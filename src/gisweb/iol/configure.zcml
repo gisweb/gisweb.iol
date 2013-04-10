@@ -8,9 +8,9 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="gisweb.iol"
+      title="IOL Bootstrap integration (gisweb.iol)"
       directory="profiles/default"
-      description="Installs the gisweb.iol package"
+      description="Contiene integrazioni tra Plomino e bootstrap, oltre a strumenti vari per la realizzazione di IstanzeOnLine"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
   <!-- -*- extra stuff goes here -*- -->
