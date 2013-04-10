@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- This file holds the setup configuration for the portal_skins tool -->
+
+<object name="portal_skins">
+
+ <object name="iol_scripts"
+    meta_type="Filesystem Directory View"
+    directory="gisweb.iol:skins/iol_scripts"/>
+
+ <object name="iol_templates"
+    meta_type="Filesystem Directory View"
+    directory="gisweb.iol:skins/iol_templates"/>
+
+ <object name="iol_assets"
+    meta_type="Filesystem Directory View"
+    directory="gisweb.iol:skins/iol_assets"/>
+
+ <skin-path name="*">
+  <layer name="iol_scripts"
+     insert-after="custom"/>
+  <layer name="iol_assets"
+     insert-after="custom"/>
+  <layer name="iol_templates"
+     insert-after="custom"/>
+ </skin-path>
+
+</object>
