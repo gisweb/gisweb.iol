@@ -4,14 +4,15 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=filename=''
+##parameters=filename='', itemname='documenti_pdf', overwrite=False
 ##title=Create pdf file from PlominoDocument
 ##
 
 """
-Create pdf file using wkpdf service
+Create pdf file using wkpdf service and attach to the PlominoDocument in
+context
 
-filename:
+filename: if not given I get it from the request or the context id
 """
 
 if context.portal_type != 'PlominoDocument':
@@ -19,6 +20,13 @@ if context.portal_type != 'PlominoDocument':
 
 from gisweb.utils import attachThis
 
-filename=filename or context.REQUEST.get('filename') or context.id
+filename = filename or \
+	context.REQUEST.get('filename') or \
+	context.getId()
+
 res = context.restrictedTraverse('@@wkpdf').get_pdf_file()
-attachThis(context, res, 'documenti_pdf', filename='%s.pdf' % filename, overwrite=False)
+
+attachThis(context, res, itemname,
+	filename='%s.pdf' % filename,
+	overwrite=overwrite
+)

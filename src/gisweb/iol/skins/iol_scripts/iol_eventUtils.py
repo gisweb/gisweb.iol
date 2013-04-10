@@ -9,7 +9,15 @@
 ##
 
 """
-Qui setto alcuni parametri comuni agli script degli eventi
+Gestione centralizzata dei valori di alcuni parametri comuni agli script
+degli eventi
+
+k: one of the defaults parameter. If none is specified all params are
+	returned in a dictionary
+	i.e.:
+	* "parentKey"
+	* "parentLinkKey"
+	* "childrenLinstKey"
 """
 
 from gisweb.utils import idx_createFieldIndex
