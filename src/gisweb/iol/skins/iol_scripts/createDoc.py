@@ -29,8 +29,11 @@ if context.portal_type != 'PlominoDocument':
 
 doc = context
 
-url = context.appProperties('ws_createdocx_URL')
-url1 = context.appProperties('ws_readdocument_URL')
+#url = context.appProperties('ws_createdocx_URL')
+#url1 = context.appProperties('ws_readdocument_URL')
+url = context.getLocalProperties('ws_createdocx_URL')
+url1 = context.getLocalProperties('ws_readdocument_URL')
+
 filename = model
 
 if """\\""" in filename:
