@@ -40,9 +40,17 @@ setup(name='gisweb.iol',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'gisweb.utils',
+          'gisweb.plominofields',
+          'gisweb.plominofieldextensions',
+          'Products.CMFPlomino'
           # -*- Extra requirements: -*-
       ],
-      extras_require={'test': ['plone.app.testing']},
+      extras_require={
+        'test': [
+            'plone.app.testing[robot]'
+        ]
+      },
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]
