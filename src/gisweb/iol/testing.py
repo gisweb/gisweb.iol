@@ -1,16 +1,40 @@
-from plone.app.testing import PloneWithPackageLayer
+from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
+from plone.app.testing import login
+from plone.app.testing import PLONE_FIXTURE
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import applyProfile
+
+from zope.configuration import xmlconfig
 
 import gisweb.iol
 from plone.testing import z2
 
 
-GISWEB_IOL = PloneWithPackageLayer(
-    zcml_package=gisweb.iol,
-    zcml_filename='testing.zcml',
-    gs_profile_id='gisweb.iol:default',
-    name="GISWEB_IOL")
+class GiswebIol(PloneSandboxLayer):
+    defaultBases = (PLONE_FIXTURE,)
+
+    def setUpZope(self, app, configurationContext):
+        xmlconfig.file(
+            'configure.zcml',
+            gisweb.iol,
+            context=configurationContext
+        )
+
+    def setUpPloneSite(self, portal):
+        portal.acl_users.userFolderAddUser('admin',
+                                           'secret',
+                                           ['Manager'],
+                                           [])
+        login(portal, 'admin')
+        portal.portal_workflow.setDefaultChain("simple_publication_workflow")
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+        applyProfile(portal, 'gisweb.iol:default')
+
+
+GISWEB_IOL = GiswebIol()
 
 GISWEB_IOL_INTEGRATION = IntegrationTesting(
     bases=(GISWEB_IOL, ),

@@ -1,5 +1,7 @@
 import unittest2 as unittest
 import os
+import robotsuite
+from plone.testing import layered
 from gisweb.iol.testing import GISWEB_IOL_ROBOT
 
 
