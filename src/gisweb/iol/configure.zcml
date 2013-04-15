@@ -6,6 +6,10 @@
     xmlns:cmf="http://namespaces.zope.org/cmf"
     i18n_domain="gisweb.iol">
 
+  <include package="plomino.tinymce" />
+  <include package="Products.CMFPlomino" />
+  <include package="gisweb.plominofieldextensions" />
+
   <genericsetup:registerProfile
       name="default"
       title="IOL Bootstrap integration (gisweb.iol)"

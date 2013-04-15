@@ -21,7 +21,10 @@ Test iol_base creation
 
 *** Keywords ***
 the folder should contain a Plomino Database
-    Sleep 1
+    Sleep  600
 
 I go to /a-folder/@@create_iol_db
     go to  /a-folder/@@create_iol_db
+
+A Folder a-folder
+  Sleep  600
