@@ -10,14 +10,13 @@
 
 from gisweb.utils import idx_createFieldIndex
 
+parentKey = script.event_common('parentKey')
+parentLinkKey = script.event_common('parentLinkKey')
+
 idx = context.getParentDatabase().getIndex()
 # verifico l'indicizzazione di alcuni campi fondamentali
-idx_createFieldIndex(idx, defaults['parentKey'])
+idx_createFieldIndex(idx, parentKey)
 idx_createFieldIndex(idx, 'CASCADE')
-
-
-parentKey = script.event_common('parentLinkKey')
-parentLinkKey = script.event_common('parentLinkKey')
 	
 def setParenthood(ChildDocument, parent_id, CASCADE=True, setDocLink=False, bash=False):
 	'''
