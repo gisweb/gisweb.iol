@@ -27,7 +27,7 @@ if isinstance(query, basestring):
     from Products.CMFPlomino.PlominoUtils import json_loads
     query = json_loads(query)
 
-flt.update({item_name: dict(query=0, range='min')})
+query.update({item_name: dict(query=0, range='min')})
 
 res = context.getParentDatabase().getIndex().dbsearch(query, sortindex=item, reverse=1, only_allowed=False)
 
