@@ -29,7 +29,7 @@ if isinstance(query, basestring):
 
 query.update({item_name: dict(query=0, range='min')})
 
-res = context.getParentDatabase().getIndex().dbsearch(query, sortindex=item, reverse=1, only_allowed=False)
+res = context.getParentDatabase().getIndex().dbsearch(query, sortindex=item_name, reverse=1, only_allowed=False)
 
 massimo = max([0]+[getattr(i, item_name) for i in res])
 
