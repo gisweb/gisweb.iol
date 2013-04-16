@@ -32,13 +32,13 @@ generators = dict(
 
 if context.portal_type == 'PlominoDocument':
 	
-	if not calculate:
+	if calculate or context.isNewDocument():
+		FRM_ID = context.getForm().getFormName()
+	else:
 		if what:
 			return context.getItem(what)
 		else:
 			return dict([(k, context.getItem(k)) for k in generators.keys()])
-	else:
-		FRM_ID = context.getForm().getFormName()
 
 elif context.portal_type == 'PlominoForm':
     FRM_ID = context.getFormName()
