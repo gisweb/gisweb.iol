@@ -8,7 +8,6 @@
 ##title=Centralized naming policy management
 ##
 
-
 """
 Centralized naming policy management
 
