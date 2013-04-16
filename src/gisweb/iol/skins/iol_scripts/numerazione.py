@@ -20,9 +20,7 @@ questo script sarà usato dalla formula di calcolo del campo.
 
 nome_script = 'numerazione'
 
-script.naming('tipo_app')
-
-numerazione = context.getParentDatabase().resources[script.naming('tipo_app')].get(nome_script)
+numerazione = context.getParentDatabase().resources[context.naming('tipo_app')].get(nome_script)
 
 if numerazione:
 	return numerazione(item_name)
