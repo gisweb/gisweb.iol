@@ -22,6 +22,14 @@ db = context.getParentDatabase()
 doc = context
 
 def richiedi_protocollo():
+	"""
+	lenght: lunghezza della stringa (default: 8)
+	
+	informazioni per il servizio di protocollazione:
+	tipo: stringa che identifica se Enbtrata o Uscita
+	oggetto: oggetto della protocollazione
+	data: data di richiesta della protocollazione
+	"""
 
     # 0. se espressamente richiesto uso la procedura di default per la protocollazione
     if auto:
