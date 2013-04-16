@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=parent_id='', backToParent='anchor'
+##parameters=parent_id='', backToParent='anchor', setDocLink=True
 ##title=
 ##
 
@@ -58,7 +58,7 @@ def setChildhood(ChildDocument, parent_id, backToParent='anchor'):
 			backUrl = '%s#%s' % (backUrl, childrenList_name)
 		ChildDocument.setItem('plominoredirecturl', backUrl)
 
-def oncreate_child(doc, parent_id='', backToParent='anchor'):
+def oncreate_child(doc, parent_id='', backToParent='anchor', setDocLink=False):
 	'''
 	Actions to perform on creation of a ChildDocument
 	'''
@@ -68,7 +68,7 @@ def oncreate_child(doc, parent_id='', backToParent='anchor'):
 		parent_id = doc.REQUEST.get(parentKey)
 
 	if parent_id:
-		setParenthood(doc, parent_id)
+		setParenthood(doc, parent_id, setDocLink=setDocLink)
 		setChildhood(doc, parent_id, backToParent)
 
-oncreate_child(context, parent_id=parent_id, backToParent=backToParent)
+oncreate_child(context, parent_id=parent_id, backToParent=backToParent, setDocLink=setDocLink)

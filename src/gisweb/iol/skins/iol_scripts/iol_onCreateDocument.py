@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=child_events=False
+##parameters=child_events=False, backToParent=False
 ##title=IOL onCreateDocument event common actions
 ##
 
@@ -30,7 +30,7 @@ context.addLocalRoles('rup-%s' % tipo_app, ['rup'])
 
 if child_events:
     
-    context.event_onCreateChild()
+    context.event_onCreateChild(backToParent=backToParent)
     
 # RINNOVO
     
