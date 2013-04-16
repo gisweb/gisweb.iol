@@ -12,6 +12,7 @@ from gisweb.utils import idx_createFieldIndex
 
 parentKey = script.event_common('parentKey')
 parentLinkKey = script.event_common('parentLinkKey')
+childrenListKey = script.event_common('childrenListKey')
 
 idx = context.getParentDatabase().getIndex()
 # verifico l'indicizzazione di alcuni campi fondamentali
