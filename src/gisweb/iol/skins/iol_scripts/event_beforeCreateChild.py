@@ -5,7 +5,7 @@
 ##bind script=script
 ##bind subpath=traverse_subpath
 ##parameters=redirect_to='', using='', message=(), kwargs={}
-##title=Manage one to many reference
+##title=
 ##
 
 def getWhereToRedirect(redirect_to, using, **kwargs):
@@ -50,7 +50,7 @@ def beforecreate_child(redirect_to='', using='', message=(), **kwargs):
 	"""
 	
 	if not 'parentKey' in kwargs:
-		parentKey = script.iol_eventUtils('parentKey')
+		parentKey = script.event_common('parentKey')
 	else:
 		# easter egg
 		parentKey = kwargs.pop('parentKey')

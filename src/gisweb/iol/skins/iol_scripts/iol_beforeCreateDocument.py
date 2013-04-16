@@ -57,3 +57,13 @@ if child_events:
         destinationForm = context.getFormName(),
         kwargs=event_args
     )
+
+
+# SCRIPT DEDICATO AL TIPO DI APPLICAZIONE
+
+tipo_app = context.naming('tipo_app')
+vs = db.resources[tipo_app].get('beforeCreateDocument')
+
+if vs:
+	return vs(context) or ''
+    

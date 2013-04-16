@@ -13,7 +13,7 @@
 2. usare una procedura standard (getMaxOf)
 
 item_name: nome del campo di numerazione. Il campo deve essere indicizzato
-	e di tipo numerico.
+	e di tipo numerico (default: numero_pratica).
 
 questo script sarà usato dalla formula di calcolo del campo.
 """
