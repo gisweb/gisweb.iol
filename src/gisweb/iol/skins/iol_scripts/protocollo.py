@@ -8,13 +8,13 @@
 ##title=Protocollo
 ##
 
-'''
+"""
 script di gestione della protocollazione
 Casistiche considerate:
 1. esiste uno script di protocollazione
 2. la protocollazione è manuale
 3. si usa una procedura base
-'''
+"""
 
 from Products.CMFPlomino.PlominoUtils import Now, DateToString, StringToDate
 
@@ -22,15 +22,15 @@ db = context.getParentDatabase()
 doc = context
 
 def richiedi_protocollo():
-	"""
-	lenght: lunghezza della stringa (default: 8)
-	
-	informazioni per il servizio di protocollazione:
-	tipo: stringa che identifica se Enbtrata o Uscita
-	oggetto: oggetto della protocollazione
-	data: data di richiesta della protocollazione
-	"""
-
+    """
+    lenght: lunghezza della stringa (default: 8)
+    
+    informazioni per il servizio di protocollazione:
+    tipo: stringa che identifica se Enbtrata o Uscita
+    oggetto: oggetto della protocollazione
+    data: data di richiesta della protocollazione
+    """
+    
     # 0. se espressamente richiesto uso la procedura di default per la protocollazione
     if auto:
         idx = db.getIndex()
