@@ -1,4 +1,4 @@
-<plominodatabase id="myiol">
+<plominodatabase id="iol_base">
   <design>
     <element id="com_sospensione" title="Comunicazione Sospensione Istanza" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">com_sospensione</id>
@@ -15,7 +15,10 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p>Vista la domanda N° <span class="plominoFieldClass">numero_pratica</span> con protocollo N° <span class="plominoFieldClass">numero_protocollo</span> del <span class="plominoFieldClass">data_protocollo</span> presentata da <span class="plominoFieldClass">richiedente</span>.</p><p>Si comunica che la stessa è stata sospesa per le seguenti motivazioni :</p><p><span class="plominoFieldClass">istruttoria_motivo_sospensione</span></p><div class="hidden" id="btn-group"><span class="plominoActionClass">btn_salva</span> <span class="plominoActionClass">btn_annulla</span></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p>Vista la domanda N° <span class="plominoFieldClass">numero_pratica</span> con protocollo N° <span class="plominoFieldClass">numero_protocollo</span> del <span class="plominoFieldClass">data_protocollo</span> presentata da <span class="plominoFieldClass">richiedente</span>.</p>
+<p>Si comunica che la stessa è stata sospesa per le seguenti motivazioni :</p>
+<p><span class="plominoFieldClass">istruttoria_motivo_sospensione</span></p>
+<div class="hidden" id="btn-group"><span class="plominoActionClass">btn_salva</span> <span class="plominoActionClass">btn_annulla</span></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -104,7 +107,7 @@
     result = DateToString(plominoDocument.getItem('data_protocollo'),'%d/%m/%Y')
 except:
     result=''
-return result]]></Formula>
+return result    ]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
@@ -132,7 +135,7 @@ elif ragsoc:
     result = ragsoc
 else:
     result = ''
-return result]]></Formula>
+return result   ]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>

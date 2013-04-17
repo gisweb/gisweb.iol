@@ -1,4 +1,4 @@
-<plominodatabase id="myiol">
+<plominodatabase id="iol_base">
   <design>
     <element id="sub_fisica" title="Nuovo soggetto" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">sub_fisica</id>
@@ -278,15 +278,6 @@ return '']]></ValidationFormula>
 <value><string>['Maschile|M','Femminile|F']</string></value>
 </member>
 <member>
-<name>selectionlist</name>
-<value><array><data>
-</data></array></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>RADIO</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -294,6 +285,15 @@ return '']]></ValidationFormula>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>RADIO</string></value>
+</member>
+<member>
+<name>selectionlist</name>
+<value><array><data>
+</data></array></value>
 </member>
 </struct></value>
 </param>
@@ -320,6 +320,15 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
+<name>dynamictableparam</name>
+<value><string>'bPaginate': true,
+			'bLengthChange': true,
+			'bFilter': true,
+			'bSort': true,
+			'bInfo': true,
+			'bAutoWidth': false</string></value>
+</member>
+<member>
 <name>selectionlist</name>
 <value><array><data>
 <value><string>Proprietario</string></value>
@@ -329,15 +338,6 @@ return '']]></ValidationFormula>
 <value><string>Comodatario</string></value>
 <value><string>Amministratore</string></value>
 </data></array></value>
-</member>
-<member>
-<name>dynamictableparam</name>
-<value><string>'bPaginate': true,
-			'bLengthChange': true,
-			'bFilter': true,
-			'bSort': true,
-			'bInfo': true,
-			'bAutoWidth': false</string></value>
 </member>
 </struct></value>
 </param>

@@ -1,14 +1,27 @@
-<plominodatabase id="myiol">
+<plominodatabase id="iol_base">
   <design>
     <element id="frm_pratica_base" title="Pratica base" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">frm_pratica_base</id>
-      <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.onCreateDocument()]]></onCreateDocument>
-      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.onOpenDocument()]]></onOpenDocument>
-      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.onSaveDocument()]]></onSaveDocument>
-      <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.onDeleteDocument()]]></onDeleteDocument>
+      <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onCreateDocument()]]></onCreateDocument>
+      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
+      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onSaveDocument()]]></onSaveDocument>
+      <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onDeleteDocument()]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
-      <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.beforeCreateDocument()]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="v-content well"><p><span class="v-content-title" id="Pratica"> </span></p><p><span class="plominoSubformClass">sub_pratica</span></p></div><div class="v-content well"><h3 class="v-content-title" id="Soggetto">Persona fisica</h3><span class="plominoSubformClass">sub_fisica</span> <span class="plominoSubformClass">sub_fisica_recapiti</span> <span class="plominoSubformClass">sub_fisica_domicilio</span><h3 class="v-content-title" id="Giuridica"></h3><span class="plominoSubformClass">sub_giuridica</span></div><div class="v-content well"><h3 class="v-content-title" id="Richiesta">Dati della richiesta</h3><p>SUBFORM CON I DATI</p></div>]]></FormLayout>
+      <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_beforeCreateDocument()
+]]></beforeCreateDocument>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="v-content well">
+<p><span class="v-content-title" id="Pratica"> </span></p>
+<p><span class="plominoSubformClass">sub_pratica</span></p>
+</div>
+<div class="v-content well">
+<h3 class="v-content-title" id="Soggetto">Persona fisica</h3>
+<span class="plominoSubformClass">sub_fisica</span> <span class="plominoSubformClass">sub_fisica_recapiti</span> <span class="plominoSubformClass">sub_fisica_domicilio</span>
+<h3 class="v-content-title" id="Giuridica"></h3>
+<span class="plominoSubformClass">sub_giuridica</span></div>
+<div class="v-content well">
+<h3 class="v-content-title" id="Richiesta">Dati della richiesta</h3>
+<p>SUBFORM CON I DATI</p>
+</div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>

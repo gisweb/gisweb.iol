@@ -1,4 +1,4 @@
-<plominodatabase id="myiol">
+<plominodatabase id="iol_base">
   <design>
     <element id="tutte-istanze" title="Tutte le istanze" type="PlominoView">
       <id type="Products.Archetypes.Field.StringField">tutte-istanze</id>
@@ -49,7 +49,7 @@ elif ragsoc:
     result = ragsoc
 else:
     result = ''
-return result]]></Formula>
+return result    ]]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
