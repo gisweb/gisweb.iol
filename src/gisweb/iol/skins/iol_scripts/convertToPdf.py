@@ -40,7 +40,7 @@ except Exception as error:
     context.setItem('test',msg)
     plone_tools.addPortalMessage(*msg, request=context.REQUEST)
     context.REQUEST.RESPONSE.redirect(context.absolute_url())
-else:    
-	context.removeItem(file_type)
-	attachThis(context, result, file_type, filename=newfilename, overwrite=True)
+else:
+    context.removeItem(file_type)
+    attachThis(context, result, file_type, filename=newfilename, overwrite=True)
 

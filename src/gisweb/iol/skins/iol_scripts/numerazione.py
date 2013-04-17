@@ -13,7 +13,7 @@
 2. usare una procedura standard (getMaxOf)
 
 item_name: nome del campo di numerazione. Il campo deve essere indicizzato
-	e di tipo numerico (default: numero_pratica).
+    e di tipo numerico (default: numero_pratica).
 
 questo script sarà usato dalla formula di calcolo del campo.
 """
@@ -23,7 +23,7 @@ nome_script = 'numerazione'
 numerazione = context.getParentDatabase().resources[context.naming('tipo_app')].get(nome_script)
 
 if numerazione:
-	return numerazione(item_name)
+    return numerazione(item_name)
 else:
-	return script.getMaxOf(item_name) + 1
-	
+    return script.getMaxOf(item_name) + 1
+

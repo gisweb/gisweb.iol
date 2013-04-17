@@ -20,18 +20,18 @@ source: PlominoDocument from where copy value
 db = context.getParentDatabase()
 
 if isinstance(source, basestring):
-	source = db.getDocument(source) or db.getDocument(context.getItem(source))
+    source = db.getDocument(source) or db.getDocument(context.getItem(source))
 
 field = context.getForm().getFormField(itemname) or source.getForm().getFormField(itemname)
 fieldtype = field.getFieldType()
 
 if fieldtype == 'ATTACHMENT':
-	# Se attachment devo anche copiare il file
-	value = source.copyFileTo(context, itemname, setItem=False)
+    # Se attachment devo anche copiare il file
+    value = source.copyFileTo(context, itemname, setItem=False)
 else:
-	value = source.getItem(itemname)
+    value = source.getItem(itemname)
 
 if setItem:
-	context.setItem(itemname, value)
+    context.setItem(itemname, value)
 else:
-	return value
+    return value

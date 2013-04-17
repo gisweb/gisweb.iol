@@ -15,20 +15,20 @@ comuni agli script degli eventi di gestione collegamento 1 a molti
 """
 
 class main():
-	
-	def parentKey(self):
-		return 'parentDocument'
-	
-	def parentLinkKey(self):
-		return 'linkToParent'
-	
-	def childrenListKey(self):
-		return 'childrenList_%s'
 
-	def doc_path(self):
-		"""
-		Calcolo unificato del valore da inserire nei doclink
-		"""
-		return '/'.join(context.doc_path())
+    def parentKey(self):
+        return 'parentDocument'
+
+    def parentLinkKey(self):
+        return 'linkToParent'
+
+    def childrenListKey(self):
+        return 'childrenList_%s'
+
+    def doc_path(self):
+        """
+        Calcolo unificato del valore da inserire nei doclink
+        """
+        return '/'.join(context.doc_path())
 
 return getattr(main(), k)()

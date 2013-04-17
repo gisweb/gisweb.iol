@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=child_events=False, msg='', redirect_to='', event_args={}
+##parameters=child_events=False, msg='', redirect_to=''
 ##title=IOL beforCreateDocument event common actions
 ##
 
@@ -14,8 +14,7 @@ Standardizzazione dele operazioni da svolgere prima della creazione di una istan
 child_events: True/False (lancia gli script di gestione dell'uno a molti)
 msg: a portal message with its class (e.g. ('My warning message', 'warning'))
 redirect_to: PlominoForm or PlominoView where to redirect in case no
-	parentDocument is given in REQUEST
-event_args: beforecreate_child parameters
+    parentDocument is given in REQUEST
 """
 
 from Products.CMFCore.utils import getToolByName
@@ -40,22 +39,21 @@ if hasattr(db, 'accreditamento_richiesto'):
 Per iniziare la pratica di accreditamento compilare il form sottostante.""" % db.Title()
             wrn = (unicode(msg, errors='replace'), 'warning')
             plone_tools.addPortalMessage(*wrn, request=context.REQUEST)
-            
+
             context.REQUEST.RESPONSE.redirect(dbutenti.absolute_url())
 
 
 # GESTIONE UNO A MOLTI
 
 if child_events:
-    
+
     msg = msg or 'Scegli uno tra i documenti elencati qui sotto.'
 
-    context.beforecreate_child(
+    context.event_beforeCreateChild(
         redirect_to = redirect_to,
         using = '',
         message = msg,
         destinationForm = context.getFormName(),
-        kwargs=event_args
     )
 
 
@@ -65,5 +63,5 @@ tipo_app = context.naming('tipo_app')
 vs = db.resources[tipo_app].get('beforeCreateDocument')
 
 if vs:
-	return vs(context) or ''
-    
+    return vs(context) or ''
+

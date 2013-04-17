@@ -23,14 +23,14 @@ idx = context.getParentDatabase().getIndex()
 # verifico l'indicizzazione di alcuni campi fondamentali
 idx_createFieldIndex(idx, parentKey)
 idx_createFieldIndex(idx, 'CASCADE')
-    
+
 def setParenthood(ChildDocument, parent_id, CASCADE=True, setDocLink=False, bash=False):
     '''
     Set parent reference in child document
     '''
 
     ParentDocument = ChildDocument.getParentDatabase().getDocument(parent_id)
-    
+
     Parent_path = ParentDocument.event_common('doc_path') #.doc_path()
 
     ChildDocument.setItem(parentKey, ParentDocument.getId())
@@ -53,7 +53,7 @@ def setChildhood(ChildDocument, parent_id, backToParent='anchor'):
 
     childrenList_name = childrenListKey % ChildDocument.Form
     childrenList = ParentDocument.getItem(childrenList_name, []) or []
-    
+
     childrenList.append(ChildDocument.event_common('doc_path'))
 
     ParentDocument.setItem(childrenList_name, childrenList)
