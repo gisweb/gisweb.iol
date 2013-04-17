@@ -8,6 +8,9 @@
 ##title=
 ##
 
+"""
+"""
+
 from gisweb.utils import idx_createFieldIndex
 
 parentKey = script.event_common('parentKey')
@@ -25,7 +28,7 @@ def setParenthood(ChildDocument, parent_id, CASCADE=True, setDocLink=False, bash
 	'''
 
 	ParentDocument = ChildDocument.getParentDatabase().getDocument(parent_id)
-	Parent_path = ParentDocument.doc_path()
+	Parent_path = ParentDocument.event_common('doc_path') #.doc_path()
 
 	ChildDocument.setItem(parentKey, ParentDocument.getId())
 	ChildDocument.setItem('CASCADE', CASCADE)
@@ -48,7 +51,7 @@ def setChildhood(ChildDocument, parent_id, backToParent='anchor'):
 	childrenList_name = childrenListKey % ChildDocument.Form
 	childrenList = ParentDocument.getItem(childrenList_name, []) or []
 	
-	childrenList.append(ChildDocument.doc_path())
+	childrenList.append(ChildDocument.event_common('doc_path'))
 
 	ParentDocument.setItem(childrenList_name, childrenList)
 

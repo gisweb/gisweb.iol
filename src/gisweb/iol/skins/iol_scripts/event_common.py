@@ -4,41 +4,31 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=k='getAttributes'
+##parameters=k
 ##title=
 ##
 
 """
-Gestione centralizzata dei valori di alcuni parametri comuni agli script
-degli eventi
-
-k: one of the defaults parameter. If none is specified all params are
-	returned in a dictionary
-	i.e.:
-	* "parentKey"
-	* "parentLinkKey"
-	* "childrenLinstKey"
-"""
+Gestione centralizzata dei valori o del loro calcolo di alcuni parametri
+comuni agli script degli eventi di gestione collegamento 1 a molti
 
 """
-Gestione centralizzata dei valori di alcuni parametri comuni agli script
-degli eventi
 
-k: one of the defaults parameter. If none is specified all params are
-	returned in a dictionary
-	i.e.:
-	* "parentKey"
-	* "parentLinkKey"
-	* "childrenLinstKey"
-"""
+class main():
+	
+	def parentKey(self):
+		return 'parentDocument'
+	
+	def parentLinkKey(self):
+		return 'linkToParent'
+	
+	def childrenListKey(self):
+		return 'childrenList_%s'
 
-defaults = dict(
-    parentKey = 'parentDocument',
-    parentLinkKey = 'linkToParent',
-    childrenListKey = 'childrenList_%s'
-)
+	def doc_path(self):
+		"""
+		Calcolo unificato del valore da inserire nei doclink
+		"""
+		return '/'.join(context.doc_path())
 
-if not k:
-    return defaults
-
-return defaults[k]
+return getattr(main(), k)()
