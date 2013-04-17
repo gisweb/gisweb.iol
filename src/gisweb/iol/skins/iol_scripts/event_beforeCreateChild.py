@@ -4,11 +4,20 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=redirect_to='', using='', message=''
+##parameters=redirect_to='', using='', message='', query_args=''
 ##title=
 ##
+from Products.CMFCore.utils import getToolByName
 
-kwargs = kwargs or {}
+from gisweb.utils import urllib_urlencode
+
+if not query_args:
+    query_args = {}
+
+if not message:
+    message = ()
+
+db = context.getParentDatabase()
 
 def getWhereToRedirect(redirect_to, using, **kwargs):
     """
@@ -39,7 +48,7 @@ def getWhereToRedirect(redirect_to, using, **kwargs):
     return destinationUrl, messages
 
 
-def beforecreate_child(redirect_to='', using='', message=()):
+def beforecreate_child(redirect_to='', using='', message=(), **kwargs):
     """
     Action to take before child creation.
     redirect_to: the name of the object (i.e. PlominoView or PlominoForm)
@@ -48,6 +57,7 @@ def beforecreate_child(redirect_to='', using='', message=()):
         object to use/execute
     message: a 2-tuple object containing the message and his class
         type (e.g. ("Indicazioni per l'utente", 'info'))
+    kwargs: arguments to pass to the url as query string.
     """
 
     parentKey = script.event_common('parentKey')
@@ -57,7 +67,7 @@ def beforecreate_child(redirect_to='', using='', message=()):
         #+ In case a parent document is not given it returns an URL where to redirect
         #+ e.g. e view where to chose a parent document.
 
-        destinationUrl, messages = getWhereToRedirect(redirect_to, using)
+        destinationUrl, messages = getWhereToRedirect(redirect_to, using, **kwargs)
 
         if context.REQUEST.get(parentKey):
             messages.append(('Given id seams not to correspond to a valid plominoDocument.', 'error'))
@@ -77,4 +87,4 @@ def beforecreate_child(redirect_to='', using='', message=()):
             context.REQUEST.RESPONSE.redirect(destinationUrl)
 
 
-return beforecreate_child(redirect_to=redirect_to, using=using, message=message)
+return beforecreate_child(redirect_to=redirect_to, using=using, message=message, **query_args)

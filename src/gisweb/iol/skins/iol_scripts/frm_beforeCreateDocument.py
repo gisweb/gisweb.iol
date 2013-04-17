@@ -53,7 +53,9 @@ if child_events:
         redirect_to = redirect_to,
         using = '',
         message = msg,
-        destinationForm = context.getFormName(),
+        query_args = dict(
+            destinationForm = context.getFormName()
+        )
     )
 
 
@@ -64,4 +66,3 @@ vs = db.resources[tipo_app].get('beforeCreateDocument')
 
 if vs:
     return vs(context) or ''
-
