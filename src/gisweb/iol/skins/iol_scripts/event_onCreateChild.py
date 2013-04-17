@@ -11,6 +11,8 @@
 """
 """
 
+from Products.CMFCore.utils import getToolByName
+
 from gisweb.utils import idx_createFieldIndex
 
 parentKey = script.event_common('parentKey')
@@ -21,57 +23,58 @@ idx = context.getParentDatabase().getIndex()
 # verifico l'indicizzazione di alcuni campi fondamentali
 idx_createFieldIndex(idx, parentKey)
 idx_createFieldIndex(idx, 'CASCADE')
-	
+    
 def setParenthood(ChildDocument, parent_id, CASCADE=True, setDocLink=False, bash=False):
-	'''
-	Set parent reference in child document
-	'''
+    '''
+    Set parent reference in child document
+    '''
 
-	ParentDocument = ChildDocument.getParentDatabase().getDocument(parent_id)
-	Parent_path = ParentDocument.event_common('doc_path') #.doc_path()
+    ParentDocument = ChildDocument.getParentDatabase().getDocument(parent_id)
+    
+    Parent_path = ParentDocument.event_common('doc_path') #.doc_path()
 
-	ChildDocument.setItem(parentKey, ParentDocument.getId())
-	ChildDocument.setItem('CASCADE', CASCADE)
-	if setDocLink:
-		if bash:
-			# utile per la procedura bash
-			ChildDocument.setItem(parentLinkKey, [Parent_path])
-		else:
-			# utile per la creazione via web
-			ChildDocument.REQUEST.set(parentLinkKey, [Parent_path])
+    ChildDocument.setItem(parentKey, ParentDocument.getId())
+    ChildDocument.setItem('CASCADE', CASCADE)
+    if setDocLink:
+        if bash:
+            # utile per la procedura bash
+            ChildDocument.setItem(parentLinkKey, [Parent_path])
+        else:
+            # utile per la creazione via web
+            ChildDocument.REQUEST.set(parentLinkKey, [Parent_path])
 
 def setChildhood(ChildDocument, parent_id, backToParent='anchor'):
-	'''
-	Set child reference on parent document
-	'''
+    '''
+    Set child reference on parent document
+    '''
 
-	db = ChildDocument.getParentDatabase()
-	ParentDocument = db.getDocument(parent_id)
+    db = ChildDocument.getParentDatabase()
+    ParentDocument = db.getDocument(parent_id)
 
-	childrenList_name = childrenListKey % ChildDocument.Form
-	childrenList = ParentDocument.getItem(childrenList_name, []) or []
-	
-	childrenList.append(ChildDocument.event_common('doc_path'))
+    childrenList_name = childrenListKey % ChildDocument.Form
+    childrenList = ParentDocument.getItem(childrenList_name, []) or []
+    
+    childrenList.append(ChildDocument.event_common('doc_path'))
 
-	ParentDocument.setItem(childrenList_name, childrenList)
+    ParentDocument.setItem(childrenList_name, childrenList)
 
-	if backToParent:
-		backUrl = ParentDocument.absolute_url()
-		if backToParent == 'anchor':
-			backUrl = '%s#%s' % (backUrl, childrenList_name)
-		ChildDocument.setItem('plominoredirecturl', backUrl)
+    if backToParent:
+        backUrl = ParentDocument.absolute_url()
+        if backToParent == 'anchor':
+            backUrl = '%s#%s' % (backUrl, childrenList_name)
+        ChildDocument.setItem('plominoredirecturl', backUrl)
 
 def oncreate_child(doc, parent_id='', backToParent='anchor', setDocLink=False):
-	'''
-	Actions to perform on creation of a ChildDocument
-	'''
+    '''
+    Actions to perform on creation of a ChildDocument
+    '''
 
-	# second take from the request
-	if not parent_id:
-		parent_id = doc.REQUEST.get(parentKey)
+    # second take from the request
+    if not parent_id:
+        parent_id = doc.REQUEST.get(parentKey)
 
-	if parent_id:
-		setParenthood(doc, parent_id, setDocLink=setDocLink)
-		setChildhood(doc, parent_id, backToParent)
+    if parent_id:
+        setParenthood(doc, parent_id, setDocLink=setDocLink)
+        setChildhood(doc, parent_id, backToParent)
 
 oncreate_child(context, parent_id=parent_id, backToParent=backToParent, setDocLink=setDocLink)

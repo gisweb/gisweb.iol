@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=destDoc, sourceItem, destItem='', new_filename=''
+##parameters=destDoc, sourceItem, destItem='', new_filename='', setItem=True
 ##title=Elenco dei modelli di stampa
 ##
 
@@ -44,4 +44,8 @@ for filename, mimetype in files.items():
     new_files[new_filename] = new_type
     old_att = destDoc.getItem(destItem, {})
     old_att.update(new_files)
-    destDoc.setItem(destItem, old_att)
+    
+    if setItem:
+		destDoc.setItem(destItem, old_att)
+	else:
+		return old_att

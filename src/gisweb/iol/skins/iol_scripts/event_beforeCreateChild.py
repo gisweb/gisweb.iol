@@ -62,8 +62,6 @@ def beforecreate_child(redirect_to='', using='', message=(), **kwargs):
 
 		destinationUrl, messages = getWhereToRedirect(redirect_to, using, **kwargs)
 		
-		roles = context.portal_membership.getAuthenticatedMember().getRolesInContext(context)
-		
 		if context.REQUEST.get(parentKey):
 			messages.append(('Given id seams not to correspond to a valid plominoDocument.', 'error'))
 		else:
@@ -77,6 +75,7 @@ def beforecreate_child(redirect_to='', using='', message=(), **kwargs):
 		for msg in messages:
 			plone_tools.addPortalMessage(*msg, request=context.REQUEST)
 
+		roles = context.portal_membership.getAuthenticatedMember().getRolesInContext(context)
 		if not 'Manager' in roles or context.REQUEST.get('test'):
 			context.REQUEST.RESPONSE.redirect(destinationUrl)
 

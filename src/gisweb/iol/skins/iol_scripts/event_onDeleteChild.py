@@ -24,7 +24,7 @@ def ondelete_child(doc, anchor=True):
         ParentDocument = db.getDocument(doc.getItem(parentKey))
         childrenList_name = childrenListKey % doc.Form
         childrenList = ParentDocument.getItem(childrenList_name)
-        url = doc.doc_path()
+        url = doc.event_common('doc_path')
         childrenList.remove(url)
         ParentDocument.setItem(childrenList_name, childrenList)
 
