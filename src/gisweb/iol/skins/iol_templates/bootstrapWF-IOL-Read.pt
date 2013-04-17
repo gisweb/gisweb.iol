@@ -5,7 +5,7 @@
                 global db python: doc.getParentDatabase();
                 global dburl python:doc.getParentDatabase().absolute_url();
                 global formName python: doc.getForm().getFormName() if doc.isDocument() else doc.getId();
-                global tipoApp  python: doc.naming_manager('tipo_app');">
+                global tipoApp  python: doc.naming('tipo_app');">
 </tal:defs>  
 
 <!-- SCRIPT E CSS DEDICATI A APPLICAZIONE -->
