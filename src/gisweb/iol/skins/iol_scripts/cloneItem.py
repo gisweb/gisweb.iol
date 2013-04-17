@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=itemname, source='parentDocument'
+##parameters=itemname, source='parentDocument', setItem=True
 ##title=Clone the specified PlominoItem from source to context
 ##
 
@@ -26,8 +26,12 @@ field = context.getForm().getFormField(itemname) or source.getForm().getFormFiel
 fieldtype = field.getFieldType()
 
 if fieldtype == 'ATTACHMENT':
+	# Se attachment devo anche copiare il file
 	value = source.copyFileTo(context, itemname, setItem=False)
 else:
 	value = source.getItem(itemname)
 
-return value
+if setItem:
+	context.setItem(itemname, value)
+else:
+	return value
