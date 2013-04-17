@@ -1,0 +1,48 @@
+<tal:block tal:define="
+    fieldname python:options['fieldname'];
+    id options/fieldname;
+    v options/fieldvalue;
+    title python:options['field'].title;
+    ttip_title title;
+    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
+    baseURL python: context.getParentDatabase().absolute_url();
+    doc_id python: context.REQUEST.PARENTS[0].getId() or '';
+    custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
+">
+                           
+<input type='hidden' tal:attributes="id fieldname;name fieldname;value v"/>
+          
+<img tal:attributes="class string:img-rounded;id string:${fieldname}_img">
+     
+
+<script type="text/javascript" charset="utf-8" tal:content="structure string:
+    var mk_options = ${custom_attributes};
+    
+   if(typeof(mk_options)=='object'){  //FARE QUALCHE CONTROLLO IN +
+        mk_options['baseURL'] = '${baseURL}';
+        mk_options['editmode'] = false;
+console.log('${v}')
+        var v = eval('${v}');
+console.log(v)
+        mk_options['position'] = v['position'];
+        
+        jq('#${fieldname}_img').attr('src','${baseURL}/resources/' + mk_options['icon']);
+   
+        //parametri per aprire il la finestra di popup con il form associato
+        if(mk_options.winpopup){mk_options.winpopup['params'] = {'doc_id': '${doc_id}'}};
+        
+        jq.plominoMaps.points['${id}'] = mk_options;
+
+        //Assegno le funzionalità di geocoding al pulsante
+        jq('#${fieldname}_addmarker').click(function() { 
+            geocode('${id}');
+        });
+
+        
+    }">
+               
+</script>
+       
+          
+                           
+</tal:block>

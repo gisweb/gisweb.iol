@@ -1,0 +1,20 @@
+<tal:block tal:define="
+    v options/fieldvalue;
+    id options/fieldname;
+    title python:options['field'].title;
+    ttip_title title;
+    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
+    custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
+    data_mandatory python: 'mandatory' if 'data-mandatory' in custom_attributes and not v else '';
+    description python:options['field'].description;
+    db python: options['field'].getParentDatabase();
+    defaultformat python:db.getDateTimeFormat();
+    fieldformat python:options['field'].getSettings('format');
+    format python:test(not(fieldformat),defaultformat,fieldformat);
+    fieldvalue python: None if not(v) else v.strftime(format);">
+        <label>
+            <span tal:condition="data_mandatory" class="data-mandatory" title="Obbligatorio per invio">■</span> 
+            <span tal:content="python:'%s: ' % title">Titolo</span>
+        </label>
+        <div tal:attributes="class string:control-label uneditable;id options/fieldname" tal:content="fieldvalue"></div>          
+</tal:block>

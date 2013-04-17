@@ -1,0 +1,93 @@
+<tal:def tal:define="
+    size python:options['field'].getSettings('size') or str(3);
+    w python: str(int(size)*60);
+    title python:options['field'].title;
+    ttip_title title;
+    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
+    custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
+    data_mandatory python: 'data-mandatory' if 'data-mandatory' in custom_attributes else '';
+    mandatory python: 'mandatory' if options['field'].getMandatory() else '';
+    dy_search python: 'dynamicSearch' if 'dynamicSearch' in custom_attributes else '';
+    dy_hidewhen python: 'dynamicHidewhen' if 'dynamicHidewhen' in custom_attributes else '';
+    id options/fieldname;
+    widget python:options['field'].getSettings('widget');
+    selection options/selection;">
+        <label class="control-label">
+        <span tal:condition="mandatory" class="mandatory" title="Obbligatorio">■</span>
+        <span tal:condition="data_mandatory" class="data-mandatory" title="Obbligatorio per invio">■</span>   
+        <span tal:content="python:'%s: ' % title">Titolo</span>
+            <i tal:condition="ttip_descr" class="icon-info-sign" data-fade-speed="10" data-trigger="hover" tal:attributes="title ttip_title;data-content ttip_descr"></i>
+        </label>
+        <tal:widget tal:condition="python:test(widget=='SELECT')">
+            <select tal:attributes="name options/fieldname;
+                                    id options/fieldname;
+                                    data-dhw dy_hidewhen;
+                                    class string:span12 ${dy_search}">
+                <tal:loop tal:repeat="v selection">
+                    <option tal:define="current options/fieldvalue;l python:v.split('|')"
+                    tal:attributes="value python:l[1];
+                        selected python: 'yes' if current in l else None;
+                        selected_old python:test(current==l[1],1,0)"
+                    tal:content="python:l[0]">value</option>
+                </tal:loop>
+            </select>
+        </tal:widget>
+        <tal:widget tal:condition="python:test(widget=='MULTISELECT')">
+            <select tal:attributes="name options/fieldname;                         
+                                    id options/fieldname;
+                                    data-dhw dy_hidewhen;
+                                    class string:span12 ${dy_search}" multiple="multiple" lines="4">
+                <tal:loop tal:repeat="v selection">
+                    <tal:block tal:define="current options/fieldvalue;
+                                        currentaslist python:test(hasattr(current, 'append'), current, [current]);
+                                        l python:v.split('|')">
+                        <option tal:attributes="value python:l[1];
+                            selected python: 'yes' if current in l else None;
+                            selected_old python: test(currentaslist and l[1] in currentaslist,1,0)"
+                        tal:content="python:l[0]">value</option>
+                    </tal:block>
+                </tal:loop>
+            </select>
+        </tal:widget>
+        <tal:widget tal:condition="python:test(widget=='CHECKBOX')">
+            <tal:block tal:define="current options/fieldvalue;
+                                currentaslist python:test(hasattr(current, 'append'), current, [current]);"
+            tal:repeat="v selection">
+                <tal:block tal:define="l python:v.split('|')">
+                    
+                    <label class="checkbox" tal:attributes="for python:options['fieldname'] + '-' + l[1];">
+                        <input type="checkbox" tal:attributes="name options/fieldname;
+                                class dy_search;
+                                data-dhw dy_hidewhen;
+                                value python:l[1];
+                                checked python: 'yes' if current in l else None;
+                                id python:options['fieldname'] + '-' + l[1]">
+                        <tag tal:replace="python:l[0]"></tag>
+                    </label>
+                    
+                    <tal:sep tal:condition="not:repeat/v/end" tal:content="structure python:options['field'].getSettings('separator')">separator</tal:sep>
+                </tal:block>
+            </tal:block>
+        </tal:widget>
+        <tal:widget tal:condition="python:test(widget=='RADIO')">
+            <tal:block tal:define="current options/fieldvalue;
+                                currentaslist python:test(hasattr(current, 'append'), current, [current]);"
+                tal:repeat="v selection">
+                <tal:block tal:define="l python:v.split('|');primo repeat/v/start">
+                    
+                    <label class="radio" tal:attributes="for python:options['fieldname'] + '-' + l[1];">
+                            <input type="radio" tal:attributes="name options/fieldname;
+                                class dy_search;
+                                data-dhw dy_hidewhen;
+                                value python: l[1];
+                                checked python: 'yes' if current in l else None;
+                                id python: options['fieldname'] + '-' + l[1]" />
+                            <tag tal:replace="python: l[0]"></tag>
+                    </label>
+                    <tal:sep tal:condition="not:repeat/v/end" tal:content="structure python:options['field'].getSettings('separator')">separator</tal:sep>
+                    
+                </tal:block> 
+                
+            </tal:block>
+        </tal:widget>
+</tal:def>

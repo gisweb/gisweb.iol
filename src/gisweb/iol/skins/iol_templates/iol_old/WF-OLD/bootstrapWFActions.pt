@@ -1,0 +1,39 @@
+<!-- <tal:test tal:content="options/fieldvalue"></tal:test> -->
+<tal:def tal:define="
+    selection options/fieldvalue;
+    actionurl python: '%s/%s/content_status_modify' %(context.REQUEST.PARENTS[0].getParentDatabase().absolute_url(),context.REQUEST.PARENTS[0].getId());
+    sospendiurl python: '%s/%s/EditDocument?openwithform=com_sospensione' %(context.REQUEST.PARENTS[0].getParentDatabase().absolute_url(),context.REQUEST.PARENTS[0].getId());
+    rigettaurl python: '%s/%s/EditDocument?openwithform=com_preavviso_rigetto' %(context.REQUEST.PARENTS[0].getParentDatabase().absolute_url(),context.REQUEST.PARENTS[0].getId());
+    ">
+        <tal:loop tal:repeat="v selection">
+            
+            
+            <div tal:condition="python: v.get('id') == 'preavviso_rigetto'" class="alert alert-error">
+                <p><span  tal:content="python: v.get('description') or ''"/>
+                <a style="width:200px" class="btn pull-right wf-actions" tal:define="id v/id" tal:attributes="id string:btn_wf_${id}; href string:${rigettaurl};" tal:content="python: v['title'] or v['id']">
+                    </a></p>
+            </div>
+            <div tal:condition="python: v.get('id') == 'sospendi'" class="alert alert-error">
+                <p><span  tal:content="python: v.get('description') or ''"/>
+                <a style="width:200px" class="btn pull-right wf-actions" tal:define="id v/id" tal:attributes="id string:btn_wf_${id}; href string:${sospendiurl};" tal:content="python: v['title'] or v['id']">
+                    </a></p>
+            </div>
+            <div tal:condition="python: v.get('id') == 'protocolla'" class="alert alert-error">
+                <p><span  tal:content="python: v.get('description') or ''"/>
+                <a style="width:200px" class="btn pull-right wf-actions" tal:define="id v/id" tal:attributes="id string:btn_wf_${id}; href string:${actionurl}?workflow_action=${id};" tal:content="python: v['title'] or v['id']">
+                    </a></p>
+            </div>
+
+            <div tal:condition="python: v.get('id') == 'invia_domanda'" 
+                class="alert alert-info"
+                tal:content="structure python: context.getParentDatabase().getForm('sub_avvertenze').formLayout(context.REQUEST)"/>
+
+            <div tal:condition="python: not v.get('id') in ['invia_domanda','preavviso_rigetto','protocolla','sospendi','protocolla']" class="alert alert-info">
+                <p><span  tal:content="python: v.get('description') or ''"/>
+                <a style="width:200px" class="btn pull-right wf-actions" tal:define="id v/id" tal:attributes="id string:btn_wf_${id}; href string:${actionurl}?workflow_action=${id};" tal:content="python: v['title'] or v['id']">
+                </a></p>
+            </div>
+        </tal:loop>
+        
+        
+</tal:def>

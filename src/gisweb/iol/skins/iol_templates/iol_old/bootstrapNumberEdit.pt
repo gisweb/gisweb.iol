@@ -1,0 +1,28 @@
+<tal:def tal:define="
+    size python:options['field'].getSettings('size') or str(1);
+    w python: str(int(size)*60);
+    title python:options['field'].title;
+    v options/fieldvalue;
+    custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
+    mandatory python: 'mandatory' if options['field'].getMandatory() else '';
+    data_mandatory python: 'data-mandatory' if 'data-mandatory' in custom_attributes else '';
+    ttip_title title;
+    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
+    ftype python:options['field'].getSettings().type;
+    ftype_class python:'integer' if ftype=='INTEGER' else 'decimal';
+    id options/fieldname;">
+        <label class="control-label">
+            <span tal:condition="mandatory" class="mandatory" title="Obbligatorio">■</span>
+            <span tal:condition="data_mandatory" class="data-mandatory" title="Obbligatorio per invio">■</span> 
+            <span tal:content="python:'%s: ' % title">Titolo</span>
+            <i tal:condition="ttip_descr" class="icon-info-sign" data-trigger="hover" tal:attributes="title ttip_title;data-content ttip_descr"></i>
+        </label>
+ 
+       
+       <input type="text" tal:attributes="
+                    id options/fieldname;
+                    name options/fieldname;
+                    value options/fieldvalue;
+                    class string:field ${ftype_class} span12;" />
+            
+</tal:def>

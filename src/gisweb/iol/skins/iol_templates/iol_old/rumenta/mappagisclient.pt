@@ -1,0 +1,142 @@
+<html>
+    <head>
+        <title></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+    <body>	
+		<script type="text/javascript" src="/gisclient/mappe/resources/jslib/ext-3.4.0/adapter/ext/ext-base.js" ></script>
+		<script type="text/javascript" src="/gisclient/mappe/resources/jslib/ext-3.4.0/ext-all.js" ></script>
+		<!--<link type="text/css" rel="stylesheet" href="/gisclient/mappe/resources/jslib/ext-3.4.0/resources/css/ext-all.css" />-->
+		<link type="text/css" rel="stylesheet" href="/gisclient/mappe/resources/jslib/ext-3.4.0/resources/css/ext-all-notheme.css" />
+		<link type="text/css" rel="stylesheet" href="/gisclient/mappe/resources/jslib/ext-3.4.0/resources/css/xtheme-gray.css" />
+		
+	   <!--
+		<script type="text/javascript" src="/gisclient/mappe/resources/jslib/ext-3.3.1/adapter/ext/ext-base-debug.js" ></script>
+        <script type="text/javascript" src="/gisclient/mappe/resources/jslib/ext-3.3.1/ext-all-debug.js" ></script>
+		-->
+
+		<script type="text/javascript" src="/gisclient/mappe/resources/jslib/openlayers/OpenLayers.js" ></script>
+		<script type="text/javascript" src="/gisclient/mappe/resources/jslib/gcOloverride.js"></script>
+		<!--<script src="/gisclient/mappe/resources/jslib/proj4js-compressed.js" type="text/javascript"></script>-->
+
+		<script type="text/javascript" src="/gisclient/mappe/resources/jslib/geoext/GeoExt.js"></script>
+		<script type="text/javascript" src="/gisclient/mappe/resources/jslib/TreeNodeAutoDisable.js"></script>
+		<script type="text/javascript" src="/gisclient/mappe/resources/jslib/LayerTreeBuilder.js"></script>
+		
+		<link type="text/css"  rel="stylesheet" href="/gisclient/mappe/resources/css/gcGeoext.css" />	
+		<link type="text/css" rel="stylesheet" href="/gisclient/mappe/resources/css/LayerTreeBuilder.css" />		
+
+		<!-- SCRIPT GISCLIENT -->
+		<script src="/gisclient/mappe/resources/jslib/gcMapPanel.js" type="text/javascript"></script>
+		<script src="/gisclient/mappe/resources/jslib/gcTreePanel.js" type="text/javascript"></script>
+		<script src="/gisclient/mappe/resources/jslib/gcSLDSelect.js" type="text/javascript"></script>
+		<script src="/gisclient/mappe/resources/jslib/gcZoomToolbar.js" type="text/javascript"></script>	
+
+		<!-- PLUGINS GISCLIENT -->		
+		<script src="/gisclient/mappe/resources/jslib/plugins/gcLoadingMessage.js" type="text/javascript"></script>
+		<script src="/gisclient/mappe/resources/jslib/plugins/gcNavigation.js" type="text/javascript"></script>
+		<script src="/gisclient/mappe/resources/jslib/plugins/gcMeasure.js" type="text/javascript"></script>
+		<script src="/gisclient/mappe/resources/jslib/plugins/gcCoordinates.js" type="text/javascript"></script>
+		<script src="/gisclient/mappe/resources/jslib/plugins/gcMapQuery.js" type="text/javascript"></script>
+		<script src="/gisclient/mappe/resources/jslib/plugins/gcFeaturePopup.js" type="text/javascript"></script>
+		<!--<script src="/gisclient/mappe/resources/jslib/plugins/gcWKTEdit-datagrid.js" type="text/javascript"></script>-->
+        <script src="/gisclient/mappe/resources/jslib/plugins/gcWKTEdit-datagrid.js" type="text/javascript"></script>
+        <script src="/gisclient/services/gcmap.php?mapset=os_scavi" type="text/javascript"></script>
+
+        
+        
+<script type="text/javascript">
+    
+
+//Possibili parametri:
+//plominomap?mapset=os_scavi&zoom=11&lat=44.11193&lon=9.81699&layers=0000BTT00TFFTFTFTT&mapconfig=mappa&editpoint=1&editpolygon=1&editline=1&treepanel=1&zoomto=sitar
+
+var GisClientServiceUrl = "/gisclient/services/";
+
+<!--CARICA L'ELENCO DEI LAYER DEFINITI PER IL MAPSET-->
+Ext.BLANK_IMAGE_URL = "/gisclient/mappe/resources/images/blank.gif";
+Ext.MessageBox.buttonText = {ok : "OK", cancel : "Annulla", yes : "Si",no : "No"};
+
+GisClient.initMapset = function() {
+
+	var mapset = GisClient.mapset[0];
+	document.title = mapset.title;
+
+    //AGGIUNGERE IL LAYER DEI CANTIERI (O SCAVI) CON IL FILTRO SU NUMERO ISTANZA
+    
+    
+	//SE VOGLIO AGGIUNGERE LAYER PRESI DA UN ALTRO MAPSET
+	//mapset.map.layers.push(new OpenLayers.Layer.Vector("mylayer"));mapset.map.layers.push(GisClient.mapset[1].map.layers);	
+	
+	var options={	
+		title: "",
+		plugins: [{ptype:"gc_loading"},{ptype:"gc_navigation"},{ptype:"gc_measure"},{ptype:"gc_mapquery"},{ptype: 'gc_featurepopup'}],
+		controls: [new OpenLayers.Control.ScaleLine({bottomInUnits:false})]
+	}
+
+
+     var wkteditConfig = {ptype:"gc_wktedit",
+        addWKTGeometry: window.parent.newWKTGeometry,
+        updateWKTGeometry: window.parent.updateWKTGeometry,
+        updatePosition: window.parent.updatePosition};
+    
+		if(getParameterByName('editpoint')) wkteditConfig["point"] = 1;
+		if(getParameterByName('editline')) wkteditConfig["line"] = 1;
+		if(getParameterByName('editpolygon')) wkteditConfig["polygon"] = 1;
+		options.plugins.push(wkteditConfig);
+
+	
+	Ext.apply(mapset,options);
+	var mapPanel = new GisClient.MapPanel(mapset);
+
+	if (!mapPanel) return;
+	//printExtent.addPage();
+
+	var zoomToolbar = [];
+	if(getParameterByName('zoomto')){
+		zoomToolbar = new GisClient.ZoomToolbar({
+			mapPanel:mapPanel,
+			dbschema:'public',
+			url:GisClientServiceUrl + getParameterByName('zoomto') + '/zoomto.php',
+			data:[['Stradario comunale','stradario',3003],['Particella catastale','particella',3003]]
+		});
+	}
+	
+	var panelItems = [];
+	if(getParameterByName('treepanel')){
+		var treeP = TreePanel(mapPanel);
+		treeP.collapsed = true;
+		panelItems.push(treeP,mapPanel);
+	}
+	else{
+		TreeMenu(mapPanel);
+		panelItems.push(mapPanel);
+	}
+
+	new Ext.Viewport({
+        layout: "fit",
+        hideBorders: false,
+        items: {
+            layout: "border",
+            items: panelItems,
+			bbar: zoomToolbar
+        }
+    });
+
+	if(!mapPanel.map.getZoom()) mapPanel.map.addControl(new OpenLayers.Control.ArgParser()); //Se non ho settato l'estensione vedo se è stata settata da querystring 
+	if(!mapPanel.map.getZoom()) mapPanel.map.zoomToExtent(mapPanel.map.maxExtent); //Se non ho settato l'estensione vedo se è stata settata dal plugin o dalla configurazione del mapset
+
+    window.parent && window.parent.InitMap && window.parent.InitMap(mapPanel);
+	
+};
+
+Ext.onReady(function() {
+	Ext.QuickTips.init();
+	//Se non c'è un layer google chiamo la funzione di inizializzazione:
+	if(!GisClient.loader) GisClient.initMapset();	
+});
+
+
+</script>
+    </body>
+</html>

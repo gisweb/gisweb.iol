@@ -1,0 +1,23 @@
+<tal:def tal:define="
+    title python:options['field'].title;
+    ttip_title title;
+    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
+    servername python:'192.168.1.100';
+    id options/fieldname;">
+    
+        <tal:def1 tal:define="id options/fieldname;v options/fieldvalue;filenames v/keys|nothing;">
+        <tal:cond tal:condition="v">
+            <div tal:attributes="class string:control-group">
+                <label >Autorizzazione e appendici</label>
+                      <ul aria-labelledby="dLabel" tal:repeat="attachment filenames">
+                         <li>
+                            <a tal:attributes="href string:http://${servername}/printservice/documenti${attachment};target string:new" >
+                               <img src="images/word.gif" /> &nbsp;<span tal:content="python:v[attachment]" />
+                            </a>
+                         </li>
+                  </ul>
+            </div>
+
+        </tal:cond>
+    </tal:def1>
+</tal:def>

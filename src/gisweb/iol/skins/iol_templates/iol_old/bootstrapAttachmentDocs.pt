@@ -1,0 +1,11 @@
+<label>
+            <span tal:content="python:'%s: ' % options['field'].title">Titolo</span>
+        </label>
+
+<ul aria-labelledby="dLabel" tal:define="docId python: context.REQUEST.PARENTS[0].getId();" tal:repeat="attachment options/fieldvalue">
+                                <li>
+                                    <a tal:define="href python:test('.pdf' in attachment,attachment,'getfile?filename='+attachment);" target="new" tal:attributes="href string:${href}" >
+                                        <img tal:define="img python:test('.pdf' in attachment,'images/pdf.gif','images/word.gif');" tal:attributes="src string:${img}" /> &nbsp;<span tal:content="python: '.'.join(attachment.split('.')[:-1]).capitalize().replace('-',' ')"/>
+                                    </a>
+                                </li>
+                            </ul>

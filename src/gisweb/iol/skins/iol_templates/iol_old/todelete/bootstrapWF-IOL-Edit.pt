@@ -1,0 +1,170 @@
+<!-- DEFINIZIONI GLOBALI DI doc,db,dburl,tipoApp,tipoRichiesta e myForm -->
+<tal:defs 
+    tal:define="global doc python: context.REQUEST.PARENTS[0];
+                global db python: doc.getParentDatabase();
+                global dburl python:doc.getParentDatabase().absolute_url();
+                global myForm python: doc.getForm() if doc.isDocument() else doc;
+                global tipoApp python:db.callScriptMethod('frm_events','genera_tipo_app',myForm.getFormName());
+                global tipoRichiesta python:db.callScriptMethod('frm_events','genera_tipo_domanda',myForm.getFormName());">
+</tal:defs>  
+
+
+<!-- SCRIPT E CSS DEDICATI A APPLICAZIONE -->
+<script type="text/javascript" tal:attributes="src string:${dburl}/resources/${tipoApp}/trasporti_edit.js"></script>  
+<link tal:attributes="href string:${dburl}/resources/${tipoApp}/trasporti.css" rel="stylesheet" type="text/css"> 
+
+
+<tal:newdoc tal:condition="python: doc.isNewDocument()">
+        <div tal:define="initial_state_id python: doc.wf_workflowInfo(wf_ids=['iol_workflow'], args=['initial_state'])['initial_state'];
+                         status_info python: doc.wf_getInfoForState('iol_workflow', initial_state_id, args=['description'])"
+            class="alert alert-info">
+            <h4 tal:content="status_info/title">Initial state title goes here</h4>
+            <div tal:content="status_info/description">Initial state description goes here</div>
+            <h5>Per poter inviare la domanda occorre aver compilato tutti i campi indicati dal simbolo blu</h5>        
+        </div>
+</tal:newdoc>
+
+<!-- NOT NEW DOCUMENT: doc is a PlominoDocument -->
+<tal:notnewdoc
+    tal:condition="python: not doc.isNewDocument()"
+    tal:define="status_info python: doc.wf_statesInfo(single=True, args=['description']);
+                status_id status_info/id;">
+        
+
+            <div id="section-message-compilazione" tal:condition="python: not doc.getItem('sospensione_motivazione')" class="alert alert-info">
+                <h4 tal:content="status_info/title">Initial state title goes here</h4>
+                <div tal:content="status_info/description">Initial state description goes here</div>
+                <h5 tal:condition="python: not doc.wf_getInfoFor('wf_protocollata')">Per poter inviare la domanda occorre aver compilato tutti i campi indicati dal simbolo blu</h5>
+            </div>
+
+
+                
+            <div tal:condition="python: status_id == 'sospesa'" class="alert alert-error">
+                  <h5>PRATICA SOSPESA IN ATTESA DI INTEGRAZIONE</h5>
+                 <div tal:content="structure python: doc.getItem('sospensione_motivazione')" />
+            </div>
+
+                <div class="row-fluid" tal:condition="python: doc.wf_getInfoFor('wf_presentata')">
+                    <div class="span4" tal:content="structure python: doc.getRenderedItem('istruttore')"></div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4"
+                        tal:repeat="campo python: ('numero_pratica', 'data_pratica', )"
+                        tal:content="structure python: doc.getRenderedItem(campo)"></div>
+                </div>
+                
+                
+                
+                <!-- DOMANDA PROTOCOLLATA -->
+                <tal:block tal:define="allegati python: doc.getItem('documenti_pdf', {})"
+                    tal:condition="python: doc.wf_getInfoFor('wf_protocollata')">
+                    <div class="row-fluid">
+                        <div class="span4"
+                            tal:repeat="campo python: ('numero_protocollo', 'data_protocollo', )"
+                            tal:content="structure python: doc.getRenderedItem(campo)"></div>
+                        <div class="span4">
+                            <ul aria-labelledby="dLabel" tal:repeat="attachment allegati">
+                                <li>
+                                    <a target="new" tal:attributes="href python:'getfile?filename='+attachment" >
+                                        <img src="images/pdf.gif" /> &nbsp;<span tal:content="python: '.'.join(attachment.split('.')[:-1]).capitalize().replace('_',' ')"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                  
+                        
+
+                        
+                        
+                        
+                <!-- DOMANDA AUTORIZZATA -->
+                        <div tal:define="allegati python: doc.getItem('documenti', {})" tal:condition="python: doc.wf_getInfoFor('wf_autorizzata')" class="row-fluid">
+                            <div class="span4"
+                                tal:repeat="campo python: ('numero_autorizzazione', 'data_autorizzazione', )"
+                                tal:content="structure python: doc.getRenderedItem(campo)"></div>
+                            <div class="dropdown span4">
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" tal:repeat="attachment allegati">
+                                    <li><a href="#" tal:attributes="href python:'getfile?filename='+attachment"><img src="images/word.gif" /> &nbsp;Documento di autorizzazione</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+   
+                
+                </tal:block>
+
+                    
+                    
+                    
+                    
+                    
+  <div class="boxupload">
+    
+ <div class="row-fluid" tal:condition="python:doc.getItem('documenti_autorizzazione') and not doc.wf_getInfoFor('wf_autorizzata')">
+                  <div class="span12" tal:content="structure python: myForm.getFormField('documenti_autorizzazione').getFieldRender(form=myForm,doc=doc,editmode=True,creation=False)" />                    
+                  </div> 
+
+<tal:autorizzata tal:condition="python: doc.wf_getInfoFor('wf_autorizzata')">
+    
+                  <div class="row-fluid">
+                        <div class="span12" tal:content="structure python: doc.getRenderedItem('documenti_autorizzazione')" />                    
+                  </div> 
+    
+    
+                  <div class="row-fluid">
+                        <div class="span12" tal:content="structure python: myForm.getFormField('documenti_appendice').getFieldRender(form=myForm,doc=doc,editmode=True,creation=False)" />                    
+                  </div> 
+                  <div class="row-fluid">
+                        <div class="span12" tal:content="structure python: myForm.getFormField('documenti_ordinanza').getFieldRender(form=myForm,doc=doc,editmode=True,creation=False)" />                    
+                  </div> 
+
+ </tal:autorizzata>              
+                         
+      
+      </div>
+                  
+                    
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            <div tal:condition="python: doc.wf_getInfoFor('wf_prorogata') or doc.wf_getInfoFor('wf_richiesta_proroga')" tal:content="structure python: doc.parentDB().getForm('sub_proroga').displayDocument(editmode=True,parent_form_id=True,doc=doc)"/>
+   
+</tal:notnewdoc> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+<tal:test> ***** fine template ***** </tal:test>

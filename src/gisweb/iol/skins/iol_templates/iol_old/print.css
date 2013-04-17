@@ -1,0 +1,29 @@
+#top-toolbar-div,
+#bottom-toolbar-div,
+#edit-bar,
+#gmap-div,
+#gcmap-div,
+#portal-footer-wrapper,
+#viewlet-above-content,
+#portal-column-one,
+#left-column-wrapper,
+#plone-document-byline
+{
+    display:none;
+}
+.alert {
+    display:none;
+}
+#center-column {
+    width: 100%;
+}
+
+
+.uneditable {
+    font-weight: bold;
+    font-size:12px;
+}
+
+label.control-label {
+    font-weight: normal !important;
+}

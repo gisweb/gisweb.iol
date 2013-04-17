@@ -1,0 +1,17 @@
+<tal:block tal:define="
+    fieldname python:options['fieldname'];
+    v options/fieldvalue;
+    title python:options['field'].title;
+    ttip_title title;
+    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
+    baseURL python: context.getParentDatabase().absolute_url();
+    doc_id python: context.REQUEST.PARENTS[0].getId() or '';
+    custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
+">
+                           
+<input type='hidden' tal:attributes="id string:${fieldname}_geometry;name fieldname;value v"/>
+    
+<tal:plugin tal:content='structure string:<a class="btn span12" id="${fieldname}" data-base-url="${baseURL}" data-icon-path="${baseURL}/resources/icons/" ${custom_attributes}><i class="icon-map-marker"></i><span style="margin-left:10px">${title}</span></a>'></tal:plugin> 
+
+                 
+</tal:block>

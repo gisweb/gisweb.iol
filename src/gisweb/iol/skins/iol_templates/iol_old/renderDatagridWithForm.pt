@@ -1,0 +1,13 @@
+<tal:block tal:define="fieldname python:None #options['fieldname'];
+                       db python:context.getParentDatabase();
+                       v python: options['fieldvalue'];
+                       field python: options['field'];
+                       associated_form python: options['field'].getSettings().associated_form;
+                       frm python:db.getForm(associated_form);
+                       k python: field.getSettings(key='field_mapping').split(',');">
+    <tal:rep tal:repeat="vv v/rawdata">
+        <tal:d tal:define="dummy python:map(context.REQUEST.set, k, vv);
+                           cont python:frm.displayDocument(None, editmode=False, creation=False, request=context.REQUEST);">
+            <div tal:content="structure cont"/>
+        </tal:d>
+    </tal:rep></tal:block>

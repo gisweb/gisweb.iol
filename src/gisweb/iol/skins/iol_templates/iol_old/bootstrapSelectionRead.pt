@@ -1,0 +1,20 @@
+<tal:def tal:define="
+    title python:options['field'].title;
+    v options/fieldvalue;
+    selection options/selection;
+    lselection python:[f.split('|') for f in selection];
+    custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
+    data_mandatory python: 'data-mandatory' if 'data-mandatory' in custom_attributes and not v else '';
+    current options/fieldvalue;
+    widget python:options['field'].getSettings('widget');
+    lcurrent python:test(hasattr(current,'split'),[current],current);
+    labeled python:[e for e in lselection if e[1] in lcurrent]">
+        <label>
+            <span tal:condition="data_mandatory" class="data-mandatory" title="Obbligatorio per invio">■</span> 
+            <span tal:condition="python:widget!='CHECKBOX' and len(labeled)==1" tal:content="python:'%s: ' % title">Titolo</span>
+        </label>               
+        <tal:loop tal:repeat="v labeled">
+            <div class="uneditable control-label" tal:content="python:v[0]" tal:attributes="id options/fieldname;value python:v[1]">selected value</div> 
+            <tal:sep tal:condition="not:repeat/v/end" tal:content="structure python:options['field'].getSettings('separator')">separator</tal:sep>
+        </tal:loop>
+</tal:def>

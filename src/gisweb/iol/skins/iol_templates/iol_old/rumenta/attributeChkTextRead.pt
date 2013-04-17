@@ -1,0 +1,24 @@
+<tal:def tal:define="
+    size python:options['field'].getSettings('size') or str(3);
+    w python: str(int(size)*60);
+    title python:options['field'].title;
+    description python:options['field'].description;
+    ttip_title python:options['field'].Schema()['tooltip_title'].getAccessor(options['field'])();
+    ttip_descr python:options['field'].Schema()['tooltip_description'].getAccessor(options['field'])();
+    cls_name python:options['field'].Schema()['cell_class'].getAccessor(options['field'])() or 'span3';
+    id options/fieldname;
+    widget python:options['field'].getSettings('widget');
+    selection options/selection;
+    v options/fieldvalue;
+    ctrVisible python:test(bool(v),'','none');">
+    
+    <tal:block tal:define="formatted_value python:v.replace('\n','<br/>');">
+        <label style="font-weight:bold;" class="control-label" tal:content="python:title.replace('##',formatted_value)">Titolo</label>
+          <!--  <div class="controls">            
+            <tal:loop tal:repeat="v labeled">
+                <tal:block tal:content="python:v[0]">selected value</tal:block>
+                <tal:sep tal:condition="not:repeat/v/end" tal:content="structure python:options['field'].getSettings('separator')">separator</tal:sep>
+            </tal:loop>
+            </div>-->
+    </tal:block>
+</tal:def>
