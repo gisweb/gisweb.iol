@@ -17,7 +17,7 @@ La funzione interroga la proprietà del plominodb <tipo_app>_is_in_test.
 Se la variabile non è settata restituisce il valore di default.
 """
 
-tipo_app = context.naming_manager('tipo_app')
+tipo_app = context.naming('tipo_app')
 
 if tipo_app:
     test_prop = '%s_is_in_test' % tipo_app
@@ -27,6 +27,6 @@ else:
 try:
     test = getattr(context.getParentDatabase(), test_prop)
 except AttributeError, err:
-	test = default
+    test = default
 
 return test
