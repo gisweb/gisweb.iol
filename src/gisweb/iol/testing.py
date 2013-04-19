@@ -28,6 +28,13 @@ class GiswebIol(PloneSandboxLayer):
             gisweb.iol,
             context=configurationContext
         )
+        if os.environ.get('BOOTSTRAP_THEME'):
+            import plonetheme.bootstrap
+            xmlconfig.file(
+                'configure.zcml',
+                plonetheme.bootstrap,
+                context=configurationContext
+            )
 
     def setUpPloneSite(self, portal):
         portal.acl_users.userFolderAddUser('admin',
@@ -36,6 +43,8 @@ class GiswebIol(PloneSandboxLayer):
                                            [])
         login(portal, 'admin')
         applyProfile(portal, 'gisweb.iol:default')
+        if os.environ.get('BOOTSTRAP_THEME'):
+            portal.portal_quickinstaller.installProduct('plonetheme.bootstrap')
         portal.invokeFactory('PlominoDatabase', 'iol_base')
         portal.iol_base.at_post_create_script()
         portal.iol_base.importDesignFromXML(from_folder=IOL_BASE_FOLDER)

@@ -12,7 +12,6 @@ Test iol_base creation
   When I visit iol_base
   And I Click on Pratica base
   Then I can see the form
-  And Comment  PAUSE
 
 *** Keywords ***
 A iol_base database
