@@ -1,30 +1,28 @@
 *** Settings ***
-
-Variables  gisweb/iol/tests/robot/variables.py
-
-Library  Selenium2Library  timeout=${SELENIUM_TIMEOUT}  implicit_wait=${SELENIUM_IMPLICIT_WAIT}
-
-Resource  library-settings.txt
-Resource  gisweb/iol/tests/robot/keywords.txt
-
-Suite Setup  Suite Setup
+Suite Setup     Suite Setup
 Suite Teardown  Suite Teardown
-
+Variables       gisweb/iol/tests/robot/variables.py
+Library         Selenium2Library  timeout=${SELENIUM_TIMEOUT}  implicit_wait=${SELENIUM_IMPLICIT_WAIT}
+Resource        library-settings.txt
+Resource        gisweb/iol/tests/robot/keywords.txt
 
 *** Test Cases ***
-
 Test iol_base creation
-    Given A Folder a-folder
-     When I go to /a-folder/@@create_iol_db
-     Then the folder should contain a Plomino Database
-
+  Given A iol_base database
+  When I visit iol_base
+  And I Click on Pratica base
+  Then I can see the form
+  And Comment  PAUSE
 
 *** Keywords ***
-the folder should contain a Plomino Database
-    Sleep  600
+A iol_base database
+  Comment  It should be there, created in our test fixture
 
-I go to /a-folder/@@create_iol_db
-    go to  /a-folder/@@create_iol_db
+I visit iol_base
+  go to  ${PLONE_URL}/iol_base/
 
-A Folder a-folder
-  Sleep  600
+And I Click on Pratica base
+  Click Link  Pratica base
+
+I can see the form
+  Page should contain  Persona fisica

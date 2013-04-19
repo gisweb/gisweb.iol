@@ -3,7 +3,7 @@ Suite Setup
   # ----------------------------------------------------------------------------
   # Suite
   # ----------------------------------------------------------------------------
-  Open browser  ${PLONE_URL}  browser=${BROWSER}  remote_url=${REMOTE_URL}  desired_capabilities=${DESIRED_CAPABILITIES}
+  Open browser  ${PLONE_URL}/iol_base  browser=${BROWSER}  remote_url=${REMOTE_URL}  desired_capabilities=${DESIRED_CAPABILITIES}
   Log in as site owner
 
 Suite Teardown

@@ -4,11 +4,13 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:cmf="http://namespaces.zope.org/cmf"
+    xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="gisweb.iol">
 
   <include package="plomino.tinymce" />
   <include package="Products.CMFPlomino" />
   <include package="gisweb.plominofieldextensions" />
+  <include package="gisweb.plominofields" />
 
   <genericsetup:registerProfile
       name="default"
@@ -23,5 +25,12 @@
   <cmf:registerDirectory name="iol_scripts"/>
   <cmf:registerDirectory name="iol_assets"/>
 
+  <browser:page
+      name="iolbootstrapview"
+      for="*"
+      class=".browser.BootstrapView"
+      allowed_interface=".interfaces.IBootstrapView"
+      permission="zope.Public"
+    />
 
 </configure>
