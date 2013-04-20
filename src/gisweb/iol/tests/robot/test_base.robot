@@ -7,14 +7,19 @@ Resource        library-settings.txt
 Resource        gisweb/iol/tests/robot/keywords.txt
 
 *** Test Cases ***
+Test fill in Pratica base
+  Given a Pratica base form
+  When I fill in anagrafica
+  Capture Page Screenshot
+  I can submit the form
+
 Test iol_base creation
   Given A iol_base database
-  Capture Page Screenshot
   When I visit iol_base
   Capture Page Screenshot
   And I Click on Pratica base
-  Then I can see the form
   Capture Page Screenshot
+  Then I can see the form
 
 *** Keywords ***
 A iol_base database
@@ -28,3 +33,22 @@ And I Click on Pratica base
 
 I can see the form
   Page should contain  Persona fisica
+
+a Pratica base form
+  go to  ${PLONE_URL}/iol_base/
+  Click Link  Pratica base
+
+I fill in anagrafica
+  Scrivo  Pinco  nel campo  fisica_nome
+  Scrivo  Pallino  nel campo  fisica_cognome
+  Scelgo  M  da  fisica_sesso
+  Scrivo  20/11/1990  nel campo  fisica_data_nato
+  Scrivo  Genova  nel campo  fisica_comune_nato
+
+Scrivo
+  [Arguments]  ${testo}  ${_nel_campo_}  ${nome_campo}
+  Input text  xpath=//input[@name="${nome_campo}"]  ${testo}
+
+Scelgo
+  [Arguments]  ${scelta}  ${_da_}  ${nome_campo}
+  Select checkbox  xpath=//input[@type="radio" and @name="${nome_campo}" and @value="${scelta}"]
