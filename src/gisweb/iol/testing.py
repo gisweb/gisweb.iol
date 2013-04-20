@@ -88,4 +88,6 @@ for i, axis in enumerate(POSSIBLE_VALUES):
     value = locals()[axis]
     PORT_NUMBER += POSSIBLE_VALUES[axis].index(value) * (2**(i*3))
 # Avoid port collisions on Jenkins parallel build matrix
-z2.ZServer.port = PORT_NUMBER
+# BUILD_NUMBER is usually only set on Jenkins
+if os.environ.get('BUILD_NUMBER'):
+    z2.ZServer.port = PORT_NUMBER
