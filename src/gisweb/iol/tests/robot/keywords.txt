@@ -23,7 +23,7 @@ Log in
   Page should contain element  __ac_password
   Input text  __ac_name  ${userid}
   Input text  __ac_password  ${password}
-  Click Button  //form[@id='login_form']//input[@type='submit']
+  Click Button  //form[@id='login_form']//*[@name='submit']
 
 Log in as site owner
   [Documentation]  Log in as the SITE_OWNER provided by plone.app.testing,
