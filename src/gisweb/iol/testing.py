@@ -17,6 +17,14 @@ IOL_BASE_FOLDER = os.path.join(THIS_DIR, 'db_dumps', 'iol_base')
 
 FALSE_STRINGS = ('NO', '0', 'FALSE')
 
+if os.environ.get('BOOTSTRAP_THEME', '').upper() in FALSE_STRINGS:
+    BOOTSTRAP_THEME = True
+    # Avoid port collisions on Jenkins parallel build matrix
+    z2.ZServer.port = 55002
+else:
+    BOOTSTRAP_THEME = False
+
+
 class GiswebIol(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
 
@@ -29,7 +37,7 @@ class GiswebIol(PloneSandboxLayer):
             gisweb.iol,
             context=configurationContext
         )
-        if os.environ.get('BOOTSTRAP_THEME').upper() not in FALSE_STRINGS:
+        if BOOTSTRAP_THEME:
             import plonetheme.bootstrap
             xmlconfig.file(
                 'configure.zcml',
@@ -44,7 +52,7 @@ class GiswebIol(PloneSandboxLayer):
                                            [])
         login(portal, 'admin')
         applyProfile(portal, 'gisweb.iol:default')
-        if os.environ.get('BOOTSTRAP_THEME').upper() not in FALSE_STRINGS:
+        if BOOTSTRAP_THEME:
             portal.portal_quickinstaller.installProduct('plonetheme.bootstrap')
         portal.invokeFactory('PlominoDatabase', 'iol_base')
         portal.iol_base.at_post_create_script()

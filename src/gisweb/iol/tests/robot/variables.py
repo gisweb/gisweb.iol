@@ -2,9 +2,10 @@
 import os
 
 from plone.app.testing.interfaces import PLONE_SITE_ID
+from plone.testing import z2
 
 
-PORT = os.environ.get('ZSERVER_PORT', 55001)
+PORT = os.environ.get('ZSERVER_PORT', z2.ZServer.port)
 PORT = os.environ.get('PLONE_TESTING_PORT', PORT)
 ZSERVER_PORT = PORT
 SELENIUM_IMPLICIT_WAIT = os.environ.get('SELENIUM_IMPLICIT_WAIT', '0.1s')
