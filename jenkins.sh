@@ -7,7 +7,8 @@ if [ "$PLONE_VERSION" == "4.1" ] ; then cat plone_4.0_4.1_versions.txt >> buildo
 virtualenv -p python2.7 env
 pwd
 ls
-ls *
+ls bin
+cat bin/buildout
 env/bin/python bootstrap.py
 bin/buildout
 bin/test
