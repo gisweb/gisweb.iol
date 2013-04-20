@@ -9,9 +9,12 @@ Resource        gisweb/iol/tests/robot/keywords.txt
 *** Test Cases ***
 Test iol_base creation
   Given A iol_base database
+  Capture Page Screenshot
   When I visit iol_base
+  Capture Page Screenshot
   And I Click on Pratica base
   Then I can see the form
+  Capture Page Screenshot
 
 *** Keywords ***
 A iol_base database
