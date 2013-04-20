@@ -18,11 +18,11 @@ IOL_BASE_FOLDER = os.path.join(THIS_DIR, 'db_dumps', 'iol_base')
 
 PLONE_LANGUAGE = os.environ.get('PLONE_LANGUAGE')
 PLONE_VERSION = os.environ.get('PLONE_VERSION')
-FALSE_STRINGS = ('NO_BOOTSTRAP', 'NO', '0', 'FALSE')
+FALSE_STRINGS = ('NO_BOOTSTRAP', 'NO', '0', 'FALSE', '')
 if os.environ.get('BOOTSTRAP_THEME', '').upper() in FALSE_STRINGS:
-    BOOTSTRAP_THEME = True
-else:
     BOOTSTRAP_THEME = False
+else:
+    BOOTSTRAP_THEME = True
 
 
 class GiswebIol(PloneSandboxLayer):
@@ -51,11 +51,11 @@ class GiswebIol(PloneSandboxLayer):
                                            ['Manager'],
                                            [])
         login(portal, 'admin')
+        if BOOTSTRAP_THEME:
+            portal.portal_quickinstaller.installProduct('plonetheme.bootstrap')
         if PLONE_LANGUAGE:
             portal.portal_languages.setDefaultLanguage(PLONE_LANGUAGE)
         applyProfile(portal, 'gisweb.iol:default')
-        if BOOTSTRAP_THEME:
-            portal.portal_quickinstaller.installProduct('plonetheme.bootstrap')
         portal.invokeFactory('PlominoDatabase', 'iol_base')
         portal.iol_base.at_post_create_script()
         portal.iol_base.importDesignFromXML(from_folder=IOL_BASE_FOLDER)
