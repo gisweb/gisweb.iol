@@ -1,4 +1,5 @@
 import os
+import logging
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
@@ -91,3 +92,8 @@ for i, axis in enumerate(POSSIBLE_VALUES):
 # BUILD_NUMBER is usually only set on Jenkins
 if os.environ.get('BUILD_NUMBER'):
     z2.ZServer.port = PORT_NUMBER
+logger = logging.getLogger('gisweb_iol_testing')
+logger.warn("Server port: %(PORT_NUMBER)s")
+logger.warn("Bootstrap theme: %(BOOTSTRAP_THEME)s")
+logger.warn("Plone version: %(PLONE_VERSION)s")
+logger.warn("Plone language: %(PLONE_LANGUAGE)s")
