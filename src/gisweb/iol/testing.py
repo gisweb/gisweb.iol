@@ -15,12 +15,11 @@ from plone.testing import z2
 THIS_DIR = os.path.dirname(__file__)
 IOL_BASE_FOLDER = os.path.join(THIS_DIR, 'db_dumps', 'iol_base')
 
+PLONE_LANGUAGE = os.environ.get('PLONE_LANGUAGE')
+PLONE_VERSION = os.environ.get('PLONE_VERSION')
 FALSE_STRINGS = ('NO_BOOTSTRAP', 'NO', '0', 'FALSE')
-
 if os.environ.get('BOOTSTRAP_THEME', '').upper() in FALSE_STRINGS:
     BOOTSTRAP_THEME = True
-    # Avoid port collisions on Jenkins parallel build matrix
-    z2.ZServer.port = 55002
 else:
     BOOTSTRAP_THEME = False
 
@@ -51,6 +50,8 @@ class GiswebIol(PloneSandboxLayer):
                                            ['Manager'],
                                            [])
         login(portal, 'admin')
+        if PLONE_LANGUAGE:
+            portal.portal_languages.setDefaultLanguage(PLONE_LANGUAGE)
         applyProfile(portal, 'gisweb.iol:default')
         if BOOTSTRAP_THEME:
             portal.portal_quickinstaller.installProduct('plonetheme.bootstrap')
@@ -72,3 +73,19 @@ GISWEB_IOL_FUNCTIONAL = FunctionalTesting(
 GISWEB_IOL_ROBOT = FunctionalTesting(
     bases=(GISWEB_IOL, z2.ZSERVER_FIXTURE),
     name='GISWEB_IOL_ROBOT')
+
+# The following code forces a different port on each combination
+# of variables on our Jenkins CI.
+# All ports are in the 54000-54512 range
+
+POSSIBLE_VALUES = {
+    'PLONE_LANGUAGE': (None, 'it', 'en'),
+    'PLONE_VERSION': (None, '4.0', '4.1', '4.2', '4.3'),
+    'BOOTSTRAP_THEME': (True, False)
+}
+PORT_NUMBER = 54000
+for i, axis in enumerate(POSSIBLE_VALUES):
+    value = locals()[axis]
+    PORT_NUMBER += POSSIBLE_VALUES[axis].index(value) * (2**(i*3))
+# Avoid port collisions on Jenkins parallel build matrix
+z2.ZServer.port = PORT_NUMBER
