@@ -171,7 +171,7 @@ return '']]></ValidationFormula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription">Nel caso di nati all estero indicare lo stato.</field>
-              <field name="customAttributes">data-plugin="autocomplete" data-autocomplete-options="{source:'/services/xSuggest',minLength:2,extraParams:{fisica_cognome:jQuery('#fisica_cognome').val(),fisica_nome:jQuery('#fisica_nome').val(),fisica_data_nato:jQuery('#fisica_data_nato').val(), fisica_sesso:jQuery('input:radio[name=fisica_sesso]:checked').val()}}"</field>
+              <field name="customAttributes">data-plugin="autocomplete" data-autocomplete-options="{source:'/xSuggest',minLength:2,extraParams:{fisica_cognome:jQuery('#fisica_cognome').val(),fisica_nome:jQuery('#fisica_nome').val(),fisica_data_nato:jQuery('#fisica_data_nato').val(), fisica_sesso:jQuery('input:radio[name=fisica_sesso]:checked').val()}}"</field>
             </extensionfields>
           </CustomData>
         </element>
