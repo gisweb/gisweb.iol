@@ -12,6 +12,7 @@ env/bin/python bootstrap.py
 # the shebangs of those files don' work; It's probably related to their lengths
 # Explicitly naming the python interpreter is a workaround
 # that will make the buildout and tests run
+env/bin/python bin/develop up -f
 env/bin/python bin/buildout
 env/bin/python bin/test
 git checkout buildout.cfg
