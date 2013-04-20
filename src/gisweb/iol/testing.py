@@ -15,7 +15,7 @@ from plone.testing import z2
 THIS_DIR = os.path.dirname(__file__)
 IOL_BASE_FOLDER = os.path.join(THIS_DIR, 'db_dumps', 'iol_base')
 
-FALSE_STRINGS = ('NO', '0', 'FALSE')
+FALSE_STRINGS = ('NO_BOOTSTRAP', 'NO', '0', 'FALSE')
 
 if os.environ.get('BOOTSTRAP_THEME', '').upper() in FALSE_STRINGS:
     BOOTSTRAP_THEME = True
