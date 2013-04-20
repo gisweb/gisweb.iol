@@ -9,6 +9,7 @@
 
   <include package="plomino.tinymce" />
   <include package="Products.CMFPlomino" />
+  <include package="gisweb.utils" />
   <include package="gisweb.plominofieldextensions" />
   <include package="gisweb.plominofields" />
 
