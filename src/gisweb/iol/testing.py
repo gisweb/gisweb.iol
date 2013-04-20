@@ -15,6 +15,7 @@ from plone.testing import z2
 THIS_DIR = os.path.dirname(__file__)
 IOL_BASE_FOLDER = os.path.join(THIS_DIR, 'db_dumps', 'iol_base')
 
+FALSE_STRINGS = ('NO', '0', 'FALSE')
 
 class GiswebIol(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
@@ -28,7 +29,7 @@ class GiswebIol(PloneSandboxLayer):
             gisweb.iol,
             context=configurationContext
         )
-        if os.environ.get('BOOTSTRAP_THEME'):
+        if os.environ.get('BOOTSTRAP_THEME').upper() not in FALSE_STRINGS:
             import plonetheme.bootstrap
             xmlconfig.file(
                 'configure.zcml',
@@ -43,7 +44,7 @@ class GiswebIol(PloneSandboxLayer):
                                            [])
         login(portal, 'admin')
         applyProfile(portal, 'gisweb.iol:default')
-        if os.environ.get('BOOTSTRAP_THEME'):
+        if os.environ.get('BOOTSTRAP_THEME').upper() not in FALSE_STRINGS:
             portal.portal_quickinstaller.installProduct('plonetheme.bootstrap')
         portal.invokeFactory('PlominoDatabase', 'iol_base')
         portal.iol_base.at_post_create_script()
