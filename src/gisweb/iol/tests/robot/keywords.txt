@@ -12,7 +12,6 @@ Suite Teardown
   # Login/Logout
   # ----------------------------------------------------------------------------
 
-
 Log in
   [Arguments]  ${userid}  ${password}
   [Documentation]  Log in to the site as ${userid} using ${password}. There
@@ -22,10 +21,9 @@ Log in
   Go to  ${PLONE_URL}/login_form
   Page should contain element  __ac_name
   Page should contain element  __ac_password
-  Page should contain button  Log in
   Input text  __ac_name  ${userid}
   Input text  __ac_password  ${password}
-  Click Button  Log in
+  Click Button  //form[@id='login_form']//input[@type='submit']
 
 Log in as site owner
   [Documentation]  Log in as the SITE_OWNER provided by plone.app.testing,
