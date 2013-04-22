@@ -122,7 +122,7 @@
         <div id="top-toolbar-div" ></div>
 
 
-         <div id="info-loading" class="loadingPanel"><img src="ajax-loading"/></div>
+         <div id="info-loading" class="loadingPanel"><img src="ajax-loading.gif"/></div>
 
             <div class="row-fluid">
                 <tal:notajax tal:condition="not:ajax_load">
