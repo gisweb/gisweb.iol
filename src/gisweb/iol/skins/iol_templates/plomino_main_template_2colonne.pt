@@ -40,50 +40,50 @@
 
     <tal:notajax tal:condition="python:not ajax_load or ajax_include_head">
 
-        
+
     <metal:block define-macro="head_includes"
         tal:define="portal_state context/@@plone_portal_state;
                     portal_url portal_state/portal_url;">
         <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.min.js"></script>
         <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.urlEncode.js"></script>
         <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.serializeZopeQuery.js"></script>
-                        
+
     <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery-ui-1.9.2.custom.min.js"></script>
     <!---->
     <script type="text/javascript" tal:attributes="src string:${portal_url}/bootstrap.min.js"></script>
     <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.datepicker.regional.it.js"></script>
     <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.dataTables.min.js"></script>
-    
-    <link tal:attributes="href string:${portal_url}/public.css" rel="stylesheet" type="text/css"> 
-       
-                        
+
+    <link tal:attributes="href string:${portal_url}/public.css" rel="stylesheet" type="text/css">
+
+
     <link tal:attributes="href string:${portal_url}/jquery-ui-1.9.2.custom.min.css" rel="stylesheet" type="text/css">
     <link tal:attributes="href string:${portal_url}/print.css?nocache=01" rel="stylesheet" media="print" type="text/css">
 
-                        
+
     <link tal:attributes="href string:${portal_url}/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link tal:attributes="href string:${portal_url}/bootstrap-responsive.min.css" rel="stylesheet" media="screen" type="text/css"> 
+    <link tal:attributes="href string:${portal_url}/bootstrap-responsive.min.css" rel="stylesheet" media="screen" type="text/css">
 
     <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.json-2.2.min.js"></script>
 
 
-        <script type="text/javascript" tal:attributes="src string:${portal_url}/plomino.dynamicview.js"></script>    
-        <link tal:attributes="href string:${portal_url}/plomino.css" rel="stylesheet" type="text/css"> 
-                    
+        <script type="text/javascript" tal:attributes="src string:${portal_url}/plomino.dynamicview.js"></script>
+        <link tal:attributes="href string:${portal_url}/plomino.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" tal:attributes="src string:${portal_url}/plomino.datagrid.js"></script>  
-    <link tal:attributes="href string:${portal_url}/datatables_bootstrap.css" rel="stylesheet" type="text/css"> 
-                        
-       
-                       
-     
+
+    <script type="text/javascript" tal:attributes="src string:${portal_url}/plomino.datagrid.js"></script>
+    <link tal:attributes="href string:${portal_url}/datatables_bootstrap.css" rel="stylesheet" type="text/css">
+
+
+
+
     <script type="text/javascript">jq=jQuery</script>
-      
-    <script type="text/javascript" tal:attributes="src string:${portal_url}/controller.js"></script>  
-    <script type="text/javascript" tal:attributes="src string:${portal_url}/controller.toolbar-top.js"></script>    
-    <link tal:attributes="href string:${portal_url}/doc.css" rel="stylesheet" type="text/css"> 
+
+    <script type="text/javascript" tal:attributes="src string:${portal_url}/controller.js"></script>
+    <script type="text/javascript" tal:attributes="src string:${portal_url}/controller.toolbar-top.js"></script>
+    <link tal:attributes="href string:${portal_url}/doc.css" rel="stylesheet" type="text/css">
     </metal:block>
-   
+
 
         <tal:comment replace="nothing"> A slot where you can insert elements in the header from a template </tal:comment>
         <metal:headslot define-slot="head_slot" />
@@ -108,30 +108,30 @@
                     left_column_contents context/bootstrap_left_column;"
                           tal:attributes="class string:${body_class} notheme;
                         dir python: isRTL and 'rtl' or 'ltr'">
-    
-      <div id="top-toolbar-div"></div>                 
-                            
+
+      <div id="top-toolbar-div"></div>
+
       <div id="visual-portal-wrapper">
 
-      
+
       <div class="visualClear" style="margin-top:50px" id="clear-space-before-wrapper-table"><!-- --></div>
 
-      
-          
+
+
                     <div id="edit-bar"
                         tal:condition="show_border"
                         tal:content="structure provider:plone.contentviews" />
-                         
-          
-      <div id="info-loading" class="loadingPanel"><img src="ajax-loading" width="64" height="64" /><br /><strong>Validazione in corso</strong></div>              
+
+
+      <div id="info-loading" class="loadingPanel"><img src="ajax-loading.gif" width="64" height="64" /><br /><strong>Validazione in corso</strong></div>
      <div id="content-colums">
      <div class="row">
          <div tal:content="structure left_column_contents"
               class="span3"
               id="left-column-wrapper"
               tal:condition="left_column_contents"></div>
-     <div id="center-column" 
-          data-offset="50" 
+     <div id="center-column"
+          data-offset="50"
           tal:attributes="class python: left_column_contents and 'twocolumns span9' or 'span12'">
 
             <tal:notajax tal:condition="not:ajax_load">
