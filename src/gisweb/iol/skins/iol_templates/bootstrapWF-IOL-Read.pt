@@ -146,7 +146,7 @@
     
                              
                 <!-- DOMANDA ASSEGNATA IN ISTRUTTORIA -->    
-                <div class="alert alert-info" tal:condition="python: doc.elencoModelli('autorizzazione')!=None and doc.canUserEdit() and doc.wf_getInfoFor('review_state') == 'assegnata' and not doc.getItem('documenti_autorizzazione')"> 
+                <div class="alert alert-info" tal:condition="python: doc.elenco_modelli('autorizzazione')!=None and doc.canUserEdit() and doc.wf_getInfoFor('review_state') == 'assegnata' and not doc.getItem('documenti_autorizzazione')"> 
                     <div class="row-fluid" >
                         <div class="span8" tal:content="structure python: doc.getRenderedItem('modello_autorizzazione')" />
                         <a disabled = "disabled" style="width:200px;margin-top:20px;margin-right:5px" class="btn wf-actions pull-right" 
@@ -183,7 +183,7 @@
     
 
                     <!-- APPENDICE -->
-                    <div class="alert alert-info" tal:condition="python: doc.elencoModelli('appendice')!=None and doc.canUserEdit() and doc.wf_getInfoFor('review_state') == 'autorizzata' and not doc.getItem('documenti_appendice') and not doc.wf_getInfoFor('wf_richiesta_proroga')">
+                    <div class="alert alert-info" tal:condition="python: doc.elenco_modelli('appendice')!=None and doc.canUserEdit() and doc.wf_getInfoFor('review_state') == 'autorizzata' and not doc.getItem('documenti_appendice') and not doc.wf_getInfoFor('wf_richiesta_proroga')">
                     <div class="row-fluid">
                         <div class="span8" tal:content="structure python: doc.getRenderedItem('modello_appendice')" />
                         <div class="span4">
@@ -202,7 +202,7 @@
     
              <!-- ORDINANZA -->                       
                         
-                    <div class="alert alert-info" tal:condition="python: doc.elencoModelli('ordinanza')!=None and doc.canUserEdit() and doc.wf_getInfoFor('review_state') == 'autorizzata' and not doc.getItem('documenti_ordinanza')">
+                    <div class="alert alert-info" tal:condition="python: doc.elenco_modelli('ordinanza')!=None and doc.canUserEdit() and doc.wf_getInfoFor('review_state') == 'autorizzata' and not doc.getItem('documenti_ordinanza')">
                         <div class="row-fluid">
                         <div class="span8" tal:content="structure python: doc.getRenderedItem('modello_ordinanza')" />
                         <div class="span4">
