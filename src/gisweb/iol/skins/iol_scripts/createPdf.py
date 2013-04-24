@@ -20,13 +20,23 @@ if context.portal_type != 'PlominoDocument':
 
 from gisweb.utils import attachThis
 
-filename = filename or \
-	context.REQUEST.get('filename') or \
-	context.getId()
+filename = '%s.pdf' % filename or \
+    context.REQUEST.get('filename') or \
+    context.getId()
 
-res = context.restrictedTraverse('@@wkpdf').get_pdf_file()
-
-attachThis(context, res, itemname,
-	filename='%s.pdf' % filename,
-	overwrite=overwrite
-)
+try:
+    res = context.restrictedTraverse('@@wkpdf').get_pdf_file()
+except Exception as err:
+    from gisweb.utils import Type
+    msg1 = "%s: %s" % (Type(err), err)
+    msg2 = "Attenzione! Non è stato possibile allegare il file: %s" % filename
+    script.addPortalMessage(msg1, 'error')
+    script.addPortalMessage(msg2, 'warning')
+else:
+    attachThis(
+        context,
+        res,
+        itemname,
+        filename=filename,
+        overwrite=overwrite
+    )

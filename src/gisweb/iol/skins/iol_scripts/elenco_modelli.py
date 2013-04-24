@@ -14,24 +14,19 @@ Interroga il servizio e restituisce la lista dei modelli di stampa
 
 from Products.CMFPlomino.PlominoUtils import json_loads, open_url, urlencode
 
-if context.portal_type != 'PlominoDocument':
-    return ''
-
 app = context.naming('tipo_app')
+nullchoice = 'Manca il modello, scegliere un modello di stampa per abilitare la funzione|%s' % ('' if not context.test_mode() else 'test')
+outlist = [nullchoice]
 
-url = context.getLocalProperties('ws_listmodel_URL')
+#url = context.getLocalProperties('ws_listmodel_URL')
+url_info = context.getMyAttribute('ws_listmodel_URL')
 
-#if url == str(-1):
-    #return None
+def open_my_url(url, **args):
+    uu = '%s?%s' %(url, urlencode(args))
+    return json_loads(open_url(uu))
 
-nullchoice = 'Manca il modello, scegliere un modello di stampa per abilitare la funzione|'
+if url_info['success']:
+    outlist += open_my_url(url, app=context.naming('tipo_app'), group=sub_path)
 
-query = dict(
-    app = app,
-    group = sub_path
-)
 
-uu = '%s?%s' %(url, urlencode(query))
-result = json_loads(open_url(uu))
-
-return [nullchoice] + result
+return outlist
