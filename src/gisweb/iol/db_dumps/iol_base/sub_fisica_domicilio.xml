@@ -183,6 +183,16 @@ return plominoDocument.getItem('domicilio_opt') != 'domicilio']]></Formula>
 <param>
 <value><struct>
 <member>
+<name>selectionlist</name>
+<value><array><data>
+<value><string>Domicilio della persona fisica|domicilio</string></value>
+</data></array></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>CHECKBOX</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -190,16 +200,6 @@ return plominoDocument.getItem('domicilio_opt') != 'domicilio']]></Formula>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>CHECKBOX</string></value>
-</member>
-<member>
-<name>selectionlist</name>
-<value><array><data>
-<value><string>Domicilio della persona fisica|domicilio</string></value>
-</data></array></value>
 </member>
 </struct></value>
 </param>

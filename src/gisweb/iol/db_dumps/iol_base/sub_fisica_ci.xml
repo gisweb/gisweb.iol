@@ -36,6 +36,14 @@
 <param>
 <value><struct>
 <member>
+<name>selectionlist</name>
+<value><array><data>
+<value><string> |</string></value>
+<value><string>Carta di identit�i</string></value>
+<value><string>Patente di guida|patente</string></value>
+</data></array></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 			'bLengthChange': true,
@@ -43,14 +51,6 @@
 			'bSort': true,
 			'bInfo': true,
 			'bAutoWidth': false</string></value>
-</member>
-<member>
-<name>selectionlist</name>
-<value><array><data>
-<value><string> |</string></value>
-<value><string>Carta di identit�i</string></value>
-<value><string>Patente di guida|patente</string></value>
-</data></array></value>
 </member>
 </struct></value>
 </param>

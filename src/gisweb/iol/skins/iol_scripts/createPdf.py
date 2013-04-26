@@ -7,7 +7,6 @@
 ##parameters=filename='', itemname='documenti_pdf', overwrite=False
 ##title=Create pdf file from PlominoDocument
 ##
-
 """
 Create pdf file using wkpdf service and attach to the PlominoDocument in
 context

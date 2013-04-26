@@ -14,13 +14,7 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="v-content well">
-<div class="row-fluid">
-<div class="span3"><span class="plominoFieldClass">numero_protocollo</span></div>
-<div class="span3"><span class="plominoFieldClass">data_protocollo</span></div>
-</div>
-</div>
-<div class="hidden" id="btn-group"><span class="plominoActionClass">btn_salva</span> <span class="plominoActionClass">btn_annulla</span></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="v-content well"><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">numero_protocollo</span></div><div class="span3"><span class="plominoFieldClass">data_protocollo</span></div></div></div><div class="hidden" id="btn-group"><span class="plominoActionClass">btn_salva</span> <span class="plominoActionClass">btn_annulla</span></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -57,7 +51,7 @@
           <ActionDisplay type="Products.Archetypes.Field.StringField">SUBMIT</ActionDisplay>
           <Content type="Products.Archetypes.Field.TextField"><![CDATA[]]></Content>
           <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[not context.isEditMode()]]></Hidewhen>
-          <InActionBar type="Products.Archetypes.Field.BooleanField">True</InActionBar>
+          <InActionBar type="Products.Archetypes.Field.BooleanField">False</InActionBar>
         </element>
         <element id="btn_annulla" title="Annulla" type="PlominoAction">
           <id type="Products.Archetypes.Field.StringField">btn_annulla</id>
@@ -69,7 +63,7 @@ else:
     url=context.absolute_url()
 return '%s' %url]]></Content>
           <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[not context.isEditMode()]]></Hidewhen>
-          <InActionBar type="Products.Archetypes.Field.BooleanField">True</InActionBar>
+          <InActionBar type="Products.Archetypes.Field.BooleanField">False</InActionBar>
         </element>
         <element id="data_protocollo" title="Data protocollo" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">data_protocollo</id>

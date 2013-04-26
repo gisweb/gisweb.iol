@@ -8,13 +8,7 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid">
-<div class="span12"><span class="plominoFieldClass">avanzata_opt</span></div>
-</div>
-<div id="advancedSearchDiv"><span class="plominoSubformClass">sub_ricerca_istruttore</span></div>
-<div class="row-fluid">
-<div class="span12"><span class="plominoFieldClass">domande_inviate</span></div>
-</div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid"><div class="span12"><span class="plominoFieldClass">avanzata_opt</span></div></div><div id="advancedSearchDiv"><span class="plominoSubformClass">sub_ricerca_istruttore</span></div><div class="row-fluid"><div class="span12"><span class="plominoFieldClass">domande_inviate</span></div></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -41,6 +35,10 @@
           <params>
 <param>
 <value><struct>
+<member>
+<name>sourceview</name>
+<value><string>tutte-istanze</string></value>
+</member>
 <member>
 <name>dynamictableparam</name>
 <value><string>'aaSorting': [],
@@ -78,16 +76,12 @@
 </string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
-<name>sourceview</name>
-<value><string>tutte-istanze</string></value>
-</member>
-<member>
 <name>labelcolumn</name>
 <value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 </struct></value>
 </param>
@@ -114,6 +108,16 @@
 <param>
 <value><struct>
 <member>
+<name>selectionlist</name>
+<value><array><data>
+<value><string>Ricerca avanzata|avanzata</string></value>
+</data></array></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>CHECKBOX</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -121,16 +125,6 @@
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>CHECKBOX</string></value>
-</member>
-<member>
-<name>selectionlist</name>
-<value><array><data>
-<value><string>Ricerca avanzata|avanzata</string></value>
-</data></array></value>
 </member>
 </struct></value>
 </param>

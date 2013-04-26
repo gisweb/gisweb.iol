@@ -3,15 +3,21 @@
     <element id="com_sospensione" title="Comunicazione Sospensione Istanza" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">com_sospensione</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
-      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[if not plominoDocument.isNewDocument():
+      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[tr_id = 'sospensione'
+tr_info = plominoDocument.wf_transitionsInfo()
+if not tr_id in plominoDocument.wf_statesInfo(args=['transitions'])['transitions']:
+    return "ATTENZIONE! La transizione %s non è disponibile per la pratica con id: %s" % (tr_id, plominoDocument.getId())
+
+if not plominoDocument.isNewDocument():
     plominoDocument.setItem('oForm',plominoDocument.getItem('Form',''))]]></onOpenDocument>
-      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.getItem('oForm'):
-    plominoDocument.setItem('Form','frm_trasporti_base')
+      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[oForm = plominoDocument.getItem('oForm')
+    
+if oForm:
+    from Products.CMFCore.utils import getToolByName
+    pw = getToolByName(context,'portal_workflow')
+    plominoDocument.setItem('Form', oForm)
     plominoDocument.removeItem('oForm')
-    try:
-        plominoDocument.doAction(action='sospendi')
-    except:
-        pass]]></onSaveDocument>
+    pw.doActionFor(plominoDocument,'sospendi')]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
@@ -107,7 +113,7 @@
     result = DateToString(plominoDocument.getItem('data_protocollo'),'%d/%m/%Y')
 except:
     result=''
-return result    ]]></Formula>
+return result]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
@@ -135,7 +141,7 @@ elif ragsoc:
     result = ragsoc
 else:
     result = ''
-return result   ]]></Formula>
+return result]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>

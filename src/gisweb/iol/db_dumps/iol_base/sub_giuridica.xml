@@ -344,15 +344,6 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
-<name>dynamictableparam</name>
-<value><string>'bPaginate': true,
-			'bLengthChange': true,
-			'bFilter': true,
-			'bSort': true,
-			'bInfo': true,
-			'bAutoWidth': false</string></value>
-</member>
-<member>
 <name>selectionlist</name>
 <value><array><data>
 <value><string> |</string></value>
@@ -361,6 +352,15 @@ return '']]></ValidationFormula>
 <value><string>Accomandatario</string></value>
 <value><string>RUP</string></value>
 </data></array></value>
+</member>
+<member>
+<name>dynamictableparam</name>
+<value><string>'bPaginate': true,
+			'bLengthChange': true,
+			'bFilter': true,
+			'bSort': true,
+			'bInfo': true,
+			'bAutoWidth': false</string></value>
 </member>
 </struct></value>
 </param>
@@ -395,6 +395,16 @@ except:
 <param>
 <value><struct>
 <member>
+<name>selectionlist</name>
+<value><array><data>
+<value><string>Persona giuridica associata|giuridica</string></value>
+</data></array></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>CHECKBOX</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -402,16 +412,6 @@ except:
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>CHECKBOX</string></value>
-</member>
-<member>
-<name>selectionlist</name>
-<value><array><data>
-<value><string>Persona giuridica associata|giuridica</string></value>
-</data></array></value>
 </member>
 </struct></value>
 </param>

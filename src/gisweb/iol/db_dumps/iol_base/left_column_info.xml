@@ -8,27 +8,7 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="well">
-<div><img class="image-inline" src="../resources/logo" /></div>
-</div>
-<div class="well">
-<div>Vai alla pagina <a href="../search_istanze_utente" target="new">Le mie istanze</a><br />Vai alla pagina dei <a class="internal-link" href="../../servizi-on-line" target="new">Servizi Online</a></div>
-</div>
-<div class="well">
-<p style="text-align: justify; "><b>Istruzioni di compilazione</b><br />Compila tutti i campi contrassegnati in rosso.  Puoi salvare la tua istanza, anche se incompleta, e finire di compilarla in un secondo momento.</p>
-<p style="text-align: justify; ">Per salvare le informazioni inserite clicca sul tasto SALVA, in alto a desta. Ritroverai tutte le istanze da te salvate nella sezione del portale <a href="../search_istanze_utente" target="new">Le mie istanze</a>.</p>
-<p style="text-align: justify; ">Per approfondimenti vai alla <a class="internal-link" href="istanze/guida-compilazione-delle-istanze-e-uso-della-sezione-le-mie-istanze" target="_blank">Guida</a>.</p>
-</div>
-<div class="well">
-<p><b>Allegati</b></p>
-<p style="text-align: justify; ">Per essere complete, alcune istanze ti richiedono di aggiungere un elenco di documenti, da inserire come allegati. Per aggiungere un documento alla tua istanza devi prima averlo salvato sul computer che stai utilizzando. Puoi caricare il documento richiesto clicca su “Scegli file” e seleziona sul tuo computer il file desiderato.</p>
-<p style="text-align: justify; "><span style="text-align: justify; ">Per approfondimenti vai alla </span><a class="internal-link" href="istanze/guida-compilazione-delle-istanze-e-uso-della-sezione-le-mie-istanze" target="_blank">Guida</a>.</p>
-</div>
-<div class="well">
-<p><b><b>Invio della domanda </b> </b></p>
-<p style="text-align: justify; ">Per inviare l'istanza all'ufficio competente è necessario compilare TUTTI i campi ed allegare TUTTI i documenti richiesti. Una volta completata la compilazione è necessario leggere e accettare le condizioni del servizio e normativa sulla privacy, che trovi in fondo alla pagina. Ora puoi spedire l'istanza schiacciando il tasto “INVIA”, in fondo a destra. Non appena inviata l'istanza, riceverai una mail di conferma all'indirizzo email con cui ti sei registrato al portale.</p>
-<p style="text-align: justify; "><span style="text-align: justify; ">Per approfondimenti vai alla <a class="internal-link" href="istanze/guida-compilazione-delle-istanze-e-uso-della-sezione-le-mie-istanze" target="_blank">Guida</a></span></p>
-</div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="well"><div><img class="image-inline" src="../resources/logo" /></div></div><div class="well"><div>Vai alla pagina <a href="../search_istanze_utente" target="new">Le mie istanze</a><br />Vai alla pagina dei <a class="internal-link" href="../../servizi-on-line" target="new">Servizi Online</a></div></div><div class="well"><p style="text-align: justify; "><b>Istruzioni di compilazione</b><br />Compila tutti i campi contrassegnati in rosso.  Puoi salvare la tua istanza, anche se incompleta, e finire di compilarla in un secondo momento.</p><p style="text-align: justify; ">Per salvare le informazioni inserite clicca sul tasto SALVA, in alto a desta. Ritroverai tutte le istanze da te salvate nella sezione del portale <a href="../search_istanze_utente" target="new">Le mie istanze</a>.</p><p style="text-align: justify; ">Per approfondimenti vai alla <a class="internal-link" href="istanze/guida-compilazione-delle-istanze-e-uso-della-sezione-le-mie-istanze" target="_blank">Guida</a>.</p></div><div class="well"><p><b>Allegati</b></p><p style="text-align: justify; ">Per essere complete, alcune istanze ti richiedono di aggiungere un elenco di documenti, da inserire come allegati. Per aggiungere un documento alla tua istanza devi prima averlo salvato sul computer che stai utilizzando. Puoi caricare il documento richiesto clicca su “Scegli file” e seleziona sul tuo computer il file desiderato.</p><p style="text-align: justify; "><span style="text-align: justify; ">Per approfondimenti vai alla </span><a class="internal-link" href="istanze/guida-compilazione-delle-istanze-e-uso-della-sezione-le-mie-istanze" target="_blank">Guida</a>.</p></div><div class="well"><p><b><b>Invio della domanda </b> </b></p><p style="text-align: justify; ">Per inviare l'istanza all'ufficio competente è necessario compilare TUTTI i campi ed allegare TUTTI i documenti richiesti. Una volta completata la compilazione è necessario leggere e accettare le condizioni del servizio e normativa sulla privacy, che trovi in fondo alla pagina. Ora puoi spedire l'istanza schiacciando il tasto “INVIA”, in fondo a destra. Non appena inviata l'istanza, riceverai una mail di conferma all'indirizzo email con cui ti sei registrato al portale.</p><p style="text-align: justify; "><span style="text-align: justify; ">Per approfondimenti vai alla <a class="internal-link" href="istanze/guida-compilazione-delle-istanze-e-uso-della-sezione-le-mie-istanze" target="_blank">Guida</a></span></p></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>

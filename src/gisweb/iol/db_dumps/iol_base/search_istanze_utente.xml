@@ -8,19 +8,7 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoFieldClass">data_filter</span></p>
-<div class="row-fluid">
-<h4 class="text-info">Domande Compilate (in attesa di invio)</h4>
-<span class="plominoFieldClass">domande_compilate</span></div>
-<div class="row-fluid">
-<h4 class="text-info">Domande in Istruttoria</h4>
-<span class="plominoFieldClass">domande_inviate</span></div>
-<div class="row-fluid">
-<h4 class="text-info">Domande Autorizzate / Prorogate</h4>
-<span class="plominoFieldClass">domande_autorizzate</span></div>
-<div class="row-fluid">
-<h4 class="text-info">Domande Sospese / Preavviso di Rigetto</h4>
-<span class="plominoFieldClass">domande_sospese</span></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoFieldClass">data_filter</span></p><div class="row-fluid"><h4 class="text-info">Domande Compilate (in attesa di invio)</h4><span class="plominoFieldClass">domande_compilate</span></div><div class="row-fluid"><h4 class="text-info">Domande in Istruttoria</h4><span class="plominoFieldClass">domande_inviate</span></div><div class="row-fluid"><h4 class="text-info">Domande Autorizzate / Prorogate</h4><span class="plominoFieldClass">domande_autorizzate</span></div><div class="row-fluid"><h4 class="text-info">Domande Sospese / Preavviso di Rigetto</h4><span class="plominoFieldClass">domande_sospese</span></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -48,6 +36,10 @@
 <param>
 <value><struct>
 <member>
+<name>sourceview</name>
+<value><string>sospese</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -63,16 +55,12 @@
 'bProcessing': true</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
-<name>sourceview</name>
-<value><string>sospese</string></value>
-</member>
-<member>
 <name>labelcolumn</name>
 <value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 </struct></value>
 </param>
@@ -99,6 +87,10 @@
 <param>
 <value><struct>
 <member>
+<name>sourceview</name>
+<value><string>dainviare</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -114,16 +106,12 @@
 'bProcessing': true</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
-<name>sourceview</name>
-<value><string>dainviare</string></value>
-</member>
-<member>
 <name>labelcolumn</name>
 <value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 </struct></value>
 </param>
@@ -150,6 +138,10 @@
 <param>
 <value><struct>
 <member>
+<name>sourceview</name>
+<value><string>inviate</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -165,16 +157,12 @@
 'bProcessing': true</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
-<name>sourceview</name>
-<value><string>inviate</string></value>
-</member>
-<member>
 <name>labelcolumn</name>
 <value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 </struct></value>
 </param>
@@ -223,6 +211,10 @@ return json_dumps(result)]]></Formula>
 <param>
 <value><struct>
 <member>
+<name>sourceview</name>
+<value><string>autorizzate</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -238,16 +230,12 @@ return json_dumps(result)]]></Formula>
 'bProcessing': true</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
-<name>sourceview</name>
-<value><string>autorizzate</string></value>
-</member>
-<member>
 <name>labelcolumn</name>
 <value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 </struct></value>
 </param>

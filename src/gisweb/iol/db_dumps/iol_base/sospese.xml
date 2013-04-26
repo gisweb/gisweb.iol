@@ -49,7 +49,7 @@ elif ragsoc:
     result = ragsoc
 else:
     result = ''
-return result    ]]></Formula>
+return result]]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>

@@ -8,27 +8,7 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="well">
-<h4>Informazioni sulla proroga</h4>
-<div class="row-fluid">
-<div class="span4"><span class="plominoFieldClass">proroga_numero_protocollo</span></div>
-<div class="span4"><span class="plominoFieldClass">proroga_data_protocollo</span></div>
-</div>
-<div class="row-fluid">
-<div class="span4"><span class="plominoFieldClass">proroga_data_autorizzazione</span></div>
-<div class="span4"><span class="plominoFieldClass">proroga_numero_autorizzazione</span></div>
-</div>
-<div class="row-fluid">
-<div class="span4"><span class="plominoFieldClass">proroga_autorizzata_dal</span></div>
-<div class="span4"><span class="plominoFieldClass">proroga_autorizzata_al</span></div>
-</div>
-<div class="row-fluid">
-<div class="span8"><span class="plominoFieldClass">proroga_motivazione</span></div>
-</div>
-<div class="row-fluid">
-<div class="span8"><span class="plominoFieldClass">proroga_prescrizioni</span></div>
-</div>
-</div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="well"><h4>Informazioni sulla proroga</h4><div class="row-fluid"><div class="span4"><span class="plominoFieldClass">proroga_numero_protocollo</span></div><div class="span4"><span class="plominoFieldClass">proroga_data_protocollo</span></div></div><div class="row-fluid"><div class="span4"><span class="plominoFieldClass">proroga_data_autorizzazione</span></div><div class="span4"><span class="plominoFieldClass">proroga_numero_autorizzazione</span></div></div><div class="row-fluid"><div class="span4"><span class="plominoFieldClass">proroga_autorizzata_dal</span></div><div class="span4"><span class="plominoFieldClass">proroga_autorizzata_al</span></div></div><div class="row-fluid"><div class="span8"><span class="plominoFieldClass">proroga_motivazione</span></div></div><div class="row-fluid"><div class="span8"><span class="plominoFieldClass">proroga_prescrizioni</span></div></div></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
