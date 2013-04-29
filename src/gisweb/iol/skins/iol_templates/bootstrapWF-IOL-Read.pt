@@ -54,7 +54,8 @@
         <!-- INVIO DOMANDA -->
             <div id="section-invio-domanda" tal:condition="python: v.get('id') == 'invia_domanda'"
                 class="alert alert-info hidden"
-                tal:content="structure python: doc.parentDB().getForm('sub_invio_domanda').displayDocument(doc, editmode=False, creation=False, parent_form_id=False, request=context.REQUEST)"/>
+                tal:define="customform python: doc.getParentDatabase().getForm('sub_invio_domanda_custom') or doc.getParentDatabase().getForm('sub_invio_domanda');"
+                tal:content="structure python: customform.displayDocument(doc, editmode=False, creation=False, parent_form_id=False, request=context.REQUEST)"/>
 
         </tal:loop>
 
@@ -223,4 +224,4 @@
 </tal:block>
 
 <tal:test tal:condition="python: doc.test_mode()"
-    tal:content="python: '***** Applicazione %s in test *****' % tipoApp"> ***** fine template ***** </tal:test>
+    tal:content="python: 'Applicazione %s in test' % tipoApp"> ***** fine template ***** </tal:test>

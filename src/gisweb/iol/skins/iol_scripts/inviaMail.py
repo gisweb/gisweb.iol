@@ -5,7 +5,7 @@
 ##bind script=script
 ##bind subpath=traverse_subpath
 ##parameters=tipo=''
-##title=
+##title=USARE sendThisMail
 ##
 
 from Products.CMFCore.utils import getToolByName

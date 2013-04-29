@@ -135,4 +135,4 @@
 </tal:notnewdoc>
 
 <tal:test tal:condition="python: doc.test_mode()"
-    tal:content="python: '***** Applicazione %s in test *****' % tipoApp"> ***** fine template ***** </tal:test>
+    tal:content="python: 'Applicazione %s in test' % tipoApp"> ***** fine template ***** </tal:test>
