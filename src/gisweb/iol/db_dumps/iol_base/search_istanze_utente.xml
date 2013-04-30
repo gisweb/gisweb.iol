@@ -36,8 +36,8 @@
 <param>
 <value><struct>
 <member>
-<name>sourceview</name>
-<value><string>sospese</string></value>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 <member>
 <name>dynamictableparam</name>
@@ -55,12 +55,12 @@
 'bProcessing': true</string></value>
 </member>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>widget</name>
 <value><string>DYNAMICTABLE</string></value>
+</member>
+<member>
+<name>sourceview</name>
+<value><string>sospese</string></value>
 </member>
 </struct></value>
 </param>
@@ -87,8 +87,8 @@
 <param>
 <value><struct>
 <member>
-<name>sourceview</name>
-<value><string>dainviare</string></value>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 <member>
 <name>dynamictableparam</name>
@@ -106,12 +106,12 @@
 'bProcessing': true</string></value>
 </member>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>widget</name>
 <value><string>DYNAMICTABLE</string></value>
+</member>
+<member>
+<name>sourceview</name>
+<value><string>dainviare</string></value>
 </member>
 </struct></value>
 </param>
@@ -138,8 +138,8 @@
 <param>
 <value><struct>
 <member>
-<name>sourceview</name>
-<value><string>inviate</string></value>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 <member>
 <name>dynamictableparam</name>
@@ -157,12 +157,12 @@
 'bProcessing': true</string></value>
 </member>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>widget</name>
 <value><string>DYNAMICTABLE</string></value>
+</member>
+<member>
+<name>sourceview</name>
+<value><string>inviate</string></value>
 </member>
 </struct></value>
 </param>
@@ -211,8 +211,8 @@ return json_dumps(result)]]></Formula>
 <param>
 <value><struct>
 <member>
-<name>sourceview</name>
-<value><string>autorizzate</string></value>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 <member>
 <name>dynamictableparam</name>
@@ -230,12 +230,12 @@ return json_dumps(result)]]></Formula>
 'bProcessing': true</string></value>
 </member>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>widget</name>
 <value><string>DYNAMICTABLE</string></value>
+</member>
+<member>
+<name>sourceview</name>
+<value><string>autorizzate</string></value>
 </member>
 </struct></value>
 </param>

@@ -36,8 +36,8 @@
 <param>
 <value><struct>
 <member>
-<name>sourceview</name>
-<value><string>tutte-istanze</string></value>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 <member>
 <name>dynamictableparam</name>
@@ -76,12 +76,12 @@
 </string></value>
 </member>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>widget</name>
 <value><string>DYNAMICTABLE</string></value>
+</member>
+<member>
+<name>sourceview</name>
+<value><string>tutte-istanze</string></value>
 </member>
 </struct></value>
 </param>
@@ -108,16 +108,6 @@
 <param>
 <value><struct>
 <member>
-<name>selectionlist</name>
-<value><array><data>
-<value><string>Ricerca avanzata|avanzata</string></value>
-</data></array></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>CHECKBOX</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -125,6 +115,16 @@
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>CHECKBOX</string></value>
+</member>
+<member>
+<name>selectionlist</name>
+<value><array><data>
+<value><string>Ricerca avanzata|avanzata</string></value>
+</data></array></value>
 </member>
 </struct></value>
 </param>

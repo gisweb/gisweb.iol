@@ -274,15 +274,6 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
-<name>selectionlist</name>
-<value><array><data>
-</data></array></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>RADIO</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -290,6 +281,15 @@ return '']]></ValidationFormula>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>RADIO</string></value>
+</member>
+<member>
+<name>selectionlist</name>
+<value><array><data>
+</data></array></value>
 </member>
 <member>
 <name>selectionlistformula</name>
@@ -320,6 +320,15 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
+<name>dynamictableparam</name>
+<value><string>'bPaginate': true,
+			'bLengthChange': true,
+			'bFilter': true,
+			'bSort': true,
+			'bInfo': true,
+			'bAutoWidth': false</string></value>
+</member>
+<member>
 <name>selectionlist</name>
 <value><array><data>
 <value><string>Proprietario</string></value>
@@ -329,15 +338,6 @@ return '']]></ValidationFormula>
 <value><string>Comodatario</string></value>
 <value><string>Amministratore</string></value>
 </data></array></value>
-</member>
-<member>
-<name>dynamictableparam</name>
-<value><string>'bPaginate': true,
-			'bLengthChange': true,
-			'bFilter': true,
-			'bSort': true,
-			'bInfo': true,
-			'bAutoWidth': false</string></value>
 </member>
 </struct></value>
 </param>

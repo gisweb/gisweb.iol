@@ -235,10 +235,6 @@ return list]]></Formula>
 <param>
 <value><struct>
 <member>
-<name>widget</name>
-<value><string>MULTISELECT</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -246,6 +242,10 @@ return list]]></Formula>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>MULTISELECT</string></value>
 </member>
 <member>
 <name>separator</name>
