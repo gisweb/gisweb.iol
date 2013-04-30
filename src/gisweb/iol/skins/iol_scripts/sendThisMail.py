@@ -7,7 +7,6 @@
 ##parameters=ObjectId, sender=''
 ##title=Low level sending email management
 ##
-
 """
 Gestione centralizzata di invio mail
 
@@ -49,8 +48,8 @@ if not custom_args:
             Text = '''
 Si comunica che in data %(now)s è stato avviato il procedimento n. %(numero_pratica)s.
 ''' % msg_info,
-            Attachment = context[info['attach']],
-            Attachment_name = info['attach'],
+            Attachment = '' if not msg_info['attach'] in context.getFilenames() else context[msg_info['attach']],
+            Attachment_name = msg_info['attach'],
         )
 
     elif ObjectId == "integra":
@@ -64,8 +63,8 @@ Si comunica che in data %(now)s è stato avviato il procedimento n. %(numero_pra
             Text = """
 Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato integrato.
 """ % msg_info,
-            Attachment = context[info['attach']],
-            Attachment_name = info['attach'],
+            Attachment = '' if not msg_info['attach'] in context.getFilenames() else context[msg_info['attach']],
+            Attachment_name = msg_info['attach'],
         )
 
     elif ObjectId == 'autorizza':
@@ -109,7 +108,7 @@ in preavviso di rigetto con le seguenti motivazioni:
         ))
 
         custom_args = dict(
-            Object = 'Sospensione pratica. n. %(numero_pratica)s - %(titolo)s' % msg_info
+            Object = 'Sospensione pratica. n. %(numero_pratica)s - %(titolo)s' % msg_info,
             Text = """
 Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è
 stato sospeso con le seguenti motivazioni:

@@ -7,11 +7,6 @@
 ##parameters=
 ##title=IOL onDeleteDocument event common actions
 ##
-
-"""
-Standardizzazione dele operazioni da svolgere alla apertura di una istanza
-"""
-
 # ON OPEN WITH FORM
 
 owf_name = context.REQUEST.get('openwithform')
