@@ -57,7 +57,7 @@
           <FieldType type="Products.Archetypes.Field.StringField">NUMBER</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">CREATION</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[#
-return context.numerazione()]]></Formula>
+return context.resources.numerazione()]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapNumberRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapNumberRead</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>

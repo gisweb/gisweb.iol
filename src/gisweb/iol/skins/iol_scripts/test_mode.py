@@ -19,14 +19,12 @@ Se la variabile non è settata restituisce il valore di default.
 
 tipo_app = context.naming('tipo_app')
 
-if tipo_app:
-    test_prop = '%s_is_in_test' % tipo_app
-else:
-    test_prop = 'app_in_test'
+for attr_name in ('app_in_test', '%s_is_in_test' % tipo_app, ):
+    try:
+        test = getattr(context.getParentDatabase(), attr_name)
+    except AttributeError, err:
+        pass
+    else:
+        return test
 
-try:
-    test = getattr(context.getParentDatabase(), test_prop)
-except AttributeError, err:
-    test = default
-
-return test
+return default

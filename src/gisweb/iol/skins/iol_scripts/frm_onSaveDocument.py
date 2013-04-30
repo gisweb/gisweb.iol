@@ -7,6 +7,7 @@
 ##parameters=child_events=False, backToParent=False
 ##title=IOL onSaveDocument event common actions
 ##
+
 """
 Standardizzazione dele operazioni da svolgere al salvataggio di una istanza
 child_events: True o False (lancia gli script di gestione dell'uno a molti)

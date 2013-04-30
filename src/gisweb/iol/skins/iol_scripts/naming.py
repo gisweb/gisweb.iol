@@ -5,7 +5,7 @@
 ##bind script=script
 ##bind subpath=traverse_subpath
 ##parameters=what='', frm_key='frm_', default='', calculate=False
-##title=Centralized naming policy management
+##title=(NON SERVE PIÙ?) Centralized naming policy management
 ##
 
 """
@@ -13,16 +13,16 @@ Centralized naming policy management
 
 what: the argument of your request i.e. 'tipo_pratica', 'tipo_app' o 'tipo_richiesta'
     e.g.:
-		tipo_pratica = trasporti_base/disabili_base/etc.
-		tipo_app = trasporti/disabili/etc.
-		tipo_richiesta = base/proroga/rinnovo
+        tipo_pratica = trasporti_base/disabili_base/etc.
+        tipo_app = trasporti/disabili/etc.
+        tipo_richiesta = base/proroga/rinnovo
 """
 
 if what=='frm_key':
     return frm_key
 
 generators = dict(
-	# tutto ciò che segue il prefisso unito da "_"
+    # tutto ciò che segue il prefisso unito da "_"
     tipo_pratica = lambda k: '_'.join(k[1:]),
     # tutto quello che sta nel mezzo unito da "_"
     tipo_app = lambda k: '_'.join(k[1:-1]),
@@ -31,14 +31,14 @@ generators = dict(
 )
 
 if context.portal_type == 'PlominoDocument':
-	
-	if calculate or context.isNewDocument():
-		FRM_ID = context.getForm().getFormName()
-	else:
-		if what:
-			return context.getItem(what)
-		else:
-			return dict([(k, context.getItem(k)) for k in generators.keys()])
+
+    if calculate or context.isNewDocument():
+        FRM_ID = context.getForm().getFormName()
+    else:
+        if what:
+            return context.getItem(what)
+        else:
+            return dict([(k, context.getItem(k)) for k in generators.keys()])
 
 elif context.portal_type == 'PlominoForm':
     FRM_ID = context.getFormName()
