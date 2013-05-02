@@ -48,7 +48,8 @@ setup(name='gisweb.iol',
       ],
       extras_require={
         'test': [
-            'plone.app.testing[robot]>=4.2.2'
+            'plone.app.testing[robot]>=4.2.2',
+            'plone.app.robotframework',
         ]
       },
       entry_points="""
