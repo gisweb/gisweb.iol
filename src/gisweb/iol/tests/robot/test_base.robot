@@ -11,6 +11,7 @@ Resource        gisweb/iol/tests/robot/keywords.txt
 Test Compilare la pratica base
   Data una Pratica base
   Leggo  Persona fisica
+  Capture Page Screenshot
   Compilando l'anagrafica
   Capture Page Screenshot
   Posso inviare la domanda
@@ -22,14 +23,25 @@ Leggo
 
 Data una Pratica base
   go to  ${PLONE_URL}/iol_base/
+  Capture Page Screenshot
   Click Link  Pratica base
+  Wait Until Page Contains  Persona fisica
 
 Compilando l'anagrafica
   Scrivo  Pinco  nel campo  fisica_nome
   Scrivo  Pallino  nel campo  fisica_cognome
   Scelgo  M  da  fisica_sesso
   Scrivo  20/11/1990  nel campo  fisica_data_nato
-  Scrivo  Genova  nel campo  fisica_comune_nato
+  Compilo il comune  fisica_comune_nato  Genova
+  Comment  PAUSE
+
+
+Compilo il comune
+  [Arguments]  ${nome_campo}  ${valore}
+  Scrivo  ${valore}  nel campo  ${nome_campo}
+  Wait Until Page Contains Element  xpath=//a[contains(text(), '${valore} (')]
+  Click Link  xpath=//a[contains(text(), '${valore} (')]
+
 
 Scrivo
   [Arguments]  ${testo}  ${_nel_campo_}  ${nome_campo}

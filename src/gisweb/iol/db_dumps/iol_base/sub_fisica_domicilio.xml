@@ -45,7 +45,7 @@
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription">Inserire il comune presso il quale si ha il domicilio</field>
-              <field name="customAttributes">data-plugin="autocomplete" data-autocomplete-options="{source:'../resources/application/services/xSuggest',minLength:2,extraParams:{pippo:1,pluto:2}}" data-mandatory</field>
+              <field name="customAttributes">data-plugin="comunifield" data-mandatory</field>
             </extensionfields>
           </CustomData>
         </element>

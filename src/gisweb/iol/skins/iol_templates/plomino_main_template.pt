@@ -38,6 +38,8 @@
         tal:define="portal_state context/@@plone_portal_state;
                     portal_url portal_state/portal_url;">
                         <!-- head_includes -->
+        <script async type="text/javascript" tal:attributes="src string:${portal_url}/comuni.jsonp"></script>
+
         <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.min.js"></script>
         <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.urlEncode.js"></script>
         <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.serializeZopeQuery.js"></script>
@@ -45,6 +47,10 @@
     <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery-ui-1.9.2.custom.min.js"></script>
     <!---->
     <script type="text/javascript" tal:attributes="src string:${portal_url}/bootstrap.min.js"></script>
+
+    <script type="text/javascript" tal:attributes="src string:${portal_url}/bootstrap-combobox/js/bootstrap-combobox.js"></script>
+    <link tal:attributes="href string:${portal_url}/bootstrap-combobox/css/bootstrap-combobox.css " rel="stylesheet" type="text/css">
+
     <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.datepicker.regional.it.js"></script>
     <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.dataTables.min.js"></script>
     <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.filestyle.js"></script>

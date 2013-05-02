@@ -167,7 +167,7 @@ return '']]></ValidationFormula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription">indicare .....</field>
-              <field name="customAttributes">data-plugin="autocomplete" data-autocomplete-options="{source:'../resources/application/services/xSuggest',minLength:2}"</field>
+              <field name="customAttributes">data-plugin="comunifield"</field>
             </extensionfields>
           </CustomData>
         </element>
