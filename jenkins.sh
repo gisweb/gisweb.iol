@@ -15,7 +15,8 @@ env/bin/python bootstrap.py
 env/bin/python bin/develop up -f
 env/bin/python bin/buildout install test
 recordmydesktop --no-cursor --no-sound --output=session.ogv &
+recordmydesktop_pid=$!
 env/bin/python bin/test
-killall recordmydesktop
-while pgrep -x recordmydesktop > /dev/null ; do sleep 1; done
+kill $recordmydesktop_pid
+while ls /proc/$recordmydesktop_pid > /dev/null ; do sleep 1; done
 git checkout buildout.cfg
