@@ -3,6 +3,7 @@ Suite Setup     Suite Setup
 Suite Teardown  Suite Teardown
 Variables       gisweb/iol/tests/robot/variables.py
 Library         Selenium2Library  timeout=${SELENIUM_TIMEOUT}  implicit_wait=${SELENIUM_IMPLICIT_WAIT}
+Library         Remote  ${PLONE_URL}/RobotRemote
 Resource        library-settings.txt
 Resource        gisweb/iol/tests/robot/keywords.txt
 
@@ -13,7 +14,6 @@ Test Compilare la pratica base
   Compilando l'anagrafica
   Capture Page Screenshot
   Posso inviare la domanda
-
 
 *** Keywords ***
 Leggo
