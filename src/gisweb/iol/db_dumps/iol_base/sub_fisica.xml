@@ -83,7 +83,7 @@ return '']]></ValidationFormula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
-              <field name="customAttributes">data-plugin="codicefiscale" data-codicefiscale-options="{source:'/resources/services/codicefiscale',fieldlist:['fisica_cognome','fisica_nome','fisica_data_nato','fisica_sesso','fisica_cod_cat_nato']}"</field>
+              <field name="customAttributes">data-plugin="codicefiscale" data-codicefiscale-options="{source:'/calcola_codicefiscale',fieldlist:['fisica_cognome','fisica_nome','fisica_data_nato','fisica_sesso','fisica_cod_cat_nato']}"</field>
             </extensionfields>
           </CustomData>
         </element>
