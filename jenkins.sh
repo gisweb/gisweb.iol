@@ -14,9 +14,8 @@ env/bin/python bootstrap.py
 # that will make the buildout and tests run
 env/bin/python bin/develop up -f
 env/bin/python bin/buildout install test
-recordmydesktop --no-cursor --no-sound --output=session.ogv &
-recordmydesktop_pid=$!
+bash -c "sleep 60 && recordmydesktop --no-cursor --no-sound --output=session.ogv & echo -n \$! > recordmydesktop_pid"
 env/bin/python bin/test
-kill $recordmydesktop_pid
-while ls /proc/$recordmydesktop_pid > /dev/null ; do sleep 1; done
+kill `cat recordmydesktop_pid`
+while ls /proc/`cat recordmydesktop_pid` > /dev/null ; do sleep 1; done
 git checkout buildout.cfg

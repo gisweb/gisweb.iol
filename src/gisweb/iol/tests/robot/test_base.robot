@@ -33,7 +33,17 @@ Compilando l'anagrafica
   Scelgo  M  da  fisica_sesso
   Scrivo  20/11/1990  nel campo  fisica_data_nato
   Compilo il comune  fisica_comune_nato  Genova
-  Comment  PAUSE
+  Scrivo  italiana  nel campo  fisica_cittadinanza
+  Scrivo  CFFFFFFFFF  nel campo  fisica_cf
+  Compilo il comune  fisica_comune  Savona
+  Scrivo  via dei Glicini  nel campo  fisica_indirizzo
+  Scrivo  12/a  nel campo  fisica_civico
+  Scrivo  001100110011  nel campo  fisica_telefono
+  Scrivo  001100110011  nel campo  fisica_cellulare
+  Scrivo  001100110011  nel campo  fisica_fax
+  Capture Page Screenshot
+  Click button  xpath=//button[@data-name='btn_salva']
+  Capture Page Screenshot
 
 
 Compilo il comune
