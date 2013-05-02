@@ -14,7 +14,7 @@ env/bin/python bootstrap.py
 # that will make the buildout and tests run
 env/bin/python bin/develop up -f
 env/bin/python bin/buildout install test
-recordmydesktop --no-cursor  --output=session.ogv &
+recordmydesktop --no-cursor --no-sound --output=session.ogv &
 env/bin/python bin/test
 killall recordmydesktop
 while pgrep -x recordmydesktop > /dev/null ; do sleep 1; done
