@@ -22,9 +22,9 @@
       />
   <!-- -*- extra stuff goes here -*- -->
 
-  <cmf:registerDirectory name="iol_templates"/>
-  <cmf:registerDirectory name="iol_scripts"/>
-  <cmf:registerDirectory name="iol_assets"/>
+  <cmf:registerDirectory name="iol_templates" recursive="True" />
+  <cmf:registerDirectory name="iol_scripts" recursive="True" />
+  <cmf:registerDirectory name="iol_assets" recursive="True" />
 
   <browser:page
       name="iolbootstrapview"
