@@ -3,15 +3,8 @@
     <element id="com_preavviso_rigetto" title="Comunicazione Preavviso Rigetto" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">com_preavviso_rigetto</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
-      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[if not plominoDocument.isNewDocument():
-    plominoDocument.setItem('oForm',plominoDocument.getItem('Form',''))]]></onOpenDocument>
-      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.getItem('oForm'):
-    from Products.CMFCore.utils import getToolByName
-    pw = getToolByName(context,'portal_workflow')
-    plominoDocument.setItem('Form',plominoDocument.getItem('oForm'))
-    plominoDocument.removeItem('oForm')
-    pw.doActionFor(plominoDocument,'preavviso_rigetto')
-    ]]></onSaveDocument>
+      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onOpenDocument()]]></onOpenDocument>
+      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onSaveDocument()]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
@@ -107,7 +100,7 @@
     result = DateToString(plominoDocument.getItem('data_protocollo'),'%d/%m/%Y')
 except:
     result=''
-return result    ]]></Formula>
+return result]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
@@ -135,7 +128,7 @@ elif ragsoc:
     result = ragsoc
 else:
     result = ''
-return result   ]]></Formula>
+return result]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
@@ -155,7 +148,7 @@ return result   ]]></Formula>
           <ActionDisplay type="Products.Archetypes.Field.StringField">SUBMIT</ActionDisplay>
           <Content type="Products.Archetypes.Field.TextField"><![CDATA[]]></Content>
           <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[not context.isEditMode()]]></Hidewhen>
-          <InActionBar type="Products.Archetypes.Field.BooleanField">True</InActionBar>
+          <InActionBar type="Products.Archetypes.Field.BooleanField">False</InActionBar>
         </element>
         <element id="btn_annulla" title="Annulla" type="PlominoAction">
           <id type="Products.Archetypes.Field.StringField">btn_annulla</id>
@@ -167,7 +160,7 @@ else:
     url=context.absolute_url()
 return '%s' %url]]></Content>
           <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[not context.isEditMode()]]></Hidewhen>
-          <InActionBar type="Products.Archetypes.Field.BooleanField">True</InActionBar>
+          <InActionBar type="Products.Archetypes.Field.BooleanField">False</InActionBar>
         </element>
       </elements>
     </element>

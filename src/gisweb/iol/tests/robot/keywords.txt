@@ -3,8 +3,8 @@ Suite Setup
   # ----------------------------------------------------------------------------
   # Suite
   # ----------------------------------------------------------------------------
-  Open browser  ${PLONE_URL}/iol_base  browser=${BROWSER}  remote_url=${REMOTE_URL}  desired_capabilities=${DESIRED_CAPABILITIES}
   Log in as site owner
+  Open browser  ${PLONE_URL}/iol_base  browser=${BROWSER}  remote_url=${REMOTE_URL}  desired_capabilities=${DESIRED_CAPABILITIES}
 
 Suite Teardown
   Close All Browsers
@@ -13,29 +13,14 @@ Suite Teardown
   # ----------------------------------------------------------------------------
 
 Log in
-  [Arguments]  ${userid}  ${password}
-  [Documentation]  Log in to the site as ${userid} using ${password}. There
-  ...  is no guarantee of where in the site you are once this is
-  ...  done. (You are responsible for knowing where you are and
-  ...  where you want to be)
-  Go to  ${PLONE_URL}/login_form
-  Page should contain element  __ac_name
-  Page should contain element  __ac_password
-  Input text  __ac_name  ${userid}
-  Input text  __ac_password  ${password}
-  Click Button  //form[@id='login_form']//*[@name='submit']
+  [Arguments]  ${role}
+  Enable autologin as  ${role}
 
 Log in as site owner
-  [Documentation]  Log in as the SITE_OWNER provided by plone.app.testing,
-  ...  with all the rights and privileges of that user.
-  Log in  ${SITE_OWNER_NAME}  ${SITE_OWNER_PASSWORD}
+  Log in  Manager
 
 Log in as test user
-  Log in  ${TEST_USER_NAME}  ${TEST_USER_PASSWORD}
+  Log in  Member
 
 Log out
-  Go to  ${PLONE_URL}/logout
-  Page should contain  logged out
-  # ----------------------------------------------------------------------------
-  # Content
-  # ----------------------------------------------------------------------------
+  Disable autologin

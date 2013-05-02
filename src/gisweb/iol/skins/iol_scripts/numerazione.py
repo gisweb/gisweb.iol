@@ -18,12 +18,11 @@ item_name: nome del campo di numerazione. Il campo deve essere indicizzato
 questo script sarà usato dalla formula di calcolo del campo.
 """
 
-nome_script = 'numerazione'
-
-numerazione = context.getParentDatabase().resources[context.naming('tipo_app')].get(nome_script)
-
-if numerazione:
-    return numerazione(item_name)
-else:
-    return script.getMaxOf(item_name) + 1
+try:
+    return context.resources.numerazione(item_name=item_name)
+except SystemError as err:
+    if str(err) == 'Excessive recursion':
+        return script.getMaxOf(item_name) + 1
+    else:
+        raise err
 

@@ -1,39 +1,40 @@
 <!-- DEFINIZIONI GLOBALI DI doc,db,dburl,tipoApp,tipoRichiesta e formName -->
 
-<tal:defs 
+<tal:defs
     tal:define="global doc python: context.REQUEST.PARENTS[0];
                 global db python: doc.getParentDatabase();
                 global dburl python:doc.getParentDatabase().absolute_url();
                 global formName python: doc.getForm().getFormName() if doc.isDocument() else doc.getId();
                 global tipoApp  python: doc.naming('tipo_app');">
-</tal:defs>  
+</tal:defs>
+
 
 <!-- SCRIPT E CSS DEDICATI A APPLICAZIONE -->
-<script type="text/javascript" tal:attributes="src string:${dburl}/resources/${tipoApp}/controller_read.js"></script>  
-<link tal:attributes="href string:${dburl}/resources/${tipoApp}/style.css" rel="stylesheet" type="text/css"> 
+<script type="text/javascript" tal:attributes="src string:${dburl}/resources/${tipoApp}/controller_read.js"></script>
+<link tal:attributes="href string:${dburl}/resources/${tipoApp}/style.css" rel="stylesheet" type="text/css">
 
 
-                   
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------>    
-<!--           TUTTO UN CASINO!!!!!!!!    BLOCCO DELLE AZIONI DI WORKFLOW                                                                           --> 
+
 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
- 
+<!--           TUTTO UN CASINO!!!!!!!!    BLOCCO DELLE AZIONI DI WORKFLOW                                                                           -->
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------>
+
 
 <tal:block tal:condition="python:doc.isDocument()">
- 
+
     <tal:blockactions tal:condition="python:not doc.isEditMode()"
         tal:define="
             actions python:doc.wf_transitionsInfo(single=False,args=['description'],);
             actionurl python: '%s/%s/content_status_modify' %(dburl,doc.getId());
             sospendiurl python: '%s/%s/EditDocument?openwithform=com_sospensione' %(dburl,doc.getId());
-            rigettaurl python: '%s/%s/EditDocument?openwithform=com_preavviso_rigetto' %(dburl,doc.getId());  
+            rigettaurl python: '%s/%s/EditDocument?openwithform=com_preavviso_rigetto' %(dburl,doc.getId());
             editprotocollourl python: '%s/%s/EditDocument?openwithform=com_protocollo' %(dburl,doc.getId());
             prorogaurl python: '%s/frm_%s_proroga/OpenForm?parentDocument=%s' %(dburl,doc.getItem('tipo_app',''),doc.getId());
 
-">    
+">
     <!-- ELENCO AZIONI IN TESTA-->
     <tal:loop tal:repeat="v actions">
-            
+
        <tal:noprotocollo tal:condition="python: v.get('id') == 'protocolla' and doc.wf_getInfoFor('review_state')!='avvio'">
         <div class=row-fluid>
            <div class="span12 alert alert-error" >
@@ -41,7 +42,7 @@
                 <a style="width:200px" class="btn pull-right wf-actions" tal:define="id v/id" tal:attributes="id string:btn_wf_${id}; href string:${actionurl}?workflow_action=${id};"><i class='icon-hand-right'></i><span tal:content="python: v['title'] or v['id']"></span></a>
            </div>
         </div>
-        
+
        <div class=row-fluid>
             <div class="span12 alert alert-error">
                 <span>E' possibile inserire manualmente i dati di protocollo</span>
@@ -49,19 +50,20 @@
            </div>
         </div>
         </tal:noprotocollo>
-        
+
         <!-- INVIO DOMANDA -->
-            <div id="section-invio-domanda" tal:condition="python: v.get('id') == 'invia_domanda'" 
+            <div id="section-invio-domanda" tal:condition="python: v.get('id') == 'invia_domanda'"
                 class="alert alert-info hidden"
-                tal:content="structure python: doc.parentDB().getForm('sub_invio_domanda').displayDocument(doc, editmode=False, creation=False, parent_form_id=False, request=context.REQUEST)"/>
+                tal:define="customform python: doc.getParentDatabase().getForm('sub_invio_domanda_custom') or doc.getParentDatabase().getForm('sub_invio_domanda');"
+                tal:content="structure python: customform.displayDocument(doc, editmode=False, creation=False, parent_form_id=False, request=context.REQUEST)"/>
 
         </tal:loop>
-  
+
     <!-- END WF ACTIONS -->
     </tal:blockactions>
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------>    
-<!--                                              BLOCCO DELLO STATO DI WORKFLOW CON INFO SULLA PRATICA                                                     --> 
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------>    
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------>
+<!--                                              BLOCCO DELLO STATO DI WORKFLOW CON INFO SULLA PRATICA                                                     -->
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------>
     <!-- START WF STATUS ->
     <!-- NEW DOCUMENT: doc is a PlominoForm -->
     <tal:formblock tal:condition="python: doc.isNewDocument()">
@@ -72,8 +74,8 @@
             <div tal:content="status_info/description">Initial state description goes here</div>
         </div>
     </tal:formblock>
-    
-    
+
+
 
     <!-- NOT NEW DOCUMENT: doc is a PlominoDocument -->
     <tal:docblock tal:condition="python: not doc.isNewDocument()" tal:define="status_info python: doc.wf_statesInfo(single=True, args=['description']);
@@ -88,7 +90,7 @@
             </div>
 
 
-                
+
             <div tal:condition="python: status_id == 'sospesa'" class="alert alert-error">
                   <h5>PRATICA SOSPESA IN ATTESA DI INTEGRAZIONE</h5>
                  <div tal:content="structure python: doc.getItem('sospensione_motivazione')" />
@@ -102,7 +104,7 @@
                         tal:repeat="campo python: ('numero_pratica', 'data_pratica', )"
                         tal:content="structure python: doc.getRenderedItem(campo)"></div>
                 </div>
-                
+
                 <!-- DOMANDA PROTOCOLLATA -->
                 <tal:block tal:define="allegati python: doc.getItem('documenti_pdf', {})"
                     tal:condition="python: doc.wf_getInfoFor('wf_protocollata')">
@@ -120,12 +122,12 @@
                             </ul>
                         </div>
                     </div>
-                  
-                        
 
-                        
-                        
-                        
+
+
+
+
+
                 <!-- DOMANDA AUTORIZZATA -->
                         <div tal:condition="python: doc.wf_getInfoFor('wf_autorizzata')" class="row-fluid">
                             <div class="span4"
@@ -138,88 +140,47 @@
                             </div>
                         </div>
 
-                        
-                        
-                    
-      
-                           
-    
-                             
-                <!-- DOMANDA ASSEGNATA IN ISTRUTTORIA -->    
-                <div class="alert alert-info" tal:condition="python: doc.elenco_modelli('autorizzazione')!=None and doc.canUserEdit() and doc.wf_getInfoFor('review_state') == 'assegnata' and not doc.getItem('documenti_autorizzazione')"> 
+                <!-- DOMANDA ASSEGNATA IN ISTRUTTORIA -->
+                <div class="alert alert-info" tal:condition="python: doc.elenco_modelli('autorizzazione')!=None and doc.canUserEdit() and doc.wf_getInfoFor('review_state') == 'assegnata' and not doc.getItem('documenti_autorizzazione')">
                     <div class="row-fluid" >
                         <div class="span8" tal:content="structure python: doc.getRenderedItem('modello_autorizzazione')" />
-                        <a disabled = "disabled" style="width:200px;margin-top:20px;margin-right:5px" class="btn wf-actions pull-right" 
+                        <a disabled = "disabled" style="width:200px;margin-top:20px;margin-right:5px" class="btn wf-actions pull-right"
                            tal:define="actions python:doc.wf_transitionsInfo(single=False,args=['description'],);
                                        actionurl python: '%s/%s/content_status_modify' %(dburl,doc.getId());
                                        id string:istruttoria_completata"
                            tal:attributes="id string:btn_modello_autorizzazione; href string:${actionurl}?workflow_action=${id};">
                                <i class='icon-hand-right'></i>Completa l'istruttoria</a>
-                    </div>  
+                    </div>
                  </div>
-                        
+
                     <div class="row-fluid" tal:condition="python: doc.getItem('documenti_autorizzazione')">
                         <div class="span12" tal:content="structure python: doc.getRenderedItem('documenti_autorizzazione')" />
-                    </div> 
-                 
-                 
-                
+                    </div>
+
+
+
                 </tal:block>
 
- 
-    </tal:docblock>  
-    
-    
+
+    </tal:docblock>
+
+
        <tal:blockactions tal:define="
             actions python:doc.wf_transitionsInfo(single=False,args=['description'],);
             actionurl python: '%s/%s/content_status_modify' %(dburl,doc.getId());
             sospendiurl python: '%s/%s/EditDocument?openwithform=com_sospensione' %(dburl,doc.getId());
-            rigettaurl python: '%s/%s/EditDocument?openwithform=com_preavviso_rigetto' %(dburl,doc.getId());  
+            rigettaurl python: '%s/%s/EditDocument?openwithform=com_preavviso_rigetto' %(dburl,doc.getId());
             editprotocollourl python: '%s/%s/EditDocument?openwithform=com_protocollo' %(dburl,doc.getId());
             prorogaurl python: '%s/frm_%s_proroga/OpenForm?parentDocument=%s' %(dburl,doc.getItem('tipo_app',''),doc.getId());
 
-">    
+">
     <!-- ELENCO AZIONI MANUALI (NO DA WF) -->
-    
 
-                    <!-- APPENDICE -->
-                    <div class="alert alert-info" tal:condition="python: doc.elenco_modelli('appendice')!=None and doc.canUserEdit() and doc.wf_getInfoFor('review_state') == 'autorizzata' and not doc.getItem('documenti_appendice') and not doc.wf_getInfoFor('wf_richiesta_proroga')">
-                    <div class="row-fluid">
-                        <div class="span8" tal:content="structure python: doc.getRenderedItem('modello_appendice')" />
-                        <div class="span4">
-                        <a disabled = "disabled" style="width:200px;margin-top:20px;margin-right:5px" class="btn wf-actions" 
-                           tal:attributes="id string:btn_modello_appendice; href string:createDoc?">
-                               <i class='icon-hand-right'></i>Aggiungi appendice</a>
-                        </div>
-                    </div>
-                    </div>
-                        
-                    <div class="row-fluid" tal:condition="python: doc.getItem('documenti_appendice')">
-                        <div class="span12" tal:content="structure python: doc.getRenderedItem('documenti_appendice')" />
-                    </div>  
-                        
-    
-    
-             <!-- ORDINANZA -->                       
-                        
-                    <div class="alert alert-info" tal:condition="python: doc.elenco_modelli('ordinanza')!=None and doc.canUserEdit() and doc.wf_getInfoFor('review_state') == 'autorizzata' and not doc.getItem('documenti_ordinanza')">
-                        <div class="row-fluid">
-                        <div class="span8" tal:content="structure python: doc.getRenderedItem('modello_ordinanza')" />
-                        <div class="span4">
-                        <a disabled = "disabled" style="width:200px;margin-top:20px;margin-right:5px" class="btn wf-actions" 
-                           tal:attributes="id string:btn_modello_ordinanza; href string:createDoc?;">
-                               <i class='icon-hand-right'></i>Allega ordinanza</a>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="row-fluid" tal:condition="python: doc.getItem('documenti_ordinanza')">
-                        <div class="span12" tal:content="structure python: doc.getRenderedItem('documenti_ordinanza')" />
-                    </div> 
 
     <div class="row-fluid">
-    
+
    <!-- ELENCO AZIONI IN CODA (ALTRE AZIONI) -->
-    
+
     <tal:loop tal:repeat="v actions">
         <div class=row-fluid>
             <div class="span12 alert alert-error" tal:condition="python: v.get('id') == 'preavviso_rigetto'" >
@@ -227,12 +188,12 @@
                 <a style="width:200px" class="btn pull-right wf-actions" tal:define="id v/id" tal:attributes="id string:btn_wf_${id}; href string:${rigettaurl};"><i class='icon-hand-right'></i><span tal:content="python: v['title'] or v['id']"></span></a>
             </div>
         </div>
-        
+
           <div class=row-fluid>
            <div class="span12 alert alert-error" tal:condition="python: v.get('id') == 'sospendi'">
                 <span  tal:content="python: v.get('description') or ''"/>
                 <a style="width:200px" class="btn pull-right wf-actions" tal:define="id v/id" tal:attributes="id string:btn_wf_${id}; href string:${sospendiurl};"><i class='icon-hand-right'></i><span tal:content="python: v['title'] or v['id']"></span></a>
-                    
+
             </div>
         </div>
 
@@ -240,10 +201,10 @@
             <div tal:condition="python: v.get('id') == 'richiesta_proroga'" class="span12 alert alert-error">
                 <span  tal:content="python: v.get('description') or ''"/>
                 <a style="width:200px" class="btn pull-right wf-actions" tal:define="id v/id" tal:attributes="id string:btn_wf_${id}; href string:${prorogaurl};"><i class='icon-hand-right'></i><span tal:content="python: v['title'] or v['id']"></span></a>
-                    
+
             </div>
         </div>
-        
+
         <div class=row-fluid>
             <div tal:condition="python: not v.get('id') in ['invia_domanda','preavviso_rigetto','protocolla','sospendi','protocolla','richiesta_proroga','istruttoria_completata']" class="span12 alert alert-info">
                 <p><span  tal:content="python: v.get('description') or ''"/>
@@ -251,12 +212,13 @@
             </div>
         </div>
         </tal:loop>
-        
+
     </div>
-    
+
     <!-- END WF ACTIONS -->
     </tal:blockactions>
 
 </tal:block>
 
-<!-- <tal:test> ***** fine template ***** </tal:test> -->
+<tal:test tal:condition="python: doc.test_mode()"
+    tal:content="python: 'Applicazione %s in test' % tipoApp"> ***** fine template ***** </tal:test>

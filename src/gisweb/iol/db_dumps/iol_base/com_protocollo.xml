@@ -3,14 +3,8 @@
     <element id="com_protocollo" title="Inserimento dati di protocollo" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">com_protocollo</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
-      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[if not plominoDocument.isNewDocument():
-    plominoDocument.setItem('oForm',plominoDocument.getItem('Form',''))]]></onOpenDocument>
-      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.getItem('oForm'):
-    #from Products.CMFCore.utils import getToolByName
-    #pw = getToolByName(context,'portal_workflow')
-    plominoDocument.setItem('Form',plominoDocument.getItem('oForm'))
-    #plominoDocument.removeItem('oForm')
-    #pw.doActionFor(plominoDocument,'assegna')]]></onSaveDocument>
+      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onOpenDocument()]]></onOpenDocument>
+      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onSaveDocument()]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
@@ -57,7 +51,7 @@
           <ActionDisplay type="Products.Archetypes.Field.StringField">SUBMIT</ActionDisplay>
           <Content type="Products.Archetypes.Field.TextField"><![CDATA[]]></Content>
           <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[not context.isEditMode()]]></Hidewhen>
-          <InActionBar type="Products.Archetypes.Field.BooleanField">True</InActionBar>
+          <InActionBar type="Products.Archetypes.Field.BooleanField">False</InActionBar>
         </element>
         <element id="btn_annulla" title="Annulla" type="PlominoAction">
           <id type="Products.Archetypes.Field.StringField">btn_annulla</id>
@@ -69,7 +63,7 @@ else:
     url=context.absolute_url()
 return '%s' %url]]></Content>
           <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[not context.isEditMode()]]></Hidewhen>
-          <InActionBar type="Products.Archetypes.Field.BooleanField">True</InActionBar>
+          <InActionBar type="Products.Archetypes.Field.BooleanField">False</InActionBar>
         </element>
         <element id="data_protocollo" title="Data protocollo" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">data_protocollo</id>

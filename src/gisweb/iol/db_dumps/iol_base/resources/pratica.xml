@@ -1,9 +1,0 @@
-<plominodatabase id="iol_base">
-  <design>
-    <resource id="pratica" title="css e js tipoapp" type="Folder">
-      <resource contenttype="application/javascript" id="controller_edit.js" title="" type="File"><![CDATA[]]></resource>
-      <resource contenttype="application/javascript" id="controller_read.js" title="" type="File"><![CDATA[]]></resource>
-      <resource contenttype="application/javascript" id="style.css" title="" type="File"><![CDATA[]]></resource>
-    </resource>
-  </design>
-</plominodatabase>

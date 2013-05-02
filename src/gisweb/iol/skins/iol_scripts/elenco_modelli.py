@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=sub_path='', test=''
+##parameters=sub_path=''
 ##title=Elenco dei modelli di stampa
 ##
 
@@ -14,24 +14,21 @@ Interroga il servizio e restituisce la lista dei modelli di stampa
 
 from Products.CMFPlomino.PlominoUtils import json_loads, open_url, urlencode
 
-if context.portal_type != 'PlominoDocument':
-    return ''
-
 app = context.naming('tipo_app')
-
-url = context.getLocalProperties('ws_listmodel_URL')
-
-#if url == str(-1):
-    #return None
-
 nullchoice = 'Manca il modello, scegliere un modello di stampa per abilitare la funzione|'
+outlist = [nullchoice]
 
-query = dict(
-    app = app,
-    group = sub_path
-)
+#url = context.getLocalProperties('ws_listmodel_URL')
+url_info = context.getMyAttribute('ws_listmodel_URL')
 
-uu = '%s?%s' %(url, urlencode(query))
-result = json_loads(open_url(uu))
+def open_my_url(url, **args):
+    uu = '%s?%s' %(url, urlencode(args))
+    return json_loads(open_url(uu))
 
-return [nullchoice] + result
+if url_info['success']:
+    outlist += open_my_url(url, app=context.naming('tipo_app'), group=sub_path)
+else:
+    outlist.append('test|test')
+
+
+return outlist

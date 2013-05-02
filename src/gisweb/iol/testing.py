@@ -6,6 +6,7 @@ from plone.app.testing import FunctionalTesting
 from plone.app.testing import login
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import applyProfile
+from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.testing.z2 import installProduct
 
 from zope.configuration import xmlconfig
@@ -72,7 +73,7 @@ GISWEB_IOL_FUNCTIONAL = FunctionalTesting(
     name="GISWEB_IOL_FUNCTIONAL")
 
 GISWEB_IOL_ROBOT = FunctionalTesting(
-    bases=(GISWEB_IOL, z2.ZSERVER_FIXTURE),
+    bases=(AUTOLOGIN_LIBRARY_FIXTURE, GISWEB_IOL, z2.ZSERVER_FIXTURE),
     name='GISWEB_IOL_ROBOT')
 
 # The following code forces a different port on each combination

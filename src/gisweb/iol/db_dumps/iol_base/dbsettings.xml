@@ -14,7 +14,7 @@
       <DoNotListUsers type="Products.Archetypes.Field.BooleanField">False</DoNotListUsers>
       <DoNotReindex type="Products.Archetypes.Field.BooleanField">False</DoNotReindex>
       <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
-      <acl AnomynousAccessRight="NoAccess" AuthenticatedAccessRight="NoAccess">
+      <acl AnomynousAccessRight="NoAccess" AuthenticatedAccessRight="PlominoAuthor">
         <params id="UserRoles">
 <param>
 <value><struct>

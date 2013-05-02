@@ -83,7 +83,7 @@ return '']]></ValidationFormula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
-              <field name="customAttributes">data-plugin="codicefiscale" data-codicefiscale-options="{source:'/services/codicefiscale',fieldlist:['fisica_cognome','fisica_nome','fisica_data_nato','fisica_sesso','fisica_cod_cat_nato']}"</field>
+              <field name="customAttributes">data-plugin="codicefiscale" data-codicefiscale-options="{source:'/resources/services/codicefiscale',fieldlist:['fisica_cognome','fisica_nome','fisica_data_nato','fisica_sesso','fisica_cod_cat_nato']}"</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -171,7 +171,7 @@ return '']]></ValidationFormula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription">Nel caso di nati all estero indicare lo stato.</field>
-              <field name="customAttributes">data-plugin="autocomplete" data-autocomplete-options="{source:'/xSuggest',minLength:2,extraParams:{fisica_cognome:jQuery('#fisica_cognome').val(),fisica_nome:jQuery('#fisica_nome').val(),fisica_data_nato:jQuery('#fisica_data_nato').val(), fisica_sesso:jQuery('input:radio[name=fisica_sesso]:checked').val()}}"</field>
+              <field name="customAttributes">data-plugin="autocomplete" data-autocomplete-options="{source:'/resources/services/listacomuni', minLength:2, extraParams:{test: 0}}"</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -274,10 +274,6 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
-<name>selectionlistformula</name>
-<value><string>['Maschile|M','Femminile|F']</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -294,6 +290,10 @@ return '']]></ValidationFormula>
 <name>selectionlist</name>
 <value><array><data>
 </data></array></value>
+</member>
+<member>
+<name>selectionlistformula</name>
+<value><string>['Maschile|M','Femminile|F']</string></value>
 </member>
 </struct></value>
 </param>
@@ -373,7 +373,7 @@ return '']]></ValidationFormula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription">in caso di .....</field>
-              <field name="customAttributes">data-plugin="autocomplete" data-autocomplete-options="{source:'/services/xSuggest',minLength:2,extraParams:{pippo:1,pluto:2}}"</field>
+              <field name="customAttributes">data-plugin="autocomplete" data-autocomplete-options="{source:'/resources/services/listacomuni', minLength:2, extraParams:{test: 0}}"</field>
             </extensionfields>
           </CustomData>
         </element>
