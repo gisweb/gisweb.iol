@@ -1,5 +1,7 @@
 import os
+import sys
 import logging
+from plone.testing import Layer
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
@@ -8,6 +10,8 @@ from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import applyProfile
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 from plone.testing.z2 import installProduct
+from Products.CMFCore.utils import getToolByName
+
 
 from zope.configuration import xmlconfig
 
@@ -26,8 +30,28 @@ else:
     BOOTSTRAP_THEME = True
 
 
+class PlominoPatch(Layer):
+    "Patch CMFPlomino exceptions to leave a trace in error_log"
+    def setUp(layer):
+        from Products.CMFPlomino.exceptions import PlominoScriptException
+
+        def reportError(self, *args, **kwargs):
+            error_log = getToolByName(self.context, 'error_log')
+            error_log.raising(sys.exc_info())
+            return layer._original_reporterror(self, *args, **kwargs)
+        layer._original_reporterror = PlominoScriptException.reportError
+        PlominoScriptException.reportError = reportError
+
+    def tearDown(self):
+        from Products.CMFPlomino.exceptions import PlominoScriptException
+        PlominoScriptException.reportError = self._original_reporterror
+
+
+PLOMINO_PATCH = PlominoPatch()
+
+
 class GiswebIol(PloneSandboxLayer):
-    defaultBases = (PLONE_FIXTURE,)
+    defaultBases = (PLOMINO_PATCH, PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
         # We need to explicitly install Zope2 products

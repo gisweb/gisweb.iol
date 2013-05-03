@@ -10,6 +10,7 @@ Resource        gisweb/iol/tests/robot/keywords.txt
 *** Test Cases ***
 Test Compilare la pratica base
   Data una Pratica base
+  Non ci sono errori nella pagina
   Leggo  Persona fisica
   Capture Page Screenshot
   Compilando l'anagrafica
@@ -43,9 +44,9 @@ Compilando l'anagrafica
   Compilo il comune  fisica_comune  Savona
   Scrivo  via dei Glicini  nel campo  fisica_indirizzo
   Scrivo  12/a  nel campo  fisica_civico
-  Scrivo  001100110011  nel campo  fisica_telefono
-  Scrivo  001100110011  nel campo  fisica_cellulare
-  Scrivo  001100110011  nel campo  fisica_fax
+  Scrivo  01100110011  nel campo  fisica_telefono
+  Scrivo  33300110011  nel campo  fisica_cellulare
+  Scrivo  esiste ancora il fax?  nel campo  fisica_fax
 
 
 Compilo il comune
@@ -65,3 +66,6 @@ Scelgo
 
 Posso inviare la domanda
   Comment  TODO
+
+Non ci sono errori nella pagina
+  Page Should Not Contain Element  css=div#plonePortalMessages dl.error
