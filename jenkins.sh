@@ -16,7 +16,7 @@ env/bin/python bootstrap.py
 env/bin/python bin/develop up -f
 env/bin/python bin/buildout install test
 # Sleep come time before starting recording to let the fixtures load
-recordmydesktop --no-cursor --no-sound --output=session.ogv &
+recordmydesktop --delay 70 --no-cursor --no-sound --output=session.ogv &
 echo -n $! > recordmydesktop_pid
 cat recordmydesktop_pid
 date
