@@ -36,8 +36,8 @@ Compilando l'anagrafica
   Scrivo  20/11/1990  nel campo  fisica_data_nato
   Compilo il comune  fisica_comune_nato  Genova
   Click Element  xpath=//span[@id='btn_fisica_cf']
-  ${CF}=  Get Value  xpath=//input[@id='fisica_cf']
   Sleep  1
+  ${CF}=  Get Value  xpath=//input[@id='fisica_cf']
   Should Be Equal  ${CF}  PLLPNC90S20D969M
   Scrivo  italiana  nel campo  fisica_cittadinanza
   Compilo il comune  fisica_comune  Savona
