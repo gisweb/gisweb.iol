@@ -15,8 +15,12 @@ env/bin/python bootstrap.py
 env/bin/python bin/develop up -f
 env/bin/python bin/buildout install test
 # Sleep come time before starting recording to let the fixtures load
-bash -c "sleep 70 && recordmydesktop --no-cursor --no-sound --output=session.ogv & echo -n \$! > recordmydesktop_pid" &
+bash -c "sleep 70 && date && recordmydesktop --no-cursor --no-sound --output=session.ogv & echo -n \$! > recordmydesktop_pid" &
+date
 env/bin/python bin/test
+date
+echo kill `cat recordmydesktop_pid`
 kill `cat recordmydesktop_pid`
 while ls /proc/`cat recordmydesktop_pid` > /dev/null ; do sleep 1; done
+date
 git checkout buildout.cfg
