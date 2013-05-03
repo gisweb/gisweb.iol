@@ -1,0 +1,86 @@
+[Workflow]
+Id:,iol_utenti
+Title:,IOL Utenti
+Description:,Workflow di accreditamento utenti alla compilazione di richieste di istanze online
+Initial state:,avvio
+Type:,Workflow
+State variable:,review_state
+
+[State]
+Id:,autorizzazione
+Title:,Autorizzazione
+Description:,L'utente è accreditato alla compilazione delle richieste di istanze online
+Transitions,revoca
+Permissions,Acquire,Anonymous,Manager,Owner,Reader,Editor,Contributor,istruttore,rup
+CMFPlomino: Edit documents,N,N,Y,N,N,N,N,Y,Y
+CMFPlomino: Remove documents,N,N,Y,N,N,N,N,N,Y
+
+[State]
+Id:,avvio
+Title:,Stato iniziale
+Description:,Modulo di accreditamento in fase di compilazione.
+Transitions,invia_domanda
+Permissions,Acquire,Anonymous,Manager,Owner,Reader,Editor,Contributor,istruttore,rup
+
+[State]
+Id:,revocato
+Title:,Accreditamento revocato
+Description:,L'accreditamento è stato revocato.
+Transitions,ripristina
+Permissions,Acquire,Anonymous,Manager,Owner,Reader,Editor,Contributor,istruttore,rup
+CMFPlomino: Edit documents,N,N,Y,N,N,N,N,Y,Y
+CMFPlomino: Remove documents,N,N,Y,N,N,N,N,N,Y
+
+[State]
+Id:,richiesta
+Title:,Richiesta di accreditamento utente
+Description:,L'utente ha fatto richiesta di accreditamento.
+Transitions,autorizza
+Permissions,Acquire,Anonymous,Manager,Owner,Reader,Editor,Contributor,istruttore,rup
+CMFPlomino: Edit documents,N,N,Y,N,N,N,N,Y,Y
+CMFPlomino: Remove documents,N,N,Y,N,N,N,N,N,Y
+
+[Transition]
+Id:,autorizza
+Title:,Accredita utente
+Description:,Accredita utente
+Details:,Abilita l'utente alla sottoscrizione di richieste di istanze online
+Target state:,autorizzazione
+Trigger:,User
+Guard expression:,python: scripts.guard_autorizza(state_change)
+Script after:,after_autorizza
+
+[Transition]
+Id:,invia_domanda
+Title:,Richiedi accreditamento
+Description:,Richiedi accreditamento
+Details:,Invia la richiesta di accreditamento dell'utente.
+Target state:,richiesta
+Trigger:,User
+Script after:,after_invia_domanda
+
+[Transition]
+Id:,revoca
+Title:,Revoca accreditamento
+Description:,Revoca accreditamento
+Details:,In caso di decadenza delle condizioni necessarie è possibile revocare l'accreditamento all'utente.
+Target state:,revocato
+Trigger:,User
+Guard role:,"rup, istruttore, Manager"
+Script after:,after_revoca
+
+[Transition]
+Id:,ripristina
+Title:,Ripristina accreditamento
+Description:,Ripristina accreditamento
+Details:,Ripristina l'accreditamento dell'utente.
+Target state:,autorizzazione
+Trigger:,User
+Guard role:,"rup, istruttore, Manager"
+Script after:,after_ripristina
+
+
+
+
+
+

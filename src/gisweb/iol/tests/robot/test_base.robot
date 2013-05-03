@@ -16,7 +16,10 @@ Test Compilare la pratica base
   Compilando l'anagrafica
   Capture Page Screenshot
   Click button  xpath=//button[@data-name='btn_salva']
+  Aspetta che la URL contenga  plomino_documents
   Capture Page Screenshot
+  Comment  PAUSE
+  Non ci sono errori nella pagina
   Posso inviare la domanda
 
 *** Keywords ***
@@ -46,7 +49,7 @@ Compilando l'anagrafica
   Scrivo  12/a  nel campo  fisica_civico
   Scrivo  01100110011  nel campo  fisica_telefono
   Scrivo  33300110011  nel campo  fisica_cellulare
-  Scrivo  esiste ancora il fax?  nel campo  fisica_fax
+  Scrivo  Cos'è il fax?  nel campo  fisica_fax
 
 
 Compilo il comune
@@ -69,3 +72,7 @@ Posso inviare la domanda
 
 Non ci sono errori nella pagina
   Page Should Not Contain Element  css=div#plonePortalMessages dl.error
+
+Aspetta che la URL contenga
+  [Arguments]  ${stringa}
+  Wait for condition  return /${stringa}/.test(location.href);

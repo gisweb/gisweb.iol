@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name="iol_workflow" meta_type="WorkflowPolicy">
+ <property name="title">Istanze OnLine Workflow</property>
+ <bindings>
+  <default/>
+  <type type_id="PlominoDocument">
+   <bound-workflow workflow_id="iol_workflow"/>
+  </type>
+ </bindings>
+</object>

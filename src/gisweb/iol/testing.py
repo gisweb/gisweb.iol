@@ -57,6 +57,7 @@ class GiswebIol(PloneSandboxLayer):
         # We need to explicitly install Zope2 products
         # otherwise their factory methods won't be registered
         installProduct(app, 'Products.CMFPlomino')
+        installProduct(app, 'Products.CMFPlacefulWorkflow')
         xmlconfig.file(
             'configure.zcml',
             gisweb.iol,
@@ -84,6 +85,15 @@ class GiswebIol(PloneSandboxLayer):
         portal.invokeFactory('PlominoDatabase', 'iol_base')
         portal.iol_base.at_post_create_script()
         portal.iol_base.importDesignFromXML(from_folder=IOL_BASE_FOLDER)
+        portal.portal_quickinstaller.installProduct('Products.CMFPlacefulWorkflow')
+        portal.iol_base.manage_addProduct['CMFPlacefulWorkflow'].manage_addWorkflowPolicyConfig()
+        ppw = getToolByName(portal, 'portal_placeful_workflow')
+        config = ppw.getWorkflowPolicyConfig(portal.iol_base)
+        config.setPolicyIn('iol_base', True)
+        config.setPolicyBelow('iol_base', True)
+
+
+
 
 
 GISWEB_IOL = GiswebIol()

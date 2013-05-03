@@ -43,7 +43,8 @@ setup(name='gisweb.iol',
           'gisweb.utils',
           'gisweb.plominofields',
           'gisweb.plominofieldextensions',
-          'Products.CMFPlomino'
+          'Products.CMFPlomino',
+          'collective.wtf',
           # -*- Extra requirements: -*-
       ],
       extras_require={

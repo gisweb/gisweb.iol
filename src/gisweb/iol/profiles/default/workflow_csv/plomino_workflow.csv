@@ -1,0 +1,19 @@
+[Workflow]
+Id:,plomino_workflow
+Title:,Plomino Workflow
+Description:,A single state workflow.
+Initial state:,published
+Type:,Workflow
+State variable:,review_state
+
+[State]
+Id:,published
+Title:,Published
+Description:,"Visible to everyone, editable by the owner."
+Transitions,
+Permissions,Acquire,Anonymous,Manager,Owner,Reader,Editor,Contributor,PlominoAuthor,PlominoDesigner,PlominoEditor,PlominoManager,PlominoReader
+Access contents information,Y,N,Y,Y,N,N,N,Y,Y,Y,Y,Y
+View,Y,N,Y,Y,N,N,N,Y,Y,Y,Y,Y
+Modify portal content,Y,N,Y,Y,N,N,N,N,Y,N,Y,N
+Add portal content,Y,N,Y,Y,N,N,N,N,Y,N,Y,N
+
