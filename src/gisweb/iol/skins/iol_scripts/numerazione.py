@@ -20,7 +20,7 @@ questo script sarà usato dalla formula di calcolo del campo.
 
 try:
     return context.resources.numerazione(item_name=item_name)
-except SystemError as err:
+except Exception as err:
     if str(err) == 'Excessive recursion':
         return script.getMaxOf(item_name) + 1
     else:
