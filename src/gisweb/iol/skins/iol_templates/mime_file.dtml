@@ -1,0 +1,3 @@
+<dtml-mime type="text/text; charset=utf-8" encode="7bit">
+  <dtml-var "text">
+  <dtml-boundary type="application/octet-stream" disposition="attachment" filename_expr="nomefile"><dtml-var "file"></dtml-mime>
