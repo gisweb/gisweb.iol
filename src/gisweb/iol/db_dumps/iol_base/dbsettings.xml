@@ -21,10 +21,11 @@
 <member>
 <name>[istruttore]</name>
 <value><struct>
-<member>
-<name>istruttori-pratica</name>
-<value><int>1</int></value>
+</struct></value>
 </member>
+<member>
+<name>[rup]</name>
+<value><struct>
 </struct></value>
 </member>
 </struct></value>
@@ -35,7 +36,7 @@
 <value><struct>
 <member>
 <name>specific_deletedocument</name>
-<value><string>PlominoAuthor</string></value>
+<value><string>PlominoManager</string></value>
 </member>
 </struct></value>
 </param>

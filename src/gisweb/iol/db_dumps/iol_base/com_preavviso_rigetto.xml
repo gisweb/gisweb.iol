@@ -3,9 +3,14 @@
     <element id="com_preavviso_rigetto" title="Comunicazione Preavviso Rigetto" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">com_preavviso_rigetto</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
-      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onOpenDocument()]]></onOpenDocument>
+      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[if 'preavviso_rigetto' not in [i.id for i in plominoDocument.wf_transitionsInfo()]:
+    return "Transizione 'preavviso_rigetto' NON disponibile"
+context.frm_onOpenDocument()]]></onOpenDocument>
       <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onSaveDocument()
-context.REQUEST.RESPONSE.redirect('%s/content_status_modify?workflow_action=preavviso_rigetto' % context.absolute_url())]]></onSaveDocument>
+
+from Products.CMFCore.utils import getToolByName
+pw=getToolByName(context,'portal_workflow')
+pw.doActionFor(context, 'preavviso_rigetto')]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>

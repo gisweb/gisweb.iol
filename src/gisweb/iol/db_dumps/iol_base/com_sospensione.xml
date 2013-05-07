@@ -3,9 +3,14 @@
     <element id="com_sospensione" title="Comunicazione Sospensione Istanza" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">com_sospensione</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
-      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onOpenDocument()]]></onOpenDocument>
+      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[if 'sospensione' not in [i.id for i in plominoDocument.wf_transitionsInfo()]:
+    return "Transizione 'sospensione' NON disponibile"
+context.frm_onOpenDocument()]]></onOpenDocument>
       <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onSaveDocument()
-context.REQUEST.RESPONSE.redirect('%s/content_status_modify?workflow_action=sospendi' % context.absolute_url())]]></onSaveDocument>
+
+from Products.CMFCore.utils import getToolByName
+pw=getToolByName(context,'portal_workflow')
+pw.doActionFor(context, 'sospendi')]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
