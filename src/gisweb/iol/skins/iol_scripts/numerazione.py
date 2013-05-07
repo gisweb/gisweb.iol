@@ -18,14 +18,10 @@ item_name: nome del campo di numerazione. Il campo deve essere indicizzato
 questo script sarà usato dalla formula di calcolo del campo.
 """
 
-try:
-    return context.resources.numerazione(item_name=item_name)
-except Exception as err:
-    # in custom o su fs vengono sollevate eccezioni differenti!
-    # "SystemError: Excessive recursion" oppure "RuntimeError: maximum recursion depth exceeded while calling a Python object"
-    messages = ('Excessive recursion', 'maximum recursion depth exceeded while calling a Python object', )
-    if str(err) in messages:
-        return script.getMaxOf(item_name) + 1
-    else:
-        raise err
+db = context.getParentDatabase()
+
+if 'numerazione' in db.resources.keys():
+    return db.resources.numerazione(item_name=item_name)
+else:
+    return script.getMaxOf(item_name) + 1
 
