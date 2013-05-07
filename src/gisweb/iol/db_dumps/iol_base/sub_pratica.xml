@@ -508,6 +508,10 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
+<name>selectionlistformula</name>
+<value><string>return context.elenco_modelli('autorizzazione')</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -515,10 +519,6 @@ return '']]></ValidationFormula>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
-</member>
-<member>
-<name>selectionlistformula</name>
-<value><string>return context.elenco_modelli('autorizzazione')</string></value>
 </member>
 </struct></value>
 </param>
@@ -581,6 +581,10 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
+<name>selectionlistformula</name>
+<value><string>return context.elencoModelli('ordinanza') or []</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -588,10 +592,6 @@ return '']]></ValidationFormula>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
-</member>
-<member>
-<name>selectionlistformula</name>
-<value><string>return context.elencoModelli('ordinanza') or []</string></value>
 </member>
 </struct></value>
 </param>
@@ -618,6 +618,10 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
+<name>selectionlistformula</name>
+<value><string>return context.elencoModelli('appendice') or []</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -625,10 +629,6 @@ return '']]></ValidationFormula>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
-</member>
-<member>
-<name>selectionlistformula</name>
-<value><string>return context.elencoModelli('appendice') or []</string></value>
 </member>
 </struct></value>
 </param>
@@ -719,15 +719,6 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
-<name>dynamictableparam</name>
-<value><string>'bPaginate': true,
-'bLengthChange': true,
-'bFilter': true,
-'bSort': true,
-'bInfo': true,
-'bAutoWidth': false</string></value>
-</member>
-<member>
 <name>selectionlistformula</name>
 <value><string>from Products.CMFPlomino.PlominoUtils import userFullname
 db = context.getParentDatabase()
@@ -741,6 +732,15 @@ if not users and context.test_mode():
 
 
 return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=userFullname(db,usr)) for usr in users]</string></value>
+</member>
+<member>
+<name>dynamictableparam</name>
+<value><string>'bPaginate': true,
+'bLengthChange': true,
+'bFilter': true,
+'bSort': true,
+'bInfo': true,
+'bAutoWidth': false</string></value>
 </member>
 </struct></value>
 </param>
@@ -1345,6 +1345,10 @@ else:
 <param>
 <value><struct>
 <member>
+<name>selectionlistformula</name>
+<value><string>return context.elencoModelli('proroga') or []</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -1352,10 +1356,6 @@ else:
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
-</member>
-<member>
-<name>selectionlistformula</name>
-<value><string>return context.elencoModelli('proroga') or []</string></value>
 </member>
 </struct></value>
 </param>

@@ -36,10 +36,6 @@
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
 'aaSorting': [],
@@ -69,6 +65,10 @@
 <name>sourceview</name>
 <value><string>sospese</string></value>
 </member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
 </struct></value>
 </param>
 </params>
@@ -93,10 +93,6 @@
           <params>
 <param>
 <value><struct>
-<member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
 <member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
@@ -127,6 +123,10 @@
 <name>sourceview</name>
 <value><string>dainviare</string></value>
 </member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
 </struct></value>
 </param>
 </params>
@@ -151,10 +151,6 @@
           <params>
 <param>
 <value><struct>
-<member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
 <member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
@@ -184,6 +180,10 @@
 <member>
 <name>sourceview</name>
 <value><string>inviate</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
@@ -231,10 +231,6 @@ return result]]></Formula>
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
 'aaSorting': [],
@@ -263,6 +259,10 @@ return result]]></Formula>
 <member>
 <name>sourceview</name>
 <value><string>autorizzate</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>

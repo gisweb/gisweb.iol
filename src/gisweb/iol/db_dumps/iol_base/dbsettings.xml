@@ -18,6 +18,15 @@
         <params id="UserRoles">
 <param>
 <value><struct>
+<member>
+<name>[istruttore]</name>
+<value><struct>
+<member>
+<name>istruttori-pratica</name>
+<value><int>1</int></value>
+</member>
+</struct></value>
+</member>
 </struct></value>
 </param>
 </params>

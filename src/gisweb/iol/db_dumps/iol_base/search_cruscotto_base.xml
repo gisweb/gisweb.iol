@@ -36,10 +36,6 @@
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'aaSorting': [],
 'bPaginate': true,
@@ -82,6 +78,10 @@
 <member>
 <name>sourceview</name>
 <value><string>tutte-istanze</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>

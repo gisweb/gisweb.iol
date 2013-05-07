@@ -36,10 +36,6 @@
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -61,6 +57,10 @@
 <member>
 <name>sourceview</name>
 <value><string>sospese</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
@@ -87,10 +87,6 @@
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -112,6 +108,10 @@
 <member>
 <name>sourceview</name>
 <value><string>dainviare</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
@@ -138,10 +138,6 @@
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -163,6 +159,10 @@
 <member>
 <name>sourceview</name>
 <value><string>inviate</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
@@ -211,10 +211,6 @@ return json_dumps(result)]]></Formula>
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -236,6 +232,10 @@ return json_dumps(result)]]></Formula>
 <member>
 <name>sourceview</name>
 <value><string>autorizzate</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
