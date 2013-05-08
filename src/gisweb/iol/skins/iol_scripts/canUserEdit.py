@@ -5,18 +5,11 @@
 ##bind script=script
 ##bind subpath=traverse_subpath
 ##parameters=test=0
-##title=
+##title=DEPRECATO! Usare hasUserPermission
 ##
 
-from Products.CMFCore.utils import getToolByName
-from gisweb.utils import rolesOfPermission
+"""
+Mantenuto solo per retro-compatibilità del codice
+"""
 
-roles = context.portal_membership.getAuthenticatedMember().getRolesInContext(context)
-
-for perm in rolesOfPermission(context, 'CMFPlomino: Edit documents'):
-    if perm['selected']=='SELECTED' and perm['name'] in roles:
-        return True
-
-if test:
-    return 'NO!'
-return False
+return context.hasUserPermission(test=test)
