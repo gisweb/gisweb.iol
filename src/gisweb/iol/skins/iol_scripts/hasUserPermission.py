@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=permission='edit',test=0
+##parameters=permission='edit',user_id='',test=0
 ##title=
 ##
 
@@ -19,7 +19,14 @@ short_cut = dict(
 
 from gisweb.utils import rolesOfPermission
 
-roles = context.portal_membership.getAuthenticatedMember().getRolesInContext(context)
+if user_id:
+    from Products.CMFCore.utils import getToolByName
+    mt = getToolByName(context, 'portal_membership')
+    member = mt.getMemberById(user_id)
+else:
+    member = context.portal_membership.getAuthenticatedMember()
+
+roles = member.getRolesInContext(context)
 permission = short_cut.get(permission) or permission
 
 for perm in rolesOfPermission(context, permission):
