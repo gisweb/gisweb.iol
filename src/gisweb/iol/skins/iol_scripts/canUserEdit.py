@@ -4,21 +4,19 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=
+##parameters=test=0
 ##title=
 ##
 
-#from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
+from gisweb.utils import rolesOfPermission
+
 roles = context.portal_membership.getAuthenticatedMember().getRolesInContext(context)
 
-wf = getToolByName(context, 'portal_workflow')
-wf_status = wf.getInfoFor(context,'review_state')
-
-if wf_status in ['avvio'] and ('Owner' in roles or 'rup' in roles or 'istruttore' in roles):
-    return True
-for perm in  context.rolesOfPermission('CMFPlomino: Edit documents'):
+for perm in rolesOfPermission(context, 'CMFPlomino: Edit documents'):
     if perm['selected']=='SELECTED' and perm['name'] in roles:
         return True
 
+if test:
+    return 'NO!'
 return False
