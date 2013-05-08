@@ -18,6 +18,9 @@ Lo script deve restituire un dizionario, sulla falsa riga di custom_args
 qui sotto, degli argomenti dello script sendMail.
     2. ObjectId: se possibile usare l'id detta transizione
 """
+
+from gisweb.utils import sendMail
+
 msg_info = dict(
         numero_pratica = context.getItem('numero_pratica'),
         titolo = context.Title(),
@@ -121,4 +124,4 @@ stato sospeso con le seguenti motivazioni:
 
 if custom_args:
     args.update(custom_args)
-    script.sendMail(**args)
+    sendMail(**args)
