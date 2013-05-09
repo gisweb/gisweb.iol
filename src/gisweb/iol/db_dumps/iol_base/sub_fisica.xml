@@ -171,7 +171,7 @@ return '']]></ValidationFormula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription">Nel caso di nati all estero indicare lo stato.</field>
-              <field name="customAttributes">data-plugin="autocomplete" data-autocomplete-options="{source:'/resources/services/listacomuni', minLength:2, extraParams:{test: 0}}"</field>
+              <field name="customAttributes">data-plugin="comunifield"</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -373,7 +373,7 @@ return '']]></ValidationFormula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription">in caso di .....</field>
-              <field name="customAttributes">data-plugin="autocomplete" data-autocomplete-options="{source:'/resources/services/listacomuni', minLength:2, extraParams:{test: 0}}"</field>
+              <field name="customAttributes">data-plugin="comunifield"</field>
             </extensionfields>
           </CustomData>
         </element>
