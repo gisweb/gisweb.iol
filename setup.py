@@ -45,6 +45,7 @@ setup(name='gisweb.iol',
           'gisweb.plominofieldextensions',
           'Products.CMFPlomino',
           'collective.wtf',
+          'zope.app.component',
           # -*- Extra requirements: -*-
       ],
       extras_require={
