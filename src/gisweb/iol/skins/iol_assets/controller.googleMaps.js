@@ -253,8 +253,6 @@ jQuery.ajax({
 }
 
 
-
-
          
 
 function addlayer(id,options){
