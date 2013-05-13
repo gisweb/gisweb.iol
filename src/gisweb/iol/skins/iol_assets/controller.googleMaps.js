@@ -2,7 +2,7 @@
 jQuery(document).ready(function () {
 
     jQuery("div[data-plugin='googlemap']").each(function(){
-        jQuery.globalEval("var options = "  + jQuery(this).data('googlemapOptions'));
+        eval("var options = "  + jQuery(this).data('googlemapOptions'));
         if(options.center) options.center = new google.maps.LatLng(options.center[0],options.center[1]);
         var map = new google.maps.Map(document.getElementById(this.id),options);
 
