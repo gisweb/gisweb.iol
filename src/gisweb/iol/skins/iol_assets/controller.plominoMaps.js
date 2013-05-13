@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
 
      //GENERAZIONE DEI CONTROLLI GEOCODE
      jQuery("[data-plugin='geocode']").each(function(){
-          jQuery.globalEval("var options = "  + jQuery(this).data('geocodeOptions'));
+          eval("var options = "  + jQuery(this).data('geocodeOptions'));
 //console.log(options.icon)
         //  if(jQuery('#'+options.icon)) options.icon = jQuery('#'+options.icon).val();
 //console.log(options.icon)
@@ -15,7 +15,7 @@ console.log(options.icon)
           options.fieldId  = this.id + '_geometry';
           var field = jQuery('#' + options.fieldId);
 
-          if( field.val()) jQuery.globalEval("var v= "  + field.val());
+          if( field.val()) eval("var v= "  + field.val());
           if(typeof(options)=='object'){
                if(jQuery(this).is('a')) jQuery(this).bind('click',geocode_actions);
                if(jQuery(this).is('img')) jQuery(this).attr('src',options.icon);
@@ -222,7 +222,7 @@ jQuery.ajax({
 
 //ACTIONS
 function geocode_actions(){
-    jQuery.globalEval("var options = "  + jQuery(this).data('geocodeOptions'));
+    eval("var options = "  + jQuery(this).data('geocodeOptions'));
     options.icon = jQuery(this).data('iconPath') + options.icon;
     options.fieldId = this.id + '_geometry';
     if(typeof(options)!='object'){

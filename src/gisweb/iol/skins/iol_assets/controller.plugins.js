@@ -2,7 +2,7 @@ jQuery(document).ready(function () {
 
     //GENERAZIONE DEI CONTROLLI AUTOCOMPLETE
     jQuery("input[data-plugin='autocomplete']").each(function(){
-        jQuery.globalEval("var options = "  + jQuery(this).data('autocompleteOptions') +" || {}");
+        eval("var options = "  + jQuery(this).data('autocompleteOptions') +" || {}");
         var baseUrl = jQuery(this).data('baseUrl');
 
         if (!options.source) options.source = '/services/xSuggest';
@@ -72,7 +72,7 @@ jQuery(document).ready(function () {
 
     //GENERAZIONE DEI CONTROLLI DATEPICKER
     jQuery("input[data-plugin='datepicker']").each(function(){
-        jQuery.globalEval("var options = "  + jQuery(this).data('datepickerOptions'));
+        eval("var options = "  + jQuery(this).data('datepickerOptions'));
         jQuery(this).datepicker(options || { });
         jQuery(this).datepicker( jQuery.datepicker.regional[ "it" ] );
 
@@ -85,7 +85,7 @@ jQuery(document).ready(function () {
 
   //GENERAZIONE DEI CONTROLLI CODICE FISCALE
     jQuery("input[data-plugin='codicefiscale']").each(function(){
-        jQuery.globalEval("var options = "  + jQuery(this).data('codicefiscaleOptions'));
+        eval("var options = "  + jQuery(this).data('codicefiscaleOptions'));
         var params={'pippo':'pluto'};
         var fieldId = this.id;
         var baseUrl = jQuery(this).data('baseUrl');
