@@ -1,14 +1,14 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
-    <element id="sub_fisica_recapiti" title="sub_fisica_recapiti" type="PlominoForm">
-      <id type="Products.Archetypes.Field.StringField">sub_fisica_recapiti</id>
+    <element id="sub_fisica_ci" title="sub_fisica_ci" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">sub_fisica_ci</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
       <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid"><div class="span6"><span class="plominoFieldClass">fisica_email</span></div><div class="span2"><span class="plominoFieldClass">fisica_telefono</span></div><div class="span2"><span class="plominoFieldClass">fisica_cellulare</span></div><div class="span2"><span class="plominoFieldClass">fisica_fax</span></div></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid"><div class="span3"><span class="plominoFieldClass">fisica_ci_tipo</span></div><div class="span3"><span class="plominoFieldClass">fisica_ci_num</span></div><div class="span3"><span class="plominoFieldClass">fisica_ci_rilasciato</span></div><div class="span3"><span class="plominoFieldClass">fisica_ci_data</span></div></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -17,12 +17,53 @@
       <isSearchForm type="Products.Archetypes.Field.BooleanField">False</isSearchForm>
       <isPage type="Products.Archetypes.Field.BooleanField">False</isPage>
       <SearchView type="Products.Archetypes.Field.StringField"/>
-      <SearchFormula type="Products.Archetypes.Field.TextField"><![CDATA[data-mandatory]]></SearchFormula>
+      <SearchFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></SearchFormula>
       <Position type="Products.Archetypes.Field.IntegerField"/>
       <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
       <elements>
-        <element id="fisica_telefono" title="Telefono" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">fisica_telefono</id>
+        <element id="fisica_ci_tipo" title="Tipo documento" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">fisica_ci_tipo</id>
+          <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>dynamictableparam</name>
+<value><string>'bPaginate': true,
+			'bLengthChange': true,
+			'bFilter': true,
+			'bSort': true,
+			'bInfo': true,
+			'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>selectionlist</name>
+<value><array><data>
+<value><string> |</string></value>
+<value><string>Carta di identit�i</string></value>
+<value><string>Patente di guida|patente</string></value>
+</data></array></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="fisica_ci_num" title="Numero documento" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">fisica_ci_num</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
@@ -35,36 +76,18 @@
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="customAttributes"/>
             </extensionfields>
           </CustomData>
         </element>
-        <element id="fisica_cellulare" title="Cellulare" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">fisica_cellulare</id>
+        <element id="fisica_ci_rilasciato" title="Rilasciato da" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">fisica_ci_rilasciato</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
-          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
-          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
-          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
-          <CustomData>
-            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
-            </extensionfields>
-          </CustomData>
-        </element>
-        <element id="fisica_email" title="Email" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">fisica_email</id>
-          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
-          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
-          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[from gisweb.utils import isEmail, isEmpty
 
 value = context.getItem('fisica_email', '') or ''
@@ -79,25 +102,39 @@ return '']]></ValidationFormula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="customAttributes"/>
             </extensionfields>
           </CustomData>
         </element>
-        <element id="fisica_fax" title="Fax" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">fisica_fax</id>
-          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+        <element id="fisica_ci_data" title="Data di nascita" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">fisica_ci_data</id>
+          <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
-          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>startingyear</name>
+<value><string>2002</string></value>
+</member>
+<member>
+<name>format</name>
+<value><string>%d/%m/%Y</string></value>
+</member>
+</struct></value>
+</param>
+</params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="customAttributes">data-plugin="datepicker" data-datepicker-options="{changeMonth:true,changeYear: true,minDate:'-110Y', maxDate: '-17Y',dateFormat:'dd/mm/yy',yearRange:'-110:+0',defaultDate:'-40Y'}"</field>
             </extensionfields>
           </CustomData>
         </element>

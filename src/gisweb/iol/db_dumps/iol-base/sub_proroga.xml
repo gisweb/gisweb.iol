@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
     <element id="sub_proroga" title="Informazioni sulla Proroga dell'Autorizzazione" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">sub_proroga</id>

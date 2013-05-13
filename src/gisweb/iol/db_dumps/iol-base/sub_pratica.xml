@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
     <element id="sub_pratica" title="subform base pratica" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">sub_pratica</id>
@@ -291,8 +291,9 @@ return '%s' %url]]></Content>
           <Content type="Products.Archetypes.Field.TextField"><![CDATA['%s/%s/EditDocument' %(plominoDocument.getParentDatabase().absolute_url(),plominoDocument.getId())]]></Content>
           <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.isEditMode():
     return True
-#return not plominoDocument.canUserEdit()
-return not plominoDocument.canUserEdit()]]></Hidewhen>
+
+from gisweb.utils import getUserPermissions
+return 'EDIT_PERMISSION' not in getUserPermissions(plominoDocument)]]></Hidewhen>
           <InActionBar type="Products.Archetypes.Field.BooleanField">True</InActionBar>
         </element>
         <element id="btn_elimina" title="Elimina" type="PlominoAction">
@@ -300,12 +301,10 @@ return not plominoDocument.canUserEdit()]]></Hidewhen>
           <ActionType type="Products.Archetypes.Field.StringField">REDIRECT</ActionType>
           <ActionDisplay type="Products.Archetypes.Field.StringField">BUTTON</ActionDisplay>
           <Content type="Products.Archetypes.Field.TextField"><![CDATA['%s/delete?returnurl=%s'  %(context.absolute_url(),context.getParentDatabase().absolute_url())]]></Content>
-          <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[from Products.CMFCore.utils import getToolByName
-if plominoDocument.isEditMode():
+          <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.isEditMode():
     return True
-#wf = getToolByName(plominoDocument, 'portal_workflow')
-#return wf.getInfoFor(context,'wf_protocollata')
-return not plominoDocument.hasRemovePermission(plominoDocument)]]></Hidewhen>
+from gisweb.utils import getUserPermissions
+return 'REMOVE_PERMISSION' not in getUserPermissions(plominoDocument)]]></Hidewhen>
           <InActionBar type="Products.Archetypes.Field.BooleanField">False</InActionBar>
         </element>
         <element id="documenti_pdf" title="Domanda inviata" type="PlominoField">

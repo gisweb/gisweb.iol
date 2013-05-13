@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
     <element id="frm_trasporti_info" title="info trasporti" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">frm_trasporti_info</id>

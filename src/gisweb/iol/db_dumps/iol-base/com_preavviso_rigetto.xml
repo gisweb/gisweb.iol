@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
     <element id="com_preavviso_rigetto" title="Comunicazione Preavviso Rigetto" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">com_preavviso_rigetto</id>

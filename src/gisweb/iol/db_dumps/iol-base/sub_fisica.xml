@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
     <element id="sub_fisica" title="Nuovo soggetto" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">sub_fisica</id>

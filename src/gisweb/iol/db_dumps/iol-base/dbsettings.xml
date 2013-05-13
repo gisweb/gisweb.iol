@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
     <dbsettings version="1.16">
       <AboutDescription type="Products.Archetypes.Field.TextField"><![CDATA[]]></AboutDescription>
@@ -21,11 +21,19 @@
 <member>
 <name>[istruttore]</name>
 <value><struct>
+<member>
+<name>istruttori-pratica</name>
+<value><int>1</int></value>
+</member>
 </struct></value>
 </member>
 <member>
 <name>[rup]</name>
 <value><struct>
+<member>
+<name>traale72</name>
+<value><int>1</int></value>
+</member>
 </struct></value>
 </member>
 </struct></value>
