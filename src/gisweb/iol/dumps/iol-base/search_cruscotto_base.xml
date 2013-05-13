@@ -8,7 +8,7 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid"><div class="span12"><span class="plominoFieldClass">avanzata_opt</span></div></div><div id="advancedSearchDiv"><span class="plominoSubformClass">sub_ricerca_istruttore</span></div><div class="row-fluid"><div class="span12"><span class="plominoFieldClass">domande_inviate</span></div></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid"><div class="span12"><span class="plominoFieldClass">avanzata_opt</span></div></div><div id="advancedSearchDiv"><span class="plominoSubformClass">base_sub_ricerca_istruttore</span></div><div class="row-fluid"><div class="span12"><span class="plominoFieldClass">domande_inviate</span></div></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>

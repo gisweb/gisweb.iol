@@ -1,7 +1,7 @@
 <plominodatabase id="iol-base">
   <design>
-    <element id="sub_proroga" title="Informazioni sulla Proroga dell'Autorizzazione" type="PlominoForm">
-      <id type="Products.Archetypes.Field.StringField">sub_proroga</id>
+    <element id="base_sub_proroga" title="Informazioni sulla Proroga dell'Autorizzazione" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">base_sub_proroga</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
       <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSaveDocument>

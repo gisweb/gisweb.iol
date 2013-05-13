@@ -24,7 +24,7 @@
       <elements>
         <element id="numero" title="N° Pratica" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">numero</id>
-          <SelectedField type="Products.Archetypes.Field.StringField">sub_pratica_data/numero_pratica</SelectedField>
+          <SelectedField type="Products.Archetypes.Field.StringField">base_sub_pratica_data/numero_pratica</SelectedField>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA['Non-existing form']]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
@@ -56,14 +56,14 @@ return result]]></Formula>
         </element>
         <element id="autorizzazione" title="N° Autorizzazione" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">autorizzazione</id>
-          <SelectedField type="Products.Archetypes.Field.StringField">sub_pratica/numero_autorizzazione</SelectedField>
+          <SelectedField type="Products.Archetypes.Field.StringField">base_sub_pratica/numero_autorizzazione</SelectedField>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA['Non-existing form']]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
         <element id="protocollo" title="Protocollo" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">protocollo</id>
-          <SelectedField type="Products.Archetypes.Field.StringField">sub_protocollo/numero_protocollo</SelectedField>
+          <SelectedField type="Products.Archetypes.Field.StringField">base_sub_protocollo/numero_protocollo</SelectedField>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA['Non-existing form']]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
@@ -80,7 +80,7 @@ else:
         </element>
         <element id="rinnovi" title="Rinnovi" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">rinnovi</id>
-          <SelectedField type="Products.Archetypes.Field.StringField">sub_trasporti_dati/trasporti_numero_rinnovi</SelectedField>
+          <SelectedField type="Products.Archetypes.Field.StringField">base_sub_trasporti_dati/trasporti_numero_rinnovi</SelectedField>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA['Non-existing form']]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">True</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
