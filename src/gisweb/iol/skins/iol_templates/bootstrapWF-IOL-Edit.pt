@@ -15,7 +15,7 @@
 
 
 <tal:newdoc tal:condition="python: doc.isNewDocument()">
-        <div tal:define="initial_state_id python: doc.wf_workflowInfo(wf_ids=['iol_workflow'], args=['initial_state'])['initial_state'];
+        <div tal:define="initial_state_id python: doc.wf_workflowInfo(wf_id='iol_workflow', args=['initial_state'])['initial_state'];
                          status_info python: doc.wf_getInfoForState('iol_workflow', initial_state_id, args=['description'])"
             class="alert alert-info">
             <h4 tal:content="status_info/title">Initial state title goes here</h4>
@@ -25,10 +25,9 @@
 </tal:newdoc>
 
 <!-- NOT NEW DOCUMENT: doc is a PlominoDocument -->
-<tal:notnewdoc
-    tal:condition="python: not doc.isNewDocument()"
-    tal:define="status_info python: doc.wf_statesInfo(single=True, args=['description']);
-                status_id status_info/id;">
+<tal:notnewdoc tal:condition="python: not doc.isNewDocument()">
+    <tal:defs tal:define="status_info python: doc.wf_statesInfo(single=True, args=['description']);
+                          status_id status_info/id;">
 
 
             <div id="section-message-compilazione" tal:condition="python: not doc.getItem('sospensione_motivazione')" class="alert alert-info">
@@ -131,7 +130,7 @@
             <div class="alert alert-info" tal:condition="python: doc.elenco_modelli('proroga')!=None and doc.canUserEdit() and doc.wf_getInfoFor('wf_richiesta_proroga') and doc.getItem('documenti_proroga')">
                         <div class="span12" tal:content="structure python: myForm.getFormField('documenti_proroga').getFieldRender(form=myForm,doc=doc,editmode=True,creation=False)" />
                   </div>
-
+    </tal:defs>
 </tal:notnewdoc>
 
 <tal:test tal:condition="python: doc.test_mode()"
