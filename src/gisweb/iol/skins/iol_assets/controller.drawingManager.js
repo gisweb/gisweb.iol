@@ -1,118 +1,124 @@
-jq(document).ready(function() {
+$(document).ready(function() {
+    
+	var drawingManager,currentOverlay;
 
-      var drawingManager;
-      var selectedShape;
-      var colors = ['#1E90FF', '#FF1493', '#32CD32', '#FF8C00', '#4B0082'];
-      var selectedColor;
-      var colorButtons = {};
+	drawingManager = new google.maps.drawing.DrawingManager({
+		drawingMode: 'marker',
+		drawingControlOptions: {
+			drawingModes: ['marker']
+		},
+		markerOptions: {
+			icon:'../resources/icons/cantiere.png',
+			title:'questo cantiere??',
+			draggable: true
+		},
+		map: $.plominoMaps.google.map
+	});
 
+	
+	$("#elemento_tipo").bind('change',onselectTools)
+	
+	function onselectTools(){
+	
+		var tipo = $(this).val();
+		var options;
+		console.log(tipo)
+		
+		if(tipo=='punto_scavo'){
+			options={
+				drawingMode: google.maps.drawing.OverlayType.MARKER,
+				drawingControlOptions: {drawingModes: ['marker']},
+				markerOptions: {
+					icon:'../resources/icons/scavo.png',
+					title:'questo scavo??',
+					draggable: true
+				}
+			}
+		}
+		if(tipo=='punto_cantiere'){
+			options={
+				drawingMode: google.maps.drawing.OverlayType.MARKER,
+				drawingControlOptions: {drawingModes: ['marker']},
+				markerOptions: {
+					icon:'../resources/icons/cantiere.png',
+					title:'questo scavo??',
+					draggable: true
+				}
+			}
+		}
+		if(tipo=='linea'){
+			options={
+				drawingMode: google.maps.drawing.OverlayType.POLYLINE,
+				drawingControlOptions: {drawingModes: ['polyline']},
+				polylineOptions: {
+					editable: true
+				}
+			}
+		}
+		if(tipo=='area_cantiere'){
+			options={
+				drawingMode: google.maps.drawing.OverlayType.POLYGON,
+				drawingControlOptions: {drawingModes: ['polygon']},
+				polygonOptions: {
+					editable: true
+				}
+			}
+		}
+		
+		drawingManager.setOptions(options) 
+		
+		
+	
+	}
 
-        var polyOptions = {
-          strokeWeight: 0,
-          fillOpacity: 0.45,
-          editable: true
-        };
+	google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
 
-      function clearSelection() {
-        if (selectedShape) {
-          selectedShape.setEditable(false);
-          selectedShape = null;
-        }
-      }
+		drawingManager.setDrawingMode(null);
+		if(currentOverlay) currentOverlay.setMap(null);
+		currentOverlay = e.overlay;
+		
+		
+		if (e.type != google.maps.drawing.OverlayType.MARKER) {
+		// Switch back to non-drawing mode after drawing a shape.
+		
+			google.maps.event.addListener(currentOverlay.getPath(), 'set_at', function(index) {
+				var encodeString = google.maps.geometry.encoding.encodePath(this);
+				if (encodeString) {
+					$('#map_geometry').val(encodeString);
+					$('#'+$.plominoMaps.google.map.getDiv().id+'_info').html('misura: ' + google.maps.geometry.spherical.computeLength(this))
+				}
+			});
+			google.maps.event.addListener(currentOverlay.getPath(), 'insert_at', function(index) {
+			console.log(index)
+				var encodeString = google.maps.geometry.encoding.encodePath(this);
+				if (encodeString) {
+					$('#map_geometry').val(encodeString);
+					$('#'+$.plominoMaps.google.map.getDiv().id+'_info').html('misura: ' + google.maps.geometry.spherical.computeLength(this))
+				}
+			});
 
-      function setSelection(shape) {
-        clearSelection();
-        selectedShape = shape;
-        shape.setEditable(true);
-        //selectColor(shape.get('fillColor') || shape.get('strokeColor'));
-      }
+			var encodeString = google.maps.geometry.encoding.encodePath(currentOverlay.getPath());
+			if (encodeString) {
+			    $('#map_geometry').val(encodeString);
+				$('#'+$.plominoMaps.google.map.getDiv().id+'_info').html('misura: ' + google.maps.geometry.spherical.computeLength(currentOverlay.getPath()))
+			}
+			
 
-      function deleteSelectedShape() {
-        if (selectedShape) {
-          selectedShape.setMap(null);
-        }
-      }
-
-
-var map=jq.plominoMaps.gMap;
-
-
-        // Creates a drawing manager attached to the map that allows the user to draw
-        // markers, lines, and shapes.
-        drawingManager = new google.maps.drawing.DrawingManager({
-
-
-           drawingControl: true,
-          drawingControlOptions: {position: google.maps.ControlPosition.TOP_CENTER,drawingModes: [google.maps.drawing.OverlayType.MARKER,
-      google.maps.drawing.OverlayType.CIRCLE, google.maps.drawing.OverlayType.POLYGON,google.maps.drawing.OverlayType.POLYLINE, google.maps.drawing.OverlayType.RECTANGLE ],
-          
-          markerOptions: {
-            draggable: true
-          },
-          polylineOptions: {
-            editable: true
-          },
-          rectangleOptions: polyOptions,
-          circleOptions: polyOptions,
-          polygonOptions: polyOptions,
-          map: map
-        });
-         
-
-				    console.log(drawingManager)
-
-					google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
-
-
-                        drawingManager.setDrawingMode(null);
-
-                        if (e.type != google.maps.drawing.OverlayType.MARKER) {
-                        // Switch back to non-drawing mode after drawing a shape.
-                        
-            
-                        // Add an event listener that selects the newly-drawn shape when the user
-                        // mouses down on it.
-                        var newShape = e.overlay;
-                        newShape.type = e.type;
-                        google.maps.event.addListener(newShape, 'click', function() {
-                          setSelection(newShape);
-                        });
-
-
-
-                 google.maps.event.addListener(newShape, 'capturing_changed', function() {
-
-
-                            if(!newShape.capturing) console.log(newShape.getPath().getArray().toString())
-
-
-                        });
-
-
-
-                        setSelection(newShape);
-                        console.log(newShape.getPath().getArray().toString())
-                        geom = newShape.getPath().getArray().toString();
-
-
-                      }
-                        else{
-                             var newMarker = e.overlay;
-                             console.log(newMarker.getPosition().toString())
-                             geom = newMarker.getPosition().toString();
-                                
-                        }
-
-
-        		} );
-
-                google.maps.event.addListener(map, 'click', function(e) {
-
-                       console.log(e)
-               
- 
-                })
-
+	    }
+		else{
+			var newMarker = e.overlay;
+			console.log(newMarker.getPosition().toString())
+			geom = newMarker.getPosition().toString();
+					
+		}
 
 
+	});
+	
+	
+	
+	
+	
+	
+	
 });

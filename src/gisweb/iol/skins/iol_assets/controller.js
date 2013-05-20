@@ -57,7 +57,9 @@ jQuery(document).ready(function () {
          this.value = this.value.toUpperCase();
     });
 
-
+  //CHOSEN X MULTISELECT E BOOTSTRAP-COMBO
+     jQuery('.chzn-select').chosen();
+     jQuery('.combobox').combobox();
 
 //VERIFICA INVIO SE NESSUN CAMPO MANDATORY VUOTO FACCIO COMPARIRE INVIO DOMANDA !!!
   if(true){

@@ -46,10 +46,12 @@
 
     <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery-ui-1.9.2.custom.min.js"></script>
     <!---->
-    <script type="text/javascript" tal:attributes="src string:${portal_url}/bootstrap.min.js"></script>
+    <script type="text/javascript" tal:attributes="src string:${portal_url}/bootstrap/bootstrap.min.js"></script>
 
-    <script type="text/javascript" tal:attributes="src string:${portal_url}/bootstrap-combobox/js/bootstrap-combobox.js"></script>
-    <link tal:attributes="href string:${portal_url}/bootstrap-combobox/css/bootstrap-combobox.css " rel="stylesheet" type="text/css">
+    <script type="text/javascript" tal:attributes="src string:${portal_url}/bootstrap/bootstrap-combobox.js"></script>
+    <link tal:attributes="href string:${portal_url}/bootstrap/bootstrap-combobox.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" tal:attributes="src string:${portal_url}/bootstrap/chosen.jquery.min.js"></script>
+    <link tal:attributes="href string:${portal_url}/bootstrap/chosen.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.datepicker.regional.it.js"></script>
     <script type="text/javascript" tal:attributes="src string:${portal_url}/jquery.dataTables.min.js"></script>
@@ -71,8 +73,12 @@
 
 
     <script type="text/javascript" tal:attributes="src string:${portal_url}/plomino.datagrid.js"></script>
-    <link tal:attributes="href string:${portal_url}/datatables_bootstrap.css" rel="stylesheet" type="text/css">
+    <link tal:attributes="href string:${portal_url}/bootstrap/datatables_bootstrap.css" rel="stylesheet" type="text/css">
 
+    <link tal:attributes="href string:${portal_url}/select2/select2.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" tal:attributes="src string:${portal_url}/select2/select2.js"></script>
+    <script type="text/javascript" tal:attributes="src string:${portal_url}/select2/select2_locale_it.js"></script>
+    <script type="text/javascript" tal:attributes="src string:${portal_url}/select2/jquery.geocomplete.min.js"></script>
 
 
 
@@ -81,8 +87,8 @@
     <script type="text/javascript" tal:attributes="src string:${portal_url}/controller.js"></script>
     <script type="text/javascript" tal:attributes="src string:${portal_url}/controller.plugins.js"></script>
     <script type="text/javascript" tal:attributes="src string:${portal_url}/controller.toolbar-top.js"></script>
-    <link tal:attributes="href string:${portal_url}/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link tal:attributes="href string:${portal_url}/bootstrap-responsive.min.css" rel="stylesheet" media="screen" type="text/css">
+    <link tal:attributes="href string:${portal_url}/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link tal:attributes="href string:${portal_url}/bootstrap/bootstrap-responsive.min.css" rel="stylesheet" media="screen" type="text/css">
 
     <link tal:attributes="href string:${portal_url}/doc.css" rel="stylesheet" type="text/css">
     <link tal:attributes="href string:${portal_url}/print.css?nocache=01" rel="stylesheet" media="print" type="text/css">
