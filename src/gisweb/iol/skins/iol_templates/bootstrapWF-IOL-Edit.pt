@@ -122,9 +122,7 @@
 
  </tal:autorizzata>
 
-
       </div>
-
 
             <div tal:condition="python: doc.wf_getInfoFor('wf_prorogata') or doc.wf_getInfoFor('wf_richiesta_proroga')" tal:content="structure python: doc.parentDB().getForm('base_sub_proroga').displayDocument(editmode=True,parent_form_id=True,doc=doc)"/>
             <div class="alert alert-info" tal:condition="python: doc.elenco_modelli('proroga')!=None and doc.canUserEdit() and doc.wf_getInfoFor('wf_richiesta_proroga') and doc.getItem('documenti_proroga')">
