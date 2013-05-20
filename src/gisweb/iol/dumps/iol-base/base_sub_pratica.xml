@@ -2,29 +2,12 @@
   <design>
     <element id="base_sub_pratica" title="subform base pratica" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_pratica</id>
-      <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.getParentDatabase().callScriptMethod('frm_events', 'onCreateDocument', plominoDocument,
-    # kin: 'child' oppure 'parent' oppure ''
-    ''
-)]]></onCreateDocument>
-      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.getParentDatabase().callScriptMethod('frm_events', 'onOpenDocument', plominoDocument,
-    # msg: messaggio custom in caso non si disponga dei premessi necessari per aprire il documento  
-    ''
-)]]></onOpenDocument>
-      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.getParentDatabase().callScriptMethod('frm_events', 'onSaveDocument', plominoDocument,
-    # kin: 'child' oppure 'parent' oppure ''
-  ''
-)]]></onSaveDocument>
-      <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.getParentDatabase().callScriptMethod('frm_events', 'onDeleteDocument', plominoDocument,
-    # kin: 'child' oppure 'parent' oppure ''
-  ''
-)]]></onDeleteDocument>
+      <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
+      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
+      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSaveDocument>
+      <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
-      <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.getParentDatabase().callScriptMethod('frm_events', 'beforeCreateDocument', plominoDocument,
-    # kin: 'child' oppure 'parent' oppure ''
-    '',
-    # msg: messaggio custom   
-    ''
-)]]></beforeCreateDocument>
+      <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
       <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoFieldClass">wf_iol</span></p><p><span class="plominoHidewhenClass">start:hw_notistruttoria</span></p>
     <div class="row-fluid"><span class="plominoFieldClass">istruttoria_prescrizioni</span></div>
     <div class="row-fluid"><span class="plominoFieldClass">istruttoria_annotazioni</span></div><p><span class="plominoHidewhenClass">end:hw_notistruttoria</span></p><p><span class="plominoHidewhenClass">start:hw_notautorizzata</span></p>
@@ -461,7 +444,7 @@ if inizio and fine:
     else:
         if inizio >= fine:
             return 'ATTENZIONE! La data di fine periodo non può precedere o coincidere con quella di inizio.'
-    
+
         fine_max = lookForValidDate(inizio.year()+1, inizio.month(), inizio.day(), timeargs=[0, 0, 0], start=1)
         if fine > fine_max:
             msg = """ATTENZIONE! Il periodo di autorizzazione richiesto non può eccedere un anno.
