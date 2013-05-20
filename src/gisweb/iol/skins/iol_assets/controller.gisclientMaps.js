@@ -2,7 +2,7 @@
 jQuery(document).ready(function () {
 
     jQuery("div[data-plugin='gisclientmap']").each(function(){
-        jQuery.globalEval("var options = "  + jQuery(this).data('gisclientmapOptions'));
+        eval("var options = "  + jQuery(this).data('gisclientmapOptions'));
         options.editMode = jQuery(this).data('editMode');
         //Aggiungo il parametro per la configurazione permanente della mappa
 
