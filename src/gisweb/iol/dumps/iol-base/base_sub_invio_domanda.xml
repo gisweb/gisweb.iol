@@ -1,0 +1,25 @@
+<plominodatabase id="iol-base">
+  <design>
+    <element id="base_sub_invio_domanda" title="base_sub_invio_domanda" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">base_sub_invio_domanda</id>
+      <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
+      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
+      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSaveDocument>
+      <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
+      <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
+      <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid"><h4 style="text-align: center; ">La domanda è stata completata e può essere inviata.</h4><h5 style="text-align: center; ">Puoi tornare alla pagina iniziale o uscire dalla compilazione e tornare ad inviare la domanda in un altro momento. Potrai trovare la domanda compilata in <a href="../plomino_documents/search_istanze_utente"> le mie istanze</a> e inviarla in un secondo tempo.</h5><h5 style="text-align: center; ">Per abilitare l'invio della domanda occorre accettare le avvertenze e l'informativa sulla privacy. Si consiglia di verificare la correttezza dei dati prima di procedere con l'invio</h5><h4 style="text-align: center; ">Avvertenze per il dichiarante</h4><p style="text-align: justify; "><i><label class="checkbox"> <input class="accettazione" id="accettazione_avvertenza_1" name="accettazione" type="checkbox" /> <a name="accettazione_avvertenza_1"></a> Il/La sottoscritto/a, è consapevole che le dichiarazioni contenute nel presente modello di domanda sono da intendersi         quali dichiarazioni sostitutive di certificazione e dichiarazioni sostitutive di atto di notorietà ai sensi degli         <strong><em>artt. 46 e 47 del D.P.R. 28 dicembre 2000 n. 445</em></strong>.<br /><br /> Il/La sottoscritto/a è, altresì, consapevole delle sanzioni penali previste dall'<strong><em>art. 76 del D.P.R.</em></strong> medesimo per le ipotesi di falsità in atti e dichiarazioni mendaci ed è a conoscenza del fatto che qualora emerga, da eventuali         controlli effettuati da questa Provincia, la non veridicità del contenuto delle dichiarazioni di cui sopra decade immediatamente         dai benefici eventualmente prodotti dal provvedimento amministrativo emanato sulla base della dichiarazione non veritiera così         come previsto dall'<strong><em>art. 75 del D.P.R. 28/12/2000 n. 445</em></strong>. </label></i></p><h4 style="text-align: center; ">Trattamento dati personali</h4><p style="text-align: justify; "><i><label class="checkbox"> <input class="accettazione" id="accettazione_avvertenza_2" name="accettazione" type="checkbox" /> <a name="accettazione_avvertenza_2"></a> Il/La sottoscritto/a è informato che i dati forniti saranno raccolti dall' Ente per le finalità connesse al rilascio         della Autorizzazione stessa, nei limiti e con le modalità consentite dal <strong><em>D.l.gs n. 196/2003         "Codice in materia di protezione dei dati personali"</em></strong>. <br /> I dati di cui alla presente scheda, verranno trattati unicamente ai fine del presente procedimento ed ai sensi         dell'<strong><em>art. 13 del D.Lgs. del 30 giugno 2003 n. 196 "Codice in materia di protezione dei dati personali"</em></strong>. </label></i></p><div style="float:right; "><span class="plominoActionClass">btn_invia_domanda</span></div></div>]]></FormLayout>
+      <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
+      <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
+      <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
+      <HideDefaultActions type="Products.Archetypes.Field.BooleanField">False</HideDefaultActions>
+      <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
+      <isSearchForm type="Products.Archetypes.Field.BooleanField">False</isSearchForm>
+      <isPage type="Products.Archetypes.Field.BooleanField">False</isPage>
+      <SearchView type="Products.Archetypes.Field.StringField"/>
+      <SearchFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></SearchFormula>
+      <Position type="Products.Archetypes.Field.IntegerField"/>
+      <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
+    </element>
+  </design>
+</plominodatabase>

@@ -54,7 +54,7 @@
         <!-- INVIO DOMANDA -->
             <div id="section-invio-domanda" tal:condition="python: v.get('id') == 'invia_domanda'"
                 class="alert alert-info hidden"
-                tal:define="customform python: doc.getParentDatabase().getForm('sub_invio_domanda_custom') or doc.getParentDatabase().getForm('sub_invio_domanda');"
+                tal:define="customform python: doc.getParentDatabase().getForm('base_sub_invio_domanda') or doc.getParentDatabase().getForm('base_sub_invio_domanda');"
                 tal:content="structure python: customform.displayDocument(doc, editmode=False, creation=False, parent_form_id=False, request=context.REQUEST)"/>
 
         </tal:loop>

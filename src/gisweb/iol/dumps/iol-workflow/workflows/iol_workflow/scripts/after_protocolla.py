@@ -1,0 +1,22 @@
+## Script (Python) "after_protocolla"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=state_change
+##title=
+##
+from Products.CMFCore.utils import getToolByName
+
+#Aggiornamento dello stato su plominoDocument
+state_change.object.updateStatus()
+
+# Dopo la protocollazione  se possibile avviene l'assegnazione
+wf = getToolByName(state_change.object, 'portal_workflow') #state_change.workflow
+
+next_transitions = wf.getTransitionsFor(state_change.object)
+next_tr = 'assegna'
+
+if next_tr in [i['id'] for i in next_transitions]:
+    wf.doActionFor(state_change.object, next_tr)

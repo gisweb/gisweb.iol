@@ -5,11 +5,11 @@
 ##bind script=script
 ##bind subpath=traverse_subpath
 ##parameters=
-##title=hasReadPermission
+##title=DEPRECATO!
 ##
 
 """
-Tenuto per retro-compatibilità
+Tenuto per retro-compatibilità perché usato in bootstrapWF-IOL*.pt
 """
 
-return context.getParentDatabase().hasReadPermission(obj=context)
+return context.getParentDatabase().hasEditPermission(obj=context)

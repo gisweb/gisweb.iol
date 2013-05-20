@@ -17,13 +17,17 @@ kwargs: argomenti da passare al metodo oncreate_child
 db = context.getParentDatabase()
 
 # PERMESSI
-# prerequisiti:
-# * ruoli di Plomino: '[istruttore]' e '[rup]'
-# * ruoli di Plone: 'istruttore' e 'rup'
+# Ad ogni utente/gruppo del portale che ha il ruolo Plomino "[iol-qualcosa]"
+#+ viene assegnato il ruolo Plone "iol-qualcosa".
 
-for role in ('[istruttore]', '[rup]'):
-    for uid in db.getUsersForRole(role):
-        context.addLocalRoles(uid, (role[1:-1], ))
+localRolesToAdd = []
+for role in db.getUserRoles():
+    if role.startswith('[iol-'):
+        for uid in db.getUsersForRole(role):
+            localRolesToAdd.append(role[1:-1])
+
+if localRolesToAdd:
+    context.addLocalRoles(uid, localRolesToAdd)
 
 
 # EVENTI DI REALIZZAZIONE COLLEGAMENTO UNO A MOLTI

@@ -1,0 +1,86 @@
+<plominodatabase id="iol-base">
+  <design>
+    <element id="sospese" title="Domande Sospese" type="PlominoView">
+      <id type="Products.Archetypes.Field.StringField">sospese</id>
+      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.getItem('wf_iol') in ['sospesa','pre_rigetto'] and plominoDocument.getItem('tipo_richiesta') in ['base','rinnovo']]]></SelectionFormula>
+      <SortColumn type="Products.Archetypes.Field.StringField"/>
+      <Categorized type="Products.Archetypes.Field.BooleanField">False</Categorized>
+      <FormFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></FormFormula>
+      <ReverseSorting type="Products.Archetypes.Field.BooleanField">False</ReverseSorting>
+      <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
+      <HideDefaultActions type="Products.Archetypes.Field.BooleanField">True</HideDefaultActions>
+      <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
+      <Widget type="Products.Archetypes.Field.StringField">DYNAMICTABLE</Widget>
+      <DynamicTableParameters type="Products.Archetypes.Field.TextField"><![CDATA['bPaginate': false,
+'bLengthChange': false,
+'bFilter': true,
+'bSort': true,
+'bInfo': true,
+'bAutoWidth': false]]></DynamicTableParameters>
+      <ViewTemplate type="Products.Archetypes.Field.StringField"/>
+      <onOpenView type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenView>
+      <Position type="Products.Archetypes.Field.IntegerField"/>
+      <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
+      <elements>
+        <element id="numero" title="Numero" type="PlominoColumn">
+          <id type="Products.Archetypes.Field.StringField">numero</id>
+          <SelectedField type="Products.Archetypes.Field.StringField">gestioneerrori</SelectedField>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.getItem('numero_pratica','')]]></Formula>
+          <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
+          <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
+        </element>
+        <element id="tipo" title="Tipo Richiesta" type="PlominoColumn">
+          <id type="Products.Archetypes.Field.StringField">tipo</id>
+          <SelectedField type="Products.Archetypes.Field.StringField">gestioneerrori</SelectedField>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.Title()]]></Formula>
+          <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
+          <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
+        </element>
+        <element id="richiedente" title="Richiedente" type="PlominoColumn">
+          <id type="Products.Archetypes.Field.StringField">richiedente</id>
+          <SelectedField type="Products.Archetypes.Field.StringField">gestioneerrori</SelectedField>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[ragsoc = plominoDocument.getItem('giuridica_denominazione','')
+nominativo = '%s %s'.strip() %(plominoDocument.getItem('fisica_cognome',''),plominoDocument.getItem('fisica_nome',''))
+if ragsoc and nominativo:
+    result = '%s (%s)' %(ragsoc,nominativo)
+elif nominativo:
+    result = nominativo
+elif ragsoc:
+    result = ragsoc
+else:
+    result = ''
+return result]]></Formula>
+          <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
+          <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
+        </element>
+        <element id="protocollo" title="Protocollo" type="PlominoColumn">
+          <id type="Products.Archetypes.Field.StringField">protocollo</id>
+          <SelectedField type="Products.Archetypes.Field.StringField">base_sub_protocollo/numero_protocollo</SelectedField>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA['Non-existing form']]></Formula>
+          <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
+          <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
+        </element>
+        <element id="dataprotocollo" title="Data Protocollo" type="PlominoColumn">
+          <id type="Products.Archetypes.Field.StringField">dataprotocollo</id>
+          <SelectedField type="Products.Archetypes.Field.StringField">gestioneerrori</SelectedField>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.getItem('data_protocollo'):
+    return DateToString(plominoDocument.getItem('data_protocollo'),'%d/%m/%Y')
+else:
+    return '']]></Formula>
+          <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
+          <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
+        </element>
+        <element id="stato" title="Stato Pratica" type="PlominoColumn">
+          <id type="Products.Archetypes.Field.StringField">stato</id>
+          <SelectedField type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</SelectedField>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.wf_getInfoFor('wf_message'):
+    return '%s - %s' %(plominoDocument.wf_statesInfo(single=False)[0]['title'],plominoDocument.wf_getInfoFor('wf_message'))
+else:
+    return plominoDocument.wf_statesInfo(single=False)[0]['title']]]></Formula>
+          <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
+          <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
+        </element>
+      </elements>
+    </element>
+  </design>
+</plominodatabase>
