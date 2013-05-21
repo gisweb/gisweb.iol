@@ -1,9 +1,10 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_test">
   <design>
     <element id="base_com_protocollo" title="Inserimento dati di protocollo" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_com_protocollo</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onOpenDocument()]]></onOpenDocument>
+      <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
       <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onSaveDocument()]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>

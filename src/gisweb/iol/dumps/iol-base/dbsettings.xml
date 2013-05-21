@@ -1,6 +1,6 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_test">
   <design>
-    <dbsettings version="1.16">
+    <dbsettings version="1.17">
       <AboutDescription type="Products.Archetypes.Field.TextField"><![CDATA[]]></AboutDescription>
       <UsingDescription type="Products.Archetypes.Field.TextField"><![CDATA[]]></UsingDescription>
       <IndexAttachments type="Products.Archetypes.Field.BooleanField">False</IndexAttachments>
@@ -11,6 +11,7 @@
       <CountDocuments type="Products.Archetypes.Field.BooleanField">False</CountDocuments>
       <DateTimeFormat type="Products.Archetypes.Field.StringField">%d/%m/%Y</DateTimeFormat>
       <StartPage type="Products.Archetypes.Field.StringField"/>
+      <i18n type="Products.Archetypes.Field.StringField"/>
       <DoNotListUsers type="Products.Archetypes.Field.BooleanField">False</DoNotListUsers>
       <DoNotReindex type="Products.Archetypes.Field.BooleanField">False</DoNotReindex>
       <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>

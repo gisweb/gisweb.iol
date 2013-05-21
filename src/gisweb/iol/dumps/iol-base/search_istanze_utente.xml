@@ -1,9 +1,10 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_test">
   <design>
     <element id="search_istanze_utente" title="Le mie Istanze" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">search_istanze_utente</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
+      <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
       <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
@@ -36,6 +37,14 @@
 <param>
 <value><struct>
 <member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -51,16 +60,8 @@
 'bProcessing': true</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>sourceview</name>
 <value><string>sospese</string></value>
-</member>
-<member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
@@ -87,6 +88,14 @@
 <param>
 <value><struct>
 <member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -102,16 +111,8 @@
 'bProcessing': true</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>sourceview</name>
 <value><string>dainviare</string></value>
-</member>
-<member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
@@ -138,6 +139,14 @@
 <param>
 <value><struct>
 <member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -153,16 +162,8 @@
 'bProcessing': true</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>sourceview</name>
 <value><string>inviate</string></value>
-</member>
-<member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
@@ -211,6 +212,14 @@ return json_dumps(result)]]></Formula>
 <param>
 <value><struct>
 <member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -226,16 +235,8 @@ return json_dumps(result)]]></Formula>
 'bProcessing': true</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>sourceview</name>
 <value><string>autorizzate</string></value>
-</member>
-<member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>

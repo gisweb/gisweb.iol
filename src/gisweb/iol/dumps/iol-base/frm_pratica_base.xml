@@ -1,9 +1,10 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_test">
   <design>
     <element id="frm_pratica_base" title="Pratica base" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">frm_pratica_base</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onCreateDocument()]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onOpenDocument()]]></onOpenDocument>
+      <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
       <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onSaveDocument()]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onDeleteDocument()]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>

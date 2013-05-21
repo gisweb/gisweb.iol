@@ -1,9 +1,10 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_test">
   <design>
     <element id="search_cruscotto_base" title="Cruscotto (Istruttore)" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">search_cruscotto_base</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
+      <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
       <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
@@ -35,6 +36,14 @@
           <params>
 <param>
 <value><struct>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
+</member>
 <member>
 <name>dynamictableparam</name>
 <value><string>'aaSorting': [],
@@ -72,16 +81,8 @@
 </string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>sourceview</name>
 <value><string>tutte-istanze</string></value>
-</member>
-<member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
@@ -108,6 +109,12 @@
 <param>
 <value><struct>
 <member>
+<name>selectionlist</name>
+<value><array><data>
+<value><string>Ricerca avanzata|avanzata</string></value>
+</data></array></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -119,12 +126,6 @@
 <member>
 <name>widget</name>
 <value><string>CHECKBOX</string></value>
-</member>
-<member>
-<name>selectionlist</name>
-<value><array><data>
-<value><string>Ricerca avanzata|avanzata</string></value>
-</data></array></value>
 </member>
 </struct></value>
 </param>

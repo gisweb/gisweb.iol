@@ -1,9 +1,10 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_test">
   <design>
     <element id="base_sub_fisica_domicilio" title="base_sub_fisica_domicilio" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_fisica_domicilio</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
+      <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
       <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
@@ -183,6 +184,12 @@ return plominoDocument.getItem('domicilio_opt') != 'domicilio']]></Formula>
 <param>
 <value><struct>
 <member>
+<name>selectionlist</name>
+<value><array><data>
+<value><string>Domicilio della persona fisica|domicilio</string></value>
+</data></array></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -194,12 +201,6 @@ return plominoDocument.getItem('domicilio_opt') != 'domicilio']]></Formula>
 <member>
 <name>widget</name>
 <value><string>CHECKBOX</string></value>
-</member>
-<member>
-<name>selectionlist</name>
-<value><array><data>
-<value><string>Domicilio della persona fisica|domicilio</string></value>
-</data></array></value>
 </member>
 </struct></value>
 </param>

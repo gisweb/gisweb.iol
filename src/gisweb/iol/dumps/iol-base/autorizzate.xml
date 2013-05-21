@@ -1,4 +1,4 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_test">
   <design>
     <element id="autorizzate" title="Domande Autorizzate" type="PlominoView">
       <id type="Products.Archetypes.Field.StringField">autorizzate</id>

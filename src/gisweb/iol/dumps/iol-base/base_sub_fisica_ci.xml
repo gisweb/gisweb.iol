@@ -1,9 +1,10 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_test">
   <design>
     <element id="base_sub_fisica_ci" title="base_sub_fisica_ci" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_fisica_ci</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
+      <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
       <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
@@ -36,6 +37,14 @@
 <param>
 <value><struct>
 <member>
+<name>selectionlist</name>
+<value><array><data>
+<value><string> |</string></value>
+<value><string>Carta di identit�i</string></value>
+<value><string>Patente di guida|patente</string></value>
+</data></array></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 			'bLengthChange': true,
@@ -43,14 +52,6 @@
 			'bSort': true,
 			'bInfo': true,
 			'bAutoWidth': false</string></value>
-</member>
-<member>
-<name>selectionlist</name>
-<value><array><data>
-<value><string> |</string></value>
-<value><string>Carta di identit�i</string></value>
-<value><string>Patente di guida|patente</string></value>
-</data></array></value>
 </member>
 </struct></value>
 </param>

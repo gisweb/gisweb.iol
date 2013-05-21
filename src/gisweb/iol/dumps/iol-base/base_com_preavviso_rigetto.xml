@@ -1,4 +1,4 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_test">
   <design>
     <element id="base_com_preavviso_rigetto" title="Comunicazione Preavviso Rigetto" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</id>
@@ -6,6 +6,7 @@
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[if 'preavviso_rigetto' not in [i.id for i in plominoDocument.wf_transitionsInfo()]:
     return "Transizione 'preavviso_rigetto' NON disponibile"
 context.frm_onOpenDocument()]]></onOpenDocument>
+      <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
       <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onSaveDocument()
 
 from Products.CMFCore.utils import getToolByName
@@ -42,12 +43,12 @@ pw.doActionFor(context, 'preavviso_rigetto')]]></onSaveDocument>
 <param>
 <value><struct>
 <member>
-<name>widget</name>
-<value><string>TEXTAREA</string></value>
-</member>
-<member>
 <name>size</name>
 <value><string>10</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>TEXTAREA</string></value>
 </member>
 </struct></value>
 </param>

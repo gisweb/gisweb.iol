@@ -49,7 +49,7 @@ def main(name, key='services_configuration'):
             error['err_msg'] = '%s' % err
             error['err_type'] = Type(err)
         else:
-            result['content_url'] = pp[key].absolute_url()
+            result['content_url'] = place.absolute_url()
             result['success'] = 1
             break
 

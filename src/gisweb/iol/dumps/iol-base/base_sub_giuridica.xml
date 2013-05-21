@@ -1,9 +1,10 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_test">
   <design>
     <element id="base_sub_giuridica" title="base_sub_giuridica" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_giuridica</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
+      <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
       <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
@@ -344,15 +345,6 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
-<name>dynamictableparam</name>
-<value><string>'bPaginate': true,
-			'bLengthChange': true,
-			'bFilter': true,
-			'bSort': true,
-			'bInfo': true,
-			'bAutoWidth': false</string></value>
-</member>
-<member>
 <name>selectionlist</name>
 <value><array><data>
 <value><string> |</string></value>
@@ -361,6 +353,15 @@ return '']]></ValidationFormula>
 <value><string>Accomandatario</string></value>
 <value><string>RUP</string></value>
 </data></array></value>
+</member>
+<member>
+<name>dynamictableparam</name>
+<value><string>'bPaginate': true,
+			'bLengthChange': true,
+			'bFilter': true,
+			'bSort': true,
+			'bInfo': true,
+			'bAutoWidth': false</string></value>
 </member>
 </struct></value>
 </param>
@@ -395,6 +396,12 @@ except:
 <param>
 <value><struct>
 <member>
+<name>selectionlist</name>
+<value><array><data>
+<value><string>Persona giuridica associata|giuridica</string></value>
+</data></array></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -406,12 +413,6 @@ except:
 <member>
 <name>widget</name>
 <value><string>CHECKBOX</string></value>
-</member>
-<member>
-<name>selectionlist</name>
-<value><array><data>
-<value><string>Persona giuridica associata|giuridica</string></value>
-</data></array></value>
 </member>
 </struct></value>
 </param>
