@@ -19,9 +19,11 @@ Se la variabile non è settata restituisce il valore di default.
 
 tipo_app = context.naming('tipo_app')
 
+db = context.getParentDatabase()
+
 for attr_name in ('app_in_test', '%s_is_in_test' % tipo_app, ):
     try:
-        test = getattr(context.getParentDatabase(), attr_name)
+        test = getattr(db, attr_name)
     except AttributeError, err:
         pass
     else:

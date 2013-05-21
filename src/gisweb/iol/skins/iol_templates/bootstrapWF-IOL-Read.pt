@@ -193,15 +193,17 @@
             <div class=row-fluid>
                 <div class="span12 alert alert-info"
                     tal:condition="python: not v.get('id') in ['invia_domanda', 'preavviso_rigetto', 'protocolla', 'sospendi', 'protocolla', 'richiesta_proroga', 'istruttoria_completata']">
-                    <p><span  tal:content="python: v.get('description') or ''"/>
+                    <p>
+                        <span  tal:content="python: v.get('description') or ''"/>
                         <a style="width:200px" class="btn pull-right wf-actions"
                             tal:define="id v/id"
                             tal:attributes="id string:btn_wf_${id}; href string:${actionurl}?workflow_action=${id};" >
                             <i class='icon-hand-right'></i>
-                            <span tal:content="python: v['title'] or v['id']"></span></a></p>
+                            <span tal:content="python: v['title'] or v['id']"></span>
+                        </a>
+                    </p>
                 </div>
             </div>
-
 
         </tal:loop>
 
@@ -209,5 +211,8 @@
 
 </tal:docblock>
 
-<tal:test tal:condition="python: doc.test_mode()"
-    tal:content="python: 'Applicazione %s in test' % tipoApp"> ***** fine template ***** </tal:test>
+<tal:test tal:condition="python: doc.test_mode(True)">
+    <a href="#"
+        tal:attributes="href python: '%s/manage_propertiesForm' % dburl"
+        tal:content="python: 'Applicazione %s in test' % tipoApp"></a>
+</tal:test>
