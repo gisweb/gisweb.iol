@@ -153,11 +153,12 @@
                     </div>
                  </div>
 
-                    <div class="row-fluid" tal:condition="python: doc.getItem('documenti_autorizzazione')">
+                    <div class="row-fluid" tal:condition="python: doc.getItem('documenti_autorizzazione') and doc.canUserEdit() and doc.wf_getInfoFor('review_state') == 'istruttoria_ok'">
                         <div class="span12" tal:content="structure python: doc.getRenderedItem('documenti_autorizzazione')" />
                     </div>
-
-
+                    <div class="row-fluid" tal:condition="python: doc.getItem('documenti_autorizzazione') and doc.wf_getInfoFor('review_state') != 'istruttoria_ok'">
+                        <div class="span12" tal:content="structure python: doc.getRenderedItem('documenti_autorizzazione')" />
+                    </div>
 
                 </tal:block>
 
