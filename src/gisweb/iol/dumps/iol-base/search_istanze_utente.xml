@@ -1,4 +1,4 @@
-<plominodatabase id="iol_test">
+<plominodatabase id="iol-base">
   <design>
     <element id="search_istanze_utente" title="Le mie Istanze" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">search_istanze_utente</id>
@@ -37,14 +37,6 @@
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -58,6 +50,14 @@
 'bAutoWidth': false,
 'bJQueryUI': false,
 'bProcessing': true</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 <member>
 <name>sourceview</name>
@@ -88,14 +88,6 @@
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -109,6 +101,14 @@
 'bAutoWidth': false,
 'bJQueryUI': false,
 'bProcessing': true</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 <member>
 <name>sourceview</name>
@@ -139,14 +139,6 @@
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -160,6 +152,14 @@
 'bAutoWidth': false,
 'bJQueryUI': false,
 'bProcessing': true</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 <member>
 <name>sourceview</name>
@@ -212,14 +212,6 @@ return json_dumps(result)]]></Formula>
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
@@ -233,6 +225,14 @@ return json_dumps(result)]]></Formula>
 'bAutoWidth': false,
 'bJQueryUI': false,
 'bProcessing': true</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 <member>
 <name>sourceview</name>

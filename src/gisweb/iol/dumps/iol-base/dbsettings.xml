@@ -1,4 +1,4 @@
-<plominodatabase id="iol_test">
+<plominodatabase id="iol-base">
   <design>
     <dbsettings version="1.17">
       <AboutDescription type="Products.Archetypes.Field.TextField"><![CDATA[]]></AboutDescription>
@@ -20,12 +20,12 @@
 <param>
 <value><struct>
 <member>
-<name>[iol-manager]</name>
+<name>[iol-reviewer]</name>
 <value><struct>
 </struct></value>
 </member>
 <member>
-<name>[iol-reviewer]</name>
+<name>[iol-manager]</name>
 <value><struct>
 </struct></value>
 </member>

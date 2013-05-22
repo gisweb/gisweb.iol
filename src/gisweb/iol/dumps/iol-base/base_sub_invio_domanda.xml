@@ -1,4 +1,4 @@
-<plominodatabase id="iol_test">
+<plominodatabase id="iol-base">
   <design>
     <element id="base_sub_invio_domanda" title="base_sub_invio_domanda" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_invio_domanda</id>
@@ -9,8 +9,7 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[
-<div class="row-fluid">
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid">
     <h4 style="text-align: center; ">La domanda è stata completata e può essere inviata.</h4>
     <h5 style="text-align: center; ">Puoi tornare alla pagina iniziale o uscire dalla compilazione e tornare ad inviare la domanda in un altro momento. Potrai trovare la domanda compilata in <a href="../plomino_documents/search_istanze_utente"> le mie istanze</a> e inviarla in un secondo tempo.</h5>
     <h5 style="text-align: center; ">Per abilitare l'invio della domanda occorre accettare le avvertenze e l'informativa sulla privacy. Si consiglia di verificare la correttezza dei dati prima di procedere con l'invio</h5>

@@ -1,4 +1,4 @@
-<plominodatabase id="iol_test">
+<plominodatabase id="iol-base">
   <design>
     <element id="frm_proroga_base" title="Richiesta di proroga" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">frm_proroga_base</id>
@@ -23,9 +23,7 @@
             autorizzata il <strong><span class="plominoFieldClass">data_autorizzazione_parent</span></strong>
             con numero di autorizzazione <strong><span class="plominoFieldClass">numero_autorizzazione_parent</span></strong>.
         </div>
-    </div>
-</div>
-<p><span class="plominoSubformClass">base_sub_proroga</span></p>]]></FormLayout>
+    </div></div><p><span class="plominoSubformClass">base_sub_proroga</span></p>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>

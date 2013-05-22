@@ -1,4 +1,4 @@
-<plominodatabase id="iol_test">
+<plominodatabase id="iol-base">
   <design>
     <element id="left_column_info" title="left_column_info" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">left_column_info</id>

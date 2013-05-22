@@ -1,4 +1,4 @@
-<plominodatabase id="iol_test">
+<plominodatabase id="iol-base">
   <design>
     <element id="search_istanze_istruttore" title="Le mie Istanze (istruttore)" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">search_istanze_istruttore</id>
@@ -37,14 +37,6 @@
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
 'aaSorting': [],
@@ -65,6 +57,14 @@
    });
    aoData.push({name:'query', value: JSON.stringify(base_query)});
 }</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 <member>
 <name>sourceview</name>
@@ -95,14 +95,6 @@
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
 'aaSorting': [],
@@ -123,6 +115,14 @@
    });
    aoData.push({name:'query', value: JSON.stringify(base_query)});
 }</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 <member>
 <name>sourceview</name>
@@ -153,14 +153,6 @@
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
 'aaSorting': [],
@@ -181,6 +173,14 @@
    });
    aoData.push({name:'query', value: JSON.stringify(base_query)});
 }</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 <member>
 <name>sourceview</name>
@@ -232,14 +232,6 @@ return result]]></Formula>
 <param>
 <value><struct>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
 'aaSorting': [],
@@ -260,6 +252,14 @@ return result]]></Formula>
    });
    aoData.push({name:'query', value: JSON.stringify(base_query)});
 }</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 <member>
 <name>sourceview</name>

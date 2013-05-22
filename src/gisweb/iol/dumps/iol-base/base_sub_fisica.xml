@@ -1,4 +1,4 @@
-<plominodatabase id="iol_test">
+<plominodatabase id="iol-base">
   <design>
     <element id="base_sub_fisica" title="Nuovo soggetto" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_fisica</id>
@@ -280,10 +280,6 @@ return '']]></ValidationFormula>
 </data></array></value>
 </member>
 <member>
-<name>selectionlistformula</name>
-<value><string>['Maschile|M','Femminile|F']</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -295,6 +291,10 @@ return '']]></ValidationFormula>
 <member>
 <name>widget</name>
 <value><string>RADIO</string></value>
+</member>
+<member>
+<name>selectionlistformula</name>
+<value><string>['Maschile|M','Femminile|F']</string></value>
 </member>
 </struct></value>
 </param>

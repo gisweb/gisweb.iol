@@ -1,4 +1,4 @@
-<plominodatabase id="iol_test">
+<plominodatabase id="iol-base">
   <design>
     <element id="base_sub_giuridica" title="base_sub_giuridica" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_giuridica</id>
