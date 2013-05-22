@@ -5,7 +5,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=ObjectId, sender=''
+##parameters=ObjectId, sender='', debug=0
 ##title=Low level sending email management
 ##
 
