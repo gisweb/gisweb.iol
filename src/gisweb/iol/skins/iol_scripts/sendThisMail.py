@@ -142,4 +142,4 @@ stato sospeso con le seguenti motivazioni:
 
 if custom_args:
     args.update(custom_args)
-    sendMail(**args)
+    sendMail(context, **args)
