@@ -36,7 +36,8 @@
             <div tal:content="structure python: doc.getItem('sospensione_motivazione')" />
         </div>
 
-        <div class="row-fluid" tal:condition="python: doc.wf_getInfoFor('wf_presentata')">
+        <div class="row-fluid"
+            tal:condition="python: doc.wf_getInfoFor('wf_presentata') and doc.verificaRuolo('iol-manager')">
             <div class="span4"
                 tal:content="structure python: myForm.getFormField('istruttore').getFieldRender(myForm, doc, doc.isEditMode(), False, request=doc.REQUEST)"></div>
         </div>
