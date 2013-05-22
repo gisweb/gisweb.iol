@@ -21,26 +21,54 @@ from gisweb.utils import serialDoc, report, Type, requests_post, attachThis, os_
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import normalizeString
 
-url1 = context.getMyAttribute('ws_readdocument_URL').get('value')
+if context.portal_type != 'PlominoDocument':
+    return ''
 
+doc = context
+
+#URL del servizio di creazione del documento
+urlCreate = context.getMyAttribute('ws_createdocx_URL').get('value')
+
+#URL del servizio di lettura del documento
+urlRead = context.getMyAttribute('ws_readdocument_URL').get('value')
+
+model=filename
 if """\\""" in filename:
     filename = filename.split("\\")[-1]
 filename = '.'.join(
         [normalizeString(s, encoding='utf-8')
             for s in filename.split('.')])
 
-docurl = "%s?app=%s&id=%s&filename=%s" %(url1, context.getItem('tipo_app', ''), context.getId(), filename)
+#Url con parametri del servizio di lettura
+docurl = "%s?app=%s&id=%s&filename=%s" %(urlRead,doc.getItem('tipo_app',''),doc.getId(),filename)
 
+#Parametri della chiamata al servizio di creazione
+query = dict(
+    app = context.REQUEST.get('test_app') or doc.getItem('tipo_app'),
+    model = model,
+    group = grp,
+    dataType = 'JSON',
+    #mode = 'show',
+    data = serialDoc(context, serial_as='json'),
+    id = context.id,
+    filename = filename,
+    download = 'false'
+)
+
+#Creazione del documento tramite webservice
 try:
-    res = open_url(docurl,asFile=False)
-except Exception as err:
-    from gisweb.utils import Type
-    msg1 = "%s: %s" % (Type(err), err)
-    msg2 = "Attenzione! Non è stato possibile allegare il file: %s" % filename
-    script.addPortalMessage(msg1, 'error')
-    script.addPortalMessage(msg2, 'warning')
-else:
-    (f,c) = context.setfile(res,filename=filename,overwrite=True,contenttype='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-    if f and c:
-        context.setItem(field,{filename:c})
+    result = requests_post(urlCreate,query, 'json', timeout=30)
+except Exception as error:
+    plone_tools = getToolByName(context.getParentDatabase().aq_inner, 'plone_utils')
+    msg = ('%s: %s' % (Type(error), error), 'error')
+    context.setItem('test',msg)
+    plone_tools.addPortalMessage(*msg, request=context.REQUEST)
+    doc.REQUEST.RESPONSE.redirect(context.absolute_url())
+
+
+#Lettura del documento da webservice
+res = open_url(docurl,asFile=False)
+(f,c) = doc.setfile(res,filename=filename,overwrite=True,contenttype='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+if f and c:
+    doc.setItem(field,{filename:c})
 
