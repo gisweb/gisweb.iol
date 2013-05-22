@@ -17,8 +17,6 @@
 <tal:blockactions tal:define="status python: doc.wf_getInfoFor('review_state');
     actions python:doc.wf_transitionsInfo(wf_id=wf_id, args=['description'],);
     actionurl python: '%s/%s/content_status_modify' %(dburl,doc.getId());
-    sospendiurl python: '%s/%s/EditDocument?openwithform=base_com_sospensione' %(dburl,doc.getId());
-    rigettaurl python: '%s/%s/EditDocument?openwithform=base_com_preavviso_rigetto' %(dburl,doc.getId());
     editprotocollourl python: '%s/%s/EditDocument?openwithform=base_com_protocollo' %(dburl,doc.getId());
     prorogaurl python: '%s/frm_%s_proroga/OpenForm?parentDocument=%s' %(dburl,doc.getItem('tipo_app',''),doc.getId());">
 
@@ -149,9 +147,8 @@
 
     <tal:blockactions tal:define="actions python:doc.wf_transitionsInfo(wf_id=wf_id, args=['description']);
         actionurl python: '%s/%s/content_status_modify' %(dburl,doc.getId());
-        sospendiurl python: '%s/%s/EditDocument?openwithform=com_sospensione' %(dburl,doc.getId());
-        rigettaurl python: '%s/%s/EditDocument?openwithform=com_preavviso_rigetto' %(dburl,doc.getId());
-        editprotocollourl python: '%s/%s/EditDocument?openwithform=com_protocollo' %(dburl,doc.getId());
+        sospendiurl python: '%s/%s/EditDocument?openwithform=base_com_sospensione' %(dburl,doc.getId());
+        rigettaurl python: '%s/%s/EditDocument?openwithform=base_com_preavviso_rigetto' %(dburl,doc.getId());
         prorogaurl python: '%s/frm_%s_proroga/OpenForm?parentDocument=%s' %(dburl,doc.getItem('tipo_app',''),doc.getId());">
 
         <tal:loop tal:repeat="v actions">

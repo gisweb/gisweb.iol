@@ -1,12 +1,3 @@
-## Script (Python) "sendThisMail"
-##bind container=container
-##bind context=context
-##bind namespace=
-##bind script=script
-##bind subpath=traverse_subpath
-##parameters=ObjectId, sender=''
-##title=Low level sending email management
-##
 """
 Gestione centralizzata di invio mail
 
@@ -28,8 +19,10 @@ msg_info = dict(
     )
 
 args = dict(
+    context = context,
     To = context.getItem('fisica_email'),
-    From = sender
+    From = sender,
+    as_script = debug
 )
 
 custom_args = dict()
@@ -80,7 +73,7 @@ Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato i
 
         custom_args = dict(
             Object = 'Autorizzazione pratica. n. %(numero_pratica)s - %(titolo)s' % msg_info,
-            Text = """Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato autorizzato.
+            msg = """Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato autorizzato.
 """ % msg_info
         )
 
@@ -142,4 +135,4 @@ stato sospeso con le seguenti motivazioni:
 
 if custom_args:
     args.update(custom_args)
-    sendMail(context, **args)
+    return sendMail(**args)
