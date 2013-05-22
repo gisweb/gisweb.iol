@@ -55,6 +55,49 @@ return context.resources.numerazione()]]></Formula>
             </extensionfields>
           </CustomData>
         </element>
+
+        <element id="progressivo_proroga" title="Progressivo di proroga" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">progressivo_proroga</id>
+          <FieldType type="Products.Archetypes.Field.StringField">NUMBER</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">CREATION</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return 0]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"></FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"></FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+
+        <element id="prorogabile" title="Prorogabile (Si/No)" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">pprorogabile</id>
+          <FieldType type="Products.Archetypes.Field.StringField">NUMBER</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">CREATION</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return 1]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"></FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"></FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription">
+                  Esprime la possibilità di prorogare la pratica a meno di altre condizioni.
+                  Viene impostata a 0 durante la transizione di approvazione della proroga e
+                  ri-impostata a 1 in caso di rifiuto della proroga.
+              </field>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+
         <element id="data_pratica" title="Data di creazione" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">data_pratica</id>
           <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
@@ -574,7 +617,7 @@ return '']]></ValidationFormula>
 </member>
 <member>
 <name>selectionlistformula</name>
-<value><string>return context.elencoModelli('ordinanza') or []</string></value>
+<value><string>return context.elenco_modelli('ordinanza') or []</string></value>
 </member>
 </struct></value>
 </param>
@@ -611,7 +654,7 @@ return '']]></ValidationFormula>
 </member>
 <member>
 <name>selectionlistformula</name>
-<value><string>return context.elencoModelli('appendice') or []</string></value>
+<value><string>return context.elenco_modelli('appendice') or []</string></value>
 </member>
 </struct></value>
 </param>
@@ -1338,7 +1381,7 @@ else:
 </member>
 <member>
 <name>selectionlistformula</name>
-<value><string>return context.elencoModelli('proroga') or []</string></value>
+<value><string>return context.elenco_modelli('proroga') or []</string></value>
 </member>
 </struct></value>
 </param>

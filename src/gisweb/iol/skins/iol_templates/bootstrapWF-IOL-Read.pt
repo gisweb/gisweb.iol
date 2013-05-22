@@ -218,12 +218,12 @@
     <strong>Informazioni di sviluppo</strong>:
     <a class="btn btn-mini" href="#"
         tal:attributes="href python: '%s/manage_propertiesForm' % dburl"
-        tal:content="python: 'Applicazione %s in test' % tipoApp"></a>
+        tal:content="python: 'Applicazione \'%s\' in test' % tipoApp"></a>
     Versione in uso di iol_base:
     <strong><a class="btn btn-mini" target="new"
         tal:define="info python: doc.getMyAttribute('iol_base_commit');
-            commit_url python: 'https://github.com/gisweb/gisweb.iol/commit/'"
-        tal:attributes="href python: '#' if not info['success'] else commit_url+info.get('value')"
+            commit_url python: 'https://github.com/gisweb/gisweb.iol/commit/%s/src/gisweb/iol/dumps/iol-base'"
+        tal:attributes="href python: '#' if not info['success'] else commit_url % info.get('value')"
         tal:content="python: info.get('value') or 'N.P.'" />
     </strong>
 </span>
