@@ -40,6 +40,8 @@ if 'mail_args' in db.resources.keys():
 
 if not custom_args:
 
+    attach_list = context.getFilenames()
+
     if ObjectId=="assegna":
 
         msg_info.update(dict(
@@ -48,11 +50,13 @@ if not custom_args:
 
         custom_args = dict(
             Object = 'Avvio del Procedimento pratica. n. %(numero_pratica)s - %(titolo)s' % msg_info,
-            Text = '''
+            msg = context.mime_file(
+                file = '' if not msg_info.get('attach') in attach_list else context[msg_info['attach']],
+                text = '''
 Si comunica che in data %(now)s è stato avviato il procedimento n. %(numero_pratica)s.
 ''' % msg_info,
-            Attachment = '' if not msg_info['attach'] in context.getFilenames() else context[msg_info['attach']],
-            Attachment_name = msg_info['attach'],
+                nomefile = msg_info['attach']
+            ),
         )
 
     elif ObjectId == "integra":
@@ -63,11 +67,13 @@ Si comunica che in data %(now)s è stato avviato il procedimento n. %(numero_pra
 
         custom_args = dict(
             Object = 'Integrazione pratica. n. %(numero_pratica)s - %(titolo)s' % msg_info,
-            Text = """
+            msg = context.mime_file(
+                file = '' if not msg_info.get('attach') in attach_list else context[msg_info['attach']],
+                text = """
 Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato integrato.
 """ % msg_info,
-            Attachment = '' if not msg_info['attach'] in context.getFilenames() else context[msg_info['attach']],
-            Attachment_name = msg_info['attach'],
+                nomefile = msg_info['attach']
+            )
         )
 
     elif ObjectId == 'autorizza':
@@ -82,9 +88,13 @@ Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato i
 
         custom_args = dict(
             Object = 'Diniego pratica. n. %(numero_pratica)s - %(titolo)s' % msg_info,
-            Text = """
+            msg = context.mime_file(
+                file = '' if not msg_info.get('attach') in attach_list else context[msg_info['attach']],
+                text = """
 Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato rigettato
-""" % msg_info
+""" % msg_info,
+                nomefile = ''
+            )
         )
 
     elif ObjectId == 'preavviso_rigetto':
@@ -95,13 +105,17 @@ Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato r
 
         custom_args = dict(
             Object = 'Preavviso Rigetto pratica. n. %(numero_pratica)s - %(titolo)s' % msg_info,
-            Text = """
+            msg = context.mime_file(
+                file = '' if not msg_info.get('attach') in attach_list else context[msg_info['attach']],
+                text = """
 Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è
 in preavviso di rigetto con le seguenti motivazioni:
 
 %(motivazione)s
 
-""" % msg_info
+""" % msg_info,
+                nomefile = ''
+            )
         )
 
     elif ObjectId == 'sospendi':
@@ -112,13 +126,17 @@ in preavviso di rigetto con le seguenti motivazioni:
 
         custom_args = dict(
             Object = 'Sospensione pratica. n. %(numero_pratica)s - %(titolo)s' % msg_info,
-            Text = """
+            msg = context.mime_file(
+                file = '' if not msg_info.get('attach') in attach_list else context[msg_info['attach']],
+                text = """
 Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è
 stato sospeso con le seguenti motivazioni:
 
 %(motivazione)s
 
-""" % msg_info
+""" % msg_info,
+                nomefile = ''
+            )
         )
 
 
