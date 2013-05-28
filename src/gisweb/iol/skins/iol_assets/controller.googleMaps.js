@@ -1,5 +1,5 @@
 //TEST CONTROLLER DI PAGINA
-jQuery(document).ready(function () {
+$(function () {
 
     jQuery("div[data-plugin='googlemap']").each(function(){
         eval("var options = "  + jQuery(this).data('googlemapOptions'));
@@ -9,7 +9,7 @@ jQuery(document).ready(function () {
         google.maps.event.addListener(map, 'center_changed', updateMapField);
         google.maps.event.addListener(map, 'zoom_changed', updateMapField);
         google.maps.event.addListener(map, 'maptypeid_changed', updateMapField);
-
+console.log(map)
         //Evetuali oprazioni da fare su ogni singola mappa
         //map.infowindow = new google.maps.InfoWindow(); //Aggiungo una finestra di popup per ogni mappa
         //Setto centro ed estensione del parent se esiste
@@ -111,6 +111,55 @@ jQuery.plominoMaps.google.updateMarkerPosition = function(options){
 
 }
 
+
+jQuery.plominoMaps.google.addEncodedGeometry = function(options){
+
+    console.log(options)
+   var overlay;
+    var path = google.maps.geometry.encoding.decodePath(options.geom);
+    if(options.geomType=='line') overlay = new google.maps.Polyline({strokeColor:'#00FFFF',strokeOpacity: 1.0,strokeWeight: 2});
+    if(options.geomType=='polygon') overlay = new google.maps.Polygon({strokeColor:'#00FFFF',strokeOpacity: 1.0,strokeWeight: 2});
+
+    if(overlay) {
+         overlay.fieldId =  options.fieldId;   
+         overlay.geomType = options.geomType;
+         overlay.setPath(path);
+         overlay.setMap($.plominoMaps.google.map);
+         //$.plominoMaps.google.map.fitBounds(overlay.getBounds())
+         if(options.geomType=='line')jQuery.plominoMaps.google.lines.push(overlay)
+         if(options.geomType=='polygon')jQuery.plominoMaps.google.polygons.push(overlay)
+
+         
+    }
+}
+
+//Trova un elemento di geometria dato un indice
+jQuery.plominoMaps.getElement = function(list,idx){
+   if(typeof(idx)=='string')
+        for (i=0;i<list.length;i++){
+              if(list[i].fieldId==idx) return list[i]
+        }
+   if(typeof(list[idx])!='undefined') 
+       return list[idx]
+   return false
+}
+
+
+
+
+jQuery.plominoMaps.google.getOverlay =  function(id){
+  var el=false;
+  el = jQuery.plominoMaps.getElement(jQuery.plominoMaps.google.points,id);
+  if (el) return el;
+  el = jQuery.plominoMaps.getElement(jQuery.plominoMaps.google.lines,id);
+  if (el) return el;
+  el = jQuery.plominoMaps.getElement(jQuery.plominoMaps.google.polygons,id);
+  if (el) return el;
+  return el;
+}
+
+
+
 jQuery.plominoMaps.google.zoomTo =  function(position,zoom){
 
 //SE C'è STRTEETVIEW VADO SU QUELLO
@@ -157,16 +206,21 @@ jQuery.plominoMaps.google.updateMap = function (dataTable){
     var data = dataTable.fnGetData();
      var conf = dataTable.fnSettings().oInit;
 
+console.log(conf)
     jQuery.each(data, function(index, row) { 
        var pos = row[conf.geomIndex];
-       if(typeof(pos)=='string') pos = eval(pos);
+
+       if(typeof(pos)=='string') pos = pos.split(" ");
+       if(pos.length==2){
+            pos[0]=parseFloat(pos[0]);pos[1]=parseFloat(pos[1]);
+console.log(pos)
        var options = {
             icon:conf.iconPath + row[conf.iconIndex],
             iconh:null,
             iconw:null,
             dataTable:dataTable,
             editmode:conf.editMode,
-            fieldId:conf.fieldId,
+            fieldId:row[0],
             //action: options.action,
             rowIndex:index,
             geomIndex:conf.geomIndex,
@@ -175,8 +229,22 @@ jQuery.plominoMaps.google.updateMap = function (dataTable){
             title:row[conf.titleIndex],
             pos:pos
        }
-
        jQuery.plominoMaps.google.addMarker(options);
+     }
+     else{
+         //Aggiungo poligoni o linee
+         var options = {
+            dataTable:dataTable,
+            editmode:conf.editMode,
+            fieldId:row[0],
+            //action: options.action,
+            title:row[conf.titleIndex],
+            geom:row[conf.geomIndex],
+            geomType:row[conf.geomTypeIndex],
+            }
+         jQuery.plominoMaps.google.addEncodedGeometry(options);
+
+     }
 
 
 
@@ -187,7 +255,10 @@ jQuery.plominoMaps.google.updateMap = function (dataTable){
 
    });
 
-  
+  var markerCluster = new MarkerClusterer(jQuery.plominoMaps.google.map, jQuery.plominoMaps.google.points);
+
+console.log(jQuery.plominoMaps);
+
 }
 
 function clearMap(type){
