@@ -1,4 +1,3 @@
-
 ## Script (Python) "sendThisMail"
 ##bind container=container
 ##bind context=context
@@ -6,7 +5,7 @@
 ##bind script=script
 ##bind subpath=traverse_subpath
 ##parameters=ObjectId, sender='', debug=0
-##title=Low level sending email management
+##title=Mail message to be sent during workflow transitions
 ##
 
 """
@@ -18,7 +17,7 @@ PlominoDatabase per customizzare le mail. Lo script deve prendere in
 ingresso, nell'ordine, il PlominoDocument in contesto e l'id del messaggio.
 Lo script deve restituire un dizionario, sulla falsa riga di custom_args
 qui sotto, degli argomenti dello script sendMail.
-    2. ObjectId: se possibile usare l'id detta transizione
+    2. ObjectId: nota bene: se possibile usare l'id detta transizione
 """
 
 from gisweb.utils import sendMail
@@ -84,8 +83,11 @@ Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato i
 
         custom_args = dict(
             Object = 'Autorizzazione pratica. n. %(numero_pratica)s - %(titolo)s' % msg_info,
-            msg = """Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato autorizzato.
-""" % msg_info
+            msg = context.mime_file(
+                file = '',
+                text = """Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato autorizzato.""" % msg_info,
+                nomefile = ''
+            )
         )
 
     elif ObjectId == 'rigetta':
@@ -125,7 +127,7 @@ in preavviso di rigetto con le seguenti motivazioni:
     elif ObjectId == 'sospendi':
 
         msg_info.update(dict(
-            motivazione = context.getItem('motivazione_sospensione',''),
+            motivazione = context.getItem('istruttoria_motivo_sospensione',''),
         ))
 
         custom_args = dict(
