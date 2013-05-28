@@ -1,7 +1,7 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_base">
   <design>
-    <element id="search_istanze_istruttore" title="Le mie Istanze (istruttore)" type="PlominoForm">
-      <id type="Products.Archetypes.Field.StringField">search_istanze_istruttore</id>
+    <element id="search_istanze_utente" title="Le mie Istanze" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">search_istanze_utente</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
       <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
@@ -9,12 +9,12 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoFieldClass">data_filter</span></p><div class="row-fluid"><h4 class="text-info">Domande Compilate (in attesa di invio)</h4><span class="plominoFieldClass">domande_compilate</span></div><div class="row-fluid"><h4 class="text-info">Domande Inviate</h4><span class="plominoFieldClass">domande_inviate</span></div><div class="row-fluid"><h4 class="text-info">Domande Autorizzate</h4><span class="plominoFieldClass">domande_autorizzate</span></div><div class="row-fluid"><h4 class="text-info">Domande Sospese / Preavviso di Rigetto</h4><span class="plominoFieldClass">domande_sospese</span></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoFieldClass">data_filter</span></p><div class="row-fluid"><h4 class="text-info">Domande Compilate (in attesa di invio)</h4><span class="plominoFieldClass">domande_compilate</span></div><div class="row-fluid"><h4 class="text-info">Domande in Istruttoria</h4><span class="plominoFieldClass">domande_inviate</span></div><div class="row-fluid"><h4 class="text-info">Domande Autorizzate / Prorogate</h4><span class="plominoFieldClass">domande_autorizzate</span></div><div class="row-fluid"><h4 class="text-info">Domande Sospese / Preavviso di Rigetto</h4><span class="plominoFieldClass">domande_sospese</span></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
       <HideDefaultActions type="Products.Archetypes.Field.BooleanField">True</HideDefaultActions>
-      <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
+      <HideInMenu type="Products.Archetypes.Field.BooleanField">False</HideInMenu>
       <isSearchForm type="Products.Archetypes.Field.BooleanField">False</isSearchForm>
       <isPage type="Products.Archetypes.Field.BooleanField">True</isPage>
       <SearchView type="Products.Archetypes.Field.StringField"/>
@@ -38,7 +38,7 @@
 <value><struct>
 <member>
 <name>dynamictableparam</name>
-<value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
+<value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
 'bPaginate': true,
 'bLengthChange': true,
@@ -49,18 +49,7 @@
 'bInfo': true,
 'bAutoWidth': false,
 'bJQueryUI': false,
-'bProcessing': true,
-'fnServerParams':function(aoData){
-   var base_query = {};                               
-   jQuery.each(jQuery('.search-data'),function(k,v){
-       base_query[jQuery(v).attr('id')]=jQuery(v).val();
-   });
-   aoData.push({name:'query', value: JSON.stringify(base_query)});
-}</string></value>
-</member>
-<member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
+'bProcessing': true</string></value>
 </member>
 <member>
 <name>widget</name>
@@ -69,6 +58,10 @@
 <member>
 <name>sourceview</name>
 <value><string>sospese</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
@@ -96,7 +89,7 @@
 <value><struct>
 <member>
 <name>dynamictableparam</name>
-<value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
+<value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
 'bPaginate': true,
 'bLengthChange': true,
@@ -107,18 +100,7 @@
 'bInfo': true,
 'bAutoWidth': false,
 'bJQueryUI': false,
-'bProcessing': true,
-'fnServerParams':function(aoData){
-   var base_query = {};                               
-   jQuery.each(jQuery('.search-data'),function(k,v){
-       base_query[jQuery(v).attr('id')]=jQuery(v).val();
-   });
-   aoData.push({name:'query', value: JSON.stringify(base_query)});
-}</string></value>
-</member>
-<member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
+'bProcessing': true</string></value>
 </member>
 <member>
 <name>widget</name>
@@ -127,6 +109,10 @@
 <member>
 <name>sourceview</name>
 <value><string>dainviare</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
@@ -154,7 +140,7 @@
 <value><struct>
 <member>
 <name>dynamictableparam</name>
-<value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
+<value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
 'bPaginate': true,
 'bLengthChange': true,
@@ -165,18 +151,7 @@
 'bInfo': true,
 'bAutoWidth': false,
 'bJQueryUI': false,
-'bProcessing': true,
-'fnServerParams':function(aoData){
-   var base_query = {};                                      
-   jQuery.each(jQuery('.search-data'),function(k,v){
-       base_query[jQuery(v).attr('id')]=jQuery(v).val();
-   });
-   aoData.push({name:'query', value: JSON.stringify(base_query)});
-}</string></value>
-</member>
-<member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
+'bProcessing': true</string></value>
 </member>
 <member>
 <name>widget</name>
@@ -185,6 +160,10 @@
 <member>
 <name>sourceview</name>
 <value><string>inviate</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
@@ -200,10 +179,11 @@
           <id type="Products.Archetypes.Field.StringField">data_filter</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[db=context.getParentDatabase()
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[from gisweb.utils import json_dumps
+db=context.getParentDatabase()
 result=dict()
-result['istruttore']=db.getCurrentUser().getMemberId()
-return result]]></Formula>
+result['owner']=db.getCurrentUser().getMemberId()
+return json_dumps(result)]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDataFilter</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDataFilter</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
@@ -223,7 +203,7 @@ return result]]></Formula>
           <FieldMode type="Products.Archetypes.Field.StringField">DISPLAY</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDocLinkSearch</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDocLinkSearch</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
@@ -233,7 +213,7 @@ return result]]></Formula>
 <value><struct>
 <member>
 <name>dynamictableparam</name>
-<value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
+<value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span11\'p&gt;',
 'aaSorting': [],
 'bPaginate': true,
 'bLengthChange': true,
@@ -244,18 +224,7 @@ return result]]></Formula>
 'bInfo': true,
 'bAutoWidth': false,
 'bJQueryUI': false,
-'bProcessing': true,
-'fnServerParams':function(aoData){
-   var base_query = {};                               
-   jQuery.each(jQuery('.search-data'),function(k,v){
-       base_query[jQuery(v).attr('id')]=jQuery(v).val();
-   });
-   aoData.push({name:'query', value: JSON.stringify(base_query)});
-}</string></value>
-</member>
-<member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
+'bProcessing': true</string></value>
 </member>
 <member>
 <name>widget</name>
@@ -264,6 +233,10 @@ return result]]></Formula>
 <member>
 <name>sourceview</name>
 <value><string>autorizzate</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>

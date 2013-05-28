@@ -1,29 +1,24 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_base">
   <design>
-    <element id="frm_proroga_base" title="Richiesta di proroga" type="PlominoForm">
-      <id type="Products.Archetypes.Field.StringField">frm_proroga_base</id>
+    <element id="base_com_preavviso_rigetto" title="Comunicazione Preavviso Rigetto" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
-      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
+      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[if 'preavviso_rigetto' not in [i['id'] for i in plominoDocument.wf_transitionsInfo()]:
+    return "Transizione 'preavviso_rigetto' NON disponibile"
+context.frm_onOpenDocument()]]></onOpenDocument>
       <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
-      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSaveDocument>
+      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onSaveDocument()
+
+from Products.CMFCore.utils import getToolByName
+pw=getToolByName(context,'portal_workflow')
+pw.doActionFor(context, 'preavviso_rigetto')]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="well">
-    <div class="alert alert-info">
-        <h5>Il/La sottoscritto/a
-            <span class="plominoFieldClass">richiedente_parent</span>,
-            <span class="plominoFieldClass">ragsoc_parent</span>
-        </h5>
-        <h5 style="text-align: center; ">dichiara</h5>
-        <div>
-            sotto la propria responsabilità la necessità di prorogare il periodo
-            di validità della pratica di <strong><span class="plominoFieldClass">titolo_pratica_parent</span></strong>
-            n° <strong><span class="plominoFieldClass">numero_pratica_parent</span></strong>
-            autorizzata il <strong><span class="plominoFieldClass">data_autorizzazione_parent</span></strong>
-            con numero di autorizzazione <strong><span class="plominoFieldClass">numero_autorizzazione_parent</span></strong>.
-        </div>
-    </div></div><p><span class="plominoSubformClass">base_sub_proroga</span></p>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p>Vista la domanda N° <span class="plominoFieldClass">numero_pratica</span> con protocollo N° <span class="plominoFieldClass">numero_protocollo</span> del <span class="plominoFieldClass">data_protocollo</span> presentata da <span class="plominoFieldClass">richiedente</span>.</p>
+<p>Si comunica che la stessa è fase di preavviso di rigetto per le seguenti motivazioni :</p>
+<p><span class="plominoFieldClass">istruttoria_rigetto_motivazione</span></p>
+<div class="hidden" id="btn-group"><span class="plominoActionClass">btn_salva</span> <span class="plominoActionClass">btn_annulla</span></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -36,83 +31,43 @@
       <Position type="Products.Archetypes.Field.IntegerField"/>
       <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
       <elements>
-        <element id="numero_pratica_parent" title="N. pratica" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">numero_pratica_parent</id>
-          <FieldType type="Products.Archetypes.Field.StringField">NUMBER</FieldType>
-          <FieldMode type="Products.Archetypes.Field.StringField">DISPLAY</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[parentId = context.REQUEST.get('parentDocument') or plominoDocument.getItem('parentDocument','')
-if parentId:
-    db = plominoDocument.getParentDatabase()
-    parent = db.getDocument(parentId)
-    return parent.getItem('numero_pratica')]]></Formula>
+        <element id="istruttoria_rigetto_motivazione" title="Motivazione Rigetto" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">istruttoria_rigetto_motivazione</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
-          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
-          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
-          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
-          <CustomData>
-            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
-            </extensionfields>
-          </CustomData>
-        </element>
-        <element id="numero_autorizzazione_parent" title="N. autorizzazione" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">numero_autorizzazione_parent</id>
-          <FieldType type="Products.Archetypes.Field.StringField">NUMBER</FieldType>
-          <FieldMode type="Products.Archetypes.Field.StringField">DISPLAY</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[parentId = context.REQUEST.get('parentDocument') or plominoDocument.getItem('parentDocument','')
-if parentId:
-    db = plominoDocument.getParentDatabase()
-    parent = db.getDocument(parentId)
-    return parent.getItem('numero_autorizzazione')]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
-          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
-          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
-          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
-          <CustomData>
-            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
-            </extensionfields>
-          </CustomData>
-        </element>
-        <element id="data_autorizzazione_parent" title="Data autorizzazione" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">data_autorizzazione_parent</id>
-          <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
-          <FieldMode type="Products.Archetypes.Field.StringField">DISPLAY</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[parentId = context.REQUEST.get('parentDocument') or plominoDocument.getItem('parentDocument','')
-if parentId:
-    db = plominoDocument.getParentDatabase()
-    parent = db.getDocument(parentId)
-    return parent.getItem('data_autorizzazione')
-return '']]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
-          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>widget</name>
+<value><string>TEXTAREA</string></value>
+</member>
+<member>
+<name>size</name>
+<value><string>10</string></value>
+</member>
+</struct></value>
+</param>
+</params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
-              <field name="customAttributes">data-plugin="datepicker" data-datepicker-options="{changeMonth:true,changeYear: true,dateFormat:'dd/mm/yy'}"</field>
+              <field name="customAttributes"/>
             </extensionfields>
           </CustomData>
         </element>
-        <element id="richiedente_parent" title="Richiedente" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">richiedente_parent</id>
+        <element id="numero_pratica" title="numero_pratica" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">numero_pratica</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">DISPLAY</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[parentId = context.REQUEST.get('parentDocument') or plominoDocument.getItem('parentDocument','')
-if parentId:
-    db = plominoDocument.getParentDatabase()
-    parent = db.getDocument(parentId)
-    return '%s %s' %(parent.getItem('fisica_cognome',''),parent.getItem('fisica_nome',''))
-return '']]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return str(plominoDocument.getItem('numero_pratica',''))]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
@@ -126,16 +81,11 @@ return '']]></Formula>
             </extensionfields>
           </CustomData>
         </element>
-        <element id="ragsoc_parent" title="ragsoc_parent" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">ragsoc_parent</id>
+        <element id="numero_protocollo" title="numero_protocollo" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">numero_protocollo</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">DISPLAY</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[parentId = context.REQUEST.get('parentDocument') or plominoDocument.getItem('parentDocument','')
-if parentId:
-    db = plominoDocument.getParentDatabase()
-    parent = db.getDocument(parentId)
-    return parent.getItem('giuridica_denominazione','')
-return 'DATO MANCANTE']]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return str(plominoDocument.getItem('numero_protocollo',''))]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
@@ -149,16 +99,15 @@ return 'DATO MANCANTE']]></Formula>
             </extensionfields>
           </CustomData>
         </element>
-        <element id="titolo_pratica_parent" title="Titolo pratica" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">titolo_pratica_parent</id>
+        <element id="data_protocollo" title="data_protocollo" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">data_protocollo</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">DISPLAY</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[parentId = context.REQUEST.get('parentDocument') or plominoDocument.getItem('parentDocument','')
-if parentId:
-    db = plominoDocument.getParentDatabase()
-    parent = db.getDocument(parentId)
-    return parent.Title()
-return '']]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[try:
+    result = DateToString(plominoDocument.getItem('data_protocollo'),'%d/%m/%Y')
+except:
+    result=''
+return result]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
@@ -171,6 +120,54 @@ return '']]></Formula>
               <field name="customAttributes"/>
             </extensionfields>
           </CustomData>
+        </element>
+        <element id="richiedente" title="richiedente" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">richiedente</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">DISPLAY</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[ragsoc = plominoDocument.getItem('giuridica_denominazione','')
+nominativo = '%s %s'.strip() %(plominoDocument.getItem('fisica_cognome',''),plominoDocument.getItem('fisica_nome',''))
+if ragsoc and nominativo:
+    result = '%s (%s)' %(ragsoc,nominativo)
+elif nominativo:
+    result = nominativo
+elif ragsoc:
+    result = ragsoc
+else:
+    result = ''
+return result]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="btn_salva" title="Salva" type="PlominoAction">
+          <id type="Products.Archetypes.Field.StringField">btn_salva</id>
+          <ActionType type="Products.Archetypes.Field.StringField">SAVE</ActionType>
+          <ActionDisplay type="Products.Archetypes.Field.StringField">SUBMIT</ActionDisplay>
+          <Content type="Products.Archetypes.Field.TextField"><![CDATA[]]></Content>
+          <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[not context.isEditMode()]]></Hidewhen>
+          <InActionBar type="Products.Archetypes.Field.BooleanField">False</InActionBar>
+        </element>
+        <element id="btn_annulla" title="Annulla" type="PlominoAction">
+          <id type="Products.Archetypes.Field.StringField">btn_annulla</id>
+          <ActionType type="Products.Archetypes.Field.StringField">REDIRECT</ActionType>
+          <ActionDisplay type="Products.Archetypes.Field.StringField">BUTTON</ActionDisplay>
+          <Content type="Products.Archetypes.Field.TextField"><![CDATA[if context.isNewDocument():
+    url=context.getParentDatabase().absolute_url()
+else:
+    url=context.absolute_url()
+return '%s' %url]]></Content>
+          <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[not context.isEditMode()]]></Hidewhen>
+          <InActionBar type="Products.Archetypes.Field.BooleanField">False</InActionBar>
         </element>
       </elements>
     </element>

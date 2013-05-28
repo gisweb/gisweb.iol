@@ -1,21 +1,24 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_base">
   <design>
-    <element id="base_com_preavviso_rigetto" title="Comunicazione Preavviso Rigetto" type="PlominoForm">
-      <id type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</id>
+    <element id="base_com_sospensione" title="Comunicazione Sospensione Istanza" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">base_com_sospensione</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
-      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[if 'preavviso_rigetto' not in [i.id for i in plominoDocument.wf_transitionsInfo()]:
-    return "Transizione 'preavviso_rigetto' NON disponibile"
+      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[if 'sospendi' not in [i['id'] for i in plominoDocument.wf_transitionsInfo()]:
+    return "Transizione 'sospensione' NON disponibile"
 context.frm_onOpenDocument()]]></onOpenDocument>
       <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
       <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onSaveDocument()
 
 from Products.CMFCore.utils import getToolByName
 pw=getToolByName(context,'portal_workflow')
-pw.doActionFor(context, 'preavviso_rigetto')]]></onSaveDocument>
+pw.doActionFor(context, 'sospendi')]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p>Vista la domanda N° <span class="plominoFieldClass">numero_pratica</span> con protocollo N° <span class="plominoFieldClass">numero_protocollo</span> del <span class="plominoFieldClass">data_protocollo</span> presentata da <span class="plominoFieldClass">richiedente</span>.</p><p>Si comunica che la stessa è fase di preavviso di rigetto per le seguenti motivazioni :</p><p><span class="plominoFieldClass">istruttoria_rigetto_motivazione</span></p><div class="hidden" id="btn-group"><span class="plominoActionClass">btn_salva</span> <span class="plominoActionClass">btn_annulla</span></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p>Vista la domanda N° <span class="plominoFieldClass">numero_pratica</span> con protocollo N° <span class="plominoFieldClass">numero_protocollo</span> del <span class="plominoFieldClass">data_protocollo</span> presentata da <span class="plominoFieldClass">richiedente</span>.</p>
+<p>Si comunica che la stessa è stata sospesa per le seguenti motivazioni :</p>
+<p><span class="plominoFieldClass">istruttoria_motivo_sospensione</span></p>
+<div class="hidden" id="btn-group"><span class="plominoActionClass">btn_salva</span> <span class="plominoActionClass">btn_annulla</span></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -28,8 +31,8 @@ pw.doActionFor(context, 'preavviso_rigetto')]]></onSaveDocument>
       <Position type="Products.Archetypes.Field.IntegerField"/>
       <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
       <elements>
-        <element id="istruttoria_rigetto_motivazione" title="Motivazione Rigetto" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">istruttoria_rigetto_motivazione</id>
+        <element id="istruttoria_motivo_sospensione" title="Motivazione Sospensione" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">istruttoria_motivo_sospensione</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
@@ -43,12 +46,12 @@ pw.doActionFor(context, 'preavviso_rigetto')]]></onSaveDocument>
 <param>
 <value><struct>
 <member>
-<name>size</name>
-<value><string>10</string></value>
-</member>
-<member>
 <name>widget</name>
 <value><string>TEXTAREA</string></value>
+</member>
+<member>
+<name>size</name>
+<value><string>10</string></value>
 </member>
 </struct></value>
 </param>

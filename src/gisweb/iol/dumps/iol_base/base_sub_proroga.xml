@@ -1,4 +1,4 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_base">
   <design>
     <element id="base_sub_proroga" title="Informazioni sulla Proroga dell'Autorizzazione" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_proroga</id>
@@ -137,12 +137,12 @@
 <param>
 <value><struct>
 <member>
-<name>size</name>
-<value><string>4</string></value>
-</member>
-<member>
 <name>widget</name>
 <value><string>TEXTAREA</string></value>
+</member>
+<member>
+<name>size</name>
+<value><string>4</string></value>
 </member>
 </struct></value>
 </param>
@@ -253,12 +253,12 @@
 <param>
 <value><struct>
 <member>
-<name>size</name>
-<value><string>4</string></value>
-</member>
-<member>
 <name>widget</name>
 <value><string>TEXTAREA</string></value>
+</member>
+<member>
+<name>size</name>
+<value><string>4</string></value>
 </member>
 </struct></value>
 </param>

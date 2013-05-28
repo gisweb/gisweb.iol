@@ -1,16 +1,16 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_base">
   <design>
-    <element id="autorizzate" title="Domande Autorizzate" type="PlominoView">
-      <id type="Products.Archetypes.Field.StringField">autorizzate</id>
-      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.wf_getInfoFor('wf_autorizzata') and not plominoDocument.wf_getInfoFor('wf_richiesta_proroga') and plominoDocument.getItem('tipo_richiesta','') in ['rinnovo','base']]]></SelectionFormula>
-      <SortColumn type="Products.Archetypes.Field.StringField"/>
+    <element id="nonprorogate" title="Domande Autorizzate non prorogate" type="PlominoView">
+      <id type="Products.Archetypes.Field.StringField">nonprorogate</id>
+      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.wf_getInfoFor('wf_autorizzata') and not plominoDocument.wf_getInfoFor('wf_prorogata') and not plominoDocument.wf_getInfoFor('wf_richiesta_proroga')]]></SelectionFormula>
+      <SortColumn type="Products.Archetypes.Field.StringField">autorizzazione</SortColumn>
       <Categorized type="Products.Archetypes.Field.BooleanField">False</Categorized>
       <FormFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></FormFormula>
-      <ReverseSorting type="Products.Archetypes.Field.BooleanField">False</ReverseSorting>
+      <ReverseSorting type="Products.Archetypes.Field.BooleanField">True</ReverseSorting>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
       <HideDefaultActions type="Products.Archetypes.Field.BooleanField">True</HideDefaultActions>
       <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
-      <Widget type="Products.Archetypes.Field.StringField">DYNAMICTABLE</Widget>
+      <Widget type="Products.Archetypes.Field.StringField">BASIC</Widget>
       <DynamicTableParameters type="Products.Archetypes.Field.TextField"><![CDATA['bPaginate': false,
 'bLengthChange': false,
 'bFilter': true,
@@ -29,11 +29,17 @@
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
+        <element id="autorizzazione" title="N° Autorizzazione" type="PlominoColumn">
+          <id type="Products.Archetypes.Field.StringField">autorizzazione</id>
+          <SelectedField type="Products.Archetypes.Field.StringField">base_sub_pratica/numero_autorizzazione</SelectedField>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA['Non-existing form']]></Formula>
+          <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
+          <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
+        </element>
         <element id="tipo" title="Tipo Richiesta" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">tipo</id>
           <SelectedField type="Products.Archetypes.Field.StringField">gestioneerrori</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.Title()
-#return plominoDocument.getItem('oggetto','')]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.Title()]]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
@@ -51,13 +57,6 @@ elif ragsoc:
 else:
     result = ''
 return result]]></Formula>
-          <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
-          <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
-        </element>
-        <element id="autorizzazione" title="N° Autorizzazione" type="PlominoColumn">
-          <id type="Products.Archetypes.Field.StringField">autorizzazione</id>
-          <SelectedField type="Products.Archetypes.Field.StringField">base_sub_pratica/numero_autorizzazione</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA['Non-existing form']]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
@@ -83,26 +82,6 @@ else:
           <SelectedField type="Products.Archetypes.Field.StringField">base_sub_trasporti_dati/trasporti_numero_rinnovi</SelectedField>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA['Non-existing form']]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">True</HiddenColumn>
-          <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
-        </element>
-        <element id="autorizzatadal" title="Inizio Validità" type="PlominoColumn">
-          <id type="Products.Archetypes.Field.StringField">autorizzatadal</id>
-          <SelectedField type="Products.Archetypes.Field.StringField">gestioneerrori</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.getItem('autorizzata_dal'):
-    return DateToString(plominoDocument.getItem('autorizzata_dal'),'%d/%m/%Y')
-else:
-    return '']]></Formula>
-          <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
-          <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
-        </element>
-        <element id="autorizzataal" title="Fine Validità" type="PlominoColumn">
-          <id type="Products.Archetypes.Field.StringField">autorizzataal</id>
-          <SelectedField type="Products.Archetypes.Field.StringField">gestioneerrori</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.getItem('autorizzata_al'):
-    return DateToString(plominoDocument.getItem('autorizzata_al'),'%d/%m/%Y')
-else:
-    return '']]></Formula>
-          <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
       </elements>

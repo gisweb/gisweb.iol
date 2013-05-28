@@ -1,16 +1,16 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_base">
   <design>
-    <element id="nonprorogate" title="Domande Autorizzate non prorogate" type="PlominoView">
-      <id type="Products.Archetypes.Field.StringField">nonprorogate</id>
-      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.wf_getInfoFor('wf_autorizzata') and not plominoDocument.wf_getInfoFor('wf_prorogata') and not plominoDocument.wf_getInfoFor('wf_richiesta_proroga')]]></SelectionFormula>
-      <SortColumn type="Products.Archetypes.Field.StringField">autorizzazione</SortColumn>
+    <element id="tutte-istanze" title="Tutte le istanze" type="PlominoView">
+      <id type="Products.Archetypes.Field.StringField">tutte-istanze</id>
+      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.getItem('tipo_richiesta','') in ['base','rinnovo'] or plominoDocument.wf_getInfoFor('review_state')=='avvio']]></SelectionFormula>
+      <SortColumn type="Products.Archetypes.Field.StringField">wfpriority</SortColumn>
       <Categorized type="Products.Archetypes.Field.BooleanField">False</Categorized>
       <FormFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></FormFormula>
-      <ReverseSorting type="Products.Archetypes.Field.BooleanField">True</ReverseSorting>
+      <ReverseSorting type="Products.Archetypes.Field.BooleanField">False</ReverseSorting>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
       <HideDefaultActions type="Products.Archetypes.Field.BooleanField">True</HideDefaultActions>
       <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
-      <Widget type="Products.Archetypes.Field.StringField">BASIC</Widget>
+      <Widget type="Products.Archetypes.Field.StringField">DYNAMICTABLE</Widget>
       <DynamicTableParameters type="Products.Archetypes.Field.TextField"><![CDATA['bPaginate': false,
 'bLengthChange': false,
 'bFilter': true,
@@ -22,17 +22,10 @@
       <Position type="Products.Archetypes.Field.IntegerField"/>
       <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
       <elements>
-        <element id="numero" title="N° Pratica" type="PlominoColumn">
+        <element id="numero" title="N°Pratica" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">numero</id>
-          <SelectedField type="Products.Archetypes.Field.StringField">base_sub_pratica_data/numero_pratica</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA['Non-existing form']]></Formula>
-          <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
-          <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
-        </element>
-        <element id="autorizzazione" title="N° Autorizzazione" type="PlominoColumn">
-          <id type="Products.Archetypes.Field.StringField">autorizzazione</id>
-          <SelectedField type="Products.Archetypes.Field.StringField">base_sub_pratica/numero_autorizzazione</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA['Non-existing form']]></Formula>
+          <SelectedField type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</SelectedField>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.getItem('numero_pratica')]]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
@@ -62,8 +55,8 @@ return result]]></Formula>
         </element>
         <element id="protocollo" title="Protocollo" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">protocollo</id>
-          <SelectedField type="Products.Archetypes.Field.StringField">base_sub_protocollo/numero_protocollo</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA['Non-existing form']]></Formula>
+          <SelectedField type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</SelectedField>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.getItem('numero_protocollo')]]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
@@ -77,11 +70,23 @@ else:
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
-        <element id="rinnovi" title="Rinnovi" type="PlominoColumn">
-          <id type="Products.Archetypes.Field.StringField">rinnovi</id>
-          <SelectedField type="Products.Archetypes.Field.StringField">base_sub_trasporti_dati/trasporti_numero_rinnovi</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA['Non-existing form']]></Formula>
-          <HiddenColumn type="Products.Archetypes.Field.BooleanField">True</HiddenColumn>
+        <element id="stato" title="Stato Pratica" type="PlominoColumn">
+          <id type="Products.Archetypes.Field.StringField">stato</id>
+          <SelectedField type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</SelectedField>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.wf_getInfoFor('wf_message'):
+    return '%s - %s' %(plominoDocument.wf_statesInfo(single=False)[0]['title'],plominoDocument.wf_getInfoFor('wf_message'))
+else:
+    return plominoDocument.wf_statesInfo(single=False)[0]['title']]]></Formula>
+          <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
+          <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
+        </element>
+        <element id="wfpriority" title=" " type="PlominoColumn">
+          <id type="Products.Archetypes.Field.StringField">wfpriority</id>
+          <SelectedField type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</SelectedField>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[from Products.CMFCore.utils import getToolByName
+pw = getToolByName(context,'portal_workflow')
+return int(pw.getInfoFor(plominoDocument, 'wf_priority') or 0)]]></Formula>
+          <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
       </elements>

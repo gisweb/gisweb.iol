@@ -1,4 +1,4 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_base">
   <design>
     <element id="dainviare" title="Domande da inviare" type="PlominoView">
       <id type="Products.Archetypes.Field.StringField">dainviare</id>
