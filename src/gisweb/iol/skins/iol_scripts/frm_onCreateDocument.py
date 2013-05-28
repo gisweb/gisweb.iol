@@ -19,18 +19,19 @@ db = context.getParentDatabase()
 # PERMESSI
 # Ad ogni utente/gruppo del portale che ha il ruolo Plomino "[iol-qualcosa]"
 #+ viene assegnato il ruolo Plone "iol-qualcosa".
-
-localRolesToAdd = []
+rolesToAdd = dict()
 for role in db.getUserRoles():
     if role.startswith('[iol-'):
         for uid in db.getUsersForRole(role):
-            localRolesToAdd.append(role[1:-1])
-
-if localRolesToAdd:
-    context.addLocalRoles(uid, localRolesToAdd)
+            if uid in rolesToAdd:
+                rolesToAdd[uid].append(role[1:-1])
+            else:
+                rolesToAdd[uid] = [role[1:-1]]
+                
+for uid,roles in rolesToAdd.items():
+    context.addLocalRoles(uid, roles)
 
 
 # EVENTI DI REALIZZAZIONE COLLEGAMENTO UNO A MOLTI
-
 if child_events:
     context.event_onCreateChild(backToParent=backToParent)
