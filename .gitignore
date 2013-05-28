@@ -1,0 +1,12 @@
+develop-eggs
+*egg-info
+*.pyc
+*.pyo
+src/gisweb.plominofieldextensions/
+src/gisweb.plominofields/
+src/gisweb.utils/
+var
+bin
+parts
+.installed.cfg
+.mr.developer.cfg
