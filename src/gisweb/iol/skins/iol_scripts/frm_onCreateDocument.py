@@ -14,9 +14,11 @@ child_events: True o False (lancia gli script di gestione dell'uno a molti)
 kwargs: argomenti da passare al metodo oncreate_child
 """
 
+from gisweb.utils import updateAllRoleMappingsFor
+
 db = context.getParentDatabase()
 
-# PERMESSI
+# RUOLI
 # Ad ogni utente/gruppo del portale che ha il ruolo Plomino "[iol-qualcosa]"
 #+ viene assegnato il ruolo Plone "iol-qualcosa".
 rolesToAdd = dict()
@@ -31,6 +33,9 @@ for role in db.getUserRoles():
 for uid,roles in rolesToAdd.items():
     context.addLocalRoles(uid, roles)
 
+# PERMESSI
+# Settaggio dei permessi in accordo agli stati iniziali dei workflow
+updateAllRoleMappingsFor(context)
 
 # EVENTI DI REALIZZAZIONE COLLEGAMENTO UNO A MOLTI
 if child_events:
