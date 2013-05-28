@@ -57,39 +57,9 @@ jQuery(document).ready(function () {
          this.value = this.value.toUpperCase();
     });
 
-
- var myOptions = { val1 : 'Suganthar', val2 : 'Suganthar2'};
-
-    $.each(myOptions, function(val, text) {
-       $('#combo').append(new Option(text, val));
-    });
-
-/*
   //CHOSEN X MULTISELECT E BOOTSTRAP-COMBO
      jQuery('.chzn-select').chosen();
-     var v = jQuery('.combobox').combobox({
-            source: function(query, process) {
-                return ["Deluxe Bicycle", "Super Deluxe Trampoline", "Super Duper Scooter"];
-            }
-        });
-
-console.log( $('#combo'))
-
-
-        $('#typeahead').typeahead({
-            source: function(query, process) {
-                return ["Deluxe Bicycle", "Super Deluxe Trampoline", "Super Duper Scooter"];
-            }
-        });
-
-*/
- $("#combo").select2();
- $("#multiselect").select2({ maximumSelectionSize: 3 });
- $("#typeahead").select2({
-    data:[{id:0,text:'enhancement'},{id:1,text:'bug'},{id:2,text:'duplicate'},{id:3,text:'invalid'},{id:4,text:'wontfix'}]
-});
-
-
+     jQuery('.combobox').combobox();
 
 //VERIFICA INVIO SE NESSUN CAMPO MANDATORY VUOTO FACCIO COMPARIRE INVIO DOMANDA !!!
   if(true){

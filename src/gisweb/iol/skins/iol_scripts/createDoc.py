@@ -7,7 +7,6 @@
 ##parameters=filename='', grp='', field=''
 ##title=Create docx file from PlominoDocument
 ##
-
 """
 Create docx file
 
@@ -26,18 +25,21 @@ if context.portal_type != 'PlominoDocument':
     return ''
 
 doc = context
+
 #URL del servizio di creazione del documento
 urlCreate = context.getMyAttribute('ws_createdocx_URL').get('value')
+
 #URL del servizio di lettura del documento
 urlRead = context.getMyAttribute('ws_readdocument_URL').get('value')
+
 model=filename
 if """\\""" in filename:
     filename = filename.split("\\")[-1]
 filename = '.'.join(
-        [normalizeString(s, encoding='utf-8') 
+        [normalizeString(s, encoding='utf-8')
             for s in filename.split('.')])
 
-#Url con parametri del servizio de lettura
+#Url con parametri del servizio di lettura
 docurl = "%s?app=%s&id=%s&filename=%s" %(urlRead,doc.getItem('tipo_app',''),doc.getId(),filename)
 
 #Parametri della chiamata al servizio di creazione
@@ -52,6 +54,7 @@ query = dict(
     filename = filename,
     download = 'false'
 )
+
 #Creazione del documento tramite webservice
 try:
     result = requests_post(urlCreate,query, 'json', timeout=30)
@@ -68,3 +71,4 @@ res = open_url(docurl,asFile=False)
 (f,c) = doc.setfile(res,filename=filename,overwrite=True,contenttype='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
 if f and c:
     doc.setItem(field,{filename:c})
+

@@ -1,10 +1,10 @@
 <!-- DEFINIZIONI DI VARIABILI GLOBALI -->
 <tal:defs tal:define="global doc python: context.REQUEST.PARENTS[0];
-                      global db python: doc.getParentDatabase();
-                      global dburl python:doc.getParentDatabase().absolute_url();
-                      global formName python: doc.getForm().getFormName() if doc.isDocument() else doc.getId();
-                      global tipoApp  python: doc.naming('tipo_app');
-                      global wf_id python: 'iol_workflow'" />
+                global db python: doc.getParentDatabase();
+                global dburl python:doc.getParentDatabase().absolute_url();
+                global formName python: doc.getForm().getFormName() if doc.isDocument() else doc.getId();
+                global tipoApp  python: doc.naming('tipo_app');
+                global wf_id python: 'iol_workflow'" />
 
 <!-- SCRIPT E CSS DEDICATI A APPLICAZIONE -->
 <script type="text/javascript" tal:attributes="src string:${dburl}/resources/${tipoApp}/controller_read.js"></script>
@@ -27,11 +27,7 @@
             <div class=row-fluid>
                <div class="span12 alert alert-error" >
                     <span  tal:content="python: v.get('description') or ''"/>
-                    <a style="width:200px" class="btn pull-right wf-actions"
-                       tal:define="id v/id"
-                       tal:attributes="id string:btn_wf_${id}; href string:${actionurl}?workflow_action=${id};">
-                           <i class='icon-hand-right'></i><span tal:content="python: v['title'] or v['id']"></span>
-                    </a>
+                    <a style="width:200px" class="btn pull-right wf-actions" tal:define="id v/id" tal:attributes="id string:btn_wf_${id}; href string:${actionurl}?workflow_action=${id};"><i class='icon-hand-right'></i><span tal:content="python: v['title'] or v['id']"></span></a>
                </div>
             </div>
             <div class=row-fluid>
@@ -138,8 +134,8 @@
             </div>
          </div>
 
-        <div class="row-fluid" tal:define="roles python:doc.getRoles()"
-            tal:condition="python: doc.getItem('documenti_autorizzazione') and ('iol-reviewer' in roles or 'iol-manager' in roles or 'Manager' in roles) and doc.wf_getInfoFor('review_state') == 'istruttoria_ok'">
+        <div class="row-fluid"
+            tal:condition="python: doc.getItem('documenti_autorizzazione') and doc.canUserEdit() and doc.wf_getInfoFor('review_state') == 'istruttoria_ok'">
             <div class="span12" tal:content="structure python: doc.getRenderedItem('documenti_autorizzazione')" />
         </div>
         <div class="row-fluid"

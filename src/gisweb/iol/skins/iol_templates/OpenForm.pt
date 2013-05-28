@@ -72,9 +72,13 @@
                             hasReadPermissionOnForm python:test(here.hasReadPermission(here)==True);
                             portal_state context/@@plone_portal_state;
                             portal_url portal_state/portal_url;">
-
+                                 
+<!--                                      MODIFICHE MARCO 18/01/2012                         -->
+                                
+                <link tal:attributes="href string:${portal_url}/bootstrap.dataTables.css" rel="stylesheet" type="text/css">                                 
+                                
+                <script type="text/javascript" tal:attributes="src string:${portal_url}/bootstrap.dataTables.js"></script>
                 <script type="text/javascript" tal:attributes="src string:${portal_url}/plomino.search.dataTables.js"></script>
-
                 <form id="plomino_form" tal:attributes="name here/id" onsubmit="javascript: return false;">
                     
                 <div tal:replace="structure provider:plone.abovecontenttitle" /><tal:block
@@ -150,6 +154,10 @@
             </tal:block>
             
             <tal:block tal:condition="python:ispage">
+                <link tal:attributes="href string:${portal_url}/bootstrap.dataTables.css" rel="stylesheet" type="text/css">                                 
+                                
+                <script type="text/javascript" tal:attributes="src string:${portal_url}/bootstrap.dataTables.js"></script>
+                <script type="text/javascript" tal:attributes="src string:${portal_url}/plomino.search.dataTables.js"></script> 
                 <h1 class="documentFirstHeading" tal:content="here/Title">Title</h1>
                 <div tal:replace="structure provider:plone.belowcontenttitle" />
                 <div tal:replace="structure provider:plone.abovecontentbody" />
@@ -160,7 +168,9 @@
             </tal:block>
                                 
             <!-- manuele: in questo modo posso usare gli eventi anche per i cruscotti -->
-            <tal:block tal:condition="python: myF.getFormName().startswith('search_')">
+            <tal:block tal:condition="python: not ispage and myF.getFormName().startswith('search_')">
+                <link tal:attributes="href string:${portal_url}/bootstrap.dataTables.css" rel="stylesheet" type="text/css">
+                <script type="text/javascript" tal:attributes="src string:${portal_url}/bootstrap.dataTables.js"></script>
                 <script type="text/javascript" tal:attributes="src string:${portal_url}/plomino.search.dataTables.js"></script>
             </tal:block>
             <!-- /manuele -->
@@ -169,7 +179,7 @@
         <tal:profiling tal:define="profiling python:here.is_profiling() and here.REQUEST.cookies.get('plomino_profiler')" tal:condition="profiling">
 			<tal:macro metal:use-macro="here/profiling/macros/durations">display durations</tal:macro>
 		</tal:profiling>
-		<input type="hidden" id="Plomino_Database_URL" tal:attributes="value python:here.getParentDatabase().absolute_url()" />
+		
     </tal:main-macro>
 </metal:main>
 

@@ -3,13 +3,31 @@ $.extend( true, $.fn.dataTable.defaults, {
     //"sDom": "<'row-fluid'<'span6'><'span6'>r>t<'row-fluid'<'span4'l><'span4'i><'span4'p>>",
     "sDom": "<'row-fluid'<'span12'>r>t<'row-fluid'<'span3'l><'span4'i><'span5'p>>",
     "sPaginationType": "bootstrap",
-
+/*    "aoColumnDefs": [
+        {
+            "aTargets": ['_all'],
+            "bUseRendered": false,
+            "fnRender": function (oObj) {
+                var cell = oObj.aData[oObj.iDataColumn];
+                if (oObj.iDataColumn > 0) {
+                    if (findInArray(cell, '<a') == -1) {
+                        return '<a href="../' + oObj.aData[0] + '" class="viewlink">' + cell + '</a>';
+                    }
+                    else
+                        return cell;
+                }
+                else {
+                    return '<input disabled=disabled type="checkbox" value="' + oObj.aData[0] + '" />';
+                }
+            }
+        },
+        { "aTargets": [0], "bSearchable": false, "bSortable": false, "sWidth": "0" }
+    ],
+*/
 "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ){
     $(nRow).addClass('linkToDocument');
-    
     $(nRow).bind('click',function(){
-        var dburl = $('#Plomino_Database_URL').val();
-        window.location= dburl + '/' + aData[0];
+        window.location='../'+aData[0];
     });
 },
     "sServerMethod":"POST",
