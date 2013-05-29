@@ -29,7 +29,21 @@ doc = context
 #URL del servizio di creazione del documento
 urlCreate = context.getMyAttribute('ws_createdocx_URL').get('value')
 #URL del servizio di lettura del documento
+
+from Products.CMFPlomino.PlominoUtils import json_loads, json_dumps, DateToString, Now, open_url
+from gisweb.utils import serialDoc, report, Type, requests_post, attachThis, os_path_join
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import normalizeString
+
+if context.portal_type != 'PlominoDocument':
+    return ''
+
+doc = context
+#URL del servizio di creazione del documento
+urlCreate = context.getMyAttribute('ws_createdocx_URL').get('value')
+#URL del servizio di lettura del documento
 urlRead = context.getMyAttribute('ws_readdocument_URL').get('value')
+
 model=filename
 if """\\""" in filename:
     filename = filename.split("\\")[-1]
@@ -68,3 +82,4 @@ res = open_url(docurl,asFile=False)
 (f,c) = doc.setfile(res,filename=filename,overwrite=True,contenttype='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
 if f and c:
     doc.setItem(field,{filename:c})
+

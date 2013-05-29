@@ -217,7 +217,7 @@
 
 
 <span class="label label-important"
-    tal:condition="python: doc.test_mode(True)">
+    tal:condition="python: doc.test_mode(True) and 'Manager' in doc.getRoles()">
     <i class="icon-info-sign icon-white"></i>
     <strong>Informazioni di sviluppo</strong>:
     <a class="btn btn-mini" href="#"
