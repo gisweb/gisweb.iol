@@ -19,7 +19,7 @@ import gisweb.iol
 from plone.testing import z2
 
 THIS_DIR = os.path.dirname(__file__)
-IOL_BASE_FOLDER = os.path.join(THIS_DIR, 'db_dumps', 'iol_base')
+IOL_BASE_FOLDER = os.path.join(THIS_DIR, 'dumps', 'iol_base')
 
 PLONE_LANGUAGE = os.environ.get('PLONE_LANGUAGE')
 PLONE_VERSION = os.environ.get('PLONE_VERSION')
