@@ -1,0 +1,15 @@
+<plominodatabase id="iol-base">
+  <design>
+    <resource id="bootstrapWF-IOL-Date-Autorizzazione" title="" type="Page Template"><![CDATA[<!-- DEFINIZIONI DI VARIABILI GLOBALI -->
+<tal:defs tal:define="global doc python: context.REQUEST.PARENTS[0];
+                        global pDoc python:test(doc.isNewDocument(),None,doc);
+                        global myForm python: doc.getParentDatabase().getForm('base_sub_pratica') or None"/>
+  <tal:blockactions>
+        <div class="row-fluid">
+            <div class="span3" tal:content="structure python: myForm.getFormField('autorizzata_dal').getFieldRender(myForm,pDoc,doc.isEditMode(),doc.isNewDocument(),request=doc.REQUEST)" />
+            <div class="span3" tal:content="structure python: myForm.getFormField('autorizzata_al').getFieldRender(myForm,pDoc,doc.isEditMode(),doc.isNewDocument(),request=doc.REQUEST)" />
+        </div>
+
+</tal:blockactions>]]></resource>
+  </design>
+</plominodatabase>
