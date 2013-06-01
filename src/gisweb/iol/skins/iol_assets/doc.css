@@ -285,3 +285,13 @@ tr.linkToDocument{
     line-height:18px;
     font-family:Helvetica; 
 }
+.pickListElement{
+    background-color:white;
+    font-weight:bold;
+    color:#555555;
+    font-size:13px;
+    line-height:18px;
+    font-family:Helvetica;
+    border: 1px solid #cccccc;
+    padding: 4px;
+}
