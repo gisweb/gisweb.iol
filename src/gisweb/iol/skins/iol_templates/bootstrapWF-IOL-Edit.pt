@@ -8,8 +8,8 @@
     global wf_id python: 'iol_workflow'" />
 
 <!-- SCRIPT E CSS DEDICATI A APPLICAZIONE -->
-<script type="text/javascript" tal:attributes="src string:${dburl}/resources/${tipoApp}/controller_edit.js"></script>
-<link tal:attributes="href string:${dburl}/resources/${tipoApp}/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" tal:attributes="src string:${dburl}/resources/controller_edit.js"></script>
+<link tal:attributes="href string:${dburl}/resources/style.css" rel="stylesheet" type="text/css">
 
 <tal:newdoc tal:condition="python: doc.isNewDocument()">
     <div class="alert alert-info"
