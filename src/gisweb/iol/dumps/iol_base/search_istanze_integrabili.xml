@@ -1,7 +1,7 @@
 <plominodatabase id="iol_base">
   <design>
-    <element id="search_istanze_rinnovabili" title="Le mie Istanze rinnovabili (Utente)" type="PlominoForm">
-      <id type="Products.Archetypes.Field.StringField">search_istanze_rinnovabili</id>
+    <element id="search_istanze_integrabili" title="Le mie Istanze Integrabili (Utente)" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">search_istanze_integrabili</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
       <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
@@ -56,7 +56,7 @@
             'fnRender': function (oObj) {
                 var cell = oObj.aData[oObj.iDataColumn];
                 var dburl=jq('#Plomino_Database_URL').val();
-                return '&lt;a href=\'' + dburl +'/frm_pratica_rinnovo?parentDocument=' + oObj.aData[0] + '\' class=\'viewlink\'&gt;' + cell + '&lt;/a&gt;';
+                return '&lt;a href=\'' + dburl +'/frm_pratica_integrazione?parentDocument=' + oObj.aData[0] + '\' class=\'viewlink\'&gt;' + cell + '&lt;/a&gt;';
             }
                 
         },
@@ -97,7 +97,7 @@ oggi = DateToString(Now(),'%d/%m/%Y')
 req = dict()
 
 req['owner'] = db.getCurrentUser().getMemberId()
-req['tipo_richiesta'] = 'base'
+req['tipo_richiesta'] = ['base','rinnovo','proroga']
 
 req['autorizzata_dal'] = dict(query=oggi,range='max')
 req['autorizzata_al'] = dict(query=oggi,range='min')

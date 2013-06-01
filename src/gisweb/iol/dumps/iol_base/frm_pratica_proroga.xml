@@ -9,7 +9,7 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onDeleteDocument(kin_events='child', anchor=False)]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[#
-context.frm_beforeCreateDocument(child_events=True, msg='', redirect_to='search_istanze_rinnovabili')]]></beforeCreateDocument>
+context.frm_beforeCreateDocument(child_events=True, msg='', redirect_to='search_istanze_prorogabili')]]></beforeCreateDocument>
       <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="v-content well"><span class="plominoSubformClass">base_sub_pratica</span></div>
 <p><span class="plominoSubformClass">sub_pratica_parent</span></p>
 <p><span class="plominoHidewhenClass">start:hw_se_editmode</span></p>
@@ -333,7 +333,7 @@ return '']]></Formula>
         <element id="autorizzata_dal" title="Data Inizio Autorizzazione" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">autorizzata_dal</id>
           <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
-          <FieldMode type="Products.Archetypes.Field.StringField">COMPUTED</FieldMode>
+          <FieldMode type="Products.Archetypes.Field.StringField">CREATION</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[parentId = context.REQUEST.get('parentDocument') or plominoDocument.getItem('parentDocument','')
 if parentId:
     db = plominoDocument.getParentDatabase()

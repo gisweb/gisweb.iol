@@ -63,8 +63,8 @@ return result]]></Formula>
         </element>
         <element id="protocollo" title="Protocollo" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">protocollo</id>
-          <SelectedField type="Products.Archetypes.Field.StringField">base_sub_protocollo/numero_protocollo</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA['Non-existing form']]></Formula>
+          <SelectedField type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</SelectedField>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.getItem('numero_protocollo','')]]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>

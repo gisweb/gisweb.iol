@@ -22,38 +22,6 @@
       <Position type="Products.Archetypes.Field.IntegerField"/>
       <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
       <elements>
-        <element id="autorizzata_dal" title="Data Inizio Autorizzazione" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">autorizzata_dal</id>
-          <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
-          <FieldMode type="Products.Archetypes.Field.StringField">COMPUTED</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">DATETIMEFieldRead</FieldEditTemplate>
-          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
-          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
-          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
-          <params>
-<param>
-<value><struct>
-<member>
-<name>startingyear</name>
-<value><string>1950</string></value>
-</member>
-<member>
-<name>format</name>
-<value><string>%d/%m/%Y</string></value>
-</member>
-</struct></value>
-</param>
-</params>
-          <CustomData>
-            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription">Data richiesta di fine periodo per il trasporto</field>
-              <field name="customAttributes">data-plugin="datepicker" data-datepicker-options="{changeMonth:true,changeYear: true,dateFormat:'dd/mm/yy'}"</field>
-            </extensionfields>
-          </CustomData>
-        </element>
         <element id="fisica_cognome" title="Cognome" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">fisica_cognome</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
