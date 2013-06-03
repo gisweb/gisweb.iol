@@ -1,4 +1,4 @@
-## Script (Python) "iol_onCreateDocument"
+## Script (Python) "frm_onCreateDocument"
 ##bind container=container
 ##bind context=context
 ##bind namespace=
@@ -7,7 +7,6 @@
 ##parameters=child_events=False, backToParent=False
 ##title=IOL onCreateDocument event common actions
 ##
-
 """
 Standardizzazione dele operazioni da svolgere alla creazione di una istanza
 child_events: True o False (lancia gli script di gestione dell'uno a molti)
@@ -37,6 +36,17 @@ for uid,roles in rolesToAdd.items():
 # Settaggio dei permessi in accordo agli stati iniziali dei workflow
 updateAllRoleMappingsFor(context)
 
+
+
 # EVENTI DI REALIZZAZIONE COLLEGAMENTO UNO A MOLTI
 if child_events:
     context.event_onCreateChild(backToParent=backToParent)
+    
+#Se ci sono dati da copiare li copio
+for sub_name in context.getForm().getSubforms():
+    doc = context
+    if '_parent' in sub_name:
+        sub_parent_form = doc.getParentDatabase().getForm(sub_name)
+        if sub_parent_form:
+            for field in sub_parent_form.getFormFields():
+                doc.cloneItem(field.getId())
