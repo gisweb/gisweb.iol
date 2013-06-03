@@ -1,7 +1,6 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_base">
   <design>
-    <resource id="bootstrapWF-IOL-Date-Autorizzazione" title="" type="Page Template"><![CDATA[<!-- DEFINIZIONI DI VARIABILI GLOBALI -->
-<tal:defs tal:define="global doc python: context.REQUEST.PARENTS[0];
+    <resource id="bootstrapWF-IOL-Date-Autorizzazione" title="" type="Page Template"><![CDATA[<!-- DEFINIZIONI DI VARIABILI GLOBALI --><tal:defs tal:define="global doc python: context.REQUEST.PARENTS[0];
                         global pDoc python:test(doc.isNewDocument(),None,doc);
                         global myForm python: doc.getParentDatabase().getForm('base_sub_pratica') or None"/>
   <tal:blockactions>
