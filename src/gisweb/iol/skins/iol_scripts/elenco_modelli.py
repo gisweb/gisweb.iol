@@ -7,7 +7,6 @@
 ##parameters=sub_path=''
 ##title=Elenco dei modelli di stampa
 ##
-
 """
 Interroga il servizio e restituisce la lista dei modelli di stampa
 """
@@ -26,8 +25,9 @@ def open_my_url(url, **args):
 
 if url_info['success']:
     outlist += open_my_url(url_info['value'], app=context.naming('tipo_app'), group=sub_path)
-else:
-    outlist.append('test|test')
+
+if context.test_mode():
+    outlist += ['test|test']
 
 
 return outlist

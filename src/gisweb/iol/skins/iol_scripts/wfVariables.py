@@ -4,13 +4,13 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=
+##parameters=wf_name='iol_workflow',var=None
 ##title=Get current workflow variables values
 ##
-
 from gisweb.utils import Type
 from Products.CMFPlomino.PlominoUtils import  DateToString, Now
 from Products.CMFCore.utils import getToolByName
+
 
 if context.portal_type!='PlominoDocument':
     return 'Tipo di oggetto non valido'
@@ -38,4 +38,3 @@ else:
 
 
 return printed
-
