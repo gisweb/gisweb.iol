@@ -30,8 +30,8 @@
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script> 
 <script type="text/javascript" src=" http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
                     
-<script type="text/javascript" tal:attributes="src string:${portal_url}/controller.googleMaps.js"></script>                        
-   
+<script type="text/javascript" tal:attributes="src string:${portal_url}/controller.googleMaps.js"></script>                        <script type="text/javascript" tal:attributes="src string:${portal_url}/layers.js"></script>                        
+
                         
         <script type='text/javascript' tal:content="structure string:
             var ${fieldname}_datatable;
@@ -62,9 +62,9 @@
                                 console.log(${fieldname}_datatable.fnGetPosition(this))
                                 if(${fieldname}_datatable.fnGetData().length>0){
                                     var rowData = ${fieldname}_datatable.fnGetData(${fieldname}_datatable.fnGetPosition(this)) 
-                                    console.log(rowData);
+                                    //console.log(rowData);
                                     var overlay = jQuery.plominoMaps.google.getOverlay(rowData[0]);
-console.log(overlay)
+
 		        				    jq(this).addClass('datagrid_row_selected');
                                     jq('#${fieldname}_editrow').removeClass('disabled');
                                     jq('#${fieldname}_deleterow').removeClass('disabled');
@@ -73,7 +73,28 @@ console.log(overlay)
 
                             });
                        },
+                        'aoColumnDefs': [
+         {
+            'aTargets': ['_all'],
+            'bUseRendered': false,
+            'fnRender': function (oObj) {
+                var cell = oObj.aData[oObj.iDataColumn];
+                var dburl='${baseURL}';
+                if(oObj.iDataColumn==0){
+                   return '<a href=\'' + dburl + '/' + oObj.aData[0] + '/EditDocument\' class=\'icon-edit\'></a>';
+                }
+                else if(oObj.iDataColumn==1){
+                   return '<a href=\'' + dburl + '/' + oObj.aData[0] + '\' class=\'viewlink\'>' + cell + '</a>';
+                }
+                else
+                    return cell
+            }
+                
+        },    
+        { 'aTargets': [0], 'bSearchable': false, 'bSortable': false, 'sWidth': '0' , 'bVisible':true }                      
 
+                        ],
+                                
        				'oLanguage': {
        					'sUrl': '@@collective.js.datatables.translation'
 					}
@@ -115,20 +136,19 @@ console.log(overlay)
         <!--MAPPA--> 
         <style tal:content="structure string:#${fieldname}_gmap img {max-width: none}"></style>
         <div class="row-fluid" tal:content='structure string:<div id="${fieldname}_gmap" ${custom_attributes}></div>'/>              
-
-                        
-        <table class="table table-striped table-bordered" tal:attributes="id string:${fieldname}_datagrid">
-        </table>  
-                        
-        <div class="btn-group" tal:condition="python:doc.isDocument() and doc.isEditMode()">      
-          <a class="btn" tal:attributes="id string:${fieldname}_addrow;">Aggiungi</a>
+                                                                
+        <div class="btn-group" tal:condition="python:doc.isDocument() and not doc.isEditMode()">      
+          <a class="btn" tal:attributes="id string:${fieldname}_addrow;">Aggiungi elemento in mappa</a>
   
-          <button class="btn disabled" tal:attributes="id string:${fieldname}_editrow;">Modifica</button>
+          <!--<button class="btn disabled" tal:attributes="id string:${fieldname}_editrow;">Modifica</button>
  
-          <button class="btn disabled" tal:attributes="id string:${fieldname}_deleterow;">Elimina</button>
-        </div>                        
-                 
-        <div style="clear: both"></div>
+          <button class="btn disabled" tal:attributes="id string:${fieldname}_deleterow;">Elimina</button>-->
+        </div>                 
+        <table class="table table-bordered" tal:attributes="id string:${fieldname}_datagrid"></table>  
+      
+                        
+                        
+        <!--<div style="clear: both"></div>-->
         <input type="hidden" tal:attributes="name options/fieldname; id string:${name};
                                           value python:test(current is not None,'|'.join(current),'')"/>
     </tal:widget>
