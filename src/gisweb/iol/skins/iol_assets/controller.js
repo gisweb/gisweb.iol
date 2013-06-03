@@ -31,6 +31,9 @@ function showLoading (){
 jQuery(document).ready(function () {
 
 
+    //Combo SELECT2
+	 $("select.combobox").select2();
+
     //HIDEWHEN PORTATI QUI
     jQuery("[data-dhw='dynamicHidewhen']").change(refreshHidewhen);
 
