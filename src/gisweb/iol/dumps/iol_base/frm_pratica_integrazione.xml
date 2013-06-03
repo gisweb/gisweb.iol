@@ -10,7 +10,9 @@
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[#
 context.frm_beforeCreateDocument(child_events=True, msg='', redirect_to='search_istanze_integrabili')]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoSubformClass">sub_pratica_parent</span></p>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoSubformClass">base_sub_pratica</span></p>
+<p><span class="plominoSubformClass">sub_pratica_integrazione_parent</span></p>
+<p><span class="plominoSubformClass">sub_pratica_parent</span></p>
 <p><span class="plominoHidewhenClass">start:hw_se_editmode</span></p>
 <p><span class="plominoFieldClass">linkToParent</span></p>
 <p><span class="plominoHidewhenClass">end:hw_se_editmode</span></p>
@@ -58,7 +60,7 @@ context.frm_beforeCreateDocument(child_events=True, msg='', redirect_to='search_
 </member>
 <member>
 <name>labelcolumn</name>
-<value><string>dsp_trasporti</string></value>
+<value><string>base_pratica_dsp</string></value>
 </member>
 </struct></value>
 </param>

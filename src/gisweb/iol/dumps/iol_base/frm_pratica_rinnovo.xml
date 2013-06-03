@@ -65,7 +65,7 @@
 </member>
 <member>
 <name>labelcolumn</name>
-<value><string>dsp_trasporti</string></value>
+<value><string>base_pratica_dsp</string></value>
 </member>
 </struct></value>
 </param>

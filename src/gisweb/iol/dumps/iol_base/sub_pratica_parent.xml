@@ -1218,24 +1218,6 @@ return '']]></ValidationFormula>
             </extensionfields>
           </CustomData>
         </element>
-        <element id="trattore_assi" title="Numero di assi" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">trattore_assi</id>
-          <FieldType type="Products.Archetypes.Field.StringField">NUMBER</FieldType>
-          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapNumberRead</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapNumberEdit</FieldEditTemplate>
-          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
-          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
-          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
-          <CustomData>
-            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription">Numero degli assi del trattore</field>
-              <field name="customAttributes">data-mandatory</field>
-            </extensionfields>
-          </CustomData>
-        </element>
         <element id="parent_numero_autorizzazione" title="Numero Autorizzazione Genitore" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">parent_numero_autorizzazione</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>

@@ -9,7 +9,20 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid"><div class="span12"><span class="plominoFieldClass">domicilio_opt</span></div></div><p><span class="plominoHidewhenClass">start:hw_no_domicilio</span></p><div class="row-fluid"><div class="span8"><span class="plominoFieldClass">fisica_domicilio_comune</span></div><div class="span2"><span class="plominoFieldClass">fisica_domicilio_provincia</span></div><div class="span2"><span class="plominoFieldClass">fisica_domicilio_cap</span></div></div><div class="row-fluid"><div class="span10"><span class="plominoFieldClass">fisica_domicilio_indirizzo</span></div><div class="span2"><span class="plominoFieldClass">fisica_domicilio_civico</span></div></div><p><span class="plominoHidewhenClass">end:hw_no_domicilio</span></p>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid">
+<div class="span12"><span class="plominoFieldClass">domicilio_opt</span></div>
+</div>
+<p><span class="plominoHidewhenClass">start:hw_no_domicilio</span></p>
+<div class="row-fluid">
+<div class="span4"><span class="plominoFieldClass">fisica_domicilio_comune</span></div>
+<div class="span2"><span class="plominoFieldClass">fisica_domicilio_provincia</span></div>
+<div class="span2"><span class="plominoFieldClass">fisica_domicilio_cap</span></div>
+</div>
+<div class="row-fluid">
+<div class="span10"><span class="plominoFieldClass">fisica_domicilio_indirizzo</span></div>
+<div class="span2"><span class="plominoFieldClass">fisica_domicilio_civico</span></div>
+</div>
+<p><span class="plominoHidewhenClass">end:hw_no_domicilio</span></p>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -29,7 +42,7 @@
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapPlugin</FieldEditTemplate>
-          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
@@ -46,7 +59,7 @@
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription">Inserire il comune presso il quale si ha il domicilio</field>
-              <field name="customAttributes">data-plugin="comunifield" data-mandatory</field>
+              <field name="customAttributes">data-plugin="elencocomuni"</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -57,7 +70,7 @@
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
-          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
@@ -85,7 +98,7 @@
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
-          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
@@ -102,7 +115,7 @@
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="customAttributes"/>
             </extensionfields>
           </CustomData>
         </element>

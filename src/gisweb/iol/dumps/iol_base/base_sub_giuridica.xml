@@ -9,9 +9,38 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid"><div class="span12"><span class="plominoFieldClass">giuridica_opt</span></div></div><p><span class="plominoHidewhenClass">start:hw_no_giuridica</span></p><div class="row-fluid"><div class="span12"><span class="plominoFieldClass">giuridica_denominazione</span></div><!--
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid">
+<div class="span12"><span class="plominoFieldClass">giuridica_opt</span></div>
+</div>
+<p><span class="plominoHidewhenClass">start:hw_no_giuridica</span></p>
+<div class="row-fluid">
+<div class="span12"><span class="plominoFieldClass">giuridica_denominazione</span></div>
+<!--
 <div class="span2"><span class="plominoFieldClass">giuridica_qualita</span></div>
---></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">giuridica_cciaa</span></div><div class="span3"><span class="plominoFieldClass">giuridica_cciaa_numero</span></div><div class="span3"><span class="plominoFieldClass">giuridica_piva</span></div><div class="span3"><span class="plominoFieldClass">giuridica_cf</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">giuridica_comune</span></div><div class="span1"><span class="plominoFieldClass">giuridica_provincia</span></div><div class="span2"><span class="plominoFieldClass">giuridica_cap</span></div><div class="span6"><span class="plominoFieldClass">giuridica_localita</span></div></div><div class="row-fluid"><div class="span10"><span class="plominoFieldClass">giuridica_indirizzo</span></div><div class="span2"><span class="plominoFieldClass">giuridica_civico</span></div></div><div class="row-fluid"><div class="span6"><span class="plominoFieldClass">giuridica_email</span></div><div class="span2"><span class="plominoFieldClass">giuridica_telefono</span></div><div class="span2"><span class="plominoFieldClass">giuridica_cellulare</span></div><div class="span2"><span class="plominoFieldClass">giuridica_fax</span></div></div><p><span class="plominoHidewhenClass">end:hw_no_giuridica</span></p>]]></FormLayout>
+--></div>
+<div class="row-fluid">
+<div class="span3"><span class="plominoFieldClass">giuridica_cciaa</span></div>
+<div class="span3"><span class="plominoFieldClass">giuridica_cciaa_numero</span></div>
+<div class="span3"><span class="plominoFieldClass">giuridica_piva</span></div>
+<div class="span3"><span class="plominoFieldClass">giuridica_cf</span></div>
+</div>
+<div class="row-fluid">
+<div class="span3"><span class="plominoFieldClass">giuridica_comune</span></div>
+<div class="span2"><span class="plominoFieldClass">giuridica_provincia</span></div>
+<div class="span2"><span class="plominoFieldClass">giuridica_cap</span></div>
+<div class="span5"><span class="plominoFieldClass">giuridica_localita</span></div>
+</div>
+<div class="row-fluid">
+<div class="span10"><span class="plominoFieldClass">giuridica_indirizzo</span></div>
+<div class="span2"><span class="plominoFieldClass">giuridica_civico</span></div>
+</div>
+<div class="row-fluid">
+<div class="span6"><span class="plominoFieldClass">giuridica_email</span></div>
+<div class="span2"><span class="plominoFieldClass">giuridica_telefono</span></div>
+<div class="span2"><span class="plominoFieldClass">giuridica_cellulare</span></div>
+<div class="span2"><span class="plominoFieldClass">giuridica_fax</span></div>
+</div>
+<p><span class="plominoHidewhenClass">end:hw_no_giuridica</span></p>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -168,7 +197,7 @@ return '']]></ValidationFormula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription">indicare .....</field>
-              <field name="customAttributes">data-plugin="comunifield"</field>
+              <field name="customAttributes">data-plugin="elencocomuni"</field>
             </extensionfields>
           </CustomData>
         </element>

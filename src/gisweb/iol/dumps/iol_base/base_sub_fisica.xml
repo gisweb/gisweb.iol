@@ -9,9 +9,33 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid"><div class="span6"><span class="plominoFieldClass">fisica_cognome</span></div><div class="span4"><span class="plominoFieldClass">fisica_nome</span></div><div class="span2"><span class="plominoFieldClass">fisica_sesso</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">fisica_data_nato</span></div><div class="span3"><span class="plominoFieldClass">fisica_comune_nato</span></div><div class="span1"><span class="plominoFieldClass">fisica_provincia_nato</span></div><div class="span5"><span class="plominoHidewhenClass">start:hw_fisica_loc_nato</span> <span class="plominoFieldClass">fisica_loc_nato</span></div><span class="plominoHidewhenClass">end:hw_fisica_loc_nato</span></div><div class="row-fluid"><!--
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid">
+<div class="span6"><span class="plominoFieldClass">fisica_cognome</span></div>
+<div class="span4"><span class="plominoFieldClass">fisica_nome</span></div>
+<div class="span2"><span class="plominoFieldClass">fisica_sesso</span></div>
+</div>
+<div class="row-fluid">
+<div class="span3"><span class="plominoFieldClass">fisica_data_nato</span></div>
+<div class="span3"><span class="plominoFieldClass">fisica_comune_nato</span></div>
+<div class="span2"><span class="plominoFieldClass">fisica_provincia_nato</span></div>
+<div class="span4"><span class="plominoHidewhenClass">start:hw_fisica_loc_nato</span> <span class="plominoFieldClass">fisica_loc_nato</span> <span class="plominoHidewhenClass">end:hw_fisica_loc_nato</span></div>
+</div>
+<div class="row-fluid"><!--
 <div class="span5"><span class="plominoFieldClass">fisica_titolo</span></div>
---><div class="span3"><span class="plominoFieldClass">fisica_cittadinanza</span></div><div class="span3"><span class="plominoFieldClass">fisica_cf</span></div><span class="plominoFieldClass">fisica_cod_cat_nato</span></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">fisica_comune</span></div><div class="span1"><span class="plominoFieldClass">fisica_provincia</span></div><div class="span2"><span class="plominoFieldClass">fisica_cap</span></div><div class="span6"><span class="plominoHidewhenClass">start:hw_fisica_loc</span> <span class="plominoFieldClass">fisica_loc</span></div><span class="plominoHidewhenClass">end:hw_fisica_loc</span></div><div class="row-fluid"><div class="span10"><span class="plominoFieldClass">fisica_indirizzo</span></div><div class="span2"><span class="plominoFieldClass">fisica_civico</span></div></div>]]></FormLayout>
+-->
+<div class="span3"><span class="plominoFieldClass">fisica_cittadinanza</span></div>
+<div class="span3"><span class="plominoFieldClass">fisica_cf</span></div>
+<span class="plominoFieldClass">fisica_cod_cat_nato</span></div>
+<div class="row-fluid">
+<div class="span3"><span class="plominoFieldClass">fisica_comune</span></div>
+<div class="span2"><span class="plominoFieldClass">fisica_provincia</span></div>
+<div class="span2"><span class="plominoFieldClass">fisica_cap</span></div>
+<div class="span5"><span class="plominoHidewhenClass">start:hw_fisica_loc</span> <span class="plominoFieldClass">fisica_loc</span> <span class="plominoHidewhenClass">end:hw_fisica_loc</span></div>
+</div>
+<div class="row-fluid">
+<div class="span10"><span class="plominoFieldClass">fisica_indirizzo</span></div>
+<div class="span2"><span class="plominoFieldClass">fisica_civico</span></div>
+</div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">BOTTOM</ActionBarPosition>
@@ -172,7 +196,7 @@ return '']]></ValidationFormula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription">Nel caso di nati all estero indicare lo stato.</field>
-              <field name="customAttributes">data-plugin="comunifield"</field>
+              <field name="customAttributes">data-plugin="elencocomuni"</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -374,7 +398,7 @@ return '']]></ValidationFormula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription">in caso di .....</field>
-              <field name="customAttributes">data-plugin="comunifield"</field>
+              <field name="customAttributes">data-plugin="elencocomuni"</field>
             </extensionfields>
           </CustomData>
         </element>

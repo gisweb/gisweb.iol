@@ -1,7 +1,7 @@
 <plominodatabase id="iol_base">
   <design>
-    <element id="dsp_pratica_base" title="Form di visualizzazione delle informazione della pratica" type="PlominoForm">
-      <id type="Products.Archetypes.Field.StringField">dsp_pratica_base</id>
+    <element id="base_pratica_dsp" title="Form di visualizzazione delle informazione della pratica" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">base_pratica_dsp</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
       <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
@@ -9,7 +9,9 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid">
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="alert">
+<h2>Autorizzazione Precedente</h2>
+<div class="row-fluid">
 <div class="span4"><span class="plominoFieldClass">numero_pratica</span></div>
 <div class="span4"><span class="plominoFieldClass">data_pratica</span></div>
 </div>
@@ -24,12 +26,13 @@
 </div>
 <div class="row-fluid">
 <div class="span4"><span class="plominoFieldClass">documenti_autorizzazione</span></div>
+</div>
 </div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
-      <HideDefaultActions type="Products.Archetypes.Field.BooleanField">False</HideDefaultActions>
-      <HideInMenu type="Products.Archetypes.Field.BooleanField">False</HideInMenu>
+      <HideDefaultActions type="Products.Archetypes.Field.BooleanField">True</HideDefaultActions>
+      <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
       <isSearchForm type="Products.Archetypes.Field.BooleanField">False</isSearchForm>
       <isPage type="Products.Archetypes.Field.BooleanField">False</isPage>
       <SearchView type="Products.Archetypes.Field.StringField"/>
