@@ -5,19 +5,8 @@
 ##bind script=script
 ##bind subpath=traverse_subpath
 ##parameters=destDoc, sourceItem, destItem='', new_filename='', setItem=True
-##title=Elenco dei modelli di stampa
+##title=Copia degli allegati da un documento ad un altro
 ##
-
-"""
-Copia di un file da un PlominoDocument ad un altro
-destDoc: documento di destinazione (o suo id)
-sourceItem: item_name sorgente
-destItem: nome(*) o formato(**) del nome dell'item di destinazione (se mancante si assume lo stesso nome della sorgente).
-new_filename: nome(***) o formato(****) del file destinazione (se mancante si assume lo stesso nome file originario).
-
-courtesy of: https://github.com/plomino/Plomino/issues/172#issuecomment-9494835
-"""
-
 if isinstance(destDoc, basestring):
     destDoc = context.getParentDatabase().getDocument(destDoc)
 
@@ -46,6 +35,6 @@ for filename, mimetype in files.items():
     old_att.update(new_files)
     
     if setItem:
-		destDoc.setItem(destItem, old_att)
-	else:
-		return old_att
+        destDoc.setItem(destItem, old_att)
+    else:
+        return old_att
