@@ -215,6 +215,11 @@
 
 </tal:docblock>
 
+<tal:cond tal:condition="python:doc.getItem('parentDocument')" >
+    <!-- INFORMAZIONI DI BASE DELLA GENITORE -->
+    
+        <div tal:content="structure python: doc.getRenderedItem('linkToParent')"></div>
+</tal:cond>    
 
 <span class="label label-important"
     tal:condition="python: doc.test_mode(True) and 'Manager' in doc.getRoles()">

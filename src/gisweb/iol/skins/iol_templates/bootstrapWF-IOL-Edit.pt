@@ -37,7 +37,7 @@
         </div>
 
         <div class="row-fluid"
-            tal:condition="python: doc.wf_getInfoFor('wf_presentata') and doc.verificaRuolo('iol-manager')">
+            tal:condition="python: doc.wf_getInfoFor('wf_presentata') and (doc.verificaRuolo('iol-manager') or doc.verificaRuolo('iol-reviewer'))">
             <div class="span4"
                 tal:content="structure python: myForm.getFormField('istruttore').getFieldRender(myForm, doc, doc.isEditMode(), False, request=doc.REQUEST)"></div>
         </div>
@@ -81,7 +81,7 @@
         </tal:block>
 
         <div class="boxupload">
-            <div class="row-fluid" tal:condition="python:doc.getItem('documenti_autorizzazione') and not doc.wf_getInfoFor('wf_autorizzata')">
+            <div class="row-fluid" tal:condition="python:doc.wf_getInfoFor('action')=='istruttoria_completata'">
                 <div class="span12"
                     tal:content="structure python: myForm.getFormField('documenti_autorizzazione').getFieldRender(form=myForm,doc=doc,editmode=True,creation=False)" />
             </div>
