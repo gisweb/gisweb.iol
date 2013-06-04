@@ -44,7 +44,11 @@ jQuery(document).ready(function () {
 				if (re.test(comune[1])) {results.push(comune)}
 			})
 			query.callback({results: results});
-		}
+		},
+                initSelection : function (element, callback) {
+                     var data = ["",element.val(),"","",""];
+                     callback(data);
+               }
 	}
         $.extend(options,baseOptions);
         $(this).select2(options).on("change", function(e) { 
@@ -54,8 +58,10 @@ jQuery(document).ready(function () {
                   var el;
                   if($('[name='+childName+']').length>0){
                        el = $('[name='+childName+']').eq(0);
-                       if(e.added) el.val(e.added[child.idx]);
-                       if(e.removed) el.val('');
+                       if(e.added) 
+                          el.val(e.added[child.idx]);
+                       else if(e.removed) 
+                          el.val('');
                        el.trigger('change');
                    }
              });

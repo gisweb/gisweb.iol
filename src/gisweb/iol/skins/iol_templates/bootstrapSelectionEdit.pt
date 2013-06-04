@@ -39,7 +39,7 @@
                                     id options/fieldname;
                                     data-dhw dy_hidewhen;
                                     data-placeholder string:Scegli qualcosa...;
-                                    class string:chzn-select ${dy_search}" multiple="multiple" lines="4" style="width:100%">
+                                    class string:combobox ${dy_search}" multiple="multiple" lines="4" style="width:100%">
                                         
                 <tal:loop tal:repeat="v selection">
                     <tal:block tal:define="current options/fieldvalue;
