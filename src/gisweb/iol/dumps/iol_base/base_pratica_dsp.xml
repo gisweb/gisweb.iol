@@ -360,7 +360,7 @@ return '']]></ValidationFormula>
 <member>
 <name>selectionlist</name>
 <value><array><data>
-<value><string>Visualizza dati pratica originaria|infopratica</string></value>
+<value><string>Visualizza dati pratica originaria|parent</string></value>
 </data></array></value>
 </member>
 </struct></value>
@@ -376,7 +376,7 @@ return '']]></ValidationFormula>
         <element id="hw_no_pratica_dsp" title="hw_no_pratica_dsp" type="PlominoHidewhen">
           <id type="Products.Archetypes.Field.StringField">hw_no_pratica_dsp</id>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[try:
-    return plominoDocument.getItem('info_pratica_opt') != 'infopratica'
+    return plominoDocument.getItem('info_pratica_opt') != 'parent'
 except:
     return True]]></Formula>
           <isDynamicHidewhen type="Products.Archetypes.Field.BooleanField">True</isDynamicHidewhen>

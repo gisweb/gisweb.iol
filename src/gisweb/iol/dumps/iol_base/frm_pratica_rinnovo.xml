@@ -19,9 +19,10 @@
 <div class="v-content well">
 <p>Il/La sottoscritto/a <span class="plominoFieldClass">richiedente_view</span>, <span class="plominoFieldClass">ragsoc_view</span></p>
 <h5 style="text-align: center; ">dichiara</h5>
-<div>sotto la propria responsabilità la necessità di rinnovare il periodo di validità della pratica n° <b><span class="plominoFieldClass">numero_pratica_view</span></b> autorizzata il <b><span class="plominoFieldClass">data_autorizzazione_view</span></b> con numero di autorizzazione <b><span class="plominoFieldClass">numero_autorizzazione_view</span></b>.</div>
+<div>sotto la propria responsabilità la necessità di rinnovare il periodo di validità della pratica n° <strong><span class="plominoFieldClass">numero_pratica_view</span></strong> autorizzata il <strong><span class="plominoFieldClass">data_autorizzazione_view</span></strong> con numero di autorizzazione <strong><span class="plominoFieldClass">numero_autorizzazione_view</span></strong>.</div>
 <h3 class="v-content-title" id="Richiesta">Dati della richiesta del rinnovo</h3>
 <div class="row-fluid">
+<div class="span4"><span class="plominoFieldClass">autorizzata_dal</span></div>
 <div class="span4"><span class="plominoFieldClass">autorizzata_al</span></div>
 </div>
 <div class="row-fluid">
@@ -350,26 +351,40 @@ return '']]></Formula>
             </extensionfields>
           </CustomData>
         </element>
-        <element id="autorizzata_dal" title="Data Inizio Autorizzazione" type="PlominoField">
+        <element id="autorizzata_dal" title="Data Inizio Rinnovo" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">autorizzata_dal</id>
           <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
-          <FieldMode type="Products.Archetypes.Field.StringField">CREATION</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[parentId = context.REQUEST.get('parentDocument') or plominoDocument.getItem('parentDocument','')
-if parentId:
-    db = plominoDocument.getParentDatabase()
-    parent = db.getDocument(parentId)
-    return parent.getItem('autorizzata_al')
-return '']]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
-          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[parentId = context.REQUEST.get('parentDocument') or context.getItem('parentDocument','')
+parentDocument = context.getParentDatabase().getDocument(parentId)
+
+fine_pratica=parentDocument.getItem('autorizzata_al') 
+
+inizio_proroga=context.getItem('autorizzata_dal') or context.REQUEST.get('autorizzata_dal')
+fine_proroga=context.getItem('autorizzata_al') or context.REQUEST.get('autorizzata_al')
+
+if inizio_proroga <= fine_pratica:     
+    return 'Attenzione! la data di inizio proroga %s deve essere maggiore della data di fine pratica: %s' % (inizio_proroga,fine_pratica)
+
+elif inizio_proroga >= fine_proroga:
+    return 'Attenzione! la data di inizio proroga deve essere inferiore alla data di fine proroga'
+else:
+    return ''
+    
+   
+   
+    
+   ]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="customAttributes">data-plugin="datepicker" data-datepicker-options="{changeMonth:true,changeYear: true,dateFormat:'dd/mm/yy'}"</field>
             </extensionfields>
           </CustomData>
         </element>

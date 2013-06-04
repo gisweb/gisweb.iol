@@ -94,7 +94,8 @@ context.frm_beforeCreateDocument(child_events=True, msg='', redirect_to='search_
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[# qui controllo semplicemente che la data inizio non sia posteriore alla data di fine
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[
+# qui controllo semplicemente che la data inizio non sia posteriore alla data di fine
 from gisweb.utils import lookForValidDate
 
 parentId = context.REQUEST.get('parentDocument') or context.getItem('parentDocument')
@@ -123,7 +124,7 @@ di validità superiore a quello originariamente concesso.
 L'ultima data accettata in questo caso è il %s.""" % fine_max.strftime('%d-%m-%Y')
             return msg
 
-return '']]></ValidationFormula>
+return ''	]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
@@ -331,15 +332,45 @@ return '']]></Formula>
             </extensionfields>
           </CustomData>
         </element>
-        <element id="autorizzata_dal" title="Data Inizio Autorizzazione" type="PlominoField">
+        <element id="autorizzata_dal" title="Data Inizio Proroga" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">autorizzata_dal</id>
           <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[#parentId = context.REQUEST.get('parentDocument') or context.getItem('parentDocument')
+#parentDocument = context.getParentDatabase().getDocument(parentId)
+
+#return  parentDocument.getItem('autorizzata_al')
+#fine_pratica=parentDocument.getItem('data_autorizzazione') 
+
+#now= DateTime()
+#if fine_pratica < now:     # scaduta
+#    return context.setItem('autorizzata_dal', now + 2)
+#else:
+ #   return context.setItem('autorizzata_dal',fine_pratica)
+    ]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[parentId = context.REQUEST.get('parentDocument') or context.getItem('parentDocument','')
+parentDocument = context.getParentDatabase().getDocument(parentId)
+
+fine_pratica=parentDocument.getItem('autorizzata_al') 
+
+inizio_proroga=context.getItem('autorizzata_dal') or context.REQUEST.get('autorizzata_dal')
+fine_proroga=context.getItem('autorizzata_al') or context.REQUEST.get('autorizzata_al')
+
+if inizio_proroga <= fine_pratica:     
+    return 'Attenzione! la data di inizio proroga %s deve essere maggiore della data di fine pratica: %s' % (inizio_proroga,fine_pratica)
+
+elif inizio_proroga >= fine_proroga:
+    return 'Attenzione! la data di inizio proroga deve essere inferiore alla data di fine proroga'
+else:
+    return ''
+    
+   
+   
+    
+   ]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>

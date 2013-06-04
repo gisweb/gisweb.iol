@@ -23,6 +23,7 @@ return context.frm_beforeCreateDocument()]]></beforeCreateDocument>
 <h3 class="v-content-title" id="Richiesta">Dati della richiesta</h3>
 <p>SUBFORM CON I DATI</p>
 <p><span class="plominoSubformClass">base_sub_child</span></p>
+<p><span class="plominoFieldClass">date_autorizzazione</span></p>
 </div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
@@ -35,6 +36,26 @@ return context.frm_beforeCreateDocument()]]></beforeCreateDocument>
       <SearchFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></SearchFormula>
       <Position type="Products.Archetypes.Field.IntegerField">3</Position>
       <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
+      <elements>
+        <element id="date_autorizzazione" title="date_autorizzazione" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">date_autorizzazione</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapWF-IOL-Date-Autorizzazione</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapWF-IOL-Date-Autorizzazione</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+      </elements>
     </element>
   </design>
 </plominodatabase>

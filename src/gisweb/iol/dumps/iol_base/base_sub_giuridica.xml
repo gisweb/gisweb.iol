@@ -9,15 +9,14 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid">
-<div class="span12"><span class="plominoFieldClass">giuridica_opt</span></div>
-</div>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div><span class="plominoFieldClass">giuridica_opt</span></div>
 <p><span class="plominoHidewhenClass">start:hw_no_giuridica</span></p>
 <div class="row-fluid">
+<div class="span6"><span class="plominoFieldClass">giuridica_qualita</span></div>
+</div>
+<div class="row-fluid">
 <div class="span12"><span class="plominoFieldClass">giuridica_denominazione</span></div>
-<!--
-<div class="span2"><span class="plominoFieldClass">giuridica_qualita</span></div>
---></div>
+</div>
 <div class="row-fluid">
 <div class="span3"><span class="plominoFieldClass">giuridica_cciaa</span></div>
 <div class="span3"><span class="plominoFieldClass">giuridica_cciaa_numero</span></div>
@@ -359,7 +358,7 @@ return '']]></ValidationFormula>
             </extensionfields>
           </CustomData>
         </element>
-        <element id="giuridica_qualita" title="Ruolo" type="PlominoField">
+        <element id="giuridica_qualita" title="In qualità di" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">giuridica_qualita</id>
           <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
@@ -388,8 +387,6 @@ return '']]></ValidationFormula>
 <value><string> |</string></value>
 <value><string>Amministratore</string></value>
 <value><string>Legale Rappresentante</string></value>
-<value><string>Accomandatario</string></value>
-<value><string>RUP</string></value>
 </data></array></value>
 </member>
 </struct></value>

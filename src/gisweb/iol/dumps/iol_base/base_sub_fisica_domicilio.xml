@@ -9,9 +9,7 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid">
-<div class="span12"><span class="plominoFieldClass">domicilio_opt</span></div>
-</div>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div><span class="plominoFieldClass">domicilio_opt</span></div>
 <p><span class="plominoHidewhenClass">start:hw_no_domicilio</span></p>
 <div class="row-fluid">
 <div class="span4"><span class="plominoFieldClass">fisica_domicilio_comune</span></div>
