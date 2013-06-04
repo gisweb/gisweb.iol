@@ -1,13 +1,12 @@
-## Script (Python) "test_modec"
+## Script (Python) "test_mode"
 ##bind container=container
 ##bind context=context
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=default=False
+##parameters=default=False,json=True
 ##title=Is app in test mode?
 ##
-
 """
 Returns True or False
 
