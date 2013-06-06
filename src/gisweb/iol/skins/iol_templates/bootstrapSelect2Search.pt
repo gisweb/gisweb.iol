@@ -1,9 +1,3 @@
-url:http://192.168.1.100:8079/iol_comsp/portal_skins/custom/bootstrapSelect2Search
-meta_type:Page Template
-title:
-content_type:text/html
-cookie:_ZopeId="48310687A517bzcorZk"; __ac="NjE2NDZkNjk2ZTo3MjM0MzY0Zjc1NGE3MzUw"; ccm_enabled=true; __cp="x%25DA%25D3%2560b%2560%2560%25C8%2504b%2586hF%2520%25A1%25C1%250C%2524J%2540%25DCbN%2590D%257EN%257Cr%257EnqA1%2507H%2528%25B5%25A8%252C39%25B5%2518%2500%25A6%250D%2509%25AF"
-
 <tal:def tal:define="
     doc python: context.REQUEST.PARENTS[0];
     fieldname options/fieldname;
@@ -19,5 +13,5 @@ cookie:_ZopeId="48310687A517bzcorZk"; __ac="NjE2NDZkNjk2ZTo3MjM0MzY0Zjc1NGE3MzUw
         </label>
         <tal:plugin tal:content='structure string:<input type="text" id="${fieldname}" data-base-url="${baseURL}" class="iol-autocomplete-form" ${custom_attributes} style="width:100%" />'></tal:plugin> 
     </div>       
-     
+  
 </tal:def>
