@@ -1,5 +1,52 @@
 jQuery(document).ready(function () {
 
+//Autosuggest per l'elenco dei nomi e compilazione campi
+jQuery(".iol-autocomplete-form").each(function(){
+  eval("var options = "  + jQuery(this).data('autocompleteformOptions') +" || {}");
+  var baseUrl = jQuery(this).data('baseUrl');
+
+  $(this).select2({
+    placeholder: options.placeolder,
+    allowClear: options.allowClear,
+    minimumInputLength: options.minimumInputLength,
+    id: options.id,
+    formatResult: options.formatResult,
+    formatSelection: options.formatSelection,
+    ajax: {
+        url: options.url,
+        dataType: 'json',
+        quietMillis: 100,
+        data: options.data,
+        results: function (data, page) {
+            var more = (page * 10) < data.total; // whether or not there are more results available
+ 
+            // notice we return the value of more so Select2 knows if more results can be loaded
+            return {results: data.names, more: more};
+        }
+      },
+      escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+  }).on("change", function(e) { 
+             var childs=e.added;
+             if(e.removed){
+                    if(!confirm('Attenzione i dati già inseriti verranno rimossi, continuo?')) return;
+                    childs=e.removed; 
+             } 
+             $.each(childs, function(key,value) {
+                  var el;
+                  if($('[name='+key+']').length>0){
+                       el = $('[name='+key+']').eq(0);
+                       if(e.added) 
+                          el.val(value);
+                       else if(e.removed){
+                            el.val('');console.log(el)}
+                       el.trigger('change');
+                   }
+             });
+             console.log("change "+JSON.stringify({val:e.val, added:e.added, removed:e.removed})); 
+        });
+});
+
+
     //GENERAZIONE DEI CONTROLLI AUTOCOMPLETE
     jQuery("input[data-plugin='autocomplete']").each(function(){
         eval("var options = "  + jQuery(this).data('autocompleteOptions') +" || {}");
@@ -25,7 +72,7 @@ jQuery(document).ready(function () {
     });
 
 
-	$("input[data-plugin='elencocomuni']").each(function(){
+$("input[data-plugin='elencocomuni']").each(function(){
         eval("var baseOptions = "  + jQuery(this).data('elencocomuniOptions') +" || {}");
         //Setto le impostazioni dei childs fisse per questo plugin
         var childs = [{'idx':0,'name':'cod_cat'},{'idx':2,'name':'provincia'},{'idx':3,'name':'cap'}];
@@ -169,10 +216,18 @@ jQuery(document).ready(function () {
     });
 
 
+
+
+
+
+
+
+
+
 jQuery("input[type=file]").filestyle({
      image: "upload.png",
      imageheight : 32,
-     imagewidth : 50,
+     imagewidth : 32,
      width : 250
  });
 
