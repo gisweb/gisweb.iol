@@ -20,9 +20,12 @@ return context.frm_beforeCreateDocument()]]></beforeCreateDocument>
 <h3 class="v-content-title" id="Giuridica"></h3>
 <span class="plominoSubformClass">base_sub_giuridica</span></div>
 <div class="v-content well">
+<p><span class="plominoFieldClass">oForm</span></p>
+<!--
 <h3 class="v-content-title" id="Richiesta">Dati della richiesta</h3>
 <p>SUBFORM CON I DATI</p>
 <p><span class="plominoSubformClass">base_sub_child</span></p>
+-->
 <p><span class="plominoFieldClass">date_autorizzazione</span></p>
 </div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
@@ -48,6 +51,45 @@ return context.frm_beforeCreateDocument()]]></beforeCreateDocument>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="oForm" title="Tipo di richiesta" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">oForm</id>
+          <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>selectionlistformula</name>
+<value><string>db = context.getParentDatabase()
+
+return ['%s|%s' % (frm.Title(), frm.getFormName()) for frm in db.getForms() if frm.getFormName().startswith('frm')]</string></value>
+</member>
+<member>
+<name>dynamictableparam</name>
+<value><string>'bPaginate': true,
+'bLengthChange': true,
+'bFilter': true,
+'bSort': true,
+'bInfo': true,
+'bAutoWidth': false</string></value>
+</member>
+</struct></value>
+</param>
+</params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
