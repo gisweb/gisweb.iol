@@ -9,7 +9,8 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid">
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div><span class="plominoFieldClass">fisica_search</span></div>
+<div class="row-fluid">
 <div class="span6"><span class="plominoFieldClass">fisica_cognome</span></div>
 <div class="span4"><span class="plominoFieldClass">fisica_nome</span></div>
 <div class="span2"><span class="plominoFieldClass">fisica_sesso</span></div>
@@ -569,6 +570,34 @@ return '']]></ValidationFormula>
           <id type="Products.Archetypes.Field.StringField">hw_fisica_loc</id>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return not plominoDocument.getItem('fisica_provincia') == 'EE']]></Formula>
           <isDynamicHidewhen type="Products.Archetypes.Field.BooleanField">True</isDynamicHidewhen>
+        </element>
+        <element id="fisica_search" title="Puoi selezionare un nominativo presente in archivio digitando il codice fiscale" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">fisica_search</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">DISPLAY</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelect2Search</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>size</name>
+<value><string>255</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes">data-autocompleteform-options="{url:'fetch_data',placeholder:'Digitare il codice fiscale della persona da ricercare',allowClear:true,minimumInputLength:0,id:function(e){return e.fisica_cf;},formatResult: function(name){return'&lt;div&gt;'+name.fisica_cognome+' '+name.fisica_nome+' cf: '+name.fisica_cf+' nato a '+name.fisica_comune_nato+' il '+name.fisica_data_nato+'&lt;/div&gt;'; },formatSelection:function(name){return name.fisica_cognome+ ' '+name.fisica_nome+' cf: '+name.fisica_cf; },data:function(term,page){return{forms:'base_sub_fisica',distinct:'fisica_cf',fisica_cf:term,page:page,size:10}}}"</field>
+            </extensionfields>
+          </CustomData>
         </element>
       </elements>
     </element>

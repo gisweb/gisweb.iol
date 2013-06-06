@@ -256,7 +256,7 @@ return result]]></Formula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="customAttributes">data-autocompleteform-options="{url:'fetch_data',placeholder:'Digitare il codice fiscale della persona da ricercare',allowClear:true,minimumInputLength:3,id:function(e){return e.fisica_cf;},formatResult: function(name){return'&lt;div&gt;'+name.fisica_cognome+' '+name.fisica_nome+' cf: '+name.fisica_cf+' nato a '+name.fisica_comune_nato+' il '+name.fisica_data_nato+'&lt;/div&gt;'; },formatSelection:function(name){return name.fisica_cognome+ ' '+name.fisica_nome+' cf: '+name.fisica_cf; },data:function(term,page){return{form_name:'base_sub_fisica',distinct:'fisica_cf',term:'fisica_cf',page_limit:10}}}"</field>
             </extensionfields>
           </CustomData>
         </element>

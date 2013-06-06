@@ -100,8 +100,9 @@ oggi = DateToString(Now(),'%Y/%m/%d')
 req = dict()
 req['owner'] = owner = db.getCurrentUser().getMemberId()
 
-req['tipo_richiesta'] = 'base'
+req['tipo_richiesta'] = ['base','integrazione','rinnovo']
 
+req['trasporti_richiesta'] = dict(query= ['singola', 'multipla'], operator='or')
 # pratiche in corso di validità
 req['autorizzata_dal'] = dict(query=oggi,range='max')
 req['autorizzata_al'] = dict(query=oggi,range='min')
