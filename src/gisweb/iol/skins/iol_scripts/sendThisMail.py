@@ -7,7 +7,6 @@
 ##parameters=ObjectId, sender='', debug=0
 ##title=Mail message to be sent during workflow transitions
 ##
-
 """
 Gestione centralizzata di invio mail
 
@@ -144,6 +143,20 @@ stato sospeso con le seguenti motivazioni:
                 nomefile = ''
             )
         )
+elif ObjectId == 'pagamenti':
+
+        custom_args = dict(
+            Object = 'Richiesta pagamento oneri n. %(numero_pratica)s - %(titolo)s' % msg_info,
+            msg = context.mime_file(
+                file = '' if not msg_info.get('attach') in attach_list else context[msg_info['attach']],
+                text = """
+Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato accolto
+""" % msg_info,
+                nomefile = ''
+            )
+        )
+
+
 
 
 if custom_args:

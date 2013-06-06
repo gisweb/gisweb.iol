@@ -15,6 +15,13 @@ kwargs: argomenti da passare al metodo oncreate_child
 
 from gisweb.utils import updateAllRoleMappingsFor
 
+if 'oForm' in context.getItems():
+    oFormName = context.getItem('oForm')
+    # previene l'associazione di un form inesistente
+    if context.getParentDatabase().getForm(oFormName):
+        context.setItem('Form', oFormName)
+    context.removeItem('oForm')
+
 db = context.getParentDatabase()
 
 # RUOLI

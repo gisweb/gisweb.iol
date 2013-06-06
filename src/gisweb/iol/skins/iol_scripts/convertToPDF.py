@@ -1,3 +1,17 @@
+## Script (Python) "convertToPdf"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=file_type='documenti_autorizzazione'
+##title=Elenco dei modelli di stampa
+##
+
+"""
+Converte il file docx in documenti_autorizzazione in pdf
+"""
+
 from gisweb.utils import requests_post,attachThis,Type
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlomino.PlominoUtils import open_url
@@ -7,27 +21,17 @@ if context.portal_type != 'PlominoDocument':
 if not file_type:
     return ''
 
-
-#result = open_url('http://iol.vmserver/printservice/services/xConvert.php?dirname=trasporti/dcdc8d9912ef4ae68bc958ab15ae0b89&mode=show&filename=autorizzazione-trasporti-eccezionali.docx')
-#context.REQUEST.RESPONSE.setHeader("Content-type", "application/pdf")
-#return result
-
 doc = context
-serviceURL = "http://10.95.2.82/printservice/services/xConvert.php"
+serviceURL = context.getLocalProperties('ws_converttopdf_URL')
 
 files = doc.getItem(file_type, {})
 filename = files.keys()[-1]
 newfilename = filename.replace('.docx','.pdf')
-info = doc.naming_manager()
+info = doc.naming()
 docurl='%s/%s' %(doc.absolute_url(),filename)
-#query = dict(
-#    dirname = '%s/%s' %(info['tipo_app'],doc.getId()),    filename = filename,
-#    mode='show'
-#)
 
-#url = '%s?mode=%s&dirname=%s&filename=%s' %(serviceURL,query['mode'],query['dirname'],query['filename'])
 url = '%s?mode=%s&docurl=%s' %(serviceURL,'show',docurl)
-#return url
+
 try:
     result = open_url(url,asFile=False)
 except Exception as error:
@@ -36,14 +40,7 @@ except Exception as error:
     context.setItem('test',msg)
     plone_tools.addPortalMessage(*msg, request=context.REQUEST)
     context.REQUEST.RESPONSE.redirect(context.absolute_url())
-    return
+else:
+    context.removeItem(file_type)
+    attachThis(context, result, file_type, filename=newfilename, overwrite=True)
 
-
-#return result
-context.removeItem(file_type)
-#return valueToSubmit
-dummy = attachThis(context, result, file_type, filename=newfilename, overwrite=True)
-return
-return str(result) # debug: erase me
-context.REQUEST.RESPONSE.setHeader("Content-type", "application/pdf")
-return result['content'] or 'vuoto'
