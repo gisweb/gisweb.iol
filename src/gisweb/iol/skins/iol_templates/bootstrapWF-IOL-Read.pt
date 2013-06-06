@@ -10,10 +10,17 @@
 <script type="text/javascript" tal:attributes="src string:${dburl}/resources/controller_read.js"></script>
 <link tal:attributes="href string:${dburl}/resources/style.css" rel="stylesheet" type="text/css">
 
+        <!-- INFORMAZIONI DI BASE DELLA GENITORE -->
+<tal:cond tal:condition="python:doc.getItem('linkToParent')" >
+        <div tal:content="structure python: doc.getRenderedItem('linkToParent')"></div>
+</tal:cond> 
+
+
 <!-- ------------------------------- -->
 <!-- BLOCCO DELLE AZIONI DI WORKFLOW -->
 <!-- ------------------------------- -->
 
+ 
 <tal:blockactions tal:define="status python: doc.wf_getInfoFor('review_state');
     actions python:doc.wf_transitionsInfo(wf_id=wf_id, args=['description'],);
     actionurl python: '%s/%s/content_status_modify' %(dburl,doc.getId());
@@ -52,6 +59,8 @@
             tal:content="structure python: customform.displayDocument(doc, editmode=False, creation=False, parent_form_id=False, request=context.REQUEST)"/>
 
     </tal:loop>
+        
+
 
 <!-- END WF ACTIONS -->
 </tal:blockactions>
@@ -214,12 +223,6 @@
     </tal:blockactions>
 
 </tal:docblock>
-
-<tal:cond tal:condition="python:doc.getItem('parentDocument')" >
-    <!-- INFORMAZIONI DI BASE DELLA GENITORE -->
-    
-        <div tal:content="structure python: doc.getRenderedItem('linkToParent')"></div>
-</tal:cond>    
 
 <span class="label label-important"
     tal:condition="python: doc.test_mode(True) and 'Manager' in doc.getRoles()">
