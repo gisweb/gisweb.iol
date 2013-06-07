@@ -18,7 +18,6 @@ Test Compilare la pratica base
   Click button  xpath=//button[@data-name='btn_salva']
   Aspetta che la URL contenga  plomino_documents
   Capture Page Screenshot
-  Comment  PAUSE
   Non ci sono errori nella pagina
   Posso inviare la domanda
 
@@ -54,10 +53,10 @@ Compilando l'anagrafica
 
 Compilo il comune
   [Arguments]  ${nome_campo}  ${valore}
-  Scrivo  ${valore}  nel campo  ${nome_campo}
-  Wait Until Page Contains Element  xpath=//a[contains(text(), '${valore} (')]
-  Click Link  xpath=//a[contains(text(), '${valore} (')]
-
+  Click Element  xpath=//div[@id='s2id_${nome_campo}']//*[contains(text(), 'Seleziona il Comune')]
+  Input text  jquery=input.select2-focused:visible  ${valore}
+  Wait Until Page Contains Element  xpath=//div[@class='select2-result-label']/div[contains(text(), '${valore}')]
+  Click Element  xpath=//div[@class='select2-result-label']/div[contains(text(), '${valore}')]
 
 Scrivo
   [Arguments]  ${testo}  ${_nel_campo_}  ${nome_campo}
@@ -72,6 +71,7 @@ Posso inviare la domanda
 
 Non ci sono errori nella pagina
   Page Should Not Contain Element  css=div#plonePortalMessages dl.error
+  Page Should Not Contain Element  css=.portalMessage.error
 
 Aspetta che la URL contenga
   [Arguments]  ${stringa}
