@@ -7,6 +7,7 @@
 ##parameters=child_events=False, backToParent=False
 ##title=IOL onCreateDocument event common actions
 ##
+
 """
 Standardizzazione dele operazioni da svolgere alla creazione di una istanza
 child_events: True o False (lancia gli script di gestione dell'uno a molti)
@@ -14,14 +15,6 @@ kwargs: argomenti da passare al metodo oncreate_child
 """
 
 from gisweb.utils import updateAllRoleMappingsFor
-
-if 'oForm' in context.getItems():
-    oFormName = context.getItem('oForm')
-    # previene l'associazione di un form inesistente
-    if context.getParentDatabase().getForm(oFormName):
-        context.setItem('Form', oFormName)
-    context.removeItem('oForm')
-
 db = context.getParentDatabase()
 
 # RUOLI

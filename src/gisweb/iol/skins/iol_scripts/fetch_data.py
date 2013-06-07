@@ -7,6 +7,7 @@
 ##parameters=forms='base_sub_giuridica', distinct='', size=10, page=1, debug=''
 ##title=
 ##
+
 """
 Servizio web che restituisce la serializzazione dei dati richiesti
 
@@ -25,6 +26,7 @@ NB:
 
 from Products.CMFPlomino.PlominoUtils import json_dumps, Now
 from gisweb.utils import serialDoc, getIndexType
+db = context.getParentDatabase()
 
 page, size = map(int, (page, size))
 start = (page-1)*size
@@ -35,7 +37,7 @@ for k,v in context.REQUEST.form.items():
     if v and k not in ('forms', 'distinct', 'page', 'size', 'debug', '_', ):
         if 'ZCTextIndex' in getIndexType(context, k):
             # TODO: implementare un protocollo condiviso per pilotare le ricerche via ajax
-            # questi adattamenti sono adatti SOLO al campo fisica_cf
+            # questi adattamenti sono adatti SOLO al campo "fisica_cf"
             if k == 'fisica_cf':
                 custom_query[k] = v.upper() + '*'
             else:
@@ -43,21 +45,21 @@ for k,v in context.REQUEST.form.items():
         else:
             custom_query[k] = v
 
-db = context.getParentDatabase()
-idx = db.getIndex()
+def get_fld_ids():
+    frms = forms.split(',')
+    flds = [db.getForm(i).getFormFields() for i in frms]
+    fld_list = sum(flds[1:], flds[0])
+    return [i.getId() for i in fld_list]
 
-frms = forms.split(',')
-flds = [db.getForm(i).getFormFields() for i in frms]
-fld_list = sum(flds[1:], flds[0])
+fld_ids = get_fld_ids()
 
-fld_ids = [i.getId() for i in fld_list]
-
-if not any([r in context.getRoles() for r in (
+if not any([r in context.getRoles()+context.getCurrentUserRoles() for r in (
     'Manager',
-    'iol-reviewer', 'iol-manager', )]):
+    '[iol-reviewer]', '[iol-manager]', )]):
     custom_query['owner'] = db.getCurrentUserId()
 
-# TODO: dato che per problemi di permessi non riesco agevolmente ad usare la Batch si può pensare di salvare i dati in sessione
+idx = db.getIndex()
+# TODO??: dato che per problemi di permessi non riesco agevolmente ad usare la Batch si può pensare di salvare i dati in sessione
 res = idx.dbsearch(custom_query, sortindex='data_autorizzazione', reverse=1, only_allowed=False, limit=None)[start:start+size]
 
 #res = Batch(items=res, size=size, start=size*int(start/size)+1)
