@@ -52,6 +52,7 @@ setup(name='gisweb.iol',
         'test': [
             'plone.app.testing[robot]>=4.2.2',
             'plone.app.robotframework',
+            'robotframework-selenium2library>=1.2.0',
         ]
       },
       entry_points="""
