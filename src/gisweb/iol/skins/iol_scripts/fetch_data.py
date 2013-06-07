@@ -7,7 +7,6 @@
 ##parameters=forms='base_sub_giuridica', distinct='', size=10, page=1, debug=''
 ##title=
 ##
-
 """
 Servizio web che restituisce la serializzazione dei dati richiesti
 
@@ -26,6 +25,7 @@ NB:
 
 from Products.CMFPlomino.PlominoUtils import json_dumps, Now
 from gisweb.utils import serialDoc, getIndexType
+
 db = context.getParentDatabase()
 
 page, size = map(int, (page, size))
@@ -33,9 +33,10 @@ start = (page-1)*size
 
 custom_query = dict()
 for k,v in context.REQUEST.form.items():
-    # considero parametro di ricerca ogni altro parametro in request oltre a quelli previsti
-    if v and k not in ('forms', 'distinct', 'page', 'size', 'debug', '_', ):
-        if 'ZCTextIndex' in getIndexType(context, k):
+    # considero parametro di ricerca ogni parametro in request corrispondente ad un campo indicizzato
+    indexType = getIndexType(context, k)
+    if v and indexType:
+        if 'ZCTextIndex' in indexType:
             # TODO: implementare un protocollo condiviso per pilotare le ricerche via ajax
             # questi adattamenti sono adatti SOLO al campo "fisica_cf"
             if k == 'fisica_cf':
@@ -65,10 +66,9 @@ res = idx.dbsearch(custom_query, sortindex='data_autorizzazione', reverse=1, onl
 #res = Batch(items=res, size=size, start=size*int(start/size)+1)
 
 get_sec = lambda d: d*24*3600
-#get_data = lambda doc: dict((k,'%s' % doc.getItem(k)) for k in fld_ids) # serializzazione semplificata
 def get_data(doc):
     if debug: t_0 = Now()
-    out = dict((k,v) for k,v in serialDoc(doc, nest_datagrid=True, serial_as=False, field_list=fld_ids) if v)
+    out = dict((k,v) for k,v in serialDoc(doc, nest_datagrid=True, serial_as=False, field_list=fld_ids, render=False) if v)
     if debug: out['elapsed'] = get_sec(Now()-t_0)
     return out
 
