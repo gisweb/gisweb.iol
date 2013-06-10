@@ -5,7 +5,7 @@
         <tal:block tal:define="relatedDoc python: db.getDocument(link);
                            form_name python: options['field'].getSettings(key='labelcolumn') or relatedDoc.getItem('Form');
                            renderForm python: db.getForm(form_name);
-                           html_content python: renderForm.displayDocument(relatedDoc, editmode=False, creation=False);">
+                           html_content python: renderForm.openMyUrl('%s/displayDocWithForm?frm_name=%s' %(relatedDoc.absolute_url(),form_name));">
             <div tal:content="structure html_content"/>
         </tal:block>
     </tal:rep>

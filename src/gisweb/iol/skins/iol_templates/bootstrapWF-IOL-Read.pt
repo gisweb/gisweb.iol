@@ -3,12 +3,13 @@
                       global db python: doc.getParentDatabase();
                       global dburl python:doc.getParentDatabase().absolute_url();
                       global formName python: doc.getForm().getFormName() if doc.isDocument() else doc.getId();
-                      global tipoApp  python: doc.naming('tipo_app');
+                      global tipoApp  python: doc.getItem('tipo_app');
                       global wf_id python: 'iol_workflow'" />
 
 <!-- SCRIPT E CSS DEDICATI A APPLICAZIONE -->
 <script type="text/javascript" tal:attributes="src string:${dburl}/resources/controller_read.js"></script>
 <link tal:attributes="href string:${dburl}/resources/style.css" rel="stylesheet" type="text/css">
+
 
         <!-- INFORMAZIONI DI BASE DELLA GENITORE -->
 <tal:cond tal:condition="python:doc.getItem('linkToParent')" >
@@ -19,13 +20,11 @@
 <!-- ------------------------------- -->
 <!-- BLOCCO DELLE AZIONI DI WORKFLOW -->
 <!-- ------------------------------- -->
-
  
 <tal:blockactions tal:define="status python: doc.wf_getInfoFor('review_state');
     actions python:doc.wf_transitionsInfo(wf_id=wf_id, args=['description'],);
     actionurl python: '%s/%s/content_status_modify' %(dburl,doc.getId());
-    editprotocollourl python: '%s/%s/EditDocument?openwithform=base_com_protocollo' %(dburl,doc.getId());
-    prorogaurl python: '%s/frm_%s_proroga/OpenForm?parentDocument=%s' %(dburl,doc.getItem('tipo_app',''),doc.getId());">
+    editprotocollourl python: '%s/%s/EditDocument?openwithform=base_com_protocollo' %(dburl,doc.getId());">
 
     <!-- ELENCO AZIONI IN TESTA-->
     <tal:loop tal:repeat="v actions">
@@ -189,19 +188,7 @@
                     </a>
                 </div>
             </div>
-
-            <!-- RICHIEDI PROROGA -->
-            <div class=row-fluid>
-                <div tal:condition="python: v.get('id') == 'richiesta_proroga'" class="span12 alert alert-error">
-                    <span  tal:content="python: v.get('description') or ''"/>
-                    <a style="width:200px" class="btn pull-right wf-actions"
-                        tal:define="id v/id"
-                        tal:attributes="id string:btn_wf_${id}; href string:${prorogaurl};">
-                        <i class='icon-hand-right'></i>
-                        <span tal:content="python: v['title'] or v['id']"></span>
-                    </a>
-                </div>
-            </div>
+            
 
             <div class=row-fluid>
                 <div class="span12 alert alert-info"
@@ -221,8 +208,90 @@
         </tal:loop>
 
     </tal:blockactions>
+        
+        <!-- ELENCO RINNOVI PROROGHE ECC -->
+        
+        <div tal:define="tipoRichiesta python:doc.getItem('tipo_richiesta','');
+                         prorogaurl python: '%s/frm_%s_proroga/OpenForm?parentDocument=%s' %(dburl,tipoApp,doc.getId());
+                         rinnovourl python: '%s/frm_%s_rinnovo/OpenForm?parentDocument=%s' %(dburl,tipoApp,doc.getId());
+                         integrazioneurl python: '%s/frm_%s_integrazione/OpenForm?parentDocument=%s' %(dburl,tipoApp,doc.getId());" 
+            tal:condition="python: doc.wf_getInfoFor('wf_autorizzata')" class="accordion" id="iol-childs">
+                <div class="accordion-group" tal:condition="python:db.isConditionVerified('proroga',app=tipoApp)">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#iol-childs" href="#iol-proroga">
+                  Proroga dell'autorizzazione
+                </a>
+              </div>
+              <div id="iol-proroga" class="accordion-body collapse" style="height: 0px; " tal:define="flagVisible python:doc.isConditionVerified('proroga');">
+                <div class="accordion-inner">         
+                    <!-- ELENCO PROROGHE -->
+                    <div class="span12" tal:content="structure python: doc.getRenderedItem('elenco_proroghe')" />
+                    <!-- RICHIEDI PROROGA -->
+                    <div  class="alert alert-error" tal:condition="python:flagVisible">
+                        <a style="width:200px" class="btn pull-right wf-actions" tal:attributes="id string:btn_proroga; href string:${prorogaurl}">
+							<i class='icon-hand-right'></i><span>Nuova Proroga</span>
+						</a>
+                    </div>
+                    
+                    <!--OPPURE       -->
+                    <div tal:condition="python:not flagVisible">La richiesta della proroga è soggetta a.... normativa .....</div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-group" tal:condition="python:db.isConditionVerified('rinnovo',tipoApp)">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#iol-childs" href="#iol-rinnovo">
+                  Rinnovo dell'autorizzazione
+                </a>
+              </div>
+              <div id="iol-rinnovo" class="accordion-body collapse" style="height: 0px; " tal:define="flagVisible python:doc.isConditionVerified('rinnovo');">
+                <div class="accordion-inner">         
+                    <!-- ELENCO RINNOVI -->
+                    <div class="span12" tal:content="structure python: doc.getRenderedItem('elenco_rinnovi')" />
+                    <!-- RICHIEDI RINNOVO -->
+                    <div  class="alert alert-error" tal:condition="python:flagVisible">
+                        <p>
+                            <a style="width:200px" class="btn pull-right wf-actions" tal:attributes="id string:btn_rinnovo; href string:${rinnovourl}">
+                                <i class='icon-hand-right'></i><span>Nuovo Rinnovo</span>
+                            </a>
+                        </p>
+                    </div>
+                    <!--OPPURE       -->
+                    <span tal:condition="python:not flagVisible">La richiesta del rinnovo è soggetta a.... normativa .....</span>
+                    
+                </div>
+              </div>
+            </div>
+            <div class="accordion-group" tal:condition="python:db.isConditionVerified('integrazione',app=tipoApp)">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#iol-childs" href="#iol-integrazione">
+                  Integrazione all'autorizzazione
+                </a>
+              </div>
+              <div id="iol-integrazione" class="accordion-body collapse" style="height: 0px; " tal:define="flagVisible python:doc.isConditionVerified('integrazione');">
+                <div class="accordion-inner">         
+                    <!-- ELENCO INTEGRAZIONI -->
+                    <div class="span12" tal:content="structure python: doc.getRenderedItem('elenco_integrazioni')" />
+                    <!-- RICHIEDI INTEGRAZIONE -->
+                        <div  class="alert alert-error" tal:condition="python:flagVisible">
+                            <p>
+                                <a style="width:200px" class="btn pull-right wf-actions" tal:attributes="id string:btn_integrazione; href string:${integrazioneurl}">
+                                    <i class='icon-hand-right'></i><span>Nuova Integrazione</span>
+                                </a>
+                            </p>
+                        </div>
+                    <!--OPPURE       -->
+                    <span tal:condition="python:not flagVisible">La richiesta di Integrazione è soggetta a.... normativa .....</span>              
+                </div>
+              </div>
+            </div>
+
+          </div>
+        
+        
 
 </tal:docblock>
+
 
 <span class="label label-important"
     tal:condition="python: doc.test_mode(True) and 'Manager' in doc.getRoles()">

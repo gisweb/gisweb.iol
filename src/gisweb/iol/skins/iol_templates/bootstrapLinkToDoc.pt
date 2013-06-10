@@ -1,0 +1,5 @@
+<tal:def tal:define="docurl python:context.REQUEST.PARENTS[0].absolute_url();
+    v options/fieldvalue;">
+    <a tal:attributes="href docurl" tal:content="v">a</a>
+       
+</tal:def>
