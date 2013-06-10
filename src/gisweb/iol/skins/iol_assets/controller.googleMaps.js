@@ -114,7 +114,7 @@ jQuery.plominoMaps.google.updateMarkerPosition = function(options){
 
 jQuery.plominoMaps.google.addEncodedGeometry = function(options){
 
-    console.log(options)
+    //console.log(options)
    var overlay;
     var path = google.maps.geometry.encoding.decodePath(options.geom);
     if(options.geomType=='line') overlay = new google.maps.Polyline({strokeColor:'#00FFFF',strokeOpacity: 1.0,strokeWeight: 2});
@@ -276,7 +276,7 @@ function clearMap(type){
 function updateMapField(){
 
 
-console.log('#'+this.getDiv().id+'_settings')
+//console.log('#'+this.getDiv().id+'_settings')
 
 
       var v = jQuery('#'+this.getDiv().id+'_settings').val();

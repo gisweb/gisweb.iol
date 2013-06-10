@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=default=False,json=True
+##parameters=default=False,json=False
 ##title=Is app in test mode?
 ##
 """
@@ -30,11 +30,11 @@ db = context.getParentDatabase()
 for attr_name in attr_list:
     try:
         test = getattr(db, attr_name)
-    except AttributeError, err:
+    except:
         pass
     else:
         default = test
-
+        
 if json:
     from Products.CMFPlomino.PlominoUtils import json_dumps
     return json_dumps(default)

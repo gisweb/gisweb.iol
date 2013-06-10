@@ -295,3 +295,8 @@ tr.linkToDocument{
     border: 1px solid #cccccc;
     padding: 4px;
 }
+
+.accordion-heading{
+  color:#555555;
+  font-size:14px;
+}

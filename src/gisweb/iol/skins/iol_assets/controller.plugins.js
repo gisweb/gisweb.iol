@@ -36,16 +36,27 @@ jQuery(".iol-autocomplete-form").each(function(){
                   if($('[name='+key+']').length>0){
                        el = $('[name='+key+']').eq(0);
                        if(e.added) 
-                          el.val(value);
-                       else if(e.removed){
-                            el.val('');console.log(el)}
-                       el.trigger('change');
+                           setControlValue(el,value);                 
+                       else if(e.removed)
+                            setControlValue(el,'');
+                        el.trigger('change');
+    
                    }
              });
-             console.log("change "+JSON.stringify({val:e.val, added:e.added, removed:e.removed})); 
+             //console.log("change "+JSON.stringify({val:e.val, added:e.added, removed:e.removed})); 
         });
 });
 
+//ATTENZIONE SISTEMARE IN SERIALDOC LA RESTITUZIONE DEI VALORI AL POSTO DELLE LABEL, PER ORA DOVE SERVE USO VALORE=LABEL
+function setControlValue(el,value){
+   if(el.is(':checkbox')||el.is(':radio')) {
+      $("#"+el.attr("name")+'-'+value).attr('checked', true);
+      //console.log("#"+el.attr("name")+'-'+value)
+    }
+   else{
+      el.val(value)
+   }
+}
 
     //GENERAZIONE DEI CONTROLLI AUTOCOMPLETE
     jQuery("input[data-plugin='autocomplete']").each(function(){

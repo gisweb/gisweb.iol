@@ -16,14 +16,14 @@ if context.portal_type!='PlominoDocument':
     return 'Tipo di oggetto non valido'
 
 print '**********************************************************************'
-print 'WORKFLOW : %s' % wfname
+print 'WORKFLOW : %s' % wf_name
 print 'STATO : %s' % (context.wf_getInfoFor('review_state'))
 print DateToString(Now(),'%d/%m/%Y %H:%M:%s') 
 print '**********************************************************************'
 
 if not var:
     pw = getToolByName(context,'portal_workflow')
-    for v in pw[wfname].variables:
+    for v in pw[wf_name].variables:
         try:
             result=context.wf_getInfoFor(v)
         except:

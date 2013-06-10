@@ -99,6 +99,7 @@ function addTopToolbarMenu(element){
 		jq(v).bind('click',function(event){
 			event.preventDefault();
 			jq("input[name='" + d['name'] + "']").trigger('click');
+                        jq("input[name='" + d['name'] + "']").remove();
 		})
 	});
 }

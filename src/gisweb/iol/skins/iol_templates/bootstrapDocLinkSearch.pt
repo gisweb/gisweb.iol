@@ -3,8 +3,9 @@
                        sourceview python: options['field'].getSettings('sourceview');
                        params python:options['field'].getSettings('dynamictableparam');
                        cols python: options['field'].getSettings().getJQueryColumns();
+                       destForm python: context.REQUEST.get('destinationForm','');
                        ">
-
+        <input type="hidden" id="destinationForm" tal:attributes="value destForm"/>
         <script type="text/javascript" charset="utf-8"
 
         tal:content="structure string:
@@ -12,6 +13,24 @@
         					var t=jq('#${fieldname}_datagrid').dataTable( {
         						'aoColumns': ${cols},
                                 'sAjaxSource':'${dburl}/${sourceview}/search_json',
+                                'aoColumnDefs': [
+                                    {
+                                        'aTargets': ['_all'],
+                                        'bUseRendered': false,
+                                        'fnRender': function (oObj) {
+                                            var cell = oObj.aData[oObj.iDataColumn];
+                                            var dburl=jq('#Plomino_Database_URL').val();
+                                            var destForm=jq('#destinationForm').val();
+                                            if (destForm ){
+                                                return '<a href=\'' + dburl +'/' + destForm + '?parentDocument=' + oObj.aData[0] + '\' class=\'viewlink\'>' + cell + '</a>';
+                                            }
+                                            else
+                                                return '<a href=\'' + dburl +'/' + oObj.aData[0] + '\' class=\'viewlink\'>' + cell + '</a>';
+                                        }
+                                            
+                                    },
+                                    { 'aTargets': [0], 'bSearchable': false, 'bSortable': false, 'sWidth': '0' }
+                                ],
         						${params},
                                 
         						'oLanguage': {
