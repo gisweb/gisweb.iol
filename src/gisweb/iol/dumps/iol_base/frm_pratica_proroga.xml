@@ -94,29 +94,28 @@ context.frm_beforeCreateDocument(child_events=True, msg='', redirect_to='search_
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[
-# qui controllo semplicemente che la data inizio non sia posteriore alla data di fine
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[# qui controllo semplicemente che la data inizio non sia posteriore alla data di fine
 from gisweb.utils import lookForValidDate
 
 parentId = context.REQUEST.get('parentDocument') or context.getItem('parentDocument')
 
 parentDocument = context.getParentDatabase().getDocument(parentId)
 
-fine = context.getItem('trasporti_datafine')
-inizio = parentDocument.getItem('trasporti_datainizio')
+fine = context.getItem('autorizzata_al')
+inizio = parentDocument.getItem('autorizzata_dal')
 
 if inizio and fine:
 
     if inizio >= fine:
         return 'ATTENZIONE! La data di fine periodo non può precedere o coincidere con quella di inizio.'
     
-    fine_old = parentDocument.getItem('trasporti_datafine')
+    fine_old = parentDocument.getItem('autorizzata_al')
     if fine_old:
-        p2 = fine-fine_old
+        p2 = fine-(fine_old +1)
         if p2 < 1:
             msg = """ATTENZIONE! La nuova data di fine autorizzazione deve essere sucessiva a quella già concessa."""
             return msg
-        p1 = fine_old-inizio
+        p1 = (fine_old+1)-inizio
         if p2 > p1:
             fine_max = fine_old + p1
             msg = """ATTENZIONE! Le autorizzazioni non è possibile concedere una proroga per un periodo
@@ -336,18 +335,17 @@ return '']]></Formula>
           <id type="Products.Archetypes.Field.StringField">autorizzata_dal</id>
           <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[#parentId = context.REQUEST.get('parentDocument') or context.getItem('parentDocument')
-#parentDocument = context.getParentDatabase().getDocument(parentId)
-
-#return  parentDocument.getItem('autorizzata_al')
-#fine_pratica=parentDocument.getItem('data_autorizzazione') 
-
-#now= DateTime()
-#if fine_pratica < now:     # scaduta
-#    return context.setItem('autorizzata_dal', now + 2)
-#else:
- #   return context.setItem('autorizzata_dal',fine_pratica)
-    ]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[parentId = context.REQUEST.get('parentDocument') or context.getItem('parentDocument','')
+parentDocument = context.getParentDatabase().getDocument(parentId)
+if parentDocument:
+    data_fine = parentDocument.getItem('autorizzata_al')
+    if data_fine >= Now():
+        return data_fine +1
+    else:
+            Now()+3
+else:
+    return ''
+ ]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>

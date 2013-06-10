@@ -37,7 +37,7 @@
           <id type="Products.Archetypes.Field.StringField">wf_iol</id>
           <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[['assegnata','presentata','istruttoria_ok']]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return ['assegnata','presentata','istruttoria_ok']]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
@@ -49,7 +49,7 @@
 <value><struct>
 <member>
 <name>selectionlistformula</name>
-<value><string>return ['Nuovo documento in compilazione|avvio','Assegnata in fase di istruttoria|assegnata', 'In attesa di autorizzazione|istruttoria_ok','Autorizzazione protocollata|autorizzata','Autorizzazione Prorogata|prorogata','Sospesa|sospesa','Preavviso di Rigetto|pre_rigetto','Archiviata|archiviata','Rigettata|rigettata']
+<value><string>return ['Nuovo documento in compilazione|avvio','Assegnata in fase di istruttoria|assegnata', 'In attesa di autorizzazione|istruttoria_ok','Autorizzazione protocollata|autorizzata','Sospesa|sospesa','Preavviso di Rigetto|pre_rigetto','Archiviata|archiviata','Rigettata|rigettata']
 
 if context.isNewDocument():
     db = context.getParentDatabase()
@@ -93,54 +93,6 @@ return out
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return False
 #not plominoDocument.methods.isIstruttore()]]></Formula>
           <isDynamicHidewhen type="Products.Archetypes.Field.BooleanField">False</isDynamicHidewhen>
-        </element>
-        <element id="tipo_pratica" title="Tipo Pratica" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">tipo_pratica</id>
-          <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
-          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldEditTemplate>
-          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
-          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
-          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
-          <params>
-<param>
-<value><struct>
-<member>
-<name>selectionlistformula</name>
-<value><string>frms = plominoDocument.getParentDatabase().callScriptMethod('frm_events','elenca_tipi_pratica')
-result = []
-for rr in plominoDocument.getParentDatabase().getCurrentUserRoles():
-    r = rr.split('-')[1][:-1]
-    for f in frms:
-        if r in f:
-            result.append(f)
-return result            </string></value>
-</member>
-<member>
-<name>dynamictableparam</name>
-<value><string>'bPaginate': true,
-'bLengthChange': true,
-'bFilter': true,
-'bSort': true,
-'bInfo': true,
-'bAutoWidth': false</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>CHECKBOX</string></value>
-</member>
-</struct></value>
-</param>
-</params>
-          <CustomData>
-            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">dynamicSearch=""</field>
-            </extensionfields>
-          </CustomData>
         </element>
       </elements>
     </element>

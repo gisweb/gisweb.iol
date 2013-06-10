@@ -18,7 +18,9 @@
 <div class="row-fluid"><span class="plominoFieldClass">integrazione_autorizzazione</span></div>
 <p><span class="plominoHidewhenClass">end:hw_notautorizzata</span></p>
 <p><span class="plominoHidewhenClass">start:hw_notsospesa</span></p>
-<div class="row-fluid alert alert-error"><span class="plominoFieldClass">istruttoria_motivo_sospensione</span></div>
+<div class="row-fluid">
+<div class="span12 alert alert-error"><span class="plominoFieldClass">istruttoria_motivo_sospensione</span></div>
+</div>
 <p><span class="plominoHidewhenClass">end:hw_notsospesa</span></p>
 <p><span class="plominoHidewhenClass">start:hw_notsospesa_utente</span></p>
 <div class="row-fluid alert alert-info"><span class="plominoFieldClass">istruttoria_annotazioni_sospensione_richiedente</span></div>
@@ -462,19 +464,19 @@ return 'REMOVE_PERMISSION' not in getUserPermissions(plominoDocument)]]></Hidewh
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[# in caso di rinnovo la data di inizio proposta coincide con quella di fine della pratica rinnovata
 # altrimenti propongo oggi+3 (tempo minimo di preavviso)
 
-default = Now() + 3
+#default = Now() + 3
 
-if plominoDocument.isNewDocument():
-    db = context.getParentDatabase()
+#if plominoDocument.isNewDocument():
+ #   db = context.getParentDatabase()
     #tipo_pratica = db.callScriptMethod('frm_events', 'genera_tipo_pratica', plominoDocument.getForm().getId())
-    parent_id = context.REQUEST.get('parentDocument')
-    parentDocument = db.getDocument(parent_id)
+  #  parent_id = context.REQUEST.get('parentDocument')
+   # parentDocument = db.getDocument(parent_id)
     #if 'rinnovo' in tipo_pratica and parentDocument:
     #    vecchia_fine = parentDocument.getItem('autorizzata_al') or default
     #    nuovo_inizio = vecchia_fine if vecchia_fine > default else default
     #    return  nuovo_inizio
 
-return default]]></Formula>
+#return default]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
@@ -1196,14 +1198,8 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
         </element>
         <element id="hw_notistruttoria" title="Nascondi quando non istruita" type="PlominoHidewhen">
           <id type="Products.Archetypes.Field.StringField">hw_notistruttoria</id>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[roles = plominoDocument.getParentDatabase().getCurrentUser().getRolesInContext(plominoDocument)
-isIstruttore = 'iol-manager' in roles or 'iol-reviewer' in roles or 'Manager' in roles
-try:
-    from Products.CMFCore.utils import getToolByName
-    wf = getToolByName(context, 'portal_workflow')
-    istruita=wf.getInfoFor(plominoDocument,'wf_protocollata') or False
-except:
-    istruita=False
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[isIstruttore = plominoDocument.verificaRuolo('iol-manager') or  plominoDocument.verificaRuolo('iol-reviewer')
+istruita=plominoDocument.wf_getInfoFor('wf_protocollata') or False
 
 #Visualizza se è stata istruita e (se in edit ruolo di istruttore, rup, manager, in view sempre)
 if istruita and ((plominoDocument.isEditMode() and isIstruttore) or not plominoDocument.isEditMode()):
@@ -1440,6 +1436,79 @@ return plominoDocument.wf_getInfoFor('wf_presentata')]]></Formula>
 </struct></value>
 </param>
 </params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="elenco_rinnovi" title="Domande di rinnovo collegate alla pratica" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">elenco_rinnovi</id>
+          <FieldType type="Products.Archetypes.Field.StringField">DOCLINK</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">renderDocLinkWithForm</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">renderDocLinkWithForm</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>dynamictableparam</name>
+<value><string>'bPaginate': true,
+'bLengthChange': true,
+'bFilter': true,
+'bSort': true,
+'bInfo': true,
+'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>base_sub_pratica</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="elenco_proroghe" title="Domande di proroga collegate alla pratica" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">elenco_proroghe</id>
+          <FieldType type="Products.Archetypes.Field.StringField">DOCLINK</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">renderDocLinkWithForm</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">renderDocLinkWithForm</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="elenco_integrazioni" title="Domande di integrazione collegate alla pratica" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">elenco_integrazioni</id>
+          <FieldType type="Products.Archetypes.Field.StringField">DOCLINK</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">renderDocLinkWithForm</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">renderDocLinkWithForm</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>

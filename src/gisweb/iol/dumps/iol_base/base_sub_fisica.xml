@@ -9,34 +9,9 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div><span class="plominoFieldClass">fisica_search</span></div>
-<div class="row-fluid">
-<div class="span6"><span class="plominoFieldClass">fisica_cognome</span></div>
-<div class="span4"><span class="plominoFieldClass">fisica_nome</span></div>
-<div class="span2"><span class="plominoFieldClass">fisica_sesso</span></div>
-</div>
-<div class="row-fluid">
-<div class="span3"><span class="plominoFieldClass">fisica_data_nato</span></div>
-<div class="span3"><span class="plominoFieldClass">fisica_comune_nato</span></div>
-<div class="span2"><span class="plominoFieldClass">fisica_provincia_nato</span></div>
-<div class="span4"><span class="plominoHidewhenClass">start:hw_fisica_loc_nato</span> <span class="plominoFieldClass">fisica_loc_nato</span> <span class="plominoHidewhenClass">end:hw_fisica_loc_nato</span></div>
-</div>
-<div class="row-fluid"><!--
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div><span class="plominoFieldClass">fisica_search</span></div><div class="row-fluid"><div class="span6"><span class="plominoFieldClass">fisica_cognome</span></div><div class="span4"><span class="plominoFieldClass">fisica_nome</span></div><div class="span2"><span class="plominoFieldClass">fisica_sesso</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">fisica_data_nato</span></div><div class="span3"><span class="plominoFieldClass">fisica_comune_nato</span></div><div class="span2"><span class="plominoFieldClass">fisica_provincia_nato</span></div><div class="span4"><span class="plominoHidewhenClass">start:hw_fisica_loc_nato</span> <span class="plominoFieldClass">fisica_loc_nato</span> <span class="plominoHidewhenClass">end:hw_fisica_loc_nato</span></div></div><div class="row-fluid"><!--
 <div class="span5"><span class="plominoFieldClass">fisica_titolo</span></div>
--->
-<div class="span3"><span class="plominoFieldClass">fisica_cittadinanza</span></div>
-<div class="span3"><span class="plominoFieldClass">fisica_cf</span></div>
-<span class="plominoFieldClass">fisica_cod_cat_nato</span></div>
-<div class="row-fluid">
-<div class="span3"><span class="plominoFieldClass">fisica_comune</span></div>
-<div class="span2"><span class="plominoFieldClass">fisica_provincia</span></div>
-<div class="span2"><span class="plominoFieldClass">fisica_cap</span></div>
-<div class="span5"><span class="plominoHidewhenClass">start:hw_fisica_loc</span> <span class="plominoFieldClass">fisica_loc</span> <span class="plominoHidewhenClass">end:hw_fisica_loc</span></div>
-</div>
-<div class="row-fluid">
-<div class="span10"><span class="plominoFieldClass">fisica_indirizzo</span></div>
-<div class="span2"><span class="plominoFieldClass">fisica_civico</span></div>
-</div>]]></FormLayout>
+--><div class="span3"><span class="plominoFieldClass">fisica_cittadinanza</span></div><div class="span3"><span class="plominoFieldClass">fisica_cf</span></div><span class="plominoFieldClass">fisica_cod_cat_nato</span></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">fisica_comune</span></div><div class="span2"><span class="plominoFieldClass">fisica_provincia</span></div><div class="span2"><span class="plominoFieldClass">fisica_cap</span></div><div class="span5"><span class="plominoHidewhenClass">start:hw_fisica_loc</span> <span class="plominoFieldClass">fisica_loc</span> <span class="plominoHidewhenClass">end:hw_fisica_loc</span></div></div><div class="row-fluid"><div class="span10"><span class="plominoFieldClass">fisica_indirizzo</span></div><div class="span2"><span class="plominoFieldClass">fisica_civico</span></div></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">BOTTOM</ActionBarPosition>
@@ -300,10 +275,6 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
-<name>selectionlistformula</name>
-<value><string>['Maschile|M','Femminile|F']</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -319,6 +290,8 @@ return '']]></ValidationFormula>
 <member>
 <name>selectionlist</name>
 <value><array><data>
+<value><string>Maschile</string></value>
+<value><string>Femminile</string></value>
 </data></array></value>
 </member>
 </struct></value>
@@ -595,7 +568,7 @@ return '']]></ValidationFormula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
-              <field name="customAttributes">data-autocompleteform-options="{url:'fetch_data',placeholder:'Digitare il codice fiscale della persona da ricercare',allowClear:true,minimumInputLength:0,id:function(e){return e.fisica_cf;},formatResult: function(name){return'&lt;div&gt;'+name.fisica_cognome+' '+name.fisica_nome+' cf: '+name.fisica_cf+' nato a '+name.fisica_comune_nato+' il '+name.fisica_data_nato+'&lt;/div&gt;'; },formatSelection:function(name){return name.fisica_cognome+ ' '+name.fisica_nome+' cf: '+name.fisica_cf; },data:function(term,page){return{forms:'base_sub_fisica',distinct:'fisica_cf',fisica_cf:term,page:page,size:10}}}"</field>
+              <field name="customAttributes">data-autocompleteform-options="{url:'fetch_data',placeholder:'Digitare il codice fiscale della persona da ricercare',allowClear:true,minimumInputLength:0,id:function(e){return e.fisica_cf;},formatResult: function(name){return' '+name.fisica_cognome+' '+name.fisica_nome+' cf: '+name.fisica_cf+' nato a '+name.fisica_comune_nato+' il '+name.fisica_data_nato+' '; },formatSelection:function(name){return name.fisica_cognome+ ' '+name.fisica_nome+' cf: '+name.fisica_cf; },data:function(term,page){return{forms:'base_sub_fisica',distinct:'fisica_cf',fisica_cf:term,page:page,size:10}}}"</field>
             </extensionfields>
           </CustomData>
         </element>

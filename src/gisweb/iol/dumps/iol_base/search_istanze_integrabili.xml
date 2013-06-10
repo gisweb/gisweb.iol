@@ -48,20 +48,8 @@
 'bInfo': true,
 'bAutoWidth': false,
 'bJQueryUI': false,
-'bProcessing': true,
-'aoColumnDefs': [
-        {
-            'aTargets': ['_all'],
-            'bUseRendered': false,
-            'fnRender': function (oObj) {
-                var cell = oObj.aData[oObj.iDataColumn];
-                var dburl=jq('#Plomino_Database_URL').val();
-                return '&lt;a href=\'' + dburl +'/frm_pratica_integrazione?parentDocument=' + oObj.aData[0] + '\' class=\'viewlink\'&gt;' + cell + '&lt;/a&gt;';
-            }
-                
-        },
-        { 'aTargets': [0], 'bSearchable': false, 'bSortable': false, 'sWidth': '0' }
-    ]</string></value>
+'bProcessing': true
+</string></value>
 </member>
 <member>
 <name>widget</name>
