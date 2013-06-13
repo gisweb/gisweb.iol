@@ -1,4 +1,6 @@
-<tal:def tal:define="docurl python:context.REQUEST.PARENTS[0].absolute_url();
+<tal:def tal:define="db python:context.REQUEST.PARENTS[0].getParentDatabase();
+    docId python:test(context.REQUEST.get('document_to_display'),context.REQUEST.get('document_to_display'),context.REQUEST.PARENTS[0].getId);
+    docurl python: db.getDocument(docId).absolute_url();
     v options/fieldvalue;">
     <a tal:attributes="href docurl" tal:content="v">a</a>
        

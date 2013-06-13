@@ -1,4 +1,4 @@
-## Script (Python) "iol_onOpenDocument"
+## Script (Python) "frm_onOpenDocument"
 ##bind container=container
 ##bind context=context
 ##bind namespace=
@@ -15,3 +15,6 @@ owf = None if not owf_name else context.getParentDatabase().getForm(owf_name)
 
 if owf and not context.isNewDocument():
     context.setItem('oForm', context.getItem('Form', ''))
+
+if context.getItem('plominoredirecturl'):
+    context.removeItem('plominoredirecturl')

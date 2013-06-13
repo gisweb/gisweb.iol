@@ -4,10 +4,9 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=child_events=False, backToParent=False
+##parameters=child_events=False, backToParent=False, suffix=''
 ##title=IOL onCreateDocument event common actions
 ##
-
 """
 Standardizzazione dele operazioni da svolgere alla creazione di una istanza
 child_events: True o False (lancia gli script di gestione dell'uno a molti)
@@ -37,10 +36,9 @@ for uid,roles in rolesToAdd.items():
 updateAllRoleMappingsFor(context)
 
 
-
 # EVENTI DI REALIZZAZIONE COLLEGAMENTO UNO A MOLTI
 if child_events:
-    context.event_onCreateChild(backToParent=backToParent)
+    context.event_onCreateChild(backToParent=backToParent, suffix=suffix)
     
 #Se ci sono dati da copiare li copio
 for sub_name in context.getForm().getSubforms():
@@ -50,3 +48,5 @@ for sub_name in context.getForm().getSubforms():
         if sub_parent_form:
             for field in sub_parent_form.getFormFields():
                 doc.cloneItem(field.getId())
+
+doc.setItem('plominoredirecturl','%s/EditDocument' % doc.absolute_url())

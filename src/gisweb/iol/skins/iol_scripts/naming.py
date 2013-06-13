@@ -5,9 +5,8 @@
 ##bind script=script
 ##bind subpath=traverse_subpath
 ##parameters=what='', frm_key='frm_', default='', calculate=False
-##title=(NON SERVE PIÙ?) Centralized naming policy management
+##title=Centralized naming policy management
 ##
-
 """
 Centralized naming policy management
 
@@ -20,6 +19,18 @@ what: the argument of your request i.e. 'tipo_pratica', 'tipo_app' o 'tipo_richi
 
 if what=='frm_key':
     return frm_key
+
+def main(what='', frm_key='frm_', default='', calculate=False):
+    """
+    frmname2what
+    """
+    return default
+
+def inverse(what, value, frm_key='frm_'):
+    """
+    what2frmname
+    """
+    return form_name
 
 generators = dict(
     # tutto ciò che segue il prefisso unito da "_"

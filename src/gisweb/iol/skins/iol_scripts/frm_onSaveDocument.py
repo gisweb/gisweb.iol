@@ -1,4 +1,4 @@
-## Script (Python) "iol_onSaveDocument"
+## Script (Python) "frm_onSaveDocument"
 ##bind container=container
 ##bind context=context
 ##bind namespace=
@@ -7,7 +7,6 @@
 ##parameters=child_events=False, backToParent=False
 ##title=IOL onSaveDocument event common actions
 ##
-
 """
 Standardizzazione dele operazioni da svolgere al salvataggio di una istanza
 child_events: True o False (lancia gli script di gestione dell'uno a molti)
@@ -22,6 +21,8 @@ if 'oForm' in context.getItems():
     if context.getParentDatabase().getForm(oFormName):
         context.setItem('Form', oFormName)
     context.removeItem('oForm')
+ 
+
 
 
 

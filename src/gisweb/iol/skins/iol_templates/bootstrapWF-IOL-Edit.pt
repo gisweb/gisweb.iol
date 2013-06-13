@@ -18,7 +18,7 @@
             status_info python: doc.wf_getInfoForState('iol_workflow', initial_state_id, args=['description'])">
         <h4 tal:content="status_info/title" />
         <div tal:content="status_info/description" />
-        <h5>Per poter inviare la domanda occorre aver compilato tutti i campi indicati dal simbolo blu</h5>
+        <h5>Compilare i campi sottostanti e digitare il pulsante Salva per proseguire nella compilazione della pratica</h5>
     </div>
 </tal:newdoc>
 

@@ -11,12 +11,6 @@
 <link tal:attributes="href string:${dburl}/resources/style.css" rel="stylesheet" type="text/css">
 
 
-        <!-- INFORMAZIONI DI BASE DELLA GENITORE -->
-<tal:cond tal:condition="python:doc.getItem('linkToParent')" >
-        <div tal:content="structure python: doc.getRenderedItem('linkToParent')"></div>
-</tal:cond> 
-
-
 <!-- ------------------------------- -->
 <!-- BLOCCO DELLE AZIONI DI WORKFLOW -->
 <!-- ------------------------------- -->
@@ -59,7 +53,11 @@
 
     </tal:loop>
         
-
+        <!-- INFORMAZIONI DI BASE DELLA GENITORE -->
+<tal:cond tal:condition="python:doc.getItem('linkToParent')" >
+        
+        <div tal:content="structure python: doc.getRenderedItem('linkToParent')"></div>
+</tal:cond>
 
 <!-- END WF ACTIONS -->
 </tal:blockactions>
@@ -133,7 +131,7 @@
         </div>
 
         <div class="alert alert-info"
-            tal:condition="python: doc.elenco_modelli('autorizzazione')!=None and doc.canUserEdit() and doc.wf_getInfoFor('review_state') == 'assegnata' and not doc.getItem('documenti_autorizzazione')">
+            tal:condition="python: doc.elenco_modelli('autorizzazione')!=None and (doc.verificaRuolo('iol-reviewer') or doc.verificaRuolo('iol-manager')) and doc.wf_getInfoFor('review_state') == 'assegnata' and not doc.getItem('documenti_autorizzazione')">
             <div class="row-fluid" >
                 <div class="span8" tal:content="structure python: doc.getRenderedItem('modello_autorizzazione')" />
                 <a disabled = "disabled" style="width:200px;margin-top:20px;margin-right:5px" class="btn wf-actions pull-right"
@@ -146,8 +144,7 @@
             </div>
          </div>
 
-        <div class="row-fluid" tal:define="roles python:doc.getRoles()"
-            tal:condition="python: doc.getItem('documenti_autorizzazione') and ('iol-reviewer' in roles or 'iol-manager' in roles or 'Manager' in roles) and doc.wf_getInfoFor('review_state') == 'istruttoria_ok'">
+        <div class="row-fluid" tal:condition="python: doc.getItem('documenti_autorizzazione') and (doc.verificaRuolo('iol-reviewer') or doc.verificaRuolo('iol-manager')) and doc.wf_getInfoFor('review_state') == 'istruttoria_ok'">
             <div class="span12" tal:content="structure python: doc.getRenderedItem('documenti_autorizzazione')" />
         </div>
         <div class="row-fluid"
@@ -225,7 +222,7 @@
               <div id="iol-proroga" class="accordion-body collapse" style="height: 0px; " tal:define="flagVisible python:doc.isConditionVerified('proroga');">
                 <div class="accordion-inner">         
                     <!-- ELENCO PROROGHE -->
-                    <div class="span12" tal:content="structure python: doc.getRenderedItem('elenco_proroghe')" />
+                    <div class="span12" tal:content="structure python: doc.getRenderedItem('childrenList_proroga')" />
                     <!-- RICHIEDI PROROGA -->
                     <div  class="alert alert-error" tal:condition="python:flagVisible">
                         <a style="width:200px" class="btn pull-right wf-actions" tal:attributes="id string:btn_proroga; href string:${prorogaurl}">
@@ -234,7 +231,7 @@
                     </div>
                     
                     <!--OPPURE       -->
-                    <div tal:condition="python:not flagVisible">La richiesta della proroga è soggetta a.... normativa .....</div>
+                    <div tal:condition="python:not flagVisible">La richiesta della proroga Ã¨ soggetta a.... normativa .....</div>
                 </div>
               </div>
             </div>
@@ -257,7 +254,7 @@
                         </p>
                     </div>
                     <!--OPPURE       -->
-                    <span tal:condition="python:not flagVisible">La richiesta del rinnovo è soggetta a.... normativa .....</span>
+                    <span tal:condition="python:not flagVisible">La richiesta del rinnovo Ã¨ soggetta a.... normativa .....</span>
                     
                 </div>
               </div>
@@ -281,7 +278,7 @@
                             </p>
                         </div>
                     <!--OPPURE       -->
-                    <span tal:condition="python:not flagVisible">La richiesta di Integrazione è soggetta a.... normativa .....</span>              
+                    <span tal:condition="python:not flagVisible">La richiesta di Integrazione Ã¨ soggetta a.... normativa .....</span>              
                 </div>
               </div>
             </div>

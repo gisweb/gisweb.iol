@@ -1,35 +1,28 @@
-//TEST CONTROLLER DI PAGINA
 jQuery(document).ready(function () {
+    //GENERAZIONE DEI CONTROLLI GEOCODE
+    jQuery("[data-plugin='geocode']").each(function(){
+        eval("var options = "  + jQuery(this).data('geocodeOptions'));
+		//console.log(options.icon)
+		//if(jQuery('#'+options.icon)) options.icon = jQuery('#'+options.icon).val();
+		//console.log(options.icon)
+        options.icon = jQuery(this).data('iconPath') + options.icon;
+		console.log(options.icon)
 
+        options.fieldId  = this.id + '_geometry';
+        var field = jQuery('#' + options.fieldId);
 
-     //GENERAZIONE DEI CONTROLLI GEOCODE
-     jQuery("[data-plugin='geocode']").each(function(){
-          eval("var options = "  + jQuery(this).data('geocodeOptions'));
-//console.log(options.icon)
-        //  if(jQuery('#'+options.icon)) options.icon = jQuery('#'+options.icon).val();
-//console.log(options.icon)
-
-          options.icon = jQuery(this).data('iconPath') + options.icon;
-console.log(options.icon)
-
-          options.fieldId  = this.id + '_geometry';
-          var field = jQuery('#' + options.fieldId);
-
-          if( field.val()) eval("var v= "  + field.val());
-          if(typeof(options)=='object'){
-               if(jQuery(this).is('a')) jQuery(this).bind('click',geocode_actions);
-               if(jQuery(this).is('img')) jQuery(this).attr('src',options.icon);
-               if(typeof(v)=='object' && typeof(options)=='object'){
-                   options.pos = v;
-                   options.editmode = jQuery(this).is('a');
-                   jQuery.plominoMaps.google.addMarker(options)
-                   //jQuery.plominoMaps.addMarker(options);
-               }
-          }
-
-          
-      });
-
+        if( field.val()) eval("var v= "  + field.val());
+        if(typeof(options)=='object'){
+			if(jQuery(this).is('a')) jQuery(this).bind('click',geocode_actions);
+			if(jQuery(this).is('img')) jQuery(this).attr('src',options.icon);
+			if(typeof(v)=='object' && typeof(options)=='object'){
+				options.pos = v;
+				options.editmode = jQuery(this).is('a');
+				jQuery.plominoMaps.google.addMarker(options)
+				//jQuery.plominoMaps.addMarker(options);
+			}
+        }
+    });
 });
 
 //Trova un elemento di geometria dato un indice
@@ -97,6 +90,20 @@ jQuery.plominoMaps.updateGeometryField = function(options){
     if(jQuery("[name^='lng']")) jQuery("[name^='lng']").val(options.pos[1].toFixed(6))
     
 
+    //SE C'è UN CAMPO PROGRESSIVA LA CALCOLO E ASSEGNO COME PER LE COORDINATE!!!!!!!!!!!!!
+    if(options.fieldprog){
+           var options = {'concessione_strada':jQuery('#concessione_strada').val(),'field':'geocode_strada_point','prefix':'concessione','lat':options.pos[0],'lng':options.pos[1]};
+           jQuery.ajax({
+                'url':'services/xSuggest',
+		'type':'POST',
+		'data':options,
+		'dataType':'JSON',
+		'success':function(data, textStatus, jqXHR){
+                     console.log(data)
+	      }
+	   });
+
+    } 
 
 
 }
@@ -354,16 +361,3 @@ function geocode_strada(options){
 	      }
 	});
 }           
-
-function addlayer(id,options){
-    var map=jQuery.plominoMaps.gMap;
-              map.overlayMapTypes.setAt(2, new google.maps.ImageMapType({
-                    getTileUrl: getGCTileURL,
-                    tileSize: new google.maps.Size(256, 256),
-                    isPng: true,
-                    url:"http://www.cartografiarl.regione.liguria.it/mapserver/mapserv.exe?MAP=E:/Progetti/mapfiles/repertoriocartografico/PIANIFICAZIONE/1047.map&LAYERS=L2624",
-                    map:map,
-                    name:'mappale'
-               }));
-
-}

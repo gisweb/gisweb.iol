@@ -7,7 +7,6 @@
 ##parameters=backToParent=False
 ##title=
 ##
-
 """
 """
 
@@ -19,5 +18,8 @@ def onsave_child(doc, backToParent=False):
     if not doc.isNewDocument():
         if doc.getItem('plominoredirecturl') and not backToParent:
             doc.removeItem('plominoredirecturl')
+
+
+
 
 onsave_child(context, backToParent=backToParent)

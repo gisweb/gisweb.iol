@@ -1,0 +1,25 @@
+<tal:def tal:define="
+    
+    db python:context.REQUEST.PARENTS[0].getParentDatabase();
+    docId python: context.REQUEST.get('document_to_display','');
+    relatedDoc python: db.getDocument(docId);
+
+    title python:options['field'].title;
+    id options/fieldname;
+    ttip_title title;
+    v python:relatedDoc.getItem(id);
+    docurl python:relatedDoc.absolute_url();
+    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();">
+      
+<label>
+            <span tal:content="python:'%s: ' % options['field'].title">Titolo</span>
+        </label>
+
+<ul aria-labelledby="dLabel" tal:repeat="attachment options/fieldvalue">
+                                <li>
+                                    <a tal:define="href python:test('.pdf' in attachment,docurl+'/'+attachment,docurl+'/getfile?filename='+attachment);" target="new" tal:attributes="href string:${href}" >
+                                        <img tal:define="img python:test('.pdf' in attachment,'images/pdf.gif','images/word.gif');" tal:attributes="src string:${img}" /> &nbsp;<span tal:content="python: '.'.join(attachment.split('.')[:-1]).capitalize().replace('-',' ')"/>
+                                    </a>
+                                </li>
+                            </ul>
+</tal:def>

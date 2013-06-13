@@ -4,10 +4,9 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=parent_id='', backToParent='anchor', setDocLink=True
+##parameters=parent_id='', backToParent='anchor', setDocLink=True, suffix=''
 ##title=
 ##
-
 """
 """
 
@@ -43,7 +42,7 @@ def setParenthood(ChildDocument, parent_id, CASCADE=True, setDocLink=False, bash
             # utile per la creazione via web
             ChildDocument.REQUEST.set(parentLinkKey, [Parent_path])
 
-def setChildhood(ChildDocument, parent_id, backToParent='anchor'):
+def setChildhood(ChildDocument, parent_id, backToParent='anchor', suffix=''):
     '''
     Set child reference on parent document
     '''
@@ -51,7 +50,7 @@ def setChildhood(ChildDocument, parent_id, backToParent='anchor'):
     db = ChildDocument.getParentDatabase()
     ParentDocument = db.getDocument(parent_id)
 
-    childrenList_name = childrenListKey % ChildDocument.Form
+    childrenList_name = childrenListKey % (suffix or ChildDocument.Form)
     childrenList = ParentDocument.getItem(childrenList_name, []) or []
 
     childrenList.append(ChildDocument.event_common('doc_path'))
@@ -64,7 +63,7 @@ def setChildhood(ChildDocument, parent_id, backToParent='anchor'):
             backUrl = '%s#%s' % (backUrl, childrenList_name)
         ChildDocument.setItem('plominoredirecturl', backUrl)
 
-def oncreate_child(doc, parent_id='', backToParent='anchor', setDocLink=False):
+def oncreate_child(doc, parent_id='', backToParent='anchor', setDocLink=False, suffix=''):
     '''
     Actions to perform on creation of a ChildDocument
     '''
@@ -75,6 +74,6 @@ def oncreate_child(doc, parent_id='', backToParent='anchor', setDocLink=False):
 
     if parent_id:
         setParenthood(doc, parent_id, setDocLink=setDocLink)
-        setChildhood(doc, parent_id, backToParent)
+        setChildhood(doc, parent_id, backToParent, suffix=suffix)
 
-oncreate_child(context, parent_id=parent_id, backToParent=backToParent, setDocLink=setDocLink)
+oncreate_child(context, parent_id=parent_id, backToParent=backToParent, setDocLink=setDocLink, suffix=suffix)

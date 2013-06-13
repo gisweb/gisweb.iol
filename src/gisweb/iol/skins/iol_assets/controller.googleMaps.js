@@ -5,11 +5,12 @@ $(function () {
         eval("var options = "  + jQuery(this).data('googlemapOptions'));
         if(options.center) options.center = new google.maps.LatLng(options.center[0],options.center[1]);
         var map = new google.maps.Map(document.getElementById(this.id),options);
+        map.initSettings = options;
 
         google.maps.event.addListener(map, 'center_changed', updateMapField);
         google.maps.event.addListener(map, 'zoom_changed', updateMapField);
         google.maps.event.addListener(map, 'maptypeid_changed', updateMapField);
-console.log(map)
+
         //Evetuali oprazioni da fare su ogni singola mappa
         //map.infowindow = new google.maps.InfoWindow(); //Aggiungo una finestra di popup per ogni mappa
         //Setto centro ed estensione del parent se esiste
