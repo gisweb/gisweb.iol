@@ -20,17 +20,12 @@
      baseURL python: context.getParentDatabase().absolute_url();
      doc python: context.REQUEST.PARENTS[0];
      docId python:doc.isDocument() and doc.getId();
-	    			data selection;
+     editMode python:1 if not doc.isDocument() or doc.isEditMode() else 0;			
+                    data selection;
 	    			cols python:options['field'].getSettings().getJQueryColumns();
 	    			params python:options['field'].getSettings('dynamictableparam');
 	    			selected python:'|'.join(lcurrent_ids+lcurrent);
 	    			">
-                        
-<!-- VEDERE DI SPOSTARLO SUL FOM ALTRIMENTI COSI METTO UNA SOLA MAPPA -->                       
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script> 
-<script type="text/javascript" src=" http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
-                    
-<script type="text/javascript" tal:attributes="src string:${portal_url}/controller.googleMaps.js"></script>                        <script type="text/javascript" tal:attributes="src string:${portal_url}/layers.js"></script>                        
 
                         
         <script type='text/javascript' tal:content="structure string:
@@ -104,6 +99,7 @@
 		
 
         			jq('#${fieldname}_addrow').click(function() {
+                        if($.plominoFormChanged && !confirm('Attenzione: le modifiche sul form andranno perse, continuare?')) return false;
                         var editUrl = '${baseURL}/' + ${fieldname}_datatable.fnSettings().oInit.editForm;
                         window.location=editUrl+'/OpenForm?parentDocument=${docId}';
                         return false;
@@ -133,11 +129,15 @@
             <i tal:condition="ttip_descr" class="icon-info-sign" data-fade-speed="10" data-trigger="hover" tal:attributes="title ttip_title;data-content ttip_descr"></i>
         </label>
                            
-        <!--MAPPA--> 
-        <style tal:content="structure string:#${fieldname}_gmap img {max-width: none}"></style>
-        <div class="row-fluid" tal:content='structure string:<div id="${fieldname}_gmap" ${custom_attributes}></div>'/>              
-                                                                
-        <div class="btn-group" tal:condition="python:doc.isDocument() and not doc.isEditMode()">      
+        <div tal:attributes="
+            id string:${fieldname}_gmap;
+            data-base-url baseURL;
+            data-edit-mode editMode;
+            class string: googlemap-plugin;
+            data-plugin-options custom_attributes;"></div>              
+
+                        
+        <div class="btn-group" tal:condition="python:doc.isDocument() and doc.isEditMode()">      
           <a class="btn" tal:attributes="id string:${fieldname}_addrow;">Aggiungi elemento in mappa</a>
   
           <!--<button class="btn disabled" tal:attributes="id string:${fieldname}_editrow;">Modifica</button>
