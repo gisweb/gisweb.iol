@@ -259,7 +259,7 @@ top:200px
 }
 
 div#advancedSearchDiv{
-    /*display:none;*/
+    display:none;
 }
 tr.linkToDocument{
     cursor:pointer;
@@ -299,4 +299,21 @@ tr.linkToDocument{
 .accordion-heading{
   color:#555555;
   font-size:14px;
+}
+
+.streetview img {
+    max-width: none
+} 
+
+.googlemap-plugin img {
+    max-width: none
+}   
+
+.geocode-icon {
+    height:16px 
+}
+
+.address-plugin {
+
+   width:100%
 }
