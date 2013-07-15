@@ -21,7 +21,6 @@
         </label>
         <tal:widget tal:condition="python:test(widget=='SELECT')">
             <select tal:attributes="name options/fieldname;
-                                    id options/fieldname;
                                     data-dhw dy_hidewhen;
                                     style string:width:100%;
                                     class string:combobox ${dy_search}">
