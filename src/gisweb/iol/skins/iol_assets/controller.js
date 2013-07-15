@@ -1,5 +1,4 @@
-jQuery.plominoMaps = {"google":{"points":[],"lines":[],"polygons":[]},"gisclient":{"points":[],"lines":[],"polygons":[]}};
- 
+$.plominoFormChanged = false;
 function showLoading (){
 
         vScrollPosition = jQuery(document).scrollTop()+150;
@@ -29,8 +28,10 @@ function showLoading (){
 
 //TEST CONTROLLER DI PAGINA
 jQuery(document).ready(function () {
+     
 
-
+    $(".field").bind('change',function(){$.plominoFormChanged=true})
+     
     //Combo SELECT2
 	 $("select.combobox").select2();
 
