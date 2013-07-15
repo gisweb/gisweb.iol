@@ -26,10 +26,14 @@ formname = targetname[:-1*len(post_str)] + 'info'
 
 db = context.getParentDatabase()
 
-targetform = db.getForm(formname)  or db.getForm('left_column_info')
+targetform = db.getForm(formname)  #or db.getForm('left_column_info')
 if not targetform: return ''
 
 if context.portal_type == 'PlominoDocument':
     return context.openWithForm(targetform)
 else:
     return targetform.formLayout(context.REQUEST)
+
+	
+	
+	
