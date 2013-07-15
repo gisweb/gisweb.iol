@@ -5,9 +5,8 @@
 ##bind script=script
 ##bind subpath=traverse_subpath
 ##parameters=file_type='documenti_autorizzazione'
-##title=Elenco dei modelli di stampa
+##title=
 ##
-
 """
 Converte il file docx in documenti_autorizzazione in pdf
 """
@@ -42,5 +41,7 @@ except Exception as error:
     context.REQUEST.RESPONSE.redirect(context.absolute_url())
 else:
     context.removeItem(file_type)
-    attachThis(context, result, file_type, filename=newfilename, overwrite=True)
-
+    #attachThis(context, result, file_type, filename=newfilename, overwrite=True)
+    (f,c) = context.setfile(result,filename=newfilename,overwrite=True,contenttype='application/pdf')
+    if f and c:
+        context.setItem(file_type,{newfilename:c})

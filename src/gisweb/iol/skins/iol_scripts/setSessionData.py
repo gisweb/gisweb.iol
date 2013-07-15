@@ -4,12 +4,19 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=
+##parameters=sessionId='', params=''
 ##title=
 ##
-from gisweb.utils import serialDoc
+from Products.CMFPlomino.PlominoUtils import json_loads,json_dumps
 doc=context
 sdm = context.session_data_manager
 session = sdm.getSessionData()
-session[doc.getId()] = serialDoc(doc)
+if not sessionId:
+    sessionId=doc.getId()
+if not params:
+    prms=doc.serialDoc(format='json')
+else:
+    prms=json_dumps(params)
+    
+session[sessionId] = prms
 return

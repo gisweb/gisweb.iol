@@ -32,6 +32,8 @@ for filename, mimetype in files.items():
     
     new_files[new_filename] = new_type
     old_att = destDoc.getItem(destItem, {})
+    if not old_att:
+        old_att=dict()
     old_att.update(new_files)
     
     if setItem:

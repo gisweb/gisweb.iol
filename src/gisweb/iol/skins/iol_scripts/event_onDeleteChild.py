@@ -16,12 +16,12 @@ def ondelete_child(doc, anchor=True, suffix=''):
     '''
 
     parentKey = script.event_common('parentKey')
-    #childrenListKey = script.event_common('childrenListKey')
+    childrenListKey = script.event_common('childrenListKey')
 
     if parentKey in doc.getItems():
         db = doc.getParentDatabase()
         ParentDocument = db.getDocument(doc.getItem(parentKey))
-        childrenList_name = childrenList_name = childrenListKey % (suffix or ChildDocument.Form)
+        childrenList_name = childrenListKey % (suffix or ChildDocument.Form)
         childrenList = ParentDocument.getItem(childrenList_name)
         url = doc.event_common('doc_path')
         childrenList.remove(url)

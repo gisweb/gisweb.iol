@@ -7,6 +7,8 @@
 ##parameters=child_events=False, backToParent=False
 ##title=IOL onSaveDocument event common actions
 ##
+from Products.CMFPlone.utils import normalizeString
+from Products.CMFPlomino.PlominoUtils import Now,DateToString
 """
 Standardizzazione dele operazioni da svolgere al salvataggio di una istanza
 child_events: True o False (lancia gli script di gestione dell'uno a molti)
@@ -14,16 +16,20 @@ backToParent: False o True o 'anchor'
 """
 
 # ON OPEN WITH FORM
-
-if 'oForm' in context.getItems():
+items = context.getItems()
+if 'oForm' in items:
     oFormName = context.getItem('oForm')
     # previene l'associazione di un form inesistente
     if context.getParentDatabase().getForm(oFormName):
         context.setItem('Form', oFormName)
     context.removeItem('oForm')
- 
-
-
+    if 'first' in items:
+        res = context.naming()
+        context.setItem('tipo_app',res['tipo_app'])
+        context.setItem('tipo_richiesta',res['tipo_richiesta'])
+        context.setItem('tipo_pratica',res['tipo_pratica'])
+        #context.removeItem('first')
+        context.setTitle('%s istanza n. %s del %s' %(context.getForm().Title(),context.getItem('numero_pratica',''),DateToString(Now(),'%d/%m/%Y')))
 
 
 # EVENTI DI REALIZZAZIONE COLLEGAMENTO UNO A MOLTI
@@ -31,6 +37,9 @@ if 'oForm' in context.getItems():
 if child_events == True:
     context.event_onSaveChild(backToParent=backToParent)
 
+if not 'oForm' in items and 'first_step' in items:
+    context.removeItem('first_step')
+    context.removeItem('plominoredirecturl')    
 
 # Se è stata sospesa, al salvataggio setto un item che abiliti la transizione di integrazione
 if context.wf_getInfoFor('review_state') == 'sospesa':

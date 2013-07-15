@@ -26,7 +26,7 @@ def open_my_url(url, **args):
 if url_info['success']:
     outlist += open_my_url(url_info['value'], app=context.naming('tipo_app'), group=sub_path)
 
-if context.test_mode():
+if context.test_mode() and len(outlist)==1:
     outlist += ['test|test']
 
 

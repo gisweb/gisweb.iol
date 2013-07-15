@@ -1,0 +1,17 @@
+<tal:defs tal:define="global doc python: context.REQUEST.PARENTS[0];
+    global pDoc python:test(doc.isNewDocument(),None,doc);
+    global db python: doc.getParentDatabase();
+    global dburl python: doc.getParentDatabase().absolute_url();
+    global myForm python: doc if not doc.isDocument() else doc.getForm();
+    global tipoApp python: doc.naming('tipo_app');
+    global tipoRichiesta python: doc.naming('tipo_richiesta');
+    global wf_id python: 'iol_workflow'" />
+
+
+<tal:blockactions>
+        <div class="row-fluid">
+            <div class="span3" tal:content="structure python: myForm.getFormField('autorizzata_dal').getFieldRender(myForm,doc,doc.isEditMode(),False,request=doc.REQUEST)"/>
+             <div class="span3" tal:content="structure python: myForm.getFormField('autorizzata_al').getFieldRender(myForm,doc,doc.isEditMode(),False,request=doc.REQUEST)"/>
+        </div>
+
+</tal:blockactions>

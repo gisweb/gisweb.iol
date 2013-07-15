@@ -2,7 +2,8 @@
             <span tal:content="python:'%s: ' % options['field'].title">Titolo</span>
         </label>
 
-<ul aria-labelledby="dLabel" tal:define="docurl python:context.REQUEST.PARENTS[0].absolute_url(); docId python:context.REQUEST.PARENTS[0].getId();" tal:repeat="attachment options/fieldvalue">
+<ul aria-labelledby="dLabel" tal:define="
+docurl python: context.REQUEST.PARENTS[0].absolute_url() if not  context.REQUEST.get('document_to_display','') else context.REQUEST.PARENTS[0].getParentDatabase().getDocument(context.REQUEST.get('document_to_display','')).absolute_url();                                         docId python:context.REQUEST.PARENTS[0].getId();" tal:repeat="attachment options/fieldvalue">
                                 <li>
                                     <a tal:define="href python:test('.pdf' in attachment,docurl+'/'+attachment,docurl+'/getfile?filename='+attachment);" target="new" tal:attributes="href string:${href}" >
                                         <img tal:define="img python:test('.pdf' in attachment,'images/pdf.gif','images/word.gif');" tal:attributes="src string:${img}" /> &nbsp;<span tal:content="python: '.'.join(attachment.split('.')[:-1]).capitalize().replace('-',' ')"/>

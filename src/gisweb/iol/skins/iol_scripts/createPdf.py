@@ -31,11 +31,7 @@ except Exception as err:
     msg2 = "Attenzione! Non è stato possibile allegare il file: %s" % filename
     script.addPortalMessage(msg1, 'error')
     script.addPortalMessage(msg2, 'warning')
-else:
-    attachThis(
-        context,
-        res,
-        itemname,
-        filename=filename,
-        overwrite=overwrite
-    )
+else:       
+    (f,c) = context.setfile(res,filename=filename,overwrite=overwrite,contenttype='application/pdf')
+    if f and c:
+        context.setItem(itemname,{filename:c})

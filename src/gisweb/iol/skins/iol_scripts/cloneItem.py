@@ -7,7 +7,6 @@
 ##parameters=itemname, source='parentDocument', setItem=True
 ##title=Clone the specified PlominoItem from source to context
 ##
-
 """
 Clones the specified PlominoItem from source to context, in case of
 attachment field type takes care of the file attachment displacement

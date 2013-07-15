@@ -7,7 +7,6 @@
 ##parameters=
 ##title=
 ##
-
 if context.portal_type == 'PlominoDocument':
     targetname = context.getForm().getFormName()
 elif context.portal_type == 'PlominoForm':

@@ -24,7 +24,7 @@ NB:
 """
 
 from Products.CMFPlomino.PlominoUtils import json_dumps, Now
-from gisweb.utils import serialDoc, getIndexType
+from gisweb.utils import getIndexType, Type
 
 db = context.getParentDatabase()
 
@@ -68,26 +68,35 @@ res = idx.dbsearch(custom_query, sortindex='data_autorizzazione', reverse=1, onl
 get_sec = lambda d: d*24*3600
 def get_data(doc):
     if debug: t_0 = Now()
-    out = dict((k,v) for k,v in serialDoc(doc, nest_datagrid=True, serial_as=False, field_list=fld_ids, render=False) if v)
+    out = dict((k,v) for k,v in doc.serialDoc(fieldsubset=fld_ids, get_id=0, nest=True, render=0, follow=0, format='') if v)
     if debug: out['elapsed'] = get_sec(Now()-t_0)
     return out
 
 data = []
+error_msg = ''
 dvalues = []
 if debug: t_0 = Now()
 for b in res:
-    doc = b.getObject()
-    if any([doc.getItem(f) for f in fld_ids]):
-        if distinct:
-            r = [str(doc.getItem(x.strip(), '') or '') for x in distinct.split(',')]
-            s = ''.join(r).lower().strip()
-            if s and s not in dvalues:
-                dvalues.append(s)
+    try:
+        doc = b.getObject()
+    except Exception as err:
+        # così non va in errore in caso di disallineamento tra indice e PlominoDatabase.
+        if not error_msg:
+            error_msg = 'Attenzione! per una maggiore affidabilità del risultato lanciare un refresh del PlominoDatabase.'
+    else:
+        if any([doc.getItem(f) for f in fld_ids]):
+            if distinct:
+                r = [str(doc.getItem(x.strip(), '') or '') for x in distinct.split(',')]
+                s = ''.join(r).lower().strip()
+                if s and s not in dvalues:
+                    dvalues.append(s)
+                    data.append(get_data(doc))
+            else:
                 data.append(get_data(doc))
-        else:
-            data.append(get_data(doc))
 
 out = dict(names=data, total=len(data))
+if error_msg:
+    out['error'] = error_msg
 if debug: out['elapsed'] = get_sec(Now()-t_0)
 
 context.REQUEST.RESPONSE.setHeader("Content-type", "application/json")

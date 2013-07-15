@@ -16,7 +16,7 @@ PlominoDatabase per customizzare le mail. Lo script deve prendere in
 ingresso, nell'ordine, il PlominoDocument in contesto e l'id del messaggio.
 Lo script deve restituire un dizionario, sulla falsa riga di custom_args
 qui sotto, degli argomenti dello script sendMail.
-    2. ObjectId: nota bene: se possibile usare l'id detta transizione
+    2. ObjectId: nota bene: se possibile usare l'id della transizione
 """
 
 from gisweb.utils import sendMail
@@ -79,13 +79,17 @@ Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato i
         )
 
     elif ObjectId == 'autorizza':
-
+                
+        msg_info.update(dict(
+            attach = context.getItem('documenti_autorizzazione', {'': ''}).keys()[0],
+        ))
+        
         custom_args = dict(
             Object = 'Autorizzazione pratica. n. %(numero_pratica)s - %(titolo)s' % msg_info,
             msg = context.mime_file(
-                file = '',
+                file = '' if not msg_info.get('attach') in attach_list else context[msg_info['attach']],
                 text = """Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato autorizzato.""" % msg_info,
-                nomefile = ''
+                nomefile = msg_info['attach'],
             )
         )
 
@@ -143,20 +147,92 @@ stato sospeso con le seguenti motivazioni:
                 nomefile = ''
             )
         )
-elif ObjectId == 'pagamenti':
+
+    elif ObjectId == 'pagamenti':
+
+        msg_info.update(dict(
+            motivazione = context.getItem('allegato_pagamento',''),
+        ))
 
         custom_args = dict(
-            Object = 'Richiesta pagamento oneri n. %(numero_pratica)s - %(titolo)s' % msg_info,
+            Object = 'Richiesta pagamento oneri pratica. n. %(numero_pratica)s - %(titolo)s' % msg_info,
             msg = context.mime_file(
-                file = '' if not msg_info.get('attach') in attach_list else context[msg_info['attach']],
+                file = '',
                 text = """
-Si comunica che in data %(now)s il procedimento n. %(numero_pratica)s è stato accolto
+Si comunica che in data %(now)s è stato richiesto il pagamento degli oneri per la pratica  n. %(numero_pratica)s :
+
+
+%(motivazione)s
+
 """ % msg_info,
                 nomefile = ''
             )
         )
+        
+    elif ObjectId == 'rifiuta_pagamento':
+        msg_info.update(dict(
+            motivazione = context.getItem('istruttoria_motivo_rifiuto',''),
+        ))
+
+        
+
+        custom_args = dict(
+            Object = 'Rifiutati pagamento oneri pratica. n. %(numero_pratica)s - %(titolo)s' % msg_info,
+            msg = context.mime_file(
+                 file = '',
+                text = """
+Si comunica che in data %(now)s è stato rifiutato il pagamento per la pratica  n. %(numero_pratica)s :
 
 
+%(motivazione)s
+
+""" % msg_info,
+                nomefile = ''
+            )
+        )
+        
+    elif ObjectId == 'richiesta_pagamenti':
+
+        msg_info.update(dict(
+            motivazione = context.getItem('',''),
+        ))
+
+        custom_args = dict(
+            Object = 'Richiesta pagamento oneri pratica. n. %(numero_pratica)s - %(titolo)s' % msg_info,
+            msg = context.mime_file(
+                 file = '',
+                text = """
+Si comunica che in data %(now)s è stata effettuata la richiesta di pagamento per la pratica  n. %(numero_pratica)s :
+
+
+%(motivazione)s
+
+""" % msg_info,
+                nomefile = ''
+            )
+        )
+        
+    elif ObjectId == 'approva_pagamenti':
+
+        msg_info.update(dict(
+            motivazione = context.getItem('allegato_pagamento',''),
+        ))
+
+        custom_args = dict(
+            Object = 'Approvato il pagamento pratica. n. %(numero_pratica)s - %(titolo)s' % msg_info,
+            msg = context.mime_file(
+                file = '',
+                text = """
+Si comunica che in data %(now)s è stato approvato il pagamento per la pratica  n. %(numero_pratica)s :
+
+
+%(motivazione)s
+
+""" % msg_info,
+                nomefile = ''
+            )
+        )        
+   
 
 
 if custom_args:

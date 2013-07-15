@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=child_events=False, backToParent=False, suffix=''
+##parameters=child_events=False, backToParent=False, suffix='',args={}
 ##title=IOL onCreateDocument event common actions
 ##
 """
@@ -39,7 +39,8 @@ updateAllRoleMappingsFor(context)
 # EVENTI DI REALIZZAZIONE COLLEGAMENTO UNO A MOLTI
 if child_events:
     context.event_onCreateChild(backToParent=backToParent, suffix=suffix)
-    
+
+
 #Se ci sono dati da copiare li copio
 for sub_name in context.getForm().getSubforms():
     doc = context
@@ -49,4 +50,25 @@ for sub_name in context.getForm().getSubforms():
             for field in sub_parent_form.getFormFields():
                 doc.cloneItem(field.getId())
 
-doc.setItem('plominoredirecturl','%s/EditDocument' % doc.absolute_url())
+if context.REQUEST.get('oForm'):
+    doc.setItem('plominoredirecturl','%s/EditDocument' % doc.absolute_url())
+    doc.setItem('first',1)
+
+    
+##############################################################################
+#                                                                            #
+#  Se pratica di rinnovo/proroga/integrazione                                #
+#  setto il flag corrispondente a 0 per prevenire                            #
+#  la creazione di 2 documenti dello stesso tipo                             #
+#                                                                            #
+##############################################################################
+
+parentId = context.REQUEST.get('parentDocument')
+parent = db.getDocument(parentId)
+if parent:
+    if args and 'rinnovabile' in args.keys() and parentId:
+        parent.setItem('rinnovabile',0)
+    if args and 'prorogabile' in args.keys() and parentId:
+        parent.setItem('prorogabile',0)
+    if args and 'integrabile' in args.keys() and parentId:
+        parent.setItem('integrabile',0)

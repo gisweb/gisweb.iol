@@ -16,5 +16,6 @@ owf = None if not owf_name else context.getParentDatabase().getForm(owf_name)
 if owf and not context.isNewDocument():
     context.setItem('oForm', context.getItem('Form', ''))
 
-if context.getItem('plominoredirecturl'):
+if context.getItem('plominoredirecturl') and context.getItem('first',0)==1:
     context.removeItem('plominoredirecturl')
+    context.removeItem('first')

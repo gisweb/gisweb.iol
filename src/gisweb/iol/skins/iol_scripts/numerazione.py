@@ -7,7 +7,6 @@
 ##parameters=item_name='numero_pratica'
 ##title=Gestione della numerazione delle pratiche
 ##
-
 """
 1. verificare l'esistenza di uno script dedicato di numerazione
 2. usare una procedura standard (getMaxOf)
@@ -21,7 +20,6 @@ questo script sarà usato dalla formula di calcolo del campo.
 db = context.getParentDatabase()
 
 if 'numerazione' in db.resources.keys():
-    return db.resources.numerazione(item_name=item_name)
+    return db.resources.numerazione(obj=context,item_name=item_name)
 else:
-    return script.getMaxOf(item_name) + 1
-
+    return context.getMaxOf(item_name) + 1

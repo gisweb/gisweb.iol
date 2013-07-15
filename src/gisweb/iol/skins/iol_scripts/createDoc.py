@@ -4,23 +4,17 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=filename='', grp='', field=''
+##parameters=model='', grp='', field='',redirect_url=''
 ##title=Create docx file from PlominoDocument
 ##
-
 """
-Create docx file
+Create docx file from a PlominoDocument giving a template model
 
-filename:
-grp:
-field:
-workflow_action:
+model: model template name;
+grp: 
+field: field of the PlominDocument where to set the docx file created;
+redirect_url: where to redirect after this operation (optional)
 """
-
-from Products.CMFPlomino.PlominoUtils import json_loads, json_dumps, DateToString, Now, open_url
-from gisweb.utils import serialDoc, report, Type, requests_post, attachThis, os_path_join
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.utils import normalizeString
 
 if context.portal_type != 'PlominoDocument':
     return ''
@@ -31,7 +25,7 @@ urlCreate = context.getMyAttribute('ws_createdocx_URL').get('value')
 #URL del servizio di lettura del documento
 
 from Products.CMFPlomino.PlominoUtils import json_loads, json_dumps, DateToString, Now, open_url
-from gisweb.utils import serialDoc, report, Type, requests_post, attachThis, os_path_join
+from gisweb.utils import report, Type, requests_post
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import normalizeString
 
@@ -44,7 +38,7 @@ urlCreate = context.getMyAttribute('ws_createdocx_URL').get('value')
 #URL del servizio di lettura del documento
 urlRead = context.getMyAttribute('ws_readdocument_URL').get('value')
 
-model=filename
+filename=model
 if """\\""" in filename:
     filename = filename.split("\\")[-1]
 filename = '.'.join(
@@ -61,7 +55,7 @@ query = dict(
     group = grp,
     dataType = 'JSON',
     #mode = 'show',
-    data = serialDoc(context, serial_as='json'),
+    data = context.serialDoc(format='json'),
     id = context.id,
     filename = filename,
     download = 'false'
@@ -83,3 +77,5 @@ res = open_url(docurl,asFile=False)
 if f and c:
     doc.setItem(field,{filename:c})
 
+if redirect_url:
+    doc.REQUEST.RESPONSE.redirect(redirect_url)
