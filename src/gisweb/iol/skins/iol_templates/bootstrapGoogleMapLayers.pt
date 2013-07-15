@@ -1,0 +1,33 @@
+<tal:def tal:define="
+    portal_state context/@@plone_portal_state;
+    portal_url portal_state/portal_url;
+    title python:options['field'].title;
+    ttip_title title;
+    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();   
+    custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
+    id options/fieldname;
+    doc python: context.REQUEST.PARENTS[0];
+    editMode python:1 if not doc.isDocument() or doc.isEditMode() else 0;
+    fieldname  options/fieldname;
+	params python:options['field'].getSettings('dynamictableparam');
+    selection options/selection;"> 
+       <!-- VEDERE DI SPOSTARLO SUL FOM ALTRIMENTI COSI METTO UNA SOLA MAPPA -->                        
+     
+<script type='text/javascript' tal:content="structure string:jq(function(){jq.plominoMaps.google.layers=${params};});"></script>      
+<div id="swingbox" class="button" data-title="{title}">
+            <tal:block tal:define="current options/fieldvalue;
+                                currentaslist python:test(hasattr(current, 'append'), current, [current]);"
+            tal:repeat="v selection">
+                <tal:block tal:define="l python:v.split('|')">
+                    <input class="plominoGoogleMapLayers" 
+                           tal:attributes="name options/fieldname;
+                                           id python:l[1];
+                                           checked python: 'checked' if current in l else None;"
+                           type="checkbox"/>   
+                    <span tal:content="python:' %s ' % l[0]">Titolo</span><br />
+                </tal:block>
+            </tal:block>        
+        <hr />
+<a id="remover" href="javascript:void(0)">Spegni tutto</a>
+</div>         
+</tal:def>

@@ -1,0 +1,78 @@
+#swingbox { position: absolute;
+	top:23px; left:0px;
+	margin-top:-2px;
+	padding: 6px 4px;
+	text-align: left;
+	width:102px;
+	background-color: #fff;
+	display: none;
+	cursor:default;
+	z-index:-1;
+}
+
+#swingbox hr { height:1px;
+	border:1px;
+	color:#e2e2e2;
+	background-color:#e2e2e2;
+	margin: 1px 0;
+}
+
+*+html #swingbox hr {
+/* IE 7 hr bug fix */
+ display:block; margin: -5px 0;
+}
+
+* html #swingbox hr {
+/* IE 6 hr bug fix */
+ display:block; margin: -5px 0;
+}
+
+#remover { color: #a5a5a5;
+	text-decoration: none;
+	cursor: default;
+	text-align: center;
+	display: block;
+}
+
+#remover.highlight { color: #0000cd;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/*
+CSS for v3 buttons stolen from:
+ http://gmaps-samples-v3.googlecode.com/svn/trunk/controls/index.html
+*/
+
+.button, .button-selected, .dropdown {
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	text-align: center;
+/*  position: relative; */
+	font-family: Arial, sans-serif;
+	font-size: 13px;
+	box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px;
+	color: #000;
+	border: 1px solid #717B87;
+	background-color: #fff; 
+}
+
+.button, .button-selected {
+	margin: 5px;
+	padding: 1px 6px;
+	overflow: hidden;
+}
+
+.button:hover {
+	background: #FEFEFE;
+	background: -moz-linear-gradient(top, #FEFEFE 0%, #F3F3F3 100%);
+	background: -webkit-gradient(linear, left top, left bottom, from(#FEFEFE), to(#F3F3F3));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FEFEFE', endColorstr='#F3F3F3', GradientType=0);
+}
+
+.button-selected {
+	font-weight: bold;
+}
