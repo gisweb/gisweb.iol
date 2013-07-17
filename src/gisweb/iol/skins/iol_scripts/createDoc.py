@@ -19,11 +19,6 @@ redirect_url: where to redirect after this operation (optional)
 if context.portal_type != 'PlominoDocument':
     return ''
 
-doc = context
-#URL del servizio di creazione del documento
-urlCreate = context.getMyAttribute('ws_createdocx_URL').get('value')
-#URL del servizio di lettura del documento
-
 from Products.CMFPlomino.PlominoUtils import json_loads, json_dumps, DateToString, Now, open_url
 from gisweb.utils import report, Type, requests_post
 from Products.CMFCore.utils import getToolByName
@@ -34,9 +29,9 @@ if context.portal_type != 'PlominoDocument':
 
 doc = context
 #URL del servizio di creazione del documento
-urlCreate = context.getMyAttribute('ws_createdocx_URL').get('value')
+urlCreate = context.get_property('ws_createdocx_URL').get('value')
 #URL del servizio di lettura del documento
-urlRead = context.getMyAttribute('ws_readdocument_URL').get('value')
+urlRead = context.get_property('ws_readdocument_URL').get('value')
 
 filename=model
 if """\\""" in filename:
@@ -75,7 +70,9 @@ except Exception as error:
 res = open_url(docurl,asFile=False)
 (f,c) = doc.setfile(res,filename=filename,overwrite=True,contenttype='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
 if f and c:
-    doc.setItem(field,{filename:c})
+    oItem = doc.getItem(field, {}) or {}
+    oItem[filename] = c
+    doc.setItem(field, oItem)
 
 if redirect_url:
     doc.REQUEST.RESPONSE.redirect(redirect_url)

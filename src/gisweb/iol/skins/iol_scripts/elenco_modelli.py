@@ -17,13 +17,13 @@ app = context.naming('tipo_app')
 nullchoice = 'Manca il modello, scegliere un modello di stampa per abilitare la funzione|'
 outlist = [nullchoice]
 
-url_info = context.getMyAttribute('ws_listmodel_URL')
+url_info = context.get_property('ws_listmodel_URL')
 
 def open_my_url(url, **args):
     uu = '%s?%s' %(url, urlencode(args))
     return json_loads(open_url(uu))
 
-if url_info['success']:
+if 'value' in url_info:
     outlist += open_my_url(url_info['value'], app=context.naming('tipo_app'), group=sub_path)
 
 if context.test_mode() and len(outlist)==1:

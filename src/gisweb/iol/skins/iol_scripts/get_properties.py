@@ -19,11 +19,17 @@ portal_folders: Plone Property Sheet list of the portal_properties where to look
 output example (not all keys are necessarily setted):
 {
     <varname>:{
-        'value': <my attribute value>,
-        'err_msg': <ErrorMessage>,
-        'content_url': <where the attribute was found>
+        'value': <my attribute value>,   # only if available
+        'err_msg': <ErrorMessage>,       # only if value NOT available
+        'content_url': <container path>  # only if value is available
     }
 }
+
+Usage sample:
+    * test whether a variable was found:
+    nfo = context.get_properties(params='myvar')
+    'value' in nfo['myvar']
+    True/False
 """
 
 from Products.CMFCore.utils import getToolByName
@@ -31,7 +37,7 @@ from gisweb.utils import Type
 
 if params and isinstance(params, basestring):
     params = params.split(',')
-else:
+elif not params:
     params = tuple()
 
 if isinstance(portal_folders, basestring):
