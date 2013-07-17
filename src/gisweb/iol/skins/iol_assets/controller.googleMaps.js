@@ -724,7 +724,7 @@ $.plominoMaps.actions["geocode_civico"] = function (e){
         var dataParams = getValuesForFields(options.params)
 
 	$.ajax({
-                'url':'services/xSuggest',
+                'url':'resources/xSuggest',
 		'type':'POST',
 		'data':dataParams,
 		'dataType':'JSON',
@@ -743,7 +743,7 @@ $.plominoMaps.actions["geocode_catasto"] = function (e){
         var options = e.data;
         var dataParams = getValuesForFields(options.params)
 	$.ajax({
-                'url':'services/xSuggest',
+                'url':'resources/xSuggest',
 		'type':'POST',
 		'data':dataParams,
 		'dataType':'JSON',
