@@ -98,8 +98,11 @@ function addTopToolbarMenu(element){
                 
 		jq(v).bind('click',function(event){
 			event.preventDefault();
-			jq("input[name='" + d['name'] + "']").trigger('click');
-                        jq("input[name='" + d['name'] + "']").remove();
+                        var btn = jq("input[name='" + d['name'] + "']");
+			btn.trigger('click');
+                        btn.attr("disabled", "disabled");
+                        window.setTimeout(function(){btn.removeAttr('disabled')},1000);
+
 		})
 	});
 }

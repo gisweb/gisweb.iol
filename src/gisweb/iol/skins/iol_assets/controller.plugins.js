@@ -28,7 +28,7 @@ jQuery(".iol-autocomplete-form").each(function(){
   }).on("change", function(e) { 
              var childs=e.added;
              if(e.removed){
-                    if(!confirm('Attenzione i dati già inseriti verranno rimossi, continuo?')) return;
+                    if(!confirm('Attenzione i dati gi� inseriti verranno rimossi, continuo?')) return;
                     childs=e.removed; 
              } 
              $.each(childs, function(key,value) {
@@ -213,33 +213,6 @@ $("input[data-plugin='elencocomuni']").each(function(){
 		});
 	});
 
-    //GENERAZIONE DEI CONTROLLI IMPORTO VALORI
-    jQuery("input[data-plugin='importo']").each(function(){
-        eval("var options = "  + jQuery(this).data('importooptions'));
-        var params = new Object();
-        var fieldId = this.id;
-        var baseUrl = jQuery(this).data('baseUrl');
-        jQuery('#btn_' + this.id).click(function(){
-			jQuery.each(options.fieldlist, function(index, txtId) {
-				   var value = jQuery('#' + txtId).val();
-				   if(!value) value = jQuery('input:radio[name = ' + txtId+ ']:checked').val();
-					if(!value){alert ('Campo ' + txtId + ' vuoto');return}
-			params[txtId] = value;
-			});
-			jQuery.ajax({
-				'url':baseUrl + options.source,
-				'type':'POST',
-				'data':params,
-				'dataType':'JSON',
-				'success':function(data, textStatus, jqXHR){
-							 //console.log(data)
-                                      jQuery('#' + fieldId).val(data.value);
-
-				}
-			});
-		});
-	});
-
     //GENERAZIONE DEL CONTROLLO PULSANTE RICERCA
     jQuery("input[data-plugin='dataTable-search']").each(function(){
 
@@ -262,8 +235,6 @@ $("input[data-plugin='elencocomuni']").each(function(){
 
 
 
-
-
 jQuery("input[type=file]").filestyle({
      image: "upload.png",
      imageheight : 32,
@@ -274,25 +245,21 @@ jQuery("input[type=file]").filestyle({
 
          //GENERAZIONE DEL CONTROLLO MODELLI DI STAMPA
 
-   jQuery("select[id^=modello]").each(function(){
+   jQuery("select[name^=modello]").each(function(){
+      var href = jQuery('#btn_' + this.name).attr('href');
       jQuery(this).bind('change',function(){
-         var href = jQuery('#btn_' + this.id).attr('href');
-         //var baseHref =  href.substring(0,href.indexOf('&')) || href;
          var baseHref =  href;
          var v =  this.id;
-         //var group = v.substring(v.indexOf('_') + 1);
          var field = 'documenti' + v.substring(v.indexOf('_'));
 
         if(jQuery(this).val()){
-          //var url = baseHref + '&field=' + field + '&grp=' + group + '&model=' + jQuery(this).val();
            var url = baseHref + '&model=' + jQuery(this).val();
-
-           jQuery('#btn_' + this.id).attr('href', url);
-           jQuery('#btn_' + this.id).removeAttr('disabled');
+           jQuery('#btn_' + this.name).attr('href', url);
+           jQuery('#btn_' + this.name).removeAttr('disabled');
         }
         else{
-           jQuery('#btn_' + this.id).attr('href',baseHref);
-           jQuery('#btn_' + this.id).attr('disabled','disabled');
+           jQuery('#btn_' + this.name).attr('href',baseHref);
+           jQuery('#btn_' + this.name).attr('disabled','disabled');
         }
     });
    });
