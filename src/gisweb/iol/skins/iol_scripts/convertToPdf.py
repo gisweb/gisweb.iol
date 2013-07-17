@@ -1,85 +1,54 @@
-## Script (Python) "createDoc"
+## Script (Python) "convertToPdf"
 ##bind container=container
 ##bind context=context
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=model='', grp='', field='',redirect_url=''
-##title=Create docx file from PlominoDocument
+##parameters=file_type='documenti_autorizzazione'
+##title=
 ##
 """
-Create docx file from a PlominoDocument giving a template model
-
-model: model template name;
-grp: 
-field: field of the PlominDocument where to set the docx file created;
-redirect_url: where to redirect after this operation (optional)
+Converte il file docx in documenti_autorizzazione in pdf
 """
+
+from gisweb.utils import requests_post,attachThis,Type
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlomino.PlominoUtils import open_url
 
 if context.portal_type != 'PlominoDocument':
     return ''
-
-from Products.CMFPlomino.PlominoUtils import json_loads, json_dumps, DateToString, Now, open_url
-from gisweb.utils import report, Type, requests_post
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.utils import normalizeString
-
-if context.portal_type != 'PlominoDocument':
+if not file_type:
     return ''
 
 doc = context
-#URL del servizio di creazione del documento
-urlCreate = context.get_property('ws_createdocx_URL').get('value')
-#URL del servizio di lettura del documento
-urlRead = context.get_property('ws_readdocument_URL').get('value')
-
+#URL del servizio di Conversione
+serviceURL = context.getLocalProperties('ws_converttopdf_URL')
 #Progetto Corrente
 try:
     proj = context.get_property('project')['value']
 except:
     proj = ''
 
-filename=model
-if """\\""" in filename:
-    filename = filename.split("\\")[-1]
-filename = '.'.join(
-        [normalizeString(s, encoding='utf-8') 
-            for s in filename.split('.')])
 
-#Url con parametri del servizio de lettura
-docurl = "%s?app=%s&id=%s&filename=%s&project=%s" %(urlRead,doc.getItem('tipo_app',''),doc.getId(),filename,proj)
+files = doc.getItem(file_type, {})
+filename = files.keys()[-1]
+newfilename = filename.replace('.docx','.pdf')
+info = doc.naming()
+docurl='%s/%s' %(doc.absolute_url(),filename)
 
-#Parametri della chiamata al servizio di creazione
-query = dict(
-    app = context.REQUEST.get('test_app') or doc.getItem('tipo_app'),
-    model = model,
-    group = grp,
-    project = proj,
-    dataType = 'JSON',
-    #mode = 'show',
-    data = context.serialDoc(format='json'),
-    id = context.id,
-    filename = filename,
-    download = 'false'
-)
-#Creazione del documento tramite webservice
+url = '%s?mode=%s&docurl=%s' %(serviceURL,'show',docurl)
+
 try:
-    result = requests_post(urlCreate,query, 'json', timeout=30)
+    result = open_url(url,asFile=False)
 except Exception as error:
     plone_tools = getToolByName(context.getParentDatabase().aq_inner, 'plone_utils')
     msg = ('%s: %s' % (Type(error), error), 'error')
     context.setItem('test',msg)
     plone_tools.addPortalMessage(*msg, request=context.REQUEST)
-    doc.REQUEST.RESPONSE.redirect(context.absolute_url())
-
-
-#Lettura del documento da webservice
-res = open_url(docurl,asFile=False)
-(f,c) = doc.setfile(res,filename=filename,overwrite=True,contenttype='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-if f and c:
-    oItem = doc.getItem(field, {}) or {}
-    oItem[filename] = c
-    doc.setItem(field, oItem)
-
-if redirect_url:
-    doc.REQUEST.RESPONSE.redirect(redirect_url)
+    context.REQUEST.RESPONSE.redirect(context.absolute_url())
+else:
+    context.removeItem(file_type)
+    #attachThis(context, result, file_type, filename=newfilename, overwrite=True)
+    (f,c) = context.setfile(result,filename=newfilename,overwrite=True,contenttype='application/pdf')
+    if f and c:
+        context.setItem(file_type,{newfilename:c})
