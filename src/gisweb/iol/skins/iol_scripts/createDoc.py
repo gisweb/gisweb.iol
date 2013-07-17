@@ -33,6 +33,12 @@ urlCreate = context.get_property('ws_createdocx_URL').get('value')
 #URL del servizio di lettura del documento
 urlRead = context.get_property('ws_readdocument_URL').get('value')
 
+#Progetto Corrente
+try:
+    proj = context.get_property('project')['value']
+except:
+    proj = ''
+
 filename=model
 if """\\""" in filename:
     filename = filename.split("\\")[-1]
@@ -41,13 +47,14 @@ filename = '.'.join(
             for s in filename.split('.')])
 
 #Url con parametri del servizio de lettura
-docurl = "%s?app=%s&id=%s&filename=%s" %(urlRead,doc.getItem('tipo_app',''),doc.getId(),filename)
+docurl = "%s?app=%s&id=%s&filename=%s&project=%s" %(urlRead,doc.getItem('tipo_app',''),doc.getId(),filename,proj)
 
 #Parametri della chiamata al servizio di creazione
 query = dict(
     app = context.REQUEST.get('test_app') or doc.getItem('tipo_app'),
     model = model,
     group = grp,
+    project = proj,
     dataType = 'JSON',
     #mode = 'show',
     data = context.serialDoc(format='json'),

@@ -18,13 +18,16 @@ nullchoice = 'Manca il modello, scegliere un modello di stampa per abilitare la 
 outlist = [nullchoice]
 
 url_info = context.get_property('ws_listmodel_URL')
-
+try:
+    proj = context.get_property('project')['value']
+except:
+    proj = ''
 def open_my_url(url, **args):
     uu = '%s?%s' %(url, urlencode(args))
     return json_loads(open_url(uu))
 
 if 'value' in url_info:
-    outlist += open_my_url(url_info['value'], app=context.naming('tipo_app'), group=sub_path)
+    outlist += open_my_url(url_info['value'], app=context.naming('tipo_app'), group=sub_path, project=proj)
 
 if context.test_mode() and len(outlist)==1:
     outlist += ['test|test']
