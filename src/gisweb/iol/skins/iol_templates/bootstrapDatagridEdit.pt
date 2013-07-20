@@ -44,7 +44,7 @@
                         }
                     } );
 
-        			$$('#${fieldname}_addrow').click(function() {console.log(this)
+        			$$('#${fieldname}_addrow').click(function() {
         				datagrid_add_row(${fieldname}_datatable, '${fieldname}', '../${associated_form}/OpenBareForm?Plomino_Parent_Field=${fieldname}&Plomino_Parent_Form=${formname}&numrows=' + ${fieldname}_datatable.fnGetData().length);return false
         			});
         			$$('#${fieldname}_editrow').click(function() {                  
