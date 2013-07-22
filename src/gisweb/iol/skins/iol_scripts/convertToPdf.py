@@ -51,4 +51,4 @@ else:
     #attachThis(context, result, file_type, filename=newfilename, overwrite=True)
     (f,c) = context.setfile(result,filename=newfilename,overwrite=True,contenttype='application/pdf')
     if f and c:
-        context.setItem(file_type,{newfilename:c})
+        context.setItem(file_type,{f:c})
