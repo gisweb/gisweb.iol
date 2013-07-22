@@ -7,14 +7,13 @@
 ##parameters=
 ##title=
 ##
-forms=context.getForms()
-apps=context.getItem('tipo_app')
-richiesta=[]
-for i in forms:
-     frmname=i.getFormName()
-     if frmname.startswith('frm_'):
-            if apps in frmname:              
-                lista= frmname.split('_')
-                a=lista[2]
-                richiesta.append(a)
-return richiesta
+
+""" Restituisce tutte le tipologie di richiesta presenti nel PlominoDatabase """
+
+tipi = list()
+for f in context.getForms():
+    tipo = f.naming('tipo_richiesta')
+    if tipo and tipo not in tipi:
+        tipi.append(tipo)
+
+return tipi
