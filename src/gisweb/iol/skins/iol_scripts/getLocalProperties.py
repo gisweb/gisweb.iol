@@ -5,7 +5,7 @@
 ##bind script=script
 ##bind subpath=traverse_subpath
 ##parameters=attr
-##title=Protocollo
+##title=getLocalProperties (DEPRECATED use get_properties or get_property instead)
 ##
 
 from Products.CMFCore.utils import getToolByName
