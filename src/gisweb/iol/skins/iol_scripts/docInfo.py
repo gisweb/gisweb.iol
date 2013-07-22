@@ -39,9 +39,9 @@ raw_data = dict(
 # Output rendering
 if format == 'json':
     context.REQUEST.RESPONSE.setHeader("Content-type", "application/json")
-    return json_dumps(raw_data)
+    return json_dumps(raw_data, sort_keys=True)
 elif format == 'text':
-    print json_dumps(raw_data, indent=4)
+    print json_dumps(raw_data, indent=4, sort_keys=True)
     #for k,v in raw_data.items():
     #    print '%s: \n\t%s' % (k,v)
     return printed

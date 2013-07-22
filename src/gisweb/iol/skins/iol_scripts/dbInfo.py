@@ -39,7 +39,8 @@ raw_data = dict(
     priority = dict(value = db.PLOMINO_RIGHTS_PRIORITY, weight=5),
     forms = dict(value = forms, weight=5),
     views = dict(value = views, weight=5),
-    db_properties = dict(value = dict((x, y) for x, y in db.propertyItems()))
+    db_properties = dict(value=db.get_properties())
+    #db_properties = dict(value = dict((x, y) for x, y in db.propertyItems()))
 )
 
 repos = {
@@ -52,14 +53,14 @@ repos = {
 for k,r in repos.items():
     test = int(isRepoUpToDate(r))
     msg = 'Already up to date!' if not test else 'Maybe needs an upgrade.'
-    raw_data[k] = dict(value=msg) 
+    raw_data[k] = dict(value=msg)
 
 # Output rendering
 if format == 'json':
     context.REQUEST.RESPONSE.setHeader("Content-type", "application/json")
-    return json_dumps(dict([(k,v['value']) for k,v in raw_data.items() if (v.get('weight') or 0)<=int(details)]))
+    return json_dumps(dict([(k,v['value']) for k,v in raw_data.items() if (v.get('weight') or 0)<=int(details)]), sort_keys=True)
 elif format == 'text':
-    print json_dumps(dict([(k,v['value']) for k,v in raw_data.items() if (v.get('weight') or 0)<=int(details)]), indent=4)
+    print json_dumps(dict([(k,v['value']) for k,v in raw_data.items() if (v.get('weight') or 0)<=int(details)]), indent=4, sort_keys=True)
     #for k,v in raw_data.items():
     #    print '%s: \n\t%s' % (k,v)
     return printed
