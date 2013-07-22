@@ -11,7 +11,7 @@
 Converte il file docx in documenti_autorizzazione in pdf
 """
 
-from gisweb.utils import requests_post,attachThis,Type
+from gisweb.utils import Type
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlomino.PlominoUtils import open_url
 
@@ -22,33 +22,28 @@ if not file_type:
 
 doc = context
 #URL del servizio di Conversione
-serviceURL = context.getLocalProperties('ws_converttopdf_URL')
+serviceURL = context.get_property('ws_converttopdf_URL').get('value')
 #Progetto Corrente
-try:
-    proj = context.get_property('project')['value']
-except:
-    proj = ''
-
+#proj = context.get_property('project').get('value') or '' # variabile non usata
 
 files = doc.getItem(file_type, {})
 filename = files.keys()[-1]
 newfilename = filename.replace('.docx','.pdf')
-info = doc.naming()
+#info = doc.naming() # variabile non usata
 docurl='%s/%s' %(doc.absolute_url(),filename)
 
-url = '%s?mode=%s&docurl=%s' %(serviceURL,'show',docurl)
+url = '%s?mode=show&docurl=%s' %(serviceURL, docurl)
 
 try:
-    result = open_url(url,asFile=False)
+    result = open_url(url, asFile=False)
 except Exception as error:
     plone_tools = getToolByName(context.getParentDatabase().aq_inner, 'plone_utils')
     msg = ('%s: %s' % (Type(error), error), 'error')
-    context.setItem('test',msg)
+    context.setItem('test', msg)
     plone_tools.addPortalMessage(*msg, request=context.REQUEST)
     context.REQUEST.RESPONSE.redirect(context.absolute_url())
 else:
     context.removeItem(file_type)
-    #attachThis(context, result, file_type, filename=newfilename, overwrite=True)
-    (f,c) = context.setfile(result,filename=newfilename,overwrite=True,contenttype='application/pdf')
+    (f,c) = context.setfile(result, filename=newfilename, overwrite=True, contenttype='application/pdf')
     if f and c:
-        context.setItem(file_type,{f:c})
+        context.setItem(file_type, {f: c})
