@@ -57,7 +57,7 @@ query = dict(
     project = proj,
     dataType = 'JSON',
     #mode = 'show',
-    data = context.serialDoc(format='json'),
+    data = context.serialDoc(format='json', render=True),
     id = context.id,
     filename = filename,
     download = 'false'
