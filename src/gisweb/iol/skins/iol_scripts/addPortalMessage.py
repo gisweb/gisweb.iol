@@ -23,7 +23,13 @@ if isinstance(msg_type, basestring):
 from Products.CMFCore.utils import getToolByName
 plone_tools = getToolByName(context, 'plone_utils')
 
-messages = [(unicode(m[0], errors='replace'), m[1])
+def getUnicode(x):
+    if isinstance(x, unicode):
+        return x
+    else:
+        return unicode(x, 'replace')
+
+messages = [(getUnicode(m[0]), m[1])
     for m in zip(msg, msg_type)]
 
 plone_tools.addPortalMessage(*msg, request=context.REQUEST)

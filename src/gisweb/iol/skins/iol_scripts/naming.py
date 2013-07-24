@@ -24,48 +24,59 @@ def main(what='', frm_key='frm_', default='', calculate=False):
     """
     frmname2what
     """
+
+    def get_tipo_richiesta(k):
+        # così tipo_richiesta "base" non è necessario se c'è solo quello
+        if len(k)>2:
+            return k[-1]
+        else:
+            return ''
+
+    generators = dict(
+        # tutto ciò che segue il prefisso unito da "_"
+        tipo_pratica = lambda k: '_'.join(k[1:]),
+        # tutto quello che sta nel mezzo unito da "_"
+        tipo_app = lambda k: '_'.join(k[1:-1]),
+        # solo il suffisso (se c'è!)
+        tipo_richiesta = get_tipo_richiesta
+    )
+
+    if context.portal_type == 'PlominoDocument':
+
+        if calculate or context.isNewDocument():
+            FRM_ID = context.getForm().getFormName()
+        else:
+            if what:
+                return context.getItem(what) or context.naming(what=what, frm_key=frm_key, default=default, calculate=True)
+            else:
+                out = dict([(k, context.getItem(k)) for k in generators.keys()])
+                if all(out.values()):
+                    return out
+                else:
+                    return context.naming(what=what, frm_key=frm_key, default=default, calculate=True)
+
+    elif context.portal_type == 'PlominoForm':
+        FRM_ID = context.getFormName()
+    else:
+        raise Exception('Oggetto di tipo %s non contemplato dallo script' % context.portal_type)
+
+    if not FRM_ID.startswith(frm_key):
+        return default
+
+    keys = FRM_ID.split('_')
+    if not what:
+        return dict([(k, gen(keys)) for k,gen in generators.items()])
+    else:
+        gen = generators.get(what)
+        if gen:
+            return gen(keys)
+
     return default
 
 def inverse(what, value, frm_key='frm_'):
     """
-    what2frmname
+    TODO what2frmname
     """
     return form_name
 
-generators = dict(
-    # tutto ciò che segue il prefisso unito da "_"
-    tipo_pratica = lambda k: '_'.join(k[1:]),
-    # tutto quello che sta nel mezzo unito da "_"
-    tipo_app = lambda k: '_'.join(k[1:-1]),
-    # solo il suffisso
-    tipo_richiesta = lambda k: k[-1]
-)
-
-if context.portal_type == 'PlominoDocument':
-
-    if calculate or context.isNewDocument():
-        FRM_ID = context.getForm().getFormName()
-    else:
-        if what:
-            return context.getItem(what)
-        else:
-            return dict([(k, context.getItem(k)) for k in generators.keys()])
-
-elif context.portal_type == 'PlominoForm':
-    FRM_ID = context.getFormName()
-else:
-    raise Exception('Oggetto di tipo %s non contemplato dallo script' % context.portal_type)
-
-if not FRM_ID.startswith(frm_key):
-    return default
-
-keys = FRM_ID.split('_')
-
-if not what:
-    return dict([(k, gen(keys)) for k,gen in generators.items()])
-else:
-    gen = generators.get(what)
-    if gen:
-        return gen(keys)
-
-return default
+return main(what=what, frm_key=frm_key, default=default, calculate=calculate)
