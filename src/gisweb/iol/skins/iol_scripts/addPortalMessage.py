@@ -27,7 +27,7 @@ def getUnicode(x):
     if isinstance(x, unicode):
         return x
     else:
-        return unicode(x, 'replace')
+        return unicode(x, errors='replace')
 
 messages = [(getUnicode(m[0]), m[1])
     for m in zip(msg, msg_type)]
