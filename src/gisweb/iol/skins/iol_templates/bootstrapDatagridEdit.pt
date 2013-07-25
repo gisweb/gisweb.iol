@@ -26,7 +26,7 @@
                 var ${fieldname}_datatable;
                 $$(document).ready(function() {
                     ${fieldname}_datatable = $$('#${fieldname}_datagrid').dataTable( {
-                        'sAjaxSource': 'tojson?item=${fieldname}&rendered=true&datatables=true',
+                        'sAjaxSource': 'tojson?item=${fieldname}&datatables=true',
                         'sServerMethod': 'POST',
                         'fnServerParams': function ( aoData ) {
                             ${request_items}
@@ -37,6 +37,8 @@
                             $$('#${fieldname}_datagrid > tbody > tr').click(function() {
                                 datagrid_deselect_rows(${fieldname}_datatable);
                                 $$(this).addClass('datagrid_row_selected');
+                                $$('#${fieldname}_editrow').attr('disabled',false);
+                                $$('#${fieldname}_deleterow').attr('disabled',false);
                             });
                         },
                         'oLanguage': {
@@ -44,14 +46,21 @@
                         }
                     } );
 
-        			$$('#${fieldname}_addrow').click(function() {
-        				datagrid_add_row(${fieldname}_datatable, '${fieldname}', '../${associated_form}/OpenBareForm?Plomino_Parent_Field=${fieldname}&Plomino_Parent_Form=${formname}&numrows=' + ${fieldname}_datatable.fnGetData().length);return false
+        			$$('#${fieldname}_addrow').click(function(e) {
+                        e.preventDefault();
+                        showLoading();
+        				datagrid_add_row(${fieldname}_datatable, '${fieldname}', '../${associated_form}/OpenBareForm?Plomino_Parent_Field=${fieldname}&Plomino_Parent_Form=${formname}&numrows=' + ${fieldname}_datatable.fnGetData().length);
+                        $$('#info-loading').fadeOut(1000);
         			});
-        			$$('#${fieldname}_editrow').click(function() {                  
-        				datagrid_edit_row(${fieldname}_datatable, '${fieldname}', '../${associated_form}/OpenBareForm?Plomino_Parent_Field=${fieldname}&Plomino_Parent_Form=${formname}');return false;
+        			$$('#${fieldname}_editrow').click(function(e) {  
+                        e.preventDefault();
+        				datagrid_edit_row(${fieldname}_datatable, '${fieldname}', '../${associated_form}/OpenBareForm?Plomino_Parent_Field=${fieldname}&Plomino_Parent_Form=${formname}');
         			});
-        			$$('#${fieldname}_deleterow').button({'label':'Elimina'}).click(function() {
-        				datagrid_delete_row(${fieldname}_datatable, '${fieldname}');return false;
+        			$$('#${fieldname}_deleterow').button({'label':'Elimina'}).click(function(e) {
+                        e.preventDefault();
+        				datagrid_delete_row(${fieldname}_datatable, '${fieldname}');
+                        $$('#${fieldname}_editrow').attr('disabled',true);
+                        $$('#${fieldname}_deleterow').attr('disabled',true);
         			});
 
         			var s = ${fieldname}_datatable.fnSettings();
@@ -76,9 +85,9 @@
     <div class="btn-group">       
           <button class="btn" tal:attributes="id string:${fieldname}_addrow;">Aggiungi</button>
   
-          <button class="btn disabled" tal:attributes="id string:${fieldname}_editrow;">Modifica</button>
+          <button class="btn" disabled="disabled" tal:attributes="id string:${fieldname}_editrow;">Modifica</button>
  
-          <button class="btn disabled" tal:attributes="id string:${fieldname}_deleterow;">Elimina</button>
+          <button class="btn" disabled="disabled" tal:attributes="id string:${fieldname}_deleterow;">Elimina</button>
     </div> 
                 
 </tal:block>

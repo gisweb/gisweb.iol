@@ -13,7 +13,7 @@
             tal:content="structure string:
                         $$(document).ready(function() {
                             $$('#${fieldname}_datagrid').dataTable( {
-                                'sAjaxSource': 'tojson?item=${fieldname}&rendered=true&datatables=true',
+                                'sAjaxSource': 'tojson?item=${fieldname}&datatables=true',
                                 'sServerMethod': 'POST',
                                 'fnServerParams': function ( aoData ) {
                                     ${request_items}

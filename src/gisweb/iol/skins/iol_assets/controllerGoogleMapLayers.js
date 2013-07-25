@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+  if(typeof($.plominoMaps.google.map)=='undefined') return;
   var chosen = [];
   var g = google.maps;
   var me = this;

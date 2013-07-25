@@ -1,0 +1,238 @@
+<tal:block 
+    define="field python:options['field'];
+            fieldname python:options['fieldname'];
+            request field/REQUEST;
+            v options/fieldvalue;
+            data python:field.getSettings().tojson(v);
+            title python:options['field'].title;
+            ttip_title title;
+            ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
+            custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
+            formname python:field.getParentNode().id;
+            doc python: context.REQUEST.PARENTS[0];
+            baseURL python: context.getParentDatabase().absolute_url();
+            editMode python:1 if not doc.isDocument() or doc.isEditMode() else 0;
+            associated_form python:field.getSettings().associated_form;
+            ">
+                
+<input type='text' style="width:100%"
+    tal:attributes="
+            id string:${fieldname}_gridvalue;
+            name fieldname;
+            value data"/>
+
+    <script 
+        type="text/javascript"
+        charset="utf-8"
+        tal:define="param python:field.getSettings().getParameters();
+                    request_items python:field.getSettings().request_items_aoData(request);"
+            tal:content="structure string:
+                var ${fieldname}_datatable;
+
+                $$(document).ready(function() {
+                    var newObject,obj;
+					var overlays = [];
+                    var editMode = ${editMode} == 1;
+                    ${fieldname}_datatable = $$('#${fieldname}_datagrid').dataTable( {
+                        'sAjaxSource': 'tojson?item=${fieldname}&datatables=true',
+                        'sServerMethod': 'POST',
+                        'fnServerParams': function ( aoData ) {
+                            ${request_items}
+                        },
+                        'bJQueryUI': false,
+                        ${param},
+                        'fnDrawCallback': function() {
+                            $$('#${fieldname}_datagrid > tbody > tr').click(function() {
+                                if(${fieldname}_datatable.fnGetData().length == 0) return;
+                                datagrid_deselect_rows(${fieldname}_datatable);
+
+                                $$.each(overlays,function(index,overlay){
+                                    if(overlay.geometryType == google.maps.drawing.OverlayType.MARKER){
+                                        overlay.setDraggable(false);
+                                        if(overlay.tmpIcon) overlay.setIcon(overlay.tmpIcon);
+                                    }
+                                    else{
+                                        overlay.setEditable(false);
+                                        if(overlay.tmpColor) overlay.setOptions({'strokeColor':overlay.tmpColor});
+                                    }
+                                });
+
+                                $$(this).addClass('datagrid_row_selected');
+                                $$('#${fieldname}_editrow').attr('disabled',false);
+                                $$('#${fieldname}_deleterow').attr('disabled',false);
+                                obj = overlays[${fieldname}_datatable.fnGetPosition(this)];
+
+                                if(obj.geometryType == google.maps.drawing.OverlayType.MARKER){
+                                    obj.setDraggable(editMode);
+                                    obj.tmpIcon = obj.getIcon();
+                                    obj.setIcon('resources/icons/selezionato.png');
+                                    obj.map.setCenter(obj.getPosition());
+                                    obj.map.setZoom(18);
+                                    obj.map.infowindow.setContent('todo:inserire info del cantiere...');
+                                    obj.map.infowindow.setPosition(obj.getPosition());  
+                                    obj.map.infowindow.open(obj.map)
+
+                                }
+                                else{
+                                    obj.setEditable(editMode);
+                                    obj.tmpColor = obj.strokeColor;
+                                    obj.setOptions({'strokeColor':'#FFFF00'});
+                                    var bounds = obj.getBounds();
+                                    obj.map.fitBounds(bounds);
+                                    obj.map.infowindow.setContent('todo:inserire info dello scavo...');
+                                    obj.map.infowindow.setPosition(bounds.getCenter());  
+                                    obj.map.infowindow.open(obj.map);
+                                }                                    
+                                    
+
+                                
+                            });
+                        },
+
+                        'fnCreatedRow': function( nRow, aData, iDataIndex ) {
+                            var geomIndex = aData.length-1;
+                            var typeIndex = aData.length-2;
+                            if(newObject){ 
+                                newObject.saved = true;
+                                datagrid_add_geometry(${fieldname}_datatable,'${fieldname}',nRow,iDataIndex,newObject)
+                                overlays[iDataIndex] = newObject;
+                                //console.log('aggiunto nuovo')
+                            }
+                            else{
+                                //colonna del datagrid dove è memorizzato il tipo di elemento
+                                if(typeof(this.fnSettings().oInit.geomIndex != 'undefined')) geomIndex = this.fnSettings().oInit.geomIndex;
+                                if(typeof(this.fnSettings().oInit.typeIndex != 'undefined')) typeIndex = this.fnSettings().oInit.typeIndex;
+
+                                var geom = aData[geomIndex];
+                                var elementType = aData[typeIndex];//chiave del tipo di elemento 
+                                var v;
+           
+                                if(geom){
+                                   v = geom.split(';');
+                                   if(v[0] == google.maps.drawing.OverlayType.POLYLINE){
+                                      obj = new google.maps.Polyline(this.fnSettings().oInit.drawingOptions[elementType].polylineOptions||{});
+                                      obj.setPath(google.maps.geometry.encoding.decodePath(v[1]))
+                                      obj.geometryType = google.maps.drawing.OverlayType.POLYLINE;
+                                   }
+                                   else if(v[0] == google.maps.drawing.OverlayType.POLYGON){
+                                      obj = new google.maps.Polygon(this.fnSettings().oInit.drawingOptions[elementType].polygonOptions||{});
+                                      obj.setPath(google.maps.geometry.encoding.decodePath(v[1]))
+                                      obj.geometryType = google.maps.drawing.OverlayType.POLYGON;
+                                   }
+                                   else{ 
+                                      obj = new google.maps.Marker(this.fnSettings().oInit.drawingOptions[elementType].markerOptions||{});
+                                      var pos = geom.split(' ');
+                                      obj.setPosition(new google.maps.LatLng(pos[1],pos[0]))
+                                      obj.geometryType = google.maps.drawing.OverlayType.MARKER;
+
+                                   }
+                                   obj.setMap($$.plominoMaps.google.map);
+                                   datagrid_add_geometry(${fieldname}_datatable,'${fieldname}',nRow,iDataIndex,obj)
+                                   overlays[iDataIndex] = obj;
+                                   //console.log('inserito da archivio');
+                                }
+                           }
+                           //SUI MARKER AGGIUNGO LO ZOOM SU STREETVIEW
+                           if(overlays[iDataIndex].geometryType == google.maps.drawing.OverlayType.MARKER)
+                                 google.maps.event.addListener(overlays[iDataIndex],'click', function(){
+                                       $$.plominoMaps.zoomStreetView(overlays[iDataIndex].getPosition())
+                                 })
+                        },
+
+                        'oLanguage': {
+                            'sUrl': '@@collective.js.datatables.translation'
+                        }
+                    } );
+
+
+
+/*
+        			$$('#${fieldname}_addrow').click(function(e) {
+                        e.preventDefault();
+        				datagrid_add_row(${fieldname}_datatable, '${fieldname}', '../${associated_form}/OpenBareForm?Plomino_Parent_Field=${fieldname}&Plomino_Parent_Form=${formname}&elementtype='+ $$('#${fieldname}_drawingMode').val() +'&numrows=' + ${fieldname}_datatable.fnGetData().length);});
+*/
+
+        			$$('#${fieldname}_editrow').click(function(e) {  
+                        e.preventDefault();
+        				datagrid_edit_row(${fieldname}_datatable, '${fieldname}', '../${associated_form}/OpenBareForm?Plomino_Parent_Field=${fieldname}&Plomino_Parent_Form=${formname}')});
+
+        			$$('#${fieldname}_deleterow').click(function(e) {  
+                        e.preventDefault();
+                        var rowIndex = ${fieldname}_datatable.fnGetPosition(datagrid_get_selected_row(${fieldname}_datatable));
+                        overlays[rowIndex].setMap(null);
+                        overlays.splice(rowIndex,1);
+                        $$('#${fieldname}_editrow').attr('disabled',true);
+                        $$('#${fieldname}_deleterow').attr('disabled',true);
+
+        				datagrid_delete_row(${fieldname}_datatable, '${fieldname}');
+                       // console.log(overlays)
+
+
+        			});
+
+
+        			var s = ${fieldname}_datatable.fnSettings();
+        			$$('#${fieldname}_editform').dialog({'autoOpen':false,'modal':true,close: function(event, ui){setTimeout(function(){
+                            if(!newObject.saved) newObject.setMap(null);},1000)} 
+                    });
+
+        //ADD DRAWING MANAGER & TYPE SELECTION TOOL
+        
+        if(s.oInit.drawingOptions){
+            var data = [];
+            $$.each(s.oInit.drawingOptions, function(key,obj) {data.push({'id':key,'text':obj.title})})
+            $$('#${fieldname}_drawingMode').select2({data:data}).bind('change',function(){
+                   $$.plominoMaps.google.drawingManager.setOptions(s.oInit.drawingOptions[$$(this).val()])
+            });
+
+            $$.plominoMaps.google.drawingManager = new google.maps.drawing.DrawingManager({'drawingControl':false});
+            $$.plominoMaps.google.drawingManager.setMap($$.plominoMaps.google.map);
+
+            google.maps.event.addListener($$.plominoMaps.google.drawingManager, 'overlaycomplete', function(e) {
+                $$.plominoMaps.google.drawingManager.setDrawingMode(null);
+                newObject = e.overlay;
+                newObject.geometryType = e.type;
+                newObject.elementType = $$('#${fieldname}_drawingMode').val();
+                showLoading();
+                datagrid_add_row(${fieldname}_datatable, '${fieldname}', '../${associated_form}/OpenBareForm?Plomino_Parent_Field=${fieldname}&Plomino_Parent_Form=${formname}&tipo='+ $$('#${fieldname}_drawingMode').val() +'&numrows=' + ${fieldname}_datatable.fnGetData().length);$$('#info-loading').fadeOut(1000);
+           });
+
+
+      }
+
+} );">
+    </script>
+                
+    <label tal:condition="python:title!=':'" class="control-label" 
+               tal:define="data_mandatory python: 'data-mandatory' if 'data-mandatory' in custom_attributes else '';
+                            mandatory python: 'mandatory' if options['field'].getMandatory() else ''">
+            <span tal:condition="mandatory" class="mandatory" title="Obbligatorio">¦</span>
+            <span tal:condition="data_mandatory" class="data-mandatory" title="Obbligatorio per invio">¦</span> 
+            <span tal:content="python:'%s: ' % title">Titolo</span>
+            <i tal:condition="ttip_descr" class="icon-info-sign" data-fade-speed="10" data-trigger="hover" tal:attributes="title ttip_title;data-content ttip_descr"></i>
+    </label>    
+                
+                
+   <input tal:condition="editMode" tal:attributes="id string:${fieldname}_drawingMode" style="width:30%">            
+                
+   <!--MAPPA--> 
+   <div tal:attributes="
+            id fieldname;
+            data-base-url baseURL;
+            data-edit-mode editMode;
+            data-value v;
+            class string: googlemap-plugin;
+            data-plugin-options custom_attributes;"></div>               
+    <table class="table table-bordered" tal:attributes="id string:${fieldname}_datagrid">
+    </table>
+    <div tal:condition="editMode" tal:attributes="id string:${fieldname}_editform"></div>
+                
+    <div tal:condition="editMode" class="btn-group">       
+          <!--<button class="btn" tal:attributes="id string:${fieldname}_addrow;">Aggiungi</button>-->
+  
+          <button class="btn" disabled="disabled" tal:attributes="id string:${fieldname}_editrow;">Modifica</button>
+ 
+          <button class="btn" disabled="disabled" tal:attributes="id string:${fieldname}_deleterow;">Elimina</button>
+    </div> 
+                
+</tal:block>
