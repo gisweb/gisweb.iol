@@ -24,7 +24,8 @@
             data-value v;
             class string: googlemap-plugin;
             data-plugin-options custom_attributes;"></div>
-        <input type='hidden' tal:attributes="id string:${fieldname}_settings;name string:${fieldname};value v"/>   
+       <div tal:attributes="id string:${fieldname}_messageinfo;class string:control-label uneditable;"></div>
+       <input type='text' style="width:100%" tal:attributes="id string:${fieldname}_geometry;name string:${fieldname};value v"/>   
 
         
 </tal:def>

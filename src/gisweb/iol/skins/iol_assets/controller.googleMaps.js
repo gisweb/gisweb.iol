@@ -16,7 +16,7 @@ var svGeocoder = new google.maps.Geocoder();
 var myPanorama;
 
 $(function(){
-
+    var currentOverlay;
      //MAPPA GOOGLE
      $(".googlemap-plugin").each(function(){
         if(typeof($(this).data("pluginOptions"))!="object") return;
@@ -35,6 +35,9 @@ $(function(){
            // google.maps.event.addListener(map, 'zoom_changed', updateMapField);
            // google.maps.event.addListener(map, 'maptypeid_changed', updateMapField);
 
+            map.infowindow = new google.maps.InfoWindow(); 
+            $.plominoMaps.google.map = map;
+
 
             /*
             if(window.parent.jQuery.plominoMaps.google.map){
@@ -50,15 +53,23 @@ $(function(){
                 //map.setStreetView(panorama);
             }
 
-            map.infowindow = new google.maps.InfoWindow(); 
-            $.plominoMaps.google.map = map;
-
-                  
-
+            if(pluginOptions.drawingTools && pluginOptions.drawingOptions){
+               $("[name='"+ pluginOptions.drawingTools +"']").bind('change',function(){
+                    $.plominoMaps.google.drawingManager.setOptions(pluginOptions.drawingOptions[$(this).val()])
+               });
+               $.plominoMaps.google.drawingManager = new google.maps.drawing.DrawingManager({'drawingControl':false});
+               $.plominoMaps.google.drawingManager.setMap(map);
+               google.maps.event.addListener($.plominoMaps.google.drawingManager, 'overlaycomplete', onOverlayComplete);
+               var sGeom = $("#"+fieldId+"_geometry").val();
+               if(sGeom){
+                   var elementType = $("[name='"+ pluginOptions.drawingTools +"']").attr('value');
+                   currentOverlay = $.plominoMaps.addObject(sGeom,pluginOptions.drawingOptions[elementType]); 
+                   currentOverlay.editMode = map.editMode;
+                   currentOverlay.fieldId = map.getDiv().id;
+                   $.plominoMaps.registerObject(currentOverlay);
+               }
+            }      
      });
-
-
-
 
   //GENERAZIONE DEI CONTROLLI GEOCODE NUOVI
    $(".geocode-plugin").each(function(){
@@ -120,12 +131,25 @@ $(function(){
 	}
     });
 
+    function onOverlayComplete(e){
+        $.plominoMaps.google.drawingManager.setDrawingMode(null);
+        if(currentOverlay){
+            currentOverlay.setMap(null);
+            delete(currentOverlay)
+        }
+		currentOverlay = e.overlay;
+        currentOverlay.geometryType = e.type;
+        currentOverlay.editMode = true;
+        currentOverlay.fieldId = $.plominoMaps.google.map.getDiv().id;
+        $.plominoMaps.registerObject(currentOverlay);
+    }
 });
 
 
+/************************************/
 
-
-  $.plominoMaps.updateMarkerPosition = function(options,position){
+//Dato un oggetto lo trasforma in marker
+$.plominoMaps.updateMarkerPosition = function(options,position){
     //var fieldId = (options.geometryField && options.geometryField.attr('id'))||options.fieldId;
     var fieldId = options.fieldId;
     var marker = $.plominoMaps.google.markers[fieldId];
@@ -145,71 +169,127 @@ $(function(){
     return marker;
 }
 
-
-$.plominoMaps.updateGeometryField = function(marker){
-
+//AGGIORNA I CAMPI DELLE GEOMETRIE
+$.plominoMaps.updateGeometryField = function(overlay,message){
    //Aggiorno il campo di posizione
-
-    if(marker.dataTable){
+    if(overlay.dataTable){
       //Campo tipo datagrid 
-        if($('#' + marker.fieldId + '_gridvalue').length){
-           var field = $('#' + marker.fieldId + '_gridvalue');
-           var field_data = jq.evalJSON(field.val());
-           var gridRow = field_data[marker.rowIndex];
+        if($('#' + overlay.fieldId + '_gridvalue').length){
+			var field = $('#' + overlay.fieldId + '_gridvalue');
+			var field_data = jq.evalJSON(field.val());
+			var gridRow = field_data[overlay.rowIndex];
 
-           if(marker.latIndex){
-              gridRow[marker.latIndex] = marker.getPosition().lat().toFixed(6)
-              marker.dataTable.fnUpdate(marker.getPosition().lat().toFixed(6),marker.rowIndex, marker.latIndex);
-           }
-           if(marker.lngIndex){
-             gridRow[marker.lngIndex] = marker.getPosition().lng().toFixed(6)
-             marker.dataTable.fnUpdate(marker.getPosition().lng().toFixed(6),marker.rowIndex, marker.lngIndex);
+			if(overlay.latIndex){
+				gridRow[overlay.latIndex] = overlay.getPosition().lat().toFixed(6)
+				overlay.dataTable.fnUpdate(overlay.getPosition().lat().toFixed(6),overlay.rowIndex, overlay.latIndex);
+			}
+			if(overlay.lngIndex){
+				gridRow[overlay.lngIndex] = overlay.getPosition().lng().toFixed(6)
+				overlay.dataTable.fnUpdate(overlay.getPosition().lng().toFixed(6),overlay.rowIndex, overlay.lngIndex);
 
-          }
-          if(marker.geomIndex) gridRow[marker.geomIndex] = marker.getPosition().lng().toFixed(6)+" "+marker.getPosition().lat().toFixed(6);
+			}
 
-          field_data[marker.rowIndex] = gridRow;
-          field.val(jq.toJSON(field_data));
-      }
-  }else{
-      $("#"+ marker.fieldId + '_geometry').val(marker.getPosition().lng().toFixed(6)+" "+marker.getPosition().lat().toFixed(6));
-      //Campi lat e lng se esistono
-     // if(jQuery("[name^='lat']")) jQuery("[name^='lat']").val(marker.getPosition().lat().toFixed(6))
-     // if(jQuery("[name^='lng']")) jQuery("[name^='lng']").val(marker.getPosition().lng().toFixed(6))
-  }
+			if(typeof(overlay.geomIndex)!='undefined'){
+				if(overlay.geometryType == google.maps.drawing.OverlayType.MARKER)
+					gridRow[overlay.geomIndex] = overlay.getPosition().lng().toFixed(6)+" "+overlay.getPosition().lat().toFixed(6);
+				else
+					gridRow[overlay.geomIndex] = overlay.geometryType +';'+google.maps.geometry.encoding.encodePath(overlay.getPath()); 
+			}
+
+			field_data[overlay.rowIndex] = gridRow;
+			field.val(jq.toJSON(field_data));
+		}
+	}else{
+		var sGeom;
+		if(overlay.geometryType == google.maps.drawing.OverlayType.MARKER){
+			sGeom = overlay.getPosition().lng().toFixed(6)+" "+overlay.getPosition().lat().toFixed(6);
+		        //Campi lat e lng se esistono
+		        if($("[name^='lat']")) $("[name^='lat']").val(overlay.getPosition().lat().toFixed(6))
+		        if($("[name^='lng']")) $("[name^='lng']").val(overlay.getPosition().lng().toFixed(6))
+                }
+		else
+			sGeom = overlay.geometryType +';'+google.maps.geometry.encoding.encodePath(overlay.getPath());
+		
+		$("#"+ overlay.fieldId + '_geometry').val(sGeom);
+                if(message) $("#"+ overlay.fieldId + '_messageinfo').text(message);
+	}
  
 }
 
-$.plominoMaps.updateProgField = function(marker){
+//REGISTRA GLI EVENTI PER TENERE AGGIONATI I CAMPI DELLE GEOMETRIE MODIFICANDO O SPOSTANDO GLI OGGETTI
+$.plominoMaps.registerObject = function(overlay){
+        var encodeString,infoString;
+	if (overlay.geometryType != google.maps.drawing.OverlayType.MARKER) {
+		if(overlay.editMode){
+			overlay.setEditable(true);
+			google.maps.event.addListener(overlay.getPath(), 'set_at', function(index) {
+				encodeString = google.maps.geometry.encoding.encodePath(this);
+				infoString = 'lunghezza: ' + google.maps.geometry.spherical.computeLength(this).toFixed(2);
+				if (overlay.geometryType == google.maps.drawing.OverlayType.POLYGON) infoString += ', superficie: ' + google.maps.geometry.spherical.computeArea(this).toFixed(2);
+				if (encodeString) $.plominoMaps.updateGeometryField(overlay);
+			});
+			google.maps.event.addListener(overlay.getPath(), 'insert_at', function(index) {
+				encodeString = google.maps.geometry.encoding.encodePath(this);
+				infoString = 'lunghezza: ' + google.maps.geometry.spherical.computeLength(this).toFixed(2);
+				if (overlay.geometryType == google.maps.drawing.OverlayType.POLYGON) infoString += ', superficie: ' + google.maps.geometry.spherical.computeArea(this).toFixed(2);
+				if (encodeString) $.plominoMaps.updateGeometryField(overlay,infoString);
+			});
+		}
 
-    if(jQuery.plominoMaps.actions["snapto_strada"])jQuery.plominoMaps.actions["snapto_strada"](marker)
-
-
-};
-
-//CENTRA UN OGGETTO DI TIPO OVERLAY
-$.plominoMaps.google.zoomToObject = function (overlay){
-
-
-
-  if(marker){
-     marker.setDraggable(dr);
-     marker.map.infowindow.setContent(marker.title);
-     marker.map.infowindow.open(marker.map, marker);
-  }
+		encodeString = google.maps.geometry.encoding.encodePath(overlay.getPath());
+		infoString = 'lunghezza: ' + google.maps.geometry.spherical.computeLength(overlay.getPath()).toFixed(2);
+		if (overlay.geometryType == google.maps.drawing.OverlayType.POLYGON) infoString += ', superficie: ' + google.maps.geometry.spherical.computeArea(overlay.getPath()).toFixed(2);
+		if (encodeString) $.plominoMaps.updateGeometryField(overlay,infoString);
+		
+	}
+	else{
+		if(overlay.editMode){
+			overlay.setDraggable(true);
+			google.maps.event.addListener(overlay, 'dragend', function() {
+                                infoString = 'posizione lat = ' + overlay.getPosition().lat().toFixed(6) + ' lon= ' + overlay.getPosition().lng().toFixed(6);
+				$.plominoMaps.updateGeometryField(overlay,infoString);
+			})
+		}
+                //SUI MARKER AGGIUNGO LO ZOOM SU STREETVIEW
+                google.maps.event.addListener(overlay,'click', function(){$.plominoMaps.zoomStreetView(overlay.getPosition())})
+                infoString = 'posizione lat = ' + overlay.getPosition().lat().toFixed(6) + ' lon= ' + overlay.getPosition().lng().toFixed(6);
+		$.plominoMaps.updateGeometryField(overlay,infoString);
+	}
 }
 
+//AGGIUNGE UN OGGETTO IN MAPPA CREANDO UN NUOVO OVERLAY (LE OPZIONI SONO MEMORIZZATE NEL FIELD DI PLOMINO)
+$.plominoMaps.addObject = function(stringGeom,options){
+	var overlay,pos;
+	var v = stringGeom.split(';');
+	if(v[0] == google.maps.drawing.OverlayType.POLYLINE){
+		overlay = new google.maps.Polyline(options.polylineOptions||{});
+		overlay.setPath(google.maps.geometry.encoding.decodePath(v[1]))
+		overlay.geometryType = google.maps.drawing.OverlayType.POLYLINE;
+	}
+	else if(v[0] == google.maps.drawing.OverlayType.POLYGON){
+		overlay = new google.maps.Polygon(options.polygonOptions||{});
+		overlay.setPath(google.maps.geometry.encoding.decodePath(v[1]))
+		overlay.geometryType = google.maps.drawing.OverlayType.POLYGON;
+	}
+	else{ 
+		overlay = new google.maps.Marker(options.markerOptions||{});
+		pos = stringGeom.split(' ');
+		overlay.setPosition(new google.maps.LatLng(pos[1],pos[0]))
+		overlay.geometryType = google.maps.drawing.OverlayType.MARKER;
+	}
+	overlay.setMap($.plominoMaps.google.map);
+	return overlay;
+}
+
+//AGGIORNA LE PROGRESSIVE (????????)
+$.plominoMaps.updateProgField = function(overlay){
+    if($.plominoMaps.actions["snapto_strada"]) $.plominoMaps.actions["snapto_strada"](overlay)
+};
 
 
-
-
-
-
-
-
+//GESTIONE DI STREETVIEW IN FINESTRA SEPARATA
 $.plominoMaps.zoomOnStreetView = function(marker){
 
-console.log(marker)
     var panorama;
     var map = marker.map;
     var sViewContainer = jq("#"+map.getDiv().id+"_streetview").get(0);
@@ -256,335 +336,7 @@ console.log(marker)
    });
 }
 
-//Aggiorna la mappa con i dati presenti in una datatable
-$.plominoMaps.google.updateMap = function (dataTable){
-     var data = dataTable.fnGetData();
-     var conf = dataTable.fnSettings().oInit;
-
-    jQuery.each(data, function(index, row) { 
-       var pos = row[conf.geomIndex];
-       if(typeof(pos)=='string') pos = pos.split(" ");
-       if(pos.length==2){
-
-          //AGGIUNGO I PUNTI
-          pos[0]=parseFloat(pos[0]);pos[1]=parseFloat(pos[1]);
-          var options = {
-            icon:conf.iconPath + row[conf.iconIndex],
-            iconh:null,
-            iconw:null,
-            dataTable:dataTable,
-            //editmode:conf.editMode,
-            fieldId:conf.fieldId+'|'+index,
-            //action: options.action,
-            rowIndex:index,
-            geomIndex:conf.geomIndex,
-            latIndex:conf.latIndex,
-            lngIndex:conf.lngIndex,
-            title:row[conf.titleIndex]
-       }
-       var marker = $.plominoMaps.updateMarkerPosition(options,new google.maps.LatLng(parseFloat(pos[1]),parseFloat(pos[0])));
-       if(conf.editMode==1) marker.setDraggable(true);
-       google.maps.event.addListener(marker, 'click', function() {
-            datagrid_deselect_rows(dataTable);
-            jq(dataTable.fnGetNodes()[marker.rowIndex]).addClass('datagrid_row_selected');
-       });
-     }
-     else{
-         //Aggiungo poligoni o linee
-         var options = {
-            dataTable:dataTable,
-            editmode:conf.editMode,
-            fieldId:row[0],
-            //action: options.action,
-            title:row[conf.titleIndex],
-            geom:row[conf.geomIndex],
-            geomType:row[conf.geomTypeIndex],
-            }
-         jQuery.plominoMaps.google.addEncodedGeometry(options);
-
-     }
-
-
-
-
-
-
-
-
-
-   });
-
-  //var markerCluster = new MarkerClusterer(jQuery.plominoMaps.google.map, jQuery.plominoMaps.google.points);
-
-
-}
-
-
-//**************** FUNZIONE PER LA GESTIONE DELLE GEOMETRIE IN DATAGRID ***********************//
-function datagrid_add_geometry(dTable,fieldId,nRow,iDataIndex,obj){
-
-    var updateGeometryField = function(overlay){
-
-       if($('#' + overlay.fieldId + '_gridvalue').length){
-           var field = $('#' + overlay.fieldId + '_gridvalue');
-           var field_data = jq.evalJSON(field.val());
-           var gridRow = field_data[overlay.rowIndex];
-
-           if(overlay.latIndex && overlay.getPosition){
-              gridRow[overlay.latIndex] = overlay.getPosition().lat().toFixed(6)
-              dTable.fnUpdate(overlay.getPosition().lat().toFixed(6),overlay.rowIndex, overlay.latIndex);
-           }
-           if(overlay.lngIndex && overlay.getPosition){
-             gridRow[overlay.lngIndex] = overlay.getPosition().lng().toFixed(6)
-             dTable.fnUpdate(overlay.getPosition().lng().toFixed(6),overlay.rowIndex, overlay.lngIndex);
-
-          }
-          if(typeof(overlay.geomIndex)!='undefined'){
-              if(overlay.getPosition)
-                  gridRow[overlay.geomIndex] = overlay.getPosition().lng().toFixed(6)+" "+overlay.getPosition().lat().toFixed(6);
-              else{
-                  gridRow[overlay.geomIndex] = overlay.geometryType +';'+google.maps.geometry.encoding.encodePath(overlay.getPath());   
-              }
-          }
-
-          field_data[overlay.rowIndex] = gridRow;
-          field.val(jq.toJSON(field_data));
-      }
-
-
-   }
-
-
-                obj.dataTable = true;
-                obj.fieldId = fieldId;
-                var tbConf = dTable.fnSettings().oInit;
-                obj.geomIndex = tbConf.geomIndex;
-                obj.rowIndex = iDataIndex;
-
-		if (obj.geometryType != google.maps.drawing.OverlayType.MARKER) {
-			google.maps.event.addListener(obj.getPath(), 'set_at', function(index) {
-                                var encodeString = google.maps.geometry.encoding.encodePath(this);
-				var infoString = 'lunghezza: ' + google.maps.geometry.spherical.computeLength(this);
-				if (obj.geometryType == google.maps.drawing.OverlayType.POLYGON) infoString += ', superficie: ' + google.maps.geometry.spherical.computeArea(this);
-                                if (encodeString) updateGeometryField(obj);
-			});
-			google.maps.event.addListener(obj.getPath(), 'insert_at', function(index) {
-				var encodeString = google.maps.geometry.encoding.encodePath(this);
-				var infoString = 'lunghezza: ' + google.maps.geometry.spherical.computeLength(this);
-				if (obj.geometryType == google.maps.drawing.OverlayType.POLYGON) infoString += ', superficie: ' + google.maps.geometry.spherical.computeArea(this);
-                                if (encodeString) updateGeometryField(obj);
-			});
-			var encodeString = google.maps.geometry.encoding.encodePath(obj.getPath());
-			var infoString = 'lunghezza: ' + google.maps.geometry.spherical.computeLength(obj.getPath());
-			if (obj.geometryType == google.maps.drawing.OverlayType.POLYGON) infoString += ', superficie: ' + google.maps.geometry.spherical.computeArea(obj.getPath());
-                        if (encodeString) updateGeometryField(obj);
-	        }
-		else{
-			google.maps.event.addListener(obj, 'dragend', function() {
-			        updateGeometryField(obj);
-                        })
-	                updateGeometryField(obj);
-		}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-jQuery.plominoMaps.google.addMarker = function(options){
-
-    if(options.pos){
-
-        var newMarker = new google.maps.Marker({
-            icon:options.icon,
-            iconh:options.iconh,
-            iconw:options.iconw,
-            dataTable:options.dataTable,
-            draggable:options.editmode,
-            fieldId:options.fieldId,
-            action: options.action,
-
-
-            rowIndex:options.rowIndex,
-            iconIndex:options.geomIndex,
-            geomIndex:options.geomIndex,
-            latIndex:options.latIndex,
-            lngIndex:options.lngIndex,
-            title:options.title,
-
-            position:new google.maps.LatLng(options.pos[0],options.pos[1]),
-            map:jQuery.plominoMaps.google.map
-        });
-
-        if(options.dataTable){
-              google.maps.event.addListener(newMarker, 'click', function() {
-                 datagrid_deselect_rows(newMarker.dataTable);
-                 jQuery(newMarker.dataTable.fnGetNodes()[newMarker.rowIndex]).addClass('datagrid_row_selected');
-
-              }); 
-        };
-
-        if (options.editmode) {
-            google.maps.event.addListener(newMarker, 'dragend', function() {
-                  newMarker.pos = [newMarker.position.lat(),newMarker.position.lng()];
-                  jQuery.plominoMaps.updateGeometryField(newMarker)
-                  
-                  //Se c'è anche gisclient allineo il marker su gc
-
-                 //if(jQuery.plominoMaps.gisclient.map)jQuery.plominoMaps.updateMarkerPosition(newMarker);
-                   //console.log(options)
-
-            });
-        }
-        else{
-            if(options.winpopup && options.winpopup.params){
-                 options.winpopup.params['field'] = id;
-                 google.maps.event.addListener(newMarker, 'click', function() {
-                    
-                    winPopup(id,newMarker,options);
-                })
-            }
-        }; 
-        jQuery.plominoMaps.google.points.push(newMarker);
-        return newMarker;
-    }
-}
-
-jQuery.plominoMaps.google.removeMarker = function(id){
-  var marker = jQuery.plominoMaps.getElement(jQuery.plominoMaps.google.points,id);
-  marker.setMap(null)
-  jQuery.plominoMaps.google.points.splice(id,1);
-}
-
-
-
-
-jQuery.plominoMaps.google.addEncodedGeometry = function(options){
-
-    //console.log(options)
-   var overlay;
-    var path = google.maps.geometry.encoding.decodePath(options.geom);
-    if(options.geomType=='line') overlay = new google.maps.Polyline({strokeColor:'#00FFFF',strokeOpacity: 1.0,strokeWeight: 2});
-    if(options.geomType=='polygon') overlay = new google.maps.Polygon({strokeColor:'#00FFFF',strokeOpacity: 1.0,strokeWeight: 2});
-
-    if(overlay) {
-         overlay.fieldId =  options.fieldId;   
-         overlay.geomType = options.geomType;
-         overlay.setPath(path);
-         overlay.setMap($.plominoMaps.google.map);
-         //$.plominoMaps.google.map.fitBounds(overlay.getBounds())
-         if(options.geomType=='line')jQuery.plominoMaps.google.lines.push(overlay)
-         if(options.geomType=='polygon')jQuery.plominoMaps.google.polygons.push(overlay)
-
-         
-    }
-}
-
-//Trova un elemento di geometria dato un indice
-jQuery.plominoMaps.getElement = function(list,idx){
-   if(typeof(idx)=='string')
-        for (i=0;i<list.length;i++){
-              if(list[i].fieldId==idx) return list[i]
-        }
-   if(typeof(list[idx])!='undefined') 
-       return list[idx]
-   return false
-}
-
-
-
-
-
-
-
-jQuery.plominoMaps.google.getOverlay =  function(id){
-  var el=false;
-  el = jQuery.plominoMaps.getElement(jQuery.plominoMaps.google.points,id);
-  if (el) return el;
-  el = jQuery.plominoMaps.getElement(jQuery.plominoMaps.google.lines,id);
-  if (el) return el;
-  el = jQuery.plominoMaps.getElement(jQuery.plominoMaps.google.polygons,id);
-  if (el) return el;
-  return el;
-}
-
-$.plominoMaps.switchOnStreetView =  function(marker){
-
-      //SE C'è STRTEETVIEW VADO SU QUELLO
-       var svClient = new google.maps.StreetViewService();
-       var panorama = $.plominoMaps.google.map.getStreetView();
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-        if(panorama.marker){
-            panorama.marker.setPosition(marker.position)
-       }
-       else{
-            panorama.marker = new google.maps.Marker({position:marker.position,map:panorama,icon:marker.icon});
-            google.maps.event.addListener(panorama.marker, 'dragend', function() {
-
-                console.log('xcvxcv')
-            })
-           
-       }
-       panorama.marker.setDraggable(true)
-       jQuery.plominoMaps.google.map.setCenter(marker.position);
-       jQuery.plominoMaps.google.map.setZoom(16);
-       svClient.getPanoramaByLocation(marker.position, 50,function (panoData, status) {
-
-              if (status == google.maps.StreetViewStatus.OK) {
-                    /**** http://dreamdealer.nl/tutorials/point_the_streetview_camera_to_a_marker.html */
-                     
-                    var panoCenter = panoData.location.latLng;//trovo la posizione del frame
-                     var heading = google.maps.geometry.spherical.computeHeading(panoCenter, marker.position);//calcolo heading con la differenza
-
-                       panorama.setPosition(marker.position);
-                       panorama.setPov({heading:heading , pitch:-30, zoom:0});
-                       panorama.setVisible(true);
-                      jq("#concessione_mappa_streetview").removeClass('hidden');
-console.log(panorama)
-
-           } else {
-                      jq("#concessione_mappa_streetview").addClass('hidden');
-                      panorama.setVisible(false);
-
-          }
-    });
-
-}
-
+//var markerCluster = new MarkerClusterer(jQuery.plominoMaps.google.map, jQuery.plominoMaps.google.points);
 
 $.plominoMaps.zoomStreetView =  function(position){
 
@@ -611,27 +363,10 @@ $.plominoMaps.zoomStreetView =  function(position){
 }
 
 
-
-
-
-
-function clearMap(type){
-   var list = jQuery.plominoMaps[type];
-   for (i=0;i<list.length;i++){
-        list[i].setMap(null) 
-   }
-}
-
-
-
-
-
 //Funzione che aggiorna il campo con la configurazione della mappa
 function updateMapField(){
 
-
 //console.log('#'+this.getDiv().id+'_settings')
-
 
       var v = jQuery('#'+this.getDiv().id+'_settings').val();
       if(v)
@@ -676,9 +411,6 @@ jQuery.ajax({
 
 
 }
-
-
-
 
          
 

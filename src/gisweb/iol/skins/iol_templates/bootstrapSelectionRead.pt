@@ -16,7 +16,7 @@
             <span tal:condition="python:widget=='CHECKBOX' and len(labeled)>1" tal:content="python:'%s: ' % title">Titolo</span>
         </label>               
         <tal:loop tal:repeat="v labeled">
-          <div tal:attributes="id options/fieldname;class string:control-label uneditable;value python:v[1]" tal:content="python:v[0]">selected value</div>
+          <div tal:attributes="id options/fieldname;name options/fieldname;class string:control-label uneditable;value python:v[1]" tal:content="python:v[0]">selected value</div>
           <tal:sep tal:condition="not:repeat/v/end" tal:content="structure python:options['field'].getSettings('separator')">separator</tal:sep>
         </tal:loop>
 </tal:def>
