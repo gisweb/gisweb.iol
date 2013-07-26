@@ -198,6 +198,8 @@ $.plominoMaps.updateGeometryField = function(overlay,message){
 
 			field_data[overlay.rowIndex] = gridRow;
 			field.val(jq.toJSON(field_data));
+                        if(message) $("#"+ overlay.fieldId + '_messageinfo').text(message);
+
 		}
 	}else{
 		var sGeom;
