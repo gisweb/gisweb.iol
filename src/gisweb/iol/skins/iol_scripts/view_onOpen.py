@@ -9,3 +9,8 @@
 ##
 
 db = context.getParentDatabase()
+user=db.getCurrentUser()
+
+if not ("Manager" in user.getRolesInContext(db) or db.hasUserRole(db.getCurrentUser().id,"[iol-reviewer]") or db.hasUserRole(db.getCurrentUser().id,
+"[iol-manager]")):
+    return 'Non si dispone dei diritti per visualizzare la pagina'
