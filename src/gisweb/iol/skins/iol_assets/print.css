@@ -1,0 +1,38 @@
+url:http://iol.provincia.sp.it/portal_skins/cmfplomino_bootstrap/print.css
+meta_type:File
+title:
+content_type:text/css
+cookie:gisclient3=7b5dd1e2c576cb2257e6b9e9eac25a6a; gcCenterLat-istanze=5504942.5; gcCenterLon-istanze=1073162.5; gcZoomLevel-istanze=9; gcTreeCollapsed=true; __ac="byD8Tncf%2B8iptTplpb1JnAWxojB4Wa6nFKkgAxW1i0Q1MWY3OGRiNnJvYnlzdGFyIQ%3D%3D"
+
+#top-toolbar-div,
+#bottom-toolbar-div,
+#edit-bar,
+#gmap-div,
+#gcmap-div,
+#portal-footer-wrapper,
+#viewlet-above-content,
+#portal-column-one,
+#left-column-wrapper,
+#plone-document-byline
+{
+    display:none;
+}
+.alert {
+    display:none;
+}
+#center-column {
+    width: 100%;
+}
+
+
+.uneditable {
+    font-weight: bold;
+    font-size:12px;
+}
+
+label.control-label {
+    font-weight: normal !important;
+}
+#section-invio-domanda {
+    display:none;
+}
