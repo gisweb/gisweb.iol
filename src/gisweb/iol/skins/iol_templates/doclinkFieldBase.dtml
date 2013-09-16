@@ -1,0 +1,58 @@
+<element id="<dtml-var "custom_field_name">" title="<dtml-var "custom_field_title">" type="PlominoField">
+    <id type="Products.Archetypes.Field.StringField"><dtml-var "custom_field_name"></id>
+    <FieldType type="Products.Archetypes.Field.StringField">DOCLINK</FieldType>
+    <FieldMode type="Products.Archetypes.Field.StringField">COMPUTED</FieldMode>
+    <Formula type="Products.Archetypes.Field.TextField"><![CDATA[
+return plominoDocument.doclinkFieldFormula(formname="<dtml-var "custom_childform_name">")]]>
+    </Formula>
+    <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDOCLINKDataTable</FieldReadTemplate>
+    <FieldEditTemplate type="Products.Archetypes.Field.StringField" />
+    <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+    <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+    <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+    <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+    <params>
+        <param>
+        <value><struct>
+        <member>
+        <name>documentslistformula</name>
+        <value><string>colnames = []
+return plominoDocument.doclinkFieldSearchFormula("<dtml-var "custom_field_name">", colnames=colnames)</string></value>
+        </member>
+        <member>
+        <name>dynamictableparam</name>
+        <value><string>//customize at your needs
+"aoColumns": [
+    { "sTitle": "Edit the document"},
+    { "sTitle": "myColumnTitle"}
+    // add here column you need
+],
+"editForm":"<dtml-var "custom_childform_name">",
+"titleIndex":1,
+"iconIndex":5,
+"geomIndex":7,
+"geomTypeIndex":6,
+"latIndex":1,
+"lngIndex":2,
+"bPaginate": false,
+"bLengthChange": false,
+"bFilter": false,
+"bSort": false,
+"bInfo": false,
+"bAutoWidth": false,
+"asStripClasses": null
+        </string></value>
+        </member>
+        <member>
+        <name>widget</name>
+        <value><string>DYNAMICTABLE</string></value>
+        </member>
+        </struct></value>
+        </param>
+    </params>
+    <CustomData>
+        <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+            <field name="fieldDescription">Custom field description</field>
+            <field name="customAttributes"/></extensionfields>
+    </CustomData>
+</element>

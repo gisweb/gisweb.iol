@@ -1,0 +1,18 @@
+<element id="CASCADE" title="CASCADE" type="PlominoField">
+    <id type="Products.Archetypes.Field.StringField">CASCADE</id>
+    <FieldType type="Products.Archetypes.Field.StringField"><dtml-var "custom_field_type"></FieldType>
+    <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+    <Formula type="Products.Archetypes.Field.TextField">return <dtml-var "custom_field_value"></Formula>
+    <FieldReadTemplate type="Products.Archetypes.Field.StringField" />
+    <FieldEditTemplate type="Products.Archetypes.Field.StringField" />
+    <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+    <ValidationFormula type="Products.Archetypes.Field.TextField" />
+    <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
+    <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+    <CustomData>
+        <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+            <field name="fieldDescription" />
+            <field name="customAttributes" />
+        </extensionfields>
+    </CustomData>
+</element>
