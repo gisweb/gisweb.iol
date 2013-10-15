@@ -27,20 +27,30 @@ def renderSimpleItem(db, doc, itemvalue, render, field, fieldtype):
     if not fieldtype:
         fieldtype = field.getFieldType()
 
+    renderedValue = None
     # if I need data representation (or metadata) for printing porposes
-    if itemvalue and render and field and fieldtype not in ('TEXT', 'NUMBER', ):
-        # not worth it to call the template to render text and numbers
-        # it is an expensive operation
-        fieldtemplate = db.getRenderingTemplate('%sFieldRead' % fieldtype) \
-            or db.getRenderingTemplate('DefaultFieldRead')
-        renderedValue = fieldtemplate(fieldname=name,
-            fieldvalue = itemvalue,
-            selection = field.getSettings().getSelectionList(doc),
-            field = field,
-            doc = doc
-        ).strip()
+    if itemvalue and render and field:
+        if fieldtype == 'SELECTION':
+            nfo = dict([i.split('|')[::-1] for i in field.getSettings().getSelectionList(doc)])
+            if isinstance(itemvalue, basestring):
+                renderedValue = nfo.get(itemvalue) or itemvalue
+            else:
+                renderedValue = [(nfo.get(i) or i) for i in itemvalue]
+
+        elif fieldtype not in ('TEXT', 'NUMBER', ):
+            # not worth it to call the template to render text and numbers
+            # it is an expensive operation
+            fieldtemplate = db.getRenderingTemplate('%sFieldRead' % fieldtype) \
+                or db.getRenderingTemplate('DefaultFieldRead')
+            renderedValue = fieldtemplate(fieldname=name,
+                fieldvalue = itemvalue,
+                selection = field.getSettings().getSelectionList(doc),
+                field = field,
+                doc = doc
+            ).strip()
+
     # if I need data value
-    else:
+    if renderedValue==None:
         if not itemvalue:
             renderedValue = ''
         elif fieldtype == 'TEXT':
