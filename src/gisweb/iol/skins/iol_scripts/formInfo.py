@@ -29,6 +29,10 @@ raw_data['fields'] = dict([(field.getId(), field.getFieldType()) for field in fo
 subforms = form.getSubforms(applyhidewhen=False)
 raw_data['subform_count'] = len(subforms)
 raw_data['subforms'] = subforms
+if not details:
+    raw_data['more_details'] = context.REQUEST.get('URL')+'?details=1'
+else:
+    raw_data['less_details'] = context.REQUEST.get('URL')
 
 # Output rendering
 if format == 'json':

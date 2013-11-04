@@ -8,20 +8,17 @@
 ##title=
 ##
 
-from Products.CMFPlomino.PlominoUtils import Now,StringToDate
-from Products.CMFCore.utils import getToolByName
-
-doc = context
-if doc.portal_type!='PlominoDocument':
+if context.portal_type!='PlominoDocument':
     context.REQUEST.RESPONSE.redirect(context.absolute_url())
 
-db = doc.getParentDatabase()
+from Products.CMFCore.utils import getToolByName
+wf = getToolByName(context, 'portal_workflow') #state_change.workflow
+tr_ids = [i['id'] for i in wf.getTransitionsFor(obj=context, container=None, REQUEST=None)]
 
-# Dopo la protocollazione  se possibile avviene l'assegnazione
-wf = getToolByName(doc, 'portal_workflow') #state_change.workflow
 next_tr = 'protocolla'
-wf.doActionFor(doc, next_tr)
+if next_tr in tr_ids:
+    wf.doActionFor(context, next_tr)
 
-doc.updateStatus()
-urlAction='%s/%s/content_status_modify?workflow_action=invia_domanda' %(db.absolute_url(),doc.getId())
+context.updateStatus()
+urlAction='%s/%s/content_status_modify?workflow_action=invia_domanda' %(db.absolute_url(),context.getId())
 context.REQUEST.RESPONSE.redirect(urlAction)
