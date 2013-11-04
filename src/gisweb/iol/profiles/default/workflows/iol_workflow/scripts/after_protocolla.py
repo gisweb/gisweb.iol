@@ -9,6 +9,9 @@
 ##
 from Products.CMFCore.utils import getToolByName
 
+doc = state_change.object
+
+
 #Aggiornamento dello stato su plominoDocument
 state_change.object.updateStatus()
 

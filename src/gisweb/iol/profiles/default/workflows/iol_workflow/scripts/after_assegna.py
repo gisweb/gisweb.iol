@@ -13,4 +13,5 @@ doc = state_change.object
 doc.updateStatus()
 
 # Invio della mail di avviso
-doc.sendThisMail('assegna')
+if doc.getItem('tipo_richiesta','')!='integrazione':
+    doc.sendThisMail('assegna')

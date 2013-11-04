@@ -1,4 +1,4 @@
-## Script (Python) "after_integra"
+## Script (Python) "after_inizializza"
 ##bind container=container
 ##bind context=context
 ##bind namespace=
@@ -7,10 +7,7 @@
 ##parameters=state_change
 ##title=
 ##
-doc=state_change.object
-
-
-
-
-#Aggiornamento dello stato su plominoDocument
+doc = state_change.object 
+    
+# Aggiornamento dello stato su plominoDocument
 doc.updateStatus()

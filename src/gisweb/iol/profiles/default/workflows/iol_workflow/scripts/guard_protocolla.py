@@ -11,9 +11,8 @@ from Products.CMFCore.utils import getToolByName
 
 doc = state_change.object
 
-db = doc.getParentDatabase()
 if doc.wf_getInfoFor('review_state') == 'avvio':
     return True
 else:
-    isIstruttore = doc.verificaRuolo('istruttore')
+    isIstruttore = doc.verificaRuolo('iol-reviewer') or doc.verificaRuolo('iol-manager')
     return not doc.getItem('numero_protocollo','') and isIstruttore

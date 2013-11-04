@@ -5,6 +5,24 @@
 ##bind script=script
 ##bind subpath=traverse_subpath
 ##parameters=state_change
-##title=TODO
+##title=
 ##
-# TODO serve la protocollazione dell'ingrazione
+#from Products.CMFCore.utils import getToolByName
+#from Products.CMFPlomino.Utils import Now,DateToString
+
+#wf = getToolByName(state_change.object, 'portal_workflow') #state_change.workflow
+doc = state_change.object
+
+fname = 'integrazione' #%DateToString(Now(),'%d%m%Y')
+doc.createPdf(filename=fname)
+
+#INVIO MAIL INTEGRAZIONE
+if doc.getItem('tipo_richiesta','')!='integrazione':
+    doc.sendThisMail('integra')
+
+
+#RIMUOVO FLAG DI PRONTA PER INTEGRAZIONE
+doc.removeItem('pronta_per_integrazione')
+
+#Aggiornamento dello stato su plominoDocument
+doc.updateStatus()

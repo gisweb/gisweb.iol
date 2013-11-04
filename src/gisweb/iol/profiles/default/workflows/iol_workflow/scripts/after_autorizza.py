@@ -20,21 +20,25 @@ tipo_richiesta = doc.getItem('tipo_richiesta','')
 
 
 # Setto il numero di rinnovi sulla richiesta genitore
-if tipo_richiesta == 'rinnovo':
+if 'rinnovo' in tipo_richiesta:
     parentDocument = db.getDocument(doc.getItem('parentDocument'))
     if parentDocument:
         num = parentDocument.getItem('numero_rinnovi', 0)
         parentDocument.setItem('numero_rinnovi', num + 1)
 
-
-#Se è una proroga la mando fino in fondo ad archiviata
-if tipo_richiesta == 'proroga':
+if 'proroga' in tipo_richiesta:
     parentDocument = db.getDocument(doc.getItem('parentDocument'))
     if parentDocument:
         num = parentDocument.getItem('numero_proroghe', 0)
         parentDocument.setItem('numero_proroghe', num + 1)
 
-#Se Rinnovo o Pratica Base Trasform il Docx dell'autorizzazione in PDF        
+#Se Rinnovo o Pratica Base Trasform il Docx dell'autorizzazione in PDF 
 doc.convertToPdf(file_type='documenti_autorizzazione')
+if doc.getItem('tipo_richiesta','')!='integrazione':
+    doc.sendThisMail('autorizza') 
+    
+# Se sono presenti modelli di comunicazione ne genera il pdf    
+if 'copyDocxToPdf' in db.resources.keys():
+    db.resources.copyDocxToPdf(doc)
 
 doc.updateStatus()

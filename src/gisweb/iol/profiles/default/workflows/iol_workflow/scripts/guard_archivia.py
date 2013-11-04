@@ -12,8 +12,8 @@ from Products.CMFPlomino.PlominoUtils import Now
 
 
 # disponibile dopo la scadenza della richiesta
-isExpired = doc.getItem('autorizzata_al') < Now()
+return doc.getItem('autorizzata_al') < Now()
 
-isIstruttore = doc.verificaRuolo('istruttore')
+#isIstruttore = doc.verificaRuolo('istruttore')
 
-return isIstruttore and isExpired
+#return isIstruttore and isExpired

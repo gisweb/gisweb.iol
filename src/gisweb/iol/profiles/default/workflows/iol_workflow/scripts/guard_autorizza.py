@@ -10,21 +10,7 @@
 from Products.CMFCore.utils import getToolByName
 
 doc = state_change.object
-db = doc.getParentDatabase()
 
-#Recupero tipologia domanda e applicazione
+isRup = doc.verificaRuolo('iol-manager')
 
-#tipo_richiesta = doc.getItem('tipo_richiesta','')
-#tipo_app = doc.getItem('tipo_app','')
-
-#Recupero Informazioni sul ruolo dell'utente
-
-isRup = doc.verificaRuolo('rup')
-
-#Verificata se:
-#1) proroga sempre
-#2) Altrimenti solo rup o manager ed è stato salvato il modello di autorizzazione
-#if tipo_richiesta=='proroga':
-#    return True
-#else:
 return doc.getItem('documenti_autorizzazione') and isRup

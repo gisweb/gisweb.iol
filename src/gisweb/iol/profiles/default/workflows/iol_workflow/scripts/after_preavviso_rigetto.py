@@ -12,4 +12,5 @@ doc = state_change.object
 #Aggiornamento dello stato su plominoDocument
 doc.updateStatus()
 #INVIO MAIL PREAVVISO RIGETTO
-doc.sendThisMail('preavviso_rigetto')
+if doc.getItem('tipo_richiesta','')!='integrazione':
+    doc.sendThisMail('preavviso_rigetto')

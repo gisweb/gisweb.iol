@@ -1,18 +1,20 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="iol_workflow" title="Istanze OnLine Workflow" description="" state_variable="review_state" initial_state="init" manager_bypass="False">
+<dc-workflow workflow_id="iol_workflow" title="Istanze OnLine Workflow" description="" state_variable="review_state" initial_state="avvio" manager_bypass="False">
  <permission>CMFPlomino: Edit documents</permission>
- <permission>CMFPlomino: Remove documents</permission>
  <permission>CMFPlomino: Read documents</permission>
+ <permission>CMFPlomino: Remove documents</permission>
  <state state_id="archiviata" title="Archiviata">
   <permission-map name="CMFPlomino: Edit documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>rup</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Read documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Remove documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>rup</permission-role>
   </permission-map>
  </state>
  <state state_id="assegnata" title="Assegnata in fase di istruttoria">
@@ -21,14 +23,18 @@
   <exit-transition transition_id="sospendi"/>
   <permission-map name="CMFPlomino: Edit documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>istruttore</permission-role>
-   <permission-role>rup</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="CMFPlomino: Read documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Remove documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>rup</permission-role>
+   <permission-role>iol-manager</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
@@ -44,16 +50,17 @@
   <exit-transition transition_id="richiesta_proroga"/>
   <permission-map name="CMFPlomino: Edit documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>istruttore</permission-role>
-   <permission-role>rup</permission-role>
+   <permission-role>iol-manager</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Read documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Remove documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>rup</permission-role>
   </permission-map>
-  <assignment name="wf_autorizzata" type="string">True</assignment>
  </state>
  <state state_id="avvio" title="Nuovo documento in compilazione">
   <exit-transition transition_id="invia_domanda"/>
@@ -61,18 +68,19 @@
   <permission-map name="CMFPlomino: Edit documents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
-   <permission-role>istruttore</permission-role>
-   <permission-role>rup</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Read documents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
-   <permission-role>istruttore</permission-role>
-   <permission-role>rup</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Remove documents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
   </permission-map>
  </state>
  <state state_id="init" title="Init">
@@ -84,14 +92,17 @@
   <exit-transition transition_id="torna_istruttoria"/>
   <permission-map name="CMFPlomino: Edit documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>istruttore</permission-role>
-   <permission-role>rup</permission-role>
+   <permission-role>iol-manager</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Read documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Remove documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>rup</permission-role>
+   <permission-role>iol-manager</permission-role>
   </permission-map>
  </state>
  <state state_id="pre_rigetto" title="In preavviso di rigetto ">
@@ -100,14 +111,18 @@
   <exit-transition transition_id="torna_istruttoria"/>
   <permission-map name="CMFPlomino: Edit documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>istruttore</permission-role>
-   <permission-role>rup</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Read documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Remove documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>rup</permission-role>
   </permission-map>
   <assignment name="wf_prerigetto" type="string">True</assignment>
  </state>
@@ -116,52 +131,56 @@
   <exit-transition transition_id="protocolla"/>
   <permission-map name="CMFPlomino: Edit documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>istruttore</permission-role>
-   <permission-role>rup</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
   </permission-map>
-  <permission-map name="CMFPlomino: Read documents" acquired="True">
+  <permission-map name="CMFPlomino: Read documents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Remove documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>rup</permission-role>
+   <permission-role>iol-manager</permission-role>
   </permission-map>
   <assignment name="wf_presentata" type="string">True</assignment>
   <assignment name="wf_priority" type="string">6</assignment>
- </state>
- <state state_id="prorogata" title="Autorizzazione Prorogata">
-  <exit-transition transition_id="archivia"/>
  </state>
  <state state_id="rigettata" title="Diniego protocollato ed inviato">
   <exit-transition transition_id="archivia"/>
   <permission-map name="CMFPlomino: Edit documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>istruttore</permission-role>
-   <permission-role>rup</permission-role>
+   <permission-role>iol-manager</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Read documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Remove documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>rup</permission-role>
   </permission-map>
  </state>
  <state state_id="sospesa" title="Pratica sospesa in attesa di integrazioni">
   <exit-transition transition_id="Integra"/>
   <exit-transition transition_id="torna_istruttoria"/>
   <permission-map name="CMFPlomino: Edit documents" acquired="False">
-   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
-   <permission-role>istruttore</permission-role>
-   <permission-role>rup</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Read documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Remove documents" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>rup</permission-role>
+   <permission-role>iol-manager</permission-role>
   </permission-map>
  </state>
  <transition transition_id="Integra" title="Invia integrazione" new_state="assegnata" trigger="USER" before_script="before_integra" after_script="after_integra">
@@ -170,14 +189,15 @@
   <guard>
    <guard-expression>python: scripts.guard_integrazione(state_change)</guard-expression>
   </guard>
-  <assignment name="wf_message">python: 'Domanda Integrata'</assignment>
   <assignment name="wf_priority">python:int('9')</assignment>
   <assignment name="wf_integrata">python:True</assignment>
+  <assignment name="wf_message">python: 'Domanda Integrata'</assignment>
  </transition>
  <transition transition_id="archivia" title="" new_state="archiviata" trigger="USER" before_script="" after_script="after_archivia">
   <description>Per archiviare la pratica . Attenzione la pratica......</description>
   <action url="" category="workflow" icon="">Archivia</action>
   <guard>
+   <guard-role>iol-reviewer</guard-role>
    <guard-expression>python: scripts.guard_archivia(state_change)</guard-expression>
   </guard>
  </transition>
@@ -194,35 +214,25 @@
   <description>La pratica è pronta per essere autorizzata</description>
   <action url="" category="workflow" icon="">Autorizza</action>
   <guard>
-   <guard-role>rup</guard-role>
-   <guard-role>istruttore</guard-role>
+   <guard-role>iol-manager</guard-role>
    <guard-role>Manager</guard-role>
    <guard-expression>python: scripts.guard_autorizza(state_change)</guard-expression>
   </guard>
   <assignment name="wf_priority">python: int('0')</assignment>
- </transition>
- <transition transition_id="diniego_proroga" title="Rifiuta Proroga" new_state="" trigger="USER" before_script="" after_script="after_diniego_proroga">
-  <action url="" category="workflow" icon="">Rifiuta Proroga</action>
-  <guard>
-   <guard-role>rup</guard-role>
-   <guard-role>istruttore</guard-role>
-   <guard-role>Manager</guard-role>
-   <guard-expression>python: scripts.guard_diniego_proroga(state_change)</guard-expression>
-  </guard>
-  <assignment name="wf_priority">python: 0</assignment>
+  <assignment name="wf_autorizzata">python:True</assignment>
  </transition>
  <transition transition_id="genera_altri_documenti" title="Genera Documento" new_state="" trigger="USER" before_script="" after_script="">
   
   <guard>
   </guard>
  </transition>
- <transition transition_id="inizializza" title="Inizializza pratica" new_state="avvio" trigger="AUTOMATIC" before_script="" after_script="">
+ <transition transition_id="inizializza" title="Inizializza pratica" new_state="" trigger="USER" before_script="" after_script="after_inizializza">
   <description>Porta la pratica in stato si avvio</description>
   <action url="" category="workflow" icon="">Inizializza pratica</action>
   <guard>
   </guard>
  </transition>
- <transition transition_id="invia_domanda" title="Invia la domanda" new_state="presentata" trigger="USER" before_script="" after_script="after_invia_domanda">
+ <transition transition_id="invia_domanda" title="Invia la domanda" new_state="presentata" trigger="USER" before_script="before_invia_domanda" after_script="after_invia_domanda">
   <description>Attenzione la domanda può essere inviata solo se tutti i campi, tranne quelli bordati di verde, sono compilati correttamente.</description>
   <action url="" category="workflow" icon="">Invia domanda</action>
   <guard>
@@ -230,37 +240,30 @@
   </guard>
   <assignment name="wf_protocollata">python:True</assignment>
  </transition>
- <transition transition_id="istruttoria_completata" title="Istruttoria completata" new_state="istruttoria_ok" trigger="USER" before_script="" after_script="after_istruttoria_completata">
+ <transition transition_id="istruttoria_completata" title="Istruttoria completata" new_state="istruttoria_ok" trigger="USER" before_script="before_istruttoria_completata" after_script="after_istruttoria_completata">
   <description>Se l'istruttoria è completata clicca su per passare alla fase di autorizzazione (IL SISTEMA VERIFICA CHE L'ISTRUTTORIA SIA COMPLETA)</description>
   <action url="" category="workflow" icon="">Verifica</action>
   <guard>
-   <guard-role>istruttore</guard-role>
-   <guard-role>rup</guard-role>
+   <guard-role>iol-reviewer</guard-role>
+   <guard-role>iol-manager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
   <assignment name="wf_priority">python: int('3')</assignment>
+ </transition>
+ <transition transition_id="loop" title="aaaa" new_state="" trigger="USER" before_script="" after_script="">
+  <action url="" category="workflow" icon="">aaaaaa</action>
+  <guard>
+  </guard>
  </transition>
  <transition transition_id="preavviso_rigetto" title="Preavviso di rigetto" new_state="pre_rigetto" trigger="USER" before_script="" after_script="after_preavviso_rigetto">
   <description>Per portare la pratica in stato di preavviso di rigetto clicca su</description>
   <action url="" category="workflow" icon="">Preavviso di rigetto</action>
   <guard>
-   <guard-role>rup</guard-role>
-   <guard-role>istruttore</guard-role>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>iol-reviewer</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
   <assignment name="wf_priority">python: int('7')</assignment>
- </transition>
- <transition transition_id="proroga" title="Proroga Autorizzazione" new_state="prorogata" trigger="USER" before_script="" after_script="after_proroga">
-  <action url="" category="workflow" icon="">Proroga Autorizzazione</action>
-  <guard>
-   <guard-role>rup</guard-role>
-   <guard-role>istruttore</guard-role>
-   <guard-role>Manager</guard-role>
-   <guard-expression>python: scripts.guard_proroga(state_change)</guard-expression>
-  </guard>
-  <assignment name="wf_priority">python: 0</assignment>
-  <assignment name="wf_richiesta_proroga">python:False</assignment>
-  <assignment name="wf_prorogata">python:True</assignment>
  </transition>
  <transition transition_id="protocolla" title="Richiedi protocollo" new_state="" trigger="USER" before_script="before_protocolla" after_script="after_protocolla">
   <description>Attenzione la domanda non è stata protocollata correttamente.</description>
@@ -270,22 +273,12 @@
   </guard>
   <assignment name="wf_protocollata">python: test(state_change.object.getItem('numero_protocollo',''),True,False)</assignment>
  </transition>
- <transition transition_id="richiesta_proroga" title="Richiedi Proroga" new_state="" trigger="USER" before_script="" after_script="after_richiesta_proroga">
-  <description>Per richiedere una proroga clicca su ....</description>
-  <action url="" category="workflow" icon="">Richiedi Proroga</action>
-  <guard>
-   <guard-expression>python: scripts.guard_richiesta_proroga(state_change)</guard-expression>
-  </guard>
-  <assignment name="wf_message">python: 'Richiesta Proroga'</assignment>
-  <assignment name="wf_richiesta_proroga">python: True</assignment>
-  <assignment name="wf_priority">python: 8</assignment>
- </transition>
  <transition transition_id="rigetta" title="Rigetta Istanza" new_state="rigettata" trigger="USER" before_script="" after_script="after_rigetta">
   <description>Rigetto della domanda: PRESENTE SOLO SE è STATO COMPILATO IL MOTIVO DEL RIGETTO</description>
   <action url="" category="workflow" icon="">Rigetta Istanza</action>
   <guard>
-   <guard-role>rup</guard-role>
-   <guard-role>istruttore</guard-role>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>iol-reviewer</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
   <assignment name="wf_priority">python: int('0')</assignment>
@@ -294,8 +287,8 @@
   <description>Per portare la pratica in stato di sospensione clicca su</description>
   <action url="" category="workflow" icon="">Sospendi</action>
   <guard>
-   <guard-role>rup</guard-role>
-   <guard-role>istruttore</guard-role>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>iol-reviewer</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
   <assignment name="wf_priority">python: int('8')</assignment>
@@ -305,11 +298,13 @@
   <description>Se si desidera riportare la pratica in stato di istruttoria clicca su</description>
   <action url="" category="workflow" icon="">Ritorna</action>
   <guard>
-   <guard-role>rup</guard-role>
-   <guard-role>istruttore</guard-role>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>iol-reviewer</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
   <assignment name="wf_priority">python:int(4)</assignment>
+  <assignment name="wf_prerigetto">python: False</assignment>
+  <assignment name="wf_sospesa">python: False</assignment>
   <assignment name="transition_on_save">python:'assegna'</assignment>
  </transition>
  <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
@@ -362,7 +357,7 @@
  <variable variable_id="transition_on_save" for_catalog="False" for_status="False" update_always="False">
   <description>transizione da eseguire su salvataggio del documento?</description>
   <default>
-   <value type="string">assegna</value>
+   <value type="string">assegna,inizializza</value>
    
   </default>
   <guard>
@@ -460,28 +455,24 @@
  <script script_id="after_archivia" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_archivia.py" module="" function=""/>
  <script script_id="after_assegna" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_assegna.py" module="" function=""/>
  <script script_id="after_autorizza" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_autorizza.py" module="" function=""/>
- <script script_id="after_diniego_proroga" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_diniego_proroga.py" module="" function=""/>
+ <script script_id="after_inizializza" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_inizializza.py" module="" function=""/>
  <script script_id="after_integra" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_integra.py" module="" function=""/>
  <script script_id="after_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_invia_domanda.py" module="" function=""/>
  <script script_id="after_istruttoria_completata" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_istruttoria_completata.py" module="" function=""/>
  <script script_id="after_preavviso_rigetto" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_preavviso_rigetto.py" module="" function=""/>
- <script script_id="after_proroga" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_proroga.py" module="" function=""/>
  <script script_id="after_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_protocolla.py" module="" function=""/>
  <script script_id="after_richiesta_integrazione" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_richiesta_integrazione.py" module="" function=""/>
- <script script_id="after_richiesta_proroga" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_richiesta_proroga.py" module="" function=""/>
  <script script_id="after_rigetta" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_rigetta.py" module="" function=""/>
  <script script_id="after_sospendi" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_sospendi.py" module="" function=""/>
  <script script_id="after_torna_istruttoria" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_torna_istruttoria.py" module="" function=""/>
  <script script_id="before_integra" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_integra.py" module="" function=""/>
- <script script_id="before_proroga" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_proroga.py" module="" function=""/>
+ <script script_id="before_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_invia_domanda.py" module="" function=""/>
+ <script script_id="before_istruttoria_completata" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_istruttoria_completata.py" module="" function=""/>
  <script script_id="before_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_protocolla.py" module="" function=""/>
  <script script_id="guard_archivia" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_archivia.py" module="" function=""/>
  <script script_id="guard_assegna" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_assegna.py" module="" function=""/>
  <script script_id="guard_autorizza" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_autorizza.py" module="" function=""/>
- <script script_id="guard_diniego_proroga" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_diniego_proroga.py" module="" function=""/>
  <script script_id="guard_integrazione" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_integrazione.py" module="" function=""/>
  <script script_id="guard_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_invia_domanda.py" module="" function=""/>
- <script script_id="guard_proroga" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_proroga.py" module="" function=""/>
  <script script_id="guard_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_protocolla.py" module="" function=""/>
- <script script_id="guard_richiesta_proroga" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_richiesta_proroga.py" module="" function=""/>
 </dc-workflow>

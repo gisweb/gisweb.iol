@@ -13,4 +13,5 @@ doc = state_change.object
 doc.updateStatus()
 
 #INVIO MAIL RIGETTO
-doc.sendThisMail('rigetto')
+if doc.getItem('tipo_richiesta','')!='integrazione':
+    doc.sendThisMail('rigetta')

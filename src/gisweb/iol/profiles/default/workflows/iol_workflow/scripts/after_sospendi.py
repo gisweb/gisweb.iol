@@ -13,4 +13,5 @@ doc = state_change.object
 doc.updateStatus()
 
 #INVIO MAIL SOSPENSIONE
-doc.sendThisMail('sospendi')
+if doc.getItem('tipo_richiesta','')!='integrazione':
+    doc.sendThisMail('sospendi')
