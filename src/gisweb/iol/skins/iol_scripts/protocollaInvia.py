@@ -21,5 +21,5 @@ if next_tr in tr_ids:
 
 context.updateStatus()
 db = context.getParentDatabase()
-urlAction='%s/content_status_modify?workflow_action=invia_domanda' %(db.absolute_url(),context.absolute_url())
+urlAction='%s/%s/content_status_modify?workflow_action=invia_domanda' %(db.absolute_url(),context.absolute_url())
 context.REQUEST.RESPONSE.redirect(urlAction)
