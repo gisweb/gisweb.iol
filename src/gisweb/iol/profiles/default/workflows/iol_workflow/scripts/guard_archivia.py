@@ -9,6 +9,7 @@
 ##
 doc = state_change.object
 from Products.CMFPlomino.PlominoUtils import Now
+db = doc.getParentDatabase()
 
 #Script personalizzato se esiste
 scriptName=script.id

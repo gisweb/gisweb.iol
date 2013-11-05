@@ -8,7 +8,10 @@
 ##title=
 ##
 #Aggiornamento dello stato su plominoDocument
-state_change.object.updateStatus()
+doc = state_change.object
+db = doc.getParentDatabase()
+
+doc.updateStatus()
 
 #INVIO MAIL DINIEGO PROROGA
 #state_change.object.inviaMail(tipo='rigetto')

@@ -9,6 +9,7 @@
 ##
 return False
 doc = state_change.object
+db = doc.getParentDatabase()
 
 #Script personalizzato se esiste
 scriptName=script.id

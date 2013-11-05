@@ -11,6 +11,7 @@
 
 doc = state_change.object
 doc.updateStatus()
+db = doc.getParentDatabase()
 
 #Script personalizzato se esiste
 scriptName=script.id

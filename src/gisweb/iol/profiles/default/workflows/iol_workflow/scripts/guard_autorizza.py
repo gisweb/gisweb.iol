@@ -10,6 +10,7 @@
 from Products.CMFCore.utils import getToolByName
 
 doc = state_change.object
+db = doc.getParentDatabase()
 
 isRup = doc.verificaRuolo('iol-manager')
 

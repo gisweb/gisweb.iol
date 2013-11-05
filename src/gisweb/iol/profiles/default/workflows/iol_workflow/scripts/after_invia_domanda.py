@@ -12,6 +12,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlomino.PlominoUtils import Now, StringToDate
 
 doc = state_change.object
+db = doc.getParentDatabase()
 
 #Script personalizzato se esiste
 scriptName=script.id

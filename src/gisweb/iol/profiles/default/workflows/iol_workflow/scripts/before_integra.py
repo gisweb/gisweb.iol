@@ -12,6 +12,7 @@
 
 #wf = getToolByName(state_change.object, 'portal_workflow') #state_change.workflow
 doc = state_change.object
+db = doc.getParentDatabase()
 
 #Script personalizzato se esiste
 scriptName=script.id

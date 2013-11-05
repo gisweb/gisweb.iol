@@ -9,6 +9,7 @@
 ##
 #Aggiornamento dello stato su plominoDocument
 doc = state_change.object
+db = doc.getParentDatabase()
 
 doc.removeItem('documenti_autorizzazione')
 

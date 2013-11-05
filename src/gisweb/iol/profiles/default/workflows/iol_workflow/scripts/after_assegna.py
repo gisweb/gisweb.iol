@@ -8,6 +8,7 @@
 ##title=
 ##
 doc = state_change.object
+db = doc.getParentDatabase()
 
 
 # Aggiornamento dello stato su plominoDocument
