@@ -7,7 +7,6 @@
 ##parameters=msg, msg_type='info'
 ##title=
 ##
-
 """
 Shortcut for reporting messages to the user.
 msg: message or list of messages

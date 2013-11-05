@@ -8,7 +8,7 @@
 ##title=A brand new serialItem
 ##
 assert context.portal_type == 'PlominoDocument', 'PlominoDocument expected, got %s instead' % context.portal_type
-assert context.getParentDatabase().isCurrentUserAuthor(context), "You don't have read permission in this document"
+assert context.getParentDatabase().isCurrentUserReader(context), "You don't have read permission in this document"
 
 from Products.CMFPlomino.PlominoUtils import json_dumps
 from Products.CMFPlone.utils import safe_unicode

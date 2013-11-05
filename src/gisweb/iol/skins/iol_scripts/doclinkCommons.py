@@ -7,7 +7,6 @@
 ##parameters=action
 ##title=
 ##
-
 """
 Gestione centralizzata dei valori o del loro calcolo di alcuni parametri
 comuni agli script degli eventi di gestione collegamento 1 a molti

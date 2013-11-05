@@ -7,7 +7,6 @@
 ##parameters=process_attachments=True, redirect=False, remove_on_fails=True
 ##title=Create just one PlominoDocument filled with random values according to context form
 ##
-
 assert context.portal_type in ('PlominoForm', 'PlominoDocument', ), 'PlominoForm or PlominoDocument expected, got %s instead' % context.portal_type
 
 assert 'Manager' in context.getRoles(), 'Ehi! Only Managers can do it!'
@@ -51,10 +50,10 @@ def getRndValue(field):
         #value = []
         #for cname in field.getSettings().getColumnLabels():
             #fld = nfrm.getFormField(cname)
-            
-        
+
+
         #value = []
-    
+
     if containsany(fieldtype, "DATE", "DATETIME"):
         fr = field.getSettings('format') or db.getDateTimeFormat()
         value = dategenerate(s=-14000, e=90, format=fr, type=fieldtype)
@@ -85,7 +84,7 @@ def getRndValue(field):
     elif fieldtype == "SELECTION":
         sel = field.getSettings().getSelectionList(form)
         vals = [i.split('|')[1] for i in sel]
-        
+
         if field.getMandatory() is True:
             vals = filter(lambda x: x, vals)
         if field.getSettings('widget') in ("SELECTION", "RADIO", ) or True:
@@ -187,7 +186,7 @@ def getRndValue(field):
         else:
             length = int(field.getSettings('size') or -1)
             if field.getSettings('widget') == 'TEXTAREA':
-                z = rndgenerate(length=random.randint(10, 100), prefix=False)                
+                z = rndgenerate(length=random.randint(10, 100), prefix=False)
                 value = '\n'.join(z.split('\n')[:length])
             elif field.getSettings('widget') == 'TEXT':
                 z = rndgenerate(length=10, prefix=False)
@@ -205,7 +204,7 @@ for field in form.getFormFields(includesubforms=True):
 
     # I arbitrarily mantain values already set up
     if fieldname not in context.REQUEST.keys():
-    
+
         value = getRndValue(field)
         if value != None:
             if fieldtype == "ATTACHMENT":

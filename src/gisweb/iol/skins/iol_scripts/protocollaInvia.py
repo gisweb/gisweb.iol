@@ -20,5 +20,6 @@ if next_tr in tr_ids:
     wf.doActionFor(context, next_tr)
 
 context.updateStatus()
-urlAction='%s/%s/content_status_modify?workflow_action=invia_domanda' %(db.absolute_url(),context.getId())
+db = context.getParentDatabase()
+urlAction='%s/content_status_modify?workflow_action=invia_domanda' %(db.absolute_url(),context.absolute_url())
 context.REQUEST.RESPONSE.redirect(urlAction)

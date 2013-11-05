@@ -7,7 +7,6 @@
 ##parameters=fieldname, colnames=''
 ##title=
 ##
-
 """
 Calcola i documenti figli.
 """
@@ -23,9 +22,9 @@ ids = context.getItem(fieldname, []) or []
 
 out = []
 for docpath in context.getItem(fieldname, []) or []:
-	doc = db.getDocument(docpath)
-	if doc:
-		nfo = dict(doc.serialDoc(fieldsubset=colnames, render=True))
-		out.append('|%s' % json_dumps([doc.getId()] + [nfo.get(k) or '' for k in colnames]))
+    doc = db.getDocument(docpath)
+    if doc:
+        nfo = dict(doc.serialDoc(fieldsubset=colnames, render=True))
+        out.append('|%s' % json_dumps([doc.getId()] + [nfo.get(k) or '' for k in colnames]))
 
 return out

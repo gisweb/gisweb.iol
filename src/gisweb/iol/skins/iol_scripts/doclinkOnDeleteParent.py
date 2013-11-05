@@ -7,7 +7,6 @@
 ##parameters=
 ##title=
 ##
-
 """
 """
 
@@ -25,7 +24,7 @@ for i in result:
         i.getObject().removeItem(parentKey)
 db.deleteDocuments(ids=docToRemove, massive=True)
 try:
-	db.refreshDB_async()
+    db.refreshDB_async()
 except:
-	db.refreshDB()
+    db.refreshDB()
 context.REQUEST.set('returnurl', db.absolute_url())

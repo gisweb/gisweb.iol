@@ -1,4 +1,4 @@
-## Script (Python) "getRedirectUrl"
+## Script (Python) "doclinkGetRedirectUrl"
 ##bind container=container
 ##bind context=context
 ##bind namespace=
@@ -7,7 +7,6 @@
 ##parameters=name, attribute, query_args={}
 ##title=
 ##
-
 """
 name: an object name inside the plominoDatabase (e.g. a PlominoForm or PlominoView name)
 attribute: a custom attribute (e.g. template) reachable using spammish acquisition

@@ -10,11 +10,11 @@
     lcurrent python:test(hasattr(current,'split'),[current],current);
     labeled python:[e for e in lselection if e[1] in lcurrent]">
         <label>
-            <span tal:condition="data_mandatory" class="data-mandatory" title="Obbligatorio per invio">■</span> 
+            <span tal:condition="data_mandatory" class="data-mandatory" title="Obbligatorio per invio">■</span>
             <span tal:condition="python:widget!='CHECKBOX' and len(labeled)==1" tal:content="python:'%s: ' % title">Titolo</span>
             <span tal:condition="python:widget=='PICKLIST'" tal:content="python:'%s: ' % title">Titolo</span>
             <span tal:condition="python:widget=='CHECKBOX' and len(labeled)>1" tal:content="python:'%s: ' % title">Titolo</span>
-        </label>               
+        </label>
         <tal:loop tal:repeat="v labeled">
           <div tal:attributes="id options/fieldname;name options/fieldname;class string:control-label uneditable;value python:v[1]" tal:content="python:v[0]">selected value</div>
           <tal:sep tal:condition="not:repeat/v/end" tal:content="structure python:options['field'].getSettings('separator')">separator</tal:sep>

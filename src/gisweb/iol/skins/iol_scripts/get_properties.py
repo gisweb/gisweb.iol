@@ -91,5 +91,5 @@ def main(*names):
                 script.addPortalMessage(msg, 'error')
 
     return result
-    
+
 return main(*params)

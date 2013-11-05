@@ -24,7 +24,7 @@ raw_data = dict(
 raw_data['isPage'] = form.isPage
 raw_data['isSearchForm'] = form.isSearchForm
 
-raw_data['fields'] = dict([(field.getId(), field.getFieldType()) for field in form.getFormFields(includesubforms=(int(details or 0)>0))])
+raw_data['fields'] = [dict(id=field.getId(), type=field.getFieldType(), label=field.Title(), url=field.absolute_url()) for field in form.getFormFields(includesubforms=(int(details or 0)>0))]
 
 subforms = form.getSubforms(applyhidewhen=False)
 raw_data['subform_count'] = len(subforms)
