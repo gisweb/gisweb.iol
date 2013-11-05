@@ -20,6 +20,7 @@ qui sotto, degli argomenti dello script sendMail.
 """
 
 from gisweb.utils import sendMail
+from Products.CMFCore.utils import getToolByName
 
 msg_info = dict(
         numero_pratica = context.getItem('numero_pratica'),
@@ -36,6 +37,11 @@ args = dict(
 
 custom_args = dict()
 db = context.getParentDatabase()
+
+if not args['To']:
+    plone_tools = getToolByName(context.getParentDatabase().aq_inner, 'plone_utils')
+    msg = 'ATTENZIONE! Non è stato possibile inviare la mail perchè non esiste nessun destinatario'
+    plone_tools.addPortalMessage(msg, request=context.REQUEST)
 
 if 'mail_args' in db.resources.keys():
     custom_args = db.resources.mail_args(context, ObjectId)
