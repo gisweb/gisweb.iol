@@ -13,6 +13,11 @@ from Products.CMFPlomino.PlominoUtils import Now, StringToDate
 
 doc = state_change.object
 
+#Script personalizzato se esiste
+scriptName=script.id
+
+if scriptName in db.resources.keys():
+    db.resources[scriptName](doc)
 
 #Se disponibile eseguo la transizione di assegnazione
 if 'assegna' in [i['id'] for i in doc.wf_transitionsInfo()]:

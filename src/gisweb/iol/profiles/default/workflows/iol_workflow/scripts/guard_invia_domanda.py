@@ -11,6 +11,12 @@ doc = state_change.object
 
 db = doc.getParentDatabase()
 
+#Script personalizzato se esiste
+scriptName=script.id
+
+if scriptName in db.resources.keys():
+    return db.resources[scriptName](doc)
+
 test = doc.test_mode()
 
 # Se rinnovo, proroga o simili la pratica genitore deve essere stata approvata

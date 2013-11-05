@@ -11,6 +11,13 @@ return False
 from Products.CMFCore.utils import getToolByName
 
 doc = state_change.object
+
+#Script personalizzato se esiste
+scriptName=script.id
+
+if scriptName in db.resources.keys():
+    return db.resources[scriptName](doc)
+
 # Transizione Automatica per i Trasporti 
 if doc.getItem('tipo_app','') in ['trasporti']:
     return doc.wf_getInfoFor('wf_richiesta_proroga') and doc.getItem('documenti_proroga')

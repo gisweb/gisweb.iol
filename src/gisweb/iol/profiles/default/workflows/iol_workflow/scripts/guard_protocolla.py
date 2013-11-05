@@ -11,6 +11,12 @@ from Products.CMFCore.utils import getToolByName
 
 doc = state_change.object
 
+#Script personalizzato se esiste
+scriptName=script.id
+
+if scriptName in db.resources.keys():
+    return db.resources[scriptName](doc)
+
 if doc.wf_getInfoFor('review_state') == 'avvio':
     return True
 else:

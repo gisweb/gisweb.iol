@@ -14,10 +14,11 @@ db = doc.getParentDatabase()
 tipo_richiesta = doc.getItem('tipo_richiesta','')
 #tipo_app = doc.getItem('tipo_app','')
 
-# Aggiornamento dello stato su plominoDocument
-#
-# re-indicizzo alla fine tutti i settaggi in una volta sola
+#Script personalizzato se esiste
+scriptName=script.id
 
+if scriptName in db.resources.keys():
+    db.resources[scriptName](doc)
 
 # Setto il numero di rinnovi sulla richiesta genitore
 if 'rinnovo' in tipo_richiesta:

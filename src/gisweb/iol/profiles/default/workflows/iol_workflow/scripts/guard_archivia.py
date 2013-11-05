@@ -10,6 +10,12 @@
 doc = state_change.object
 from Products.CMFPlomino.PlominoUtils import Now
 
+#Script personalizzato se esiste
+scriptName=script.id
+
+if scriptName in db.resources.keys():
+    return db.resources[scriptName](doc)
+
 
 # disponibile dopo la scadenza della richiesta
 return doc.getItem('autorizzata_al') < Now()

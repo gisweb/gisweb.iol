@@ -13,6 +13,13 @@ from Products.CMFPlomino.PlominoUtils import Now,StringToDate
 doc = state_change.object
 db = doc.getParentDatabase()
 
+#Script personalizzato se esiste
+scriptName=script.id
+
+if scriptName in db.resources.keys():
+    db.resources[scriptName](doc)
+
+
 #Recupero tipologia domanda e applicazione
 tipo_richiesta = doc.getItem('tipo_richiesta','')
 tipo_app = doc.getItem('tipo_app','')

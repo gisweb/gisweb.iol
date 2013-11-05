@@ -8,4 +8,11 @@
 ##title=
 ##
 doc = state_change.object
+
+#Script personalizzato se esiste
+scriptName=script.id
+
+if scriptName in db.resources.keys():
+    return db.resources[scriptName](doc)
+
 return doc.getItem('pronta_per_integrazione',0)

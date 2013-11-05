@@ -28,7 +28,8 @@ if tipo_app in ('trasporti', ):
     doc.setItem('istruttore', 'ufficio_trasporti')
 
 
-# Se nel pDb esiste lo script: beforeinvioDomanda allora lo eseguo
+#Script personalizzato se esiste
+scriptName=script.id
 
-if 'before_invia_domanda' in db.resources.keys():
-    db.resources.before_invia_domanda(doc)
+if scriptName in db.resources.keys():
+    db.resources[scriptName](doc)

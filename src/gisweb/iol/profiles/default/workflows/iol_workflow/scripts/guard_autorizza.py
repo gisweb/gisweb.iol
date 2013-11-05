@@ -13,4 +13,10 @@ doc = state_change.object
 
 isRup = doc.verificaRuolo('iol-manager')
 
+#Script personalizzato se esiste
+scriptName=script.id
+
+if scriptName in db.resources.keys():
+    return db.resources[scriptName](doc)
+
 return doc.getItem('documenti_autorizzazione') and isRup

@@ -13,7 +13,13 @@ doc = state_change.object
 
 
 #Aggiornamento dello stato su plominoDocument
-state_change.object.updateStatus()
+doc.updateStatus()
+
+#Script personalizzato se esiste
+scriptName=script.id
+
+if scriptName in db.resources.keys():
+    db.resources[scriptName](doc)
 
 # Dopo la protocollazione  se possibile avviene l'assegnazione
 wf = getToolByName(state_change.object, 'portal_workflow') #state_change.workflow

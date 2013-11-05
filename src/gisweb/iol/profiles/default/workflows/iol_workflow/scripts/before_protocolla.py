@@ -12,6 +12,12 @@ from Products.CMFCore.utils import getToolByName
 
 doc = state_change.object
 
+#Script personalizzato se esiste
+scriptName=script.id
+
+if scriptName in db.resources.keys():
+    db.resources[scriptName](doc)
+	
 params = dict(
     oggetto = '',
     tipo = 'E',

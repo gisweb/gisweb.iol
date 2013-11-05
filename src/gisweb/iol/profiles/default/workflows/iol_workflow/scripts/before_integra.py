@@ -13,6 +13,12 @@
 #wf = getToolByName(state_change.object, 'portal_workflow') #state_change.workflow
 doc = state_change.object
 
+#Script personalizzato se esiste
+scriptName=script.id
+
+if scriptName in db.resources.keys():
+    db.resources[scriptName](doc)
+
 fname = 'integrazione' #%DateToString(Now(),'%d%m%Y')
 doc.createPdf(filename=fname)
 

@@ -8,4 +8,10 @@
 ##title=
 ##
 #Aggiornamento dello stato su plominoDocument
-state_change.object.updateStatus()
+doc = state_change.object
+doc.updateStatus()
+#Script personalizzato se esiste
+scriptName=script.id
+
+if scriptName in db.resources.keys():
+    db.resources[scriptName](doc)

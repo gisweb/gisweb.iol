@@ -12,4 +12,10 @@ db = doc.getParentDatabase()
 istr = doc.getItem('istruttore')
 prot = doc.getItem('numero_protocollo')
 
+#Script personalizzato se esiste
+scriptName=script.id
+
+if scriptName in db.resources.keys():
+    return db.resources[scriptName](doc)
+
 return istr and prot
