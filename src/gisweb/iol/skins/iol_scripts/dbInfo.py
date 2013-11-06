@@ -54,7 +54,15 @@ for k,r in repos.items():
     test = int(isRepoUpToDate(r))
     msg = 'Already up to date!' if not test else 'Maybe needs an upgrade.'
     raw_data[k] = dict(value=msg)
-
+    
+ld = int(details)-1
+md = int(details)+1
+rr = max([(v.get('weight') or 0) for k,v in raw_data.items()])+1
+if ld in range(rr):
+    raw_data['less_details'] = dict(value=db.REQUEST.get('URL')+'?details=%s' % ld)
+if md in range(rr):
+    raw_data['more_details'] = dict(value=db.REQUEST.get('URL')+'?details=%s' % md)
+    
 # Output rendering
 if format == 'json':
     context.REQUEST.RESPONSE.setHeader("Content-type", "application/json")

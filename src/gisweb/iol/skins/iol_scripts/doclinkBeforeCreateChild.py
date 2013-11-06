@@ -47,4 +47,4 @@ if 'CADCADE' not in field_ids:
         kw = dict(custom_field_type='INTEGER', custom_field_value=1)
     else:
         kw = dict(custom_field_type='BOOLEAN', custom_field_value=True)
-    context.doclinkImportTool(dtml='cascadeFieldBase')
+    context.doclinkImportTool(dtml='cascadeFieldBase', kw=kw)

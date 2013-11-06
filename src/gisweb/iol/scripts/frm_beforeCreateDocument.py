@@ -44,7 +44,7 @@ def frm_beforeCreateDocument(context, child_events=False, msg='', redirect_to=''
         context.event_beforeCreateChild(
             redirect_to = redirect_to,
             using = '',
-            message = msg,
+            custom_message = msg,
             query_args = dict(
                 destinationForm = context.getFormName()
             )
