@@ -60,9 +60,22 @@ jQuery(document).ready(function () {
     });
 
 
+
+
+
+
+// SE ISTRUTTORE RIMUOVO IL CAPO fisica_email DA data-mandatory
+
+var isIstruttore = ($('#iol-reviewer').val()== '1') || ($('#iol-manager').val()=='1');
+
+if (isIstruttore) {
+    $('#fisica_email').removeClass('data-mandatory');
+    $('#fisica_email').parents('div:first').find('span.data-mandatory').remove();
+}
+
 //VERIFICA INVIO SE NESSUN CAMPO MANDATORY VUOTO FACCIO COMPARIRE INVIO DOMANDA !!!
-  //if(true){
-  if(jQuery("div.data-mandatory:visible").length == 0){
+
+if(jQuery("div.data-mandatory:visible").length == 0){
 
     jQuery('#section-message-compilazione').addClass('hidden');
     jQuery('#section-invio-domanda').removeClass('hidden');
