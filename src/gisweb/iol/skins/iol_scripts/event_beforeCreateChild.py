@@ -37,13 +37,18 @@ elif not parentDocument and not 'test' in context.REQUEST.keys():
         context.addPortalMessage(custom_message or 'No plominoDocument id given.', 'warning')
     context.REQUEST.RESPONSE.redirect(destinationUrl)
 
-field_ids = context.objectIds(spec='PlominoField')
-if parentKey not in field_ids:
-    context.doclinkImportTool(dtml='parentDocumentFieldBase', kw=dict(custom_field_name=parentKey))
-if 'CADCADE' not in field_ids:
-    # Plomino versions < 1.17 does not support BOOLEAN data type
-    if db.plomino_version < '1.17':
-        kw = dict(custom_field_type='INTEGER', custom_field_value=1)
-    else:
-        kw = dict(custom_field_type='BOOLEAN', custom_field_value=True)
-    context.doclinkImportTool(dtml='cascadeFieldBase', kw=kw)
+# In this case fields "CASCADE" and "parentDocument" are MANDATORY.
+field_ids = [i.getId() for i in context.getFormFields(includesubforms=True)]
+for fldid in (parentKey, 'CADCADE', ):
+    assert (fldid in field_ids), 'Attenzione! Campo "%s" non trovato.' % fldid
+
+
+#if parentKey not in field_ids:
+    #context.doclinkImportTool(dtml='parentDocumentFieldBase', kw=dict(custom_field_name=parentKey))
+#if 'CADCADE' not in field_ids:
+    ## Plomino versions < 1.17 does not support BOOLEAN data type
+    #if db.plomino_version < '1.17':
+        #kw = dict(custom_field_type='INTEGER', custom_field_value=1)
+    #else:
+        #kw = dict(custom_field_type='BOOLEAN', custom_field_value=True)
+    #context.doclinkImportTool(dtml='cascadeFieldBase', kw=kw)
