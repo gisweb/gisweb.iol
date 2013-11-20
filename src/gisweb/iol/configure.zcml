@@ -7,33 +7,33 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="gisweb.iol">
 
-  <include package="Products.CMFCore" />
-  <include package="Products.CMFPlacefulWorkflow" />
-  <include package="plomino.tinymce" />
-  <include package="Products.CMFPlomino" />
-  <include package="gisweb.utils" />
-  <include package="gisweb.plominofieldextensions" />
-  <include package="gisweb.plominofields" />
+    <include package="Products.CMFCore" />
+    <include package="Products.CMFPlacefulWorkflow" />
+    <include package="plomino.tinymce" />
+    <include package="Products.CMFPlomino" />
+    <include package="gisweb.utils" />
+    <include package="gisweb.plominofieldextensions" />
+    <include package="gisweb.plominofields" />
 
-  <genericsetup:registerProfile
-      name="default"
-      title="IOL Base (gisweb.iol)"
-      directory="profiles/default"
-      description="Contiene strumenti vari per la realizzazione di IstanzeOnLine"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
-  <!-- -*- extra stuff goes here -*- -->
+    <genericsetup:registerProfile
+        name="default"
+        title="IOL Base (gisweb.iol)"
+        directory="profiles/default"
+        description="Contiene strumenti vari per la realizzazione di IstanzeOnLine"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+    <!-- -*- extra stuff goes here -*- -->
 
-  <cmf:registerDirectory name="iol_templates" recursive="True" />
-  <cmf:registerDirectory name="iol_scripts" recursive="True" />
-  <cmf:registerDirectory name="iol_assets" recursive="True" />
+    <cmf:registerDirectory name="iol_templates" recursive="True" />
+    <cmf:registerDirectory name="iol_scripts" recursive="True" />
+    <cmf:registerDirectory name="iol_assets" recursive="True" />
 
-  <browser:page
-      name="iolbootstrapview"
-      for="*"
-      class=".browser.BootstrapView"
-      allowed_interface=".interfaces.IBootstrapView"
-      permission="zope.Public"
+    <browser:page
+        name="iolbootstrapview"
+        for="*"
+        class=".browser.BootstrapView"
+        allowed_interface=".interfaces.IBootstrapView"
+        permission="zope.Public"
     />
 
 </configure>
