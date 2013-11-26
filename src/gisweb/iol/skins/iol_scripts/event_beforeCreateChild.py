@@ -39,7 +39,7 @@ elif not parentDocument and not 'test' in context.REQUEST.keys():
 
 # In this case fields "CASCADE" and "parentDocument" are MANDATORY.
 field_ids = [i.getId() for i in context.getFormFields(includesubforms=True)]
-for fldid in (parentKey, 'CADCADE', ):
+for fldid in (parentKey, 'CASCADE', ):
     assert (fldid in field_ids), 'Attenzione! Campo "%s" non trovato.' % fldid
 
 
