@@ -34,6 +34,7 @@ for uid,roles in rolesToAdd.items():
 # PERMESSI
 # Settaggio dei permessi in accordo agli stati iniziali dei workflow
 updateAllRoleMappingsFor(context)
+context.updateStatus()
 
 
 # EVENTI DI REALIZZAZIONE COLLEGAMENTO UNO A MOLTI
@@ -54,7 +55,6 @@ if context.REQUEST.get('oForm'):
     doc.setItem('plominoredirecturl','%s/EditDocument' % doc.absolute_url())
     doc.setItem('first',1)
 
-    
 ##############################################################################
 #                                                                            #
 #  Se pratica di rinnovo/proroga/integrazione                                #
