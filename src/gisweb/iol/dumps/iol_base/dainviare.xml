@@ -1,8 +1,8 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol_disabili">
   <design>
     <element id="dainviare" title="Domande da inviare" type="PlominoView">
       <id type="Products.Archetypes.Field.StringField">dainviare</id>
-      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.getItem('tipo_app','')!='' and plominoDocument.wf_getInfoFor('review_state') == 'avvio']]></SelectionFormula>
+      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.getItem('tipo_app')!='' and plominoDocument.getItem('wf_iol') =='avvio']]></SelectionFormula>
       <SortColumn type="Products.Archetypes.Field.StringField">datapratica</SortColumn>
       <Categorized type="Products.Archetypes.Field.BooleanField">False</Categorized>
       <FormFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></FormFormula>

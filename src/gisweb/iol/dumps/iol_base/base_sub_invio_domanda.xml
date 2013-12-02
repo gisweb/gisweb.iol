@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol_disabili">
   <design>
     <element id="base_sub_invio_domanda" title="base_sub_invio_domanda" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_invio_domanda</id>

@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol_disabili">
   <design>
     <element id="sospese" title="Domande Sospese" type="PlominoView">
       <id type="Products.Archetypes.Field.StringField">sospese</id>

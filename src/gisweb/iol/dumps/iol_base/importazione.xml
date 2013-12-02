@@ -1,7 +1,7 @@
 <plominodatabase id="iol_disabili">
   <design>
-    <element id="search_cruscotto_info" title="Ricerca Base" type="PlominoForm">
-      <id type="Products.Archetypes.Field.StringField">search_cruscotto_info</id>
+    <element id="importazione" title="Form per importazione" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">importazione</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
       <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
@@ -9,99 +9,50 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="well">
-<div><img src="../../logo.png" /></div>
-</div>
-<p><span class="plominoHidewhenClass">start:hw_notistruttore</span></p>
-<div class="staticSearch">
-<div class="row-fluid">
-<div class="span12"><span class="plominoFieldClass">wf_iol</span></div>
-</div>
-<div class="row-fluid">
-<div class="span12"><span class="plominoFieldClass">tipo_richiesta</span></div>
-</div>
-</div>
-<p><span class="plominoHidewhenClass">end:hw_notistruttore</span></p>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div id="passi"><span class="plominoFieldClass">n_passi</span></div>
+<div id="avvio"></div>
+<div id="result"></div>
+<p><span class="plominoFieldClass">script</span></p>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
       <HideDefaultActions type="Products.Archetypes.Field.BooleanField">True</HideDefaultActions>
       <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
       <isSearchForm type="Products.Archetypes.Field.BooleanField">False</isSearchForm>
-      <isPage type="Products.Archetypes.Field.BooleanField">False</isPage>
+      <isPage type="Products.Archetypes.Field.BooleanField">True</isPage>
       <SearchView type="Products.Archetypes.Field.StringField"/>
       <SearchFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></SearchFormula>
       <Position type="Products.Archetypes.Field.IntegerField"/>
       <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
       <elements>
-        <element id="wf_iol" title="Stato Pratica" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">wf_iol</id>
-          <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
+        <element id="script" title="Javascript da caricare" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">script</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return ['assegnata','presentata','istruttoria_ok','autorizzata']]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionCheck</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionCheck</FieldEditTemplate>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[dburl = context.getParentDatabase().absolute_url()
+return """
+<script src="%s/resources/import.js"></script>
+""" %dburl]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">scriptINCLUDE</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">scriptINCLUDE</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
-          <params>
-<param>
-<value><struct>
-<member>
-<name>dynamictableparam</name>
-<value><string>'bPaginate': true,
-'bLengthChange': true,
-'bFilter': true,
-'bSort': true,
-'bInfo': true,
-'bAutoWidth': false</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>CHECKBOX</string></value>
-</member>
-<member>
-<name>selectionlistformula</name>
-<value><string>return ['Nuovo documento in compilazione|avvio','Assegnata in fase di istruttoria|assegnata', 'In attesa di autorizzazione|istruttoria_ok','Autorizzazione protocollata|autorizzata','Sospesa|sospesa','Preavviso di Rigetto|pre_rigetto','Archiviata|archiviata','Rigettata|rigettata']
-
-if context.isNewDocument():
-    db = context.getParentDatabase()
-    # questo crea un problema di scrittura durante una visualizzazione...
-    # se è grave per soluzioni alternative si accettano suggerimenti ;-)
-    doc = db.createDocument()
-    out = ['%(title)s|%(id)s' % i for i in doc.wf_statesInfo(state_id=None, single=False)]
-    db.deleteDocument(doc)
-else:
-    out = ['%(title)s|%(id)s' % i for i in context.wf_statesInfo(state_id=None, single=False)]
-
-return out
-
-#return context.methods.statesList()</string></value>
-</member>
-</struct></value>
-</param>
-</params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
-              <field name="customAttributes">dynamicSearch=""</field>
+              <field name="customAttributes"/>
             </extensionfields>
           </CustomData>
         </element>
-        <element id="hw_notistruttore" title="hw_notistruttore" type="PlominoHidewhen">
-          <id type="Products.Archetypes.Field.StringField">hw_notistruttore</id>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return False
-#not plominoDocument.methods.isIstruttore()]]></Formula>
-          <isDynamicHidewhen type="Products.Archetypes.Field.BooleanField">False</isDynamicHidewhen>
-        </element>
-        <element id="tipo_richiesta" title="Tipo Pratica" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">tipo_richiesta</id>
+        <element id="n_passi" title="Numero di passi" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">n_passi</id>
           <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldEditTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
@@ -119,12 +70,8 @@ return out
 'bAutoWidth': false</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>CHECKBOX</string></value>
-</member>
-<member>
 <name>selectionlistformula</name>
-<value><string>return ['Base|base','Rinnovo|rinnovo','Duplicato|duplicato']       </string></value>
+<value><string>[10|10,20|20,50|50,100|100]</string></value>
 </member>
 </struct></value>
 </param>
@@ -132,7 +79,7 @@ return out
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
-              <field name="customAttributes">dynamicSearch=""</field>
+              <field name="customAttributes"/>
             </extensionfields>
           </CustomData>
         </element>

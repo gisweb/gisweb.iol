@@ -1,6 +1,6 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol_disabili">
   <design>
-    <element id="frm_pratica_base" title="Pratica base" type="PlominoForm">
+    <element id="frm_pratica_base" title="Richiesta dati Anagrafici" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">frm_pratica_base</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onCreateDocument()]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onOpenDocument()]]></onOpenDocument>
@@ -10,30 +10,47 @@
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[#
 return context.frm_beforeCreateDocument()]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="v-content well">
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoSubformClass">base_sub_pulsantiera</span></p>
+<div class="v-content well">
 <p><span class="v-content-title" id="Pratica"> </span></p>
 <p><span class="plominoSubformClass">base_sub_pratica</span></p>
 </div>
 <div class="v-content well">
 <h3 class="v-content-title" id="Soggetto">Persona fisica</h3>
-<span class="plominoSubformClass">base_sub_fisica</span> <span class="plominoSubformClass">base_sub_fisica_recapiti</span> <span class="plominoSubformClass">base_sub_fisica_domicilio</span>
+<span class="plominoSubformClass">base_sub_fisica</span> <span class="plominoSubformClass">base_sub_fisica_recapiti</span> <!--
 <h3 class="v-content-title" id="Giuridica"></h3>
-<span class="plominoSubformClass">base_sub_giuridica</span></div>
-<div class="v-content well">
-<h3 class="v-content-title" id="Richiesta">Dati della richiesta</h3>
-<p>SUBFORM CON I DATI</p>
-</div>]]></FormLayout>
+<span class="plominoSubformClass">base_sub_giuridica</span> --></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
       <HideDefaultActions type="Products.Archetypes.Field.BooleanField">True</HideDefaultActions>
-      <HideInMenu type="Products.Archetypes.Field.BooleanField">False</HideInMenu>
+      <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
       <isSearchForm type="Products.Archetypes.Field.BooleanField">False</isSearchForm>
       <isPage type="Products.Archetypes.Field.BooleanField">False</isPage>
       <SearchView type="Products.Archetypes.Field.StringField"/>
       <SearchFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></SearchFormula>
       <Position type="Products.Archetypes.Field.IntegerField">3</Position>
       <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
+      <elements>
+        <element id="oForm" title="Form di partenza" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">oForm</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+      </elements>
     </element>
   </design>
 </plominodatabase>

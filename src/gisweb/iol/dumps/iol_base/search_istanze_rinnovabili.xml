@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol_disabili">
   <design>
     <element id="search_istanze_rinnovabili" title="Le mie Istanze rinnovabili (Utente)" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">search_istanze_rinnovabili</id>
@@ -9,7 +9,10 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoFieldClass">data_filter</span></p><div class="row-fluid"><div class="span12"><span class="plominoFieldClass">domande_autorizzate</span></div></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoFieldClass">data_filter</span></p>
+<div class="row-fluid">
+<div class="span12"><span class="plominoFieldClass">domande_autorizzate</span></div>
+</div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -51,16 +54,16 @@
 'bProcessing': true</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>sourceview</name>
 <value><string>autorizzate</string></value>
 </member>
 <member>
 <name>labelcolumn</name>
 <value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 </struct></value>
 </param>
@@ -78,16 +81,20 @@
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[from gisweb.utils import json_dumps, json_loads
 db=context.getParentDatabase()
-oggi = DateToString(Now(),'%d/%m/%Y')
-
+start = DateToString(Now()-30,'%d/%m/%Y')
+end = DateToString(Now()+30,'%d/%m/%Y')
+listDays=[]
+l=DateRange(Now()-30,Now()+30)
+for d in l:
+    listDays.append(DateToString(d,'%d/%m/%Y'))
 # condizioni base
 req = dict()
 
-req['owner'] = db.getCurrentUser().getMemberId()
-req['tipo_richiesta'] = 'base'
+if not (context.verificaRuolo('iol-manager') or context.verificaRuolo('iol-reviewer')):
+    req['owner'] = owner = db.getCurrentUser().getMemberId()
 
-req['autorizzata_dal'] = dict(query=oggi,range='max')
-req['autorizzata_al'] = dict(query=oggi,range='min')
+
+req['autorizzata_al'] = {'operator':'or','query':listDays}
 
 return json_dumps(req)]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDataFilter</FieldReadTemplate>

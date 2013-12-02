@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol_disabili">
   <design>
     <element id="base_com_preavviso_rigetto" title="Comunicazione Preavviso Rigetto" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</id>
@@ -15,10 +15,7 @@ pw.doActionFor(context, 'preavviso_rigetto')]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p>Vista la domanda N° <span class="plominoFieldClass">numero_pratica</span> con protocollo N° <span class="plominoFieldClass">numero_protocollo</span> del <span class="plominoFieldClass">data_protocollo</span> presentata da <span class="plominoFieldClass">richiedente</span>.</p>
-<p>Si comunica che la stessa è fase di preavviso di rigetto per le seguenti motivazioni :</p>
-<p><span class="plominoFieldClass">istruttoria_rigetto_motivazione</span></p>
-<div class="hidden" id="btn-group"><span class="plominoActionClass">btn_salva</span> <span class="plominoActionClass">btn_annulla</span></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p>Vista la domanda N° <span class="plominoFieldClass">numero_pratica</span> con protocollo N° <span class="plominoFieldClass">numero_protocollo</span> del <span class="plominoFieldClass">data_protocollo</span> presentata da <span class="plominoFieldClass">richiedente</span>.</p><p>Si comunica che la stessa è fase di preavviso di rigetto per le seguenti motivazioni :</p><p><span class="plominoFieldClass">istruttoria_rigetto_motivazione</span></p><div class="hidden" id="btn-group"><span class="plominoActionClass">btn_salva</span> <span class="plominoActionClass">btn_annulla</span></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>

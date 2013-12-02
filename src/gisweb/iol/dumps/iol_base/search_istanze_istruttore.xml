@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol_disabili">
   <design>
     <element id="search_istanze_istruttore" title="Le mie Istanze (istruttore)" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">search_istanze_istruttore</id>
@@ -59,16 +59,16 @@
 }</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>sourceview</name>
 <value><string>sospese</string></value>
 </member>
 <member>
 <name>labelcolumn</name>
 <value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 </struct></value>
 </param>
@@ -117,16 +117,16 @@
 }</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>sourceview</name>
 <value><string>dainviare</string></value>
 </member>
 <member>
 <name>labelcolumn</name>
 <value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 </struct></value>
 </param>
@@ -175,16 +175,16 @@
 }</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>sourceview</name>
 <value><string>inviate</string></value>
 </member>
 <member>
 <name>labelcolumn</name>
 <value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 </struct></value>
 </param>
@@ -254,16 +254,16 @@ return result]]></Formula>
 }</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>sourceview</name>
 <value><string>autorizzate</string></value>
 </member>
 <member>
 <name>labelcolumn</name>
 <value><string>richiedente</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 </struct></value>
 </param>

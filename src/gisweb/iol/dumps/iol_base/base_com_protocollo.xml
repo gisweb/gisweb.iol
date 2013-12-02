@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol_disabili">
   <design>
     <element id="base_com_protocollo" title="Inserimento dati di protocollo" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_com_protocollo</id>
@@ -75,12 +75,12 @@ return '%s' %url]]></Content>
 <param>
 <value><struct>
 <member>
-<name>startingyear</name>
-<value><string>1950</string></value>
-</member>
-<member>
 <name>format</name>
 <value><string>%d/%m/%Y</string></value>
+</member>
+<member>
+<name>startingyear</name>
+<value><string>1950</string></value>
 </member>
 </struct></value>
 </param>

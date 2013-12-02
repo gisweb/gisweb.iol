@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol_disabili">
   <design>
     <element id="base_sub_fisica_recapiti" title="base_sub_fisica_recapiti" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_fisica_recapiti</id>
@@ -54,7 +54,7 @@
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="customAttributes"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -98,7 +98,7 @@ return '']]></ValidationFormula>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="customAttributes"/>
             </extensionfields>
           </CustomData>
         </element>
