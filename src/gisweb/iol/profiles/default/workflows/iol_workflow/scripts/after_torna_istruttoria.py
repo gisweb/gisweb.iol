@@ -12,7 +12,8 @@ doc = state_change.object
 db = doc.getParentDatabase()
 
 doc.removeItem('documenti_autorizzazione')
-
+doc.removeItem('numero_autorizzazione')
+doc.removeItem('label_autorizzazione')
 doc.removeItem('istruttoria_motivo_sospensione')
 doc.removeItem('istruttoria_rigetto_motivazione')
 
