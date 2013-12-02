@@ -21,5 +21,5 @@ if scriptName in db.resources.keys():
     db.resources[scriptName](doc)
 
 # Invio della mail di avviso
-if doc.getItem('tipo_richiesta','')!='integrazione':
+if doc.getItem('iol_tipo_richiesta','')!='integrazione':
     doc.sendThisMail('assegna')

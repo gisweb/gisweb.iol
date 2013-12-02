@@ -6,8 +6,8 @@
                       global db python: doc.getParentDatabase();
                       global dburl python:doc.getParentDatabase().absolute_url();
                       global formName python: doc.getForm().getFormName() if doc.isDocument() else doc.getId();
-                      global tipoApp  python: doc.getItem('tipo_app');
-                      global tipoRichiesta  python: doc.getItem('tipo_richiesta');
+                      global tipoApp  python: doc.getItem('iol_tipo_app');
+                      global tipoRichiesta  python: doc.getItem('iol_tipo_richiesta');
                       global wf_id python: 'iol_workflow';" />
 
 <!-- ------------------------------- -->
@@ -202,7 +202,7 @@
         actionurl python: '%s/%s/content_status_modify' %(dburl,doc.getId());
         sospendiurl python: '%s/%s/EditDocument?openwithform=base_com_sospensione' %(dburl,doc.getId());
         rigettaurl python: '%s/%s/EditDocument?openwithform=base_com_preavviso_rigetto' %(dburl,doc.getId());
-        prorogaurl python: '%s/frm_%s_proroga/OpenForm?parentDocument=%s' %(dburl,doc.getItem('tipo_app',''),doc.getId());">
+        prorogaurl python: '%s/frm_%s_proroga/OpenForm?parentDocument=%s' %(dburl,doc.getItem('iol_tipo_app',''),doc.getId());">
 
         <tal:loop tal:repeat="v actions">
 
@@ -293,7 +293,7 @@
 
  <!-- La parte commentata di template sottostante è sostituita dal codice soprastante e potrà essere eliminata solo dopo esser stata testata  -->
 
-      <!--   <div tal:define="tipoRichiesta python:doc.getItem('tipo_richiesta','');
+      <!--   <div tal:define="tipoRichiesta python:doc.getItem('iol_tipo_richiesta','');
                          prorogaurl python: '%s/frm_%s_proroga/OpenForm?parentDocument=%s' %(dburl,tipoApp,doc.getId());
                          rinnovourl python: '%s/frm_%s_rinnovo/OpenForm?parentDocument=%s' %(dburl,tipoApp,doc.getId());
                          integrazioneurl python: '%s/frm_%s_integrazione/OpenForm?parentDocument=%s' %(dburl,tipoApp,doc.getId());

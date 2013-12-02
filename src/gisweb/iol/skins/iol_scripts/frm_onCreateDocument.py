@@ -39,7 +39,7 @@ context.updateStatus()
 
 # EVENTI DI REALIZZAZIONE COLLEGAMENTO UNO A MOLTI
 if child_events:
-    context.event_onCreateChild(backToParent=backToParent, suffix=suffix or context.naming('tipo_richiesta'))
+    context.event_onCreateChild(backToParent=backToParent, suffix=suffix or context.naming('iol_tipo_richiesta'))
 
 
 #Se ci sono dati da copiare li copio

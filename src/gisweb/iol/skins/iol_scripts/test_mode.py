@@ -11,19 +11,19 @@
 Returns True or False
 
 Ti dice se la applicazione di cui fa parte il documento o il form è in test.
-La funzione interroga la proprietà del plominodb <tipo_app>_is_in_test.
+La funzione interroga la proprietà del plominodb <iol_tipo_app>_is_in_test.
 Se la variabile non è settata restituisce il valore di default.
 """
 
 attr_list = ['app_in_test']
 
 try:
-    tipo_app = context.naming('tipo_app')
+    iol_tipo_app = context.naming('iol_tipo_app')
 except Exception as err:
-   tipo_app = ''
+   iol_tipo_app = ''
 
-if tipo_app:
-    attr_list.append('%s_is_in_test' % tipo_app)
+if iol_tipo_app:
+    attr_list.append('%s_is_in_test' % iol_tipo_app)
 
 db = context.getParentDatabase()
 

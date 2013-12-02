@@ -24,7 +24,7 @@ fname = 'integrazione' #%DateToString(Now(),'%d%m%Y')
 doc.createPdf(filename=fname)
 
 #INVIO MAIL INTEGRAZIONE
-if doc.getItem('tipo_richiesta','')!='integrazione':
+if doc.getItem('iol_tipo_richiesta','')!='integrazione':
     doc.sendThisMail('integra')
 
 

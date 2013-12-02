@@ -20,5 +20,5 @@ if scriptName in db.resources.keys():
     db.resources[scriptName](doc)
 
 #INVIO MAIL RIGETTO
-if doc.getItem('tipo_richiesta','')!='integrazione':
+if doc.getItem('iol_tipo_richiesta','')!='integrazione':
     doc.sendThisMail('rigetta')

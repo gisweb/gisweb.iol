@@ -11,8 +11,8 @@ doc = state_change.object
 db = doc.getParentDatabase()
 
 #Recupero tipologia domanda e applicazione
-tipo_richiesta = doc.getItem('tipo_richiesta','')
-#tipo_app = doc.getItem('tipo_app','')
+iol_tipo_richiesta = doc.getItem('iol_tipo_richiesta','')
+#iol_tipo_app = doc.getItem('iol_tipo_app','')
 
 #Script personalizzato se esiste
 scriptName=script.id
@@ -21,13 +21,13 @@ if scriptName in db.resources.keys():
     db.resources[scriptName](doc)
 
 # Setto il numero di rinnovi sulla richiesta genitore
-if 'rinnovo' in tipo_richiesta:
+if 'rinnovo' in iol_tipo_richiesta:
     parentDocument = db.getDocument(doc.getItem('parentDocument'))
     if parentDocument:
         num = parentDocument.getItem('numero_rinnovi', 0)
         parentDocument.setItem('numero_rinnovi', num + 1)
 
-if 'proroga' in tipo_richiesta:
+if 'proroga' in iol_tipo_richiesta:
     parentDocument = db.getDocument(doc.getItem('parentDocument'))
     if parentDocument:
         num = parentDocument.getItem('numero_proroghe', 0)
@@ -35,7 +35,7 @@ if 'proroga' in tipo_richiesta:
 
 #Se Rinnovo o Pratica Base Trasform il Docx dell'autorizzazione in PDF 
 doc.convertToPdf(file_type='documenti_autorizzazione')
-if doc.getItem('tipo_richiesta','')!='integrazione':
+if doc.getItem('iol_tipo_richiesta','')!='integrazione':
     doc.sendThisMail('autorizza') 
     
 # Se sono presenti modelli di comunicazione ne genera il pdf    

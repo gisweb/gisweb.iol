@@ -34,7 +34,7 @@ for br in idx.dbsearch(dict(parentDocument=doc.getId)):
     if next_tr in [i['id'] for i in next_transitions]:
         wf.doActionFor(proroga, next_tr)
         proroga.copiaPerProroga()
-    if 'proroga' in doc.getItem('tipo_pratica'):
+    if 'proroga' in doc.getItem('iol_tipo_pratica'):
         proroga.delete(REQUEST={}) # specifico una REQUEST vuota per evitare il redirect indesiderato
 
 #INVIO MAIL ISTANZA PROROGATA

@@ -21,12 +21,12 @@ if scriptName in db.resources.keys():
 
 
 #Recupero tipologia domanda e applicazione
-tipo_richiesta = doc.getItem('tipo_richiesta','')
-tipo_app = doc.getItem('tipo_app','')
+iol_tipo_richiesta = doc.getItem('iol_tipo_richiesta','')
+iol_tipo_app = doc.getItem('iol_tipo_app','')
 
 # Setto il progressivo del numero di autorizzazione
 if not doc.getItem('numero_autorizzazione'):
-    prog = doc.getMaxOf('numero_autorizzazione', query={'tipo_app': tipo_app}) + 1
+    prog = doc.getMaxOf('numero_autorizzazione', query={'iol_tipo_app': iol_tipo_app}) + 1
     doc.setItem('numero_autorizzazione', prog)
 
 doc.setItem('data_autorizzazione', Now())

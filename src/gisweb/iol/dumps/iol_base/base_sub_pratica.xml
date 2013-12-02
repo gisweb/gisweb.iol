@@ -481,9 +481,9 @@ inizio = context.getItem('autorizzata_dal')
 if inizio and fine:
 
     # nel caso di rinnovo controllo che la durata complessiva non ecceda i 2 anni
-    tipo_pratica = plominoDocument.getItem('tipo_pratica', '') or ''
+    iol_tipo_pratica = plominoDocument.getItem('iol_tipo_pratica', '') or ''
     parentDocument = plominoDocument.getParentDatabase().getDocument(plominoDocument.getItem('parentDocument', ''))
-    if parentDocument and 'rinnovo' in tipo_pratica:
+    if parentDocument and 'rinnovo' in iol_tipo_pratica:
         inizio = parentDocument.getItem('autorizzata_dal')
         fine_max = lookForValidDate(inizio.year()+2, inizio.month(), inizio.day(), timeargs=[0, 0, 0], start=1)
         if fine > fine_max:
@@ -1314,11 +1314,11 @@ return plominoDocument.wf_getInfoFor('wf_presentata')]]></Formula>
             </extensionfields>
           </CustomData>
         </element>
-        <element id="tipo_pratica" title="Tipo pratica" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">tipo_pratica</id>
+        <element id="iol_tipo_pratica" title="Tipo pratica" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">iol_tipo_pratica</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">CREATION</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return context.naming('tipo_pratica') or context.REQUEST.get('tipo_pratica') or 'test']]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return context.naming('iol_tipo_pratica') or context.REQUEST.get('iol_tipo_pratica') or 'test']]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
@@ -1332,11 +1332,11 @@ return plominoDocument.wf_getInfoFor('wf_presentata')]]></Formula>
             </extensionfields>
           </CustomData>
         </element>
-        <element id="tipo_app" title="Tipologia dell'Applicazione" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">tipo_app</id>
+        <element id="iol_tipo_app" title="Tipologia dell'Applicazione" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">iol_tipo_app</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">CREATION</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return context.naming('tipo_app') or context.REQUEST.get('tipo_app') or 'test']]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return context.naming('iol_tipo_app') or context.REQUEST.get('iol_tipo_app') or 'test']]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>

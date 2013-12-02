@@ -25,7 +25,7 @@ db = doc.getParentDatabase()
 idx = db.getIndex()
 for br in idx.dbsearch(dict(parentDocument=doc.getId)):
     proroga = br.getObject()
-    if 'proroga' in proroga.getItem('tipo_richiesta'):
+    if 'proroga' in proroga.getItem('iol_tipo_richiesta'):
         proroga.delete(REQUEST={}) # specifico una REQUEST vuota per evitare il redirect indesiderato
 
 doc.convertToPDF(file_type='documenti_proroga')    

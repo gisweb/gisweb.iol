@@ -10,11 +10,11 @@
 """
 Centralized naming policy management
 
-what: the argument of your request i.e. 'tipo_pratica', 'tipo_app' o 'tipo_richiesta'
+what: the argument of your request i.e. 'iol_tipo_pratica', 'iol_tipo_app' o 'iol_tipo_richiesta'
     e.g.:
-        tipo_pratica = trasporti_base/disabili_base/etc.
-        tipo_app = trasporti/disabili/etc.
-        tipo_richiesta = base/proroga/rinnovo
+        iol_tipo_pratica = trasporti_base/disabili_base/etc.
+        iol_tipo_app = trasporti/disabili/etc.
+        iol_tipo_richiesta = base/proroga/rinnovo
 """
 
 if what=='frm_key':
@@ -25,8 +25,8 @@ def main(what='', frm_key='frm_', default='', calculate=False):
     frmname2what
     """
 
-    def get_tipo_richiesta(k):
-        # così tipo_richiesta "base" non è necessario se c'è solo quello
+    def get_iol_tipo_richiesta(k):
+        # così iol_tipo_richiesta "base" non è necessario se c'è solo quello
         if len(k)>2:
             return k[-1]
         else:
@@ -34,11 +34,11 @@ def main(what='', frm_key='frm_', default='', calculate=False):
 
     generators = dict(
         # tutto ciò che segue il prefisso unito da "_"
-        tipo_pratica = lambda k: '_'.join(k[1:]),
+        iol_tipo_pratica = lambda k: '_'.join(k[1:]),
         # tutto quello che sta nel mezzo unito da "_"
-        tipo_app = lambda k: '_'.join(k[1:-1]),
+        iol_tipo_app = lambda k: '_'.join(k[1:-1]),
         # solo il suffisso (se c'è!)
-        tipo_richiesta = get_tipo_richiesta
+        iol_tipo_richiesta = get_iol_tipo_richiesta
     )
 
     if context.portal_type == 'PlominoDocument':

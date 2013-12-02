@@ -22,9 +22,9 @@ doc.createPdf(filename='domanda_inviata')
 
 
 # SETTO ISTRUTTORE PREDETERMINATO
-tipo_app = doc.getItem('tipo_app','')
+iol_tipo_app = doc.getItem('iol_tipo_app','')
 
-if tipo_app in ('trasporti', ):
+if iol_tipo_app in ('trasporti', ):
     doc.setItem('istruttore', 'ufficio_trasporti')
 
 
