@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="iol_workflow_bkp_spezia_21031202" title="Istanze OnLine Workflow" description="" state_variable="review_state" initial_state="avvio" manager_bypass="False">
+<dc-workflow workflow_id="iol_workflow" title="Istanze OnLine Workflow" description="" state_variable="review_state" initial_state="avvio" manager_bypass="False">
  <permission>CMFPlomino: Edit documents</permission>
  <permission>CMFPlomino: Read documents</permission>
  <permission>CMFPlomino: Remove documents</permission>
@@ -460,27 +460,27 @@
   <guard>
   </guard>
  </variable>
- <script script_id="after_archivia" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/after_archivia.py" module="" function=""/>
- <script script_id="after_assegna" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/after_assegna.py" module="" function=""/>
- <script script_id="after_autorizza" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/after_autorizza.py" module="" function=""/>
- <script script_id="after_inizializza" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/after_inizializza.py" module="" function=""/>
- <script script_id="after_integra" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/after_integra.py" module="" function=""/>
- <script script_id="after_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/after_invia_domanda.py" module="" function=""/>
- <script script_id="after_istruttoria_completata" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/after_istruttoria_completata.py" module="" function=""/>
- <script script_id="after_preavviso_rigetto" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/after_preavviso_rigetto.py" module="" function=""/>
- <script script_id="after_protocolla" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/after_protocolla.py" module="" function=""/>
- <script script_id="after_richiesta_integrazione" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/after_richiesta_integrazione.py" module="" function=""/>
- <script script_id="after_rigetta" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/after_rigetta.py" module="" function=""/>
- <script script_id="after_sospendi" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/after_sospendi.py" module="" function=""/>
- <script script_id="after_torna_istruttoria" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/after_torna_istruttoria.py" module="" function=""/>
- <script script_id="before_integra" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/before_integra.py" module="" function=""/>
- <script script_id="before_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/before_invia_domanda.py" module="" function=""/>
- <script script_id="before_istruttoria_completata" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/before_istruttoria_completata.py" module="" function=""/>
- <script script_id="before_protocolla" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/before_protocolla.py" module="" function=""/>
- <script script_id="guard_archivia" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/guard_archivia.py" module="" function=""/>
- <script script_id="guard_assegna" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/guard_assegna.py" module="" function=""/>
- <script script_id="guard_autorizza" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/guard_autorizza.py" module="" function=""/>
- <script script_id="guard_integrazione" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/guard_integrazione.py" module="" function=""/>
- <script script_id="guard_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/guard_invia_domanda.py" module="" function=""/>
- <script script_id="guard_protocolla" type="Script (Python)" filename="workflows/iol_workflow_bkp_spezia_21031202/scripts/guard_protocolla.py" module="" function=""/>
+ <script script_id="after_archivia" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_archivia.py" module="" function=""/>
+ <script script_id="after_assegna" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_assegna.py" module="" function=""/>
+ <script script_id="after_autorizza" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_autorizza.py" module="" function=""/>
+ <script script_id="after_inizializza" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_inizializza.py" module="" function=""/>
+ <script script_id="after_integra" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_integra.py" module="" function=""/>
+ <script script_id="after_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_invia_domanda.py" module="" function=""/>
+ <script script_id="after_istruttoria_completata" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_istruttoria_completata.py" module="" function=""/>
+ <script script_id="after_preavviso_rigetto" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_preavviso_rigetto.py" module="" function=""/>
+ <script script_id="after_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_protocolla.py" module="" function=""/>
+ <script script_id="after_richiesta_integrazione" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_richiesta_integrazione.py" module="" function=""/>
+ <script script_id="after_rigetta" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_rigetta.py" module="" function=""/>
+ <script script_id="after_sospendi" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_sospendi.py" module="" function=""/>
+ <script script_id="after_torna_istruttoria" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_torna_istruttoria.py" module="" function=""/>
+ <script script_id="before_integra" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_integra.py" module="" function=""/>
+ <script script_id="before_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_invia_domanda.py" module="" function=""/>
+ <script script_id="before_istruttoria_completata" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_istruttoria_completata.py" module="" function=""/>
+ <script script_id="before_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_protocolla.py" module="" function=""/>
+ <script script_id="guard_archivia" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_archivia.py" module="" function=""/>
+ <script script_id="guard_assegna" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_assegna.py" module="" function=""/>
+ <script script_id="guard_autorizza" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_autorizza.py" module="" function=""/>
+ <script script_id="guard_integrazione" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_integrazione.py" module="" function=""/>
+ <script script_id="guard_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_invia_domanda.py" module="" function=""/>
+ <script script_id="guard_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_protocolla.py" module="" function=""/>
 </dc-workflow>
