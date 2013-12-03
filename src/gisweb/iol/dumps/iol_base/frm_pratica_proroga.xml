@@ -1,6 +1,6 @@
 <plominodatabase id="iol_base">
   <design>
-    <element id="frm_pratica_proroga" title="Richiesta di proroga" type="PlominoForm">
+    <element id="frm_pratica_proroga" title="Richiesta di proroga (demo)" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">frm_pratica_proroga</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onCreateDocument(child_events=True, backToParent=False)]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
@@ -123,7 +123,7 @@ di validità superiore a quello originariamente concesso.
 L'ultima data accettata in questo caso è il %s.""" % fine_max.strftime('%d-%m-%Y')
             return msg
 
-return ''	]]></ValidationFormula>
+return '']]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
@@ -344,8 +344,7 @@ if parentDocument:
     else:
             Now()+3
 else:
-    return ''
- ]]></Formula>
+    return '']]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
@@ -363,12 +362,7 @@ if inizio_proroga <= fine_pratica:
 elif inizio_proroga >= fine_proroga:
     return 'Attenzione! la data di inizio proroga deve essere inferiore alla data di fine proroga'
 else:
-    return ''
-    
-   
-   
-    
-   ]]></ValidationFormula>
+    return '']]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>

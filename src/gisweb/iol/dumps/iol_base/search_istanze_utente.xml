@@ -1,4 +1,4 @@
-<plominodatabase id="iol_disabili">
+<plominodatabase id="iol_base">
   <design>
     <element id="search_istanze_utente" title="Le mie Istanze" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">search_istanze_utente</id>
@@ -56,12 +56,12 @@
 <value><string>sospese</string></value>
 </member>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>widget</name>
 <value><string>DYNAMICTABLE</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
@@ -107,12 +107,12 @@
 <value><string>dainviare</string></value>
 </member>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>widget</name>
 <value><string>DYNAMICTABLE</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
@@ -158,12 +158,12 @@
 <value><string>inviate</string></value>
 </member>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>widget</name>
 <value><string>DYNAMICTABLE</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>
@@ -231,12 +231,12 @@ return json_dumps(result)]]></Formula>
 <value><string>autorizzate</string></value>
 </member>
 <member>
-<name>labelcolumn</name>
-<value><string>richiedente</string></value>
-</member>
-<member>
 <name>widget</name>
 <value><string>DYNAMICTABLE</string></value>
+</member>
+<member>
+<name>labelcolumn</name>
+<value><string>richiedente</string></value>
 </member>
 </struct></value>
 </param>

@@ -1,4 +1,4 @@
-<plominodatabase id="iol_disabili">
+<plominodatabase id="iol_base">
   <design>
     <element id="importazione" title="Form per importazione" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">importazione</id>
@@ -9,10 +9,7 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div id="passi"><span class="plominoFieldClass">n_passi</span></div>
-<div id="avvio"></div>
-<div id="result"></div>
-<p><span class="plominoFieldClass">script</span></p>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div id="passi"><span class="plominoFieldClass">n_passi</span></div><div id="avvio"></div><div id="result"></div><p><span class="plominoFieldClass">script</span></p>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -61,6 +58,10 @@ return """
 <param>
 <value><struct>
 <member>
+<name>selectionlistformula</name>
+<value><string>[10|10,20|20,50|50,100|100]</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -68,10 +69,6 @@ return """
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
-</member>
-<member>
-<name>selectionlistformula</name>
-<value><string>[10|10,20|20,50|50,100|100]</string></value>
 </member>
 </struct></value>
 </param>
