@@ -1,4 +1,4 @@
-<plominodatabase id="iol_disabili">
+<plominodatabase id="iol_base">
   <design>
     <element id="base_sub_viewparent" title="Visualizza il documento  genitore" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_viewparent</id>
@@ -9,9 +9,7 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoHidewhenClass">start:hw_nohistory</span></p>
-<p><span class="plominoFieldClass">docHistory</span></p>
-<p><span class="plominoHidewhenClass">end:hw_nohistory</span></p>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoHidewhenClass">start:hw_nohistory</span></p><p><span class="plominoFieldClass">docHistory</span></p><p><span class="plominoHidewhenClass">end:hw_nohistory</span></p>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>

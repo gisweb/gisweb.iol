@@ -1,6 +1,6 @@
-<plominodatabase id="iol_disabili">
+<plominodatabase id="iol_base">
   <design>
-    <element id="frm_pratica_base" title="Richiesta dati Anagrafici" type="PlominoForm">
+    <element id="frm_pratica_base" title="Richiesta (demo)" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">frm_pratica_base</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onCreateDocument()]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onOpenDocument()]]></onOpenDocument>
@@ -17,14 +17,23 @@ return context.frm_beforeCreateDocument()]]></beforeCreateDocument>
 </div>
 <div class="v-content well">
 <h3 class="v-content-title" id="Soggetto">Persona fisica</h3>
-<span class="plominoSubformClass">base_sub_fisica</span> <span class="plominoSubformClass">base_sub_fisica_recapiti</span> <!--
-<h3 class="v-content-title" id="Giuridica"></h3>
-<span class="plominoSubformClass">base_sub_giuridica</span> --></div>]]></FormLayout>
+<span class="plominoSubformClass">base_sub_fisica</span> <span class="plominoSubformClass">base_sub_fisica_recapiti</span></div>
+<div class="v-content well">
+<h3 class="v-content-title" id="Soggetto">Persona giuridica</h3>
+<span class="plominoSubformClass">base_sub_giuridica</span></div>
+<div class="v-content well">
+<h3 class="v-content-title" id="Richiesta">Dati della richiesta</h3>
+<p>SUBFORM CON I DATI</p>
+</div>
+<div class="v-content well">
+<h3 class="v-content-title" id="Richiesta">Allegati della richiesta</h3>
+<p>SUBFORM DEGLI ALLEGATI</p>
+</div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
       <HideDefaultActions type="Products.Archetypes.Field.BooleanField">True</HideDefaultActions>
-      <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
+      <HideInMenu type="Products.Archetypes.Field.BooleanField">False</HideInMenu>
       <isSearchForm type="Products.Archetypes.Field.BooleanField">False</isSearchForm>
       <isPage type="Products.Archetypes.Field.BooleanField">False</isPage>
       <SearchView type="Products.Archetypes.Field.StringField"/>

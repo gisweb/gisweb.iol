@@ -1,4 +1,4 @@
-<plominodatabase id="iol_disabili">
+<plominodatabase id="iol_base">
   <design>
     <element id="base_sub_integrazione" title="Sub Pratica Integrazione" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_integrazione</id>
