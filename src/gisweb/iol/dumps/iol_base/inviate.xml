@@ -2,7 +2,7 @@
   <design>
     <element id="inviate" title="Domande Inviate " type="PlominoView">
       <id type="Products.Archetypes.Field.StringField">inviate</id>
-      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return (plominoDocument.getItem('wf_iol') in ['presentata','assegnata','istruttoria_ok'] or (plominoDocument.wf_getInfoFor('wf_richiesta_proroga') and plominoDocument.getItem('wf_iol')=='autorizzata')) and plominoDocument.getItem('tipo_richiesta') in ['base','rinnovo']]]></SelectionFormula>
+      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return (plominoDocument.getItem('wf_iol') in ['presentata','assegnata','istruttoria_ok'] or (plominoDocument.wf_getInfoFor('wf_richiesta_proroga') and plominoDocument.getItem('wf_iol')=='autorizzata')) and plominoDocument.getItem('tipo_richiesta') in ['base','rinnovo','duplicato']]]></SelectionFormula>
       <SortColumn type="Products.Archetypes.Field.StringField"/>
       <Categorized type="Products.Archetypes.Field.BooleanField">False</Categorized>
       <FormFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></FormFormula>
@@ -56,7 +56,7 @@ return result]]></Formula>
         <element id="protocollo" title="Protocollo" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">protocollo</id>
           <SelectedField type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.getItem('numero_protocollo')]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.getItem('numero_protocollo','')]]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>

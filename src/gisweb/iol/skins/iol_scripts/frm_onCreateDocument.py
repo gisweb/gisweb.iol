@@ -27,18 +27,19 @@ for role in db.getUserRoles():
                 rolesToAdd[uid].append(role[1:-1])
             else:
                 rolesToAdd[uid] = [role[1:-1]]
-                
+
 for uid,roles in rolesToAdd.items():
     context.addLocalRoles(uid, roles)
 
 # PERMESSI
 # Settaggio dei permessi in accordo agli stati iniziali dei workflow
 updateAllRoleMappingsFor(context)
+context.updateStatus()
 
 
 # EVENTI DI REALIZZAZIONE COLLEGAMENTO UNO A MOLTI
 if child_events:
-    context.event_onCreateChild(backToParent=backToParent, suffix=suffix)
+    context.event_onCreateChild(backToParent=backToParent, suffix=suffix or context.naming('tipo_richiesta'))
 
 
 #Se ci sono dati da copiare li copio
@@ -54,7 +55,6 @@ if context.REQUEST.get('oForm'):
     doc.setItem('plominoredirecturl','%s/EditDocument' % doc.absolute_url())
     doc.setItem('first',1)
 
-    
 ##############################################################################
 #                                                                            #
 #  Se pratica di rinnovo/proroga/integrazione                                #

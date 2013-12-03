@@ -18,7 +18,7 @@
     instance: local instance folder name containing the import folder
 """
 
-from gisweb.utils import importFromPortal
+from gisweb.utils import importFromPortal, os_path_isfile
 
 urlpars = dict(
     user = user,
@@ -38,6 +38,9 @@ if portal:
 
 out = importFromPortal(remoteAddress, objId, instance=instance)
 
-# redirect to the imoprtExportForm method
-redirecturl = '%s/manage_importExportForm' % context.portal_skins.aq_inner.aq_parent.absolute_url()
-context.REQUEST.RESPONSE.redirect(redirecturl)
+if os_path_isfile(out):
+    # redirect to the imoprtExportForm method
+    redirecturl = '%s/manage_importExportForm' % context.portal_skins.aq_inner.aq_parent.absolute_url()
+    context.REQUEST.RESPONSE.redirect(redirecturl)
+else:
+    return out

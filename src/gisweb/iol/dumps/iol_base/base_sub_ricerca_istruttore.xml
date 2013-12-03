@@ -148,6 +148,24 @@
             </extensionfields>
           </CustomData>
         </element>
+        <element id="btn_home" title="Home" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">btn_home</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">DISPLAY</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return 'Home']]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapPlugin</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapPlugin</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes">data-plugin="dataTable-search" data-target="advancedSearchDiv"</field>
+            </extensionfields>
+          </CustomData>
+        </element>
       </elements>
     </element>
   </design>

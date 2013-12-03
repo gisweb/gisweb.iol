@@ -9,31 +9,12 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onDeleteDocument(kin_events='child', anchor=False)]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_beforeCreateDocument(child_events=True, msg='', redirect_to='search_istanze_rinnovabili')]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="v-content well"><span class="plominoSubformClass">base_sub_pratica</span></div>
-<!--
-<p><span class="plominoSubformClass">sub_pratica_parent</span></p>
-<p><span class="plominoHidewhenClass">start:hw_se_editmode</span></p>
-<p><span class="plominoFieldClass">linkToParent</span></p>
-<p><span class="plominoHidewhenClass">end:hw_se_editmode</span></p>
--->
-<div class="v-content well">
-<p>Il/La sottoscritto/a <span class="plominoFieldClass">richiedente_view</span>, <span class="plominoFieldClass">ragsoc_view</span></p>
-<h5 style="text-align: center; ">dichiara</h5>
-<div>sotto la propria responsabilità la necessità di rinnovare il periodo di validità della pratica n° <strong><span class="plominoFieldClass">numero_pratica_view</span></strong> autorizzata il <strong><span class="plominoFieldClass">data_autorizzazione_view</span></strong> con numero di autorizzazione <strong><span class="plominoFieldClass">numero_autorizzazione_view</span></strong>.</div>
-<h3 class="v-content-title" id="Richiesta">Dati della richiesta del rinnovo</h3>
-<div class="row-fluid">
-<div class="span4"><span class="plominoFieldClass">autorizzata_dal</span></div>
-<div class="span4"><span class="plominoFieldClass">autorizzata_al</span></div>
-</div>
-<div class="row-fluid">
-<div class="span12"><span class="plominoFieldClass">motivazione</span></div>
-</div>
-</div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="v-content well"><span class="plominoSubformClass">base_sub_pratica</span></div><div class="v-content well"><p>Il/La sottoscritto/a <span class="plominoFieldClass">richiedente_view</span>, <span class="plominoFieldClass">ragsoc_view</span></p><h5 style="text-align: center; ">dichiara</h5><div>sotto la propria responsabilità la necessità di rinnovare il periodo di validità della pratica n° <b><span class="plominoFieldClass">numero_pratica_view</span></b> autorizzata il <b><span class="plominoFieldClass">data_autorizzazione_view</span></b> con numero di autorizzazione <b><span class="plominoFieldClass">numero_autorizzazione_view</span></b>.</div><h3 class="v-content-title" id="Richiesta">Dati della richiesta del rinnovo</h3><div class="row-fluid"><div class="span12"><span class="plominoFieldClass">motivazione</span></div></div></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
       <HideDefaultActions type="Products.Archetypes.Field.BooleanField">True</HideDefaultActions>
-      <HideInMenu type="Products.Archetypes.Field.BooleanField">False</HideInMenu>
+      <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
       <isSearchForm type="Products.Archetypes.Field.BooleanField">False</isSearchForm>
       <isPage type="Products.Archetypes.Field.BooleanField">False</isPage>
       <SearchView type="Products.Archetypes.Field.StringField"/>
@@ -66,7 +47,7 @@
 </member>
 <member>
 <name>labelcolumn</name>
-<value><string>base_pratica_dsp</string></value>
+<value><string>frm_disabili_base</string></value>
 </member>
 </struct></value>
 </param>
@@ -373,12 +354,7 @@ if inizio_proroga <= fine_pratica:
 elif inizio_proroga >= fine_proroga:
     return 'Attenzione! la data di inizio proroga deve essere inferiore alla data di fine proroga'
 else:
-    return ''
-    
-   
-   
-    
-   ]]></ValidationFormula>
+    return '']]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>

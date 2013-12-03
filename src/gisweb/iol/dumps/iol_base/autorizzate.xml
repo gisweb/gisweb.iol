@@ -2,7 +2,7 @@
   <design>
     <element id="autorizzate" title="Domande Autorizzate" type="PlominoView">
       <id type="Products.Archetypes.Field.StringField">autorizzate</id>
-      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.wf_getInfoFor('wf_autorizzata')]]></SelectionFormula>
+      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.wf_getInfoFor('wf_autorizzata') and not plominoDocument.wf_getInfoFor('wf_richiesta_proroga') and plominoDocument.getItem('tipo_richiesta','') in ['rinnovo','base','duplicato']]]></SelectionFormula>
       <SortColumn type="Products.Archetypes.Field.StringField"/>
       <Categorized type="Products.Archetypes.Field.BooleanField">False</Categorized>
       <FormFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></FormFormula>
@@ -25,7 +25,7 @@
         <element id="numero" title="N° Pratica" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">numero</id>
           <SelectedField type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.getItem('numero_pratica','')]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[context.getItem('numero_pratica')]]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
@@ -57,14 +57,14 @@ return result]]></Formula>
         <element id="autorizzazione" title="N° Autorizzazione" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">autorizzazione</id>
           <SelectedField type="Products.Archetypes.Field.StringField">base_sub_pratica/numero_autorizzazione</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.getItem('numero_autorizzazione','')]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[context.getItem('numero_autorizzazione')]]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
         <element id="protocollo" title="Protocollo" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">protocollo</id>
           <SelectedField type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.getItem('numero_protocollo','')]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[context.getItem('numero_protocollo')]]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
@@ -76,13 +76,6 @@ return result]]></Formula>
 else:
     return '']]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
-          <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
-        </element>
-        <element id="rinnovi" title="Rinnovi" type="PlominoColumn">
-          <id type="Products.Archetypes.Field.StringField">rinnovi</id>
-          <SelectedField type="Products.Archetypes.Field.StringField">base_sub_trasporti_dati/trasporti_numero_rinnovi</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA['Non-existing form']]></Formula>
-          <HiddenColumn type="Products.Archetypes.Field.BooleanField">True</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
         <element id="autorizzatadal" title="Inizio Validità" type="PlominoColumn">

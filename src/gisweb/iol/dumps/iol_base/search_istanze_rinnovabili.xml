@@ -51,12 +51,12 @@
 'bProcessing': true</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
-</member>
-<member>
 <name>sourceview</name>
 <value><string>autorizzate</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 <member>
 <name>labelcolumn</name>
@@ -78,16 +78,20 @@
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[from gisweb.utils import json_dumps, json_loads
 db=context.getParentDatabase()
-oggi = DateToString(Now(),'%d/%m/%Y')
-
+start = DateToString(Now()-30,'%d/%m/%Y')
+end = DateToString(Now()+30,'%d/%m/%Y')
+listDays=[]
+l=DateRange(Now()-30,Now()+30)
+for d in l:
+    listDays.append(DateToString(d,'%d/%m/%Y'))
 # condizioni base
 req = dict()
 
-req['owner'] = db.getCurrentUser().getMemberId()
-req['tipo_richiesta'] = 'base'
+if not (context.verificaRuolo('iol-manager') or context.verificaRuolo('iol-reviewer')):
+    req['owner'] = owner = db.getCurrentUser().getMemberId()
 
-req['autorizzata_dal'] = dict(query=oggi,range='max')
-req['autorizzata_al'] = dict(query=oggi,range='min')
+
+req['autorizzata_al'] = {'operator':'or','query':listDays}
 
 return json_dumps(req)]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDataFilter</FieldReadTemplate>

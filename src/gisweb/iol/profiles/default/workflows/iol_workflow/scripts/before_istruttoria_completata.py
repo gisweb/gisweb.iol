@@ -28,6 +28,7 @@ tipo_app = doc.getItem('tipo_app','')
 if not doc.getItem('numero_autorizzazione'):
     prog = doc.getMaxOf('numero_autorizzazione', query={'tipo_app': tipo_app}) + 1
     doc.setItem('numero_autorizzazione', prog)
+
 doc.setItem('data_autorizzazione', Now())
 
 if not doc.getItem('numero_protocollo_autorizzazione'):
