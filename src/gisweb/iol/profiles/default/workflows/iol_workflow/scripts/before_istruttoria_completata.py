@@ -23,7 +23,7 @@ if script.run_script(doc, script.id) != False:
         prog = doc.getMaxOf('numero_autorizzazione', query={'iol_tipo_app': iol_tipo_app}) + 1
         doc.setItem('numero_autorizzazione', prog)
 
-    doc.setItem('data_autorizzazione', Now())
+    doc.setItem('data_autorizzazione', DateTime())
 
     # 3.
     if not doc.getItem('numero_protocollo_autorizzazione'):
@@ -31,7 +31,7 @@ if script.run_script(doc, script.id) != False:
         params = dict(
             oggetto = 'Autorizazione pratica prot. %s' %doc.getItem('numero_protocollo',''),
             tipo = 'U',
-            data = Now()
+            data = DateTime()
         )
 
         resp = doc.protocollo(params=params)

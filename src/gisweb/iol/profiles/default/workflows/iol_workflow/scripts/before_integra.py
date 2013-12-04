@@ -15,7 +15,7 @@ if script.run_script(doc, script.id) != False:
     #### OTHER CODE HERE ####
 
     # 1. Creo documento di integrazione
-    fname = 'integrazione' #%DateToString(Now(),'%d%m%Y')
+    fname = 'integrazione'
     doc.createPdf(filename=fname)
 
     # 2. INVIO MAIL INTEGRAZIONE

@@ -14,11 +14,12 @@ if script.run_script(doc, script.id) != False:
 
     #### OTHER CODE HERE ####
 
-    from Products.CMFPlomino.PlominoUtils import Now,StringToDate
+    from Products.CMFPlomino.PlominoUtils import StringToDate
+
     params = dict(
         oggetto = '',
         tipo = 'E',
-        data = Now()
+        data = DateTime()
     )
     resp = doc.protocollo(params=params)
     if resp:

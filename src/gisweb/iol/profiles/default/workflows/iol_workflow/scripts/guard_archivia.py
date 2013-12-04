@@ -16,7 +16,7 @@ if guard_response == None:
 
     #### OTHER CODE HERE ####
 
-    guard_response = doc.getItem('autorizzata_al') < Now()
+    guard_response = doc.getItem('autorizzata_al') < DateTime()
 
 
 return guard_response

@@ -15,7 +15,7 @@ if script.run_script(doc, script.id) != False:
     #### OTHER CODE HERE ####
 
     # 1. 
-    doc.setItem('data_pratica',Now())
+    doc.setItem('data_pratica', DateTime())
 
     # 2. 
     doc.createPdf(filename='domanda_inviata')
