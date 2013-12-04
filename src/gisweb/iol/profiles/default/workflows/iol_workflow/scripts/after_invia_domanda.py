@@ -7,24 +7,21 @@
 ##parameters=state_change
 ##title=
 ##
-# dopo l'invio della domanda eseguo la protocollazione
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlomino.PlominoUtils import Now, StringToDate
-
 doc = state_change.object
-db = doc.getParentDatabase()
 
-#Script personalizzato se esiste
-scriptName=script.id
-
-if scriptName in db.resources.keys():
-    db.resources[scriptName](doc)
-
-#Se disponibile eseguo la transizione di assegnazione
-if 'assegna' in [i['id'] for i in doc.wf_transitionsInfo()]:
-    wf = getToolByName(doc, 'portal_workflow') # state_change.workflow
-    wf.doActionFor(doc, 'assegna')
-    
-
-# Aggiornamento dello stato su plominoDocument
+#Aggiornamento dello stato su plominoDocument
 doc.updateStatus()
+
+if script.run_script(doc, script.id) != False:
+
+    #### OTHER CODE HERE ####
+    
+    # 1. Se disponibile eseguo la transizione di assegnazione
+    if 'assegna' in map(lambda tr: tr['id'], doc.wf_transitionsInfo()):
+        from Products.CMFCore.utils import getToolByName
+        wf = getToolByName(doc, 'portal_workflow')
+        wf.doActionFor(doc, 'assegna')
+
+    script.run_script(doc, script.id, suffix='post')
+
+#### SCRIPT ENDS HERE ####

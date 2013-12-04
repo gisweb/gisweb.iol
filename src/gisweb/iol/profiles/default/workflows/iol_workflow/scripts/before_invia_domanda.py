@@ -7,29 +7,19 @@
 ##parameters=state_change
 ##title=
 ##
-# dopo l'invio della domanda eseguo la protocollazione
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlomino.PlominoUtils import Now, StringToDate
 
 doc = state_change.object
 
-db = doc.getParentDatabase()
+if script.run_script(doc, script.id) != False:
 
-doc.setItem('data_pratica',Now())
-# ALLEGO LA RICHIESTA
+    #### OTHER CODE HERE ####
 
-doc.createPdf(filename='domanda_inviata')
+    # 1. 
+    doc.setItem('data_pratica',Now())
 
+    # 2. 
+    doc.createPdf(filename='domanda_inviata')
 
-# SETTO ISTRUTTORE PREDETERMINATO
-iol_tipo_app = doc.getItem('iol_tipo_app','')
+    script.run_script(doc, script.id, suffix='post')
 
-if iol_tipo_app in ('trasporti', ):
-    doc.setItem('istruttore', 'ufficio_trasporti')
-
-
-#Script personalizzato se esiste
-scriptName=script.id
-
-if scriptName in db.resources.keys():
-    db.resources[scriptName](doc)
+#### SCRIPT ENDS HERE ####

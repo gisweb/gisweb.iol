@@ -483,4 +483,5 @@
  <script script_id="guard_integrazione" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_integrazione.py" module="" function=""/>
  <script script_id="guard_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_invia_domanda.py" module="" function=""/>
  <script script_id="guard_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_protocolla.py" module="" function=""/>
+ <script script_id="run_script" type="Script (Python)" filename="workflows/iol_workflow/scripts/run_script.py" module="" function=""/>
 </dc-workflow>

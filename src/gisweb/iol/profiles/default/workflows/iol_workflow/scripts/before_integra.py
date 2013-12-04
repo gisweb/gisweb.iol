@@ -7,29 +7,24 @@
 ##parameters=state_change
 ##title=
 ##
-#from Products.CMFCore.utils import getToolByName
-#from Products.CMFPlomino.Utils import Now,DateToString
 
-#wf = getToolByName(state_change.object, 'portal_workflow') #state_change.workflow
 doc = state_change.object
-db = doc.getParentDatabase()
 
-#Script personalizzato se esiste
-scriptName=script.id
+if script.run_script(doc, script.id) != False:
 
-if scriptName in db.resources.keys():
-    db.resources[scriptName](doc)
+    #### OTHER CODE HERE ####
 
-fname = 'integrazione' #%DateToString(Now(),'%d%m%Y')
-doc.createPdf(filename=fname)
+    # 1. Creo documento di integrazione
+    fname = 'integrazione' #%DateToString(Now(),'%d%m%Y')
+    doc.createPdf(filename=fname)
 
-#INVIO MAIL INTEGRAZIONE
-if doc.getItem('iol_tipo_richiesta','')!='integrazione':
-    doc.sendThisMail('integra')
+    # 2. INVIO MAIL INTEGRAZIONE
+    if doc.naming('richiesta') != 'integrazione':
+        doc.sendThisMail('integra')
 
+    # 3. RIMUOVO FLAG DI PRONTA PER INTEGRAZIONE
+    doc.removeItem('pronta_per_integrazione')
 
-#RIMUOVO FLAG DI PRONTA PER INTEGRAZIONE
-doc.removeItem('pronta_per_integrazione')
+    script.run_script(doc, script.id, suffix='post')
 
-#Aggiornamento dello stato su plominoDocument
-doc.updateStatus()
+#### SCRIPT ENDS HERE ####

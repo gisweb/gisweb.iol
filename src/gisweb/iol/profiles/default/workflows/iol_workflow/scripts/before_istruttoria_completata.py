@@ -7,49 +7,48 @@
 ##parameters=state_change
 ##title=
 ##
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlomino.PlominoUtils import Now,StringToDate
 
 doc = state_change.object
-db = doc.getParentDatabase()
 
-#Script personalizzato se esiste
-scriptName=script.id
+if script.run_script(doc, script.id) != False:
 
-if scriptName in db.resources.keys():
-    db.resources[scriptName](doc)
+    #### OTHER CODE HERE ####
 
+    # 1. Recupero tipologia domanda e applicazione
+    iol_tipo_richiesta = doc.naming('richiesta','')
+    iol_tipo_app = doc.naming('applicazione','')
 
-#Recupero tipologia domanda e applicazione
-iol_tipo_richiesta = doc.getItem('iol_tipo_richiesta','')
-iol_tipo_app = doc.getItem('iol_tipo_app','')
+    # 2. Setto il progressivo del numero di autorizzazione
+    if not doc.getItem('numero_autorizzazione'):
+        prog = doc.getMaxOf('numero_autorizzazione', query={'iol_tipo_app': iol_tipo_app}) + 1
+        doc.setItem('numero_autorizzazione', prog)
 
-# Setto il progressivo del numero di autorizzazione
-if not doc.getItem('numero_autorizzazione'):
-    prog = doc.getMaxOf('numero_autorizzazione', query={'iol_tipo_app': iol_tipo_app}) + 1
-    doc.setItem('numero_autorizzazione', prog)
+    doc.setItem('data_autorizzazione', Now())
 
-doc.setItem('data_autorizzazione', Now())
+    # 3.
+    if not doc.getItem('numero_protocollo_autorizzazione'):
+        #Protocollazione Autorizzazione
+        params = dict(
+            oggetto = 'Autorizazione pratica prot. %s' %doc.getItem('numero_protocollo',''),
+            tipo = 'U',
+            data = Now()
+        )
 
-if not doc.getItem('numero_protocollo_autorizzazione'):
-    #Protocollazione Autorizzazione
-    params = dict(
-        oggetto = 'Autorizazione pratica prot. %s' %doc.getItem('numero_protocollo',''),
-        tipo = 'U',
-        data = Now()
-    )
-    
-    resp = doc.protocollo(params=params)
-  
-    if resp:
-        data = StringToDate(resp['data'], format='%Y-%m-%d')
-        doc.setItem('numero_protocollo_autorizzazione', '%s' % resp['numero'])
-        doc.setItem('data_protocollo_autorizzazione', data)
+        resp = doc.protocollo(params=params)
 
+        if resp:
+            data = StringToDate(resp['data'], format='%Y-%m-%d')
+            doc.setItem('numero_protocollo_autorizzazione', '%s' % resp['numero'])
+            doc.setItem('data_protocollo_autorizzazione', data)
 
-if doc.REQUEST.get('model') and doc.REQUEST.get('field'):
-    model = doc.REQUEST.get('model') or ''
-    field = doc.REQUEST.get('field') or ''
-    grp = doc.REQUEST.get('grp') or ''
+    # 4.
+    if doc.REQUEST.get('model') and doc.REQUEST.get('field'):
+        model = doc.REQUEST.get('model') or ''
+        field = doc.REQUEST.get('field') or ''
+        grp = doc.REQUEST.get('grp') or ''
 
-    doc.createDoc(model=model, field=field, grp=grp)
+        doc.createDoc(model=model, field=field, grp=grp)
+
+    script.run_script(doc, script.id, suffix='post')
+
+#### SCRIPT ENDS HERE ####

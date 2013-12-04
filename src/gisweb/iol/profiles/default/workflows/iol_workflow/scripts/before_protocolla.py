@@ -7,29 +7,25 @@
 ##parameters=state_change
 ##title=
 ##
-from Products.CMFPlomino.PlominoUtils import Now,StringToDate
-from Products.CMFCore.utils import getToolByName
 
 doc = state_change.object
-db = doc.getParentDatabase()
 
-#Script personalizzato se esiste
-scriptName=script.id
+if script.run_script(doc, script.id) != False:
 
-if scriptName in db.resources.keys():
-    db.resources[scriptName](doc)
-	
-params = dict(
-    oggetto = '',
-    tipo = 'E',
-    data = Now()
-)
+    #### OTHER CODE HERE ####
 
-resp = doc.protocollo(params=params)
+    from Products.CMFPlomino.PlominoUtils import Now,StringToDate
+    params = dict(
+        oggetto = '',
+        tipo = 'E',
+        data = Now()
+    )
+    resp = doc.protocollo(params=params)
+    if resp:
+        data = StringToDate(resp['data'], format='%Y-%m-%d')
+        doc.setItem('numero_protocollo', '%s' % resp['numero'])
+        doc.setItem('data_protocollo', data)
 
-if resp:
-    data = StringToDate(resp['data'], format='%Y-%m-%d')
-    doc.setItem('numero_protocollo', '%s' % resp['numero'])
-    doc.setItem('data_protocollo', data)
+    script.run_script(doc, script.id, suffix='post')
 
-doc.updateStatus()
+#### SCRIPT ENDS HERE ####

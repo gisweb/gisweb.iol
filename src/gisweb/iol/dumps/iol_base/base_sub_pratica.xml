@@ -51,7 +51,7 @@ if not parentId:
 else:
     db = context.getParentDatabase()
     parent = db.getDocument(parentId)
-    tipo = plominoDocument.naming(what='tipo_richiesta')
+    tipo = plominoDocument.naming(what='iol_tipo_richiesta')
     result = parent.getItem('numero_proroghe',0)
     if tipo == 'proroga':
         result += 1
@@ -79,7 +79,7 @@ if not parentId:
 else:
     db = context.getParentDatabase()
     parent = db.getDocument(parentId)
-    tipo = plominoDocument.naming(what='tipo_richiesta')
+    tipo = plominoDocument.naming(what='iol_tipo_richiesta')
     result = parent.getItem('numero_rinnovi',0)
     if tipo == 'rinnovo':
         result += 1
@@ -542,7 +542,7 @@ return '']]></ValidationFormula>
 <member>
 <name>selectionlistformula</name>
 <value><string># valori possibili: autorizzazione, proroga, rinnovo
-sub_path = context.naming('tipo_richiesta').replace('base', 'autorizzazione')
+sub_path = context.naming('iol_tipo_richiesta').replace('base', 'autorizzazione')
 return context.elenco_modelli(sub_path)</string></value>
 </member>
 <member>
@@ -1350,11 +1350,11 @@ return plominoDocument.wf_getInfoFor('wf_presentata')]]></Formula>
             </extensionfields>
           </CustomData>
         </element>
-        <element id="tipo_richiesta" title="Tipo Richiesta" type="PlominoField">
-          <id type="Products.Archetypes.Field.StringField">tipo_richiesta</id>
+        <element id="iol_tipo_richiesta" title="Tipo Richiesta" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">iol_tipo_richiesta</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">CREATION</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.naming('tipo_richiesta') or plominoDocument.REQUEST.get('tipo_richiesta') or 'test']]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.naming('iol_tipo_richiesta') or plominoDocument.REQUEST.get('iol_tipo_richiesta') or 'test']]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
@@ -1415,7 +1415,7 @@ if not parentId:
 else:
     db = context.getParentDatabase()
     parent = db.getDocument(parentId)
-    tipo = plominoDocument.naming(what='tipo_richiesta')
+    tipo = plominoDocument.naming(what='iol_tipo_richiesta')
     result = parent.getItem('numero_ripristini',0)
     if tipo == 'ripristini':
         result += 1
