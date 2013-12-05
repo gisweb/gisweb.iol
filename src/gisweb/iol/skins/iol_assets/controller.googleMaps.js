@@ -92,6 +92,7 @@ $(function(){
         if(typeof($(this).data("pluginOptions"))!="object") return;
         var pluginOptions = $(this).data("pluginOptions");
         //pluginOptions.geometryField = $("#"+this.id + '_geometry');  
+        pluginOptions.fieldId= this.id;  
         pluginOptions.editMode = $(this).data("editMode")==1;
         if(pluginOptions.icon) pluginOptions.icon = $(this).data("iconPath") + pluginOptions.icon;
 
@@ -1050,7 +1051,7 @@ getGCTileURL = function(tile, zoom) {
   }
 
   
-$.plominoMaps.actions_NEW["geocode_address"] = function (e){
+$.plominoMaps.actions["geocode_address"] = function (e){
         var options = e.data;
 	var address='';
         var txt;
@@ -1077,37 +1078,7 @@ $.plominoMaps.actions_NEW["geocode_address"] = function (e){
                 }
 	});
 }
-
-
-
-
   
-  
-  
-  
-$.plominoMaps.actions["geocode_address"] = function (e){
-        var options = e.data;
-	var address='';
-        var txt;
-	$.each(options.fieldlist, function(index, fieldId) { 
-             if($("[name='" + fieldId +"']").is('select')) 
-                 txt = $("[name='" + fieldId +"'] option:selected").text();
-             else
-                 txt = $('#' + fieldId).val();
-             if(!txt) alert ('Campo ' + fieldId+ ' vuoto')
-	     address = address + txt + ', ';
-	});
-        address += 'Italia'; 
-
-	svGeocoder.geocode({'address': address}, function(results, status) {
-		if (status == google.maps.GeocoderStatus.OK){
-                    $.plominoMaps.updateMarkerPosition(options,results[0].geometry.location);
-                }
-                else{
-                     alert('Non è possibile individuare l\'indirizzo ' + address)
-                }
-	});
-}
 $.plominoMaps.actions["geocode_point"] = function (e){
 
          if(!drawingManager) return;

@@ -25,7 +25,9 @@
             class string: googlemap-plugin;
             data-plugin-options custom_attributes;"></div>
        <div tal:attributes="id string:${fieldname}_messageinfo;class string:control-label uneditable;"></div>
-       <input type='text' style="width:100%" tal:attributes="id string:${fieldname}_geometry;name string:${fieldname};value v"/>   
+       <input type='hidden' style="width:100%" tal:attributes="id string:${fieldname}_geometry;name string:${fieldname};value v"/>   
+       <div class="alert-info">Con un click sul segnaposto inserito in mappa è possibile passare alla visualizzazione delle immagini del servizio <b>Street View</b> di Google (nelle zone coperte dal servizio). <b>Click sulla X in alto a destra dell'immagine per ritornare alla mappa.</b></div>
+
 
         
 </tal:def>
