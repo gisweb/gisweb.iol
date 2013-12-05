@@ -301,9 +301,19 @@ tr.linkToDocument{
   font-size:14px;
 }
 
+.streetview {
+    background: url('streetview.jpg') no-repeat center;
+    background-color: #E5E3DF;
+    border: 2px solid #cccccc;
+}
+
 .streetview img {
     max-width: none
 } 
+
+.googlemap-plugin {
+    border: 2px solid #cccccc;
+}  
 
 .googlemap-plugin img {
     max-width: none

@@ -1,9 +1,9 @@
-jQuery(document).ready(function () {
+$(document).ready(function () {
 
 //Autosuggest per l'elenco dei nomi e compilazione campi
-jQuery(".iol-autocomplete-form").each(function(){
-  eval("var options = "  + jQuery(this).data('autocompleteformOptions') +" || {}");
-  var baseUrl = jQuery(this).data('baseUrl');
+$(".iol-autocomplete-form").each(function(){
+  eval("var options = "  + $(this).data('autocompleteformOptions') +" || {}");
+  var baseUrl = $(this).data('baseUrl');
 
   $(this).select2({
     placeholder: options.placeolder,
@@ -59,32 +59,32 @@ function setControlValue(el,value){
 }
 
     //GENERAZIONE DEI CONTROLLI AUTOCOMPLETE
-    jQuery("input[data-plugin='autocomplete']").each(function(){
-        eval("var options = "  + jQuery(this).data('autocompleteOptions') +" || {}");
-        var baseUrl = jQuery(this).data('baseUrl');
+    $("input[data-plugin='autocomplete']").each(function(){
+        eval("var options = "  + $(this).data('autocompleteOptions') +" || {}");
+        var baseUrl = $(this).data('baseUrl');
 
         if (!options.source) options.source = '/services/xSuggest';
         if (options.source.indexOf('?') > 0) options.source += '&'; else options.source += '?';
         options.source += 'field=' + this.id;
 
-        if (options.extraParams) options.source += '&' + jQuery.param(options.extraParams);
+        if (options.extraParams) options.source += '&' + $.param(options.extraParams);
         options.source =  baseUrl + options.source;
         options.select = function(event,ui){
              if (typeof(ui.item.child)!='undefined'){
-                 jQuery.each(ui.item.child,function(k,v){
-                     if(jQuery('#'+k)){
-                          jQuery('#'+k).val(v);
-                          jQuery('#'+k).trigger('change');
+                 $.each(ui.item.child,function(k,v){
+                     if($('#'+k)){
+                          $('#'+k).val(v);
+                          $('#'+k).trigger('change');
                      }
                   });
              }
         };
-        jQuery(this).autocomplete(options);
+        $(this).autocomplete(options);
     });
 
 
 $("input[data-plugin='elencocomuni']").each(function(){
-        eval("var baseOptions = "  + jQuery(this).data('elencocomuniOptions') +" || {}");
+        eval("var baseOptions = "  + $(this).data('elencocomuniOptions') +" || {}");
         //Setto le impostazioni dei childs fisse per questo plugin
         var childs = [{'idx':0,'name':'cod_cat'},{'idx':2,'name':'provincia'},{'idx':3,'name':'cap'}];
         var options = {
@@ -98,7 +98,7 @@ $("input[data-plugin='elencocomuni']").each(function(){
 		query: function(query) {
 			var results = [];
 			var re = RegExp('^' + query.term, 'i');
-			jQuery.each(iol_elenco_comuni, function(_, comune) {
+			$.each(iol_elenco_comuni, function(_, comune) {
 				if (re.test(comune[1])) {results.push(comune)}
 			})
 			query.callback({results: results});
@@ -128,7 +128,7 @@ $("input[data-plugin='elencocomuni']").each(function(){
     });
 
 	
-    jQuery("input[data-plugin='comunifield']").each(function(){
+    $("input[data-plugin='comunifield']").each(function(){
         var fieldname = this.name;
         var fieldname_tokens = this.name.split(/_/);
         var formname = fieldname_tokens[0];
@@ -158,55 +158,55 @@ $("input[data-plugin='elencocomuni']").each(function(){
             },
             select: function(event,ui){
                 if (typeof(ui.item.child)!='undefined'){
-                 jQuery.each(ui.item.child,function(k,v){
-                     if(jQuery('#'+k)){
-                          jQuery('#'+k).val(v);
-                          jQuery('#'+k).trigger('change');
+                 $.each(ui.item.child,function(k,v){
+                     if($('#'+k)){
+                          $('#'+k).val(v);
+                          $('#'+k).trigger('change');
                      }
                   });
                 }
             }
         };
-        jQuery(this).autocomplete(options);
+        $(this).autocomplete(options);
     });
 
 
 
 
     //GENERAZIONE DEI CONTROLLI DATEPICKER
-    jQuery("input[data-plugin='datepicker']").each(function(){
-        eval("var options = "  + jQuery(this).data('datepickerOptions'));
-        jQuery(this).datepicker(options || { });
-        jQuery(this).datepicker( jQuery.datepicker.regional[ "it" ] );
+    $("input[data-plugin='datepicker']").each(function(){
+        eval("var options = "  + $(this).data('datepickerOptions'));
+        $(this).datepicker(options || { });
+        $(this).datepicker( $.datepicker.regional[ "it" ] );
 
 
 
-        jQuery('#btn_' + this.id).click(function(){
-            jQuery(this).datepicker('show');
+        $('#btn_' + this.id).click(function(){
+            $(this).datepicker('show');
         });
     });
 
   //GENERAZIONE DEI CONTROLLI CODICE FISCALE
-    jQuery("input[data-plugin='codicefiscale']").each(function(){
-        eval("var options = "  + jQuery(this).data('codicefiscaleOptions'));
+    $("input[data-plugin='codicefiscale']").each(function(){
+        eval("var options = "  + $(this).data('codicefiscaleOptions'));
         var params={'pippo':'pluto'};
         var fieldId = this.id;
-        var baseUrl = jQuery(this).data('baseUrl');
-        jQuery('#btn_' + this.id).click(function(){
-			jQuery.each(options.fieldlist, function(index, txtId) {
-				   var value = jQuery('#' + txtId).val();
-				   if(!value) value = jQuery('input:radio[name = ' + txtId+ ']:checked').val();
+        var baseUrl = $(this).data('baseUrl');
+        $('#btn_' + this.id).click(function(){
+			$.each(options.fieldlist, function(index, txtId) {
+				   var value = $('#' + txtId).val();
+				   if(!value) value = $('input:radio[name = ' + txtId+ ']:checked').val();
 					if(!value){alert ('Campo ' + txtId + ' vuoto');return}
 			params[txtId] = value;
 			});
-			jQuery.ajax({
+			$.ajax({
 				'url':baseUrl + options.source,
 				'type':'POST',
 				'data':params,
 				'dataType':'JSON',
 				'success':function(data, textStatus, jqXHR){
 							 //console.log(data)
-                                      jQuery('#' + fieldId).val(data.value);
+                                      $('#' + fieldId).val(data.value);
 
 				}
 			});
@@ -214,14 +214,14 @@ $("input[data-plugin='elencocomuni']").each(function(){
 	});
 
     //GENERAZIONE DEL CONTROLLO PULSANTE RICERCA
-    jQuery("input[data-plugin='dataTable-search']").each(function(){
+    $("input[data-plugin='dataTable-search']").each(function(){
 
-        jQuery(this).button().bind('click',function(event){
+        $(this).button().bind('click',function(event){
             event.preventDefault();
-            var target=jQuery(this).data('target');
+            var target=$(this).data('target');
             var form_query = jq('#'+target).serializeZopeQuery();
-            jQuery.each(jQuery('[data-plugin="datatables"]'),function(k,table){
-                jQuery('#'+jQuery(table).attr('id')).dataTable().fnDraw();
+            $.each($('[data-plugin="datatables"]'),function(k,table){
+                $('#'+$(table).attr('id')).dataTable().fnDraw();
             });
         });
     });
@@ -235,7 +235,7 @@ $("input[data-plugin='elencocomuni']").each(function(){
 
 
 
-jQuery("input[type=file]").filestyle({
+$("input[type=file]").filestyle({
      image: "upload.png",
      imageheight : 32,
      imagewidth : 32,
@@ -245,21 +245,21 @@ jQuery("input[type=file]").filestyle({
 
          //GENERAZIONE DEL CONTROLLO MODELLI DI STAMPA
 
-   jQuery("select[name^=modello]").each(function(){
-      var href = jQuery('#btn_' + this.name).attr('href');
-      jQuery(this).bind('change',function(){
+   $("select[name^=modello]").each(function(){
+      var href = $('#btn_' + this.name).attr('href');
+      $(this).bind('change',function(){
          var baseHref =  href;
          var v =  this.id;
          var field = 'documenti' + v.substring(v.indexOf('_'));
 
-        if(jQuery(this).val()){
-           var url = baseHref + '&model=' + jQuery(this).val();
-           jQuery('#btn_' + this.name).attr('href', url);
-           jQuery('#btn_' + this.name).removeAttr('disabled');
+        if($(this).val()){
+           var url = baseHref + '&model=' + $(this).val();
+           $('#btn_' + this.name).attr('href', url);
+           $('#btn_' + this.name).removeAttr('disabled');
         }
         else{
-           jQuery('#btn_' + this.name).attr('href',baseHref);
-           jQuery('#btn_' + this.name).attr('disabled','disabled');
+           $('#btn_' + this.name).attr('href',baseHref);
+           $('#btn_' + this.name).attr('disabled','disabled');
         }
     });
    });
