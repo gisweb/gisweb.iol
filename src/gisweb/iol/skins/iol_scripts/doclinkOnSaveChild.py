@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=redirect=False
+##parameters=redirect=True
 ##title=Actions for child document save event
 ##
 """
