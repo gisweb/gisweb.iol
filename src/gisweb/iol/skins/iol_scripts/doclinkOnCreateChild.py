@@ -4,28 +4,31 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=CASCADE=True, redirect=True
+##parameters=redirect=True
 ##title=Actions for child document creation event
 ##
 """
 Actions for child document creation:
 set parent reference in child document
 
-CASCADE: True/False
-redirect: True/False
+redirect: True/False/anchor name
 """
 
-parentKey = context.doclinkCommons('parentKey')
-parentId = context.REQUEST.get(parentKey)
+parentKey = script.doclinkCommons('parentKey')
+plominoDatabase = context.getParentDatabase()
 
-context.setItem(parentKey, parentId)
-if context.getParentDatabase().plomino_version < '1.17':
-    # Plomino versions < 1.17 does not support BOOLEAN data type
-    CASCADE = 1 if CASCADE else 0
-context.setItem('CASCADE', CASCADE)
+parentId = context.REQUEST.get(parentKey)
+assert parentId, "Attenzione! Nessun valore trovato in request per il campo \"%s\"" % parentKey
+parentDocument = plominoDatabase.getDocument(parentId)
 
 if redirect:
-    backUrl = context.absolute_url().replace(context.getId(), parentId)
+    backUrl = parentDocument.doclinkCommons('doc_path')
     if isinstance(redirect, basestring):
         backUrl = '%s#%s' % (backUrl, redirect)
     context.setItem('plominoredirecturl', backUrl)
+
+childhood_name = context.REQUEST.get('parentField')
+assert childhood_name, "Attenzione! Nessun valore trovato in request per il campo \"parentField\""
+childhood_value = parentDocument.getItem(childhood_name, []) or []
+childhood_value.append(context.doclinkCommons('doc_path'))
+parentDocument.setItem(childhood_name, childhood_value)

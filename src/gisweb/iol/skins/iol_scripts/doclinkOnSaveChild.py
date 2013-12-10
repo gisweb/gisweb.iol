@@ -10,14 +10,6 @@
 """
 """
 
-parentKey = script.doclinkCommons('parentKey')
-
 if not context.isNewDocument():
     if context.getItem('plominoredirecturl') and not redirect:
         context.removeItem('plominoredirecturl')
-
-plominoDatabase = context.getParentDatabase()
-plominoDatabase.getIndex().indexDocument(context)
-parentId = context.getItem(parentKey)
-parentDocument = plominoDatabase.getDocument(parentId)
-parentDocument.refresh()

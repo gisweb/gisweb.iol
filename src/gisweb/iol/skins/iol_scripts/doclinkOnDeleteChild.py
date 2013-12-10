@@ -13,9 +13,18 @@
 parentKey = script.doclinkCommons('parentKey')
 db = context.getParentDatabase()
 parentId = context.getItem(parentKey)
-ParentDocument = db.getDocument(parentId)
-ParentDocument.refresh()
-backUrl = ParentDocument.absolute_url()
+parentDocument = db.getDocument(parentId)
+
+childhood_name = context.REQUEST.get('parentField')
+assert childhood_name, "Attenzione! Nessun valore trovato in request per il campo \"parentField\""
+childhood_value = parentDocument.getItem(childhood_name, []) or []
+
+childhood_value.pop(childhood_value.index(context.doclinkCommons('doc_path')))
+
+parentDocument.setItem(childhood_name, childhood_value)
+
+backUrl = parentDocument.doclinkCommons('doc_path')
+
 if redirect:
     backUrl = '%s#%s' % (backUrl, redirect)
 context.REQUEST.set('returnurl', backUrl)

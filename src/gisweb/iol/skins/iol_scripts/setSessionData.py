@@ -17,6 +17,6 @@ if not params:
     prms=doc.serialDoc(format='json')
 else:
     prms=json_dumps(params)
-    
+
 session[sessionId] = prms
 return
