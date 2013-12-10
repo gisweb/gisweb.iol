@@ -10,6 +10,7 @@
 """
 """
 
+context.removeItem('parentField')
 if not context.isNewDocument():
     if context.getItem('plominoredirecturl') and not redirect:
         context.removeItem('plominoredirecturl')
