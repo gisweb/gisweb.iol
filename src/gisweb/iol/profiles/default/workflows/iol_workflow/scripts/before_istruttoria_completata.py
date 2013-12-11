@@ -8,6 +8,8 @@
 ##title=
 ##
 
+from Products.CMFPlomino.PlominoUtils import StringToDate
+
 doc = state_change.object
 
 if script.run_script(doc, script.id) != False:
