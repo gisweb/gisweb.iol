@@ -37,6 +37,10 @@
 <param>
 <value><struct>
 <member>
+<name>sourceview</name>
+<value><string>sospese</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
 'aaSorting': [],
@@ -57,10 +61,6 @@
    });
    aoData.push({name:'query', value: JSON.stringify(base_query)});
 }</string></value>
-</member>
-<member>
-<name>sourceview</name>
-<value><string>sospese</string></value>
 </member>
 <member>
 <name>widget</name>
@@ -95,6 +95,10 @@
 <param>
 <value><struct>
 <member>
+<name>sourceview</name>
+<value><string>dainviare</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
 'aaSorting': [],
@@ -115,10 +119,6 @@
    });
    aoData.push({name:'query', value: JSON.stringify(base_query)});
 }</string></value>
-</member>
-<member>
-<name>sourceview</name>
-<value><string>dainviare</string></value>
 </member>
 <member>
 <name>widget</name>
@@ -153,6 +153,10 @@
 <param>
 <value><struct>
 <member>
+<name>sourceview</name>
+<value><string>inviate</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
 'aaSorting': [],
@@ -173,10 +177,6 @@
    });
    aoData.push({name:'query', value: JSON.stringify(base_query)});
 }</string></value>
-</member>
-<member>
-<name>sourceview</name>
-<value><string>inviate</string></value>
 </member>
 <member>
 <name>widget</name>
@@ -232,6 +232,10 @@ return result]]></Formula>
 <param>
 <value><struct>
 <member>
+<name>sourceview</name>
+<value><string>autorizzate</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'sDom': '&lt;\'hidden\'r&gt;t&lt;\'span3\'l&gt;&lt;\'span3\'i&gt;&lt;\'span5\'p&gt;',
 'aaSorting': [],
@@ -252,10 +256,6 @@ return result]]></Formula>
    });
    aoData.push({name:'query', value: JSON.stringify(base_query)});
 }</string></value>
-</member>
-<member>
-<name>sourceview</name>
-<value><string>autorizzate</string></value>
 </member>
 <member>
 <name>widget</name>

@@ -57,10 +57,6 @@
 <param>
 <value><struct>
 <member>
-<name>selectionlistformula</name>
-<value><string>return context.getParentDatabase().resources.elencoVie()</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -68,6 +64,10 @@
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>selectionlistformula</name>
+<value><string>return context.getParentDatabase().resources.elencoVie()</string></value>
 </member>
 </struct></value>
 </param>
@@ -172,12 +172,12 @@
 <param>
 <value><struct>
 <member>
-<name>dynamictableparam</name>
-<value><string>{}</string></value>
-</member>
-<member>
 <name>widget</name>
 <value><string>CHECKBOX</string></value>
+</member>
+<member>
+<name>dynamictableparam</name>
+<value><string>{}</string></value>
 </member>
 <member>
 <name>selectionlist</name>
@@ -277,10 +277,6 @@ except:
 <param>
 <value><struct>
 <member>
-<name>associated_form</name>
-<value><string>sub_elemento</string></value>
-</member>
-<member>
 <name>jssettings</name>
 <value><string>"aoColumns": [
     { "sTitle": "Tipo" },
@@ -323,6 +319,10 @@ except:
 <name>field_mapping</name>
 <value><string>elemento_tipo,elemento_lunghezza,elemento_larghezza,elemento_profondita,elemento_descrizione,elemento_zona,elemento_geometria</string></value>
 </member>
+<member>
+<name>associated_form</name>
+<value><string>sub_elemento</string></value>
+</member>
 </struct></value>
 </param>
 </params>
@@ -348,10 +348,6 @@ except:
 <param>
 <value><struct>
 <member>
-<name>selectionlistformula</name>
-<value><string>['|empty','Posizione civico|punto_cantiere']</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>"drawingOptions":{
     "empty":{"drawingControl":false,"drawingMode":null,"title":""},
@@ -372,6 +368,10 @@ except:
         "polygonOptions":{"strokeColor":"#00FFFF","strokeOpacity": 1.0,"strokeWeight": 2}
     }                             
 }</string></value>
+</member>
+<member>
+<name>selectionlistformula</name>
+<value><string>['|empty','Posizione civico|punto_cantiere']</string></value>
 </member>
 </struct></value>
 </param>

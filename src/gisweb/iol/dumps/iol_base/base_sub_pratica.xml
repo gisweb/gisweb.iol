@@ -283,6 +283,10 @@ return list]]></Formula>
 <param>
 <value><struct>
 <member>
+<name>widget</name>
+<value><string>MULTISELECT</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -290,10 +294,6 @@ return list]]></Formula>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>MULTISELECT</string></value>
 </member>
 <member>
 <name>separator</name>
@@ -447,12 +447,12 @@ return 'REMOVE_PERMISSION' not in getUserPermissions(plominoDocument)]]></Hidewh
 <param>
 <value><struct>
 <member>
-<name>startingyear</name>
-<value><string>1950</string></value>
-</member>
-<member>
 <name>format</name>
 <value><string>%d/%m/%Y</string></value>
+</member>
+<member>
+<name>startingyear</name>
+<value><string>1950</string></value>
 </member>
 </struct></value>
 </param>
@@ -508,12 +508,12 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
-<name>startingyear</name>
-<value><string>1950</string></value>
-</member>
-<member>
 <name>format</name>
 <value><string>%d/%m/%Y</string></value>
+</member>
+<member>
+<name>startingyear</name>
+<value><string>1950</string></value>
 </member>
 </struct></value>
 </param>
@@ -540,12 +540,6 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
-<name>selectionlistformula</name>
-<value><string># valori possibili: autorizzazione, proroga, rinnovo
-sub_path = context.naming('tipo_richiesta').replace('base', 'autorizzazione')
-return context.elenco_modelli(sub_path)</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -553,6 +547,12 @@ return context.elenco_modelli(sub_path)</string></value>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>selectionlistformula</name>
+<value><string># valori possibili: autorizzazione, proroga, rinnovo
+sub_path = context.naming('tipo_richiesta').replace('base', 'autorizzazione')
+return context.elenco_modelli(sub_path)</string></value>
 </member>
 </struct></value>
 </param>
@@ -615,10 +615,6 @@ return context.elenco_modelli(sub_path)</string></value>
 <param>
 <value><struct>
 <member>
-<name>selectionlistformula</name>
-<value><string>return context.elenco_modelli('ordinanza') or []</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -626,6 +622,10 @@ return context.elenco_modelli(sub_path)</string></value>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>selectionlistformula</name>
+<value><string>return context.elenco_modelli('ordinanza') or []</string></value>
 </member>
 </struct></value>
 </param>
@@ -652,10 +652,6 @@ return context.elenco_modelli(sub_path)</string></value>
 <param>
 <value><struct>
 <member>
-<name>selectionlistformula</name>
-<value><string>return context.elenco_modelli('appendice') or []</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -663,6 +659,10 @@ return context.elenco_modelli(sub_path)</string></value>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>selectionlistformula</name>
+<value><string>return context.elenco_modelli('appendice') or []</string></value>
 </member>
 </struct></value>
 </param>
@@ -753,6 +753,15 @@ return context.elenco_modelli(sub_path)</string></value>
 <param>
 <value><struct>
 <member>
+<name>dynamictableparam</name>
+<value><string>'bPaginate': true,
+'bLengthChange': true,
+'bFilter': true,
+'bSort': true,
+'bInfo': true,
+'bAutoWidth': false</string></value>
+</member>
+<member>
 <name>selectionlistformula</name>
 <value><string>from Products.CMFPlomino.PlominoUtils import userFullname
 db = context.getParentDatabase()
@@ -766,15 +775,6 @@ if not users and context.test_mode():
 
 
 return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=userFullname(db,usr)) for usr in users]</string></value>
-</member>
-<member>
-<name>dynamictableparam</name>
-<value><string>'bPaginate': true,
-'bLengthChange': true,
-'bFilter': true,
-'bSort': true,
-'bInfo': true,
-'bAutoWidth': false</string></value>
 </member>
 </struct></value>
 </param>

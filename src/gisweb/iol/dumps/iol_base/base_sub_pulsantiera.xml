@@ -9,7 +9,7 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="hidden" id="btn-group"><span class="plominoActionClass">btn_home</span> <span class="plominoActionClass">btn_salva</span> <span class="plominoActionClass">btn_annulla</span> <span class="plominoActionClass">btn_modifica</span> <span class="plominoActionClass">btn_elimina</span></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="hidden" id="btn-group"><span class="plominoActionClass">btn_home</span> <span class="plominoActionClass">btn_salva</span> <span class="plominoActionClass">btn_annulla</span> <span class="plominoActionClass">btn_modifica</span> <span class="plominoActionClass">btn_elimina</span> <span class="plominoActionClass">btn_back</span></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -74,6 +74,19 @@ return 'REMOVE_PERMISSION' not in getUserPermissions(plominoDocument)]]></Hidewh
           <ActionDisplay type="Products.Archetypes.Field.StringField">BUTTON</ActionDisplay>
           <Content type="Products.Archetypes.Field.TextField"><![CDATA[return context.getParentDatabase().absolute_url()]]></Content>
           <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[return context.isEditMode()]]></Hidewhen>
+          <InActionBar type="Products.Archetypes.Field.BooleanField">True</InActionBar>
+        </element>
+        <element id="btn_back" title="Chiudi" type="PlominoAction">
+          <id type="Products.Archetypes.Field.StringField">btn_back</id>
+          <ActionType type="Products.Archetypes.Field.StringField">REDIRECT</ActionType>
+          <ActionDisplay type="Products.Archetypes.Field.StringField">BUTTON</ActionDisplay>
+          <Content type="Products.Archetypes.Field.TextField"><![CDATA[return context.getParentDatabase().getDocument(context.getItem('parentDocument')).absolute_url()]]></Content>
+          <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[if context.isEditMode():
+    return True
+elif 'parentDocument' in context.getItems():
+    return False
+else:
+    return True]]></Hidewhen>
           <InActionBar type="Products.Archetypes.Field.BooleanField">True</InActionBar>
         </element>
       </elements>

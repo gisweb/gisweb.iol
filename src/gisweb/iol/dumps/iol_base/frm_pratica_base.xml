@@ -10,25 +10,7 @@
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[#
 return context.frm_beforeCreateDocument()]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoSubformClass">base_sub_pulsantiera</span></p>
-<div class="v-content well">
-<p><span class="v-content-title" id="Pratica"> </span></p>
-<p><span class="plominoSubformClass">base_sub_pratica</span></p>
-</div>
-<div class="v-content well">
-<h3 class="v-content-title" id="Soggetto">Persona fisica</h3>
-<span class="plominoSubformClass">base_sub_fisica</span> <span class="plominoSubformClass">base_sub_fisica_recapiti</span></div>
-<div class="v-content well">
-<h3 class="v-content-title" id="Soggetto">Persona giuridica</h3>
-<span class="plominoSubformClass">base_sub_giuridica</span></div>
-<div class="v-content well">
-<h3 class="v-content-title" id="Richiesta">Dati della richiesta</h3>
-<p>SUBFORM CON I DATI</p>
-</div>
-<div class="v-content well">
-<h3 class="v-content-title" id="Richiesta">Allegati della richiesta</h3>
-<p>SUBFORM DEGLI ALLEGATI</p>
-</div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoSubformClass">base_sub_pulsantiera</span></p><div class="v-content well"><p><span class="v-content-title" id="Pratica"> </span></p><p><span class="plominoSubformClass">base_sub_pratica</span></p></div><div class="v-content well"><h3 class="v-content-title" id="Soggetto">Persona fisica</h3><span class="plominoSubformClass">base_sub_fisica</span> <span class="plominoSubformClass">base_sub_fisica_recapiti</span></div><div class="v-content well"><h3 class="v-content-title" id="Soggetto">Persona giuridica</h3><span class="plominoSubformClass">base_sub_giuridica</span></div><div class="v-content well"><h3 class="v-content-title" id="Richiesta">Dati della richiesta</h3><p>SUBFORM CON I DATI</p></div><div class="v-content well"><h3 class="v-content-title" id="Richiesta">Allegati della richiesta</h3><p>SUBFORM DEGLI ALLEGATI</p></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
