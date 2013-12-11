@@ -1,5 +1,17 @@
-#swingbox { position: absolute;
-	top:23px; left:0px;
+#pngdiv{
+        position:absolute;
+	background-image: url(selezionato.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+
+	height: 37px;
+	width: 32px;
+	margin-top: 0px;
+	z-index: 2;
+}
+
+#layerInfo{ position: absolute;
+	top:23px; left:80px;
 	margin-top:-2px;
 	padding: 6px 4px;
 	text-align: left;
@@ -10,7 +22,20 @@
 	z-index:-1;
 }
 
-#swingbox hr { height:1px;
+
+
+#layerBox { position: absolute;
+	top:23px; left:0px;
+	margin-top:-2px;
+	padding: 6px 4px;
+	text-align: left;
+	width:102px;
+	background-color: #fff;
+	display: none;
+	cursor:default;
+	z-index:-1;
+}
+#LayerBox hr { height:1px;
 	border:1px;
 	color:#e2e2e2;
 	background-color:#e2e2e2;
@@ -58,6 +83,13 @@ CSS for v3 buttons stolen from:
 	color: #000;
 	border: 1px solid #717B87;
 	background-color: #fff; 
+}
+
+.info-selected {
+
+ 	border: 1px solid #717B87;
+	background-color: #fff; 
+
 }
 
 .button, .button-selected {

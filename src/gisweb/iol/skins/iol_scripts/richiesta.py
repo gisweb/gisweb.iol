@@ -12,7 +12,7 @@
 
 tipi = list()
 for f in context.getForms():
-    tipo = f.naming('tipo_richiesta')
+    tipo = f.naming('iol_tipo_richiesta')
     if tipo and tipo not in tipi:
         tipi.append(tipo)
 

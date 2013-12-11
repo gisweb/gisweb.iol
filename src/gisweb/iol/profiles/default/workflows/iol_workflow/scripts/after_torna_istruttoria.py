@@ -7,20 +7,22 @@
 ##parameters=state_change
 ##title=
 ##
-#Aggiornamento dello stato su plominoDocument
+
 doc = state_change.object
-db = doc.getParentDatabase()
 
-doc.removeItem('documenti_autorizzazione')
-doc.removeItem('numero_autorizzazione')
-doc.removeItem('label_autorizzazione')
-doc.removeItem('istruttoria_motivo_sospensione')
-doc.removeItem('istruttoria_rigetto_motivazione')
-
+#Aggiornamento dello stato su plominoDocument
 doc.updateStatus()
 
-#Script personalizzato se esiste
-scriptName=script.id
+if script.run_script(doc, script.id) != False:
 
-if scriptName in db.resources.keys():
-    db.resources[scriptName](doc)
+    #### OTHER CODE HERE ####
+
+    doc.removeItem('documenti_autorizzazione')
+    doc.removeItem('numero_autorizzazione')
+    doc.removeItem('label_autorizzazione')
+    doc.removeItem('istruttoria_motivo_sospensione')
+    doc.removeItem('istruttoria_rigetto_motivazione')
+
+    script.run_script(doc, script.id, suffix='post')
+
+#### SCRIPT ENDS HERE ####

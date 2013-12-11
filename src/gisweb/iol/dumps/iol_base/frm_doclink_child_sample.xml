@@ -1,0 +1,149 @@
+<plominodatabase id="iol_base">
+  <design>
+    <element id="frm_doclink_child_sample" title="doclink child sample" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">frm_doclink_child_sample</id>
+      <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.doclinkOnCreateChild()]]></onCreateDocument>
+      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
+      <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
+      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.doclinkOnSaveChild()]]></onSaveDocument>
+      <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.doclinkOnDeleteChild()]]></onDeleteDocument>
+      <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
+      <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoSubformClass">base_sub_pulsantiera</span></p>
+<p><span class="plominoSubformClass">base_sub_child</span></p>
+<div class="row-fluid">
+<div class="span4"><span class="plominoFieldClass">child_field1</span></div>
+<div class="span4"><span class="plominoFieldClass">child_field2</span></div>
+</div>
+<div class="row-fluid">
+<div class="span4"><span class="plominoFieldClass">child_field3</span></div>
+<div class="span4"><span class="plominoFieldClass">child_field4</span></div>
+</div>]]></FormLayout>
+      <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
+      <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
+      <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
+      <HideDefaultActions type="Products.Archetypes.Field.BooleanField">True</HideDefaultActions>
+      <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
+      <isSearchForm type="Products.Archetypes.Field.BooleanField">False</isSearchForm>
+      <isPage type="Products.Archetypes.Field.BooleanField">False</isPage>
+      <SearchView type="Products.Archetypes.Field.StringField"/>
+      <SearchFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></SearchFormula>
+      <Position type="Products.Archetypes.Field.IntegerField"/>
+      <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
+      <elements>
+        <element id="child_field1" title="Field 1" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">child_field1</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>size</name>
+<value><string>255</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="child_field2" title="Field 2" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">child_field2</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>size</name>
+<value><string>255</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="child_field3" title="Field 3" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">child_field3</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>size</name>
+<value><string>255</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="child_field4" title="Field 4" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">child_field4</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>size</name>
+<value><string>255</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+      </elements>
+    </element>
+  </design>
+</plominodatabase>

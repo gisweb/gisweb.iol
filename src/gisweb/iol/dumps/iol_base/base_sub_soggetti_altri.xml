@@ -1,0 +1,126 @@
+<plominodatabase id="iol_base">
+  <design>
+    <element id="base_sub_soggetti_altri" title="sub_soggetti_altri" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">base_sub_soggetti_altri</id>
+      <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
+      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
+      <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
+      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSaveDocument>
+      <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[from gisweb.utils import ondelete_parent
+
+ondelete_parent(plominoDocument)]]></onDeleteDocument>
+      <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
+      <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoFieldClass">elenco_altri_richiedenti</span></p><p> </p><p><span class="plominoFieldClass">elenco_altri_intestatari</span></p>]]></FormLayout>
+      <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
+      <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
+      <ActionBarPosition type="Products.Archetypes.Field.StringField">BOTTOM</ActionBarPosition>
+      <HideDefaultActions type="Products.Archetypes.Field.BooleanField">False</HideDefaultActions>
+      <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
+      <isSearchForm type="Products.Archetypes.Field.BooleanField">False</isSearchForm>
+      <isPage type="Products.Archetypes.Field.BooleanField">False</isPage>
+      <SearchView type="Products.Archetypes.Field.StringField"/>
+      <SearchFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></SearchFormula>
+      <Position type="Products.Archetypes.Field.IntegerField"/>
+      <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
+      <elements>
+        <element id="elenco_altri_richiedenti" title="Dati anagrafici di altri richiedenti" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">elenco_altri_richiedenti</id>
+          <FieldType type="Products.Archetypes.Field.StringField">DATAGRID</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">datagridMyTemplateList</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">datagridMyTemplateEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>jssettings</name>
+<value><string>"aoColumns": [
+    { "sTitle": "Cognome" },
+    { "sTitle": "Nome" },
+    { "sTitle": "Data di nascita" },
+    { "sTitle": "Comune" }
+],
+"bPaginate": false,
+"bLengthChange": false,
+"bFilter": false,
+"bSort": false,
+"bInfo": false,
+"bAutoWidth": false
+</string></value>
+</member>
+<member>
+<name>field_mapping</name>
+<value><string>fisica_cognome,fisica_nome,fisica_data_nato,fisica_comune_nato,fisica_provincia_nato,fisica_stato_nato,fisica_cf,fisica_cittadinanza,fisica_indirizzo_comune,fisica_indirizzo_provincia,fisica_indirizzo_indirizzo,fisica_indirizzo_civico,fisica_indirizzo_cap,fisica_app,fisica_pec</string></value>
+</member>
+<member>
+<name>associated_form</name>
+<value><string>base_sub_fisica</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes">width:800px;height:400px</field>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="elenco_altri_intestatari" title="Dati anagrafici di altri intestatari" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">elenco_altri_intestatari</id>
+          <FieldType type="Products.Archetypes.Field.StringField">DATAGRID</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">datagridMyTemplateList</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">datagridMyTemplateEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>jssettings</name>
+<value><string>"aoColumns": [
+    { "sTitle": "Cognome" },
+    { "sTitle": "Nome" },
+    { "sTitle": "Data di nascita" },
+    { "sTitle": "Comune" }
+],
+"bPaginate": false,
+"bLengthChange": false,
+"bFilter": false,
+"bSort": false,
+"bInfo": false,
+"bAutoWidth": false
+</string></value>
+</member>
+<member>
+<name>field_mapping</name>
+<value><string>fisica_cognome,fisica_nome,fisica_data_nato,fisica_comune_nato,fisica_provincia_nato,fisica_stato_nato,fisica_cf,fisica_cittadinanza,fisica_indirizzo_comune,fisica_indirizzo_provincia,fisica_indirizzo_indirizzo,fisica_indirizzo_civico,fisica_indirizzo_cap,fisica_app,fisica_pec</string></value>
+</member>
+<member>
+<name>associated_form</name>
+<value><string>base_sub_fisica</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes">width:800px;height:400px</field>
+            </extensionfields>
+          </CustomData>
+        </element>
+      </elements>
+    </element>
+  </design>
+</plominodatabase>

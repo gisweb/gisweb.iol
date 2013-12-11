@@ -9,7 +9,13 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid"><div class="span6"><span class="plominoFieldClass">fisica_email</span></div><div class="span2"><span class="plominoFieldClass">fisica_telefono</span></div><div class="span2"><span class="plominoFieldClass">fisica_cellulare</span></div><div class="span2"><span class="plominoFieldClass">fisica_fax</span></div></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid">
+<div class="span3"><span class="plominoFieldClass">fisica_email</span></div>
+<div class="span3"><span class="plominoFieldClass">fisica_pec</span></div>
+<div class="span2"><span class="plominoFieldClass">fisica_telefono</span></div>
+<div class="span2"><span class="plominoFieldClass">fisica_cellulare</span></div>
+<div class="span2"><span class="plominoFieldClass">fisica_fax</span></div>
+</div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -93,6 +99,32 @@ return '']]></ValidationFormula>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="fisica_pec" title="PEC" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">fisica_pec</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[from gisweb.utils import isEmail, isEmpty
+
+value = context.getItem('fisica_pec', '') or ''
+
+if not isEmpty(value) and not isEmail(value):
+    msg = 'Spiacente "%s" non sembra essere un indirizzo e-mail valido.' % value
+    return msg
+
+return '']]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>

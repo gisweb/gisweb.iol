@@ -2,10 +2,9 @@ $(document).ready(function() {
 
   if(typeof($.plominoMaps.google.map)=='undefined') return;
   var chosen = [];
-  var g = google.maps;
   var me = this;
 
-  $("#swingbox input").click(function(){switchLayer(this.checked, this.id)});
+  $("#layerBox input").click(function(){switchLayer(this.checked, this.id)});
   $("#remover").click(function(){hideAll()});
 
   var outer = document.createElement("div");
@@ -24,21 +23,21 @@ $(document).ready(function() {
   // Take care of the clicked target
   inner.onclick = toggleLayers;
 
-  var swingmenu = document.getElementById("swingbox");
-  inner.appendChild(swingmenu);
+  var layerMenu = document.getElementById("layerBox");
+  inner.appendChild(layerMenu);
 
   outer.onmouseover = function() {
    if (me.timer) clearTimeout(me.timer);
-    swingmenu.style.display = "block";
+    layerMenu.style.display = "block";
   };
 
   outer.onmouseout = function() {
    me.timer = setTimeout(function() {
-   swingmenu.style.display = "none";
+   layerMenu.style.display = "none";
    }, 300);
   };
   
-  $.plominoMaps.google.map.controls[g.ControlPosition.TOP_RIGHT].push(outer); 
+  $.plominoMaps.google.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(outer); 
   google.maps.event.addListener($.plominoMaps.google.map, 'zoom_changed', updateLayersTool);
 	
 //DA RIFARE CON JQUERY
@@ -46,7 +45,7 @@ $(document).ready(function() {
 function updateLayersTool(){
  var disabled;
  var map=this;
- $("#swingbox input").each(function(_,el){
+ $("#layerBox input").each(function(_,el){
      disabled = $.plominoMaps.google.layers[el.id].minZoom != 'undefined' && map.getZoom() < $.plominoMaps.google.layers[el.id].minZoom;
      //disabled = !disabled && $.plominoMaps.google.layers[el.id].maxZoom != 'undefined' && map.getZoom() > $.plominoMaps.google.layers[el.id].maxZoom;
      el.disabled=disabled;
@@ -67,7 +66,7 @@ function adaptButton(is_on) {
  }
  else {
    // Reset the link and the button when all checkboxes are unchecked
-   if ($("#swingbox input:checked").length==0) {
+   if ($("#layerBox input:checked").length==0) {
      hider.blur();
      hider.className ="";
      text.style.fontWeight = "normal";
@@ -82,7 +81,8 @@ function switchLayer(is_on, id) {
        layerIndex++;
   }
   if (is_on) {
-    $.plominoMaps.google.map.overlayMapTypes.setAt(layerIndex,$.plominoMaps.google.layers[id]);
+      if(!$.plominoMaps.google.map.overlayMapTypes.getAt(layerIndex)) $.plominoMaps.google.map.overlayMapTypes.insertAt(layerIndex,$.plominoMaps.google.layers[id]);
+      $.plominoMaps.google.map.overlayMapTypes.setAt(layerIndex,$.plominoMaps.google.layers[id]);
   } else {
     $.plominoMaps.google.map.overlayMapTypes.removeAt(layerIndex);
   }
@@ -90,7 +90,7 @@ function switchLayer(is_on, id) {
 }
 
 function hideAll() {
- $("#swingbox input:checked").each(function(_,el){
+ $("#layerBox input:checked").each(function(_,el){
      switchLayer(false, el.id);
      chosen.push(el.id);
  })

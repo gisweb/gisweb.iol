@@ -8,26 +8,29 @@
 ##title=NON UTILIZZATA
 ##
 return None
+
 doc = state_change.object
-db = doc.getParentDatabase()
 
 #Aggiornamento dello stato su plominoDocument
+db = doc.getParentDatabase()
 doc.updateStatus()
 
-#Script personalizzato se esiste
-scriptName=script.id
+if script.run_script(doc, script.id) != False:
 
-if scriptName in db.resources.keys():
-    db.resources[scriptName](doc)
+    #### OTHER CODE HERE ####
 
-# Dopo che la pratica è stata prorogata posso rimuovere il documento di proroga e il doclink relativo
-db = doc.getParentDatabase()
-idx = db.getIndex()
-for br in idx.dbsearch(dict(parentDocument=doc.getId)):
-    proroga = br.getObject()
-    if 'proroga' in proroga.getItem('tipo_richiesta'):
-        proroga.delete(REQUEST={}) # specifico una REQUEST vuota per evitare il redirect indesiderato
+    # Dopo che la pratica è stata prorogata posso rimuovere il documento di proroga e il doclink relativo
+    #db = doc.getParentDatabase()
+    #idx = db.getIndex()
+    #for br in idx.dbsearch(dict(parentDocument=doc.getId)):
+        #proroga = br.getObject()
+        #if 'proroga' in proroga.getItem('iol_tipo_richiesta'):
+            #proroga.delete(REQUEST={}) # specifico una REQUEST vuota per evitare il redirect indesiderato
 
-doc.convertToPDF(file_type='documenti_proroga')    
-#INVIO MAIL ISTANZA PROROGATA
-#doc.inviaMail(tipo='rigetto')
+    #doc.convertToPDF(file_type='documenti_proroga')    
+    #INVIO MAIL ISTANZA PROROGATA
+    #doc.inviaMail(tipo='rigetto')
+
+    script.run_script(doc, script.id, suffix='post')
+
+#### SCRIPT ENDS HERE ####

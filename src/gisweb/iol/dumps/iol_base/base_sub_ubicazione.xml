@@ -1,0 +1,615 @@
+<plominodatabase id="iol_base">
+  <design>
+    <element id="base_sub_ubicazione" title="base_sub_ubicazione" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">base_sub_ubicazione</id>
+      <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
+      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
+      <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
+      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSaveDocument>
+      <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
+      <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
+      <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoFieldClass">scripts</span></p>
+<div class="row-fluid">
+<div class="span4"><span class="plominoFieldClass">ubicazione_comune</span></div>
+</div>
+<div class="alert-info">
+<h5>Usare gli strumenti per localizzare l'intervento, le informazioni inserite in questa sezione non verranno salvate</h5>
+<div class="row-fluid">
+<div class="span7"><span class="plominoFieldClass">localizzazione_indirizzo</span></div>
+<div class="span1"><span class="plominoFieldClass">localizzazione_foglio</span></div>
+<div class="span2"><span class="plominoFieldClass">localizzazione_mappale</span></div>
+</div>
+</div>
+<div class="hidden streetview" id="ubicazione_mappa_streetview"></div>
+<div class="hidden no-streetview alert-error">Il servizio di StreetView non compre questa zona</div>
+<p><span class="plominoFieldClass">ubicazione_mappa</span> <span class="plominoFieldClass">ubicazione_layers</span></p>
+<div class="alert-info">
+<h5>Riferimenti toponomastici e catastali:</h5>
+</div>
+<div class="row-fluid">
+<div class="span5"><span class="plominoFieldClass">ubicazione_via</span></div>
+<div class="span2"><span class="plominoFieldClass">ubicazione_civico</span></div>
+<div class="span1"></div>
+<div class="span2"><span class="plominoFieldClass">ubicazione_cap</span></div>
+</div>
+<div class="row-fluid">
+<div class="span2"><span class="plominoFieldClass">ubicazione_foglio</span></div>
+<div class="span3"><span class="plominoFieldClass">ubicazione_mappale</span></div>
+<div class="span2"><span class="plominoFieldClass">ubicazione_ufoglio</span></div>
+<div class="span3"><span class="plominoFieldClass">ubicazione_umappale</span></div>
+<div class="span2"><span class="plominoFieldClass">ubicazione_usub</span></div>
+</div>]]></FormLayout>
+      <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
+      <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
+      <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
+      <HideDefaultActions type="Products.Archetypes.Field.BooleanField">False</HideDefaultActions>
+      <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
+      <isSearchForm type="Products.Archetypes.Field.BooleanField">False</isSearchForm>
+      <isPage type="Products.Archetypes.Field.BooleanField">False</isPage>
+      <SearchView type="Products.Archetypes.Field.StringField"/>
+      <SearchFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></SearchFormula>
+      <Position type="Products.Archetypes.Field.IntegerField"/>
+      <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
+      <elements>
+        <element id="ubicazione_comune" title="Comune di" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">ubicazione_comune</id>
+          <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>dynamictableparam</name>
+<value><string>'bPaginate': true,
+'bLengthChange': true,
+'bFilter': true,
+'bSort': true,
+'bInfo': true,
+'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>selectionlistformula</name>
+<value><string>['|','AMEGLIA|A261','ARCOLA|A373','BEVERINO|A836','BOLANO|A932','BONASSOLA|A961','BORGHETTO DI VARA|A992','BRUGNATO|B214','CALICE AL CORNOVIGLIO|B410','CARRO |B838','CARRODANO|B839','CASTEL NUOVO MAGRA|C240','DEIVA MARINA|D265','FOLLO|D655','FRAMURA|D758','LA SPEZIA|E463','LERICI|E542','LEVANTO|E560','MAISSANA|E842','MONTEROSSO AL MARE|F609','ORTONOVO|G143','PIGNONE|G664','PORTOVENERE|G925','RICCO DEL GOLFO|H275','RIOMAGGIORE|H304','ROCCHETTA DI VARA|H461','SANTO STEFANO DI MAGRA|I363','SARZANA|I449','SESTA GODANO|E070','VARESE LIGURE|L681','VERNAZZA|L774','VEZZANO LIGURE|L819','ZIGNAGO|M177']</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="ubicazione_foglio" title="Foglio (N.C.T)" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">ubicazione_foglio</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return context.getItem('localizzazione_foglio')]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>size</name>
+<value><string>255</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="ubicazione_mappale" title="Mappale (N.C.T)" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">ubicazione_mappale</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>size</name>
+<value><string>255</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="ubicazione_mappa" title="Mappa" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">ubicazione_mappa</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapGoogleMap</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapGoogleMap</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes">{"map":{"streetViewControl": true,"scaleControl":true,"zoom": 9,"scrollwheel":false,"center":[44.158,9.769],"mapTypeId":"roadmap"}}</field>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="ubicazione_layers" title="Livelli" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">ubicazione_layers</id>
+          <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return 'grafo']]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapGoogleMapLayers</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapGoogleMapLayers</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>widget</name>
+<value><string>CHECKBOX</string></value>
+</member>
+<member>
+<name>dynamictableparam</name>
+<value><string>{"grafo":new google.maps.ImageMapType({
+     getTileUrl: getGCTileURL,
+     tileSize: new google.maps.Size(256, 256),
+     isPng: true,
+     index:1,    
+     "name":"adsdadasdasda",
+     url:"http://sitiset.provincia.sp.it/gisclient/services/ows.php?project=siti&amp;map=catasto_strade1&amp;layers=grafo.archi",
+     minZoom:6, 
+     maxZoom:12,
+     opacity:0.5
+  }),
+"particelle":new google.maps.ImageMapType({
+     getTileUrl: getGCTileURL,
+     tileSize: new google.maps.Size(256, 256),
+     isPng: true,
+     index:1,
+     minZoom:14,
+     url:"http://sitiset.provincia.sp.it/gisclient/services/ows.php?project=siti&amp;map=catasto_strade1&amp;layers=particelle,fabbricati"
+  }),
+"strade":new google.maps.ImageMapType({
+     getTileUrl: getGCTileURL,
+     tileSize: new google.maps.Size(256, 256),
+     isPng: true,
+     index:2,
+     opacity:0.7,
+     minZoom:10,
+     url:"http://sitiset.provincia.sp.it/gisclient/services/ows.php?project=siti&amp;map=catasto_strade1&amp;layers=strade"
+  }),
+"sfondo":new google.maps.ImageMapType({
+     getTileUrl: WMSGetTileUrl,
+     tileSize: new google.maps.Size(256, 256),
+     isPng: true,
+     index:2,
+     opacity:0.7,
+     minZoom:10,
+     maxZoom:28,
+     alt:"Sfondo cartografico",
+     name:"Sfondo",
+     url: "http://localhost:8080/service?"
+  }),
+"osm":new google.maps.ImageMapType({
+	getTileUrl: function (coord, zoom) {
+		return "http://tile.openstreetmap.org/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+	},
+	tileSize: new google.maps.Size(256, 256),
+	isPng: true,
+	alt: "OpenStreetMap",
+	name: "OSM",
+	maxZoom: 19
+  })
+}
+$.plominoMaps.google.map.mapTypes.set("osm", $.plominoMaps.google.layers["osm"]);
+$.plominoMaps.google.map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+$.plominoMaps.google.map.overlayMapTypes.setAt(0,$.plominoMaps.google.layers["grafo"]);
+$.plominoMaps.google.map.setOptions({mapTypeControlOptions: {
+    mapTypeIds:['osm',
+        google.maps.MapTypeId.ROADMAP,
+        google.maps.MapTypeId.TERRAIN,
+        google.maps.MapTypeId.SATELLITE,
+        google.maps.MapTypeId.HYBRID],
+    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+}});</string></value>
+</member>
+<member>
+<name>selectionlist</name>
+<value><array><data>
+<value><string>Grafo stradale|grafo</string></value>
+<value><string>Catasto|particelle</string></value>
+<value><string>Rete stradale|strade</string></value>
+</data></array></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="localizzazione_foglio" title="Foglio" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">localizzazione_foglio</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>size</name>
+<value><string>255</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="localizzazione_mappale" title="Mappale" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">localizzazione_mappale</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapAddressRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapAddressEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>size</name>
+<value><string>255</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes">{"gmap":"ubicazione_mappa","icon":"posizione_mappale.png","zoom":18,"action":"geocode_catasto","params":{"cod_cat":"ubicazione_comune","foglio":"localizzazione_foglio","mappale":"localizzazione_mappale","field":"geocode_catasto"},"child":{},"winpopup":{"type":1},"iconw":32,"iconh":37,"message":"Seleziona un punto in mappa per avere la progressiva"}</field>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="localizzazione_indirizzo" title="Localizzazione dell'intervento" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">localizzazione_indirizzo</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapAddressRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapAddressEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes">{"gmap":"ubicazione_mappa","icon":"posizione_indirizzo.png","zoom":18,"action":"geocode_address","fieldlist":["localizzazione_indirizzo","ubicazione_comune"],"child":{},"winpopup":{"type":1},"iconw":32,"iconh":37}</field>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="ubicazione_cap" title="CAP" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">ubicazione_cap</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>size</name>
+<value><string>255</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="COMUNE_ISTAT" title="COMUNE_ISTAT" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">COMUNE_ISTAT</id>
+          <FieldType type="Products.Archetypes.Field.StringField">NUMBER</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">COMPUTEDONSAVE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[from gisweb.irideworkflow import getCodcom
+codfisco = plominoDocument.getItem('ubicazione_comune')
+return getCodcom(codfisco)]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="scripts" title="Scripts" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">scripts</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">DISPLAY</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return """
+<link rel="stylesheet" type="text/css" href="controllerGoogleMapLayers.css"> 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=drawing,geometry"></script><script type="text/javascript" src="markerclusterer.js"></script><script type="text/javascript" src="controller.googleMaps.js"></script><script type="text/javascript" src="%s/controller.js"></script>""" %(context.getParentDatabase().resources.absolute_url())]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">scriptINCLUDE</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="ubicazione_via" title="Via" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">ubicazione_via</id>
+          <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>dynamictableparam</name>
+<value><string>'bPaginate': true,
+'bLengthChange': true,
+'bFilter': true,
+'bSort': true,
+'bInfo': true,
+'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>selectionlistformula</name>
+<value><string>return context.getParentDatabase().resources.elencoVie()</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription">Stradario del comune</field>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="ubicazione_civico" title="Civico" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">ubicazione_civico</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapAddressRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapAddressEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>size</name>
+<value><string>255</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription">Indicare il civico o il civico iniziale</field>
+              <field name="customAttributes">{"title":"Posizione civico iniziale","gmap":"ubiazione_mappa","icon":"posizione_civico.png","zoom":18,"action":"geocode_civico", "params":{"via":"ubicazione_via","civico":"ubicazione_civico","field":"geocode_civico"},"child":{},"winpopup":{"type":1},"iconw":32,"iconh":37,"message":""}</field>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="localizzazione_mappale_geometry" title="localizzazione_mappale_geometry" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">localizzazione_mappale_geometry</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="localizzazione_indirizzo_geometry" title="localizzazione_indirizzo_geometry" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">localizzazione_indirizzo_geometry</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="ubicazione_civico_geometry" title="ubicazione_civico_geometry" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">ubicazione_civico_geometry</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="ubicazione_ufoglio" title="Foglio  (N.C.E.U)" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">ubicazione_ufoglio</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return context.getItem('localizzazione_foglio')]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>size</name>
+<value><string>255</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="ubicazione_umappale" title="Mappale  (N.C.E.U)" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">ubicazione_umappale</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>size</name>
+<value><string>255</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="ubicazione_usub" title="Sub (N.C.E.U)" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">ubicazione_usub</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>size</name>
+<value><string>255</string></value>
+</member>
+</struct></value>
+</param>
+</params>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+      </elements>
+    </element>
+  </design>
+</plominodatabase>

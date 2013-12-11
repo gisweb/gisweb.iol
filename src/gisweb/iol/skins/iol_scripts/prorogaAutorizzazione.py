@@ -17,7 +17,7 @@ if context.portal_type != 'PlominoDocument':
 
 doc=context
 
-request = dict(parentDocument=doc.getId(),tipo_richiesta='proroga')
+request = dict(parentDocument=doc.getId(),iol_tipo_richiesta='proroga')
 
 idx = doc.getParentDatabase().getIndex()
 res = idx.dbsearch(request)

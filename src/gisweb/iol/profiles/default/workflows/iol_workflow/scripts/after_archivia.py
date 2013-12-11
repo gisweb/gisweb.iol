@@ -7,13 +7,16 @@
 ##parameters=state_change
 ##title=
 ##
-#Aggiornamento dello stato su plominoDocument
+
 doc = state_change.object
-db = doc.getParentDatabase()
+
+#Aggiornamento dello stato su plominoDocument
 doc.updateStatus()
 
-#Script personalizzato se esiste
-scriptName=script.id
+if script.run_script(doc, script.id) != False:
 
-if scriptName in db.resources.keys():
-    db.resources[scriptName](doc)
+    #### OTHER CODE HERE ####
+
+    script.run_script(doc, script.id, suffix='post')
+
+#### SCRIPT ENDS HERE ####

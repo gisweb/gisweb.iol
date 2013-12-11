@@ -25,9 +25,9 @@ if 'oForm' in items:
     context.removeItem('oForm')
     if 'first' in items:
         res = context.naming()
-        context.setItem('tipo_app',res['tipo_app'])
-        context.setItem('tipo_richiesta',res['tipo_richiesta'])
-        context.setItem('tipo_pratica',res['tipo_pratica'])
+        context.setItem('iol_tipo_app',res['iol_tipo_app'])
+        context.setItem('iol_tipo_richiesta',res['iol_tipo_richiesta'])
+        context.setItem('iol_tipo_pratica',res['iol_tipo_pratica'])
         #context.removeItem('first')
         context.setTitle('%s istanza n. %s del %s' %(context.getForm().Title(),context.getItem('numero_pratica',''),DateToString(Now(),'%d/%m/%Y')))
 

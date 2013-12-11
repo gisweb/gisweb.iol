@@ -7,13 +7,17 @@
 ##parameters=state_change
 ##title=
 ##
+
 doc = state_change.object
-db = doc.getParentDatabase()
 
-#Script personalizzato se esiste
-scriptName=script.id
+guard_response = script.run_script(doc, script.id)
 
-if scriptName in db.resources.keys():
-    return db.resources[scriptName](doc)
+if guard_response == None:
 
-return doc.getItem('pronta_per_integrazione',0)
+    #### OTHER CODE HERE ####
+
+    guard_response = doc.getItem('pronta_per_integrazione')
+
+return guard_response
+
+#### SCRIPT ENDS HERE ####

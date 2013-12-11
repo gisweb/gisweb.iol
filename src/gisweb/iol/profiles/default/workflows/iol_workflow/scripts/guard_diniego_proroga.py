@@ -8,13 +8,17 @@
 ##title=NON UTILIZZATA
 ##
 return False
+
 doc = state_change.object
-db = doc.getParentDatabase()
 
-#Script personalizzato se esiste
-scriptName=script.id
+guard_response = script.run_script(doc, script.id)
 
-if scriptName in db.resources.keys():
-    return db.resources[scriptName](doc)
+if guard_response == None:
 
-return doc.wf_getInfoFor('wf_richiesta_proroga')
+    #### OTHER CODE HERE ####
+
+    guard_response = doc.wf_getInfoFor('wf_richiesta_proroga')
+
+return guard_response
+
+#### SCRIPT ENDS HERE ####

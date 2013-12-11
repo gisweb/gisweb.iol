@@ -58,10 +58,6 @@ return """
 <param>
 <value><struct>
 <member>
-<name>selectionlistformula</name>
-<value><string>[10|10,20|20,50|50,100|100]</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -69,6 +65,10 @@ return """
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>selectionlistformula</name>
+<value><string>[10|10,20|20,50|50,100|100]</string></value>
 </member>
 </struct></value>
 </param>

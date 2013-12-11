@@ -21,6 +21,7 @@
   <exit-transition transition_id="istruttoria_completata"/>
   <exit-transition transition_id="preavviso_rigetto"/>
   <exit-transition transition_id="sospendi"/>
+  <exit-transition transition_id="torna_presentata"/>
   <permission-map name="CMFPlomino: Edit documents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>iol-manager</permission-role>
@@ -93,6 +94,7 @@
   <permission-map name="CMFPlomino: Edit documents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
   </permission-map>
   <permission-map name="CMFPlomino: Read documents" acquired="True">
    <permission-role>Manager</permission-role>
@@ -190,8 +192,8 @@
    <guard-expression>python: scripts.guard_integrazione(state_change)</guard-expression>
   </guard>
   <assignment name="wf_message">python: 'Domanda Integrata'</assignment>
-  <assignment name="wf_priority">python:int('9')</assignment>
   <assignment name="wf_integrata">python:True</assignment>
+  <assignment name="wf_priority">python:int('9')</assignment>
  </transition>
  <transition transition_id="archivia" title="" new_state="archiviata" trigger="USER" before_script="" after_script="after_archivia">
   <description>Per archiviare la pratica . Attenzione la pratica......</description>
@@ -210,18 +212,20 @@
    <guard-expression>python: scripts.guard_assegna(state_change)</guard-expression>
   </guard>
   <assignment name="wf_priority">python: int('4')</assignment>
+  <assignment name="wf_torna_presentata">python: False</assignment>
   <assignment name="wf_protocollata">python: test(state_change.object.getItem('numero_protocollo',''),True,False)</assignment>
  </transition>
- <transition transition_id="autorizza" title="Autorizza" new_state="autorizzata" trigger="USER" before_script="" after_script="after_autorizza">
+ <transition transition_id="autorizza" title="Autorizza" new_state="autorizzata" trigger="USER" before_script="before_autorizza" after_script="after_autorizza">
   <description>La pratica è pronta per essere autorizzata</description>
   <action url="" category="workflow" icon="">Autorizza</action>
   <guard>
    <guard-role>iol-manager</guard-role>
    <guard-role>Manager</guard-role>
+   <guard-role>iol-reviewer</guard-role>
    <guard-expression>python: scripts.guard_autorizza(state_change)</guard-expression>
   </guard>
-  <assignment name="wf_autorizzata">python:True</assignment>
   <assignment name="wf_priority">python: int('0')</assignment>
+  <assignment name="wf_autorizzata">python:True</assignment>
  </transition>
  <transition transition_id="autorizza_importazione" title="Autorizza Importazione" new_state="" trigger="USER" before_script="" after_script="">
   
@@ -245,7 +249,7 @@
   <guard>
    <guard-expression>python: scripts.guard_invia_domanda(state_change)</guard-expression>
   </guard>
-  <assignment name="wf_protocollata">python:True</assignment>
+  <assignment name="wf_protocollata">python: test(state_change.object.getItem('numero_protocollo',''),True,False)</assignment>
  </transition>
  <transition transition_id="istruttoria_completata" title="Istruttoria completata" new_state="istruttoria_ok" trigger="USER" before_script="before_istruttoria_completata" after_script="after_istruttoria_completata">
   <description>Se l'istruttoria è completata clicca su per passare alla fase di autorizzazione (IL SISTEMA VERIFICA CHE L'ISTRUTTORIA SIA COMPLETA)</description>
@@ -280,7 +284,7 @@
   </guard>
   <assignment name="wf_protocollata">python: test(state_change.object.getItem('numero_protocollo',''),True,False)</assignment>
  </transition>
- <transition transition_id="rigetta" title="Rigetta Istanza" new_state="rigettata" trigger="USER" before_script="" after_script="after_rigetta">
+ <transition transition_id="rigetta" title="Rigetta Istanza" new_state="rigettata" trigger="USER" before_script="before_rigetta" after_script="after_rigetta">
   <description>Rigetto della domanda: PRESENTE SOLO SE è STATO COMPILATO IL MOTIVO DEL RIGETTO</description>
   <action url="" category="workflow" icon="">Rigetta Istanza</action>
   <guard>
@@ -288,6 +292,7 @@
    <guard-role>iol-reviewer</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
+  <assignment name="wf_rigetta">python: True</assignment>
   <assignment name="wf_priority">python: int('0')</assignment>
  </transition>
  <transition transition_id="sospendi" title="Sospensione e richiesta integrazione" new_state="sospesa" trigger="USER" before_script="" after_script="after_sospendi">
@@ -298,8 +303,8 @@
    <guard-role>iol-reviewer</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
-  <assignment name="wf_sospesa">python:True</assignment>
   <assignment name="wf_priority">python: int('8')</assignment>
+  <assignment name="wf_sospesa">python:True</assignment>
  </transition>
  <transition transition_id="torna_istruttoria" title="Torna a Istruttoria" new_state="assegnata" trigger="USER" before_script="" after_script="after_torna_istruttoria">
   <description>Se si desidera riportare la pratica in stato di istruttoria clicca su</description>
@@ -309,11 +314,20 @@
    <guard-role>iol-reviewer</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
-  <assignment name="wf_sospesa">python: False</assignment>
-  <assignment name="transition_on_save">python:'assegna'</assignment>
   <assignment name="wf_prerigetto">python: False</assignment>
   <assignment name="wf_priority">python:int(4)</assignment>
   <assignment name="wf_autorizzata">python:False</assignment>
+  <assignment name="transition_on_save">python:'assegna'</assignment>
+  <assignment name="wf_sospesa">python: False</assignment>
+ </transition>
+ <transition transition_id="torna_presentata" title="Torna in presentata" new_state="presentata" trigger="USER" before_script="before_torna_presentata" after_script="after_torna_presentata">
+  <action url="" category="workflow" icon="">Torna in presentata</action>
+  <guard>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>iol-reviewer</guard-role>
+   <guard-role>Manager</guard-role>
+  </guard>
+  <assignment name="wf_torna_presentata">python: True</assignment>
  </transition>
  <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
   <description>Previous transition</description>
@@ -367,6 +381,14 @@
   <default>
    <value type="string">assegna,inizializza</value>
    
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_assegnata" for_catalog="True" for_status="True" update_always="False">
+  <default>
+   
+   <expression>python: False</expression>
   </default>
   <guard>
   </guard>
@@ -451,8 +473,24 @@
   <guard>
   </guard>
  </variable>
+ <variable variable_id="wf_rigetta" for_catalog="True" for_status="True" update_always="False">
+  <default>
+   
+   <expression>python: False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
  <variable variable_id="wf_sospesa" for_catalog="True" for_status="True" update_always="False">
   <description>Flag di Istanza Sospesa</description>
+  <default>
+   
+   <expression>python: False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_torna_presentata" for_catalog="True" for_status="True" update_always="False">
   <default>
    
    <expression>python: False</expression>
@@ -473,14 +511,22 @@
  <script script_id="after_rigetta" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_rigetta.py" module="" function=""/>
  <script script_id="after_sospendi" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_sospendi.py" module="" function=""/>
  <script script_id="after_torna_istruttoria" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_torna_istruttoria.py" module="" function=""/>
+ <script script_id="after_torna_presentata" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_torna_presentata.py" module="" function=""/>
+ <script script_id="before_archivia" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_archivia.py" module="" function=""/>
+ <script script_id="before_assegna" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_assegna.py" module="" function=""/>
+ <script script_id="before_autorizza" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_autorizza.py" module="" function=""/>
  <script script_id="before_integra" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_integra.py" module="" function=""/>
  <script script_id="before_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_invia_domanda.py" module="" function=""/>
  <script script_id="before_istruttoria_completata" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_istruttoria_completata.py" module="" function=""/>
  <script script_id="before_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_protocolla.py" module="" function=""/>
+ <script script_id="before_rigetta" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_rigetta.py" module="" function=""/>
+ <script script_id="before_sospendi" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_sospendi.py" module="" function=""/>
+ <script script_id="before_torna_presentata" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_torna_presentata.py" module="" function=""/>
  <script script_id="guard_archivia" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_archivia.py" module="" function=""/>
  <script script_id="guard_assegna" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_assegna.py" module="" function=""/>
  <script script_id="guard_autorizza" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_autorizza.py" module="" function=""/>
  <script script_id="guard_integrazione" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_integrazione.py" module="" function=""/>
  <script script_id="guard_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_invia_domanda.py" module="" function=""/>
  <script script_id="guard_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_protocolla.py" module="" function=""/>
+ <script script_id="run_script" type="Script (Python)" filename="workflows/iol_workflow/scripts/run_script.py" module="" function=""/>
 </dc-workflow>

@@ -7,15 +7,19 @@
 ##parameters=state_change
 ##title=
 ##
+
 doc = state_change.object
-db = doc.getParentDatabase()
-istr = doc.getItem('istruttore')
-prot = doc.getItem('numero_protocollo')
 
-#Script personalizzato se esiste
-scriptName=script.id
+guard_response = script.run_script(doc, script.id)
 
-if scriptName in db.resources.keys():
-    return db.resources[scriptName](doc)
+if guard_response == None:
 
-return istr and prot
+    #### OTHER CODE HERE ####
+
+    istr = doc.getItem('istruttore')
+    prot = doc.getItem('numero_protocollo')
+    guard_response = istr and prot
+
+return guard_response
+
+#### SCRIPT ENDS HERE ####

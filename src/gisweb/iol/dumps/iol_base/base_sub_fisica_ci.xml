@@ -122,12 +122,12 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
-<name>startingyear</name>
-<value><string>2002</string></value>
-</member>
-<member>
 <name>format</name>
 <value><string>%d/%m/%Y</string></value>
+</member>
+<member>
+<name>startingyear</name>
+<value><string>2002</string></value>
 </member>
 </struct></value>
 </param>

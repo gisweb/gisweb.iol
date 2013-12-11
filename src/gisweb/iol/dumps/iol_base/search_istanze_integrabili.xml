@@ -37,6 +37,10 @@
 <param>
 <value><struct>
 <member>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'aaSorting': [],
 'bPaginate': true,
@@ -50,10 +54,6 @@
 'bJQueryUI': false,
 'bProcessing': true
 </string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
 </member>
 <member>
 <name>sourceview</name>

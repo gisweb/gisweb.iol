@@ -9,7 +9,41 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div><span class="plominoFieldClass">giuridica_opt</span></div><p><span class="plominoHidewhenClass">start:hw_no_giuridica</span></p><div class="row-fluid"><div class="span12"><span class="plominoFieldClass">giuridica_search</span></div></div><div class="row-fluid"><div class="span6"><span class="plominoFieldClass">giuridica_qualita</span></div></div><div class="row-fluid"><div class="span12"><span class="plominoFieldClass">giuridica_denominazione</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">giuridica_cciaa</span></div><div class="span3"><span class="plominoFieldClass">giuridica_cciaa_numero</span></div><div class="span3"><span class="plominoFieldClass">giuridica_piva</span></div><div class="span3"><span class="plominoFieldClass">giuridica_cf</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">giuridica_comune</span></div><div class="span2"><span class="plominoFieldClass">giuridica_provincia</span></div><div class="span2"><span class="plominoFieldClass">giuridica_cap</span></div><div class="span5"><span class="plominoFieldClass">giuridica_localita</span></div></div><div class="row-fluid"><div class="span10"><span class="plominoFieldClass">giuridica_indirizzo</span></div><div class="span2"><span class="plominoFieldClass">giuridica_civico</span></div></div><div class="row-fluid"><div class="span6"><span class="plominoFieldClass">giuridica_email</span></div><div class="span2"><span class="plominoFieldClass">giuridica_telefono</span></div><div class="span2"><span class="plominoFieldClass">giuridica_cellulare</span></div><div class="span2"><span class="plominoFieldClass">giuridica_fax</span></div></div><p><span class="plominoHidewhenClass">end:hw_no_giuridica</span></p>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div><span class="plominoFieldClass">giuridica_opt</span></div>
+<p><span class="plominoHidewhenClass">start:hw_no_giuridica</span></p>
+<div class="row-fluid">
+<div class="span12"><span class="plominoFieldClass">giuridica_search</span></div>
+</div>
+<div class="row-fluid">
+<div class="span6"><span class="plominoFieldClass">giuridica_qualita</span></div>
+</div>
+<div class="row-fluid">
+<div class="span12"><span class="plominoFieldClass">giuridica_denominazione</span></div>
+</div>
+<div class="row-fluid">
+<div class="span3"><span class="plominoFieldClass">giuridica_cciaa</span></div>
+<div class="span3"><span class="plominoFieldClass">giuridica_cciaa_numero</span></div>
+<div class="span3"><span class="plominoFieldClass">giuridica_piva</span></div>
+<div class="span3"><span class="plominoFieldClass">giuridica_cf</span></div>
+</div>
+<div class="row-fluid">
+<div class="span3"><span class="plominoFieldClass">giuridica_comune</span></div>
+<div class="span2"><span class="plominoFieldClass">giuridica_provincia</span></div>
+<div class="span2"><span class="plominoFieldClass">giuridica_cap</span></div>
+<div class="span5"><span class="plominoFieldClass">giuridica_localita</span></div>
+</div>
+<div class="row-fluid">
+<div class="span10"><span class="plominoFieldClass">giuridica_indirizzo</span></div>
+<div class="span2"><span class="plominoFieldClass">giuridica_civico</span></div>
+</div>
+<div class="row-fluid">
+<div class="span3"><span class="plominoFieldClass">giuridica_email</span></div>
+<div class="span3"><span class="plominoFieldClass">giuridica_pec</span></div>
+<div class="span2"><span class="plominoFieldClass">giuridica_telefono</span></div>
+<div class="span2"><span class="plominoFieldClass">giuridica_cellulare</span></div>
+<div class="span2"><span class="plominoFieldClass">giuridica_fax</span></div>
+</div>
+<p><span class="plominoHidewhenClass">end:hw_no_giuridica</span></p>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -392,6 +426,10 @@ except:
 <param>
 <value><struct>
 <member>
+<name>widget</name>
+<value><string>CHECKBOX</string></value>
+</member>
+<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -399,10 +437,6 @@ except:
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
-</member>
-<member>
-<name>widget</name>
-<value><string>CHECKBOX</string></value>
 </member>
 <member>
 <name>selectionlist</name>
@@ -466,7 +500,7 @@ except:
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[from gisweb.utils import isEmail, isEmpty
 
-value = context.getItem('fisica_email', '') or ''
+value = context.getItem('giuridica_email', '') or ''
 
 if not isEmpty(value) and not isEmail(value):
     msg = 'Spiacente "%s" non sembra essere un indirizzo e-mail valido.' % value
@@ -525,6 +559,32 @@ return '']]></ValidationFormula>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription"/>
               <field name="customAttributes">data-autocompleteform-options="{url:'fetch_data',placeholder:'Elenco:....',allowClear:true,minimumInputLength:0,id:function(e){return e.giuridica_cf;},formatResult: function(name){return' '+name.giuridica_denominazione+' '+' (pi: '+name.giuridica_piva+') '; },formatSelection:function(name){return name.giuridica_denominazione; },data:function(term,page){return{forms:'base_sub_giuridica',distinct:'giuridica_cf,giuridica_indirizzo',fisica_cf:$('#fisica_cf').val(),page:page,size:10}}}"</field>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="giuridica_pec" title="PEC" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">giuridica_pec</id>
+          <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[from gisweb.utils import isEmail, isEmpty
+
+value = context.getItem('giuridica_pec', '') or ''
+
+if not isEmpty(value) and not isEmail(value):
+    msg = 'Spiacente "%s" non sembra essere un indirizzo e-mail valido.' % value
+    return msg
+
+return '']]></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
             </extensionfields>
           </CustomData>
         </element>
