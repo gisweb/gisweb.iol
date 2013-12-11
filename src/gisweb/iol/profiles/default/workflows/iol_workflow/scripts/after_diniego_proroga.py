@@ -7,11 +7,15 @@
 ##parameters=state_change
 ##title=
 ##
-#Aggiornamento dello stato su plominoDocument
 doc = state_change.object
-db = doc.getParentDatabase()
 
+#Aggiornamento dello stato su plominoDocument
 doc.updateStatus()
 
-#INVIO MAIL DINIEGO PROROGA
-#state_change.object.inviaMail(tipo='rigetto')
+if script.run_script(doc, script.id) != False:
+
+    #### OTHER CODE HERE ####
+
+    script.run_script(doc, script.id, suffix='post')
+
+#### SCRIPT ENDS HERE ####

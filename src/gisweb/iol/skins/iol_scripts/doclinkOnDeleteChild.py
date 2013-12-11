@@ -13,9 +13,18 @@
 parentKey = script.doclinkCommons('parentKey')
 db = context.getParentDatabase()
 parentId = context.getItem(parentKey)
-ParentDocument = db.getDocument(parentId)
-ParentDocument.refresh()
-backUrl = ParentDocument.absolute_url()
+parentDocument = db.getDocument(parentId)
+
+targetvalue = context.doclinkCommons('doc_path')
+for fld in filter(lambda f: f.getFieldType()=='DOCLINK', parentDocument.getForm().getFormFields(includesubforms=True)):
+    fldname = fld.getId()
+    value = parentDocument.getItem(fldname, []) or []
+    if targetvalue in value:
+        value.pop(value.index(targetvalue))
+        parentDocument.setItem(fldname, value)
+
+backUrl = parentDocument.doclinkCommons('doc_path')
+
 if redirect:
     backUrl = '%s#%s' % (backUrl, redirect)
 context.REQUEST.set('returnurl', backUrl)

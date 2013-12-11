@@ -16,7 +16,7 @@ anchor: modalità per il redirect sulla pratica "genitore"
 # EVENTI DI REALIZZAZIONE COLLEGAMENTO UNO A MOLTI
 
 if kin_events == 'child':
-    context.event_onDeleteChild(anchor=anchor, suffix=suffix or context.naming('tipo_richiesta'))
+    context.event_onDeleteChild(anchor=anchor, suffix=suffix or context.naming('iol_tipo_richiesta'))
 elif kin_events == 'parent':
     context.event_onDeleteParent()
 

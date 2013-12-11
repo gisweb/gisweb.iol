@@ -47,11 +47,11 @@ filename = '.'.join(
             for s in filename.split('.')])
 
 #Url con parametri del servizio de lettura
-docurl = "%s?app=%s&id=%s&filename=%s&project=%s" %(urlRead,doc.getItem('tipo_app',''),doc.getId(),filename,proj)
+docurl = "%s?app=%s&id=%s&filename=%s&project=%s" %(urlRead,doc.getItem('iol_tipo_app',''),doc.getId(),filename,proj)
 
 #Parametri della chiamata al servizio di creazione
 query = dict(
-    app = context.REQUEST.get('test_app') or doc.getItem('tipo_app'),
+    app = context.REQUEST.get('test_app') or doc.getItem('iol_tipo_app'),
     model = model,
     group = grp,
     project = proj,

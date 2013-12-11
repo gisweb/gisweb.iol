@@ -13,7 +13,7 @@ Interroga il servizio e restituisce la lista dei modelli di stampa
 
 from Products.CMFPlomino.PlominoUtils import json_loads, open_url, urlencode
 
-app = context.naming('tipo_app')
+app = context.naming('iol_tipo_app')
 nullchoice = 'Manca il modello, scegliere un modello di stampa per abilitare la funzione|'
 outlist = [nullchoice]
 
@@ -27,7 +27,7 @@ def open_my_url(url, **args):
     return json_loads(open_url(uu))
 
 if 'value' in url_info:
-    outlist += open_my_url(url_info['value'], app=context.naming('tipo_app'), group=sub_path, project=proj)
+    outlist += open_my_url(url_info['value'], app=context.naming('iol_tipo_app'), group=sub_path, project=proj)
 
 if context.test_mode() and len(outlist)==1:
     outlist += ['test|test']

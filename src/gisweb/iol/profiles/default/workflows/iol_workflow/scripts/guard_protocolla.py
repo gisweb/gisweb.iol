@@ -7,19 +7,24 @@
 ##parameters=state_change
 ##title=
 ##
-from Products.CMFCore.utils import getToolByName
 
 doc = state_change.object
-db = doc.getParentDatabase()
 
-#Script personalizzato se esiste
-scriptName=script.id
+guard_response = script.run_script(doc, script.id)
 
-if scriptName in db.resources.keys():
-    return db.resources[scriptName](doc)
+if guard_response == None:
 
-if doc.wf_getInfoFor('review_state') == 'avvio':
-    return True
-else:
-    isIstruttore = doc.verificaRuolo('iol-reviewer') or doc.verificaRuolo('iol-manager')
-    return not doc.getItem('numero_protocollo','') and isIstruttore
+    #### OTHER CODE HERE ####
+
+    def getResponse():
+        if doc.wf_getInfoFor('review_state') == 'avvio':
+            return True
+        else:
+            isIstruttore = doc.verificaRuolo('iol-reviewer') or doc.verificaRuolo('iol-manager')
+            return not doc.getItem('numero_protocollo','') and isIstruttore
+
+    guard_response = getResponse()
+
+return guard_response
+
+#### SCRIPT ENDS HERE ####

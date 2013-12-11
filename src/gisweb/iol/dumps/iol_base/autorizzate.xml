@@ -2,7 +2,7 @@
   <design>
     <element id="autorizzate" title="Domande Autorizzate" type="PlominoView">
       <id type="Products.Archetypes.Field.StringField">autorizzate</id>
-      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.wf_getInfoFor('wf_autorizzata') and not plominoDocument.wf_getInfoFor('wf_richiesta_proroga') and plominoDocument.getItem('tipo_richiesta','') in ['rinnovo','base','duplicato']]]></SelectionFormula>
+      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.wf_getInfoFor('wf_autorizzata') and not plominoDocument.wf_getInfoFor('wf_richiesta_proroga') and plominoDocument.naming('richiesta') in ['rinnovo','base','duplicato']]]></SelectionFormula>
       <SortColumn type="Products.Archetypes.Field.StringField"/>
       <Categorized type="Products.Archetypes.Field.BooleanField">False</Categorized>
       <FormFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></FormFormula>

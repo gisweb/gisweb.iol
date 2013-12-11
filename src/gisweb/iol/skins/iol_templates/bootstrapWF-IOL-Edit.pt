@@ -4,8 +4,8 @@
         global db python: doc.getParentDatabase();
         global dburl python: doc.getParentDatabase().absolute_url();
         global myForm python: doc if not doc.isDocument() else doc.getForm();
-        global tipoApp python: doc.naming('tipo_app');
-        global tipoRichiesta python: doc.naming('tipo_richiesta');
+        global tipoApp python: doc.naming('iol_tipo_app');
+        global tipoRichiesta python: doc.naming('iol_tipo_richiesta');
         global wf_id python: 'iol_workflow';
         global myForm python:doc.getForm();" />
     
@@ -21,7 +21,7 @@
     </tal:newdoc>
     
     <tal:newdoc tal:condition="python: not doc.isNewDocument()">
-        <div tal:condition="python:doc.wf_getInfoFor('review_state')=='avvio' and doc.naming('tipo_app')!='pratica'"
+        <div tal:condition="python:doc.wf_getInfoFor('review_state')=='avvio' and doc.naming('iol_tipo_app')!='pratica'"
             class="alert alert-info">
             <!--tal:define="initial_state_id python: doc.wf_workflowInfo(wf_id=wf_id, args=['initial_state'])['initial_state'];
                 status_info python: doc.wf_getInfoForState('iol_workflow', initial_state_id, args=['description'])">

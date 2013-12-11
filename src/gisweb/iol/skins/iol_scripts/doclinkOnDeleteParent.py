@@ -16,12 +16,7 @@ db = context.getParentDatabase()
 idx = db.getIndex()
 request = {parentKey: context.getId()}
 result = idx.dbsearch(request)
-docToRemove = []
-for i in result:
-    if i.CASCADE:
-        docToRemove.append(i.id)
-    else:
-        i.getObject().removeItem(parentKey)
+docToRemove = map(lambda brain: brain.id, idx.dbsearch(request))
 db.deleteDocuments(ids=docToRemove, massive=True)
 try:
     db.refreshDB_async()
