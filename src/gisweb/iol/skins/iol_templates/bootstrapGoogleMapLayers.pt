@@ -11,12 +11,12 @@
     fieldname  options/fieldname;
 	params python:options['field'].getSettings('dynamictableparam');
     selection options/selection;"> 
-       <!-- VEDERE DI SPOSTARLO SUL FOM ALTRIMENTI COSI METTO UNA SOLA MAPPA -->                        
-     
-<script type='text/javascript' tal:content="structure string:jq(function(){jq.plominoMaps.google.layers=${params};});"></script>      
-<div id="swingbox" class="button" data-title="{title}">
+
+<script type='text/javascript' tal:content="structure string:jq(function(){jq.plominoMaps.google.layers=${params};});"></script>
+<div id="infoButton"></div>
+<div id="layerBox" class="button" data-title="{title}">
             <tal:block tal:define="current options/fieldvalue;
-                                currentaslist python:test(hasattr(current, 'append'), current, [current]);"
+            currentaslist python:test(hasattr(current, 'append'), current, [current]);"
             tal:repeat="v selection">
                 <tal:block tal:define="l python:v.split('|')">
                     <input class="plominoGoogleMapLayers" 

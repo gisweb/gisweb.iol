@@ -25,7 +25,7 @@
         type="text/javascript"
         charset="utf-8"
         tal:define="param python:field.getSettings().getParameters();
-                    request_items python:field.getSettings().request_items_aoData(request);"
+            request_items python:field.getSettings().request_items_aoData(request);"
             tal:content="structure string:
                 var ${fieldname}_datatable;
 
@@ -45,7 +45,7 @@
                             $$('#${fieldname}_datagrid > tbody > tr').click(function() {
                                 if(${fieldname}_datatable.fnGetData().length == 0) return;
                                 datagrid_deselect_rows(${fieldname}_datatable);
-
+                                var aData = ${fieldname}_datatable.fnGetData()[${fieldname}_datatable.fnGetPosition(this)]
                                 $$.each(overlays,function(index,overlay){
                                     if(overlay.geometryType == google.maps.drawing.OverlayType.MARKER){
                                         overlay.setDraggable(false);
@@ -65,10 +65,10 @@
                                 if(obj.geometryType == google.maps.drawing.OverlayType.MARKER){
                                     obj.setDraggable(editMode);
                                     obj.tmpIcon = obj.getIcon();
-                                    obj.setIcon('resources/icons/selezionato.png');
+                                    //obj.setIcon('resources/icons/selezionato.png');
                                     obj.map.setCenter(obj.getPosition());
                                     obj.map.setZoom(18);
-                                    obj.map.infowindow.setContent('todo:inserire info del cantiere...');
+                                    obj.map.infowindow.setContent(aData[1]);
                                     obj.map.infowindow.setPosition(obj.getPosition());  
                                     obj.map.infowindow.open(obj.map)
 
@@ -79,7 +79,7 @@
                                     obj.setOptions({'strokeColor':'#FFFF00'});
                                     var bounds = obj.getBounds();
                                     obj.map.fitBounds(bounds);
-                                    obj.map.infowindow.setContent('todo:inserire info dello scavo...');
+                                    obj.map.infowindow.setContent(aData[1]);
                                     obj.map.infowindow.setPosition(bounds.getCenter());  
                                     obj.map.infowindow.open(obj.map);
                                 }                                    
@@ -90,8 +90,10 @@
                         'fnCreatedRow': function( nRow, aData, iDataIndex ) {
 
                             var options = this.fnSettings().oInit;
-                            if(options.geomIndex == 'undefined') options.geomIndex = aData.length-1;
-                            if(options.typeIndex == 'undefined') options.typeIndex = aData.length-2;
+                            //if(options.geomIndex == 'undefined') 
+							options.geomIndex = aData.length-1;
+                            //if(options.typeIndex == 'undefined') 
+							options.typeIndex = aData.length-2;
 
                             if(newObject){ 
                                 newObject.saved = true;

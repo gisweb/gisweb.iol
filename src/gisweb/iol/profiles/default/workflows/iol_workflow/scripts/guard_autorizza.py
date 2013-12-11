@@ -7,17 +7,18 @@
 ##parameters=state_change
 ##title=
 ##
-from Products.CMFCore.utils import getToolByName
 
 doc = state_change.object
-db = doc.getParentDatabase()
 
-isRup = doc.verificaRuolo('iol-manager')
+guard_response = script.run_script(doc, script.id)
 
-#Script personalizzato se esiste
-scriptName=script.id
+if guard_response == None:
 
-if scriptName in db.resources.keys():
-    return db.resources[scriptName](doc)
+    #### OTHER CODE HERE ####
 
-return doc.getItem('documenti_autorizzazione') and isRup
+    isRup = doc.verificaRuolo('iol-manager')
+    guard_response = doc.getItem('documenti_autorizzazione') and isRup
+
+return guard_response
+
+#### SCRIPT ENDS HERE ####

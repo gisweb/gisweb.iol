@@ -7,25 +7,31 @@
 ##parameters=state_change
 ##title=
 ##
-doc = state_change.object
 
+doc = state_change.object
 db = doc.getParentDatabase()
 
-#Script personalizzato se esiste
-scriptName=script.id
+guard_response = script.run_script(doc, script.id)
 
-if scriptName in db.resources.keys():
-    return db.resources[scriptName](doc)
+if guard_response == None:
 
-test = doc.test_mode()
+    #### OTHER CODE HERE ####
 
-# Se rinnovo, proroga o simili la pratica genitore deve essere stata approvata
+    def getResponse():
+        test = doc.test_mode()
 
-ParentDocument_id = doc.getItem('parentDocument')
-ParentDocument = db.getDocument(ParentDocument_id)
+        # Se rinnovo, proroga o simili la pratica genitore deve essere stata approvata
+        ParentDocument_id = doc.getItem('parentDocument')
+        ParentDocument = db.getDocument(ParentDocument_id)
 
-if not test:
-    if ParentDocument:
-        return ParentDocument.wf_getInfoFor('wf_autorizzata')
+        if not test:
+            if ParentDocument:
+                return ParentDocument.wf_getInfoFor('wf_autorizzata')
 
-return True
+        return True
+
+    guard_response = getResponse()
+
+return guard_response
+
+#### SCRIPT ENDS HERE ####

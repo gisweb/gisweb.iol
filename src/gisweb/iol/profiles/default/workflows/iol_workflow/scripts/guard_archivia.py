@@ -7,20 +7,18 @@
 ##parameters=state_change
 ##title=
 ##
+
 doc = state_change.object
-from Products.CMFPlomino.PlominoUtils import Now
-db = doc.getParentDatabase()
 
-#Script personalizzato se esiste
-scriptName=script.id
+guard_response = script.run_script(doc, script.id)
 
-if scriptName in db.resources.keys():
-    return db.resources[scriptName](doc)
+if guard_response == None:
+
+    #### OTHER CODE HERE ####
+
+    guard_response = doc.getItem('autorizzata_al') < DateTime()
 
 
-# disponibile dopo la scadenza della richiesta
-return doc.getItem('autorizzata_al') < Now()
+return guard_response
 
-#isIstruttore = doc.verificaRuolo('istruttore')
-
-#return isIstruttore and isExpired
+#### SCRIPT ENDS HERE ####

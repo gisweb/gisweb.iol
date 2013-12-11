@@ -14,7 +14,7 @@
         
 <label class="checkbox">
   <input type="checkbox"
-       tal:attributes="value id;
+       tal:attributes="value v;
                        name id;
                        disabled python: None if not doc.isDocument() or doc.isEditMode() else 'disabled';
                        checked python: None if not doc.isDocument() else 'checked';" >

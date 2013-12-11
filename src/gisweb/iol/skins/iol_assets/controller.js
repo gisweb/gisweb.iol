@@ -1,10 +1,10 @@
 $.plominoFormChanged = false;
 function showLoading (){
 
-        vScrollPosition = jQuery(document).scrollTop()+150;
+        vScrollPosition = $(document).scrollTop()+150;
         hPosition = parseInt(jq(document).width()/2);
 
-        jQuery("#info-loading").css({
+        $("#info-loading").css({
             top: (vScrollPosition),
             left: (hPosition)
         }).fadeIn(200);  
@@ -13,13 +13,13 @@ function showLoading (){
 
     	function refreshHidewhen() {
         	var onsuccess = function(data, textStatus, xhr) {
-                jQuery("#info-loading").fadeOut(1000);
+                $("#info-loading").fadeOut(1000);
             	for (var hw in data)
-                	jQuery('.hidewhen-' + hw).css('display', data[hw]?'none':'block');
+                	$('.hidewhen-' + hw).css('display', data[hw]?'none':'block');
         	}
  
                 showLoading ()
-        	jQuery.post('computehidewhens', jQuery('#plomino_form').serialize(), onsuccess, 'json');
+        	$.post('computehidewhens', $('#plomino_form').serialize(), onsuccess, 'json');
     	}
 
 
@@ -27,7 +27,7 @@ function showLoading (){
 
 
 //TEST CONTROLLER DI PAGINA
-jQuery(document).ready(function () {
+$(document).ready(function () {
      
 
     $(".field").bind('change',function(){$.plominoFormChanged=true})
@@ -36,13 +36,13 @@ jQuery(document).ready(function () {
 	 $("select.combobox").select2();
 
     //HIDEWHEN PORTATI QUI
-    jQuery("[data-dhw='dynamicHidewhen']").change(refreshHidewhen);
+    $("[data-dhw='dynamicHidewhen']").change(refreshHidewhen);
 
-    jQuery('.wf-actions').bind('click',function(){showLoading();});
+    $('.wf-actions').bind('click',function(){showLoading();});
 
    //GENERAZIONE DEL MENU VERTICALE
-    if(jQuery('#v-menu-div')){
-        addVerticalMenu(jQuery('#v-menu-div'));
+    if($('#v-menu-div')){
+        addVerticalMenu($('#v-menu-div'));
 
 
    }
@@ -52,10 +52,10 @@ jQuery(document).ready(function () {
        return false;
    })
 
-   jQuery('input.decimal').numeric();
-   jQuery('input.integer').numeric(false, function() { alert("Solo valori interi"); this.value = ""; this.focus(); });
+   $('input.decimal').numeric();
+   $('input.integer').numeric(false, function() { alert("Solo valori interi"); this.value = ""; this.focus(); });
 
-    jQuery('input.data-uppercase').keyup(function(){
+    $('input.data-uppercase').keyup(function(){
          this.value = this.value.toUpperCase();
     });
 
@@ -75,50 +75,57 @@ if (isIstruttore) {
 
 //VERIFICA INVIO SE NESSUN CAMPO MANDATORY VUOTO FACCIO COMPARIRE INVIO DOMANDA !!!
 
-if(jQuery("div.data-mandatory:visible").length == 0){
+if($("div.data-mandatory:visible").length == 0){
 
-    jQuery('#section-message-compilazione').addClass('hidden');
-    jQuery('#section-invio-domanda').removeClass('hidden');
+    $('#section-message-compilazione').addClass('hidden');
+    $('#section-invio-domanda').removeClass('hidden');
+
 
     //VESTIZIONE DEL PULSANTE DI INVIO DOMANDA
-    jQuery('#btn_invia_domanda').attr('value','Invia Domanda');
-    jQuery('#btn_invia_domanda').addClass('btn');
-    jQuery('#btn_invia_domanda').attr('disabled','disabled');
-    jQuery('input.accettazione').bind('change',function(){
+    $('#btn_invia_domanda').attr('value','Invia Domanda');
+    $('#btn_invia_domanda').addClass('btn');
+    $('#btn_invia_domanda').attr('disabled','disabled');
+
+    $('input.accettazione').bind('change',function(){
     var send = true;
-    jQuery.each(jQuery('input.accettazione'),function(k,v){
-        send = send && jQuery(this).is(':checked');
+    $.each($('input.accettazione'),function(k,v){
+
+
+
+
+        send = send && $(this).is(':checked');
     });
 
     if (send){
-        jQuery('#btn_invia_domanda').removeAttr('disabled');
+        $('#btn_invia_domanda').removeAttr('disabled');
+
     }
     else
-        jQuery('#btn_invia_domanda').attr('disabled','disabled');
+        $('#btn_invia_domanda').attr('disabled','disabled');
     });
  }
 
 
 
    //GENERAZIONE DATATABLES
-    jQuery("table[data-plugin='datatable']").each(function(){
+    $("table[data-plugin='datatable']").each(function(){
  
       //alert(this.name);
 
     });
 
-    jQuery('.icon-info-sign').popover();
+    $('.icon-info-sign').popover();
 
     
 });
 
 function winPopup(id,marker,options){
     var serviceURL = options.baseURL + '/application/services/renderInfoFormMap';
-    jQuery.ajax({
-                url: serviceURL + '?' + jQuery.param(options.winpopup.params),
+    $.ajax({
+                url: serviceURL + '?' + $.param(options.winpopup.params),
                 success: function (data) {
-                    jQuery.plominoMaps.infowindow.setContent(data);
-                    jQuery.plominoMaps.infowindow.open(id, marker)
+                    $.plominoMaps.infowindow.setContent(data);
+                    $.plominoMaps.infowindow.open(id, marker)
                 }
     })
 
@@ -133,9 +140,9 @@ function addVerticalMenu(element){
         html+='<div class="affix">';
 	html+='<ul id="v-menu" class="nav nav-list bs-docs-sidenav">';
     
-    jQuery('.v-content-title').each(function(k,v){
-		var id = jQuery(v).closest('p').attr('id');
-		var title = jQuery(v).html();
+    $('.v-content-title').each(function(k,v){
+		var id = $(v).closest('p').attr('id');
+		var title = $(v).html();
 		var li = '<li><a href="' + window.location + '#' + id + '">' + title + '</a></li>';
 		html+=li;
 	});
@@ -153,37 +160,37 @@ function addVerticalMenu(element){
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 function datagrid_show_form_soloperprov(field_id, formurl, onsubmit) {
 
-    jQuery('#loader').addClass("loading"); 
+    $('#loader').addClass("loading"); 
 
     var field_selector = "#" + field_id + "_myeditform";
-    jQuery(field_selector).html(
+    $(field_selector).html(
         '<iframe style="width:100%;height:100%"></iframe>'
     );
-    var iframe = jQuery("#" + field_id + "_myeditform iframe");
+    var iframe = $("#" + field_id + "_myeditform iframe");
 
-    //jQuery(field_selector).append('<div id="loading-image"><img src="http://iol.vmserver/portal_skins/custom/loading.gif" alt="Loading..." /></div>');return;
+    //$(field_selector).append('<div id="loading-image"><img src="http://iol.vmserver/portal_skins/custom/loading.gif" alt="Loading..." /></div>');return;
 
     iframe.attr('src', formurl);
     iframe.load(function() {
         var popup;
         var body = iframe[0].contentDocument.body;
         // Edit-form close button
-		jQuery("input[name=plomino_close]", body).removeAttr('onclick').click(function() {
+		$("input[name=plomino_close]", body).removeAttr('onclick').click(function() {
 			//popup.dialog('close');
                          alert('chiudi a mano che non ho capito come si fa');popup.hide();
 		});
 		// Edit form submission
-		jQuery('form', body).submit(function(){
+		$('form', body).submit(function(){
 			var message = "";
 
-			jQuery.ajax({url: this.action+"?"+jQuery(this).serialize(),
+			$.ajax({url: this.action+"?"+$(this).serialize(),
 				async: false,
-				//context: jQuery('#plomino_form'),
+				//context: $('#plomino_form'),
 				error: function() {
 					alert("Error while validating.");
 				},
 				success: function(data) {
-					message = jQuery(data).filter('#plomino_child_errors').html();
+					message = $(data).filter('#plomino_child_errors').html();
 					return false;
 				}
 			});
@@ -191,16 +198,16 @@ function datagrid_show_form_soloperprov(field_id, formurl, onsubmit) {
 			if(!(message === null || message === '')) {
 				alert(message);
                 // Avoid Plone message "You already submitted this form", since we didn't
-                jQuery(this).find('input[type="submit"].submitting').removeClass('submitting');
+                $(this).find('input[type="submit"].submitting').removeClass('submitting');
 				return false;
 			}
-			jQuery.get(this.action, jQuery(this).serialize(), function(data, textStatus, XMLHttpRequest){
+			$.get(this.action, $(this).serialize(), function(data, textStatus, XMLHttpRequest){
 				// Call back function with new row
 				var rowdata = [];
-				jQuery('span.plominochildfield', data).each(function(){
+				$('span.plominochildfield', data).each(function(){
 					rowdata.push(this.innerHTML);
 				});
-				var raw = jQuery.evalJSON(jQuery('#raw_values', data).text());
+				var raw = $.evalJSON($('#raw_values', data).text());
 				onsubmit(rowdata, raw);
 			});
 			//popup.dialog('close');
@@ -208,18 +215,17 @@ function datagrid_show_form_soloperprov(field_id, formurl, onsubmit) {
 			return false;
 		});
 		// Prepare and display the dialog
-		jQuery('.documentActions', body).remove();
-		//popup.dialog("option", "title", jQuery('.documentFirstHeading', body).remove().text());
+		$('.documentActions', body).remove();
+		//popup.dialog("option", "title", $('.documentFirstHeading', body).remove().text());
 		//popup.dialog('open');
                 field_selector = "#" + field_id + "_lightbox";
-                popup =  jQuery(field_selector).lightbox();
-                //jQuery('#loading-image').remove();
-                jQuery('#loader').removeClass("loading"); 
+                popup =  $(field_selector).lightbox();
+                //$('#loading-image').remove();
+                $('#loader').removeClass("loading"); 
 
 	});
 
 
 }
 
-jQuery.datepicker.setDefaults(jQuery.datepicker.regional['it']);
-  
+$.datepicker.setDefaults($.datepicker.regional['it']);

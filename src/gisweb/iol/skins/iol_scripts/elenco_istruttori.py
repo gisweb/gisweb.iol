@@ -12,13 +12,13 @@
 def elenco_istruttori(doc):
     """
     Restituisce l'elenco degli istruttori che possono essere assegnati alla pratica.
-    Ovvero gli utenti appartenenti al gruppo Plone 'istruttori-<tipo_app>'
+    Ovvero gli utenti appartenenti al gruppo Plone 'istruttori-<iol_tipo_app>'
     """
 
-    tipo_app = context.naming('tipo_app')
+    iol_tipo_app = context.naming('iol_tipo_app')
 
-    # se tipo_app è stringa vuota elenco tutti gli istruttori
-    group_name = 'istruttori-%s' % tipo_app
+    # se iol_tipo_app è stringa vuota elenco tutti gli istruttori
+    group_name = 'istruttori-%s' % iol_tipo_app
     groups_l = [i for i in doc.getParentDatabase().getPortalGroups() if i.getId().startswith(group_name)]
 
     # per ogni gruppo è la lista dei propri membri

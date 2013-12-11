@@ -8,18 +8,18 @@
 ##title=
 ##
 doc = state_change.object
-db = doc.getParentDatabase()
 
-
-# Aggiornamento dello stato su plominoDocument
+#Aggiornamento dello stato su plominoDocument
 doc.updateStatus()
 
-#Script personalizzato se esiste
-scriptName=script.id
+if script.run_script(doc, script.id) != False:
 
-if scriptName in db.resources.keys():
-    db.resources[scriptName](doc)
+    #### OTHER CODE HERE ####
+    
+    # 1. Invio della mail di avviso
+    if doc.naming('richiesta') != 'integrazione':
+        doc.sendThisMail('assegna')
 
-# Invio della mail di avviso
-if doc.getItem('tipo_richiesta','')!='integrazione':
-    doc.sendThisMail('assegna')
+    script.run_script(doc, script.id, suffix='post')
+
+#### SCRIPT ENDS HERE ####
