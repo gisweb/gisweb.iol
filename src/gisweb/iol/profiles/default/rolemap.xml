@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<rolemap>
+    <roles>
+        <role name="iol-manager"/>
+        <role name="iol-reviewer"/>
+        <role name="iol-test"/>
+    </roles>
+</rolemap>
