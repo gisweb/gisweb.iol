@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
     <element id="tutte-istanze" title="Tutte le istanze" type="PlominoView">
       <id type="Products.Archetypes.Field.StringField">tutte-istanze</id>

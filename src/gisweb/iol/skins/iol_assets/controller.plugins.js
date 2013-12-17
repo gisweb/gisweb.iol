@@ -103,10 +103,10 @@ $("input[data-plugin='elencocomuni']").each(function(){
 			})
 			query.callback({results: results});
 		},
-                initSelection : function (element, callback) {
+        initSelection : function (element, callback) {
                      var data = ["",element.val(),"","",""];
                      callback(data);
-               }
+        }
 	}
         $.extend(options,baseOptions);
         $(this).select2(options).on("change", function(e) { 
@@ -178,8 +178,6 @@ $("input[data-plugin='elencocomuni']").each(function(){
         eval("var options = "  + $(this).data('datepickerOptions'));
         $(this).datepicker(options || { });
         $(this).datepicker( $.datepicker.regional[ "it" ] );
-
-
 
         $('#btn_' + this.id).click(function(){
             $(this).datepicker('show');

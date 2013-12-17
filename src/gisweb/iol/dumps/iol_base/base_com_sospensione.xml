@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
     <element id="base_com_sospensione" title="Comunicazione Sospensione Istanza" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_com_sospensione</id>

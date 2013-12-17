@@ -209,9 +209,8 @@ $(function(){
         currentOverlay.editMode = true;
         currentOverlay.fieldId = currentOverlay.fieldId || $.plominoMaps.google.map.getDiv().id;
         $.plominoMaps.registerObject(currentOverlay);
-    }
-
-
+    };
+	
     function onMouseMove(e){
          var position = 'Long: ' + e.latLng.lng().toFixed(6) + ' Lat: ' + e.latLng.lat().toFixed(6);
          if($.plominoMaps.google.map.initSettings.coordsrid && Proj4js.defs['EPSG:'+$.plominoMaps.google.map.initSettings.coordsrid]){
@@ -221,38 +220,30 @@ $(function(){
               Proj4js.transform(source, dest, p); 
               position = position + ' - X: ' + p.x.toFixed(2) + ' Y: ' + p.y.toFixed(2);
          }
-
-         $("#"+$.plominoMaps.google.map.getDiv().id+"_messageinfo").text(position) ;
-
-
-/************************************/
-
-//Dato un oggetto lo trasforma in marker
-  $.plominoMaps.updateMarkerPosition = function(options,position){
-    //var fieldId = (options.geometryField && options.geometryField.attr('id'))||options.fieldId;
-    var fieldId = options.fieldId;
-    var marker = $.plominoMaps.google.markers[fieldId];
-    if(typeof(marker)=="undefined"){
-        marker = new google.maps.Marker(options);
-        marker.setMap($.plominoMaps.google.map);
-        marker.setDraggable(options.editMode);
-        marker.geometryType = google.maps.drawing.OverlayType.MARKER;
-        google.maps.event.addListener(marker, 'dragend', function() {$.plominoMaps.updateGeometryField(marker);marker.isProg && $.plominoMaps.updateProgField(marker);});
-        google.maps.event.addListener(marker, 'click', function() {$.plominoMaps.zoomOnStreetView (marker)});
-        $.plominoMaps.google.markers[fieldId] = marker;
-    }
-    marker.setPosition(position);
-    if(typeof(marker.panoMarker)!='undefined') marker.panoMarker.setPosition(position)
-    $.plominoMaps.updateGeometryField(marker);
-    $.plominoMaps.google.map.setCenter(position);
-    $.plominoMaps.google.map.setZoom(Math.min(options.zoom,18)||Math.min($.plominoMaps.google.map.getZoom(),18));
-    return marker;
-}
-
-
-e
-    }
-
+         $("#"+$.plominoMaps.google.map.getDiv().id+"_messageinfo").text(position);
+	};
+	
+    //Dato un oggetto lo trasforma in marker
+	$.plominoMaps.updateMarkerPosition = function(options,position){
+		//var fieldId = (options.geometryField && options.geometryField.attr('id'))||options.fieldId;
+		var fieldId = options.fieldId;
+		var marker = $.plominoMaps.google.markers[fieldId];
+		if(typeof(marker)=="undefined"){
+			marker = new google.maps.Marker(options);
+			marker.setMap($.plominoMaps.google.map);
+			marker.setDraggable(options.editMode);
+			marker.geometryType = google.maps.drawing.OverlayType.MARKER;
+			google.maps.event.addListener(marker, 'dragend', function() {$.plominoMaps.updateGeometryField(marker);marker.isProg && $.plominoMaps.updateProgField(marker);});
+			google.maps.event.addListener(marker, 'click', function() {$.plominoMaps.zoomOnStreetView (marker)});
+			$.plominoMaps.google.markers[fieldId] = marker;
+		}
+		marker.setPosition(position);
+		if(typeof(marker.panoMarker)!='undefined') marker.panoMarker.setPosition(position)
+		$.plominoMaps.updateGeometryField(marker);
+		$.plominoMaps.google.map.setCenter(position);
+		$.plominoMaps.google.map.setZoom(Math.min(options.zoom,18)||Math.min($.plominoMaps.google.map.getZoom(),18));
+		return marker;
+	};
 
 });
 
@@ -393,8 +384,6 @@ if(!sCoord) return '';
 }
 
 
-
-
 //AGGIORNA LE PROGRESSIVE (????????)
 $.plominoMaps.updateProgField = function(overlay){
     if($.plominoMaps.actions["snapto_strada"]) $.plominoMaps.actions["snapto_strada"](overlay)
@@ -476,14 +465,6 @@ function switchtoStreetView (position){
     });
 
 }
-
-
-
-
-
-
-
-
 
 
 $.plominoMaps.updateGeometryField = function(marker){
@@ -641,32 +622,6 @@ $.plominoMaps.google.updateMap = function (dataTable){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $.plominoMaps.google.addMarker = function(options){
 
     if(options.pos){
@@ -732,9 +687,6 @@ $.plominoMaps.google.removeMarker = function(id){
   $.plominoMaps.google.points.splice(id,1);
 }
 
-
-
-
 $.plominoMaps.google.addEncodedGeometry = function(options){
 
     //console.log(options)
@@ -766,12 +718,6 @@ $.plominoMaps.getElement = function(list,idx){
        return list[idx]
    return false
 }
-
-
-
-
-
-
 
 $.plominoMaps.google.getOverlay =  function(id){
   var el=false;
@@ -947,10 +893,6 @@ $.ajax({
 }
 
 
-
-
-         
-
 function addlayer(id,options){
     var map=$.plominoMaps.google.map;
               map.overlayMapTypes.setAt(2, new google.maps.ImageMapType({
@@ -1056,12 +998,12 @@ $.plominoMaps.actions["geocode_address"] = function (e){
 	var address='';
         var txt;
 	$.each(options.fieldlist, function(index, fieldId) { 
-             if($('#' + fieldId).is('select')) 
-                 txt = $("#" + fieldId +" option:selected").text();
+             if($("[name='"+fieldId+"']").is('select')) 
+                 txt = $("[name='"+fieldId+"'] option:selected").text();
 
-             else if($('#' + fieldId).is('input')) 
-                 txt = $('#' + fieldId).val();
-             else if($('#' + fieldId).length==0)
+             else if($("[name='"+fieldId+"']").is('input')) 
+                 txt = $("[name='"+fieldId+"']").val();
+             else if($("[name='"+fieldId+"']").length==0)
                  txt = fieldId;
              if(!txt) alert ('Campo ' + fieldId+ ' vuoto')
 	     address = address + txt + ', ';
@@ -1078,7 +1020,29 @@ $.plominoMaps.actions["geocode_address"] = function (e){
                 }
 	});
 }
+ 
+
   
+$.plominoMaps.actions["geocode_civico"] = function (e){
+        var options = e.data;
+        var dataParams = getValuesForFields(options.params)
+
+	$.ajax({
+                'url':'resources/xSuggest',
+		'type':'POST',
+		'data':dataParams,
+		'dataType':'JSON',
+		'success':function(data, textStatus, jqXHR){
+                    if(data.success){
+                        var position = new google.maps.LatLng(data.lat,data.lng)
+                        $.plominoMaps.updateMarkerPosition(options,position);
+		    }		 
+                    else
+                        alert('Il civico inserito non risulta presente in archivio')
+                }
+	});
+} 
+
 $.plominoMaps.actions["geocode_point"] = function (e){
 
          if(!drawingManager) return;
@@ -1097,7 +1061,7 @@ $.plominoMaps.actions["geocode_catasto"] = function (e){
         var options = e.data;
         var dataParams = getValuesForFields(options.params)
 	$.ajax({
-                'url':'services/xSuggest',
+                'url':'resources/xSuggest',
 		'type':'POST',
 		'data':dataParams,
 		'dataType':'JSON',

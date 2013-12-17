@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
     <element id="base_sub_pulsantiera" title="pulsantiera" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_pulsantiera</id>
