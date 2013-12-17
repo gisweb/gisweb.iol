@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
     <element id="search_cruscotto_info" title="Ricerca Base" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">search_cruscotto_info</id>
@@ -37,19 +37,6 @@
 <param>
 <value><struct>
 <member>
-<name>widget</name>
-<value><string>CHECKBOX</string></value>
-</member>
-<member>
-<name>dynamictableparam</name>
-<value><string>'bPaginate': true,
-'bLengthChange': true,
-'bFilter': true,
-'bSort': true,
-'bInfo': true,
-'bAutoWidth': false</string></value>
-</member>
-<member>
 <name>selectionlistformula</name>
 <value><string>return ['Nuovo documento in compilazione|avvio','Assegnata in fase di istruttoria|assegnata', 'In attesa di autorizzazione|istruttoria_ok','Autorizzazione protocollata|autorizzata','Sospesa|sospesa','Preavviso di Rigetto|pre_rigetto','Archiviata|archiviata','Rigettata|rigettata']
 
@@ -66,6 +53,19 @@ else:
 return out
 
 #return context.methods.statesList()</string></value>
+</member>
+<member>
+<name>dynamictableparam</name>
+<value><string>'bPaginate': true,
+'bLengthChange': true,
+'bFilter': true,
+'bSort': true,
+'bInfo': true,
+'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>CHECKBOX</string></value>
 </member>
 </struct></value>
 </param>
@@ -98,8 +98,8 @@ return out
 <param>
 <value><struct>
 <member>
-<name>widget</name>
-<value><string>CHECKBOX</string></value>
+<name>selectionlistformula</name>
+<value><string>return ['Base|base','Rinnovo|rinnovo','Duplicato|duplicato']       </string></value>
 </member>
 <member>
 <name>dynamictableparam</name>
@@ -111,8 +111,8 @@ return out
 'bAutoWidth': false</string></value>
 </member>
 <member>
-<name>selectionlistformula</name>
-<value><string>return ['Base|base','Rinnovo|rinnovo','Duplicato|duplicato']       </string></value>
+<name>widget</name>
+<value><string>CHECKBOX</string></value>
 </member>
 </struct></value>
 </param>

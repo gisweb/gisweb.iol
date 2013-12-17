@@ -1,4 +1,4 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
     <element id="base_sub_fisica_recapiti" title="base_sub_fisica_recapiti" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_fisica_recapiti</id>
@@ -9,13 +9,7 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid">
-<div class="span3"><span class="plominoFieldClass">fisica_email</span></div>
-<div class="span3"><span class="plominoFieldClass">fisica_pec</span></div>
-<div class="span2"><span class="plominoFieldClass">fisica_telefono</span></div>
-<div class="span2"><span class="plominoFieldClass">fisica_cellulare</span></div>
-<div class="span2"><span class="plominoFieldClass">fisica_fax</span></div>
-</div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="row-fluid"><div class="span3"><span class="plominoFieldClass">fisica_email</span></div><div class="span3"><span class="plominoFieldClass">fisica_pec</span></div><div class="span2"><span class="plominoFieldClass">fisica_telefono</span></div><div class="span2"><span class="plominoFieldClass">fisica_cellulare</span></div><div class="span2"><span class="plominoFieldClass">fisica_fax</span></div></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>

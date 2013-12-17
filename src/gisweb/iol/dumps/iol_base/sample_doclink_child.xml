@@ -1,7 +1,7 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
-    <element id="frm_doclink_child_sample" title="doclink child sample" type="PlominoForm">
-      <id type="Products.Archetypes.Field.StringField">frm_doclink_child_sample</id>
+    <element id="sample_doclink_child" title="doclink child sample" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">sample_doclink_child</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.doclinkOnCreateChild()]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
       <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>

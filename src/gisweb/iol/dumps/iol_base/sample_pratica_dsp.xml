@@ -1,7 +1,7 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
-    <element id="base_pratica_dsp" title="Form di visualizzazione delle informazione della pratica" type="PlominoForm">
-      <id type="Products.Archetypes.Field.StringField">base_pratica_dsp</id>
+    <element id="sample_pratica_dsp" title="Form di visualizzazione delle informazione della pratica" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">sample_pratica_dsp</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
       <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
@@ -9,8 +9,33 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="alert"><h2>Autorizzazione Precedente</h2><div class="row-fluid"><div class="span12"><span class="plominoFieldClass">info_pratica_opt</span></div><div class="span12"><span class="plominoHidewhenClass">start:hw_no_pratica_dsp</span></div></div><p> </p><div class="row-fluid"><div class="span4"><span class="plominoFieldClass">numero_pratica</span></div></div><div class="row-fluid"><div class="span4"><span class="plominoFieldClass">numero_protocollo</span></div><div class="span4"><span class="plominoFieldClass">data_protocollo</span></div></div><div class="row-fluid"><div class="span4"><span class="plominoFieldClass">numero_autorizzazione</span></div><div class="span4"><span class="plominoFieldClass">data_autorizzazione</span></div><div class="span4"><span class="plominoFieldClass">numero_protocollo_autorizzazione</span></div></div><div class="row-fluid"><div class="span4"><span class="plominoFieldClass">documenti_autorizzazione</
-span></div></div><p> </p><div class="row-fluid"><div class="span12"><span class="plominoHidewhenClass">end:hw_no_pratica_dsp</span></div></div></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="alert">
+<h2>Informazioni sulla pratica</h2>
+<div class="row-fluid">
+<div class="span12"><span class="plominoFieldClass">info_pratica_opt</span></div>
+<div class="span12"><span class="plominoHidewhenClass">start:hw_no_pratica_dsp</span></div>
+</div>
+<p> </p>
+<div class="row-fluid">
+<div class="span4"><span class="plominoFieldClass">numero_pratica</span></div>
+</div>
+<div class="row-fluid">
+<div class="span4"><span class="plominoFieldClass">numero_protocollo</span></div>
+<div class="span4"><span class="plominoFieldClass">data_protocollo</span></div>
+</div>
+<div class="row-fluid">
+<div class="span4"><span class="plominoFieldClass">numero_autorizzazione</span></div>
+<div class="span4"><span class="plominoFieldClass">data_autorizzazione</span></div>
+<div class="span4"><span class="plominoFieldClass">numero_protocollo_autorizzazione</span></div>
+</div>
+<div class="row-fluid">
+<div class="span4"><span class="plominoFieldClass">documenti_autorizzazione</span></div>
+</div>
+<p> </p>
+<div class="row-fluid">
+<div class="span12"><span class="plominoHidewhenClass">end:hw_no_pratica_dsp</span></div>
+</div>
+</div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -153,12 +178,12 @@ return default]]></Formula>
 <param>
 <value><struct>
 <member>
-<name>format</name>
-<value><string>%d/%m/%Y</string></value>
-</member>
-<member>
 <name>startingyear</name>
 <value><string>1950</string></value>
+</member>
+<member>
+<name>format</name>
+<value><string>%d/%m/%Y</string></value>
 </member>
 </struct></value>
 </param>
@@ -214,12 +239,12 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
-<name>format</name>
-<value><string>%d/%m/%Y</string></value>
-</member>
-<member>
 <name>startingyear</name>
 <value><string>1950</string></value>
+</member>
+<member>
+<name>format</name>
+<value><string>%d/%m/%Y</string></value>
 </member>
 </struct></value>
 </param>
@@ -320,10 +345,6 @@ return '']]></ValidationFormula>
 <param>
 <value><struct>
 <member>
-<name>widget</name>
-<value><string>CHECKBOX</string></value>
-</member>
-<member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
 'bLengthChange': true,
@@ -331,6 +352,10 @@ return '']]></ValidationFormula>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>CHECKBOX</string></value>
 </member>
 <member>
 <name>selectionlist</name>

@@ -1,7 +1,7 @@
-<plominodatabase id="iol_base">
+<plominodatabase id="iol-base">
   <design>
-    <element id="frm_doclink_sample" title="doclink sample" type="PlominoForm">
-      <id type="Products.Archetypes.Field.StringField">frm_doclink_sample</id>
+    <element id="sample_doclink" title="doclink sample" type="PlominoForm">
+      <id type="Products.Archetypes.Field.StringField">sample_doclink</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
       <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
       <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
@@ -15,7 +15,7 @@
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
       <HideDefaultActions type="Products.Archetypes.Field.BooleanField">True</HideDefaultActions>
-      <HideInMenu type="Products.Archetypes.Field.BooleanField">False</HideInMenu>
+      <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
       <isSearchForm type="Products.Archetypes.Field.BooleanField">False</isSearchForm>
       <isPage type="Products.Archetypes.Field.BooleanField">False</isPage>
       <SearchView type="Products.Archetypes.Field.StringField"/>
@@ -38,8 +38,11 @@
 <param>
 <value><struct>
 <member>
-<name>widget</name>
-<value><string>DYNAMICTABLE</string></value>
+<name>documentslistformula</name>
+<value><string>colnames=['child_field1','child_field2','child_field3','child_field4']
+fieldname = "child_documents"
+return context.doclinkFieldSearchFormula(fieldname=fieldname, colnames=colnames)
+</string></value>
 </member>
 <member>
 <name>dynamictableparam</name>
@@ -50,7 +53,7 @@
     { "sTitle": "Field 3"},
     { "sTitle": "Field 4"}
 ],
-"editForm":"frm_doclink_child_sample",
+"editForm":"sample_doclink_child",
 "titleIndex":1,
 "iconIndex":5,
 "geomIndex":7,
@@ -67,11 +70,8 @@
 </string></value>
 </member>
 <member>
-<name>documentslistformula</name>
-<value><string>colnames=['child_field1','child_field2','child_field3','child_field4']
-fieldname = "child_documents"
-return context.doclinkFieldSearchFormula(fieldname=fieldname, colnames=colnames)
-</string></value>
+<name>widget</name>
+<value><string>DYNAMICTABLE</string></value>
 </member>
 </struct></value>
 </param>
