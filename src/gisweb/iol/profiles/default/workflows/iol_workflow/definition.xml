@@ -1,401 +1,532 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <dc-workflow workflow_id="iol_workflow" title="Istanze OnLine Workflow" description="" state_variable="review_state" initial_state="avvio" manager_bypass="False">
-    <permission>gisweb.iol: Read iol documents</permission>
-    <permission>gisweb.iol: Edit iol documents</permission>
-    <permission>gisweb.iol: Delete iol documents</permission>
-    <state state_id="archiviata" title="Archiviata">
-        <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Read iol documents" acquired="True">
-            <permission-role>Manager</permission-role>
-            <permission-role>Owner</permission-role>
-        </permission-map>
-    </state>
-    <state state_id="assegnata" title="Assegnata in fase di istruttoria">
-        <exit-transition transition_id="istruttoria_completata" />
-        <exit-transition transition_id="preavviso_rigetto" />
-        <exit-transition transition_id="sospendi" />
-        <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Read iol documents" acquired="True">
-            <permission-role>Manager</permission-role>
-            <permission-role>Owner</permission-role>
-        </permission-map>
-    </state>
-    <state state_id="autorizzata" title="Autorizzazione rilasciata">
-        <exit-transition transition_id="archivia" />
-        <exit-transition transition_id="diniego_proroga" />
-        <exit-transition transition_id="proroga" />
-        <exit-transition transition_id="richiesta_proroga" />
-        <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Read iol documents" acquired="True">
-            <permission-role>Manager</permission-role>
-            <permission-role>Owner</permission-role>
-        </permission-map>
-    </state>
-    <state state_id="avvio" title="Nuovo documento in compilazione">
-        <exit-transition transition_id="invia_domanda" />
-        <exit-transition transition_id="protocolla" />
-        <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-            <permission-role>Owner</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-            <permission-role>Owner</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Read iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-            <permission-role>Owner</permission-role>
-        </permission-map>
-    </state>
-    <state state_id="init" title="Init">
-        <description>Stato precedente l'avvio della pratica</description>
-        <exit-transition transition_id="inizializza" />
-    </state>
-    <state state_id="istruttoria_ok" title="Istruttoria completata, in attesa di autorizzazione">
-        <exit-transition transition_id="autorizza" />
-        <exit-transition transition_id="torna_istruttoria" />
-        <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Read iol documents" acquired="True">
-            <permission-role>Manager</permission-role>
-            <permission-role>Owner</permission-role>
-        </permission-map>
-    </state>
-    <state state_id="pre_rigetto" title="In preavviso di rigetto ">
-        <description>In preavviso di rigetto</description>
-        <exit-transition transition_id="rigetta" />
-        <exit-transition transition_id="torna_istruttoria" />
-        <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-            <permission-role>Owner</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Read iol documents" acquired="True">
-            <permission-role>Manager</permission-role>
-            <permission-role>Owner</permission-role>
-        </permission-map>
-        <assignment name="wf_prerigetto" type="string">True</assignment>
-    </state>
-    <state state_id="presentata" title="Domanda arrivata in lavorazione">
-        <exit-transition transition_id="assegna" />
-        <exit-transition transition_id="protocolla" />
-        <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Read iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-            <permission-role>Owner</permission-role>
-        </permission-map>
-        <assignment name="wf_presentata" type="string">True</assignment>
-        <assignment name="wf_priority" type="string">6</assignment>
-    </state>
-    <state state_id="rigettata" title="Diniego protocollato ed inviato">
-        <exit-transition transition_id="archivia" />
-        <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Read iol documents" acquired="True">
-            <permission-role>Manager</permission-role>
-            <permission-role>Owner</permission-role>
-        </permission-map>
-    </state>
-    <state state_id="sospesa" title="Pratica sospesa in attesa di integrazioni">
-        <exit-transition transition_id="Integra" />
-        <exit-transition transition_id="torna_istruttoria" />
-        <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
-            <permission-role>Manager</permission-role>
-            <permission-role>Owner</permission-role>
-        </permission-map>
-        <permission-map name="gisweb.iol: Read iol documents" acquired="True">
-            <permission-role>Manager</permission-role>
-            <permission-role>Owner</permission-role>
-        </permission-map>
-    </state>
-    <transition transition_id="Integra" title="Invia integrazione" new_state="assegnata" trigger="USER" before_script="before_integra" after_script="after_integra">
-        <description>Richiesta di integrazione: PRESENTE SOLO SE è STATO COMPILATO IL MOTIVO DELLA SOSPENSIONE</description>
-        <action url="" category="workflow" icon="">Richiedi Integrazione</action>
-        <guard>
-            <guard-expression>python: scripts.guard_integrazione(state_change)</guard-expression>
-        </guard>
-        <assignment name="wf_priority">python:int('9')</assignment>
-        <assignment name="wf_message">python: 'Domanda Integrata'</assignment>
-        <assignment name="wf_integrata">python:True</assignment>
-    </transition>
-    <transition transition_id="archivia" title="" new_state="archiviata" trigger="USER" before_script="" after_script="after_archivia">
-        <description>Per archiviare la pratica . Attenzione la pratica......</description>
-        <action url="" category="workflow" icon="">Archivia</action>
-        <guard>
-            <guard-role>iol-reviewer</guard-role>
-            <guard-expression>python: scripts.guard_archivia(state_change)</guard-expression>
-        </guard>
-    </transition>
-    <transition transition_id="assegna" title="Avvio del procedimento" new_state="assegnata" trigger="USER" before_script="" after_script="after_assegna">
-        <description>La domanda è stata presentata occorre assegnare l'istruttore per avviare il procedimento</description>
-        <action url="" category="workflow" icon="">Assegna</action>
-        <guard>
-            <guard-expression>python: scripts.guard_assegna(state_change)</guard-expression>
-        </guard>
-        <assignment name="wf_priority">python: int('4')</assignment>
-        <assignment name="wf_protocollata">python: test(state_change.object.getItem('numero_protocollo',''),True,False)</assignment>
-    </transition>
-    <transition transition_id="autorizza" title="Autorizza" new_state="autorizzata" trigger="USER" before_script="" after_script="after_autorizza">
-        <description>La pratica è pronta per essere autorizzata</description>
-        <action url="" category="workflow" icon="">Autorizza</action>
-        <guard>
-            <guard-role>iol-manager</guard-role>
-            <guard-role>Manager</guard-role>
-            <guard-expression>python: scripts.guard_autorizza(state_change)</guard-expression>
-        </guard>
-        <assignment name="wf_priority">python: int('0')</assignment>
-        <assignment name="wf_autorizzata">python:True</assignment>
-    </transition>
-    <transition transition_id="genera_altri_documenti" title="Genera Documento" new_state="" trigger="USER" before_script="" after_script="">
-        <guard />
-    </transition>
-    <transition transition_id="inizializza" title="Inizializza pratica" new_state="" trigger="USER" before_script="" after_script="after_inizializza">
-        <description>Porta la pratica in stato si avvio</description>
-        <action url="" category="workflow" icon="">Inizializza pratica</action>
-        <guard />
-    </transition>
-    <transition transition_id="invia_domanda" title="Invia la domanda" new_state="presentata" trigger="USER" before_script="before_invia_domanda" after_script="after_invia_domanda">
-        <description>Attenzione la domanda può essere inviata solo se tutti i campi, tranne quelli bordati di verde, sono compilati correttamente.</description>
-        <action url="" category="workflow" icon="">Invia domanda</action>
-        <guard>
-            <guard-expression>python: scripts.guard_invia_domanda(state_change)</guard-expression>
-        </guard>
-        <assignment name="wf_protocollata">python:True</assignment>
-    </transition>
-    <transition transition_id="istruttoria_completata" title="Istruttoria completata" new_state="istruttoria_ok" trigger="USER" before_script="before_istruttoria_completata" after_script="after_istruttoria_completata">
-        <description>Se l'istruttoria è completata clicca su per passare alla fase di autorizzazione (IL SISTEMA VERIFICA CHE L'ISTRUTTORIA SIA COMPLETA)</description>
-        <action url="" category="workflow" icon="">Verifica</action>
-        <guard>
-            <guard-role>iol-reviewer</guard-role>
-            <guard-role>iol-manager</guard-role>
-            <guard-role>Manager</guard-role>
-        </guard>
-        <assignment name="wf_priority">python: int('3')</assignment>
-    </transition>
-    <transition transition_id="loop" title="aaaa" new_state="" trigger="USER" before_script="" after_script="">
-        <action url="" category="workflow" icon="">aaaaaa</action>
-        <guard />
-    </transition>
-    <transition transition_id="preavviso_rigetto" title="Preavviso di rigetto" new_state="pre_rigetto" trigger="USER" before_script="" after_script="after_preavviso_rigetto">
-        <description>Per portare la pratica in stato di preavviso di rigetto clicca su</description>
-        <action url="" category="workflow" icon="">Preavviso di rigetto</action>
-        <guard>
-            <guard-role>iol-manager</guard-role>
-            <guard-role>iol-reviewer</guard-role>
-            <guard-role>Manager</guard-role>
-        </guard>
-        <assignment name="wf_priority">python: int('7')</assignment>
-    </transition>
-    <transition transition_id="protocolla" title="Richiedi protocollo" new_state="" trigger="USER" before_script="before_protocolla" after_script="after_protocolla">
-        <description>Attenzione la domanda non è stata protocollata correttamente.</description>
-        <action url="" category="workflow" icon="">Richiedi protocollo</action>
-        <guard>
-            <guard-expression>python: scripts.guard_protocolla(state_change)</guard-expression>
-        </guard>
-        <assignment name="wf_protocollata">python: test(state_change.object.getItem('numero_protocollo',''),True,False)</assignment>
-    </transition>
-    <transition transition_id="rigetta" title="Rigetta Istanza" new_state="rigettata" trigger="USER" before_script="" after_script="after_rigetta">
-        <description>Rigetto della domanda: PRESENTE SOLO SE è STATO COMPILATO IL MOTIVO DEL RIGETTO</description>
-        <action url="" category="workflow" icon="">Rigetta Istanza</action>
-        <guard>
-            <guard-role>iol-manager</guard-role>
-            <guard-role>iol-reviewer</guard-role>
-            <guard-role>Manager</guard-role>
-        </guard>
-        <assignment name="wf_priority">python: int('0')</assignment>
-    </transition>
-    <transition transition_id="sospendi" title="Sospensione e richiesta integrazione" new_state="sospesa" trigger="USER" before_script="" after_script="after_sospendi">
-        <description>Per portare la pratica in stato di sospensione clicca su</description>
-        <action url="" category="workflow" icon="">Sospendi</action>
-        <guard>
-            <guard-role>iol-manager</guard-role>
-            <guard-role>iol-reviewer</guard-role>
-            <guard-role>Manager</guard-role>
-        </guard>
-        <assignment name="wf_sospesa">python:True</assignment>
-        <assignment name="wf_priority">python: int('8')</assignment>
-    </transition>
-    <transition transition_id="torna_istruttoria" title="Torna a Istruttoria" new_state="assegnata" trigger="USER" before_script="" after_script="after_torna_istruttoria">
-        <description>Se si desidera riportare la pratica in stato di istruttoria clicca su</description>
-        <action url="" category="workflow" icon="">Ritorna</action>
-        <guard>
-            <guard-role>iol-manager</guard-role>
-            <guard-role>iol-reviewer</guard-role>
-            <guard-role>Manager</guard-role>
-        </guard>
-        <assignment name="wf_sospesa">python: False</assignment>
-        <assignment name="wf_priority">python:int(4)</assignment>
-        <assignment name="transition_on_save">python:'assegna'</assignment>
-        <assignment name="wf_prerigetto">python: False</assignment>
-    </transition>
-    <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
-        <description>Previous transition</description>
-        <default>
-            <expression>transition/getId|nothing</expression>
-        </default>
-        <guard />
-    </variable>
-    <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
-        <description>The ID of the user who performed the previous transition</description>
-        <default>
-            <expression>user/getId</expression>
-        </default>
-        <guard />
-    </variable>
-    <variable variable_id="gg_sospensione" for_catalog="True" for_status="True" update_always="False">
-        <description>Giorni di Sospensione dell' Istanza</description>
-        <default>
-            <value type="string">0</value>
-        </default>
-        <guard />
-    </variable>
-    <variable variable_id="review_history" for_catalog="False" for_status="True" update_always="False">
-        <description>Provides access to workflow history</description>
-        <default>
-            <expression>state_change/getHistory</expression>
-        </default>
-        <guard>
-            <guard-permission>Request review</guard-permission>
-            <guard-permission>Review portal content</guard-permission>
-        </guard>
-    </variable>
-    <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
-        <description>When the previous transition was performed</description>
-        <default>
-            <expression>state_change/getDateTime</expression>
-        </default>
-        <guard />
-    </variable>
-    <variable variable_id="transition_on_save" for_catalog="False" for_status="False" update_always="False">
-        <description>transizione da eseguire su salvataggio del documento?</description>
-        <default>
-            <value type="string">assegna,inizializza</value>
-        </default>
-        <guard />
-    </variable>
-    <variable variable_id="wf_autorizzata" for_catalog="True" for_status="True" update_always="False">
-        <description>Flag di Istanza Autorizzata</description>
-        <default>
-            <expression>python: False</expression>
-        </default>
-        <guard />
-    </variable>
-    <variable variable_id="wf_integrata" for_catalog="True" for_status="True" update_always="False">
-        <description>Flag di Istanza Integrata</description>
-        <default>
-            <expression>python:False</expression>
-        </default>
-        <guard />
-    </variable>
-    <variable variable_id="wf_message" for_catalog="True" for_status="True" update_always="True">
-        <default>
-            <expression>python:''</expression>
-        </default>
-        <guard />
-    </variable>
-    <variable variable_id="wf_prerigetto" for_catalog="True" for_status="True" update_always="False">
-        <description>Flag di Istanza in Pre-Rigetto</description>
-        <default>
-            <expression>python: False</expression>
-        </default>
-        <guard />
-    </variable>
-    <variable variable_id="wf_presentata" for_catalog="True" for_status="True" update_always="False">
-        <description>Flag di Domanda Presentata</description>
-        <default>
-            <expression>python: False</expression>
-        </default>
-        <guard />
-    </variable>
-    <variable variable_id="wf_priority" for_catalog="True" for_status="True" update_always="True">
-        <description>Priorità della'istanza</description>
-        <default>
-            <value type="string">0</value>
-        </default>
-        <guard />
-    </variable>
-    <variable variable_id="wf_prorogata" for_catalog="True" for_status="True" update_always="False">
-        <description>Flag Prorogata</description>
-        <default>
-            <expression>python: False</expression>
-        </default>
-        <guard />
-    </variable>
-    <variable variable_id="wf_protocollata" for_catalog="True" for_status="True" update_always="False">
-        <description>Flag di Istanza Protocollata</description>
-        <default>
-            <expression>python: False</expression>
-        </default>
-        <guard />
-    </variable>
-    <variable variable_id="wf_richiesta_proroga" for_catalog="True" for_status="True" update_always="False">
-        <description>Flag di Richiesta Proroga</description>
-        <default>
-            <expression>python: False</expression>
-        </default>
-        <guard />
-    </variable>
-    <variable variable_id="wf_sospesa" for_catalog="True" for_status="True" update_always="False">
-        <description>Flag di Istanza Sospesa</description>
-        <default>
-            <expression>python: False</expression>
-        </default>
-        <guard />
-    </variable>
-    <script script_id="after_archivia" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_archivia.py" module="" function="" />
-    <script script_id="after_assegna" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_assegna.py" module="" function="" />
-    <script script_id="after_autorizza" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_autorizza.py" module="" function="" />
-    <script script_id="after_inizializza" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_inizializza.py" module="" function="" />
-    <script script_id="after_integra" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_integra.py" module="" function="" />
-    <script script_id="after_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_invia_domanda.py" module="" function="" />
-    <script script_id="after_istruttoria_completata" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_istruttoria_completata.py" module="" function="" />
-    <script script_id="after_preavviso_rigetto" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_preavviso_rigetto.py" module="" function="" />
-    <script script_id="after_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_protocolla.py" module="" function="" />
-    <script script_id="after_richiesta_integrazione" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_richiesta_integrazione.py" module="" function="" />
-    <script script_id="after_rigetta" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_rigetta.py" module="" function="" />
-    <script script_id="after_sospendi" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_sospendi.py" module="" function="" />
-    <script script_id="after_torna_istruttoria" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_torna_istruttoria.py" module="" function="" />
-    <script script_id="before_integra" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_integra.py" module="" function="" />
-    <script script_id="before_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_invia_domanda.py" module="" function="" />
-    <script script_id="before_istruttoria_completata" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_istruttoria_completata.py" module="" function="" />
-    <script script_id="before_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_protocolla.py" module="" function="" />
-    <script script_id="guard_archivia" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_archivia.py" module="" function="" />
-    <script script_id="guard_assegna" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_assegna.py" module="" function="" />
-    <script script_id="guard_autorizza" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_autorizza.py" module="" function="" />
-    <script script_id="guard_integrazione" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_integrazione.py" module="" function="" />
-    <script script_id="guard_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_invia_domanda.py" module="" function="" />
-    <script script_id="guard_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_protocolla.py" module="" function="" />
+ <permission>gisweb.iol: Read iol documents</permission>
+ <permission>gisweb.iol: Read iol documents</permission>
+ <permission>gisweb.iol: Delete iol documents</permission>
+ <state state_id="archiviata" title="Archiviata">
+  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="assegnata" title="Assegnata in fase di istruttoria">
+  <exit-transition transition_id="istruttoria_completata"/>
+  <exit-transition transition_id="preavviso_rigetto"/>
+  <exit-transition transition_id="sospendi"/>
+  <exit-transition transition_id="torna_presentata"/>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+   <permission-role>istruttore</permission-role>
+   <permission-role>rup</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="autorizzata" title="Autorizzazione rilasciata">
+  <exit-transition transition_id="archivia"/>
+  <exit-transition transition_id="diniego_proroga"/>
+  <exit-transition transition_id="proroga"/>
+  <exit-transition transition_id="richiesta_proroga"/>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="avvio" title="Nuovo documento in compilazione">
+  <exit-transition transition_id="invia_domanda"/>
+  <exit-transition transition_id="protocolla"/>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="init" title="Init">
+  <description>Stato precedente l'avvio della pratica</description>
+  <exit-transition transition_id="inizializza"/>
+ </state>
+ <state state_id="istruttoria_ok" title="Istruttoria completata, in attesa di autorizzazione">
+  <exit-transition transition_id="autorizza"/>
+  <exit-transition transition_id="torna_istruttoria"/>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="pre_rigetto" title="In preavviso di rigetto ">
+  <description>In preavviso di rigetto</description>
+  <exit-transition transition_id="rigetta"/>
+  <exit-transition transition_id="torna_istruttoria"/>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <assignment name="wf_prerigetto" type="string">True</assignment>
+ </state>
+ <state state_id="presentata" title="Domanda arrivata in lavorazione">
+  <exit-transition transition_id="assegna"/>
+  <exit-transition transition_id="protocolla"/>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+  </permission-map>
+  <assignment name="wf_presentata" type="string">True</assignment>
+  <assignment name="wf_priority" type="string">6</assignment>
+ </state>
+ <state state_id="rigettata" title="Diniego protocollato ed inviato">
+  <exit-transition transition_id="archivia"/>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="sospesa" title="Pratica sospesa in attesa di integrazioni">
+  <exit-transition transition_id="Integra"/>
+  <exit-transition transition_id="torna_istruttoria"/>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+  </permission-map>
+ </state>
+ <transition transition_id="Integra" title="Invia integrazione" new_state="assegnata" trigger="USER" before_script="before_integra" after_script="after_integra">
+  <description>Richiesta di integrazione: PRESENTE SOLO SE è STATO COMPILATO IL MOTIVO DELLA SOSPENSIONE</description>
+  <action url="" category="workflow" icon="">Richiedi Integrazione</action>
+  <guard>
+   <guard-expression>python: scripts.guard_integrazione(state_change)</guard-expression>
+  </guard>
+  <assignment name="wf_message">python: 'Domanda Integrata'</assignment>
+  <assignment name="wf_integrata">python:True</assignment>
+  <assignment name="wf_priority">python:int('9')</assignment>
+ </transition>
+ <transition transition_id="archivia" title="" new_state="archiviata" trigger="USER" before_script="" after_script="after_archivia">
+  <description>Per archiviare la pratica . Attenzione la pratica......</description>
+  <action url="" category="workflow" icon="">Archivia</action>
+  <guard>
+   <guard-role>iol-reviewer</guard-role>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-expression>python: scripts.guard_archivia(state_change)</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="assegna" title="Avvio del procedimento" new_state="assegnata" trigger="USER" before_script="" after_script="after_assegna">
+  <description>La domanda è stata presentata occorre assegnare l'istruttore per avviare il procedimento</description>
+  <action url="" category="workflow" icon="">Assegna</action>
+  <guard>
+   <guard-expression>python: scripts.guard_assegna(state_change)</guard-expression>
+  </guard>
+  <assignment name="wf_priority">python: int('4')</assignment>
+  <assignment name="wf_torna_presentata">python: False</assignment>
+  <assignment name="wf_protocollata">python: test(state_change.object.getItem('numero_protocollo',''),True,False)</assignment>
+ </transition>
+ <transition transition_id="autorizza" title="Autorizza" new_state="autorizzata" trigger="USER" before_script="before_autorizza" after_script="after_autorizza">
+  <description>La pratica è pronta per essere autorizzata</description>
+  <action url="" category="workflow" icon="">Autorizza</action>
+  <guard>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>iol-reviewer</guard-role>
+   <guard-expression>python: scripts.guard_autorizza(state_change)</guard-expression>
+  </guard>
+  <assignment name="wf_priority">python: int('0')</assignment>
+  <assignment name="wf_autorizzata">python:True</assignment>
+ </transition>
+ <transition transition_id="autorizza_importazione" title="Autorizza Importazione" new_state="" trigger="USER" before_script="" after_script="">
+  
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="genera_altri_documenti" title="Genera Documento" new_state="" trigger="USER" before_script="" after_script="">
+  
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="inizializza" title="Inizializza pratica" new_state="" trigger="USER" before_script="" after_script="after_inizializza">
+  <description>Porta la pratica in stato si avvio</description>
+  <action url="" category="workflow" icon="">Inizializza pratica</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="invia_domanda" title="Invia la domanda" new_state="presentata" trigger="USER" before_script="before_invia_domanda" after_script="after_invia_domanda">
+  <description>Attenzione la domanda può essere inviata solo se tutti i campi, tranne quelli bordati di verde, sono compilati correttamente.</description>
+  <action url="" category="workflow" icon="">Invia domanda</action>
+  <guard>
+   <guard-expression>python: scripts.guard_invia_domanda(state_change)</guard-expression>
+  </guard>
+  <assignment name="wf_protocollata">python: test(state_change.object.getItem('numero_protocollo',''),True,False)</assignment>
+ </transition>
+ <transition transition_id="istruttoria_completata" title="Istruttoria completata" new_state="istruttoria_ok" trigger="USER" before_script="before_istruttoria_completata" after_script="after_istruttoria_completata">
+  <description>Se l'istruttoria è completata clicca su per passare alla fase di autorizzazione (IL SISTEMA VERIFICA CHE L'ISTRUTTORIA SIA COMPLETA)</description>
+  <action url="" category="workflow" icon="">Verifica</action>
+  <guard>
+   <guard-role>iol-reviewer</guard-role>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>Manager</guard-role>
+  </guard>
+  <assignment name="wf_priority">python: int('3')</assignment>
+ </transition>
+ <transition transition_id="loop" title="aaaa" new_state="" trigger="USER" before_script="" after_script="">
+  <action url="" category="workflow" icon="">aaaaaa</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="preavviso_rigetto" title="Preavviso di rigetto" new_state="pre_rigetto" trigger="USER" before_script="" after_script="after_preavviso_rigetto">
+  <description>Per portare la pratica in stato di preavviso di rigetto clicca su</description>
+  <action url="" category="workflow" icon="">Preavviso di rigetto</action>
+  <guard>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>iol-reviewer</guard-role>
+   <guard-role>Manager</guard-role>
+  </guard>
+  <assignment name="wf_priority">python: int('7')</assignment>
+ </transition>
+ <transition transition_id="protocolla" title="Richiedi protocollo" new_state="" trigger="USER" before_script="before_protocolla" after_script="after_protocolla">
+  <description>Attenzione la domanda non è stata protocollata correttamente.</description>
+  <action url="" category="workflow" icon="">Richiedi protocollo</action>
+  <guard>
+   <guard-expression>python: scripts.guard_protocolla(state_change)</guard-expression>
+  </guard>
+  <assignment name="wf_protocollata">python: test(state_change.object.getItem('numero_protocollo',''),True,False)</assignment>
+ </transition>
+ <transition transition_id="rigetta" title="Rigetta Istanza" new_state="rigettata" trigger="USER" before_script="before_rigetta" after_script="after_rigetta">
+  <description>Rigetto della domanda: PRESENTE SOLO SE è STATO COMPILATO IL MOTIVO DEL RIGETTO</description>
+  <action url="" category="workflow" icon="">Rigetta Istanza</action>
+  <guard>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>iol-reviewer</guard-role>
+   <guard-role>Manager</guard-role>
+  </guard>
+  <assignment name="wf_rigetta">python: True</assignment>
+  <assignment name="wf_priority">python: int('0')</assignment>
+ </transition>
+ <transition transition_id="sospendi" title="Sospensione e richiesta integrazione" new_state="sospesa" trigger="USER" before_script="" after_script="after_sospendi">
+  <description>Per portare la pratica in stato di sospensione clicca su</description>
+  <action url="" category="workflow" icon="">Sospendi</action>
+  <guard>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>iol-reviewer</guard-role>
+   <guard-role>Manager</guard-role>
+  </guard>
+  <assignment name="wf_priority">python: int('8')</assignment>
+  <assignment name="wf_sospesa">python:True</assignment>
+ </transition>
+ <transition transition_id="torna_istruttoria" title="Torna a Istruttoria" new_state="assegnata" trigger="USER" before_script="" after_script="after_torna_istruttoria">
+  <description>Se si desidera riportare la pratica in stato di istruttoria clicca su</description>
+  <action url="" category="workflow" icon="">Ritorna</action>
+  <guard>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>iol-reviewer</guard-role>
+   <guard-role>Manager</guard-role>
+  </guard>
+  <assignment name="wf_prerigetto">python: False</assignment>
+  <assignment name="wf_priority">python:int(4)</assignment>
+  <assignment name="wf_autorizzata">python:False</assignment>
+  <assignment name="transition_on_save">python:'assegna'</assignment>
+  <assignment name="wf_sospesa">python: False</assignment>
+ </transition>
+ <transition transition_id="torna_presentata" title="Torna in presentata" new_state="presentata" trigger="USER" before_script="before_torna_presentata" after_script="after_torna_presentata">
+  <action url="" category="workflow" icon="">Torna in presentata</action>
+  <guard>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>iol-reviewer</guard-role>
+   <guard-role>Manager</guard-role>
+  </guard>
+  <assignment name="wf_torna_presentata">python: True</assignment>
+ </transition>
+ <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
+  <description>Previous transition</description>
+  <default>
+   
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
+  <description>The ID of the user who performed the previous transition</description>
+  <default>
+   
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="gg_sospensione" for_catalog="True" for_status="True" update_always="False">
+  <description>Giorni di Sospensione dell' Istanza</description>
+  <default>
+   <value type="string">0</value>
+   
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False" for_status="True" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
+  <description>When the previous transition was performed</description>
+  <default>
+   
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="transition_on_save" for_catalog="False" for_status="False" update_always="False">
+  <description>transizione da eseguire su salvataggio del documento?</description>
+  <default>
+   <value type="string">assegna,inizializza</value>
+   
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_assegnata" for_catalog="True" for_status="True" update_always="False">
+  <default>
+   
+   <expression>python: False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_autorizzata" for_catalog="True" for_status="True" update_always="False">
+  <description>Flag di Istanza Autorizzata</description>
+  <default>
+   
+   <expression>python: False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_integrata" for_catalog="True" for_status="True" update_always="False">
+  <description>Flag di Istanza Integrata</description>
+  <default>
+   
+   <expression>python:False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_message" for_catalog="True" for_status="True" update_always="True">
+  <default>
+   
+   <expression>python:''</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_prerigetto" for_catalog="True" for_status="True" update_always="False">
+  <description>Flag di Istanza in Pre-Rigetto</description>
+  <default>
+   
+   <expression>python: False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_presentata" for_catalog="True" for_status="True" update_always="False">
+  <description>Flag di Domanda Presentata</description>
+  <default>
+   
+   <expression>python: False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_priority" for_catalog="True" for_status="True" update_always="True">
+  <description>Priorità della'istanza</description>
+  <default>
+   <value type="string">0</value>
+   
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_prorogata" for_catalog="True" for_status="True" update_always="False">
+  <description>Flag Prorogata</description>
+  <default>
+   
+   <expression>python: False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_protocollata" for_catalog="True" for_status="True" update_always="False">
+  <description>Flag di Istanza Protocollata</description>
+  <default>
+   
+   <expression>python: False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_richiesta_proroga" for_catalog="True" for_status="True" update_always="False">
+  <description>Flag di Richiesta Proroga</description>
+  <default>
+   
+   <expression>python: False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_rigetta" for_catalog="True" for_status="True" update_always="False">
+  <default>
+   
+   <expression>python: False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_sospesa" for_catalog="True" for_status="True" update_always="False">
+  <description>Flag di Istanza Sospesa</description>
+  <default>
+   
+   <expression>python: False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_torna_presentata" for_catalog="True" for_status="True" update_always="False">
+  <default>
+   
+   <expression>python: False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <script script_id="after_archivia" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_archivia.py" module="" function=""/>
+ <script script_id="after_assegna" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_assegna.py" module="" function=""/>
+ <script script_id="after_autorizza" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_autorizza.py" module="" function=""/>
+ <script script_id="after_inizializza" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_inizializza.py" module="" function=""/>
+ <script script_id="after_integra" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_integra.py" module="" function=""/>
+ <script script_id="after_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_invia_domanda.py" module="" function=""/>
+ <script script_id="after_istruttoria_completata" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_istruttoria_completata.py" module="" function=""/>
+ <script script_id="after_preavviso_rigetto" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_preavviso_rigetto.py" module="" function=""/>
+ <script script_id="after_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_protocolla.py" module="" function=""/>
+ <script script_id="after_richiesta_integrazione" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_richiesta_integrazione.py" module="" function=""/>
+ <script script_id="after_rigetta" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_rigetta.py" module="" function=""/>
+ <script script_id="after_sospendi" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_sospendi.py" module="" function=""/>
+ <script script_id="after_torna_istruttoria" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_torna_istruttoria.py" module="" function=""/>
+ <script script_id="after_torna_presentata" type="Script (Python)" filename="workflows/iol_workflow/scripts/after_torna_presentata.py" module="" function=""/>
+ <script script_id="before_archivia" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_archivia.py" module="" function=""/>
+ <script script_id="before_assegna" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_assegna.py" module="" function=""/>
+ <script script_id="before_autorizza" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_autorizza.py" module="" function=""/>
+ <script script_id="before_integra" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_integra.py" module="" function=""/>
+ <script script_id="before_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_invia_domanda.py" module="" function=""/>
+ <script script_id="before_istruttoria_completata" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_istruttoria_completata.py" module="" function=""/>
+ <script script_id="before_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_protocolla.py" module="" function=""/>
+ <script script_id="before_rigetta" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_rigetta.py" module="" function=""/>
+ <script script_id="before_sospendi" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_sospendi.py" module="" function=""/>
+ <script script_id="before_torna_presentata" type="Script (Python)" filename="workflows/iol_workflow/scripts/before_torna_presentata.py" module="" function=""/>
+ <script script_id="guard_archivia" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_archivia.py" module="" function=""/>
+ <script script_id="guard_assegna" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_assegna.py" module="" function=""/>
+ <script script_id="guard_autorizza" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_autorizza.py" module="" function=""/>
+ <script script_id="guard_integrazione" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_integrazione.py" module="" function=""/>
+ <script script_id="guard_invia_domanda" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_invia_domanda.py" module="" function=""/>
+ <script script_id="guard_protocolla" type="Script (Python)" filename="workflows/iol_workflow/scripts/guard_protocolla.py" module="" function=""/>
+ <script script_id="run_script" type="Script (Python)" filename="workflows/iol_workflow/scripts/run_script.py" module="" function=""/>
 </dc-workflow>
