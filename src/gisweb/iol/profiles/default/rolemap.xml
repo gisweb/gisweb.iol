@@ -5,4 +5,5 @@
         <role name="iol-reviewer"/>
         <role name="iol-test"/>
     </roles>
+    <permissions />
 </rolemap>

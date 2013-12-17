@@ -27,10 +27,12 @@
           <ActionType type="Products.Archetypes.Field.StringField">SAVE</ActionType>
           <ActionDisplay type="Products.Archetypes.Field.StringField">SUBMIT</ActionDisplay>
           <Content type="Products.Archetypes.Field.TextField"><![CDATA[]]></Content>
-          <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[if not plominoDocument.isEditMode():
-    return True
-else:
-    return False]]></Hidewhen>
+          <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.isNewDocument():
+    return False
+if plominoDocument.checkIolPermission('edit'):
+    if plominoDocument.isEditMode():
+        return False
+return True]]></Hidewhen>
           <InActionBar type="Products.Archetypes.Field.BooleanField">True</InActionBar>
         </element>
         <element id="btn_annulla" title="Annulla" type="PlominoAction">
@@ -52,7 +54,7 @@ return '%s' %url]]></Content>
           <Content type="Products.Archetypes.Field.TextField"><![CDATA['%s/%s/EditDocument' %(plominoDocument.getParentDatabase().absolute_url(),plominoDocument.getId())]]></Content>
           <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.isEditMode():
     return True
-return plominoDocument.checkIolPermission('edit')]]></Hidewhen>
+return not plominoDocument.checkIolPermission('edit')]]></Hidewhen>
           <InActionBar type="Products.Archetypes.Field.BooleanField">True</InActionBar>
         </element>
         <element id="btn_elimina" title="Elimina" type="PlominoAction">
@@ -62,7 +64,7 @@ return plominoDocument.checkIolPermission('edit')]]></Hidewhen>
           <Content type="Products.Archetypes.Field.TextField"><![CDATA['%s/delete?returnurl=%s'  %(context.absolute_url(),context.getParentDatabase().absolute_url())]]></Content>
           <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.isEditMode():
     return True
-return plominoDocument.checkIolPermission('remove')]]></Hidewhen>
+return not plominoDocument.checkIolPermission('remove')]]></Hidewhen>
           <InActionBar type="Products.Archetypes.Field.BooleanField">False</InActionBar>
         </element>
         <element id="btn_home" title="Home" type="PlominoAction">
