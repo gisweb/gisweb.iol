@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <dc-workflow workflow_id="iol_workflow" title="Istanze OnLine Workflow" description="" state_variable="review_state" initial_state="avvio" manager_bypass="False">
- <permission>gisweb.iol: Read iol documents</permission>
+ <permission>gisweb.iol: Edit iol documents</permission>
  <permission>gisweb.iol: Read iol documents</permission>
  <permission>gisweb.iol: Delete iol documents</permission>
  <state state_id="archiviata" title="Archiviata">
-  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+  <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="gisweb.iol: Read iol documents" acquired="True">
@@ -22,7 +22,7 @@
   <exit-transition transition_id="preavviso_rigetto"/>
   <exit-transition transition_id="sospendi"/>
   <exit-transition transition_id="torna_presentata"/>
-  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+  <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>iol-manager</permission-role>
    <permission-role>iol-reviewer</permission-role>
@@ -49,7 +49,7 @@
   <exit-transition transition_id="diniego_proroga"/>
   <exit-transition transition_id="proroga"/>
   <exit-transition transition_id="richiesta_proroga"/>
-  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+  <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>iol-manager</permission-role>
   </permission-map>
@@ -66,7 +66,7 @@
  <state state_id="avvio" title="Nuovo documento in compilazione">
   <exit-transition transition_id="invia_domanda"/>
   <exit-transition transition_id="protocolla"/>
-  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+  <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
    <permission-role>iol-manager</permission-role>
@@ -91,7 +91,7 @@
  <state state_id="istruttoria_ok" title="Istruttoria completata, in attesa di autorizzazione">
   <exit-transition transition_id="autorizza"/>
   <exit-transition transition_id="torna_istruttoria"/>
-  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+  <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>iol-manager</permission-role>
    <permission-role>iol-reviewer</permission-role>
@@ -111,7 +111,7 @@
   <description>In preavviso di rigetto</description>
   <exit-transition transition_id="rigetta"/>
   <exit-transition transition_id="torna_istruttoria"/>
-  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+  <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
    <permission-role>iol-manager</permission-role>
@@ -131,7 +131,7 @@
  <state state_id="presentata" title="Domanda arrivata in lavorazione">
   <exit-transition transition_id="assegna"/>
   <exit-transition transition_id="protocolla"/>
-  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+  <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>iol-manager</permission-role>
    <permission-role>iol-reviewer</permission-role>
@@ -151,7 +151,7 @@
  </state>
  <state state_id="rigettata" title="Diniego protocollato ed inviato">
   <exit-transition transition_id="archivia"/>
-  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+  <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>iol-manager</permission-role>
   </permission-map>
@@ -168,7 +168,7 @@
  <state state_id="sospesa" title="Pratica sospesa in attesa di integrazioni">
   <exit-transition transition_id="Integra"/>
   <exit-transition transition_id="torna_istruttoria"/>
-  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+  <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
    <permission-role>iol-manager</permission-role>
