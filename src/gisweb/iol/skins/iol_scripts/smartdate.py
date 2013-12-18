@@ -13,7 +13,7 @@ if not date:
 if isinstance(date, basestring) and dateformat:
     from Products.CMFPlomino.PlominoUtils import StringToDate
     date = StringToDate(date, format=dateformat)
-    
+
 def smartdate(date):
 
     now = DateTime()

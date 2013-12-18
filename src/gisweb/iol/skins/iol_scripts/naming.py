@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=what='', frm_key='frm_', default='', calculate=False, rebuild=False
+##parameters=what='', frm_key='frm_', default='', calculate=False, rebuild=False, error=True
 ##title=Centralized naming policy management
 ##
 """
@@ -78,7 +78,8 @@ def main(plominoObject, what='', frm_key='frm_', default='', calculate=False):
                 items = plominoObject.getItems()
                 fields = [i.getId() for i in plominoObject.getForm().getFormFields(includesubforms=True)]
                 itemname = alias[what]['itemname']
-                assert itemname in (fields+items), 'Attenzione! "%s" non è un campo valido definito per l\'oggetto %s' % (itemname, plominoObject.getId())
+                if error:
+                    assert itemname in (fields+items), 'Attenzione! "%s" non è un campo valido definito per l\'oggetto %s' % (itemname, plominoObject.getId())
             return value
 
         if calculate or plominoObject.isNewDocument():

@@ -2,7 +2,7 @@
   <design>
     <element id="tutte-istanze" title="Tutte le istanze" type="PlominoView">
       <id type="Products.Archetypes.Field.StringField">tutte-istanze</id>
-      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.naming('richiesta') in ['base','rinnovo','duplicato'] or plominoDocument.wf_getInfoFor('review_state')=='avvio']]></SelectionFormula>
+      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.naming('richiesta', error=False) in ['base','rinnovo','duplicato'] or plominoDocument.wf_getInfoFor('review_state')=='avvio']]></SelectionFormula>
       <SortColumn type="Products.Archetypes.Field.StringField">wfpriority</SortColumn>
       <Categorized type="Products.Archetypes.Field.BooleanField">False</Categorized>
       <FormFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></FormFormula>
