@@ -1,4 +1,4 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_base">
   <design>
     <element id="search_istanze_utente" title="Le mie Istanze" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">search_istanze_utente</id>

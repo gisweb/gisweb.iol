@@ -1,15 +1,15 @@
 <span tal:define="widget python:options['field'].getSettings('widget');
-				selection python:options['selection'];
-				name python:options['fieldname'];
+		selection python:options['selection'];
+		name python:options['fieldname'];
                 fieldname name;
                 title python:options['field'].title;
                 ttip_title title;
                 ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
                 custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
-				current python:options['fieldvalue'];
-				lcurrent python:test(hasattr(current,'split'),[current],current);
-				lcurrent_ids python:[p.split('/')[-1] for p in lcurrent];
-				">
+		current python:options['fieldvalue'];
+		lcurrent python:test(hasattr(current,'split'),[current],current);
+		lcurrent_ids python:[p.split('/')[-1] for p in lcurrent];
+		">
                       
 	<tal:widget tal:condition="python:test(widget=='DYNAMICTABLE')"
 		tal:define="
@@ -20,12 +20,13 @@
      baseURL python: context.getParentDatabase().absolute_url();
      doc python: context.REQUEST.PARENTS[0];
      docId python:doc.isDocument() and doc.getId();
+     showLink python:0 if doc.isDocument() and not doc.checkIolPermission('edit') or doc.isEditMode() else 1;
      editMode python:1 if not doc.isDocument() or doc.isEditMode() else 0;			
-                    data selection;
-	    			cols python:options['field'].getSettings().getJQueryColumns();
-	    			params python:options['field'].getSettings('dynamictableparam');
-	    			selected python:'|'.join(lcurrent_ids+lcurrent);
-	    			">
+                data selection;
+	    	cols python:options['field'].getSettings().getJQueryColumns();
+	    	params python:options['field'].getSettings('dynamictableparam');
+	    	selected python:'|'.join(lcurrent_ids+lcurrent);
+	    	">
 
                         
         <script type='text/javascript' tal:content="structure string:
@@ -65,13 +66,17 @@
                 var cell = oObj.aData[oObj.iDataColumn];
                 var dburl='${baseURL}';
                 if(oObj.iDataColumn==0){
-                   return '<a href=\'' + dburl + '/' + oObj.aData[0] + '/EditDocument\' class=\'icon-edit\'></a>';
+                   if(${showLink}) 
+                         return '<a href=\'' + dburl + '/' + oObj.aData[0] + '/EditDocument\' class=\'icon-edit\'></a>';
+                   else  
+                         return null
                 }
-                else if(oObj.iDataColumn==1){
+                else if(${showLink} && oObj.iDataColumn==1){
                    return '<a href=\'' + dburl + '/' + oObj.aData[0] + '\' class=\'viewlink\'>' + cell + '</a>';
                 }
-                else
+                else {
                     return cell
+                }
             }
                 
         },    
@@ -90,7 +95,7 @@
         		jq('#${fieldname}_addrow').click(function() {
                         if($.plominoFormChanged && !confirm('Attenzione: le modifiche sul form andranno perse, continuare?')) return false;
                         var editUrl = '${baseURL}/' + ${fieldname}_datatable.fnSettings().oInit.editForm;
-                        window.location=editUrl+'/OpenForm?parentDocument=${docId}';
+                        window.location=editUrl+'/OpenForm?parentDocument=${docId}&parentField=${fieldname}';
                         return false;
         			});
         			jq('#${fieldname}_editrow').click(function() {
@@ -118,13 +123,14 @@
             <i tal:condition="ttip_descr" class="icon-info-sign" data-fade-speed="10" data-trigger="hover" tal:attributes="title ttip_title;data-content ttip_descr"></i>
         </label>  
         
-        <table class="table table-bordered" tal:attributes="id string:${fieldname}_datagrid"></table>             
+        <table class="table table-bordered" tal:attributes="id string:${fieldname}_datagrid"></table>          
+   <!--
         <div class="btn-group" tal:condition="python:doc.isDocument() and doc.isEditMode()">      
           <button class="btn" tal:attributes="id string:${fieldname}_addrow;">Aggiungi</button>
           <button class="btn disabled" tal:attributes="id string:${fieldname}_editrow;">Modifica</button>
-          <button class="btn disabled" tal:attributes="id string:${fieldname}_deleterow;">Elimina</button>-->
+          <button class="btn disabled" tal:attributes="id string:${fieldname}_deleterow;">Elimina</button>
         </div>                 
-        
+   --> 
         <!--<div style="clear: both"></div>-->
         <input type="hidden" tal:attributes="name options/fieldname; id string:${name};
                                           value python:test(current is not None,'|'.join(current),'')"/>

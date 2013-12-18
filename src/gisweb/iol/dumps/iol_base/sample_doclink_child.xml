@@ -1,4 +1,4 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_base">
   <design>
     <element id="sample_doclink_child" title="doclink child sample" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">sample_doclink_child</id>
