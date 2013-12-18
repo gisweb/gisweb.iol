@@ -1,4 +1,4 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_base">
   <design>
     <element id="sample_doclink" title="doclink sample" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">sample_doclink</id>
@@ -10,7 +10,8 @@
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
       <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoSubformClass">base_sub_pulsantiera</span></p>
-<p><span class="plominoFieldClass">child_documents</span></p>]]></FormLayout>
+<p><span class="plominoFieldClass">child_documents</span></p>
+<p><span class="plominoActionClass">add_child</span></p>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -82,6 +83,16 @@ return context.doclinkFieldSearchFormula(fieldname=fieldname, colnames=colnames)
               <field name="customAttributes"/>
             </extensionfields>
           </CustomData>
+        </element>
+        <element id="add_child" title="Add child" type="PlominoAction">
+          <id type="Products.Archetypes.Field.StringField">add_child</id>
+          <ActionType type="Products.Archetypes.Field.StringField">REDIRECT</ActionType>
+          <ActionDisplay type="Products.Archetypes.Field.StringField">BUTTON</ActionDisplay>
+          <Content type="Products.Archetypes.Field.TextField"><![CDATA[url = '%s/OpenForm?parentDocument=%s&parentField=%s' %(context.getParentDatabase().getForm('sample_doclink_child').absolute_url(),context.getId(),'child_documents')
+return url]]></Content>
+          <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[hidewhen = not context.isDocument() or context.isEditMode() or not context.checkIolPermission('edit')
+return hidewhen]]></Hidewhen>
+          <InActionBar type="Products.Archetypes.Field.BooleanField">False</InActionBar>
         </element>
       </elements>
     </element>

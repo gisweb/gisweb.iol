@@ -1,4 +1,4 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_base">
   <design>
     <dbsettings version="1.17">
       <AboutDescription type="Products.Archetypes.Field.TextField"><![CDATA[]]></AboutDescription>

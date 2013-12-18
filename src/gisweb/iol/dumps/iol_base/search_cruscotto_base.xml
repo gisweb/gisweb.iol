@@ -1,4 +1,4 @@
-<plominodatabase id="iol-base">
+<plominodatabase id="iol_base">
   <design>
     <element id="search_cruscotto_base" title="Cruscotto (Istruttore)" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">search_cruscotto_base</id>
