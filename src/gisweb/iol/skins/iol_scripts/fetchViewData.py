@@ -23,8 +23,6 @@ def main():
 
     data = []
     categorized = context.getCategorized()
-    #start = 1
-    #limit = -1
     search = None
     sort_index = None
 
@@ -68,7 +66,7 @@ def main():
     columnids = [col.id for col in context.getColumns()
             if not getattr(col, 'HiddenColumn', False)]
     for b in results:
-        row = [b.getPath().split('/')[-1]]
+        row = [b.getPath()] # [b.getPath().split('/')[-1]]
         for colid in columnids:
             v = getattr(b, context.getIndexKey(colid), '')
             if isinstance(v, basestring):
@@ -85,7 +83,7 @@ def main():
             data.append(row)
 
     if as_dict:
-        data = map(lambda row: dict(zip(['id']+columnids, row)), data)
+        data = map(lambda row: dict(zip(['url']+columnids, row)), data)
 
     if as_json:
         context.REQUEST.RESPONSE.setHeader("Content-type", "application/json")
