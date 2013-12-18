@@ -11,8 +11,8 @@
             tal:define="param python:field.getSettings().getParameters();
                         request_items python:field.getSettings().request_items_aoData(request);"
             tal:content="structure string:
-                        $$(document).ready(function() {
-                            $$('#${fieldname}_datagrid').dataTable( {
+                        jQuery(document).ready(function() {
+                            jQuery('#${fieldname}_datagrid').dataTable( {
                                 'sAjaxSource': 'tojson?item=${fieldname}&datatables=true',
                                 'sServerMethod': 'POST',
                                 'fnServerParams': function ( aoData ) {

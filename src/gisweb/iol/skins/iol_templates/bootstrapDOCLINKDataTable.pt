@@ -1,11 +1,11 @@
 <span tal:define="widget python:options['field'].getSettings('widget');
 		selection python:options['selection'];
 		name python:options['fieldname'];
-                fieldname name;
-                title python:options['field'].title;
-                ttip_title title;
-                ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
-                custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
+        fieldname name;
+        title python:options['field'].title;
+        ttip_title title;
+        ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
+        custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
 		current python:options['fieldvalue'];
 		lcurrent python:test(hasattr(current,'split'),[current],current);
 		lcurrent_ids python:[p.split('/')[-1] for p in lcurrent];
@@ -22,7 +22,7 @@
      docId python:doc.isDocument() and doc.getId();
      showLink python:0 if doc.isDocument() and not doc.checkIolPermission('edit') or doc.isEditMode() else 1;
      editMode python:1 if not doc.isDocument() or doc.isEditMode() else 0;			
-                data selection;
+            data selection;
 	    	cols python:options['field'].getSettings().getJQueryColumns();
 	    	params python:options['field'].getSettings('dynamictableparam');
 	    	selected python:'|'.join(lcurrent_ids+lcurrent);

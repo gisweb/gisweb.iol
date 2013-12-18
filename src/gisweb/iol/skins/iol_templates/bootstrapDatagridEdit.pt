@@ -11,21 +11,17 @@
             formname python:field.getParentNode().id;
             associated_form python:field.getSettings().associated_form;
             ">
-<input type='hidden'
-    tal:attributes="
+<input type="hidden" tal:attributes="
             id string:${fieldname}_gridvalue;
             name fieldname;
             value data"/>
-
-    <script 
-        type="text/javascript"
-        charset="utf-8"
+    <script type="text/javascript" charset="utf-8"
         tal:define="param python:field.getSettings().getParameters();
-                    request_items python:field.getSettings().request_items_aoData(request);"
+            request_items python:field.getSettings().request_items_aoData(request);"
             tal:content="structure string:
                 var ${fieldname}_datatable;
-                $$(document).ready(function() {
-                    ${fieldname}_datatable = $$('#${fieldname}_datagrid').dataTable( {
+                jQuery(document).ready(function() {
+                    ${fieldname}_datatable = jQuery('#${fieldname}_datagrid').dataTable( {
                         'sAjaxSource': 'tojson?item=${fieldname}&datatables=true',
                         'sServerMethod': 'POST',
                         'fnServerParams': function ( aoData ) {
@@ -33,12 +29,14 @@
                         },
                         'bJQueryUI': false,
                         ${param},
-                        'fnDrawCallback': function() {
-                            $$('#${fieldname}_datagrid > tbody > tr').click(function() {
+                        'fnDrawCallback': function() {                           
+						    jQuery('#${fieldname}_editrow').addClass('disabled');
+                            jQuery('#${fieldname}_deleterow').addClass('disabled');
+                            jQuery('#${fieldname}_datagrid > tbody > tr').click(function() {
                                 datagrid_deselect_rows(${fieldname}_datatable);
-                                $$(this).addClass('datagrid_row_selected');
-                                $$('#${fieldname}_editrow').attr('disabled',false);
-                                $$('#${fieldname}_deleterow').attr('disabled',false);
+                                jQuery(this).addClass('datagrid_row_selected');
+                                jQuery('#${fieldname}_editrow').removeClass('disabled');
+                                jQuery('#${fieldname}_deleterow').removeClass('disabled');
                             });
                         },
                         'oLanguage': {
@@ -46,33 +44,33 @@
                         }
                     } );
 
-        			$$('#${fieldname}_addrow').click(function(e) {
+        			jQuery('#${fieldname}_addrow').click(function(e) {
                         e.preventDefault();
                         showLoading();
         				datagrid_add_row(${fieldname}_datatable, '${fieldname}', '../${associated_form}/OpenBareForm?Plomino_Parent_Field=${fieldname}&Plomino_Parent_Form=${formname}&numrows=' + ${fieldname}_datatable.fnGetData().length);
-                        $$('#info-loading').fadeOut(1000);
+                        jQuery('#info-loading').fadeOut(1000);
         			});
-        			$$('#${fieldname}_editrow').click(function(e) {  
+        			jQuery('#${fieldname}_editrow').click(function(e) {  
                         e.preventDefault();
         				datagrid_edit_row(${fieldname}_datatable, '${fieldname}', '../${associated_form}/OpenBareForm?Plomino_Parent_Field=${fieldname}&Plomino_Parent_Form=${formname}');
         			});
-        			$$('#${fieldname}_deleterow').button({'label':'Elimina'}).click(function(e) {
+        			jQuery('#${fieldname}_deleterow').button({'label':'Elimina'}).click(function(e) {
                         e.preventDefault();
         				datagrid_delete_row(${fieldname}_datatable, '${fieldname}');
-                        $$('#${fieldname}_editrow').attr('disabled',true);
-                        $$('#${fieldname}_deleterow').attr('disabled',true);
+                        jQuery('#${fieldname}_editrow').attr('disabled',true);
+                        jQuery('#${fieldname}_deleterow').attr('disabled',true);
         			});
 
         			var s = ${fieldname}_datatable.fnSettings();
                     var windowWidth = s.oInit.winW||800;
                     var windowHeight = s.oInit.winH||600;
-        			$$('#${fieldname}_editform').dialog({ 'autoOpen': false, 'modal': true, 'width': windowWidth, 'height': windowHeight });
+        			jQuery('#${fieldname}_editform').dialog({ 'autoOpen': false, 'modal': true, 'width': windowWidth, 'height': windowHeight });
                 } );">
     </script>
                 
     <label tal:condition="python:title!=':'" class="control-label" 
                tal:define="data_mandatory python: 'data-mandatory' if 'data-mandatory' in custom_attributes else '';
-                            mandatory python: 'mandatory' if options['field'].getMandatory() else ''">
+               mandatory python: 'mandatory' if options['field'].getMandatory() else ''">
             <span tal:condition="mandatory" class="mandatory" title="Obbligatorio">■</span>
             <span tal:condition="data_mandatory" class="data-mandatory" title="Obbligatorio per invio">■</span> 
             <span tal:content="python:'%s: ' % title">Titolo</span>
