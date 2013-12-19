@@ -30,13 +30,14 @@
                         'bJQueryUI': false,
                         ${param},
                         'fnDrawCallback': function() {                           
-						    jQuery('#${fieldname}_editrow').addClass('disabled');
+                            jQuery('#${fieldname}_editrow').addClass('disabled');
                             jQuery('#${fieldname}_deleterow').addClass('disabled');
                             jQuery('#${fieldname}_datagrid > tbody > tr').click(function() {
                                 datagrid_deselect_rows(${fieldname}_datatable);
                                 jQuery(this).addClass('datagrid_row_selected');
                                 jQuery('#${fieldname}_editrow').removeClass('disabled');
                                 jQuery('#${fieldname}_deleterow').removeClass('disabled');
+                                console.log('dfsdfsf')
                             });
                         },
                         'oLanguage': {
@@ -57,8 +58,8 @@
         			jQuery('#${fieldname}_deleterow').button({'label':'Elimina'}).click(function(e) {
                         e.preventDefault();
         				datagrid_delete_row(${fieldname}_datatable, '${fieldname}');
-                        jQuery('#${fieldname}_editrow').attr('disabled',true);
-                        jQuery('#${fieldname}_deleterow').attr('disabled',true);
+                        jQuery('#${fieldname}_editrow').addClass('disabled');
+                        jQuery('#${fieldname}_deleterow').addClass('disabled');
         			});
 
         			var s = ${fieldname}_datatable.fnSettings();
@@ -83,9 +84,9 @@
     <div class="btn-group">       
           <button class="btn" tal:attributes="id string:${fieldname}_addrow;">Aggiungi</button>
   
-          <button class="btn" disabled="disabled" tal:attributes="id string:${fieldname}_editrow;">Modifica</button>
+          <button class="btn" tal:attributes="id string:${fieldname}_editrow;">Modifica</button>
  
-          <button class="btn" disabled="disabled" tal:attributes="id string:${fieldname}_deleterow;">Elimina</button>
+          <button class="btn" tal:attributes="id string:${fieldname}_deleterow;">Elimina</button>
     </div> 
                 
 </tal:block>

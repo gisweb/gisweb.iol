@@ -10,7 +10,19 @@
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[#
 context.frm_beforeCreateDocument(child_events=True, msg='', redirect_to='search_istanze_integrabili')]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoSubformClass">base_sub_pratica</span></p><p><span class="plominoSubformClass">sub_pratica_integrazione_parent</span></p><p><span class="plominoSubformClass">sub_pratica_parent</span></p><p><span class="plominoHidewhenClass">start:hw_se_editmode</span></p><p><span class="plominoFieldClass">linkToParent</span></p><p><span class="plominoHidewhenClass">end:hw_se_editmode</span></p><div class="v-content well"><p>Il/La sottoscritto/a <span class="plominoFieldClass">richiedente_parent</span>, <span class="plominoFieldClass">ragsoc_parent</span></p><h5 style="text-align: center; ">dichiara</h5><div>sotto la propria responsabilità la necessità di integrare il periodo di validità della pratica n° <b><span class="plominoFieldClass">numero_pratica_parent</span></b> autorizzata il <b><span class="plominoFieldClass">data_autorizzazione_parent</span></b> con numero di autorizzazione <b><span class=" plominoFieldClass">numero_autorizzazione_parent</span></b>.</div><h3 class="v-content-title" id="Richiesta">Dati della richiesta dell'Integrazione</h3><p><span class="plominoSubformClass">base_sub_integrazione</span></p></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoSubformClass">base_sub_pratica</span></p>
+<p><span class="plominoSubformClass">sub_pratica_integrazione_parent</span></p>
+<p><span class="plominoSubformClass">sub_pratica_parent</span></p>
+<p><span class="plominoHidewhenClass">start:hw_se_editmode</span></p>
+<p><span class="plominoFieldClass">linkToParent</span></p>
+<p><span class="plominoHidewhenClass">end:hw_se_editmode</span></p>
+<div class="v-content well">
+<p>Il/La sottoscritto/a <span class="plominoFieldClass">richiedente_parent</span>, <span class="plominoFieldClass">ragsoc_parent</span></p>
+<h5 style="text-align: center; ">dichiara</h5>
+<div>sotto la propria responsabilità la necessità di integrare il periodo di validità della pratica n° <b><span class="plominoFieldClass">numero_pratica_parent</span></b> autorizzata il <b><span class="plominoFieldClass">data_autorizzazione_parent</span></b> con numero di autorizzazione <b><span class=" plominoFieldClass">numero_autorizzazione_parent</span></b>.</div>
+<h3 class="v-content-title" id="Richiesta">Dati della richiesta dell'Integrazione</h3>
+<p><span class="plominoSubformClass">base_sub_integrazione</span></p>
+</div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>

@@ -9,7 +9,16 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_onDeleteDocument(kin_events='child', anchor=False)]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[context.frm_beforeCreateDocument(child_events=True, msg='', redirect_to='search_istanze_rinnovabili')]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="v-content well"><span class="plominoSubformClass">base_sub_pratica</span></div><div class="v-content well"><p>Il/La sottoscritto/a <span class="plominoFieldClass">richiedente_view</span>, <span class="plominoFieldClass">ragsoc_view</span></p><h5 style="text-align: center; ">dichiara</h5><div>sotto la propria responsabilità la necessità di rinnovare il periodo di validità della pratica n° <b><span class="plominoFieldClass">numero_pratica_view</span></b> autorizzata il <b><span class="plominoFieldClass">data_autorizzazione_view</span></b> con numero di autorizzazione <b><span class="plominoFieldClass">numero_autorizzazione_view</span></b>.</div><h3 class="v-content-title" id="Richiesta">Dati della richiesta del rinnovo</h3><div class="row-fluid"><div class="span12"><span class="plominoFieldClass">motivazione</span></div></div></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div class="v-content well"><span class="plominoSubformClass">base_sub_pratica</span></div>
+<div class="v-content well">
+<p>Il/La sottoscritto/a <span class="plominoFieldClass">richiedente_view</span>, <span class="plominoFieldClass">ragsoc_view</span></p>
+<h5 style="text-align: center; ">dichiara</h5>
+<div>sotto la propria responsabilità la necessità di rinnovare il periodo di validità della pratica n° <b><span class="plominoFieldClass">numero_pratica_view</span></b> autorizzata il <b><span class="plominoFieldClass">data_autorizzazione_view</span></b> con numero di autorizzazione <b><span class="plominoFieldClass">numero_autorizzazione_view</span></b>.</div>
+<h3 class="v-content-title" id="Richiesta">Dati della richiesta del rinnovo</h3>
+<div class="row-fluid">
+<div class="span12"><span class="plominoFieldClass">motivazione</span></div>
+</div>
+</div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
