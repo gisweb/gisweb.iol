@@ -56,9 +56,7 @@ return '%s' %url]]></Content>
           <Content type="Products.Archetypes.Field.TextField"><![CDATA['%s/%s/EditDocument' %(plominoDocument.getParentDatabase().absolute_url(),plominoDocument.getId())]]></Content>
           <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.isEditMode():
     return True
-
-from gisweb.utils import getUserPermissions
-return 'EDIT_PERMISSION' not in getUserPermissions(plominoDocument)]]></Hidewhen>
+return not plominoDocument.checkIolPermission('edit')]]></Hidewhen>
           <InActionBar type="Products.Archetypes.Field.BooleanField">True</InActionBar>
         </element>
         <element id="btn_elimina" title="Elimina" type="PlominoAction">
@@ -68,8 +66,7 @@ return 'EDIT_PERMISSION' not in getUserPermissions(plominoDocument)]]></Hidewhen
           <Content type="Products.Archetypes.Field.TextField"><![CDATA['%s/delete?returnurl=%s'  %(context.absolute_url(),context.getParentDatabase().absolute_url())]]></Content>
           <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.isEditMode():
     return True
-from gisweb.utils import getUserPermissions
-return 'REMOVE_PERMISSION' not in getUserPermissions(plominoDocument)]]></Hidewhen>
+return not plominoDocument.checkIolPermission('remove')]]></Hidewhen>
           <InActionBar type="Products.Archetypes.Field.BooleanField">False</InActionBar>
         </element>
         <element id="btn_home" title="Home" type="PlominoAction">
