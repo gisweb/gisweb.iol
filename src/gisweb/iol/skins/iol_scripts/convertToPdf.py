@@ -28,7 +28,7 @@ serviceURL = context.get_property('ws_converttopdf_URL').get('value')
 
 files = doc.getItem(file_type, {})
 filename = files.keys()[-1]
-newfilename = filename.replace('.docx','.pdf')
+newfilename = filename.replace('.docx','.pdf').replace('.odt','.pdf')
 #info = doc.naming() # variabile non usata
 docurl='%s/%s' %(doc.absolute_url(),filename)
 
