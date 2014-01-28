@@ -1,0 +1,155 @@
+<!-- DEFINIZIONI DI VARIABILI GLOBALI -->
+<div tal:on-error="structure container/handleError">
+    
+    <tal:parameters tal:define="doc options/doc;"> 
+        
+    <tal:defs tal:define="global db python: doc.getParentDatabase();
+        global dburl python: doc.getParentDatabase().absolute_url();
+        global myForm python: doc if not doc.isDocument() else doc.getForm();
+        global tipoApp python: doc.naming('tipo_app');
+        global tipoRichiesta python: doc.naming('tipo_richiesta');
+        global wf_id python: 'iol_workflow';
+        global myForm python:doc.getForm();" />
+    
+    
+    
+    
+     <div class="row-fluid"
+            tal:condition="python: doc.wf_getInfoFor('wf_presentata') and (doc.verificaRuolo('iol-manager') or doc.verificaRuolo('iol-reviewer'))">
+            <div class="span4"
+                tal:content="structure python: myForm.getFormField('istruttore').getFieldRender(myForm, doc, doc.isEditMode(), False, request=doc.REQUEST)"></div>
+            
+        </div>
+
+        <div class="row-fluid">
+            <div class="span4"
+                tal:repeat="campo python: ('numero_pratica', 'data_pratica', )"
+                tal:content="structure python: doc.getRenderedItem(campo)"></div>
+        </div> 
+        
+        
+         <tal:block tal:define="allegati python: doc.getItem('documenti_pdf', {})"
+            tal:condition="python: doc.wf_getInfoFor('wf_protocollata')">
+             <div class="row-fluid">
+                <div class="span4"
+                    tal:repeat="campo python: ('numero_protocollo', 'data_protocollo', )"
+                    tal:content="structure python: doc.getRenderedItem(campo)" />
+                <div class="span4">
+                    <ul aria-labelledby="dLabel" tal:repeat="attachment allegati">
+                        <li><a target="new" tal:attributes="href python:'getfile?filename='+attachment" >
+                            <img src="images/pdf.gif" /> &nbsp;
+                            <span tal:content="python: '.'.join(attachment.split('.')[:-1]).capitalize().replace('_',' ')"/>
+                        </a></li>
+                    </ul>
+                </div>
+            </div> 
+        </tal:block>      
+            
+       <!-- <div class="row-fluid">
+            <div class="span4"
+                tal:repeat="campo python: ('numero_autorizzazione', 'data_autorizzazione', )"
+                tal:content="structure python: doc.getRenderedItem(campo)"></div>
+        </div> -->
+        
+    
+        
+         <tal:block tal:define="allegati python: doc.getItem('documenti_pdf', {})"
+            tal:condition="python: doc.wf_getInfoFor('wf_protocollata')">
+         <!-- DOMANDA AUTORIZZATA -->
+            <div tal:define="allegati python: doc.getItem('documenti', {})"
+                tal:condition="python: 'value' in db.get_property('documenti_autorizzazione') and doc.wf_getInfoFor('wf_autorizzata')" class="row-fluid">
+                     <div class="alert alert-info">   
+     <div class="row-fluid">
+         <div class="span12">
+             <h4>Attenzione assicurarsi di caricare documenti in formatoWord (docx)</h4>
+             
+        </div>
+        </div>   
+        </div>   
+        
+                <div class="span4"
+                 tal:repeat="campo python: ('numero_autorizzazione', 'data_autorizzazione', )"
+                    tal:content="structure python: doc.getRenderedItem(campo)" />
+                <div class="dropdown span4">
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" tal:repeat="attachment allegati">
+                        <li><a href="#"
+                            tal:attributes="href python:'getfile?filename='+attachment">
+                            <img src="images/word.gif" /> &nbsp;Documento di autorizzazione
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </tal:block>
+
+        <div class="boxupload">
+            <div class="row-fluid" tal:condition="python: 'value' in db.get_property('documenti_autorizzazione') and doc.wf_getInfoFor('action')=='istruttoria_completata'">
+                <div class="span12"
+                    tal:content="structure python: myForm.getFormField('documenti_autorizzazione').getFieldRender(form=myForm,doc=doc,editmode=True,creation=False)" />
+            </div>
+            <tal:autorizzata tal:condition="python: doc.wf_getInfoFor('wf_autorizzata')">
+                <div class="row-fluid" tal:condition="python:'value' in db.get_property('documenti_autorizzazione')">
+                    <div class="span12"
+                        tal:content="structure python: myForm.getFormField('documenti_autorizzazione').getFieldRender(form=myForm,doc=doc,editmode=True,creation=False)" />
+                </div>
+                <div class="row-fluid" tal:condition="python:'value' in db.get_property('documenti_appendice')">
+                    <div class="span12"
+                        tal:content="structure python: myForm.getFormField('documenti_appendice').getFieldRender(form=myForm,doc=doc,editmode=True,creation=False)" />
+                </div>
+
+                <div class="row-fluid" tal:condition="python:'value' in db.get_property('documenti_ordinanza')">
+                    <div class="span12"
+                        tal:content="structure python: myForm.getFormField('documenti_ordinanza').getFieldRender(form=myForm,doc=doc,editmode=True,creation=False)" />
+                </div>
+            </tal:autorizzata>
+        </div>
+            
+            
+       
+    
+    
+    
+    <div class="alert alert-info" tal:condition="python:bool(doc.wf_getInfoFor('wf_presentata')) and (doc.verificaRuolo('iol-manager') or doc.verificaRuolo('iol-reviewer'))">
+            <tal:cond tal:define="fields python: ['istruttoria_prescrizioni','istruttoria_annotazioni']" tal:repeat="campo fields">
+            <div class="row-fluid" >
+                <div class="span12" tal:content="structure python: myForm.getFormField(campo).getFieldRender(myForm, doc, doc.isEditMode(), False, request=doc.REQUEST)"></div>
+            </div>
+            </tal:cond>
+            <tal:cond tal:condition="python:bool(doc.wf_getInfoFor('wf_autorizzata')) and doc.verificaRuolo('iol-manager')" tal:define="fields python: ['integrazione_autorizzazione']" tal:repeat="campo fields">
+            <div class="row-fluid" >
+                <div class="span12" tal:content="structure python: myForm.getFormField(campo).getFieldRender(myForm, doc, doc.isEditMode(), False, request=doc.REQUEST)"></div>
+            </div>
+            </tal:cond>
+        </div>  
+        
+         <!-- PARTE DI SOSPENSIONE -->
+       <div class="alert alert-info" tal:condition="python:bool(doc.wf_getInfoFor('wf_sospesa'))">
+            <tal:cond tal:condition="python:bool(doc.verificaRuolo('iol-manager') or doc.verificaRuolo('iol-reviewer'))" tal:define="fields python: ['istruttoria_motivo_sospensione']" tal:repeat="campo fields">
+            <div class="row-fluid">
+                <div class="span12" tal:content="structure python: myForm.getFormField(campo).getFieldRender(myForm, doc, doc.isEditMode(), False, request=doc.REQUEST)"></div>
+            </div>
+            </tal:cond>
+            <tal:cond tal:condition="python:(doc.verificaRuolo('iol-manager') or doc.verificaRuolo('Owner'))" tal:define="fields python: ['istruttoria_annotazioni_sospensione_richiedente']" tal:repeat="campo fields">
+            <div class="row-fluid" >
+                <div class="span12" tal:content="structure python: myForm.getFormField(campo).getFieldRender(myForm, doc, doc.isEditMode(), False, request=doc.REQUEST)"></div>
+            </div>
+            </tal:cond>
+        </div>
+        
+        
+          <!-- PARTE DI RIGETTO -->
+        <div class="alert alert-info" tal:condition="python:bool(doc.wf_getInfoFor('wf_prerigetto'))">
+            <tal:cond tal:condition="python:(doc.verificaRuolo('iol-manager') or doc.verificaRuolo('iol-reviewer'))" tal:define="fields python: ['istruttoria_rigetto_motivazione','istruttoria_rigetto_controdeduzioni','istruttoria_rigetto_annotazioni_richiedente']" tal:repeat="campo fields">
+            <div class="row-fluid" >
+                <div class="span12" tal:content="structure python: myForm.getFormField(campo).getFieldRender(myForm, doc, doc.isEditMode(), False, request=doc.REQUEST)"></div>
+            </div>
+            </tal:cond>
+            <tal:cond tal:condition="python:(doc.verificaRuolo('iol-manager') or doc.verificaRuolo('Owner'))" tal:define="fields python: ['istruttoria_rigetto_annotazioni_richiedente']" tal:repeat="campo fields">
+            <div class="row-fluid" >
+                <div class="span12" tal:content="structure python: myForm.getFormField(campo).getFieldRender(myForm, doc, doc.isEditMode(), False, request=doc.REQUEST)"></div>
+            </div>
+            </tal:cond>
+        </div>
+        
+        
+    </tal:parameters>   
+</div>

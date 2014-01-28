@@ -1,0 +1,49 @@
+<!-- DEFINIZIONI DI VARIABILI GLOBALI -->
+<div tal:define="block string: wf_fields" tal:on-error="structure container/handleError">
+    
+    <tal:parameters tal:define="doc options/doc;"> 
+        <tal:defs tal:define="docId python:context.REQUEST.get('document_to_display',context.REQUEST.PARENTS[0].getId());
+                      global docurl python:doc.absolute_url();
+                      global db python: doc.getParentDatabase();
+                      global dburl python:doc.getParentDatabase().absolute_url();
+                      global formName python: doc.getForm().getFormName() if doc.isDocument() else doc.getId();
+                      global tipoApp  python: doc.getItem('tipo_app');
+                      global tipoRichiesta  python: doc.getItem('tipo_richiesta');
+                      global wf_id python: 'iol_workflow';
+                      global status python: doc.wf_getInfoFor('review_state');" />
+        
+     
+        <div tal:define="block string: Fields rich text" tal:on-error="structure container/handleError">
+    
+<!-- PARTE DI ISTRUTTORIA -->
+<div class="alert alert-info" tal:condition="python:bool(doc.wf_getInfoFor('wf_presentata'))">
+    <tal:cond tal:define="fields python: ['istruttoria_prescrizioni','istruttoria_annotazioni']" tal:repeat="campo fields">
+    <div class="row-fluid" >
+        <div class="span12" tal:content="structure python: doc.getRenderedItem(campo)"></div>
+    </div>
+    </tal:cond>
+    <tal:cond tal:condition="python:bool(doc.wf_getInfoFor('wf_autorizzata'))" tal:define="fields python: ['integrazione_autorizzazione']" tal:repeat="campo fields">
+    <div class="row-fluid" >
+        <div class="span12" tal:content="structure python: doc.getRenderedItem(campo)"></div>
+    </div>
+    </tal:cond>
+</div>
+<!-- PARTE DI SOSPENSIONE -->
+<div class="alert alert-info" tal:condition="python:bool(doc.wf_getInfoFor('wf_sospesa'))">
+    <tal:cond  tal:define="fields python: ['istruttoria_motivo_sospensione','istruttoria_annotazioni_sospensione_richiedente']" tal:repeat="campo fields">
+    <div class="row-fluid" >
+        <div class="span12" tal:content="structure python: doc.getRenderedItem(campo)"></div>
+    </div>
+    </tal:cond>
+</div>
+<!-- PARTE DI RIGETTO -->
+<div class="alert alert-info" tal:condition="python:bool(doc.wf_getInfoFor('wf_prerigetto'))">
+    <tal:cond tal:define="fields python: ['istruttoria_rigetto_motivazione','istruttoria_rigetto_controdeduzioni','istruttoria_rigetto_annotazioni_richiedente']" tal:repeat="campo fields">
+    <div class="row-fluid" >
+        <div class="span12" tal:content="structure python: doc.getRenderedItem(campo)"></div>
+    </div>
+    </tal:cond>
+</div>
+      </div>
+    </tal:parameters>
+</div>
