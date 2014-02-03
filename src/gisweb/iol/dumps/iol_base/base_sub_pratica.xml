@@ -2,23 +2,23 @@
   <design>
     <element id="base_sub_pratica" title="subform base pratica" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_sub_pratica</id>
-      <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
-      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onOpenDocument>
-      <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
-      <onSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSaveDocument>
-      <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
-      <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
-      <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
+      <onCreateDocument type="Products.Archetypes.Field.TextField"></onCreateDocument>
+      <onOpenDocument type="Products.Archetypes.Field.TextField"></onOpenDocument>
+      <beforeSaveDocument type="Products.Archetypes.Field.TextField"></beforeSaveDocument>
+      <onSaveDocument type="Products.Archetypes.Field.TextField"></onSaveDocument>
+      <onDeleteDocument type="Products.Archetypes.Field.TextField"></onDeleteDocument>
+      <onSearch type="Products.Archetypes.Field.TextField"></onSearch>
+      <beforeCreateDocument type="Products.Archetypes.Field.TextField"></beforeCreateDocument>
       <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p><span class="plominoFieldClass">wf_iol</span></p>]]></FormLayout>
-      <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
-      <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
+      <DocumentTitle type="Products.Archetypes.Field.TextField"></DocumentTitle>
+      <DocumentId type="Products.Archetypes.Field.TextField"></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
       <HideDefaultActions type="Products.Archetypes.Field.BooleanField">True</HideDefaultActions>
       <HideInMenu type="Products.Archetypes.Field.BooleanField">True</HideInMenu>
       <isSearchForm type="Products.Archetypes.Field.BooleanField">False</isSearchForm>
       <isPage type="Products.Archetypes.Field.BooleanField">False</isPage>
       <SearchView type="Products.Archetypes.Field.StringField"/>
-      <SearchFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></SearchFormula>
+      <SearchFormula type="Products.Archetypes.Field.TextField"></SearchFormula>
       <Position type="Products.Archetypes.Field.IntegerField">1</Position>
       <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
       <elements>
@@ -31,7 +31,7 @@ return context.numerazione()]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapNumberRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapNumberRead</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -59,7 +59,7 @@ return result]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -87,7 +87,7 @@ return result]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -105,7 +105,7 @@ return result]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -127,9 +127,19 @@ return result]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <params>
+<param>
+<value><struct>
+<member>
+<name>format</name>
+<value><string>%d/%m/%Y</string></value>
+</member>
+</struct></value>
+</param>
+</params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
               <field name="fieldDescription">Data di creazione della pratica.</field>
@@ -141,11 +151,11 @@ return result]]></Formula>
           <id type="Products.Archetypes.Field.StringField">numero_protocollo</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -159,11 +169,11 @@ return result]]></Formula>
           <id type="Products.Archetypes.Field.StringField">data_protocollo</id>
           <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DateIndex</IndexType>
           <params>
@@ -187,11 +197,11 @@ return result]]></Formula>
           <id type="Products.Archetypes.Field.StringField">numero_autorizzazione</id>
           <FieldType type="Products.Archetypes.Field.StringField">NUMBER</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapNumberRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapNumberEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -205,11 +215,11 @@ return result]]></Formula>
           <id type="Products.Archetypes.Field.StringField">data_autorizzazione</id>
           <FieldType type="Products.Archetypes.Field.StringField">DATETIME</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -223,11 +233,11 @@ return result]]></Formula>
           <id type="Products.Archetypes.Field.StringField">wf_iol</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapWF-IOL-Read</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapWF-IOL-Edit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -245,7 +255,7 @@ return result]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -276,7 +286,7 @@ return list]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">template.ol</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">template.ol</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
@@ -292,12 +302,12 @@ return list]]></Formula>
 'bAutoWidth': false</string></value>
 </member>
 <member>
-<name>widget</name>
-<value><string>MULTISELECT</string></value>
-</member>
-<member>
 <name>separator</name>
 <value><string>&lt;br&gt;</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>MULTISELECT</string></value>
 </member>
 </struct></value>
 </param>
@@ -313,7 +323,7 @@ return list]]></Formula>
           <id type="Products.Archetypes.Field.StringField">btn_salva</id>
           <ActionType type="Products.Archetypes.Field.StringField">SAVE</ActionType>
           <ActionDisplay type="Products.Archetypes.Field.StringField">SUBMIT</ActionDisplay>
-          <Content type="Products.Archetypes.Field.TextField"><![CDATA[]]></Content>
+          <Content type="Products.Archetypes.Field.TextField"></Content>
           <Hidewhen type="Products.Archetypes.Field.TextField"><![CDATA[if not plominoDocument.isEditMode():
     return True
 else:
@@ -359,11 +369,11 @@ return 'REMOVE_PERMISSION' not in getUserPermissions(plominoDocument)]]></Hidewh
           <id type="Products.Archetypes.Field.StringField">documenti_pdf</id>
           <FieldType type="Products.Archetypes.Field.StringField">ATTACHMENT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapAttachmentRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapAttachmentRead</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -377,11 +387,11 @@ return 'REMOVE_PERMISSION' not in getUserPermissions(plominoDocument)]]></Hidewh
           <id type="Products.Archetypes.Field.StringField">documenti</id>
           <FieldType type="Products.Archetypes.Field.StringField">ATTACHMENT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapFSDocumentRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapFSDocumentRead</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -414,7 +424,7 @@ return 'REMOVE_PERMISSION' not in getUserPermissions(plominoDocument)]]></Hidewh
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">ZCTextIndex</IndexType>
           <CustomData>
@@ -436,11 +446,11 @@ return 'REMOVE_PERMISSION' not in getUserPermissions(plominoDocument)]]></Hidewh
           <id type="Products.Archetypes.Field.StringField">autorizzata_dal</id>
           <FieldType type="Products.Archetypes.Field.StringField">DATETIME</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
@@ -468,7 +478,7 @@ return 'REMOVE_PERMISSION' not in getUserPermissions(plominoDocument)]]></Hidewh
           <id type="Products.Archetypes.Field.StringField">autorizzata_al</id>
           <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
@@ -529,22 +539,16 @@ return '']]></ValidationFormula>
           <id type="Products.Archetypes.Field.StringField">modello_autorizzazione</id>
           <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">DISPLAY</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
 <param>
 <value><struct>
-<member>
-<name>selectionlistformula</name>
-<value><string># valori possibili: autorizzazione, proroga, rinnovo
-sub_path = context.naming('iol_tipo_richiesta').replace('base', 'autorizzazione')
-return context.elenco_modelli(sub_path)</string></value>
-</member>
 <member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
@@ -553,6 +557,12 @@ return context.elenco_modelli(sub_path)</string></value>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>selectionlistformula</name>
+<value><string># valori possibili: autorizzazione, proroga, rinnovo
+sub_path = context.naming('iol_tipo_richiesta').replace('base', 'autorizzazione')
+return context.elenco_modelli(sub_path)</string></value>
 </member>
 </struct></value>
 </param>
@@ -568,11 +578,11 @@ return context.elenco_modelli(sub_path)</string></value>
           <id type="Products.Archetypes.Field.StringField">numero_ordinanza</id>
           <FieldType type="Products.Archetypes.Field.StringField">NUMBER</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapNumberRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapNumberRead</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -586,11 +596,11 @@ return context.elenco_modelli(sub_path)</string></value>
           <id type="Products.Archetypes.Field.StringField">data_ordinanza</id>
           <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -604,20 +614,16 @@ return context.elenco_modelli(sub_path)</string></value>
           <id type="Products.Archetypes.Field.StringField">modello_ordinanza</id>
           <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">DISPLAY</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
 <param>
 <value><struct>
-<member>
-<name>selectionlistformula</name>
-<value><string>return context.elenco_modelli('ordinanza') or []</string></value>
-</member>
 <member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
@@ -626,6 +632,10 @@ return context.elenco_modelli(sub_path)</string></value>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>selectionlistformula</name>
+<value><string>return context.elenco_modelli('ordinanza') or []</string></value>
 </member>
 </struct></value>
 </param>
@@ -641,20 +651,16 @@ return context.elenco_modelli(sub_path)</string></value>
           <id type="Products.Archetypes.Field.StringField">modello_appendice</id>
           <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">DISPLAY</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
 <param>
 <value><struct>
-<member>
-<name>selectionlistformula</name>
-<value><string>return context.elenco_modelli('appendice') or []</string></value>
-</member>
 <member>
 <name>dynamictableparam</name>
 <value><string>'bPaginate': true,
@@ -663,6 +669,10 @@ return context.elenco_modelli(sub_path)</string></value>
 'bSort': true,
 'bInfo': true,
 'bAutoWidth': false</string></value>
+</member>
+<member>
+<name>selectionlistformula</name>
+<value><string>return context.elenco_modelli('appendice') or []</string></value>
 </member>
 </struct></value>
 </param>
@@ -678,11 +688,11 @@ return context.elenco_modelli(sub_path)</string></value>
           <id type="Products.Archetypes.Field.StringField">documenti_autorizzazione</id>
           <FieldType type="Products.Archetypes.Field.StringField">ATTACHMENT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapAttachmentDocs</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapAttachmentEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
@@ -706,11 +716,11 @@ return context.elenco_modelli(sub_path)</string></value>
           <id type="Products.Archetypes.Field.StringField">documenti_ordinanza</id>
           <FieldType type="Products.Archetypes.Field.StringField">ATTACHMENT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapAttachmentDocs</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapAttachmentEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -724,11 +734,11 @@ return context.elenco_modelli(sub_path)</string></value>
           <id type="Products.Archetypes.Field.StringField">documenti_appendice</id>
           <FieldType type="Products.Archetypes.Field.StringField">ATTACHMENT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapAttachmentDocs</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapAttachmentEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -742,16 +752,25 @@ return context.elenco_modelli(sub_path)</string></value>
           <id type="Products.Archetypes.Field.StringField">istruttore</id>
           <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
 <param>
 <value><struct>
+<member>
+<name>dynamictableparam</name>
+<value><string>'bPaginate': true,
+'bLengthChange': true,
+'bFilter': true,
+'bSort': true,
+'bInfo': true,
+'bAutoWidth': false</string></value>
+</member>
 <member>
 <name>selectionlistformula</name>
 <value><string>from Products.CMFPlomino.PlominoUtils import userFullname
@@ -767,15 +786,6 @@ if not users and context.test_mode():
 
 return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=userFullname(db,usr)) for usr in users]</string></value>
 </member>
-<member>
-<name>dynamictableparam</name>
-<value><string>'bPaginate': true,
-'bLengthChange': true,
-'bFilter': true,
-'bSort': true,
-'bInfo': true,
-'bAutoWidth': false</string></value>
-</member>
 </struct></value>
 </param>
 </params>
@@ -790,11 +800,11 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
           <id type="Products.Archetypes.Field.StringField">istruttoria_annotazioni</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
@@ -818,11 +828,11 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
           <id type="Products.Archetypes.Field.StringField">istruttoria_prescrizioni</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
@@ -846,11 +856,11 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
           <id type="Products.Archetypes.Field.StringField">integrazione_autorizzazione</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
@@ -874,11 +884,11 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
           <id type="Products.Archetypes.Field.StringField">istruttoria_annotazioni_richiedente</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
@@ -902,23 +912,23 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
           <id type="Products.Archetypes.Field.StringField">istruttoria_motivo_sospensione</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
 <param>
 <value><struct>
 <member>
-<name>widget</name>
-<value><string>TEXTAREA</string></value>
-</member>
-<member>
 <name>size</name>
 <value><string>10</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>TEXTAREA</string></value>
 </member>
 </struct></value>
 </param>
@@ -934,23 +944,23 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
           <id type="Products.Archetypes.Field.StringField">istruttoria_annotazioni_sospensione_richiedente</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
 <param>
 <value><struct>
 <member>
-<name>widget</name>
-<value><string>TEXTAREA</string></value>
-</member>
-<member>
 <name>size</name>
 <value><string>6</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>TEXTAREA</string></value>
 </member>
 </struct></value>
 </param>
@@ -966,23 +976,23 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
           <id type="Products.Archetypes.Field.StringField">istruttoria_rigetto_motivazione</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
 <param>
 <value><struct>
 <member>
-<name>widget</name>
-<value><string>TEXTAREA</string></value>
-</member>
-<member>
 <name>size</name>
 <value><string>10</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>TEXTAREA</string></value>
 </member>
 </struct></value>
 </param>
@@ -998,23 +1008,23 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
           <id type="Products.Archetypes.Field.StringField">istruttoria_rigetto_annotazioni_richiedente</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
 <param>
 <value><struct>
 <member>
-<name>widget</name>
-<value><string>TEXTAREA</string></value>
-</member>
-<member>
 <name>size</name>
 <value><string>6</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>TEXTAREA</string></value>
 </member>
 </struct></value>
 </param>
@@ -1030,23 +1040,23 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
           <id type="Products.Archetypes.Field.StringField">istruttoria_rigetto_annotazioni</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
 <param>
 <value><struct>
 <member>
-<name>widget</name>
-<value><string>TEXTAREA</string></value>
-</member>
-<member>
 <name>size</name>
 <value><string>6</string></value>
+</member>
+<member>
+<name>widget</name>
+<value><string>TEXTAREA</string></value>
 </member>
 </struct></value>
 </param>
@@ -1062,11 +1072,11 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
           <id type="Products.Archetypes.Field.StringField">istruttoria_rigetto_controdeduzioni</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
@@ -1090,11 +1100,11 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
           <id type="Products.Archetypes.Field.StringField">rigetto_numero_protocollo_ap</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -1108,11 +1118,11 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
           <id type="Products.Archetypes.Field.StringField">rigetto_data_protocollo_ap</id>
           <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">COMPUTED</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDateEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -1126,11 +1136,11 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
           <id type="Products.Archetypes.Field.StringField">rigetto_numero_protocollo</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -1144,11 +1154,11 @@ return initlist + ['%(full_name)s (%(id)s)|%(id)s' % dict(id=usr, full_name=user
           <id type="Products.Archetypes.Field.StringField">rigetto_data_protocollo</id>
           <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">COMPUTED</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDateEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -1272,11 +1282,11 @@ return plominoDocument.wf_getInfoFor('wf_presentata')]]></Formula>
           <id type="Products.Archetypes.Field.StringField">numero_protocollo_autorizzazione</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -1290,11 +1300,11 @@ return plominoDocument.wf_getInfoFor('wf_presentata')]]></Formula>
           <id type="Products.Archetypes.Field.StringField">data_protocollo_autorizzazione</id>
           <FieldType type="Products.Archetypes.Field.StringField">DATETIME</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DateIndex</IndexType>
           <params>
@@ -1322,7 +1332,7 @@ return plominoDocument.wf_getInfoFor('wf_presentata')]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -1340,7 +1350,7 @@ return plominoDocument.wf_getInfoFor('wf_presentata')]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">FieldIndex</IndexType>
           <CustomData>
@@ -1358,7 +1368,7 @@ return plominoDocument.wf_getInfoFor('wf_presentata')]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -1372,11 +1382,11 @@ return plominoDocument.wf_getInfoFor('wf_presentata')]]></Formula>
           <id type="Products.Archetypes.Field.StringField">linkToParent</id>
           <FieldType type="Products.Archetypes.Field.StringField">DOCLINK</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">renderDocLinkWithForm</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">renderDocLinkWithForm</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <params>
@@ -1423,7 +1433,7 @@ return result]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -1437,11 +1447,11 @@ return result]]></Formula>
           <id type="Products.Archetypes.Field.StringField">progressivo_pratica</id>
           <FieldType type="Products.Archetypes.Field.StringField">NUMBER</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -1455,11 +1465,11 @@ return result]]></Formula>
           <id type="Products.Archetypes.Field.StringField">progressivo_autorizzazione</id>
           <FieldType type="Products.Archetypes.Field.StringField">NUMBER</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -1473,11 +1483,11 @@ return result]]></Formula>
           <id type="Products.Archetypes.Field.StringField">label_autorizzazione</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
+          <Formula type="Products.Archetypes.Field.TextField"></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -1506,7 +1516,7 @@ else:
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
@@ -1527,7 +1537,25 @@ else:
           <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
           <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
-          <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
+          <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
+          <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
+          <CustomData>
+            <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
+              <field name="fieldDescription"/>
+              <field name="customAttributes"/>
+            </extensionfields>
+          </CustomData>
+        </element>
+        <element id="current_doc" title="Pratica corrente" type="PlominoField">
+          <id type="Products.Archetypes.Field.StringField">current_doc</id>
+          <FieldType type="Products.Archetypes.Field.StringField">NUMBER</FieldType>
+          <FieldMode type="Products.Archetypes.Field.StringField">CREATION</FieldMode>
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return 1]]></Formula>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
+          <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
+          <ValidationFormula type="Products.Archetypes.Field.TextField"></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
