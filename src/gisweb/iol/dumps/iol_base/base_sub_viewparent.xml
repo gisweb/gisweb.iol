@@ -54,8 +54,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -78,8 +78,8 @@ return 'Autorizzazione n. %s pratica n. %s %s' %(naut,num,data)]]></Formula>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">parentDocument</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">""""""parentDocument""""""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -127,8 +127,8 @@ return result]]></Formula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>

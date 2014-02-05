@@ -72,8 +72,8 @@ return out
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">dynamicSearch=""</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">""""""dynamicSearch=""""""""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -119,8 +119,8 @@ return out
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">dynamicSearch=""</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">""""""dynamicSearch=""""""""</field>
             </extensionfields>
           </CustomData>
         </element>

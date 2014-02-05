@@ -35,8 +35,8 @@
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -62,7 +62,7 @@ return '%s' %url]]></Content>
         </element>
         <element id="data_protocollo" title="Data protocollo" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">data_protocollo</id>
-          <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
+          <FieldType type="Products.Archetypes.Field.StringField">DATETIME</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
@@ -87,8 +87,8 @@ return '%s' %url]]></Content>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-plugin="datepicker" data-datepicker-options="{changeMonth:true,changeYear: true,dateFormat:'dd/mm/yy'}"</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""data-plugin="datepicker" data-datepicker-options="{changeMonth:true,changeYear: true,dateFormat:'dd/mm/yy'}""""</field>
             </extensionfields>
           </CustomData>
         </element>

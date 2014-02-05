@@ -35,8 +35,8 @@
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""data-mandatory"""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -53,8 +53,8 @@
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -79,8 +79,8 @@ return '']]></ValidationFormula>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""data-mandatory"""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -97,8 +97,8 @@ return '']]></ValidationFormula>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -123,8 +123,8 @@ return '']]></ValidationFormula>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>

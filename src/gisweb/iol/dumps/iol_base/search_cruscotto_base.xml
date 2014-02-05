@@ -89,8 +89,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -132,8 +132,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription">Attiva/Disattiva l'opzione di ricerca avanzata.</field>
-              <field name="customAttributes"/>
+              <field name="FieldDescription">Attiva/Disattiva l'opzione di ricerca avanzata.</field>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>

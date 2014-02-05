@@ -45,8 +45,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription">Inserire il comune presso il quale si ha il domicilio</field>
-              <field name="customAttributes">data-plugin="elencocomuni"</field>
+              <field name="FieldDescription">Inserire il comune presso il quale si ha il domicilio</field>
+              <field name="HTMLAttributesFormula">"""data-plugin="elencocomuni""""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -73,8 +73,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">readonly</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""readonly"""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -101,8 +101,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -129,8 +129,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""data-mandatory"""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -157,8 +157,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""data-mandatory"""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -207,8 +207,8 @@ return plominoDocument.getItem('domicilio_opt') != 'domicilio']]></Formula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">dynamicHidewhen=1</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""dynamicHidewhen=1"""</field>
             </extensionfields>
           </CustomData>
         </element>

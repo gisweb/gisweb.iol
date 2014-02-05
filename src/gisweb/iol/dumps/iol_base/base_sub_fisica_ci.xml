@@ -58,8 +58,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -76,8 +76,8 @@
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -102,14 +102,14 @@ return '']]></ValidationFormula>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
         <element id="fisica_ci_data" title="Data di rilascio" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">fisica_ci_data</id>
-          <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
+          <FieldType type="Products.Archetypes.Field.StringField">DATETIME</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
@@ -134,8 +134,8 @@ return '']]></ValidationFormula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-plugin="datepicker" data-datepicker-options="{changeMonth:true,changeYear: true,minDate:'-110Y', maxDate: '-17Y',dateFormat:'dd/mm/yy',yearRange:'-20:+0',defaultDate:'-10Y'}"</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""data-plugin="datepicker" data-datepicker-options="{changeMonth:true,changeYear: true,minDate:'-110Y', maxDate: '-17Y',dateFormat:'dd/mm/yy',yearRange:'-20:+0',defaultDate:'-10Y'}""""</field>
             </extensionfields>
           </CustomData>
         </element>

@@ -9,7 +9,9 @@
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.doclinkOnDeleteChild(redirect='elenco_altri_tecnici')]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div><span class="plominoFieldClass">tecnico_search</span></div><div class="row-fluid"><div class="span2"><span class="plominoFieldClass">tecnico_app</span></div><div class="span4"><span class="plominoFieldClass">tecnico_cognome</span></div><div class="span4"><span class="plominoFieldClass">tecnico_nome</span></div><div class="span2"><span class="plominoFieldClass">tecnico_sesso</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">tecnico_qualita</span></div><div class="span9"><span class="plominoFieldClass">tecnico_denominazione</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">tecnico_comune_nato</span></div><div class="span1"><span class="plominoFieldClass">tecnico_provincia_nato</span></div><div class="span3"><span class="plominoFieldClass">tecnico_data_nato</span></div><span class="plominoFieldClass">tecnico_cod_cat_nato</span></div><div class="row-fluid"><div class="span10"><span class="plominoFieldClass">tecnico_indirizzo</span></div><div class="span2"><span class="plominoFieldClass">tecnico_civico</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">tecnico_comune</span></div><div class="span1"><span class="plominoFieldClass">tecnico_provincia</span></div><div class="span2"><span class="plominoFieldClass">tecnico_cap</span></div><div class="span2"><span class="plominoFieldClass">tecnico_piva</span></div><div class="span3"><span class="plominoFieldClass">tecnico_cf</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">tecnico_cciaa</span></div><div class="span3"><span class="plominoFieldClass">tecnico_cciaa_numero</span></div><div class="span3"><span class="plominoFieldClass">tecnico_inail</span></div><div class="span3"><span class="plominoFieldClass">tecnico_inps</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">tecnico_albo</span></div><div class="span3"><span class="plominoFieldClass">tecnico_albo_numero</span></div><div class="span2"><span class="plominoFieldClass">tecnico_albo_prov</span></div><div class="span2"><span class="plominoFieldClass">tecnico_edile_numero</span></div><div class="span2"><span class="plominoFieldClass">tecnico_edile_prov</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">tecnico_email</span></div><div class="span3"><span class="plominoFieldClass">tecnico_pec</span></div><div class="span2"><span class="plominoFieldClass">tecnico_telefono</span></div><div class="span2"><span class="plominoFieldClass">tecnico_cellulare</span></div><div class="span2"><span class="plominoFieldClass">tecnico_fax</span></div></div><div><span class="plominoFieldClass">tecnico_ruolo</span></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<div><span class="plominoFieldClass">tecnico_search</span></div><div class="row-fluid"><div class="span2"><span class="plominoFieldClass">tecnico_app</span></div><div class="span4"><span class="plominoFieldClass">tecnico_cognome</span></div><div class="span4"><span class="plominoFieldClass">tecnico_nome</span></div><div class="span2"><span class="plominoFieldClass">tecnico_sesso</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">tecnico_qualita</span></div><div class="span9"><span class="plominoFieldClass">tecnico_denominazione</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">tecnico_comune_nato</span></div><div class="span1"><span class="plominoFieldClass">tecnico_provincia_nato</span></div><div class="span3"><span class="plominoFieldClass">tecnico_data_nato</span></div><span class="plominoFieldClass">tecnico_cod_cat_nato</span></div><div class="row-fluid"
+><div class="span10"><span class="plominoFieldClass">tecnico_indirizzo</span></div><div class="span2"><span class="plominoFieldClass">tecnico_civico</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">tecnico_comune</span></div><div class="span1"><span class="plominoFieldClass">tecnico_provincia</span></div><div class="span2"><span class="plominoFieldClass">tecnico_cap</span></div><div class="span2"><span class="plominoFieldClass">tecnico_piva</span></div><div class="span3"><span class="plominoFieldClass">tecnico_cf</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">tecnico_cciaa</span></div><div class="span3"><span class="plominoFieldClass">tecnico_cciaa_numero</span></div><div class="span3"><span class="plominoFieldClass">tecnico_inail</span></div><div class="span3"><span class="plominoFieldClass">tecnico_inps</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">tecnico_albo</span></
+div><div class="span3"><span class="plominoFieldClass">tecnico_albo_numero</span></div><div class="span2"><span class="plominoFieldClass">tecnico_albo_prov</span></div><div class="span2"><span class="plominoFieldClass">tecnico_edile_numero</span></div><div class="span2"><span class="plominoFieldClass">tecnico_edile_prov</span></div></div><div class="row-fluid"><div class="span3"><span class="plominoFieldClass">tecnico_email</span></div><div class="span3"><span class="plominoFieldClass">tecnico_pec</span></div><div class="span2"><span class="plominoFieldClass">tecnico_telefono</span></div><div class="span2"><span class="plominoFieldClass">tecnico_cellulare</span></div><div class="span2"><span class="plominoFieldClass">tecnico_fax</span></div></div><div><span class="plominoFieldClass">tecnico_ruolo</span></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -45,8 +47,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-autocompleteform-options="{url:'fetch_data',placeholder:'Elenco:....',allowClear:true,minimumInputLength:0,id:function(e){return e.tecnico_cf;},formatResult: function(name){return' '+name.tecnico_denominazione+' '+' (pi: '+name.tecnico_piva+') '; },formatSelection:function(name){return name.tecnico_denominazione; },data:function(term,page){return{forms:'base_sub_tecnico',distinct:'tecnico_cf,tecnico_indirizzo',fisica_cf:$('#fisica_cf').val(),page:page,size:10}}}"</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""data-autocompleteform-options="{url:'fetch_data',placeholder:'Elenco:....',allowClear:true,minimumInputLength:0,id:function(e){return e.tecnico_cf;},formatResult: function(name){return' '+name.tecnico_denominazione+' '+' (pi: '+name.tecnico_piva+') '; },formatSelection:function(name){return name.tecnico_denominazione; },data:function(term,page){return{forms:'base_sub_tecnico',distinct:'tecnico_cf,tecnico_indirizzo',fisica_cf:$('#fisica_cf').val(),page:page,size:10}}}""""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -91,8 +93,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -119,8 +121,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -147,8 +149,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -191,8 +193,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -232,8 +234,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -260,8 +262,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -288,8 +290,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-plugin="elencocomuni"</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""data-plugin="elencocomuni""""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -316,14 +318,14 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
         <element id="tecnico_data_nato" title="Data di nascita" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">tecnico_data_nato</id>
-          <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
+          <FieldType type="Products.Archetypes.Field.StringField">DATETIME</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
           <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
@@ -348,8 +350,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-plugin="datepicker" data-datepicker-options="{changeMonth:true,changeYear: true,minDate:'-110Y', maxDate: '-17Y',dateFormat:'dd/mm/yy',yearRange:'-110:+0',defaultDate:'-40Y'}"</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""data-plugin="datepicker" data-datepicker-options="{changeMonth:true,changeYear: true,minDate:'-110Y', maxDate: '-17Y',dateFormat:'dd/mm/yy',yearRange:'-110:+0',defaultDate:'-40Y'}""""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -376,8 +378,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -404,8 +406,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -432,8 +434,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription">indicare .....</field>
-              <field name="customAttributes">data-plugin="elencocomuni"</field>
+              <field name="FieldDescription">indicare .....</field>
+              <field name="HTMLAttributesFormula">"""data-plugin="elencocomuni""""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -460,8 +462,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -488,8 +490,8 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -524,8 +526,8 @@ return '']]></ValidationFormula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -560,8 +562,8 @@ return '']]></ValidationFormula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-plugin="codicefiscale" data-codicefiscale-options="{source:'/calcola_codicefiscale',fieldlist:['tecnico_cognome','tecnico_nome','tecnico_data_nato','tecnico_sesso','tecnico_cod_cat_nato']}"</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""data-plugin="codicefiscale" data-codicefiscale-options="{source:'/calcola_codicefiscale',fieldlist:['tecnico_cognome','tecnico_nome','tecnico_data_nato','tecnico_sesso','tecnico_cod_cat_nato']}""""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -588,8 +590,8 @@ return '']]></ValidationFormula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -616,8 +618,8 @@ return '']]></ValidationFormula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -644,8 +646,8 @@ return '']]></ValidationFormula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -672,8 +674,8 @@ return '']]></ValidationFormula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -710,8 +712,8 @@ return '']]></ValidationFormula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -738,8 +740,8 @@ return '']]></ValidationFormula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -776,8 +778,8 @@ return '']]></ValidationFormula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -804,8 +806,8 @@ return '']]></ValidationFormula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -842,8 +844,8 @@ return '']]></ValidationFormula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -868,8 +870,8 @@ return '']]></ValidationFormula>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""data-mandatory"""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -886,8 +888,8 @@ return '']]></ValidationFormula>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""data-mandatory"""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -904,8 +906,8 @@ return '']]></ValidationFormula>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""data-mandatory"""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -922,8 +924,8 @@ return '']]></ValidationFormula>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">"""data-mandatory"""</field>
             </extensionfields>
           </CustomData>
         </element>
@@ -972,8 +974,8 @@ return '']]></ValidationFormula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -998,8 +1000,8 @@ return '']]></ValidationFormula>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
@@ -1016,8 +1018,8 @@ return '']]></ValidationFormula>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
         </element>
