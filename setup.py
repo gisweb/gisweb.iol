@@ -47,6 +47,7 @@ setup(name='gisweb.iol',
           'collective.wtf',
           'zope.app.component',
           # -*- Extra requirements: -*-
+          'dict2xml'
       ],
       extras_require={
         'test': [

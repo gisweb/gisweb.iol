@@ -14,7 +14,7 @@ assert context.isReader(), "You don't have read permission in this document"
 from Products.CMFPlomino.PlominoUtils import json_dumps
 
 try:
-    from gisweb.utils import dict2xml
+    from gisweb.iol import dict2xml
 except ImportError as err:
     GOT_XML = False
 else:

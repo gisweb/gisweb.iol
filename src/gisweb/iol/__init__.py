@@ -4,3 +4,5 @@ allow_module('gisweb.iol.scripts.frm_beforeCreateDocument')
 import permissions
 
 from permissions import IOL_READ_PERMISSION, IOL_EDIT_PERMISSION, IOL_REMOVE_PERMISSION
+
+from dict2xml import dict2xml
