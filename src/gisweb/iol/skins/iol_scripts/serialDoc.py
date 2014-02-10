@@ -74,6 +74,6 @@ if format == 'json':
 elif format == 'xml':
     assert GOT_XML, '%s' % err
     context.REQUEST.RESPONSE.setHeader("Content-type", "text/xml")
-    return dict2xml(dict(raw_data))
+    return '<?xml version="1.0" encoding="UTF-8"?>\n' + dict2xml(dict(info=dict(raw_data)))
 else:
     return raw_data
