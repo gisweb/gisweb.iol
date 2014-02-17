@@ -3,6 +3,5 @@
   <version>0001</version>
   <dependencies>
     <dependency>profile-Products.CMFPlomino:default</dependency>
-    <dependency>profile-gisweb.plominofieldextensions:default</dependency>
   </dependencies>
 </metadata>

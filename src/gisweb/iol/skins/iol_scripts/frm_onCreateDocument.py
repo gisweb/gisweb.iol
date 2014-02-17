@@ -19,23 +19,12 @@ db = context.getParentDatabase()
 # RUOLI
 # Ad ogni utente/gruppo del portale che ha il ruolo Plomino "[iol-qualcosa]"
 #+ viene assegnato il ruolo Plone "iol-qualcosa".
-rolesToAdd = dict()
-for role in db.getUserRoles():
-    if role.startswith('[iol-'):
-        for uid in db.getUsersForRole(role):
-            if uid in rolesToAdd:
-                rolesToAdd[uid].append(role[1:-1])
-            else:
-                rolesToAdd[uid] = [role[1:-1]]
-
-for uid,roles in rolesToAdd.items():
-    context.addLocalRoles(uid, roles)
+doc.addIOLRoles()
 
 # PERMESSI
 # Settaggio dei permessi in accordo agli stati iniziali dei workflow
 updateAllRoleMappingsFor(context)
 context.updateStatus()
-
 
 # EVENTI DI REALIZZAZIONE COLLEGAMENTO UNO A MOLTI
 if child_events:
