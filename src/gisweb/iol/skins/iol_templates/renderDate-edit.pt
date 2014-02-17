@@ -1,9 +1,0 @@
-<tal:defs tal:define="global doc python: context.REQUEST.PARENTS[0];
-    global myForm python: doc if not doc.isDocument() else doc.getForm()" />
-
-<tal:blockactions>
-    <div class="row-fluid">
-        <div class="span3" tal:content="structure python: myForm.getFormField('autorizzata_dal').getFieldRender(myForm,doc,doc.isEditMode(),False,request=doc.REQUEST)"/>
-        <div class="span3" tal:content="structure python: myForm.getFormField('autorizzata_al').getFieldRender(myForm,doc,doc.isEditMode(),False,request=doc.REQUEST)"/>
-    </div>
-</tal:blockactions>

@@ -1,9 +1,0 @@
-<tal:defs tal:define="global doc python: context.REQUEST.PARENTS[0];" />
-
-<tal:blockactions>
-    <div class="row-fluid">
-        <div class="span4"
-            tal:repeat="date python:('autorizzata_dal', 'autorizzata_al',)"
-            tal:content="structure python: doc.getRenderedItem(date)"></div>
-    </div>
-</tal:blockactions>
