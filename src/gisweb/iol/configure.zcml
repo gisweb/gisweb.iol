@@ -26,12 +26,4 @@
     <cmf:registerDirectory name="iol_scripts" recursive="True" />
     <cmf:registerDirectory name="iol_assets" recursive="True" />
 
-    <browser:page
-        name="iolbootstrapview"
-        for="*"
-        class=".browser.BootstrapView"
-        allowed_interface=".interfaces.IBootstrapView"
-        permission="zope.Public"
-    />
-
 </configure>
