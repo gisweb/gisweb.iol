@@ -8,7 +8,7 @@ function showLoading (){
             top: (vScrollPosition),
             left: (hPosition)
         }).fadeIn(200);  
-    
+
     }
 
     	function refreshHidewhen() {
@@ -22,10 +22,6 @@ function showLoading (){
         	$.post('computehidewhens', $('#plomino_form').serialize(), onsuccess, 'json');
     	}
 
-
-
-
-
 //TEST CONTROLLER DI PAGINA
 $(document).ready(function () {
      
@@ -36,7 +32,7 @@ $(document).ready(function () {
 	 $("select.combobox").select2();
 
     //HIDEWHEN PORTATI QUI
-    $("[data-dhw='dynamicHidewhen']").change(refreshHidewhen);
+    $("[data-dhw='true']").change(refreshHidewhen);
 
     $('.wf-actions').bind('click',function(){showLoading();});
 
@@ -79,7 +75,6 @@ if($("div.data-mandatory:visible").length == 0){
 
     $('#section-message-compilazione').addClass('hidden');
     $('#section-invio-domanda').removeClass('hidden');
-
 
     //VESTIZIONE DEL PULSANTE DI INVIO DOMANDA
     $('#btn_invia_domanda').attr('value','Invia Domanda');
