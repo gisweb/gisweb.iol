@@ -24,10 +24,10 @@ function showLoading (){
 
 //TEST CONTROLLER DI PAGINA
 $(document).ready(function () {
-     
+
 
     $(".field").bind('change',function(){$.plominoFormChanged=true})
-     
+
     //Combo SELECT2
 	 $("select.combobox").select2();
 

@@ -8,9 +8,13 @@
 ##title=
 ##
 from gisweb.utils import json_dumps, Type, cf_build
+from Products.CMFPlomino.PlominoUtils import StringToDate
 result={'success': 0}
 
-giorno, mese, anno = map(int, fisica_data_nato.split('/'))
+nascita = StringToDate(fisica_data_nato, format=None)
+giorno = nascita.day()
+mese = nascita.month()
+anno = nascita.year()
 
 data = (fisica_cognome, fisica_nome, anno, mese, giorno, fisica_sesso, fisica_cod_cat_nato)
 
@@ -21,5 +25,5 @@ except Exception as err:
     result['err_msg'] = str(err)
 else:
     result['success'] = 1
-    
+
 return json_dumps(result)

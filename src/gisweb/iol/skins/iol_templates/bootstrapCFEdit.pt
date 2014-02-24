@@ -8,9 +8,9 @@
     baseURL python: context.getParentDatabase().absolute_url();
     mandatory python: 'mandatory' if options['field'].getMandatory() else ''">
 
-    <label class="control-label">
-        <span tal:content="python:'%s: ' % title">Titolo</span>
-    </label>
+    <tal:label metal:use-macro="here/macros/macros/showlabel" >
+        display the field title as label
+    </tal:label>
     <div class="input-append">
         <tal:plugin tal:content='structure string:<input type="text" name="${fieldname}" maxlenght="${size}" id="${fieldname}" data-base-url="${baseURL}" class="field span12" value="${fieldvalue}" />'></tal:plugin> 
         <span class="add-on btn" tal:attributes="id string:btn_${fieldname}">Calcola <i class="icon-edit"></i></span> 
