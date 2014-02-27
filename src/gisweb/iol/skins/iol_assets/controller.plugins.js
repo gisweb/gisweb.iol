@@ -91,6 +91,7 @@ $("input[data-plugin='elencocomuni']").each(function(){
                 placeholder: 'Seleziona il Comune',
                 allowClear: true,
            	minimumInputLength: 2,
+           	width:'off',
 		id: function(e) { return e[1]; },
 		text: function(e) { return e[1]; },
 		formatResult: function(data) { return '<div>' + data[1] + ' (' + data[2] + ')</div>'; },
