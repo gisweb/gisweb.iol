@@ -20,10 +20,5 @@
       </label>
     
 
-      
-        <label>
-            <span tal:condition="data_mandatory" class="data-mandatory" title="Obbligatorio per invio">■</span> 
-            <span tal:content="python:'%s: ' % title">Titolo</span>
-        </label>
         <div tal:attributes="class string:control-label uneditable;id options/fieldname" tal:content="fieldvalue"></div>          
 </tal:block>

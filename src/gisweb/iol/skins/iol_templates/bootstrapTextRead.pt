@@ -7,7 +7,7 @@
     
      
         
-        <label tal:condition="python:title!=':'" class="control-label>
+        <label tal:condition="python:title!=':'" class="control-label">
             <span tal:condition="data_mandatory" class="data-mandatory" title="Obbligatorio per invio">■</span> 
             <span tal:content="python:'%s: ' % title">Titolo</span>
         </label>
