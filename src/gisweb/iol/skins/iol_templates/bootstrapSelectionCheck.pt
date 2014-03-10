@@ -12,8 +12,8 @@
                   mandatory python: 'mandatory' if options['field'].getMandatory() else '';
                   dy_search python: 'dynamicSearch' if 'dynamicSearch' in custom_attributes else '';
                   dy_hidewhen python: 'dynamicHidewhen' if 'dynamicHidewhen' in custom_attributes else '';">
-    <label class="control-label">
-        <!-- <span tal:condition="mandatory" class="mandatory" title="Obbligatorio">■</span>
+    <label class="control-label" tal:condition="python:title!=':'">
+       <!-- <span tal:condition="mandatory" class="mandatory" title="Obbligatorio">■</span>
         <span tal:condition="data_mandatory" class="data-mandatory" title="Obbligatorio per invio">■</span> -->
         <span tal:content="python:'%s: ' % title">Titolo</span>
             <i tal:condition="ttip_descr"
