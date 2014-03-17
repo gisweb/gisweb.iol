@@ -16,24 +16,24 @@ from gisweb.utils import json_dumps
 from Products.CMFCore.utils import getToolByName
 
 pw = getToolByName(context, 'portal_workflow')
-rs = context.wf_statesInfo(args=['transitions'])
+rs = context.WFgetStateAttr(args=['transitions'])
 
 wf_vars = dict([(info['wf_id'], [i for i in pw[info['wf_id']].variables]) for info in rs])
 wf_vals = {}
 for wf_id,var_list in wf_vars.items():
-    wf_vals[wf_id] = dict([(k,context.wf_getInfoFor(k, wf_id=wf_id)) for k in var_list])
+    wf_vals[wf_id] = dict([(k,context.WFgetInfoFor(k, wf_id=wf_id)) for k in var_list])
 
 raw_data = dict(
     chain = context.wf_getChainFor(),
     review_state = rs,
     size = context.getObjSize(),
-    review_history = context.wf_getInfoFor('review_history'),
+    review_history = context.WFgetInfoFor('review_history'),
     #json = context.tojson(),
     form = context.Form,
     Plomino_Authors = context.Plomino_Authors,
     created = script.smartdate(db.created()),
     modified = script.smartdate(db.modified()),
-    wf_vars = wf_vals #context.wf_getInfoFor(*wf_vars)
+    wf_vars = wf_vals #context.WFgetInfoFor(*wf_vars)
 )
 
 # Output rendering

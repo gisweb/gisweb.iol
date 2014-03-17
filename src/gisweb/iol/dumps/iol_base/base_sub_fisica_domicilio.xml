@@ -27,8 +27,8 @@
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapPlugin</FieldEditTemplate>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
@@ -45,18 +45,18 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription">Inserire il comune presso il quale si ha il domicilio</field>
-              <field name="customAttributes">data-plugin="elencocomuni"</field>
+              <field name="FieldDescription">Inserire il comune presso il quale si ha il domicilio</field>
+              <field name="HTMLAttributesFormula">'data-plugin="elencocomuni"'</field>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="fisica_domicilio_provincia" title="Provincia" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">fisica_domicilio_provincia</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
@@ -73,18 +73,18 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">readonly</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">'readonly'</field>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="fisica_domicilio_cap" title="CAP" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">fisica_domicilio_cap</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">True</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
@@ -101,18 +101,18 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="fisica_domicilio_indirizzo" title="Indirizzo" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">fisica_domicilio_indirizzo</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
@@ -129,18 +129,18 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">'data-mandatory'</field>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="fisica_domicilio_civico" title="Civico" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">fisica_domicilio_civico</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
@@ -157,16 +157,16 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-mandatory</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">'data-mandatory'</field>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="hw_no_domicilio" title="hw_no_domicilio" type="PlominoHidewhen">
           <id type="Products.Archetypes.Field.StringField">hw_no_domicilio</id>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[# su HW dinamici non è necessario discriminare il caso in cui il contesto è un form
 # il contesto è un TemporaryDocument (e il valore di dafault dei campi al caricamento della pagina è '' <stringa vuota>)
-return plominoDocument.getItem('domicilio_opt') != 'domicilio']]></Formula>
+return not 'domicilio' in plominoDocument.getItem('domicilio_opt')]]></Formula>
           <isDynamicHidewhen type="Products.Archetypes.Field.BooleanField">True</isDynamicHidewhen>
         </element>
         <element id="domicilio_opt" title="SE IL DOMICILIO E' DIVERSO DALLA RESIDENZA ATTIVARE LA SEZIONE SOTTOSTANTE" type="PlominoField">
@@ -174,8 +174,8 @@ return plominoDocument.getItem('domicilio_opt') != 'domicilio']]></Formula>
           <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionRead</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldEditTemplate>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
@@ -207,11 +207,11 @@ return plominoDocument.getItem('domicilio_opt') != 'domicilio']]></Formula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">dynamicHidewhen=1</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">'data-dhw="true"=1'</field>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
       </elements>
     </element>
   </design>

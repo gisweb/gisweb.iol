@@ -27,19 +27,19 @@
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapTextRead</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapTextEdit</FieldEditTemplate>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="btn_salva" title="Salva" type="PlominoAction">
           <id type="Products.Archetypes.Field.StringField">btn_salva</id>
           <ActionType type="Products.Archetypes.Field.StringField">SAVE</ActionType>
@@ -62,11 +62,11 @@ return '%s' %url]]></Content>
         </element>
         <element id="data_protocollo" title="Data protocollo" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">data_protocollo</id>
-          <FieldType type="Products.Archetypes.Field.StringField">DATE</FieldType>
+          <FieldType type="Products.Archetypes.Field.StringField">DATETIME</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapDateRead</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapDatePicker</FieldEditTemplate>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">True</ToBeIndexed>
@@ -74,7 +74,7 @@ return '%s' %url]]></Content>
           <params>
 <param>
 <value><struct>
-<member>
+<member><name>widget</name><value><string>JQUERY</string></value></member><member>
 <name>startingyear</name>
 <value><string>1950</string></value>
 </member>
@@ -87,11 +87,11 @@ return '%s' %url]]></Content>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">data-plugin="datepicker" data-datepicker-options="{changeMonth:true,changeYear: true,dateFormat:'dd/mm/yy'}"</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">'data-datepicker-options="{changeMonth:true,changeYear: true,dateFormat:\'dd/mm/yy\'}"'</field>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
       </elements>
     </element>
   </design>

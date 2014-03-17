@@ -1,7 +1,7 @@
 <tal:def tal:define="
     title python:options['field'].title;
     ttip_title title;
-    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
+    ttip_descr python:options['field'].Schema()['FieldDescription'].getAccessor(options['field'])();
     servername python:'192.168.1.100';
     id options/fieldname;">
     

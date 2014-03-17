@@ -54,11 +54,11 @@
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="titolo" title="Titolo del Documento" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">titolo</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
@@ -78,11 +78,11 @@ return 'Autorizzazione n. %s pratica n. %s %s' %(naut,num,data)]]></Formula>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">parentDocument</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">'parentDocument'</field>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="docHistory" title="Storia della pratica" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">docHistory</id>
           <FieldType type="Products.Archetypes.Field.StringField">DOCLINK</FieldType>
@@ -100,8 +100,8 @@ for i in idx.dbsearch(searchPrm,sortindex='data_autorizzazione',reverse=1,only_a
     doc = i.getObject()
     result.append('/'.join(doc.doc_path()))
 return result]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">renderDocLinkWithForm-Accordion</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">renderDocLinkWithForm-Accordion</FieldEditTemplate>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
@@ -127,14 +127,14 @@ return result]]></Formula>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="hw_nohistory" title="Nascondi la storia della pratica" type="PlominoHidewhen">
           <id type="Products.Archetypes.Field.StringField">hw_nohistory</id>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[if not context.isDocument() or context.isEditMode() or not context.wf_getInfoFor('wf_protocollata'):
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[if not context.isDocument() or context.isEditMode() or not context.WFgetInfoFor('wf_protocollata'):
     return True
 else:
     return False]]></Formula>

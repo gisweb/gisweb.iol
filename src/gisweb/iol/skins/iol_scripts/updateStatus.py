@@ -16,7 +16,7 @@ reindex: if evaluated as True the PlominoDocument will be reindexed
 
 """
 
-context.setItem(itemname, context.wf_getInfoFor('review_state'))
+context.setItem(itemname, context.WFgetInfoFor('review_state'))
 db = context.getParentDatabase()
 
 if reindex:

@@ -1,0 +1,18 @@
+<tal:err tal:on-error="structure container/handleError">
+<tal:description tal:replace=" "><!--
+    Renderiza i record del DATAGRID con il form associato
+    WARNING: da testare
+--></tal:description>
+<tal:block tal:define="db python:context.getParentDatabase();
+                       values options/fieldvalue;
+                       associated_form python: options['field'].getSettings().associated_form;
+                       frm python:db.getForm(associated_form);
+                       k python: options['field'].getSettings(key='field_mapping').split(',');">
+    <tal:rep tal:repeat="value values/rawdata">
+        <tal:d tal:define="_ python: map(context.REQUEST.set, k, value);
+                           cont python: frm.displayDocument(None, request=context.REQUEST);">
+            <div tal:content="structure cont"/>
+        </tal:d>
+    </tal:rep>
+</tal:block>
+</tal:err>

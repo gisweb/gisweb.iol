@@ -1,7 +1,7 @@
 <tal:def tal:define="
     title python:options['field'].title;
     ttip_title title;
-    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
+    ttip_descr python:options['field'].Schema()['FieldDescription'].getAccessor(options['field'])();
     custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
     dy_search python: 'dynamicSearch' if 'dynamicSearch' in custom_attributes else '';
     fieldname options/fieldname;

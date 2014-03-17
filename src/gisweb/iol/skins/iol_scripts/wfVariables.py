@@ -25,7 +25,7 @@ args=dict(wf_ids=wf_name)
 print '**********************************************************************'
 print 'WORKFLOW ASSOCIATI: %s' % wf_ids
 print 'WORKFLOW RICHIESTO: %s' % wf_name
-print 'STATO : %s' % (context.wf_getInfoFor('review_state'))
+print 'STATO : %s' % (context.WFgetInfoFor('review_state'))
 print DateToString(Now(),'%d/%m/%Y %H:%M:%s') 
 print '**********************************************************************'
 
@@ -33,13 +33,13 @@ if not var:
     
     for v in pw[wf_name].variables:
         try:
-            result=context.wf_getInfoFor(v,wf_ids=[wf_name])
+            result=context.WFgetInfoFor(v,wf_ids=[wf_name])
         except:
             result='variable %s not found' %v
         print 'Variables "%s" with values "%s" and type "%s"' %(v,str(result),str(Type(result)))
 else:
     try:
-        result=context.wf_getInfoFor(var,wf_ids=[wf_name])
+        result=context.WFgetInfoFor(var,wf_ids=[wf_name])
     except:
         result='variable %s not found' %var
     print 'Variables "%s" with values "%s" and type "%s"' %(var,str(result),str(Type(result)))

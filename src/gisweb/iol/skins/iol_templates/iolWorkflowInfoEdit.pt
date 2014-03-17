@@ -14,8 +14,8 @@
     
     <tal:newdoc tal:condition="python: doc.isNewDocument()">
         <div class="alert alert-info"
-             tal:define="initial_state_id python: doc.wf_workflowInfo(wf_id=wf_id, args=['initial_state'])['initial_state'];
-                status_info python: doc.wf_getInfoForState('iol_workflow', initial_state_id, args=['description'])">
+             tal:define="initial_state_id python: doc.WFgetWorkflowAttr(wf_id=wf_id, args=['initial_state'])['initial_state'];
+                status_info python: doc.WFgetStateAttr(wf_id='iol_workflow', state_id=initial_state_id, args=['description'])">
             <h4 tal:content="status_info/title" />
             <div tal:content="status_info/description" />
             <h5>Compilare i dati anagrafici e cliccare il pulsante Salva per proseguire nella compilazione della pratica</h5>
@@ -23,7 +23,7 @@
     </tal:newdoc>
     
     <tal:newdoc tal:condition="python: not doc.isNewDocument()">
-        <div tal:condition="python:doc.wf_getInfoFor('review_state')=='avvio' and doc.naming('tipo_app')!='pratica'"
+        <div tal:condition="python:doc.WFgetInfoFor('review_state')=='avvio' and doc.naming('tipo_app')!='pratica'"
             class="alert alert-info">
             
             <h5>Compilare i campi sottostanti e digitare il pulsante "Salva" per proseguire nella compilazione della pratica</h5>
@@ -31,12 +31,12 @@
     </tal:newdoc>
     
     <tal:notnewdoc tal:condition="python: not doc.isNewDocument()"
-        tal:define="status_info python: doc.wf_statesInfo(wf_id=wf_id, args=['description']);
+        tal:define="status_info python: doc.WFgetStateAttr(wf_id=wf_id, args=['description']);
         status_id status_info/id;">
         <div id="section-message-compilazione" tal:condition="python: not doc.getItem('sospensione_motivazione')" class="alert alert-info">
             <h4 tal:content="status_info/title" />
             <div tal:content="status_info/description" />
-            <h5 tal:condition="python: not doc.wf_getInfoFor('wf_protocollata')">
+            <h5 tal:condition="python: not doc.WFgetInfoFor('wf_protocollata')">
                 Per poter inviare la domanda occorre aver compilato tutti i campi indicati dal simbolo blu</h5>
         </div>
 

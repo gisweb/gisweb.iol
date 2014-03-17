@@ -3,7 +3,7 @@
     <element id="base_com_preavviso_rigetto" title="Comunicazione Preavviso Rigetto" type="PlominoForm">
       <id type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</id>
       <onCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onCreateDocument>
-      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[if 'preavviso_rigetto' not in [i['id'] for i in plominoDocument.wf_transitionsInfo()]:
+      <onOpenDocument type="Products.Archetypes.Field.TextField"><![CDATA[if 'preavviso_rigetto' not in plominoDocument.WFgetTransitionsAttr(as_sorted_list=False):
     return "Transizione 'preavviso_rigetto' NON disponibile"
 context.frm_onOpenDocument()]]></onOpenDocument>
       <beforeSaveDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeSaveDocument>
@@ -15,7 +15,7 @@ pw.doActionFor(context, 'preavviso_rigetto')]]></onSaveDocument>
       <onDeleteDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></onDeleteDocument>
       <onSearch type="Products.Archetypes.Field.TextField"><![CDATA[]]></onSearch>
       <beforeCreateDocument type="Products.Archetypes.Field.TextField"><![CDATA[]]></beforeCreateDocument>
-      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p>Vista la domanda N° <span class="plominoFieldClass">numero_pratica</span> con protocollo N° <span class="plominoFieldClass">numero_protocollo</span> del <span class="plominoFieldClass">data_protocollo</span> presentata da <span class="plominoFieldClass">richiedente</span>.</p><p>Si comunica che la stessa è fase di preavviso di rigetto per le seguenti motivazioni :</p><p><span class="plominoFieldClass">istruttoria_rigetto_motivazione</span></p><div class="hidden" id="btn-group"><span class="plominoActionClass">btn_salva</span> <span class="plominoActionClass">btn_annulla</span></div>]]></FormLayout>
+      <FormLayout type="Products.Archetypes.Field.TextField"><![CDATA[<p>Vista la domanda N&#176; <span class="plominoFieldClass">numero_pratica</span> con protocollo N&#176; <span class="plominoFieldClass">numero_protocollo</span> del <span class="plominoFieldClass">data_protocollo</span> presentata da <span class="plominoFieldClass">richiedente</span>.</p><p>Si comunica che la stessa &#232; fase di preavviso di rigetto per le seguenti motivazioni :</p><p><span class="plominoFieldClass">istruttoria_rigetto_motivazione</span></p><div class="hidden" id="btn-group"><span class="plominoActionClass">btn_salva</span> <span class="plominoActionClass">btn_annulla</span></div>]]></FormLayout>
       <DocumentTitle type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentTitle>
       <DocumentId type="Products.Archetypes.Field.TextField"><![CDATA[]]></DocumentId>
       <ActionBarPosition type="Products.Archetypes.Field.StringField">TOP</ActionBarPosition>
@@ -55,11 +55,11 @@ pw.doActionFor(context, 'preavviso_rigetto')]]></onSaveDocument>
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="numero_pratica" title="numero_pratica" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">numero_pratica</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
@@ -73,11 +73,11 @@ pw.doActionFor(context, 'preavviso_rigetto')]]></onSaveDocument>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="numero_protocollo" title="numero_protocollo" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">numero_protocollo</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
@@ -91,11 +91,11 @@ pw.doActionFor(context, 'preavviso_rigetto')]]></onSaveDocument>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="data_protocollo" title="data_protocollo" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">data_protocollo</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
@@ -113,11 +113,11 @@ return result]]></Formula>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="richiedente" title="richiedente" type="PlominoField">
           <id type="Products.Archetypes.Field.StringField">richiedente</id>
           <FieldType type="Products.Archetypes.Field.StringField">TEXT</FieldType>
@@ -141,11 +141,11 @@ return result]]></Formula>
           <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="btn_salva" title="Salva" type="PlominoAction">
           <id type="Products.Archetypes.Field.StringField">btn_salva</id>
           <ActionType type="Products.Archetypes.Field.StringField">SAVE</ActionType>

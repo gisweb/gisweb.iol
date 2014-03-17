@@ -12,7 +12,7 @@
                       global tipoApp  python: doc.getItem('tipo_app') or doc.getItem('iol_tipo_app')  ;
                       global tipoRichiesta  python: doc.getItem('tipo_richiesta') or doc.getItem('iol_tipo_richiesta');
                       global wf_id python: 'iol_workflow';
-                      global status python: doc.wf_getInfoFor('review_state');
+                      global status python: doc.WFgetInfoFor('review_state');
    
                    global myForm python: doc if not doc.isDocument() else doc.getForm();
                     global isDisplayDoc python:bool(context.REQUEST.get('document_to_display',''))
@@ -20,18 +20,13 @@
     
    
     
-    <tal:blockactions tal:define="status python: doc.wf_getInfoFor('review_state');
-    actions python:doc.wf_transitionsInfo(wf_id=wf_id, args=['description'],);
+    <tal:blockactions tal:define="status python: doc.WFgetInfoFor('review_state');
+    actions python:doc.WFgetTransitionsAttr(wf_id=wf_id, args=['description'],);
     actionurl python: '%s/%s/content_status_modify' %(dburl,doc.getId());
     editprotocollourl python: '%s/%s/EditDocument?openwithform=base_com_protocollo' %(dburl,doc.getId());
     sospendiurl python: '%s/%s/EditDocument?openwithform=base_com_sospensione' %(dburl,doc.getId());
     rigettaurl python: '%s/%s/EditDocument?openwithform=base_com_preavviso_rigetto' %(dburl,doc.getId());
-    prorogaurl python: '%s/frm_%s_proroga/OpenForm?parentDocument=%s' %(dburl,tipoApp,doc.getId());
-    dbOrd python: doc.getParentDatabase().iol_ordinanze.absolute_url(); 
-     ordinanza python: '%s/frm_ordinanze_base' %(dbOrd)">  
-
-
-
+    prorogaurl python: '%s/frm_%s_proroga/OpenForm?parentDocument=%s' %(dburl,tipoApp,doc.getId())">  
 
     <tal:loop tal:repeat="v actions">
 
@@ -68,11 +63,11 @@
     
                                         
           <div class="alert alert-info"
-      tal:condition="python: 'value' in db.get_property('documenti_autorizzazione') and doc.elenco_modelli('autorizzazione')!=None and (doc.verificaRuolo('iol-reviewer') or doc.verificaRuolo('iol-manager')) and doc.wf_getInfoFor('review_state') == 'assegnata' and not doc.getItem('documenti_autorizzazione')">
+      tal:condition="python: 'value' in db.get_property('documenti_autorizzazione') and doc.elenco_modelli('autorizzazione')!=None and (doc.verificaRuolo('iol-reviewer') or doc.verificaRuolo('iol-manager')) and doc.WFgetInfoFor('review_state') == 'assegnata' and not doc.getItem('documenti_autorizzazione')">
             <div class="row-fluid" >
                 <div class="span8" tal:content="structure python: doc.getRenderedItem('modello_autorizzazione')" />
                 <a disabled = "disabled" style="width:200px;margin-top:20px;margin-right:5px" class="btn wf-actions pull-right"
-                   tal:define="actions python:doc.wf_transitionsInfo(wf_id=wf_id, args=['description'],);
+                   tal:define="actions python:doc.WFgetTransitionsAttr(wf_id=wf_id, args=['description'],);
                        actionurl python: '%s/%s/content_status_modify' %(dburl,doc.getId());
                        id string:istruttoria_completata;
                        fieldName string:documenti_autorizzazione;
@@ -128,7 +123,7 @@
            <div tal:condition="python:not isDisplayDoc" tal:define="block string: Figli della Pratica" tal:on-error="structure container/handleError">
                <tal:def tal:define="req python: doc.richiesta()">
                 <tal:loop tal:repeat="v req">
-                    <div tal:condition="python: doc.wf_getInfoFor('wf_autorizzata')" class="accordion" id="iol-childs">
+                    <div tal:condition="python: doc.WFgetInfoFor('wf_autorizzata')" class="accordion" id="iol-childs">
                       <div tal:define="parenturl python:'%s/frm_%s_%s/OpenForm?parentDocument=%s' %(dburl,tipoApp,v,doc.getId());
                                        ids python:'#iol-%s' %(v);
                                        id python:'iol-%s' %(v)">
@@ -141,7 +136,7 @@
         
                             <div tal:attributes="id id" class="accordion-body collapse" style="height: 0px; " tal:define="flagVisible python:doc.isConditionVerified(v);">
                            <div class="accordion-inner">
-                               <a tal:condition="python:not doc.wf_getInfoFor('review_state')=='archiviata'" style="width:200px" class="btn pull-right wf-actions" tal:attributes="id string:btn_v; href string:${parenturl}">
+                               <a tal:condition="python:not doc.WFgetInfoFor('review_state')=='archiviata'" style="width:200px" class="btn pull-right wf-actions" tal:attributes="id string:btn_v; href string:${parenturl}">
                                    <i class='icon-hand-right'></i><span tal:content="python: 'Nuovo/a %s' %(v)"></span>
                                </a>
                                <!--<span tal:content="python:str(doc.getItem('childrenList_frm_%s_%s' %(tipoApp,v)))"/>-->
@@ -162,7 +157,7 @@
     </div>
         
       
-    <!--     <div tal:condition="python: doc.wf_getInfoFor('wf_priority')==3 and doc.verificaRuolo('iol-manager')">
+    <!--     <div tal:condition="python: doc.WFgetInfoFor('wf_priority')==3 and doc.verificaRuolo('iol-manager')">
           <div class="row-fluid">
               <div class="alert alert-error span12">
                   <span>Richiesta di Ordiananza</span>

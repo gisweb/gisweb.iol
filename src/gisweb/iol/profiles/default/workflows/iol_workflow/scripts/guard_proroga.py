@@ -21,8 +21,8 @@ if scriptName in db.resources.keys():
 
 # Transizione Automatica per i Trasporti 
 if doc.getItem('iol_tipo_app','') in ['trasporti']:
-    return doc.wf_getInfoFor('wf_richiesta_proroga') and doc.getItem('documenti_proroga')
+    return doc.WFgetInfoFor('wf_richiesta_proroga') and doc.getItem('documenti_proroga')
 else:
     roles = context.portal_membership.getAuthenticatedMember().getRolesInContext(doc)
     isIstruttore = 'rup' in roles or 'Manager' in roles or 'istruttore' in roles
-    return doc.wf_getInfoFor('wf_richiesta_proroga') and isIstruttore and doc.getItem('documenti_proroga')
+    return doc.WFgetInfoFor('wf_richiesta_proroga') and isIstruttore and doc.getItem('documenti_proroga')

@@ -11,7 +11,7 @@
     <IndexType type="Products.Archetypes.Field.StringField">DEFAULT</IndexType>
     <CustomData>
         <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-            <field name="fieldDescription" />
+            <field name="FieldDescription" />
             <field name="customAttributes" />
         </extensionfields>
     </CustomData>

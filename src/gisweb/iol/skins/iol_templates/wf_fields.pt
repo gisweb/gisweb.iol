@@ -10,11 +10,11 @@
                       global tipoApp  python: doc.getItem('tipo_app');
                       global tipoRichiesta  python: doc.getItem('tipo_richiesta');
                       global wf_id python: 'iol_workflow';
-                      global status python: doc.wf_getInfoFor('review_state');" />
+                      global status python: doc.WFgetInfoFor('review_state');" />
     
                             <!-- PRESENTATA -->    
         
-   <!-- <div tal:condition="python: doc.wf_getInfoFor('wf_presentata')==True">    
+   <!-- <div tal:condition="python: doc.WFgetInfoFor('wf_presentata')==True">    
  <div class="row-fluid">
         <div class="span8" tal:content="structure python: doc.getRenderedItem('istruttore')" />
     </div>
@@ -23,7 +23,7 @@
        
                                 <!-- ISTRUTTORE ASSEGNATO-->
         
-    <div class="row-fluid" tal:condition="python: doc.wf_getInfoFor('wf_presentata')">
+    <div class="row-fluid" tal:condition="python: doc.WFgetInfoFor('wf_presentata')">
         <div class="span8"
             
             tal:content="structure python: doc.getRenderedItem('istruttore')"></div>
@@ -43,7 +43,7 @@
   <tal:blockstates tal:define="allegati python: doc.getItem('documenti_pdf', {})">
       
                     <!-- PRATICA PROTOCOLLATA -->
-     <div class="row-fluid" tal:condition="python: doc.wf_getInfoFor('wf_protocollata')">
+     <div class="row-fluid" tal:condition="python: doc.WFgetInfoFor('wf_protocollata')">
             <div class="span4"
                 tal:repeat="campo python: ('numero_protocollo', 'data_protocollo', )"
                 tal:content="structure python: doc.getRenderedItem(campo)"></div>

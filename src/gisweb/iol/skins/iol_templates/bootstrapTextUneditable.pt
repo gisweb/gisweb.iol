@@ -2,7 +2,7 @@
     size python:options['field'].getSettings('size') or '';
     title python:options['field'].title;
     ttip_title title;
-    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();">
+    ttip_descr python:options['field'].Schema()['FieldDescription'].getAccessor(options['field'])();">
        
         <label class="control-label">
         <span tal:content="python:'%s: ' % title">Titolo</span>

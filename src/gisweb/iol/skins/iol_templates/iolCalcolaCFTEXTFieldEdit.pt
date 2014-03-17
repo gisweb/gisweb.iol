@@ -1,0 +1,24 @@
+<tal:block tal:on-error="structure container/handleError">
+<tal:removeme tal:replace=" ">
+    <!-- widget per il calcolo del codice fiscale -->
+</tal:removeme>
+<tal:def tal:define="
+    fieldname options/fieldname">
+    <tal:label metal:use-macro="here/macros/macros/showlabel" >
+        display the field title as label
+    </tal:label>
+    <div class="input-append">
+        <input type="text"
+            tal:attributes="name fieldname;
+                maxlenght python:options['field'].getSettings('size') or '255';
+                id fieldname;
+                data-base-url python: context.getParentDatabase().absolute_url();
+                value options/fieldvalue" />
+        <span class="add-on btn"
+            tal:attributes="id string:btn_${fieldname}">
+            Calcola <i class="icon-edit"></i>
+        </span> 
+    </div>
+
+</tal:def>
+</tal:block>

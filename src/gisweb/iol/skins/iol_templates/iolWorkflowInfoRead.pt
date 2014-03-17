@@ -17,14 +17,10 @@
 
 
 
-<tal:blockactions tal:define="status python: doc.wf_getInfoFor('review_state');
-    actions python:doc.wf_transitionsInfo(wf_id=wf_id, args=['description'],);
+<tal:blockactions tal:define="status python: doc.WFgetInfoFor('review_state');
+    actions python:doc.WFgetTransitionsAttr(wf_id=wf_id, args=['description'],);
     actionurl python: '%s/%s/content_status_modify' %(dburl,doc.getId());
     editprotocollourl python: '%s/%s/EditDocument?openwithform=base_com_protocollo' %(dburl,doc.getId());">
-
- 
-        
- 
 </tal:blockactions>
 
 </div>
@@ -35,11 +31,11 @@
 
 <div tal:define="block string:line 77-91 bootrstrap:wf_iol_EDIT" tal:on-error="structure container/handleError">
 
-<tal:docblock tal:define="status_info python: doc.wf_statesInfo(wf_id=wf_id, args=['description']);
-    transitions python: [tr['id'] for tr in doc.wf_transitionsInfo(wf_if=wf_id)];
+<tal:docblock tal:define="status_info python: doc.WFgetStateAttr(wf_id=wf_id, args=['description']);
+    transitions python: [tr['id'] for tr in doc.WFgetTransitionsAttr(wf_id=wf_id)];
     status_id status_info/id;
-    message python: doc.wf_getInfoFor('wf_message');">
-   
+    message python: doc.WFgetInfoFor('wf_message');">
+
 <div tal:define="block string:line 119-131 bootrstrap:wf_iol_READ" tal:on-error="structure container/handleError">
       <div tal:condition="python: 'wf_status' in db.resources.keys()"> 
              <div tal:define="page python: db.resources.wf_status(doc=doc)">
@@ -59,13 +55,12 @@
 <div tal:define="block string:line 138-150 bootrstrap:wf_iol_READ" tal:on-error="structure container/handleError">
     
     <!-- STATI GENERICI -->
-       <tal:blockstates tal:define="allegati python: doc.getItem('documenti_pdf', {})">  
-           
+    <tal:blockstates tal:define="allegati python: doc.getItem('documenti_pdf', {})">  
         <div tal:condition="python: 'wf_fields' in db.resources.keys()"> 
-             <div tal:define="page python: db.resources.wf_fields(doc=doc)">
-               <div tal:content="structure page"></div>
-             </div>
-          </div>
+            <div tal:define="page python: db.resources.wf_fields(doc=doc)">
+                <div tal:content="structure page" />
+            </div>
+        </div>
            
             <div tal:condition="python: 'wf_fields' not in db.resources.keys()"> 
              <div tal:define="page python: container.wf_fields(doc=doc)">
@@ -73,51 +68,31 @@
              </div>
           </div>  
 
-       
-          
+        <div tal:define="block string:line 175-184 bootrstrap:wf_iol_READ"
+            tal:on-error="structure container/handleError">
+        </div>  
+        <div tal:define="block string:line 203-209 bootrstrap:wf_iol_READ" tal:on-error="structure container/handleError">
 
-<div tal:define="block string:line 175-184 bootrstrap:wf_iol_READ" tal:on-error="structure container/handleError">
-
-
-
-       
-    </div>  
-
- 
-<div tal:define="block string:line 203-209 bootrstrap:wf_iol_READ" tal:on-error="structure container/handleError">
-
-       <div class="row-fluid" tal:condition="python: doc.getItem('documenti_autorizzazione') and (doc.verificaRuolo('iol-reviewer') or doc.verificaRuolo('iol-manager')) and doc.wf_getInfoFor('review_state') == 'istruttoria_ok'">
-            <div class="span12" tal:content="structure python: doc.getRenderedItem('documenti_autorizzazione')" />
+                <div class="row-fluid"
+                    tal:condition="python: doc.getItem('documenti_autorizzazione') and (doc.verificaRuolo('iol-reviewer') or doc.verificaRuolo('iol-manager')) and doc.WFgetInfoFor('review_state') == 'istruttoria_ok'">
+                    <div class="span12" tal:content="structure python: doc.getRenderedItem('documenti_autorizzazione')" />
+                </div>
+                <div class="row-fluid"
+                    tal:condition="python: doc.getItem('documenti_autorizzazione') and doc.WFgetInfoFor('review_state') != 'istruttoria_ok'">
+                    <div class="span12" tal:content="structure python: doc.getRenderedItem('documenti_autorizzazione')" />
+                </div>
         </div>
-        <div class="row-fluid"
-            tal:condition="python: doc.getItem('documenti_autorizzazione') and doc.wf_getInfoFor('review_state') != 'istruttoria_ok'">
-            <div class="span12" tal:content="structure python: doc.getRenderedItem('documenti_autorizzazione')" />
-        </div>
-    
-    
-    
-       
-
-           </div>
-
 
     </tal:blockstates>
 
     </div>
-  
 
-
-
-
-
-
-
-   <tal:blockactions tal:define="actions python:doc.wf_transitionsInfo(wf_id=wf_id, args=['description']);
+    <tal:blockactions tal:define="actions python:doc.WFgetTransitionsAttr(wf_id=wf_id, args=['description']);
         actionurl python: '%s/%s/content_status_modify' %(dburl,doc.getId());
         sospendiurl python: '%s/%s/EditDocument?openwithform=base_com_sospensione' %(dburl,doc.getId());
         rigettaurl python: '%s/%s/EditDocument?openwithform=base_com_preavviso_rigetto' %(dburl,doc.getId());
         prorogaurl python: '%s/frm_%s_proroga/OpenForm?parentDocument=%s' %(dburl,doc.getItem('tipo_app',''),doc.getId());">
-            
+
 <div tal:define="block string:wf_actions bootrstrap:wf_iol_READ" tal:on-error="structure container/handleError">
 
                <!-- ELENCO AZIONI IN TESTA-->
@@ -142,7 +117,6 @@
                <div tal:content="structure page"></div>
              </div>
           </div>
-           
             <div tal:condition="python: 'wf_fields_custom' not in db.resources.keys()"> 
              <div tal:define="page python: container.wf_fields_custom(doc=doc)">
                <div tal:content="structure page"></div>

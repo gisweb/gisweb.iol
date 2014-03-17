@@ -17,7 +17,7 @@ if guard_response == None:
     #### OTHER CODE HERE ####
 
     def getResponse():
-        if doc.wf_getInfoFor('review_state') == 'avvio':
+        if doc.WFgetInfoFor('review_state') == 'avvio':
             return True
         else:
             isIstruttore = doc.verificaRuolo('iol-reviewer') or doc.verificaRuolo('iol-manager')

@@ -7,3 +7,6 @@ import permissions
 from permissions import IOL_READ_PERMISSION, IOL_EDIT_PERMISSION, IOL_REMOVE_PERMISSION
 
 from scripts.acl_utils import addIOLRoles
+
+from scripts.workflow_utils import getChainFor, getInfoFor, getStateAttr,\
+    getWorkflowAttr, getTransitionsAttr

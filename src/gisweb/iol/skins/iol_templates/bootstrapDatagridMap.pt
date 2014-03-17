@@ -6,7 +6,7 @@
             data python:field.getSettings().tojson(v);
             title python:options['field'].title;
             ttip_title title;
-            ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
+            ttip_descr python:options['field'].Schema()['FieldDescription'].getAccessor(options['field'])();
             custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
             formname python:field.getParentNode().id;
             doc python: context.REQUEST.PARENTS[0];

@@ -26,7 +26,7 @@ if guard_response == None:
 
         if not test:
             if ParentDocument:
-                return ParentDocument.wf_getInfoFor('wf_autorizzata')
+                return ParentDocument.WFgetInfoFor('wf_autorizzata')
 
         return True
 

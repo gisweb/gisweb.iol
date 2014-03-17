@@ -24,7 +24,6 @@ NB:
 """
 
 from Products.CMFPlomino.PlominoUtils import json_dumps, Now
-from gisweb.utils import getIndexType, Type
 
 db = context.getParentDatabase()
 
@@ -32,17 +31,12 @@ page, size = map(int, (page, size))
 start = (page-1)*size
 
 custom_query = dict()
+# considero parametro di ricerca ogni parametro in request corrispondente ad un
+# campo indicizzato
 for k,v in context.REQUEST.form.items():
-    # considero parametro di ricerca ogni parametro in request corrispondente ad un campo indicizzato
-    indexType = getIndexType(context, k)
-    if v and indexType:
-        if 'ZCTextIndex' in indexType:
-            # TODO: implementare un protocollo condiviso per pilotare le ricerche via ajax
-            # questi adattamenti sono adatti SOLO al campo "fisica_cf"
-            if k == 'fisica_cf':
-                custom_query[k] = v.upper() + '*'
-            else:
-                custom_query[k] = v + '*'
+    if v and k in db.getIndex().indexes():
+        if k == 'fisica_cf':
+            custom_query[k] = v.upper() + '*'
         else:
             custom_query[k] = v
 
@@ -54,21 +48,29 @@ def get_fld_ids():
 
 fld_ids = get_fld_ids()
 
-if not any([r in context.getRoles()+context.getCurrentUserRoles() for r in (
-    'Manager',
-    '[iol-reviewer]', '[iol-manager]', )]):
+roles = context.getRoles()+context.getCurrentUserRoles()
+if 'Manager' in roles:
+    # for test poposes
+    sortindex = None
+elif not any([r in roles for r in ('[iol-manager]', '[iol-reviewer]', )]):
     custom_query['owner'] = db.getCurrentUserId()
 
 idx = db.getIndex()
-# TODO??: dato che per problemi di permessi non riesco agevolmente ad usare la Batch si può pensare di salvare i dati in sessione
-res = idx.dbsearch(custom_query, sortindex='data_autorizzazione', reverse=1, only_allowed=False, limit=None)[start:start+size]
+# TODO??: dato che per problemi di permessi non riesco agevolmente ad usare la
+# funzione Batch si può pensare di salvare i dati in sessione
+res = idx.dbsearch(custom_query, sortindex=sortindex, reverse=1,
+                   only_allowed=False, limit=None)[start:start+size]
+
+#print len(res)
+#return printed
 
 #res = Batch(items=res, size=size, start=size*int(start/size)+1)
 
 get_sec = lambda d: d*24*3600
 def get_data(doc):
     if debug: t_0 = Now()
-    out = dict((k,v) for k,v in doc.serialDoc(fieldsubset=fld_ids, get_id=0, nest=True, render=0, follow=0, format='') if v)
+    out = dict((k,v) for k,v in doc.serialDoc(fieldsubset=fld_ids, get_id=0,
+        nest=True, render=0, follow=0, format='') if v)
     if debug: out['elapsed'] = get_sec(Now()-t_0)
     return out
 

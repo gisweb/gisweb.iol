@@ -1,7 +1,8 @@
 $(document).ready(function () {
 
 //Autosuggest per l'elenco dei nomi e compilazione campi
-$(".iol-autocomplete-form").each(function(){
+//$(".iol-autocomplete-form").each(function(){
+$("[data-autocompleteform-options]").each(function(){
   eval("var options = "  + $(this).data('autocompleteformOptions') +" || {}");
   var baseUrl = $(this).data('baseUrl');
 

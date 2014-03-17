@@ -52,7 +52,7 @@ return plominoDocument.doclinkFieldSearchFormula("<dtml-var "custom_field_name">
     </params>
     <CustomData>
         <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-            <field name="fieldDescription">Custom field description</field>
+            <field name="FieldDescription">Custom field description</field>
             <field name="customAttributes"/></extensionfields>
     </CustomData>
 </element>

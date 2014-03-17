@@ -10,18 +10,18 @@
                       global tipoApp  python: doc.getItem('tipo_app');
                       global tipoRichiesta  python: doc.getItem('tipo_richiesta');
                       global wf_id python: 'iol_workflow';
-                      global status python: doc.wf_getInfoFor('review_state');" />
+                      global status python: doc.WFgetInfoFor('review_state');" />
     
-   <tal:docblock tal:define="status_info python: doc.wf_statesInfo(wf_id=wf_id, args=['description']);
-    transitions python: [tr['id'] for tr in doc.wf_transitionsInfo(wf_if=wf_id)];
+   <tal:docblock tal:define="status_info python: doc.WFgetStateAttr(wf_id=wf_id, args=['description']);
+    transitions python: [tr['id'] for tr in doc.WFgetTransitionsAttr(wf_id=wf_id)];
     status_id status_info/id;
-    message python: doc.wf_getInfoFor('wf_message');">
+    message python: doc.WFgetInfoFor('wf_message');">
     <div id="section-message-compilazione" class="alert alert-info"
         tal:condition="python: not doc.getItem('sospensione_motivazione')">
 
         <h4 tal:content="status_info/title" />
         <div tal:content="status_info/description" />
-        <h5 tal:condition="python: not doc.wf_getInfoFor('wf_protocollata')">
+        <h5 tal:condition="python: not doc.WFgetInfoFor('wf_protocollata')">
             Per poter inviare la domanda occorre aver compilato tutti i campi indicati dal simbolo blu, per accedere alla modifica dei dati clicca su "Modifica"
         </h5>
     </div>

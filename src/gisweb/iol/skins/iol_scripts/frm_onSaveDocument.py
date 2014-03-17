@@ -42,7 +42,7 @@ if not 'oForm' in items and 'first_step' in items:
     context.removeItem('plominoredirecturl')    
 
 # Se è stata sospesa, al salvataggio setto un item che abiliti la transizione di integrazione
-if context.wf_getInfoFor('review_state') == 'sospesa':
+if context.WFgetInfoFor('review_state') == 'sospesa':
     context.setItem('pronta_per_integrazione', 1)
 
 

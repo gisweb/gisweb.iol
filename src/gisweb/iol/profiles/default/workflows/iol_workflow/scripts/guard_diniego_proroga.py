@@ -17,7 +17,7 @@ if guard_response == None:
 
     #### OTHER CODE HERE ####
 
-    guard_response = doc.wf_getInfoFor('wf_richiesta_proroga')
+    guard_response = doc.WFgetInfoFor('wf_richiesta_proroga')
 
 return guard_response
 

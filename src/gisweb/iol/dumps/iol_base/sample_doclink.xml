@@ -79,11 +79,11 @@ return context.doclinkFieldSearchFormula(fieldname=fieldname, colnames=colnames)
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes"/>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula"/>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="add_child" title="Add child" type="PlominoAction">
           <id type="Products.Archetypes.Field.StringField">add_child</id>
           <ActionType type="Products.Archetypes.Field.StringField">REDIRECT</ActionType>

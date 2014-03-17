@@ -15,7 +15,7 @@
     
     
      <div class="row-fluid"
-            tal:condition="python: doc.wf_getInfoFor('wf_presentata') and (doc.verificaRuolo('iol-manager') or doc.verificaRuolo('iol-reviewer'))">
+            tal:condition="python: doc.WFgetInfoFor('wf_presentata') and (doc.verificaRuolo('iol-manager') or doc.verificaRuolo('iol-reviewer'))">
             <div class="span4"
                 tal:content="structure python: myForm.getFormField('istruttore').getFieldRender(myForm, doc, doc.isEditMode(), False, request=doc.REQUEST)"></div>
             
@@ -29,7 +29,7 @@
         
         
          <tal:block tal:define="allegati python: doc.getItem('documenti_pdf', {})"
-            tal:condition="python: doc.wf_getInfoFor('wf_protocollata')">
+            tal:condition="python: doc.WFgetInfoFor('wf_protocollata')">
              <div class="row-fluid">
                 <div class="span4"
                     tal:repeat="campo python: ('numero_protocollo', 'data_protocollo', )"
@@ -54,10 +54,10 @@
     
         
          <tal:block tal:define="allegati python: doc.getItem('documenti_pdf', {})"
-            tal:condition="python: doc.wf_getInfoFor('wf_protocollata')">
+            tal:condition="python: doc.WFgetInfoFor('wf_protocollata')">
          <!-- DOMANDA AUTORIZZATA -->
             <div tal:define="allegati python: doc.getItem('documenti', {})"
-                tal:condition="python: 'value' in db.get_property('documenti_autorizzazione') and doc.wf_getInfoFor('wf_autorizzata')" class="row-fluid">
+                tal:condition="python: 'value' in db.get_property('documenti_autorizzazione') and doc.WFgetInfoFor('wf_autorizzata')" class="row-fluid">
                      <div class="alert alert-info">   
      <div class="row-fluid">
          <div class="span12">
@@ -82,11 +82,11 @@
         </tal:block>
 
         <div class="boxupload">
-            <div class="row-fluid" tal:condition="python: 'value' in db.get_property('documenti_autorizzazione') and doc.wf_getInfoFor('action')=='istruttoria_completata'">
+            <div class="row-fluid" tal:condition="python: 'value' in db.get_property('documenti_autorizzazione') and doc.WFgetInfoFor('action')=='istruttoria_completata'">
                 <div class="span12"
                     tal:content="structure python: myForm.getFormField('documenti_autorizzazione').getFieldRender(form=myForm,doc=doc,editmode=True,creation=False)" />
             </div>
-            <tal:autorizzata tal:condition="python: doc.wf_getInfoFor('wf_autorizzata')">
+            <tal:autorizzata tal:condition="python: doc.WFgetInfoFor('wf_autorizzata')">
                 <div class="row-fluid" tal:condition="python:'value' in db.get_property('documenti_autorizzazione')">
                     <div class="span12"
                         tal:content="structure python: myForm.getFormField('documenti_autorizzazione').getFieldRender(form=myForm,doc=doc,editmode=True,creation=False)" />
@@ -108,13 +108,13 @@
     
     
     
-    <div class="alert alert-info" tal:condition="python:bool(doc.wf_getInfoFor('wf_presentata')) and (doc.verificaRuolo('iol-manager') or doc.verificaRuolo('iol-reviewer'))">
+    <div class="alert alert-info" tal:condition="python:bool(doc.WFgetInfoFor('wf_presentata')) and (doc.verificaRuolo('iol-manager') or doc.verificaRuolo('iol-reviewer'))">
             <tal:cond tal:define="fields python: ['istruttoria_prescrizioni','istruttoria_annotazioni']" tal:repeat="campo fields">
             <div class="row-fluid" >
                 <div class="span12" tal:content="structure python: myForm.getFormField(campo).getFieldRender(myForm, doc, doc.isEditMode(), False, request=doc.REQUEST)"></div>
             </div>
             </tal:cond>
-            <tal:cond tal:condition="python:bool(doc.wf_getInfoFor('wf_autorizzata')) and doc.verificaRuolo('iol-manager')" tal:define="fields python: ['integrazione_autorizzazione']" tal:repeat="campo fields">
+            <tal:cond tal:condition="python:bool(doc.WFgetInfoFor('wf_autorizzata')) and doc.verificaRuolo('iol-manager')" tal:define="fields python: ['integrazione_autorizzazione']" tal:repeat="campo fields">
             <div class="row-fluid" >
                 <div class="span12" tal:content="structure python: myForm.getFormField(campo).getFieldRender(myForm, doc, doc.isEditMode(), False, request=doc.REQUEST)"></div>
             </div>
@@ -122,7 +122,7 @@
         </div>  
         
          <!-- PARTE DI SOSPENSIONE -->
-       <div class="alert alert-info" tal:condition="python:bool(doc.wf_getInfoFor('wf_sospesa'))">
+       <div class="alert alert-info" tal:condition="python:bool(doc.WFgetInfoFor('wf_sospesa'))">
             <tal:cond tal:condition="python:bool(doc.verificaRuolo('iol-manager') or doc.verificaRuolo('iol-reviewer'))" tal:define="fields python: ['istruttoria_motivo_sospensione']" tal:repeat="campo fields">
             <div class="row-fluid">
                 <div class="span12" tal:content="structure python: myForm.getFormField(campo).getFieldRender(myForm, doc, doc.isEditMode(), False, request=doc.REQUEST)"></div>
@@ -137,7 +137,7 @@
         
         
           <!-- PARTE DI RIGETTO -->
-        <div class="alert alert-info" tal:condition="python:bool(doc.wf_getInfoFor('wf_prerigetto'))">
+        <div class="alert alert-info" tal:condition="python:bool(doc.WFgetInfoFor('wf_prerigetto'))">
             <tal:cond tal:condition="python:(doc.verificaRuolo('iol-manager') or doc.verificaRuolo('iol-reviewer'))" tal:define="fields python: ['istruttoria_rigetto_motivazione','istruttoria_rigetto_controdeduzioni','istruttoria_rigetto_annotazioni_richiedente']" tal:repeat="campo fields">
             <div class="row-fluid" >
                 <div class="span12" tal:content="structure python: myForm.getFormField(campo).getFieldRender(myForm, doc, doc.isEditMode(), False, request=doc.REQUEST)"></div>

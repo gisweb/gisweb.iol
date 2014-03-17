@@ -4,7 +4,7 @@
     id options/fieldname;
     title python:options['field'].title;
     ttip_title title;
-    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
+    ttip_descr python:options['field'].Schema()['FieldDescription'].getAccessor(options['field'])();
     custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
     doc python: context.REQUEST.PARENTS[0];
     editMode python:1 if not doc.isDocument() or doc.isEditMode() else 0;

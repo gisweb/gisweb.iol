@@ -4,7 +4,7 @@
     v options/fieldvalue;
     title python:options['field'].title;
     ttip_title title;
-    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
+    ttip_descr python:options['field'].Schema()['FieldDescription'].getAccessor(options['field'])();
     baseURL python: context.getParentDatabase().absolute_url();
     doc_id python: context.REQUEST.PARENTS[0].getId() or '';
     custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();

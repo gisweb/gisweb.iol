@@ -1,0 +1,26 @@
+<tal:block tal:on-error="structure container/handleError">
+<tal:removeme tal:replace=" ">
+    <!-- WARNING: da verificare il caso d'uso -->
+</tal:removeme>
+<tal:label metal:use-macro="here/macros/macros/showlabel" >
+    display the field title as label
+</tal:label>
+<ul aria-labelledby="dLabel"
+    tal:define="altDocId python: context.REQUEST.get('document_to_display', '');
+        doc python: context.REQUEST.PARENTS[0]
+        altDoc python: doc.getParentDatabase().getDocument(altDocId);
+        docurl python: doc.absolute_url() if not altDoc else altDoc.absolute_url();
+        docId python: doc.getId()"
+    tal:repeat="attachment options/fieldvalue">
+    <li>
+        <a tal:define="urltemplate python: '%s/%s' if attachment.endswith('.pdf') else '%s/getfile?filename=%s';
+            refurl python: urltemplate % (docurl, attachment, )"
+            target="new"
+            tal:attributes="href string:${refurl}" >
+            <img tal:define="img python:test('.pdf' in attachment,'images/pdf.gif','images/word.gif');"
+                tal:attributes="src string:${img}" /> &nbsp;<span
+                    tal:content="python: '.'.join(attachment.split('.')[:-1]).capitalize().replace('-',' ')"/>
+        </a>
+    </li>
+</ul>
+</tal:block>

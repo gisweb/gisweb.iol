@@ -3,7 +3,7 @@
     portal_url portal_state/portal_url;
     title python:options['field'].title;
     ttip_title title;
-    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();   
+    ttip_descr python:options['field'].Schema()['FieldDescription'].getAccessor(options['field'])();   
     custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
     id options/fieldname;
     doc python: context.REQUEST.PARENTS[0];

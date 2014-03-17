@@ -2,7 +2,7 @@
   <design>
     <element id="autorizzate" title="Domande Autorizzate" type="PlominoView">
       <id type="Products.Archetypes.Field.StringField">autorizzate</id>
-      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.wf_getInfoFor('wf_autorizzata') and not plominoDocument.wf_getInfoFor('wf_richiesta_proroga') and plominoDocument.naming('richiesta') in ['rinnovo','base','duplicato']]]></SelectionFormula>
+      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.WFgetInfoFor('wf_autorizzata') and not plominoDocument.WFgetInfoFor('wf_richiesta_proroga') and plominoDocument.naming('richiesta') in ['rinnovo','base','duplicato']]]></SelectionFormula>
       <SortColumn type="Products.Archetypes.Field.StringField"/>
       <Categorized type="Products.Archetypes.Field.BooleanField">False</Categorized>
       <FormFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></FormFormula>
@@ -22,7 +22,7 @@
       <Position type="Products.Archetypes.Field.IntegerField"/>
       <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
       <elements>
-        <element id="numero" title="N° Pratica" type="PlominoColumn">
+        <element id="numero" title="N&#176; Pratica" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">numero</id>
           <SelectedField type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</SelectedField>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[context.getItem('numero_pratica')]]></Formula>
@@ -54,7 +54,7 @@ return result]]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
-        <element id="autorizzazione" title="N° Autorizzazione" type="PlominoColumn">
+        <element id="autorizzazione" title="N&#176; Autorizzazione" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">autorizzazione</id>
           <SelectedField type="Products.Archetypes.Field.StringField">base_sub_pratica/numero_autorizzazione</SelectedField>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[context.getItem('numero_autorizzazione')]]></Formula>
@@ -78,7 +78,7 @@ else:
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
-        <element id="autorizzatadal" title="Inizio Validità" type="PlominoColumn">
+        <element id="autorizzatadal" title="Inizio Validit&#224;" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">autorizzatadal</id>
           <SelectedField type="Products.Archetypes.Field.StringField">gestioneerrori</SelectedField>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.getItem('autorizzata_dal'):
@@ -88,7 +88,7 @@ else:
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>
-        <element id="autorizzataal" title="Fine Validità" type="PlominoColumn">
+        <element id="autorizzataal" title="Fine Validit&#224;" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">autorizzataal</id>
           <SelectedField type="Products.Archetypes.Field.StringField">gestioneerrori</SelectedField>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.getItem('autorizzata_al'):

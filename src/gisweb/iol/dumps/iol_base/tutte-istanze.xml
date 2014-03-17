@@ -2,7 +2,7 @@
   <design>
     <element id="tutte-istanze" title="Tutte le istanze" type="PlominoView">
       <id type="Products.Archetypes.Field.StringField">tutte-istanze</id>
-      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.naming('richiesta', error=False) in ['base','rinnovo','duplicato'] or plominoDocument.wf_getInfoFor('review_state')=='avvio']]></SelectionFormula>
+      <SelectionFormula type="Products.Archetypes.Field.TextField"><![CDATA[return plominoDocument.naming('richiesta', error=False) in ['base','rinnovo','duplicato'] or plominoDocument.WFgetInfoFor('review_state')=='avvio']]></SelectionFormula>
       <SortColumn type="Products.Archetypes.Field.StringField">wfpriority</SortColumn>
       <Categorized type="Products.Archetypes.Field.BooleanField">False</Categorized>
       <FormFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></FormFormula>
@@ -22,7 +22,7 @@
       <Position type="Products.Archetypes.Field.IntegerField"/>
       <excludeFromNav type="Products.Archetypes.Field.BooleanField">False</excludeFromNav>
       <elements>
-        <element id="numero" title="N°Pratica" type="PlominoColumn">
+        <element id="numero" title="N&#176;Pratica" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">numero</id>
           <SelectedField type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</SelectedField>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[plominoDocument.getItem('numero_pratica')]]></Formula>
@@ -73,10 +73,10 @@ else:
         <element id="stato" title="Stato Pratica" type="PlominoColumn">
           <id type="Products.Archetypes.Field.StringField">stato</id>
           <SelectedField type="Products.Archetypes.Field.StringField">base_com_preavviso_rigetto</SelectedField>
-          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.wf_getInfoFor('wf_message'):
-    return '%s - %s' %(plominoDocument.wf_statesInfo(single=False)[0]['title'],plominoDocument.wf_getInfoFor('wf_message'))
+          <Formula type="Products.Archetypes.Field.TextField"><![CDATA[if plominoDocument.WFgetInfoFor('wf_message'):
+    return '%s - %s' %(plominoDocument.WFgetStateAttr()['title'],plominoDocument.WFgetInfoFor('wf_message'))
 else:
-    return plominoDocument.wf_statesInfo(single=False)[0]['title']]]></Formula>
+    return plominoDocument.WFgetStateAttr()['title']]]></Formula>
           <HiddenColumn type="Products.Archetypes.Field.BooleanField">False</HiddenColumn>
           <DisplaySum type="Products.Archetypes.Field.BooleanField">False</DisplaySum>
         </element>

@@ -1,17 +1,20 @@
+<tal:err tal:on-error="structure container/handleError">
 <tal:def tal:define="
     doc python: context.REQUEST.PARENTS[0];
     fieldname options/fieldname;
     title python:options['field'].title;
     ttip_title title;
-    ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
-    baseURL python: context.getParentDatabase().absolute_url();
-    custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();">
-        
-    <div tal:condition="python: doc.isNewDocument()" class="alert alert-info">      
+    ttip_descr python:options['field'].Schema()['FieldDescription'].getAccessor(options['field'])();
+    baseURL python: context.getParentDatabase().absolute_url();">
+    <div tal:condition="python: doc.isNewDocument()" class="alert alert-info">
         <label class="control-label"> 
               <span tal:content="python:'%s: ' % title">Titolo</span>
         </label>
-        <tal:plugin tal:content='structure string:<input type="text" id="${fieldname}" data-base-url="${baseURL}" class="iol-autocomplete-form" ${custom_attributes} style="width:100%" />'></tal:plugin> 
-    </div>       
-  
+        <input tal:attributes="id fieldname;
+            data-base-url baseURL;
+            class string:iol-autocomplete-form;"
+            style="width:100%"
+            type="text">
+    </div>
 </tal:def>
+</tal:err>

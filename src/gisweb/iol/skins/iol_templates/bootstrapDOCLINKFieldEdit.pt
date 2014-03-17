@@ -4,7 +4,7 @@
                 fieldname name;
                 title python:options['field'].title;
                 ttip_title title;
-                ttip_descr python:options['field'].Schema()['fieldDescription'].getAccessor(options['field'])();
+                ttip_descr python:options['field'].Schema()['FieldDescription'].getAccessor(options['field'])();
                 custom_attributes python:options['field'].Schema()['customAttributes'].getAccessor(options['field'])();
 				current python:options['fieldvalue'];
 				lcurrent python:test(hasattr(current,'split'),[current],current);

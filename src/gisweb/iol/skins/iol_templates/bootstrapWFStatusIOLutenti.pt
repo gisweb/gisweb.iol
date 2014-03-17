@@ -7,9 +7,9 @@
 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
                            
    <tal:state tal:condition="python: not doc.isNewDocument()">
-        <div tal:define="state_info python: doc.wf_statesInfo(single=True, args=['description']);
-            state_message python: doc.wf_getInfoFor('state_message')"
-            tal:attributes="class python: 'alert alert-%s' % doc.wf_getInfoFor('message_class')">
+        <div tal:define="state_info python: doc.WFgetStateAttr(args=['description']);
+            state_message python: doc.WFgetInfoFor('state_message')"
+            tal:attributes="class python: 'alert alert-%s' % doc.WFgetInfoFor('message_class')">
             <h4 tal:content="state_info/title">State title goes here</h4>
             <div tal:content="state_info/description">State description goes here</div>
             <h5 tal:condition="python: not not state_message">
@@ -20,9 +20,9 @@
                            
    <tal:state tal:condition="python: doc.isNewDocument()">
         <div tal:define="tmp python: doc.getParentDatabase().createDocument();
-            state_info python: tmp.wf_statesInfo(single=True, args=['description']);
-            state_message python: tmp.wf_getInfoFor('state_message');
-            message_class python: tmp.wf_getInfoFor('message_class');
+            state_info python: tmp.WFgetStateAttr(args=['description']);
+            state_message python: tmp.WFgetInfoFor('state_message');
+            message_class python: tmp.WFgetInfoFor('message_class');
             dummy python: tmp.delete()"
             tal:attributes="class python: 'alert alert-%s' % message_class">
             <h4 tal:content="state_info/title">State title goes here</h4>
@@ -38,12 +38,12 @@
 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
                            
     <tal:transitions tal:condition="python:not doc.isEditMode()"
-        tal:define="transitions_info python: doc.wf_transitionsInfo(single=False, args=['description']);
+        tal:define="transitions_info python: doc.WFgetTransitionsAttr(args=['description']);
             doActionURL python: '%s/content_status_modify?workflow_action=' % doc.absolute_url()">
 
-        <tal:block tal:define="message_form python: doc.wf_getInfoFor('state_instructions') or ''"
+        <tal:block tal:define="message_form python: doc.WFgetInfoFor('state_instructions') or ''"
             tal:condition="python: not not message_form">
-            <div tal:attributes="class python: 'alert alert-%s' % doc.wf_getInfoFor('instruction_class')"
+            <div tal:attributes="class python: 'alert alert-%s' % doc.WFgetInfoFor('instruction_class')"
                 tal:define="message python: doc.getParentDatabase().getForm(message_form).formLayout(doc.REQUEST)"
                 tal:content="structure message" />
         </tal:block>

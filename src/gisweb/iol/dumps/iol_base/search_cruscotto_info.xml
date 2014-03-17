@@ -38,21 +38,7 @@
 <value><struct>
 <member>
 <name>selectionlistformula</name>
-<value><string>return ['Nuovo documento in compilazione|avvio','Assegnata in fase di istruttoria|assegnata', 'In attesa di autorizzazione|istruttoria_ok','Autorizzazione protocollata|autorizzata','Sospesa|sospesa','Preavviso di Rigetto|pre_rigetto','Archiviata|archiviata','Rigettata|rigettata']
-
-if context.isNewDocument():
-    db = context.getParentDatabase()
-    # questo crea un problema di scrittura durante una visualizzazione...
-    # se è grave per soluzioni alternative si accettano suggerimenti ;-)
-    doc = db.createDocument()
-    out = ['%(title)s|%(id)s' % i for i in doc.wf_statesInfo(state_id=None, single=False)]
-    db.deleteDocument(doc)
-else:
-    out = ['%(title)s|%(id)s' % i for i in context.wf_statesInfo(state_id=None, single=False)]
-
-return out
-
-#return context.methods.statesList()</string></value>
+<value><string>return ['Nuovo documento in compilazione|avvio','Assegnata in fase di istruttoria|assegnata', 'In attesa di autorizzazione|istruttoria_ok','Autorizzazione protocollata|autorizzata','Sospesa|sospesa','Preavviso di Rigetto|pre_rigetto','Archiviata|archiviata','Rigettata|rigettata']</string></value>
 </member>
 <member>
 <name>dynamictableparam</name>
@@ -72,11 +58,11 @@ return out
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">dynamicSearch=""</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">'dynamicSearch=""'</field>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
         <element id="hw_notistruttore" title="hw_notistruttore" type="PlominoHidewhen">
           <id type="Products.Archetypes.Field.StringField">hw_notistruttore</id>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[return False
@@ -88,8 +74,8 @@ return out
           <FieldType type="Products.Archetypes.Field.StringField">SELECTION</FieldType>
           <FieldMode type="Products.Archetypes.Field.StringField">EDITABLE</FieldMode>
           <Formula type="Products.Archetypes.Field.TextField"><![CDATA[]]></Formula>
-          <FieldReadTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldReadTemplate>
-          <FieldEditTemplate type="Products.Archetypes.Field.StringField">bootstrapSelectionEdit</FieldEditTemplate>
+          <FieldReadTemplate type="Products.Archetypes.Field.StringField"/>
+          <FieldEditTemplate type="Products.Archetypes.Field.StringField"/>
           <Mandatory type="Products.Archetypes.Field.BooleanField">False</Mandatory>
           <ValidationFormula type="Products.Archetypes.Field.TextField"><![CDATA[]]></ValidationFormula>
           <ToBeIndexed type="Products.Archetypes.Field.BooleanField">False</ToBeIndexed>
@@ -119,11 +105,11 @@ return out
 </params>
           <CustomData>
             <extensionfields ExportImportClass="Products.CMFPlomino.tests.schemaextender.importexport.ExtendedFieldImportExporter">
-              <field name="fieldDescription"/>
-              <field name="customAttributes">dynamicSearch=""</field>
+              <field name="FieldDescription"/>
+              <field name="HTMLAttributesFormula">'dynamicSearch=""'</field>
             </extensionfields>
           </CustomData>
-        </element>
+        <TitleAsLabel type="Products.Archetypes.Field.BooleanField">True</TitleAsLabel></element>
       </elements>
     </element>
   </design>

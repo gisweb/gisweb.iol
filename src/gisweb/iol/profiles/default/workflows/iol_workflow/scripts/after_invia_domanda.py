@@ -17,7 +17,7 @@ if script.run_script(doc, script.id) != False:
     #### OTHER CODE HERE ####
 
     # 1. Se disponibile eseguo la transizione di assegnazione
-    if 'assegna' in map(lambda tr: tr['id'], doc.wf_transitionsInfo()):
+    if 'assegna' in map(lambda tr: tr['id'], doc.WFgetTransitionsAttr()):
         from Products.CMFCore.utils import getToolByName
         wf = getToolByName(doc, 'portal_workflow')
         wf.doActionFor(doc, 'assegna')
