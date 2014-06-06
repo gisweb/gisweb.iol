@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.3'
+version = '0.8'
 
 long_description = (
     open('README.txt').read()
@@ -29,8 +29,8 @@ setup(name='gisweb.iol',
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
       keywords='',
-      author='',
-      author_email='',
+      author='Roberto Starnini',
+      author_email='roberto.starnin@gisweb.it',
       url='http://svn.plone.org/svn/collective/',
       license='gpl',
       packages=find_packages('src'),
@@ -39,10 +39,6 @@ setup(name='gisweb.iol',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'setuptools',
-          'gisweb.utils',
-          'gisweb.plominofields',
-          'gisweb.plominofieldextensions',
           'Products.CMFPlomino',
           'collective.wtf',
           'zope.app.component',
