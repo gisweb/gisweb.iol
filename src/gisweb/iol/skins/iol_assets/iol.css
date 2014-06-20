@@ -1,0 +1,277 @@
+.plomino_form {
+
+   margin-right:10px;
+
+}
+
+#renderedForm {
+
+  border: 1px solid black
+
+}
+
+
+#renderedForm div.alert{
+ 
+    display:none
+
+}
+
+#renderedForm span.label,span.legend{
+ 
+    color: #000000;
+    font-size:12px;
+    display:block;
+    background-color:#FF0000;
+    text-shadow:none;
+    border-radius: 3px;
+
+}
+
+#renderedForm span.TEXTFieldRead-TEXT{
+ 
+    font-size:12px;
+    background-color:#FFFFFF;
+    width:100%;
+    border:1 px solid gray;
+
+}
+
+
+#renderedForm div.row-fluid{
+
+   mrgin-bottom:15px;
+
+}
+
+
+.plomino_form_solobootstrap .row-fluid select,input[type='text'] {
+    width:100%;
+    height: 24px;
+
+}
+.date{
+
+    width:100%;
+    height: 1em;
+    border-radius: 5px;
+
+}
+
+input["data-plugin='iolCodicefiscale'"] {
+
+    width:50%;
+
+}
+
+
+.plomino_form .row-fluid input.date{width:100%;text-align:left} 
+
+.plomino_form input[type="radio"],label {
+    vertical-align:middle;
+    padding: 0px;
+    margin: 0px;
+
+}
+
+.plomino_form label.required, legend.required {
+ 
+    color: #FF0000;
+
+}
+
+.plomino_form label.mandatory {
+ 
+    color: #FF00FF;
+
+}
+
+.plomino_form legend {
+  text-align:left;
+  height:5px;
+  top:-10px;
+  font-size:14px;
+  border-style: none;
+ border-width: 0px;
+    display: block;
+
+    line-height: 4px;
+    margin-bottom: 2px;
+    padding: 0;
+    width: 100%;
+
+}
+.select2-container {
+
+   width:100%
+
+}
+
+.plomino_form label,legend {
+    color:gray;
+    font-weight:bold;
+    display:block;
+
+}
+
+table.dataTable{
+
+
+
+
+}
+
+.plomino_form table.dataTable thead th {
+    border-bottom: 2px solid #000000;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+
+background-color: #FFFFFF;
+    padding: 3px 18px 3px 10px;
+}
+
+
+.plominomap {
+
+    width:50%;
+    height:300px;
+
+}
+
+.plominomap-info {
+
+   height:25px;
+   width:100%;
+   border: 1px solid grey;
+
+}
+.plominomap-streetview {
+   margin-top:-300px;
+   margin-left:5px;
+   height:300px;
+   width:50%;
+   background: url('streetview.jpg') no-repeat center;
+   background-color: #E5E3DF;
+   border: 1px solid #cccccc;
+   float: right
+
+}
+
+.plominomap-streetview img {
+    max-width: none
+} 
+
+.plominomap img {
+    max-width: none
+}  
+
+.icon-button{
+
+  height:18px;
+  margin-left:5px;
+}
+
+#layerbox { position: absolute;
+  top:23px; left:0px;
+  margin-top:-2px;
+  padding: 6px 4px;
+  text-align: left;
+  width:150px;
+  max-height:200px;
+  background-color: #fff;
+  display: none;
+  cursor:default;
+  z-index:-1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 1px 2px; 
+
+
+}
+
+#layerbox hr { height:1px;
+  border:1px;
+  color:#e2e2e2;
+  background-color:#e2e2e2;
+  margin: 1px 0;
+}
+
+*+html #layerbox hr {
+/* IE 7 hr bug fix */
+ display:block; margin: -5px 0;
+}
+
+* html #layerbox hr {
+/* IE 6 hr bug fix */
+ display:block; margin: -5px 0;
+}
+
+
+*+html #layerbox hr {
+/* IE 7 hr bug fix */
+ display:block; margin: -5px 0;
+}
+
+* html #layerbox hr {
+/* IE 6 hr bug fix */
+ display:block; margin: -5px 0;
+}
+
+/*
+CSS for v3 buttons stolen from:
+ http://gmaps-samples-v3.googlecode.com/svn/trunk/controls/index.html
+*/
+
+.button, .button-selected, .dropdown {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  text-align: center;
+/*  position: relative; */
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 1px 2px; 
+  -moz-box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px;
+  color: #000;
+  /*border: 1px solid #717B87;*/
+  background-color: #fff; 
+}
+
+.button, .button-selected {
+  margin: 5px;
+  padding: 1px 6px;
+  overflow: hidden;
+}
+
+.button:hover {
+  background: #FEFEFE;
+  background: -moz-linear-gradient(top, #FEFEFE 0%, #F3F3F3 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#FEFEFE), to(#F3F3F3));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FEFEFE', endColorstr='#F3F3F3', GradientType=0);
+}
+
+.button-selected {
+  font-weight: bold;
+}
+
+
+#layerbox label{
+
+
+    display:list-item;
+    list-style:none;
+    white-space:nowrap;
+    margin-top: -3px;
+
+} 
+
+#layerbox input{
+  float: left;
+  display: :inline;
+  margin-right: 2px;
+
+
+}

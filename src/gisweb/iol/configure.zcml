@@ -9,9 +9,7 @@
 
     <include package="Products.CMFCore" />
     <include package="Products.CMFPlacefulWorkflow" />
-    <include package="plomino.tinymce" />
     <include package="Products.CMFPlomino" />
-    <include package="gisweb.utils" />
 
     <genericsetup:registerProfile
         name="default"
@@ -25,6 +23,8 @@
     <cmf:registerDirectory name="iol_templates" recursive="True" />
     <cmf:registerDirectory name="iol_scripts" recursive="True" />
     <cmf:registerDirectory name="iol_assets" recursive="True" />
+
+   
 
     <browser:page
         name="iolbootstrapview"

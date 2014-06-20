@@ -39,6 +39,8 @@ setup(name='gisweb.iol',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
+          'setuptools',
+          'gisweb.utils',
           'Products.CMFPlomino',
           'collective.wtf',
           'zope.app.component',
