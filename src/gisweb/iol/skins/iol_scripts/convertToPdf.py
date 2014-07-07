@@ -11,10 +11,9 @@
 Converte il file docx in documenti_autorizzazione in pdf
 """
 
-from gisweb.utils import Type, is_json, json_loads
+from gisweb.utils import Type
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlomino.PlominoUtils import open_url
-import base64
 
 if context.portal_type != 'PlominoDocument':
     return ''
@@ -34,26 +33,17 @@ newfilename = filename.replace('.docx','.pdf').replace('.odt','.pdf')
 docurl='%s/%s' %(doc.absolute_url(),filename)
 
 url = '%s?mode=show&docurl=%s' %(serviceURL, docurl)
-plone_tools = getToolByName(context.getParentDatabase().aq_inner, 'plone_utils')
+
 try:
     result = open_url(url, asFile=False)
 except Exception as error:
-    
+    plone_tools = getToolByName(context.getParentDatabase().aq_inner, 'plone_utils')
     msg = ('%s: %s' % (Type(error), error), 'error')
     context.setItem('test', msg)
     plone_tools.addPortalMessage(*msg, request=context.REQUEST)
     context.REQUEST.RESPONSE.redirect(context.absolute_url())
 else:
-    if is_json(result):
-        res=json_loads(result)
-        if res['success']==1:
-            context.removeItem(file_type)
-            (f,c) = context.setfile(base64.b64decode(res['file']), filename=newfilename, overwrite=True, contenttype='application/pdf')
-            if f and c:
-                context.setItem(file_type, {f: c})
-        else:
-            msg = ('%s' %res['message'], 'error')
-            plone_tools.addPortalMessage(*msg, request=context.REQUEST)
-            context.REQUEST.RESPONSE.redirect(context.absolute_url())
-    else:
-        pass
+    context.removeItem(file_type)
+    (f,c) = context.setfile(result, filename=newfilename, overwrite=True, contenttype='application/pdf')
+    if f and c:
+        context.setItem(file_type, {f: c})
