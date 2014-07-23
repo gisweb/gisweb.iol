@@ -4,46 +4,82 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=file_type='documenti_autorizzazione'
-##title=
+##parameters=item='documenti_autorizzazione', url='ws_converttopdf_URL', test=False
+##title=convertToPdf (interfaccia client al servizio xConvert)
 ##
+
 """
 Converte il file docx in documenti_autorizzazione in pdf
 """
 
-from gisweb.utils import Type
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlomino.PlominoUtils import open_url
+assert context.portal_type == 'PlominoDocument', "Context is not a PlominoDocument!"
+assert item, "item parameter is mandatory!"
 
-if context.portal_type != 'PlominoDocument':
-    return ''
-if not file_type:
-    return ''
+from gisweb.utils import Type, decode_b64, requests_post
 
-doc = context
-#URL del servizio di Conversione
-serviceURL = context.get_property('ws_converttopdf_URL').get('value')
-#Progetto Corrente
-#proj = context.get_property('project').get('value') or '' # variabile non usata
+res = context.get_property(url)
+if 'value' in res:
+    # in caso contrario considero sia stata passata una url castom
+    url = res.get('value')
 
-files = doc.getItem(file_type, {})
-filename = files.keys()[-1]
-newfilename = filename.replace('.docx','.pdf').replace('.odt','.pdf')
-#info = doc.naming() # variabile non usata
-docurl='%s/%s' %(doc.absolute_url(),filename)
+def test_path(o, v, *a):
+    """ Verifica la presenza di tutte le chiavi annidate in 'a' e
+    testa il valore dell'ultima variavile che sia uguale a 'v'
+    """
+    foo = dict(o)
+    for k in a:
+        if not k in foo:
+            return False
+        else:
+            foo = foo.get(k, {})
+    return foo == v
 
-url = '%s?mode=show&docurl=%s' %(serviceURL, docurl)
-
-try:
-    result = open_url(url, asFile=False)
-except Exception as error:
+def redirect_with_warning(msg, level='error'):
+    """ """
+    from Products.CMFCore.utils import getToolByName
     plone_tools = getToolByName(context.getParentDatabase().aq_inner, 'plone_utils')
-    msg = ('%s: %s' % (Type(error), error), 'error')
-    context.setItem('test', msg)
-    plone_tools.addPortalMessage(*msg, request=context.REQUEST)
+    plone_tools.addPortalMessage(msg, level, request=context.REQUEST)
     context.REQUEST.RESPONSE.redirect(context.absolute_url())
+
+files = context.getItem(item, {})
+convertibles = [c for c in files.items() if c[0].endswith('.docx')]
+
+if len(convertibles)>0:
+    filename, mime = convertibles[0]
 else:
-    context.removeItem(file_type)
-    (f,c) = context.setfile(result, filename=newfilename, overwrite=True, contenttype='application/pdf')
-    if f and c:
-        context.setItem(file_type, {f: c})
+    return ''
+
+query = dict(
+    docurl = '%s/%s' %(context.absolute_url(), filename),
+    # WARNING: il servizio sembra avere problemi con l'opzione file
+    # file = context.getfile(filename),
+    app = context.getItem('iol_tipo_app'),
+    id = context.getId(),
+)
+    
+try:
+    res = requests_post(url, query, 'json', 'headers')
+except Exception as error:
+    msg = '%s: %s' % (Type(error), error)
+    redirect_with_warning(msg, level='error')
+else:
+    if res['status_code'] == 200:
+        if test_path(res, 1, 'json', 'success'):
+            # interrogazione avvenuta con successo
+            text = decode_b64(res['json']['file'])
+            if test is False:
+                newfilename = filename.replace('.docx','.pdf')
+                (f,c) = context.setfile(text, filename=newfilename, overwrite=True, contenttype='application/pdf')
+                if f and c:
+                    context.setItem(item, {f: c})
+            else:
+                return res
+        elif test_path(res, 0, 'json', 'success'):
+            msg = res['json']['message']
+            redirect_with_warning(msg)
+        else:
+            raise Excetion('NotImplementedError: risposta non prevista.')
+    else:
+        # gestione dell'erroe di comunicazione col servizio
+        msg = 'Il servizio ha risposto con uno status: %s' % res['status_code']
+        redirect_with_warning(msg, level='error')

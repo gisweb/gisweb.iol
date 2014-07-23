@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=fieldsubset='', get_id=0, nest=True, render=0, follow=0, format=''
+##parameters=fieldsubset='', get_id=0, nest=True, render=0, follow=0, format='', avoid_subset=False
 ##title=A brand new serialDoc
 ##
 assert context.portal_type == 'PlominoDocument', 'PlominoDocument expected, got %s instead' % context.portal_type
@@ -20,21 +20,22 @@ except ImportError as err:
 else:
     GOT_XML = True
 
-def serialDoc(doc, fieldsubset=[], nest=True, render=True, follow=False):
+def serialDoc(doc, fieldsubset=[], nest=True, render=True, follow=False, avoid=False):
     """
     Take a Plomino document :doc: and extract its data in a JSON-serializable
     structure for printing porposes. Item values are renderized according to
     the field definition and by default only defined fields will be considered.
 
     doc          : the PlominoDocument that contains data to serialize;
-    fieldsubset : subset of item to be serialized, you can just specify the
+    fieldsubset  : subset of item to be serialized, you can just specify the
                    list if item name you need;
     nest         : whether the fields of type DATAGRID and DOCLINK has to be
                    serialized nested in a list;
     render       : if True Item values are renderized according to the field
                    definition and by default only defined fields will be considered.
     format       : json/xml;
-    follow      : follow doclink?
+    follow       : follow doclink?
+    avoid        : if True the fieldsubset is considered as a black list of field to avoid.
     """
 
     form = doc.getForm()
@@ -42,7 +43,10 @@ def serialDoc(doc, fieldsubset=[], nest=True, render=True, follow=False):
 
     contentKeys = fieldnames + [i for i in doc.getItems() if i not in fieldnames]
     if fieldsubset:
-        contentKeys = [i for i in contentKeys if i in fieldsubset]
+        if avoid:
+            contentKeys = [i for i in contentKeys if not i in fieldsubset]
+        else:
+            contentKeys = [i for i in contentKeys if i in fieldsubset]
 
     result = [] if not get_id else [('id', doc.getId(), )]
     for key in contentKeys:
@@ -65,7 +69,7 @@ for el in rawsubset:
     else:
         subset.append(el)
 
-raw_data = serialDoc(context, fieldsubset=subset, nest=nest, render=render, follow=follow)
+raw_data = serialDoc(context, fieldsubset=subset, nest=nest, render=render, follow=follow, avoid=avoid_subset)
 
 # Output rendering
 if format == 'json':
