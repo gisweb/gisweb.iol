@@ -58,9 +58,9 @@
 
 }
 
-input["data-plugin='iolCodicefiscale'"] {
+input[data-plugin='iolCodicefiscale'],input[data-plugin='iolMarker'] {
 
-    width:50%;
+    max-width:200px;
 
 }
 
@@ -108,7 +108,7 @@ input["data-plugin='iolCodicefiscale'"] {
 }
 
 .plomino_form label,legend {
-    color:gray;
+    color:dark-grey;
     font-weight:bold;
     display:block;
 
@@ -275,3 +275,39 @@ CSS for v3 buttons stolen from:
 
 
 }
+
+#portal-top,
+#plone-document-byline,
+.formControls
+{
+  display:none;
+}
+
+
+
+#iol-buttons .btn{
+
+  margin-right:8px;
+
+}
+
+#iol-menus li {
+
+  list-style-type: none;
+  cursor: pointer;
+
+}
+
+
+
+.plomino_form table.dataTable thead th {
+border-bottom: 1px solid #000000;
+color:grey;
+background: #FFFFFF;
+}
+
+
+
+
+
+

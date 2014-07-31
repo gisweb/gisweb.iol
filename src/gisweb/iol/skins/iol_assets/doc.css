@@ -327,3 +327,27 @@ tr.linkToDocument{
 
    width:100%
 }
+
+ul,ol {
+
+  list-style:none;
+
+}
+
+ li { display: inline; }
+
+ .hiddenStructure{
+
+  display:none;
+
+ }
+
+
+
+
+
+#edit-bar{
+
+  height: :26px;
+ font-size: 80%;
+}
