@@ -42,6 +42,8 @@ setup(name='gisweb.iol',
           'gisweb.utils',
           'Products.CMFPlomino',
           'collective.wtf',
+          'Products.CMFPlacefulWorkflow',
+          'collective.wkpdfview', 
           'zope.app.component',
           # -*- Extra requirements: -*-
           'dict2xml'

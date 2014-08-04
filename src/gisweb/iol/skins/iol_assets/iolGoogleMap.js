@@ -13,8 +13,6 @@
     $.fn.iolGoogleMap = function( options ) {
 
         var mapOverlays = [];
-
-        console.log( $(this.selector) )
         var self;
 
         options = $.extend({
@@ -61,13 +59,19 @@
 
         //AGGIUNGE UN OGGETTO IN MAPPA CREANDO UN NUOVO OVERLAY (LE OPZIONI SONO MEMORIZZATE NEL FIELD DI PLOMINO)
         var createOverlay = function  (stringGeom,options){
-            if(!options) return;
+            if(typeof(options)!='object') return;
             var overlay,pos;
             var v = stringGeom.split(';');
-            var elementType = v[0];
-            var geometryType = v[1];
-            var sGeom = v[2];
-
+            if(v.length == 1){
+                //var elementType = v[0];
+                var geometryType = "point";
+                var sGeom = v[0];
+            }
+            else{
+                //var elementType = v[0];
+                var geometryType = v[0];
+                var sGeom = v[1];
+            }
             if(geometryType == "point"){ 
                 overlay = new google.maps.Marker(options.markerOptions||{});
                 pos = sGeom.split(' ');
@@ -90,7 +94,8 @@
                 overlay.setPath(getPathFromCoord(sGeom));
                 overlay.geometryType = google.maps.drawing.OverlayType.POLYGON;
             }
-            overlay.elementType = elementType;
+
+            //overlay.elementType = elementType;
             return overlay;
         }
 
@@ -135,12 +140,20 @@
                 updateGeometryField(overlay,infoString);
             }
         }
-        //AGGIORNA I CAMPI DELLE GEOMETRIE
+        //AGGIORNA I CAMPI DELLE GEOMETRIE CON LE INFORMAZIONI DELL'OGGETTO OVERLAY
         var updateGeometryField = function (overlay){
            //Aggiorno il campo di posizione
             if(overlay.dataTable){
               //Campo tipo datagrid 
+/*            In questo caso definire sulla configurazione js del datagrid gli indici delle colonne dove sono memorizzate le informazioni del marker/overlay
+              geomIndex: indice del valore della GEOMETRIA
+              typeIdex: indice per la classificazione dell'OGGETTO
+              latIndex: indice per il valore lat
+              lngIndex: indice per il valore lng
+              le informazioni vengono settate suull'oggetto overlay*/
+
                 if($('#' + overlay.fieldId + '_gridvalue').length){
+
                     var field = $('#' + overlay.fieldId + '_gridvalue');
                     var field_data = $.evalJSON(field.val());
                     var gridRow = field_data[overlay.rowIndex];
@@ -155,10 +168,13 @@
 
                     }
 
+                    //VEDERE SE DIFFERENZIARE POINT E MARKER
                     if(typeof(overlay.geomIndex)!='undefined'){
                         if(overlay.geometryType == google.maps.drawing.OverlayType.MARKER)
                             gridRow[overlay.geomIndex] = overlay.getPosition().lng().toFixed(6)+" "+overlay.getPosition().lat().toFixed(6);
-                        else
+                        else if (overlay.geometryType == 'point')
+                            gridRow[overlay.geomIndex] = overlay.getPosition().lng().toFixed(6)+" "+overlay.getPosition().lat().toFixed(6);
+                        else 
                             gridRow[overlay.geomIndex] = overlay.geometryType +';'+google.maps.geometry.encoding.encodePath(overlay.getPath()); 
                     }
 
@@ -274,8 +290,10 @@
             var map = new google.maps.Map(mapdiv,mapOptions);
             var defaultMapTypeIds = [google.maps.MapTypeId.ROADMAP,google.maps.MapTypeId.TERRAIN,google.maps.MapTypeId.SATELLITE,google.maps.MapTypeId.HYBRID];
 
+            var currentOverlay;
 
-            //CCORDINATE SU MOSEMOVE
+            //COORDINATE SU MOSEMOVE
+            //SETTARE L'ATTRIBUTO "coordsrid" SULL'OGGETTO CONFIGURAZIONE DELLA MAPPA PER AVERE LE COORDINATE IN ALTRO SISTEMA
             google.maps.event.addListener(map, 'mousemove', function(e){
                 var position = 'Lng: ' + e.latLng.lng().toFixed(6) + ' Lat: ' + e.latLng.lat().toFixed(6);
                 if(mapOptions.coordsrid && Proj4js.defs['EPSG:'+mapOptions.coordsrid]){
@@ -290,6 +308,7 @@
             });
 
             //ELENCO DEI LIVELLI
+            //IN "mapLayers" C'E' L'ELENCO DEI LIVELLI DEFINITI DA UN OGGETTO JSON
             if(options.mapLayers) {
                 console.log(options.mapLayers)
                 var layerSettings = $("[name='" + options.mapLayers + "']").data('mapLayers');
@@ -318,77 +337,81 @@
                     map.setMapTypeId(mapTypeIds[0]);
                 }
             }
+            else {
+                mapTypeIds = defaultMapTypeIds;
+                map.setMapTypeId(mapTypeIds[0]);
+            }
 
             //EDITING VETTORIALE
-            if(options.drawingTools){
-                var currentOverlay;
-                var drawingSettings = $("[name='"+ options.drawingTools +"']").data("drawingOptions");
-                if(typeof(drawingSettings)=='string')  drawingSettings = JSON.parse(drawingSettings.replace(/[\n\r]/g, ''));
+/*          IN "drawingOptions" DEFINISCO LE OPZIONI DI CONFIGURAZIONE DEL DRAWINGMANAGER (VEDI API GOOGLE)
+            INOLTRE IN data("drawingTarget") DEFINISCO L'ID DEL CAMPO DOVE VA A FINIRE IL VALORE IN STRINGA DELLA GEOMETRIA
+            SE NON VIENE DEFINITA L'OPZIONE, LA GEOMETRIA VIENE SCRITTA SUL CAMPO ID DELLA MAPPA 
+            ESEMPIO:
+                data-drawing-tools='inserisci_elemento_in_mappa'
+                data-drawing-target = 'elenco_elementi'
+                data-drawing-options='{"
+                empty":{"drawingControl":false,"drawingMode":null,"title":""},
+                "punto_cantiere":{"drawingControl":true,"drawingMode":"marker","title":"Punto di occupazione del cantiere",
+                    "drawingControlOptions":{"drawingModes":["marker"]},
+                    "markerOptions":{"icon":"resources/icons/posizione_indirizzo.png","title":"Punto di occupazione del cantiere"}
+                },
+                "linea_cantiere":{"drawingControl":true,"drawingMode":"polyline","title":"Linea del cantiere",
+                   "drawingControlOptions":{"drawingModes":["polyline"]},
+                   "polylineOptions":{"strokeColor":"#00FF00","strokeOpacity": 1.0,"strokeWeight": 2}
+                },
+                "area_cantiere":{"drawingControl":true,"drawingMode":"polygon","title":"Area del cantiere",
+                   "drawingControlOptions":{"drawingModes":["polygon"]},
+                   "polygonOptions":{"strokeColor":"#00FFFF","strokeOpacity": 1.0,"strokeWeight": 2}
+                }}'*/
 
-                //console.log(drawingSettings)
 
-                if(drawingSettings){
-                    var currentValue;
-                    var drawingManager = new google.maps.drawing.DrawingManager({'drawingControl':false});
-                    drawingManager.setMap(map);
-                    google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e){
+            if(options.drawingOptions){
 
-                        drawingManager.setDrawingMode(null);
-                        if(currentOverlay){
-                            currentOverlay.setMap(null);
-                            delete(currentOverlay)
-                        }
-                        console.log(e)
-                        currentOverlay = e.overlay;
-                        currentOverlay.elementType = currentValue; 
-                        currentOverlay.geometryType = (e.type=='marker')?'point':e.type;
-                        //currentOverlay.editMode = true;
-                        currentOverlay.fieldId = currentOverlay.fieldId || $element.attr('id');
-                        registerObject(currentOverlay);
-                        if(currentOverlay.geometryType == "point")  zoomOnStreetView(currentOverlay)
-                        console.log(currentOverlay)
+                var drawingManager = new google.maps.drawing.DrawingManager({'drawingControl':false});
+                drawingManager.setMap(map);
 
-                    });
+                var drawingOptions = options.drawingOptions;
+                if(typeof(drawingOptions)=='string')  drawingOptions = JSON.parse(options.drawingOptions.replace(/[\n\r]/g, ''));
 
-                    $("[name='"+ options.drawingTools +"']").bind('change',function(){
-                        currentValue = $(this).val();
-                        if($(this).is("input") && !$(this).is("input:checked")) currentValue="empty";
-                        drawingManager.setOptions(drawingSettings[currentValue])
-                    });
+                //CHECK SE IL DATO INSERITO VIENE SCRITTO SU DATAGRID
+                var datagridLink = $("#" + options.drawingTarget + "_addrow").get(0);
 
-                    //AGGIUNGO LA GEOMETRIA SALVATA SUL CAMPO
-                    var sGeom = $(this).val();
-                    if(sGeom){
-                        var v = sGeom.split(';');
-                        var elementType = (v.length == 3 && v[0]);
-                        currentOverlay = createOverlay(sGeom, drawingSettings[elementType]); 
-                        currentOverlay.setMap(map);
-                        currentOverlay.editMode = 1;
-                        currentOverlay.fieldId = $element.attr('id');
-                        registerObject(currentOverlay);
-                        if(currentOverlay.geometryType == "point")  zoomOnStreetView(currentOverlay)
-                   }
+                //SETTO IL TOOL DI DISEGNO DALLA COMBO
+                $("[name='"+ options.drawingTools +"']").bind('change',function(){
+                    //if($(this).is("input") && !$(this).is("input:checked")) currentValue="empty";
+                    drawingManager.setOptions(drawingOptions[$(this).val()]);
+                    if(datagridLink) $(datagridLink).attr("href", $(datagridLink).attr("href") + "&" + options.drawingTools + "=" + $(this).val())
+                })
 
-                }
+                //EVENTO SULL'INSERIMENTO DEL NUOVO OGGETTO
+                google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e){
+                    //DISABILITO LA MODALITA' DISEGNO E AGGIUNGO GLI ATTRIBUTI ALL'OVERLAY
+                    drawingManager.setDrawingMode(null);
+                    e.overlay.geometryType = (e.type=='marker')?'point':e.type;
+                    e.overlay.editMode = editMode;
+                    e.overlay.fieldId = options.drawingTarget || $element.attr('id');
+                    currentOverlay = e.overlay;
+
+                    //SE STO AGGIUNGENDO ELEMENTI AD UN DATAGRID APRO IL DIALOG
+                    if(datagridLink){
+                        $(datagridLink).trigger('click');
+                    }
+                    else{
+                        registerObject(e.overlay);
+                        if(e.overlay.geometryType == "point")  zoomOnStreetView(e.overlay)
+                    }
+
+                });
 
             }
 
-
-
-
             google.maps.iolMaps[this.id] = map;
 
-
-            //AGGIUNGO I MARKERS PRESENTI SULLA FORM (dopo aver caricato la mappa???)
-
-
-
-
- 
-
+            //AGGIUNGO I MARKERS PRESENTI SULLA FORM E SUI DATAGRID DOPO IL CARICAMENTO DELLA MAPPA
             google.maps.event.addListenerOnce(map, 'idle', function(){
 
                 console.log('mappa caricata');
+                //AGGIUNGO I MARKERS
                 var markerOptions
                 $("[data-plugin='iolMarker']").each(function(){      
                     if($(this).val()){  
@@ -413,21 +436,90 @@
                         google.maps.iolMarkers[this.id] = marker;
 
                     }
-
-                    /*
-
-
-*/
-                    console.log(this)
-
                 });
 
 
+                //SETTO I DATAGRIDS INTEGRATI (DA VEDERE I DATAGRIDS NON DIPENDENTI DA DRAWINGTOOLS)
+                //AGGIUNGO GLI ELEMENTI GEOMETRICI PRESENTI NEI DATAGRIDS
+                if($('#'+ options.drawingTarget +'_datagrid') && $('#'+ options.drawingTarget +'_datagrid').dataTable()){
+                    //CARICO I DATI DALLA TABELLA DATAGRID RAW
+                    var field = $('#' + options.drawingTarget + '_gridvalue');
+                    console.log(field.val())
+                    var rawData = $.evalJSON(field.val());
 
-                //google.maps.iolMarkers[0].setMap(map)
-                //registerObject(google.maps.iolMarkers[0])
+                    var settings = $('#'+ options.drawingTarget +'_datagrid').dataTable().fnSettings().oInit
+                    var overlay, sGeom, elementType, geomIndex, typeIndex;
+                    $.each(rawData,function(index,data){
 
-                //console.log(google.maps.iolMarkers)
+                        sGeom = data[settings.geomIndex];  
+                        elementType = data[settings.typeIndex]; 
+                        overlay = createOverlay(sGeom, drawingOptions[elementType]); 
+                        overlay.dataTable = this;
+                        overlay.setMap(map);
+                        overlay.editMode = editMode;
+                        overlay.fieldId =  options.drawingTarget;
+                        overlay.lngIndex = settings.lngIndex;
+                        overlay.latIndex = settings.latIndex;
+                        overlay.geomIndex = settings.geomIndex;
+                        overlay.rowIndex = index;
+                        registerObject(overlay);
+
+                    });
+
+                    //EVENTI SUL DATAGRID 
+                    $('#'+ options.drawingTarget +'_datagrid').dataTable().fnSettings().aoRowCreatedCallback.push( {
+                        "fn": function( nRow, aData, iDataIndex ){ 
+                            console.log("AGGIUNTA LA RIGA")
+
+                            //SETTO PER DEFAULT ULTIMA E PENULTIMA COLONNA DEL GRID PER I VALORI DI GEOMETRIA E TIPO
+                            currentOverlay.dataTable = this;
+                            currentOverlay.geomIndex = settings.geomIndex;
+                            currentOverlay.typeIndex = settings.typeIndex;
+                            currentOverlay.lngIndex = settings.lngIndex;
+                            currentOverlay.latIndex = settings.latIndex;
+                            currentOverlay.rowIndex = iDataIndex;
+                            registerObject(currentOverlay)
+
+                        }
+                    });
+
+                     //SUL CHIUDI ELIMINO IL MARKER SE NON HO SALVATO
+                    $("#" + options.drawingTarget + "_editform").dialog().bind("dialogclose", 
+                        function(event, ui){ 
+                            console.log("CLOSE!!!!!!!!!!!!")
+                            setTimeout(function(){
+                                if(!currentOverlay.saved) currentOverlay.setMap(null);
+                            },1000)} 
+                    );
+
+                }
+
+
+
+
+
+
+
+
+
+
+/*                var sGeom = $(this).val();
+                if(sGeom){
+                    var v = sGeom.split(';');
+                    var elementType = (v.length == 3 && v[0]);
+                    currentOverlay = createOverlay(sGeom, drawingOptions[elementType]); 
+
+                    console.log(currentOverlay)
+
+                    currentOverlay.setMap(map);
+                    currentOverlay.editMode = 1;
+                    currentOverlay.fieldId = $element.attr('id');
+                    registerObject(currentOverlay);
+                    if(currentOverlay.geometryType == "point")  zoomOnStreetView(currentOverlay)
+               }
+*/
+
+
 
 
 
@@ -594,7 +686,11 @@
             };
 
 
+            function updateDatagridField (marker){
 
+
+
+            }
 
             
 

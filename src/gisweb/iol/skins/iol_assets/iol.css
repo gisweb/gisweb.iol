@@ -277,8 +277,7 @@ CSS for v3 buttons stolen from:
 }
 
 #portal-top,
-#plone-document-byline,
-.formControls
+#plone-document-byline
 {
   display:none;
 }
@@ -306,7 +305,11 @@ color:grey;
 background: #FFFFFF;
 }
 
+.plomino_form table.dataTable tbody tr td {
 
+  vertical-align: top;
+
+}
 
 
 
