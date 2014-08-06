@@ -87,7 +87,7 @@
                 var params = getValuesForFields (options.params)
                 if(!options.service) return;
                 $.ajax({
-                    'url':baseUrl + "/services/" + options.service,
+                    'url':baseUrl + "/" + options.service,
                     'type':'POST',
                     'data':params,
                     'dataType':'JSON',
