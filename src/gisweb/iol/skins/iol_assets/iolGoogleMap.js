@@ -4,16 +4,17 @@
 
     var svClient = new google.maps.StreetViewService;
     var svGeocoder = new google.maps.Geocoder();
-    google.maps.iolMarkers = {};
-    google.maps.iolMaps = {};
+    //google.maps.iolMarkers = {};
+    //google.maps.iolMaps = {};
 
 
 
 
     $.fn.iolGoogleMap = function( options ) {
-
+        var iolMarkers = {};
         var mapOverlays = [];
-        var self;
+        var map, self;
+
 
         options = $.extend({
             test: 'Test'
@@ -24,8 +25,8 @@
             return '<strong>' + text + '</strong>';
         };
 
-        $.fn.iolGoogleMap.getMap = function(index) {
-            return google.maps.iolMaps[index];
+        $.fn.iolGoogleMap.getMap = function() {
+            return map;
         };
 
 
@@ -56,6 +57,7 @@
         }         
 
         $.fn.iolGoogleMap.settings = options;
+
 
         //AGGIUNGE UN OGGETTO IN MAPPA CREANDO UN NUOVO OVERLAY (LE OPZIONI SONO MEMORIZZATE NEL FIELD DI PLOMINO)
         var createOverlay = function  (stringGeom,options){
@@ -287,7 +289,7 @@
             $element.before(infodiv);
 
             var mapOverlays, mapTypeIds;
-            var map = new google.maps.Map(mapdiv,mapOptions);
+            map = new google.maps.Map(mapdiv,mapOptions);
             var defaultMapTypeIds = [google.maps.MapTypeId.ROADMAP,google.maps.MapTypeId.TERRAIN,google.maps.MapTypeId.SATELLITE,google.maps.MapTypeId.HYBRID];
 
             var currentOverlay;
@@ -405,12 +407,12 @@
 
             }
 
-            google.maps.iolMaps[this.id] = map;
+            //google.maps.iolMaps[this.id] = map;
 
             //AGGIUNGO I MARKERS PRESENTI SULLA FORM E SUI DATAGRID DOPO IL CARICAMENTO DELLA MAPPA
             google.maps.event.addListenerOnce(map, 'idle', function(){
 
-                console.log('mappa caricata');
+                $(document).trigger('maploaded');
                 //AGGIUNGO I MARKERS
                 var markerOptions
                 $("[data-plugin='iolMarker']").each(function(){      
@@ -433,7 +435,7 @@
                         } 
                         marker = new google.maps.Marker(markerOptions);
                         registerObject(marker);
-                        google.maps.iolMarkers[this.id] = marker;
+                        iolMarkers[this.id] = marker;
 
                     }
                 });
@@ -444,8 +446,8 @@
                 if($('#'+ options.drawingTarget +'_datagrid') && $('#'+ options.drawingTarget +'_datagrid').dataTable()){
                     //CARICO I DATI DALLA TABELLA DATAGRID RAW
                     var field = $('#' + options.drawingTarget + '_gridvalue');
-                    console.log(field.val())
-                    var rawData = $.evalJSON(field.val());
+                    var rawData = [];
+                    if(field.val()) rawData = $.evalJSON(field.val());
 
                     var settings = $('#'+ options.drawingTarget +'_datagrid').dataTable().fnSettings().oInit
                     var overlay, sGeom, elementType, geomIndex, typeIndex;
@@ -477,6 +479,7 @@
                             currentOverlay.typeIndex = settings.typeIndex;
                             currentOverlay.lngIndex = settings.lngIndex;
                             currentOverlay.latIndex = settings.latIndex;
+                            currentOverlay.saved = true;
                             currentOverlay.rowIndex = iDataIndex;
                             registerObject(currentOverlay)
 
@@ -489,7 +492,7 @@
                             console.log("CLOSE!!!!!!!!!!!!")
                             setTimeout(function(){
                                 if(!currentOverlay.saved) currentOverlay.setMap(null);
-                            },1000)} 
+                            },500)} 
                     );
 
                 }

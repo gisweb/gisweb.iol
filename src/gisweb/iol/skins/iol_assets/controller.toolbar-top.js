@@ -1,33 +1,65 @@
 /*--------------------------------------------------------------------------------------------------------------------------*/
 function scrollWin(anc,offset){ 
-    target = jq(anc);   
-    jq('html, body').animate({  
-        scrollTop: target.offset().top - offset
-    }, 500);  
+
 }  
 
 /*---------------------------------------------------------------------------------------------------------------------------*/
-function addTopToolbar(element){
+function addTopToolbarvv(element){
 
    var html='';
    html+='<div class="navbar-inner" id="toolbar-top">';
    html+='<div class="container">';
    html+='<ul class="nav pull-left">';
 
-   jq('.v-content-title').each(function(k,v){
-		var id = jq(v).attr('id');
-		if(id) html+='<li><a id="anc_'+id+'" href="#'+id+'" data-id="'+id+'">' + id+ '</a></li>';
+   $('.v-content-title').each(function(k,v){
+		var id = $(v).attr('id');
+		if(id) html+='<li><a anchor="anc_'+id+'" href="#'+id+'" data-id="'+id+'">' + id+ '</a></li>';
 	});
    html+='</ul></div></div>';
    element.html(html);
    element.addClass('navbar navbar-fixed-top');
 
 
-   jq('#top-toolbar-div a').click(function(){
-      var d = jq(this).data();
+   $('#iol-menus a').click(function(){
+      var d = $(this).data();
+      console.log(d)
       scrollWin('#' + d['id'],element.height()+50); 
        return false;
      })
+}
+
+
+function addTopToolbar(){
+
+  var html='<div id="top-toolbar-div" class="navbar navbar-fixed-top">';
+  html+='<div class="navbar-inner" id="toolbar-top">';
+  html+='<div class="container">';
+  html+='<ul class="nav pull-left" id="iol-menus">';
+  html+='</ul><ul class="nav pull-right" id="iol-buttons">'
+  html+='</ul></div></div></div>';
+  $(".plomino_form").append(html);
+
+
+  $('.v-content-title').each(function(k,v){
+    var title = $(v).attr('title');
+    if(title) 
+      $("#iol-menus").append('<li><a anchor="' + title + '" >' + title + '</a></li>')
+  });
+
+  $('.iol-control-buttons > input').each(function(k,v){
+    $(v).addClass("btn btn-inverse").appendTo("#iol-buttons")
+  });
+
+  $('#iol-menus a').click(function(e){
+    e.preventDefault();
+    var target = $("[title='" + $(this).attr("anchor") + "']");  
+    var offset = 50;
+    console.log(target)
+    if(target)
+      $('html, body').animate({scrollTop: target.offset().top - offset}, 500);  
+  });
+
+  //$(".formControls").hide();
 }
 
 function addBottomToolbar(element){
@@ -37,8 +69,8 @@ function addBottomToolbar(element){
    html+='<div class="container">';
    html+='<ul class="nav pull-left">';
 
-   jq('.v-content-title').each(function(k,v){
-		var id = jq(v).attr('id');
+   $('.v-content-title').each(function(k,v){
+		var id = $(v).attr('id');
 		if(id) html+='<li><a id="anc_'+id+'" href="#'+id+'" data-id="'+id+'">' + id+ '</a></li>';
 	});
    html+='</ul></div></div>';
@@ -46,8 +78,8 @@ function addBottomToolbar(element){
    element.addClass('navbar navbar-fixed-bottom');
 
 
-   jq('#bottom-toolbar-div a').click(function(){
-      var d = jq(this).data();
+   $('#bottom-toolbar-div a').click(function(){
+      var d = $(this).data();
       scrollWin('#' + d['id'],element.height()+50); 
        return false;
      })
@@ -70,35 +102,37 @@ function addTopToolbarMenu(element){
         html += ''
 	html += '<a href="#" class="dropdown-toggle" data-toggle="dropdown">Azioni<b class="caret"></b></a>';
 	html += '<ul class="dropdown-menu" id="dropdown-menu">';
-	jq.each(jq('#btn-workflow > input'),function(k,v){
-	    html += '<li class="no-circle"><a href="#" data-name="' + jq(v).attr('name') + '">' + jq(v).val() + '</a></li>';
+	$.each($('#btn-workflow > input'),function(k,v){
+	    html += '<li class="no-circle"><a href="#" data-name="' + $(v).attr('name') + '">' + $(v).val() + '</a></li>';
         });
 	html += '</ul>';
 	html += '</li>';
 	html += '</ul>';
-	jq('#'+element + ' div.container').append(html);
-	jq.each(jq('ul#dropdown-menu a'),function(k,v){
-		var d=jq(v).data();
-		jq(v).bind('click',function(event){
+	$('#'+element + ' div.container').append(html);
+	$.each($('ul#dropdown-menu a'),function(k,v){
+		var d=$(v).data();
+		$(v).bind('click',function(event){
 			event.preventDefault();
-			jq("input[name='" + d['name'] + "']").trigger('click');
+			$("input[name='" + d['name'] + "']").trigger('click');
 		})
 	});
 */
         //Azioni Edit Save Cancel Delete
         var html = '<div class="btn-group pull-right" id="form_button">';
-        jq.each(jq('#btn-group > input'),function(k,v){
+        $.each($('.iol-control-buttons'),function(k,v){
             
-	    html += '<button class="btn btn-info" data-name="' + jq(v).attr('name') + '">' + jq(v).val() + '</button>';
+	    html += '<button class="btn btn-info" data-name="' + $(v).attr('name') + '">' + $(v).val() + '</button>';
         });
         html += '</div>';
-        jq('#'+element + ' div.container').append(html);
-	jq.each(jq('#form_button button'),function(k,v){
-		var d=jq(v).data();
+        $('#'+element + ' div.container').append(html);
+
+
+	$.each($('#form_button button'),function(k,v){
+		var d=$(v).data();
                 
-		jq(v).bind('click',function(event){
+		$(v).bind('click',function(event){
 			event.preventDefault();
-                        var btn = jq("input[name='" + d['name'] + "']");
+                        var btn = $("input[name='" + d['name'] + "']");
 			btn.trigger('click');
                         btn.attr("disabled", "disabled");
                         window.setTimeout(function(){btn.removeAttr('disabled')},1000);
@@ -109,18 +143,22 @@ function addTopToolbarMenu(element){
 /*---------------------------------------------------------------------------------------------------------------------------*/
 
 //GENERAZIONE TOOLBAR TOP
-jq(document).ready(function(){
-    if(jq('#top-toolbar-div')){
-        addTopToolbar(jq('#top-toolbar-div'));
+$(document).ready(function(){
+
+addTopToolbar();
+/*
+    if($('#top-toolbar-div')){
+        addTopToolbar($('#top-toolbar-div'));
 	//addTopToolbarActions('top-toolbar-div');
 	addTopToolbarMenu('top-toolbar-div');
    }
-    if(jq('#bottom-toolbar-div')){
-        addBottomToolbar(jq('#bottom-toolbar-div'));
+    if($('#bottom-toolbar-div')){
+        addBottomToolbar($('#bottom-toolbar-div'));
 	//addTopToolbarActions('top-toolbar-div');
 	addTopToolbarMenu('bottom-toolbar-div');
    }
-   jq('#btn-group').hide(); 
+   $('#btn-group').hide(); 
+*/
 });
 
 
