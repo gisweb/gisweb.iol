@@ -1,18 +1,32 @@
-## Script (Python) "codicefiscale"
-##bind container=container
-##bind context=context
-##bind namespace=
-##bind script=script
-##bind subpath=traverse_subpath
-##parameters=fisica_cognome, fisica_nome, fisica_data_nato, fisica_sesso, fisica_cod_cat_nato
-##title=
-##
-from gisweb.utils import json_dumps, Type, cf_build
+from gisweb.utils import Type, cf_build
+from Products.CMFPlomino.PlominoUtils import json_dumps
+
+
 result={'success': 0}
 
-giorno, mese, anno = map(int, fisica_data_nato.split('/'))
+keys=container.REQUEST.form.keys()
 
-data = (fisica_cognome, fisica_nome, anno, mese, giorno, fisica_sesso, fisica_cod_cat_nato)
+for k in keys:
+    if 'codcat' in k:
+        cod_cat_nato=context.REQUEST.get(k)
+    elif 'cognome' in k:
+        cognome=context.REQUEST.get(k)
+        
+    elif 'data_nato' in k:
+        data_nato=context.REQUEST.get(k)
+        
+    elif 'nome' in k:
+        nome=context.REQUEST.get(k)
+        
+    elif 'sesso' in k:
+        sesso=context.REQUEST.get(k)
+        
+
+giorno, mese, anno = map(int, data_nato.split('/'))
+
+
+
+data = (cognome, nome, anno, mese, giorno, sesso, cod_cat_nato)
 
 try:
     result['value'] = cf_build(*data)
