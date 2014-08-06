@@ -1,5 +1,0 @@
-<ul tal:define="values options/fieldvalue">
-    <tal:loop tal:repeat="v values">
-        <li tal:content="structure v"></li>
-    </tal:loop>    
-</ul>

@@ -1,4 +1,0 @@
-<input type="hidden" tal:attributes="
-                    id options/fieldname;
-                    name options/fieldname;
-                    value options/fieldvalue;" />
