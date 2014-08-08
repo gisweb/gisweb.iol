@@ -88,6 +88,11 @@
         $(".add-row").addClass("btn")
         $(".edit-row").addClass("btn")
         $(".delete-row").addClass("btn")
+        //$("input:file").addClass("btn")
+
+
+//class read input-xlarge uneditable-input
+
 
         //select2 plugin
         $('.plomino_form select').each(initializePlugin);

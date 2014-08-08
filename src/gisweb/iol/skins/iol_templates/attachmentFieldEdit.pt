@@ -1,0 +1,33 @@
+<tal:def tal:define="param python:options['field'].getSettings('parameters');
+                    type param/type">
+    <tal:cond tal:condition="python: type == 'SINGLE'">
+
+
+    <input type="file" tal:attributes="id options/fieldname; name options/fieldname;"/>
+
+    <input type="text"  name="testvalue" id="testvalue" value="QQQQQQQQQQQQQQQQQQQQQQ"/>
+
+
+    </tal:cond> 
+    <tal:cond tal:condition="python: type == 'MULTI'">
+
+
+        <a  href="./EditDocument?openwithform=frm_upload"> AGGIUNGI ALTRI FILE .... </a>
+
+
+
+
+    </tal:cond> 
+</tal:def>
+
+
+<tal:block tal:repeat="attachment options/fieldvalue">
+    <a href="#" tal:attributes="href python:'getfile?filename='+attachment" 
+        tal:content="attachment">filename</a>
+     <a href="#" tal:attributes="href string:deleteAttachment?field=${options/fieldname}&filename=$attachment">
+        <img alt="Delete file" src="delete_icon.gif" />
+     </a>
+    <br/>
+</tal:block>
+
+
