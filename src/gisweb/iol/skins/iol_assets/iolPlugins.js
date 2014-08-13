@@ -1,4 +1,5 @@
 (function ($) {
+    "use strict";
 
     function getValuesForFields(fieldList){
          var params={};
@@ -230,7 +231,8 @@
             $(button).html(' Carica ')
             $element.before(button);
             
-            $element.bind("change",function(){
+            $element.bind("change",function(e){
+                console.log($element.prop("files"))
                 if($element.prop("files").length > 0){
                     $("#" + this.id +"_span").html($element.prop("files")[0].name);
                     $(".removeUpload").addClass("icon-remove")

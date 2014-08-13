@@ -1,16 +1,16 @@
-<tal:def tal:define="param python:options['field'].getSettings('parameters');
-                    type param/type">
+
+<input type="file" name="allegato"/>
+
+<input type="file" name="allegato"/>
+
+<input type="file" name="allegato"/>
+
+<input type="file" name="allegato"/>
 
 
 
-    <input type="text"  name="testupload" id="testupload" value="QQQQQQQQQQQQQQQQQQQQQQ"/>
 
 
-
-
-
-
-</tal:def>
 
 
 

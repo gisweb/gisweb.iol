@@ -1,6 +1,6 @@
 (function ( $ ) {
 
-
+    "use strict";
 
     var svClient = new google.maps.StreetViewService;
     var svGeocoder = new google.maps.Geocoder();
@@ -641,7 +641,7 @@
             }
 
             function toggleLayer(){
-                var layer;
+                var layer, layerName;
                 layerName = $(this).val();
                 layer = mapOverlays[layerName]
                 if(!layer) return;

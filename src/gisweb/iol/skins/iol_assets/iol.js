@@ -1,7 +1,7 @@
 
 (function ($) {
 
-
+    "use strict";
     //I can pass a plugin name or set the plugin name in element's attributes
     function initializePlugin (){
         var $element = $(this);

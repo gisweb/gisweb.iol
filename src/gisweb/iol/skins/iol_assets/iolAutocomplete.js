@@ -1,9 +1,11 @@
 // DA SISTEMARE!!!!!!!!!!!!!!!!!!
 (function ($) {
+  "use strict";
 	$(document).ready(function () {
         //Autosuggest per l'elenco dei nomi e compilazione campi
+        var options;
         $("[data-plugin = iolAutocompleteForm]").each(function(){
-          eval("var options = "  + $(this).data('autocompleteformOptions') +" || {}");
+          eval("options = "  + $(this).data('autocompleteformOptions') +" || {}");
           var baseUrl = $(this).data('baseUrl');
 
           $(this).select2({
