@@ -1,3 +1,5 @@
+
+
 (function ( $ ) {
 
     "use strict";
@@ -7,6 +9,17 @@
     //google.maps.iolMarkers = {};
     //google.maps.iolMaps = {};
 
+    if (!google.maps.Polyline.prototype.getBounds) {
+       google.maps.Polyline.prototype.getBounds = function(latLng) {
+          var bounds = new google.maps.LatLngBounds();
+          var path = this.getPath();
+          for (var i = 0; i < path.getLength(); i++) {
+             bounds.extend(path.getAt(i));
+          }
+          return bounds;
+       }
+    }
+    if (!google.maps.Polygon.prototype.getBounds) google.maps.Polygon.prototype.getBounds = google.maps.Polyline.prototype.getBounds
 
 
 
@@ -141,6 +154,8 @@
                 infoString = 'posizione lat = ' + overlay.getPosition().lat().toFixed(6) + ' lon= ' + overlay.getPosition().lng().toFixed(6);
                 updateGeometryField(overlay,infoString);
             }
+
+            mapOverlays.push(overlay);
         }
         //AGGIORNA I CAMPI DELLE GEOMETRIE CON LE INFORMAZIONI DELL'OGGETTO OVERLAY
         var updateGeometryField = function (overlay){
@@ -206,6 +221,16 @@
          
         }
 
+        var zoomOnOverlay = function(overlay){
+            if(overlay.geometryType == "point"){
+                map.setCenter(overlay.position);
+                map.setZoom(overlay.zoom || 16);
+            }
+            else{
+                console.log(overlay.getBounds())
+                map.fitBounds(overlay.getBounds());
+            }
+        }
 
 
         //GESTIONE DI STREETVIEW IN FINESTRA SEPARATA
@@ -288,7 +313,7 @@
             $element.before(stViewdiv);
             $element.before(infodiv);
 
-            var mapOverlays, mapTypeIds;
+            var mapLayers, mapTypeIds;
             map = new google.maps.Map(mapdiv,mapOptions);
             var defaultMapTypeIds = [google.maps.MapTypeId.ROADMAP,google.maps.MapTypeId.TERRAIN,google.maps.MapTypeId.SATELLITE,google.maps.MapTypeId.HYBRID];
 
@@ -322,7 +347,7 @@
                     mapTypeIds = mapTypeIds && mapTypeIds.split(',') || defaultMapTypeIds;
 
                     var baseType = $("[name='" + options.mapLayers + "']").data('baseType');
-                    mapOverlays = addMapLayers(layerSettings);
+                    mapLayers = addMapLayers(layerSettings);
                     if(baseType) 
                         map.setMapTypeId(baseType);
                     else
@@ -377,12 +402,14 @@
 
                 //CHECK SE IL DATO INSERITO VIENE SCRITTO SU DATAGRID
                 var datagridLink = $("#" + options.drawingTarget + "_addrow").get(0);
+                var datagridLinkTarget = datagridLink && $(datagridLink).attr("href");
+                var openDialog = options.openDialog;
 
                 //SETTO IL TOOL DI DISEGNO DALLA COMBO
                 $("[name='"+ options.drawingTools +"']").bind('change',function(){
                     //if($(this).is("input") && !$(this).is("input:checked")) currentValue="empty";
                     drawingManager.setOptions(drawingOptions[$(this).val()]);
-                    if(datagridLink) $(datagridLink).attr("href", $(datagridLink).attr("href") + "&" + options.drawingTools + "=" + $(this).val())
+                    if(datagridLinkTarget) $(datagridLink).attr("href", datagridLinkTarget + "&" + options.drawingTools + "=" + $(this).val())
                 })
 
                 //EVENTO SULL'INSERIMENTO DEL NUOVO OGGETTO
@@ -393,9 +420,10 @@
                     e.overlay.editMode = editMode;
                     e.overlay.fieldId = options.drawingTarget || $element.attr('id');
                     currentOverlay = e.overlay;
+                    google.maps.event.trigger(map,'overlaycomplete', e.overlay);
 
                     //SE STO AGGIUNGENDO ELEMENTI AD UN DATAGRID APRO IL DIALOG
-                    if(datagridLink){
+                    if(datagridLink && openDialog){
                         $(datagridLink).trigger('click');
                     }
                     else{
@@ -444,14 +472,9 @@
                 //SETTO I DATAGRIDS INTEGRATI (DA VEDERE I DATAGRIDS NON DIPENDENTI DA DRAWINGTOOLS)
                 //AGGIUNGO GLI ELEMENTI GEOMETRICI PRESENTI NEI DATAGRIDS
                 if($('#'+ options.drawingTarget +'_datagrid') && $('#'+ options.drawingTarget +'_datagrid').dataTable()){
-                    //CARICO I DATI DALLA TABELLA DATAGRID RAW
-                    var field = $('#' + options.drawingTarget + '_gridvalue');
-                    var rawData = [];
-                    if(field.val()) rawData = $.evalJSON(field.val());
-
                     var settings = $('#'+ options.drawingTarget +'_datagrid').dataTable().fnSettings().oInit
                     var overlay, sGeom, elementType, geomIndex, typeIndex;
-                    $.each(rawData,function(index,data){
+                    $.each($('#'+ options.drawingTarget +'_datagrid').dataTable().fnGetData(),function(index,data){
 
                         sGeom = data[settings.geomIndex];  
                         elementType = data[settings.typeIndex]; 
@@ -463,13 +486,15 @@
                         overlay.lngIndex = settings.lngIndex;
                         overlay.latIndex = settings.latIndex;
                         overlay.geomIndex = settings.geomIndex;
+                        overlay.saved = true;
                         overlay.rowIndex = index;
                         registerObject(overlay);
 
                     });
 
                     //EVENTI SUL DATAGRID 
-                    $('#'+ options.drawingTarget +'_datagrid').dataTable().fnSettings().aoRowCreatedCallback.push( {
+                    var oTable = $('#'+ options.drawingTarget +'_datagrid').dataTable();
+                    oTable.fnSettings().aoRowCreatedCallback.push( {
                         "fn": function( nRow, aData, iDataIndex ){ 
                             console.log("AGGIUNTA LA RIGA")
 
@@ -486,6 +511,15 @@
                         }
                     });
 
+                    //EVENTI SULLA SELEZIONE DELLA RIGA
+                    $('#'+ options.drawingTarget +'_datagrid > tbody > tr').click(function() {
+                        var currentRow = oTable.fnGetPosition(this);
+                        currentOverlay = mapOverlays[currentRow];
+                        console.log(currentOverlay);
+                        zoomOnOverlay(currentOverlay);
+                        //ZOOM SU OGGETTO????
+                    });
+
                      //SUL CHIUDI ELIMINO IL MARKER SE NON HO SALVATO
                     $("#" + options.drawingTarget + "_editform").dialog().bind("dialogclose", 
                         function(event, ui){ 
@@ -494,6 +528,18 @@
                                 if(!currentOverlay.saved) currentOverlay.setMap(null);
                             },500)} 
                     );
+/*
+                     $('#'+ options.drawingTarget +'_datagrid').dataTable().fnSettings().aoDrawCallback.push( {
+                        "fn": function( oSettings ){ 
+                            console.log("?????????'' LA RIGA")
+                            console.log(oSettings.aoData)
+
+                        }
+                    })*/
+
+                    $('#'+ options.drawingTarget +'_deleterow').bind("click", function(){
+                        currentOverlay.setMap(null);
+                    });
 
                 }
 
@@ -609,7 +655,7 @@
                 var layerBox = document.getElementById("layerbox");
                 if(!layerBox) return;
                 var g = google.maps;
-                var me = this;
+                var timer;
                 var outer = document.createElement("div");
                 outer.style.width = "93px";
 
@@ -627,14 +673,14 @@
                 if(layerBox) inner.appendChild(layerBox);
 
                 outer.onmouseover = function() {
-                    if (me.timer) clearTimeout(me.timer);
+                    if (timer) clearTimeout(timer);
                     layerBox.style.display = "block";
                 };
 
                 outer.onmouseout = function() {
-                me.timer = setTimeout(function() {
-                    layerBox.style.display = "none";
-                    }, 300);
+                    timer = setTimeout(function() {
+                     layerBox.style.display = "none";
+                     }, 300);
                 };
 
               map.controls[g.ControlPosition.TOP_RIGHT].push(outer);
@@ -643,7 +689,7 @@
             function toggleLayer(){
                 var layer, layerName;
                 layerName = $(this).val();
-                layer = mapOverlays[layerName]
+                layer = mapLayers[layerName]
                 if(!layer) return;
 
                 if ($(this).is(':checked')) { 

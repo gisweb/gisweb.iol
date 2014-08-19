@@ -11,12 +11,6 @@
 }
 
 
-#renderedForm div.alert{
- 
-    display:none
-
-}
-
 #renderedForm span.label,span.legend{
  
     color: #000000;
@@ -152,7 +146,7 @@ background-color: #FFFFFF;
    height:300px;
    width:50%;
    background: url('streetview.jpg') no-repeat center;
-   background-color: #E5E3DF;
+   background-color: #FFF;
    border: 1px solid #cccccc;
    float: right
 
