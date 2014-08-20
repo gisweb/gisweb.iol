@@ -305,13 +305,27 @@ background: #FFFFFF;
 
 }
 
+
+
 .fileUpload {
   position: relative;
   overflow: hidden;
   margin-left: 5px;
   margin-top:-10px;
 }
-.fileUpload input.upload {
+
+.fileUpload ul{
+  margin-left: -5px;
+  margin-top: 10px;
+  font-size: 12px;
+
+}
+.icon-folder-open{
+
+  margin:2px;
+
+}
+input[type='file'] {
   position: absolute;
   top: 0;
   right: 0;
@@ -320,11 +334,12 @@ background: #FFFFFF;
   font-size: 20px;
   cursor: pointer;
   opacity: 0;
+  display: none;
   filter: alpha(opacity=0);
 }
 
 .removeUpload {
   cursor: pointer;
-  margin-left:-18px;
+  margin-left:10px;
 }
 

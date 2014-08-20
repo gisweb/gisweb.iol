@@ -195,61 +195,61 @@
 
     $.fn.iolUploadFile = function( options ) {
 
-        function checkUploadFile() {
 
-            var file_list = $(this).prop("files");
-            eval("var options = "  + jQuery(this).data('fileOptions') +" || {}");
-            var allowed = (options && options.filetype) || ['pdf','pdf/A','p7m','jpeg','jpg','png'];
-            var maxsize = (options && options.maxsize) || 6; //MAX 6 MB 
+        function checkUploadFile($element, options) {
+            var ret = false;
+            options = options || {};
+            var file_list = $element.prop("files");
+            var allowed = options.filetype || ['pdf','pdf/A','p7m','jpeg','jpg','png'];
+            var maxsize = options.maxsize || 6; //MAX 6 MB 
             for (var i = 0, file; file = file_list[i]; i++) {
+                ret = true;
                 var sFileName = file.name;
                 var sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
                 var iFileSize = file.size;
                 var iConvert = (file.size / 1000000).toFixed(2);
 
                 if (allowed.indexOf(sFileExtension) == -1 || iConvert > maxsize) {
-                    txt = "File: " + sFileExtension + "\n\n";
+                    var txt = "File: " + sFileExtension + "\n\n";
                     txt += "Dimensione: " + iConvert + " MB \n\n";
                     txt += "Attenzione il file deve essere di tipo: " + allowed.join(', ')  + ". Dimensione massima " + maxsize + " MB.\n\n";
                     alert(txt);
-                    $(this).text('');
-                    $(this).val('');
+                    ret = false;
+                    return ret;
                 }
 
             }
+            return ret;
         }
 
         return this.each(function() {
             options = options.pluginOptions;
-            var fieldId = this.id;
-            $element = $(this);
-            $element.addClass("upload");
-            $element.before($("<span id='" + this.id + "_span' class='upload uneditable-input'></span><span class='removeUpload'></span>"))
-            var baseUrl = $(this).data('baseUrl') || '';
-            $(this).wrap( "<div class='fileUpload btn btn-inverse'></div>" );
-            var button = document.createElement( "span" );
-            $(button).html(' Carica ')
-            $element.before(button);
-            
+            var $element = $(this);
+            $element.wrap( "<div class='fileUpload'></div>" );
+            $("label[for='" + this.id + "'] ").append($("<span class='icon-folder-open'>"))
+            var message = options.emptyMessage || 'No files'
+            $element.before("<ul><li class='noFile'>" + message + "</li></ul>")
             $element.bind("change",function(e){
-                console.log($element.prop("files"))
-                if($element.prop("files").length > 0){
-                    $("#" + this.id +"_span").html($element.prop("files")[0].name);
-                    $(".removeUpload").addClass("icon-remove")
+                var ul = $element.prev();
+                $element.prev().find("li").each(function(index,element){
+                    if(index>0) $(element).remove();
+                })
+                if(checkUploadFile($element,options)){
+                    $element.prev().find(".noFile").hide()
+                    for(var i=0;i<$element.prop("files").length;i++){
+                        var li = $('<li> ' + $element.prop("files")[i].name + '</li>');
+                        $element.prev().append(li);
+                    }
                 }
                 else{
-                    $("#" + this.id +"_span").html("");
-                    $(".removeUpload").removeClass("icon-remove")
+                    $element.prev().find(".noFile").show()
+                    $element.text('');
+                    $element.val('');
                 }
+                console.log($element.prop("files"))
+
 
             })
-            $(".removeUpload").bind("click",function(){
-                $("#" + $element.attr("id") +"_span").html("");
-                $(this).removeClass("icon-remove");
-                delete($element.prop("files"));
-
-
-            }) 
 
 
         });

@@ -10,15 +10,7 @@
              inline="False"
              insert-after="++resource++jquery.datatables.js"
              />
- <javascript cacheable="True"
-             compression="safe"
-             cookable="True"
-             enabled="True"
-             expression=""
-             id="select2_locale_it.js"
-             inline="False"
-             insert-after="select2.js"
-             />
+
  <javascript cacheable="True"
              compression="safe"
              cookable="True"
@@ -72,5 +64,14 @@
              id="iol.js"
              inline="False"
              insert-after="iolPlugins.js"
+             />
+ <javascript cacheable="True"
+             compression="safe"
+             cookable="True"
+             enabled="True"
+             expression=""
+             id="select2_locale_it.js"
+             inline="False"
+             insert-after="select2.js"
              />
 </object>

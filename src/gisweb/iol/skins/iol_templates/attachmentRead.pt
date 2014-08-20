@@ -1,0 +1,9 @@
+<tal:block tal:define="attachments options/fieldvalue;
+                    filenames attachments/keys|nothing">   
+    <ul>
+    <tal:block tal:repeat="attachment filenames">
+        <li><a href="#" tal:attributes="href python:'getfile?filename='+attachment" tal:content="attachment">filename</a></li>
+    </tal:block>
+    </ul>
+
+</tal:block>
