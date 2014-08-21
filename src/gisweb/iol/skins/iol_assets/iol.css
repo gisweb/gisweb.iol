@@ -343,3 +343,7 @@ input[type='file'] {
   margin-left:10px;
 }
 
+#renderedForm .search-utente{
+  display:none;
+
+}

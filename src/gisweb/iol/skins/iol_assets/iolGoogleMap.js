@@ -51,8 +51,8 @@
         $.fn.iolGoogleMap.addMarker = function(mapName, markerOptions) {
 
             //createOverlay('sdfsdf','sdfsdf')
-            console.log(markerOptions)
-            console.log(mapName)
+            console.log(markerOptions);
+            console.log(mapName);
 
 
 
@@ -227,7 +227,7 @@
                 map.setZoom(overlay.zoom || 16);
             }
             else{
-                console.log(overlay.getBounds())
+                console.log(overlay.getBounds());
                 map.fitBounds(overlay.getBounds());
             }
         }

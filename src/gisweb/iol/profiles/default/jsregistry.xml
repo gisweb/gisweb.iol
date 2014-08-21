@@ -2,7 +2,7 @@
 <object name="portal_javascripts" meta_type="JavaScripts Registry">
              
  <javascript cacheable="True"
-             compression="safe"
+             compression="none"
              cookable="True"
              enabled="True"
              expression=""
@@ -12,7 +12,7 @@
              />
 
  <javascript cacheable="True"
-             compression="safe"
+             compression="none"
              cookable="True"
              enabled="True"
              expression=""
@@ -21,7 +21,7 @@
              insert-after="select2.js"
              />
  <javascript cacheable="True"
-             compression="safe"
+             compression="none"
              cookable="True"
              enabled="True"
              expression=""
@@ -30,7 +30,7 @@
              insert-after="select2.js"
              />
  <javascript cacheable="True"
-             compression="safe"
+             compression="none"
              cookable="True"
              enabled="True"
              expression=""

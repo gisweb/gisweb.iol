@@ -85,9 +85,9 @@
         //$("*[data-plugin]").removeClass("form-control");
         //$("table").removeClass("dataTable");
         //$("table").addClass("display table-bordered table plominoview")
-        $(".add-row").addClass("btn")
-        $(".edit-row").addClass("btn")
-        $(".delete-row").addClass("btn")
+        $(".add-row").addClass("btn");
+        $(".edit-row").addClass("btn");
+        $(".delete-row").addClass("btn");
         //$("input:file").addClass("btn")
 
 
