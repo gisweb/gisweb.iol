@@ -11,7 +11,8 @@ assert context.portal_type == 'PlominoDocument', 'PlominoDocument expected, got 
 db = context.getParentDatabase()
 assert context.isReader(), "You don't have read permission in this document"
 
-from gisweb.utils import json_dumps
+from Products.CMFPlomino.PlominoUtils import json_dumps
+
 
 from Products.CMFCore.utils import getToolByName
 
@@ -39,9 +40,9 @@ raw_data = dict(
 # Output rendering
 if format == 'json':
     context.REQUEST.RESPONSE.setHeader("Content-type", "application/json")
-    return json_dumps(raw_data, sort_keys=True)
+    return json_dumps(raw_data)
 elif format == 'text':
-    print json_dumps(raw_data, indent=4, sort_keys=True)
+    print json_dumps(raw_data)
     #for k,v in raw_data.items():
     #    print '%s: \n\t%s' % (k,v)
     return printed
