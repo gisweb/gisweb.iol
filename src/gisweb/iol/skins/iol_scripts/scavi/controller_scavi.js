@@ -4,7 +4,7 @@
   var initDialog = function(_, container){
 
     $("#elenco_elementi_addrow").hide();
-    $('#elemento_tipo').select2('val', null);
+    //$('#elemento_tipo').select2('val', null);
 
     var elencoCivici = [];
     $('#civico').select2({
@@ -70,7 +70,6 @@
 
     var map = $("#mappa").iolGoogleMap.getMap();
     google.maps.event.addListener(map, 'overlaycomplete', function(overlay){
-        console.log(overlay)
         var geom = "", points = [];
         if(overlay.geometryType=='point')
           geom = "SRID=4326;POINT(" + overlay.getPosition().lng() + " " + overlay.getPosition().lat() + ")";
@@ -79,7 +78,6 @@
             points.push(point.lng() + " " +point.lat());
           })
           geom = "SRID=4326;LINESTRING(" + points.join(",") + ")";
-          console.log(geom);
         }
 
         $.ajax({
@@ -92,12 +90,17 @@
           //$('#civico').select2('data', elencoCivici);
           //$('#civico').select2('val', null);
           //$("#geometry").val('');
-          console.log(overlay)
+          //SE STO USANDO IL DATAGRID
           var datagridLink = $("#" + overlay.fieldId + "_addrow").get(0);
-          var datagridLinkTarget = datagridLink && $(datagridLink).attr("href");
-          if(datagridLinkTarget) $(datagridLink).attr("href", datagridLinkTarget + "&categoria=" + data[0].categoria)
+          if(datagridLink){
+            var datagridLinkTarget = datagridLink && $(datagridLink).attr("href");
+            if(datagridLinkTarget) $(datagridLink).attr("href", datagridLinkTarget + "&categoria=" + data[0].categoria)
+            $(datagridLink).trigger('click');
+          }
 
-          $(datagridLink).trigger('click');
+          //SE STO USANDO LA COMBO SULLA FORM
+          
+
         }
       });
 

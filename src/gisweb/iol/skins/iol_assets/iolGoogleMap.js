@@ -76,39 +76,53 @@
         var createOverlay = function  (stringGeom,options){
             if(typeof(options)!='object') return;
             var overlay,pos;
-            var v = stringGeom.split(';');
-            if(v.length == 1){
-                //var elementType = v[0];
-                var geometryType = "point";
-                var sGeom = v[0];
-            }
-            else{
-                //var elementType = v[0];
-                var geometryType = v[0];
-                var sGeom = v[1];
-            }
-            if(geometryType == "point"){ 
+            var patt = /\((.*?)\)/;
+            var sCoordinates = stringGeom.match(patt)[1]
+
+            if(stringGeom.indexOf('POINT')!=-1){
                 overlay = new google.maps.Marker(options.markerOptions||{});
-                pos = sGeom.split(' ');
+                pos = sCoordinates.split(' ');
                 overlay.setPosition(new google.maps.LatLng(pos[1],pos[0]))
-                overlay.geometryType = geometryType;
+                overlay.geometryType = google.maps.drawing.OverlayType.MARKER;
             }
-            else if(geometryType == google.maps.drawing.OverlayType.POLYLINE){
-                overlay = new google.maps.Polyline(options.polylineOptions||{});
-                overlay.setPath(google.maps.geometry.encoding.decodePath(sGeom))
-                overlay.geometryType = google.maps.drawing.OverlayType.POLYLINE;
+            if((stringGeom.indexOf('LINESTRING')!=-1) || (stringGeom.indexOf('POLYGON')!=-1)){
+
+                if(stringGeom.indexOf('LINESTRING')!=-1){
+                    overlay = new google.maps.Polyline(options.polylineOptions||{});
+                    overlay.geometryType = google.maps.drawing.OverlayType.POLYLINE;
+                }
+                else{
+                    overlay = new google.maps.Polygon(options.polygonOptions||{});
+                    overlay.geometryType = google.maps.drawing.OverlayType.POLYGON;
+                }
+                var v, points = [];
+                var pos = sCoordinates.split(',');
+                for(var i=0;i<pos.length;i++){
+                    v = pos[i].split(" ");
+                    points.push(new google.maps.LatLng(v[1],v[0]));
+                }
+                overlay.setPath(points);
             }
-            else if(geometryType == google.maps.drawing.OverlayType.POLYGON){
-                overlay = new google.maps.Polygon(options.polygonOptions||{});
-                overlay.setPath(google.maps.geometry.encoding.decodePath(sGeom))
-                overlay.geometryType = google.maps.drawing.OverlayType.POLYGON;
+
+            if(stringGeom.indexOf('POLYGON')!=-1){
+                points = [];
+                pos = sCoordinates.split(',');
+                for(var i=0;i<pos.length;i++){
+                    v = pos[i].split(" ");
+                    points.push(new google.maps.LatLng(v[1],v[0]));
+                }
+                console.log(options)
+
+                overlay.setPath(points);
+
             }
+ /* 
             //STRINGA DI COORDINATE
             else if(geometryType == "coords"){
                 overlay = new google.maps.Polygon(options.polygonOptions||{});
                 overlay.setPath(getPathFromCoord(sGeom));
                 overlay.geometryType = google.maps.drawing.OverlayType.POLYGON;
-            }
+            }*/
 
             //overlay.elementType = elementType;
             return overlay;
@@ -202,21 +216,31 @@
             }else{
                 var sGeom;
                 if(overlay.geometryType == "point"){
-                    sGeom = overlay.elementType + ';' + overlay.geometryType + ';' + overlay.getPosition().lng().toFixed(6)+" "+overlay.getPosition().lat().toFixed(6);
+                    //sGeom = overlay.elementType + ';' + overlay.geometryType + ';' + overlay.getPosition().lng().toFixed(6)+" "+overlay.getPosition().lat().toFixed(6);
+                    sGeom = "SRID=4326;POINT(" + overlay.getPosition().lng().toFixed(6) + " " + overlay.getPosition().lat().toFixed(6) + ")";
                 }
                 else if(overlay.geometryType == google.maps.drawing.OverlayType.MARKER){
-                    sGeom = overlay.getPosition().lng().toFixed(6) + " " + overlay.getPosition().lat().toFixed(6);
+                    //sGeom = overlay.getPosition().lng().toFixed(6) + " " + overlay.getPosition().lat().toFixed(6);
+                    sGeom = "SRID=4326;POINT(" + overlay.getPosition().lng().toFixed(6) + " " + overlay.getPosition().lat().toFixed(6) + ")";
                     //Campi lat e lng se esistono
                     if($("[name^='lat']")) $("[name^='lat']").val(overlay.getPosition().lat().toFixed(6))
                     if($("[name^='lng']")) $("[name^='lng']").val(overlay.getPosition().lng().toFixed(6))
                 }
-                else
-                    sGeom = overlay.elementType + ';' + overlay.geometryType + ';' + google.maps.geometry.encoding.encodePath(overlay.getPath());
-
+                else{
+                    var points = [];
+                    overlay.getPath().forEach(function(point,_){
+                        points.push(point.lng().toFixed(6) + " " +point.lat().toFixed(6));
+                    })
+                    if(overlay.geometryType == google.maps.drawing.OverlayType.POLYLINE)
+                        sGeom = "SRID=4326;LINESTRING(" + points.join(",") + ")";
+                    if(overlay.geometryType == google.maps.drawing.OverlayType.POLYGON){
+                        points.push(points[0]);
+                        sGeom = "SRID=4326;POLYGON(" + points.join(",") + ")";
+                    }
+                    //sGeom = overlay.elementType + ';' + overlay.geometryType + ';' + google.maps.geometry.encoding.encodePath(overlay.getPath());
+                    //sGeom = overlay.elementType + ';' + overlay.geometryType + ';' + overlay.getPath().toString();
+                }
                 $("#"+ overlay.fieldId).val(sGeom);
-                //$("#"+ overlay.fieldId + '_geometry').val(sGeom);
-                //$element.val(sGeom);
-                //if(message) $("#" + $element.attr('id') + '_info').text(message);
             }
          
         }
@@ -227,7 +251,6 @@
                 map.setZoom(overlay.zoom || 16);
             }
             else{
-                console.log(overlay.getBounds());
                 map.fitBounds(overlay.getBounds());
             }
         }
@@ -237,8 +260,6 @@
         var zoomOnStreetView = function (marker){
 
             var panorama;
-
-            console.log(marker)
 
             var sViewContainer = $("#" + marker.fieldId + "_streetview").get(0);
             
@@ -257,7 +278,7 @@
 
                 if (status == google.maps.StreetViewStatus.OK) {
                     /**** http://dreamdealer.nl/tutorials/point_the_streetview_camera_to_a_marker.html */
-                    console.log(status)
+                    //console.log(status)
                     var position = marker.getPosition();     
                     if(typeof(marker.panoMarker)=='undefined'){
                        marker.panoMarker = new google.maps.Marker({
@@ -296,7 +317,7 @@
             var $element = $( this );
             var mapOptions = options.pluginOptions || {};
             var baseUrl = options.baseUrl;
-            var editMode = options.editMode;
+            var editMode = parseInt(options.editMode);
             if(mapOptions.center) mapOptions.center = new google.maps.LatLng(mapOptions.center[0],mapOptions.center[1]);
             var mapdiv = document.createElement( "div" );
             var stViewdiv = document.createElement( "div" );
@@ -318,6 +339,8 @@
             var defaultMapTypeIds = [google.maps.MapTypeId.ROADMAP,google.maps.MapTypeId.TERRAIN,google.maps.MapTypeId.SATELLITE,google.maps.MapTypeId.HYBRID];
 
             var currentOverlay;
+
+            console.log(editMode)
 
             //COORDINATE SU MOSEMOVE
             //SETTARE L'ATTRIBUTO "coordsrid" SULL'OGGETTO CONFIGURAZIONE DELLA MAPPA PER AVERE LE COORDINATE IN ALTRO SISTEMA
@@ -404,10 +427,12 @@
                 var datagridLink = $("#" + options.drawingTarget + "_addrow").get(0);
                 var datagridLinkTarget = datagridLink && $(datagridLink).attr("href");
                 var openDialog = options.openDialog;
+                var elementType = '';
 
                 //SETTO IL TOOL DI DISEGNO DALLA COMBO
                 $("[name='"+ options.drawingTools +"']").bind('change',function(){
                     //if($(this).is("input") && !$(this).is("input:checked")) currentValue="empty";
+                    elementType = $(this).val();
                     drawingManager.setOptions(drawingOptions[$(this).val()]);
                     if(datagridLinkTarget) $(datagridLink).attr("href", datagridLinkTarget + "&" + options.drawingTools + "=" + $(this).val())
                 })
@@ -419,19 +444,38 @@
                     e.overlay.geometryType = (e.type=='marker')?'point':e.type;
                     e.overlay.editMode = editMode;
                     e.overlay.fieldId = options.drawingTarget || $element.attr('id');
-                    currentOverlay = e.overlay;
+                    e.overlay.elementType = elementType;
                     google.maps.event.trigger(map,'overlaycomplete', e.overlay);
 
                     //SE STO AGGIUNGENDO ELEMENTI AD UN DATAGRID APRO IL DIALOG
                     if(datagridLink && openDialog){
+                        currentOverlay = e.overlay;
                         $(datagridLink).trigger('click');
                     }
                     else{
+                        if(currentOverlay) currentOverlay.setMap(null);//una sola geometria per il campo non datagrid
+                        currentOverlay = e.overlay;
                         registerObject(e.overlay);
                         if(e.overlay.geometryType == "point")  zoomOnStreetView(e.overlay)
                     }
 
+
+
                 });
+
+
+                //AGGIUNGO LE GEOMETRIE PRESENTI COME CAMPI SULLA FORM
+                var sGeom = $element.val();
+                if(sGeom){
+                    elementType = $("[name='"+ options.drawingTools +"']").val();
+                    currentOverlay = createOverlay(sGeom, drawingOptions[elementType]); 
+                    currentOverlay.setMap(map);
+                    currentOverlay.editMode = editMode;
+                    currentOverlay.fieldId = $element.attr('id');
+                    registerObject(currentOverlay);
+                    if(currentOverlay.geometryType == "point")  zoomOnStreetView(currentOverlay)
+               }
+
 
             }
 
@@ -471,7 +515,7 @@
 
                 //SETTO I DATAGRIDS INTEGRATI (DA VEDERE I DATAGRIDS NON DIPENDENTI DA DRAWINGTOOLS)
                 //AGGIUNGO GLI ELEMENTI GEOMETRICI PRESENTI NEI DATAGRIDS
-                if($('#'+ options.drawingTarget +'_datagrid') && $('#'+ options.drawingTarget +'_datagrid').dataTable()){
+                if($('#'+ options.drawingTarget +'_datagrid').length && $('#'+ options.drawingTarget +'_datagrid').dataTable()){
                     var settings = $('#'+ options.drawingTarget +'_datagrid').dataTable().fnSettings().oInit
                     var overlay, sGeom, elementType, geomIndex, typeIndex;
                     $.each($('#'+ options.drawingTarget +'_datagrid').dataTable().fnGetData(),function(index,data){
@@ -542,37 +586,6 @@
                     });
 
                 }
-
-
-
-
-
-
-
-
-
-
-/*                var sGeom = $(this).val();
-                if(sGeom){
-                    var v = sGeom.split(';');
-                    var elementType = (v.length == 3 && v[0]);
-                    currentOverlay = createOverlay(sGeom, drawingOptions[elementType]); 
-
-                    console.log(currentOverlay)
-
-                    currentOverlay.setMap(map);
-                    currentOverlay.editMode = 1;
-                    currentOverlay.fieldId = $element.attr('id');
-                    registerObject(currentOverlay);
-                    if(currentOverlay.geometryType == "point")  zoomOnStreetView(currentOverlay)
-               }
-*/
-
-
-
-
-
-
 
             });
 
