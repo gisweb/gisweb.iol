@@ -276,9 +276,9 @@
             }
             svClient.getPanoramaByLocation(marker.getPosition(),50,function (panoData, status) {
 
+
                 if (status == google.maps.StreetViewStatus.OK) {
                     /**** http://dreamdealer.nl/tutorials/point_the_streetview_camera_to_a_marker.html */
-                    //console.log(status)
                     var position = marker.getPosition();     
                     if(typeof(marker.panoMarker)=='undefined'){
                        marker.panoMarker = new google.maps.Marker({
@@ -298,18 +298,11 @@
                     var panoCenter = panoData.location.latLng;//trovo la posizione del frame
                     var heading = google.maps.geometry.spherical.computeHeading(panoCenter, position);//calcolo heading con la differenza
                     panorama.setPosition(position);                    
-
+                    //????????????????????? vedere
                     panorama.setPov({heading:heading , pitch:-15, zoom:0});
-
-                    $(sViewContainer).show();
-                    $(".no-streetview").addClass('hidden');
-                    $(sViewContainer).removeClass('hidden');
-
+  
                 } else {
-                    $(sViewContainer).hide()
-                    $(sViewContainer).addClass('hidden');
-                    $(".no-streetview").removeClass('hidden');
-                    console.log('no streetview')
+                    $(sViewContainer).html('');
                 }
            });
         }
@@ -341,9 +334,6 @@
             var defaultMapTypeIds = [google.maps.MapTypeId.ROADMAP,google.maps.MapTypeId.TERRAIN,google.maps.MapTypeId.SATELLITE,google.maps.MapTypeId.HYBRID];
 
             var currentOverlay;
-
-            console.log(editMode)
-
             //COORDINATE SU MOSEMOVE
             //SETTARE L'ATTRIBUTO "coordsrid" SULL'OGGETTO CONFIGURAZIONE DELLA MAPPA PER AVERE LE COORDINATE IN ALTRO SISTEMA
             google.maps.event.addListener(map, 'mousemove', function(e){
@@ -362,7 +352,6 @@
             //ELENCO DEI LIVELLI
             //IN "mapLayers" C'E' L'ELENCO DEI LIVELLI DEFINITI DA UN OGGETTO JSON
             if(options.mapLayers) {
-                console.log(options.mapLayers)
                 var layerSettings = $("[name='" + options.mapLayers + "']").data('mapLayers');
                 if(typeof(layerSettings)=='string')  layerSettings = JSON.parse(layerSettings.replace(/[\n\r]/g, ''));
                 

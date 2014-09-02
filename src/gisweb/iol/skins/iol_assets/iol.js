@@ -9,7 +9,7 @@
         if(typeof(pluginOptions)=='string')  pluginOptions = JSON.parse(pluginOptions.replace(/[\n\r]/g, ''));
 
         var pluginName = pluginOptions['plugin'];
-        console.log(pluginName)
+        //console.log(pluginName)
 
         //Force select2 plugin from select elements
         if($element.is('select')) pluginName = 'select2';
