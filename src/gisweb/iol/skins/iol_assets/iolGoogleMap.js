@@ -297,9 +297,11 @@
                     }
                     var panoCenter = panoData.location.latLng;//trovo la posizione del frame
                     var heading = google.maps.geometry.spherical.computeHeading(panoCenter, position);//calcolo heading con la differenza
-                    panorama.setPosition(position);
+                    panorama.setPosition(position);                    
+
                     panorama.setPov({heading:heading , pitch:-15, zoom:0});
-                    $(sViewContainer).show()
+
+                    $(sViewContainer).show();
                     $(".no-streetview").addClass('hidden');
                     $(sViewContainer).removeClass('hidden');
 

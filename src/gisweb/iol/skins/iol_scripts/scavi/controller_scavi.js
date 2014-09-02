@@ -81,7 +81,7 @@
         }
 
         $.ajax({
-        'url':"resources/trovaCategoria",
+        'url':"scavi/trovaCategoria",
         'type':'POST',
         'data':{"geom":geom},
         'dataType':'JSON',
@@ -99,6 +99,8 @@
           }
 
           //SE STO USANDO LA COMBO SULLA FORM
+          if($('#categoria_cosap').length)
+            $('#categoria_cosap').select2('val', data[0].categoria);
           
 
         }
