@@ -2,7 +2,7 @@
 
 (function ( $ ) {
 
-    "use strict";
+   // "use strict";
 
     var svClient = new google.maps.StreetViewService;
     var svGeocoder = new google.maps.Geocoder();
@@ -431,11 +431,16 @@
                 //EVENTO SULL'INSERIMENTO DEL NUOVO OGGETTO
                 google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e){
                     //DISABILITO LA MODALITA' DISEGNO E AGGIUNGO GLI ATTRIBUTI ALL'OVERLAY
+                    
+
                     drawingManager.setDrawingMode(null);
                     e.overlay.geometryType = (e.type=='marker')?'point':e.type;
                     e.overlay.editMode = editMode;
+
                     e.overlay.fieldId = options.drawingTarget || $element.attr('id');
                     e.overlay.elementType = elementType;
+
+
                     google.maps.event.trigger(map,'overlaycomplete', e.overlay);
 
                     //SE STO AGGIUNGENDO ELEMENTI AD UN DATAGRID APRO IL DIALOG

@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=condition='',app=''
+##parameters=condition='',applicazione=''
 ##title=Script che verifica se alcune condizioni sul PlominoDocument sono verificate
 ##
 #                                                                                              #
@@ -16,18 +16,23 @@
 #                                                                                              # 
 ################################################################################################
 
+
+from Products.CMFCore.utils import getToolByName
+
+app = getToolByName(context,applicazione)
 if context.portal_type=='PlominoDocument':
     doc=context
-    fld = doc.getParentDatabase().resources
-    if script.id in fld.keys():
-        return fld[script.id](context,cond=condition)
+    
+    #fld = doc.getParentDatabase().resources
+    if script.id in app.objectIds():
+        return app.isConditionVerified(doc,condition)
     else:
         return True
-elif context.portal_type=='PlominoDatabase':
-    fld = context.resources
-    if script.id in fld.keys():
-        return fld[script.id](context,cond=condition,application=app)
-    else:
-        return True
-else:
-    return False
+#elif context.portal_type=='PlominoDatabase':
+    #fld = context.resources
+    #if script.id in fld.keys():
+     #   return fld[script.id](context,cond=condition,application=app)
+   # else:
+    #    return True
+#else:
+    #return False

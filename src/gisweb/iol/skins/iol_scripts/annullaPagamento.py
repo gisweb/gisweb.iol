@@ -13,6 +13,7 @@ from Products.CMFPlomino.PlominoUtils import StringToDate,DateToString, Now
 
 
 
+
 importo=context.REQUEST.get('importo')
 esito=context.REQUEST.get('esito')
 divisa=context.REQUEST.get('divisa')
