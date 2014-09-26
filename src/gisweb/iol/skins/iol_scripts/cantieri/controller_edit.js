@@ -12,6 +12,8 @@ $( document ).ready(function() {
   	})
 
    	
+// rimuove pulsante add al  datagrid dei pagamenti
+   $("#elenco_pagamenti_addrow").remove();
 
     
 
