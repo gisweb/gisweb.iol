@@ -22,7 +22,7 @@ $.extend( true, $.fn.dataTable.defaults, {
         aoData.push({name:'query', value: JSON.stringify(form_query)});
      },
     'fnServerData': function ( sSource, aoData, fnCallback, oSettings ) {
-     oSettings.jqXHR = jq.ajax( {
+     oSettings.jqXHR = jQuery.ajax( {
         'dataType': 'json',
         'type': 'POST',
         'url': sSource,
