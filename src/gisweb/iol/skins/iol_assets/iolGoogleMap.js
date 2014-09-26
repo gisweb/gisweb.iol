@@ -235,7 +235,7 @@
                         sGeom = "SRID=4326;LINESTRING(" + points.join(",") + ")";
                     if(overlay.geometryType == google.maps.drawing.OverlayType.POLYGON){
                         points.push(points[0]);
-                        sGeom = "SRID=4326;POLYGON(" + points.join(",") + ")";
+                        sGeom = "SRID=4326;POLYGON((" + points.join(",") + "))";
                     }
                     //sGeom = overlay.elementType + ';' + overlay.geometryType + ';' + google.maps.geometry.encoding.encodePath(overlay.getPath());
                     //sGeom = overlay.elementType + ';' + overlay.geometryType + ';' + overlay.getPath().toString();
