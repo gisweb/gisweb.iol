@@ -47,12 +47,15 @@ elif doc.portal_type=='PlominoDocument':
     info = doc.docInfo(format='')
     state = info['review_state'][0]['id']
     actions = info['review_state'][0]['transitions']
+    wf_acts = doc.wf_transitionsInfo(wf_id=wf_id, args=['description'])
     wfVars = info['wf_vars'][wf_id]
     editMode = doc.isEditMode()
     creationMode = False
 
-if doc and state == 'avvio':
-    frm = db.getForm('base_sub_invio_domanda')
+
+
+if doc and state == 'avvio' and 'invia_domanda' in [act.get('id') for act in wf_acts]:
+    frm = db.getForm('base_sub_invio_domanda') 
     html += frm.displayDocument(doc,editmode=editMode,parent_form_id=frmName)
 
 if doc:
@@ -71,6 +74,7 @@ if doc and state=='autorizzata':
 if doc:
     frm = db.getForm('base_sub_workflow')
     html += frm.displayDocument(doc,editmode=editMode,parent_form_id=frmName)
+
 
 
 

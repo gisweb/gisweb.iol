@@ -26,6 +26,6 @@ for act in actions:
         if description=='':            
             description = act.get('description') or act.get('title') or act.get('id')
             
-        html='''<div class="row-fluid"><div class="span12 alert-error"><h4>%s</h4><a style="width:200px" class="btn pull-right wf-actions" id="btn_wf_%s" href="%s"><i class='icon-hand-right'></i><span>%s</span></a></div></div>''' %(description,act.get('id'),actionurl,act.get('title'))            
+        html='''<div class="row-fluid"><div class="span12 alert alert-error"><h4>%s</h4><a style="width:200px" class="btn pull-right wf-actions" id="btn_wf_%s" href="%s"><i class='icon-hand-right'></i><span>%s</span></a></div></div>''' %(description,act.get('id'),actionurl,act.get('title'))            
             
         return html

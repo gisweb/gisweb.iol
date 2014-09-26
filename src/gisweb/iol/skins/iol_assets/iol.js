@@ -13,7 +13,7 @@
 
         //Force select2 plugin from select elements
         if($element.is('select')) pluginName = 'select2';
-
+        
 
         if ($.fn.hasOwnProperty(pluginName)){
             $.fn[pluginName].call($element, pluginOptions);
@@ -25,7 +25,7 @@
     }
 
     function addTopNavbar(){
-
+      
       var html='<div id="top-toolbar-div" class="navbar navbar-fixed-top">';
       html+='<div class="navbar-inner" id="toolbar-top">';
      // html+='<div class="container">';
@@ -73,6 +73,44 @@
         label.on("mouseover",function(){icon.tooltipster('show')});
         label.on("mouseout",function(){icon.tooltipster('hide')})
     }
+    
+    // aggiunge l'attributo data-dhw=1 a tutti gli input radio con lo stesso name
+    $( document ).ready(function() {        
+        var radio = $("input:radio").filter("[data-dhw=1]");        
+        $.each(radio,function(i,v){
+            var nome = v['name'];            
+            $("[name="+ "'" + nome + "'" + "]").each(function(){$(this).attr('data-dhw',1)});          
+            
+        });
+    });
+
+    // aggiunge l'attributo iol-hw=nome del hw a tutti gli input radio con lo stesso name
+    $( document ).ready(function() { 
+
+        var radio_hw = $("input:radio[data-dhw]");        
+        $.each(radio_hw,function(i,v){
+            var attr_name = $(this).attr('data-dhw');
+            var nome_hw = v['name'];            
+            $("[name="+ "'" + nome_hw + "'" + "]").each(function(){$(this).attr('data-dhw',attr_name)});          
+            
+        });
+    });
+
+    // aggiunge l'attributo iol-hw=nome del hw a tutti gli input radio con lo stesso name
+    $( document ).ready(function() { 
+
+        var radio_hw = $("input:radio[hw_value]");        
+        $.each(radio_hw,function(i,v){
+            var attr_name = $(this).attr('hw_value');
+            var nome_hw = v['name'];            
+            $("[name="+ "'" + nome_hw + "'" + "]").each(function(){$(this).attr('hw_value',attr_name)});          
+            
+        });
+    });
+
+    
+
+    
 
     $(function () {
 
@@ -127,6 +165,199 @@
 
 
     });
+
+    // hide when dinamico prevede che siano inseriti nel campo html5 attribute gli attributi:
+    // 'iol-hw=hw_no_...'  e  'hw_value=valore'
+    // è comodo da usare quando è solo uno l'hide when da cui dipende il campo
+    $( document ).ready(function() {  
+
+        var hw = $("input[data-dhw]"); 
+        $.each(hw,function(i,v){
+            if ($(this).attr('data-dhw') != "1"){
+                var hw_field = 'hidewhen-' + $(this).attr('data-dhw');
+                //$("." + hw_field).attr("style","display: none;");                
+                var name = v['name'];
+                $("[name="+ "'" + name + "'" + "]").bind('click',function(){                        
+                    var value = $(this).attr('hw_value');
+                    if (value) {
+                        console.log('pippo')
+                        if ($(this).val() == value) {
+                            $("." + hw_field).attr("style","display: block;");
+                        }
+                        else {
+                            $("." + hw_field).attr("style","display: none;");
+                        }
+                        
+                    }
+                    else {
+                        console.log(hw_field)
+                        $("." + hw_field).toggle();
+                    }       
+                });
+            };     
+        });    
+          
+    });
+
+$(document).ready(function() { 
+    
+    var elementi = $("div[class*='span']");
+    $.each(elementi,function(){
+        
+        if ($(this).children().eq(1).hasClass('TEXTFieldRead-TEXT')){
+            
+            $(this).children().removeClass('label');
+            $(this).children().addClass('label1');
+            $(this).children().next().addClass('readonly');
+        }
+
+        else if ($(this).children().eq(1).hasClass('TEXTFieldRead-TEXTAREA')){
+            
+            $(this).children().removeClass('label');
+            $(this).children().addClass('label1');
+            $(this).children().next().addClass('readonly');
+        }
+        else if ($(this).children().hasClass('label')){
+            $(this).children().removeClass().addClass('label1');
+            if ($(this).children().next().hasClass('label1')){
+                $(this).children().next().addClass('readonly');
+            }
+        }
+        else if ($(this).children().hasClass('fieldset')){
+           //if ($(this).children().children().hasClass('select-field')){
+            
+               $(this).children().children().removeClass('legend').addClass('label1')
+            //} 
+                     
+
+        }         
+
+    });
+});
+
+
+
+
+
+$(document).ready(function() {
+  if ($('form[id=plomino_form]').length > 0){
+    $("#portal-column-content").removeClass().addClass("span12")
+    $(".portlet").remove();
+    $(".managePortletsLink").remove();
+    $("#portal-columns").removeClass().addClass('container-fluid');
+    $("#portal-columns").attr("style",'margin-top:80px');
+    $("div .remove-class-wf").removeClass()
+  } 
+
+});   
+
+
+$(document).ready(function() { 
+
+      
+      var html='<div id="top-toolbar-div" class="navbar navbar-fixed-top">';
+      html+='<div class="navbar-inner" id="toolbar-top">';
+     // html+='<div class="container">';
+      html+='<ul class="nav pull-left" id="iol-menus">';
+      html+='</ul><ul class="nav pull-right" id="iol-buttons">'
+      html+='</ul></div></div>'//</div>';
+
+      $("#renderedForm").append(html);
+
+      $('.v-content-title').each(function(k,v){
+        var title = $(v).attr('title');
+        if(title) 
+          $("#iol-menus").append('<li><a anchor="' + title + '" >' + title + '</a></li>')
+      });
+
+      $('.iol-control-buttons > input').each(function(k,v){
+        $(v).addClass("btn btn-inverse").appendTo("#iol-buttons")
+      });
+
+      $('#iol-menus a').click(function(e){
+        e.preventDefault();
+        var target = $("[title='" + $(this).attr("anchor") + "']");  
+        var offset = 50;
+        console.log(target)
+        if(target)
+          $('html, body').animate({scrollTop: target.offset().top - offset}, 500);  
+      });
+
+      $('input[uppercase=1]').keyup(function(){
+         this.value = this.value.toUpperCase();
+     });
+
+
+}); 
+
+
+
+$(document).ready(function() { 
+    $("#edit-bar").addClass("row-fluid");
+
+});
+
+$(document).ready(function() { 
+ $("select[name^=modello]").each(function(){
+      var href = $('#btn_' + this.name).attr('href');
+      $('#btn_' + this.name).attr('data-href',$('#btn_' + this.name).attr('href'));
+      $('#btn_' + this.name).removeAttr('href');
+      $('#btn_' + this.name).off('click');
+      $(this).bind('change',function(){
+         var baseHref =  href;
+         var v =  this.id;
+         var field = 'documenti' + v.substring(v.indexOf('_'));
+
+        if($(this).val()){
+           var url = baseHref + '&model=' + $(this).val();
+           $('#btn_' + this.name).attr('href', url);
+           $('#btn_' + this.name).on('click');
+           $('#btn_' + this.name).removeAttr('disabled');
+        }
+        else{
+           $('#btn_' + this.name).off('click');
+           //$('#btn_' + this.name).attr('href', baseHref);
+           $('#btn_' + this.name).removeAttr('href');
+           $('#btn_' + this.name).attr('disabled','disabled');
+        }
+    });
+   });
+});
+
+$(document).ready(function() { 
+//VERIFICA INVIO SE NESSUN CAMPO MANDATORY VUOTO FACCIO COMPARIRE INVIO DOMANDA !!!
+
+  if($("div.data-mandatory:visible").length == 0){
+
+      $('#section-message-compilazione').addClass('hidden');
+      $('#section-invio-domanda').removeClass('hidden');
+
+
+      //VESTIZIONE DEL PULSANTE DI INVIO DOMANDA
+      $('#btn_invia_domanda').attr('value','Invia Domanda');
+      $('#btn_invia_domanda').addClass('btn');
+      $('#btn_invia_domanda').attr('disabled','disabled');
+
+      $('input.accettazione').bind('change',function(){
+      var send = true;
+      $.each($('input.accettazione'),function(k,v){
+
+
+          send = send && $(this).is(':checked');
+      });
+
+      if (send){
+          $('#btn_invia_domanda').removeAttr('disabled');
+
+      }
+      else
+          $('#btn_invia_domanda').attr('disabled','disabled');
+      });
+   }
+});
+
+
+
 
 
 

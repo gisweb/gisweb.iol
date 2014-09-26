@@ -4,35 +4,74 @@
 
 }
 
-#renderedForm {
+/*form {
 
   border: 1px solid black
 
+}*/
+
+
+
+.label1{
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.control-label{
+  
+  font-weight: bold;
+}
+
+.readonly{
+  background-color:#ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  margin-left: -4px;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  height: 18px;
+  box-shadow: inset 0 1px 1px;  
+  padding: 4px;
+  margin-bottom: 9px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #555555;
+  width:100%;
 }
 
 
-#renderedForm span.label,span.legend{
+form span.label,span.legend{
  
     color: #000000;
     font-size:12px;
     display:block;
-    background-color:#FFFFFF;
+    
     text-shadow:none;
     border-radius: 3px;
 
 }
 
-#renderedForm span.TEXTFieldRead-TEXT{
+form span.TEXTFieldRead-TEXT{
  
     font-size:12px;
     background-color:#FFFFFF;
-    width:100%;
-    border:1 px solid gray;
+    /*width:100%;
+    border:1 px solid gray;*/
 
 }
 
+/*div .span4 {
+   border: 1px solid #cccccc; 
+}
 
-#renderedForm div.row-fluid{
+div .span3 {
+   border: 1px solid #cccccc; 
+}*/
+
+
+
+form div.row-fluid{
 
    mrgin-bottom:15px;
 

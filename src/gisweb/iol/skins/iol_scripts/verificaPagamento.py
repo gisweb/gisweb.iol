@@ -9,7 +9,7 @@
 ##
 
 from Products.CMFPlomino.PlominoUtils import StringToDate,DateToString
-
+from Products.CMFCore.utils import getToolByName
 
 
 #doc=str(context.REQUEST.get('url'))
@@ -23,6 +23,7 @@ aut=context.REQUEST.get('codAut')
 
 session=context.REQUEST.get('session_id')
 
+wf = getToolByName(context, 'portal_workflow')
 
 
 #if context.REQUEST.SESSION.id == sessione:
@@ -48,6 +49,7 @@ if context.getItem('elenco_pagamenti'):
             p.append(c)
 
     context.setItem('elenco_pagamenti',p)
+  	wf = getToolByName(context, 'portal_workflow')
 
 
     

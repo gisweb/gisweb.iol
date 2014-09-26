@@ -68,7 +68,7 @@
     };
 
     $.fn.iolCodicefiscale = function( options ) {
-
+        
         return this.each(function() {
             options = options.pluginOptions;
             var fieldId = this.id;
@@ -255,6 +255,7 @@
         });
     }
 
+   
 
 
 

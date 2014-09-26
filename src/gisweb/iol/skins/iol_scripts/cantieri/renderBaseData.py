@@ -47,6 +47,7 @@ elif doc.portal_type=='PlominoDocument':
     info = doc.docInfo(format='')
     state = info['review_state'][0]['id']
     actions = info['review_state'][0]['transitions']
+    wf_acts = doc.wf_transitionsInfo(wf_id=wf_id, args=['description'])
     wfVars = info['wf_vars'][wf_id]
     editMode = doc.isEditMode()
     creationMode = False
