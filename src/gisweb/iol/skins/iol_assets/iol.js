@@ -180,7 +180,7 @@
                 $("[name="+ "'" + name + "'" + "]").bind('click',function(){                        
                     var value = $(this).attr('hw_value');
                     if (value) {
-                        console.log('pippo')
+                        
                         if ($(this).val() == value) {
                             $("." + hw_field).attr("style","display: block;");
                         }
@@ -198,6 +198,8 @@
         });    
           
     });
+
+
 
 $(document).ready(function() { 
     
@@ -240,7 +242,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-  if ($('form[id=plomino_form]').length > 0){
+  if ($('form[name]').length > 0){
     $("#portal-column-content").removeClass().addClass("span12")
     $(".portlet").remove();
     $(".managePortletsLink").remove();
@@ -357,6 +359,22 @@ $(document).ready(function() {
 });
 
 
+// form dei pagamenti
+$(document).ready(function() {
+
+var formName=$('input[name="Form"]').val();
+if (formName=='iol_pagamenti_online'){
+    $('#btn_pagamento').bind('click',function(event){
+        event.preventDefault();
+        
+        var frm=$('form[name="iol_pagamenti_online"]');
+        frm.attr('action',$(this).attr('data-href'));
+        frm.attr('method','POST');
+        frm.submit();
+    });
+}
+    
+});
 
 
 

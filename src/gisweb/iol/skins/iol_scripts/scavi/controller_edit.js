@@ -11,6 +11,8 @@ $( document ).ready(function() {
        $("#importo_cosap").val('');
   	})
 
+// rimuove pulsante add al  datagrid dei pagamenti
+   $("#elenco_pagamenti_addrow").remove();
    	
 
     
