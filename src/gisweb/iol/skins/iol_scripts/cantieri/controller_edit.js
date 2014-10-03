@@ -15,6 +15,33 @@ $( document ).ready(function() {
 // rimuove pulsante add al  datagrid dei pagamenti
    $("#elenco_pagamenti_addrow").remove();
 
+function checkLunghezza(){
+	if(this.fnGetData().length>0){
+		for(i=0; i<this.fnGetData().length; i++){
+			if(this.fnGetData()[i][2]>5.01){
+				$(".alertCantiereLength").attr("style","display: block;")
+			}
+			else if (this.fnGetData()[i][3]>5.01){
+				$(".alertCantiereLength").attr("style","display: block;")
+			}
+			else {
+				$(".alertCantiereLength").attr("style","display: none;")
+			}
+
+		};
+	};
+};
+/*if ($('#elementi_scavo_dg_datagrid').length>1){
+	console.log($('#elementi_scavo_dg_datagrid'));
+}*/
+
+
+/*if ($("#elementi_scavo_dg_datagrid").length>0){
+	console.log(this);
+   $("#elementi_scavo_dg_datagrid").dataTable().fnSettings().aoDrawCallback.push({fn: checkLunghezza});
+};*/
+
+
     
 
     

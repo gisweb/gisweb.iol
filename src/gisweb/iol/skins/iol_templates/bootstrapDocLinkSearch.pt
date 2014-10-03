@@ -6,7 +6,7 @@
                        cols python: options['field'].getSettings().getJQueryColumns();
                        destForm python: context.REQUEST.get('destinationForm','');
                        ">
-        <div tal:content="structure python: destForm"></div>
+        
 
         <input type="hidden" id="destinationForm" tal:attributes="value destForm"/>
 
@@ -22,7 +22,7 @@
                                         'aTargets': ['_all'],
                                         'bUseRendered': false,
                                         'fnRender': function (oObj) {
-                                            var cell = oObj.aData[oObj.iDataColumn];
+                                            var cell = oObj.aData[oObj.iDataColumn];           
                                             var dburl=$$('#Plomino_Database_URL').val();
                                             var destForm=$$('#destinationForm').val();
                                             if (destForm ){

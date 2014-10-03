@@ -56,7 +56,7 @@ elif doc.portal_type=='PlominoDocument':
 
 if doc and state == 'avvio' and 'invia_domanda' in [act.get('id') for act in wf_acts]:
     frm = db.getForm('base_sub_invio_domanda') 
-    html += frm.displayDocument(doc,editmode=editMode,parent_form_id=frmName)
+    html += frm.displayDocument(doc,parent_form_id=frmName)
 
 if doc or db.isNewDocument():
     frm = db.getForm('base_sub_etichette')

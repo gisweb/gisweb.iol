@@ -218,12 +218,14 @@ $(document).ready(function() {
             $(this).children().removeClass('label');
             $(this).children().addClass('label1');
             $(this).children().next().addClass('readonly');
+             
         }
         else if ($(this).children().hasClass('label')){
             $(this).children().removeClass().addClass('label1');
             if ($(this).children().next().hasClass('label1')){
                 $(this).children().next().addClass('readonly');
             }
+            
         }
         else if ($(this).children().hasClass('fieldset')){
            //if ($(this).children().children().hasClass('select-field')){
@@ -236,6 +238,10 @@ $(document).ready(function() {
 
     });
 });
+
+ 
+
+           
 
 
 

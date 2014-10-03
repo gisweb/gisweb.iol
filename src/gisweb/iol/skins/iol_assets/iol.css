@@ -10,7 +10,9 @@
 
 }*/
 
-
+span.TEXTFieldRead-TEXTAREA{
+  white-space:normal;
+}
 
 .label1{
   display: block;
