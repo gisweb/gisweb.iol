@@ -2,7 +2,7 @@
 $( document ).ready(function() {
 
 	$('#importo_cosap_temp').attr('readonly', true);
-
+    $('#categoria_cosap').attr('readonly', true);
 
 
 //resetta il campo importo cosap 
@@ -17,11 +17,12 @@ $( document ).ready(function() {
 
 function checkLunghezza(){
 	if(this.fnGetData().length>0){
-		for(i=0; i<this.fnGetData().length; i++){
-			if(this.fnGetData()[i][2]>5.01){
+		
+		for(i=0; i<this.fnGetData().length; i++){			
+			if(parseFloat(this.fnGetData()[i][2])>5){
 				$(".alertCantiereLength").attr("style","display: block;")
 			}
-			else if (this.fnGetData()[i][3]>5.01){
+			else if (parseFloat(this.fnGetData()[i][3])>5){
 				$(".alertCantiereLength").attr("style","display: block;")
 			}
 			else {
@@ -31,18 +32,16 @@ function checkLunghezza(){
 		};
 	};
 };
-/*if ($('#elementi_scavo_dg_datagrid').length>1){
-	console.log($('#elementi_scavo_dg_datagrid'));
-}*/
+
+$(document).on('datatable_complete',function(e){ console.log(e)
+	if ($("#elementi_scavo_dg_datagrid").length>0){
+	$(".alertCantiereLength").attr("style","display: none;")	
+	   $("#elementi_scavo_dg_datagrid").dataTable().fnSettings().aoDrawCallback.push({fn: checkLunghezza});
+	   	 
+	};
 
 
-/*if ($("#elementi_scavo_dg_datagrid").length>0){
-	console.log(this);
-   $("#elementi_scavo_dg_datagrid").dataTable().fnSettings().aoDrawCallback.push({fn: checkLunghezza});
-};*/
-
-
-    
+});
 
     
 });

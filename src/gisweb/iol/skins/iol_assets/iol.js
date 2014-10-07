@@ -55,6 +55,51 @@
 
     }
 
+  function addTopToolbar(element){
+     
+     var html='';
+     html+='<div class="navbar-inner" id="toolbar-top">';
+     html+='<div class="container">';
+     html+='<ul class="nav pull-left">';
+
+     $('.v-content-title').each(function(k,v){
+      var id = $(v).attr('id');
+      if(id) html+='<li><a id="anc_'+id+'" href="#'+id+'" data-id="'+id+'">' + id+ '</a></li>';
+    });
+     html+='</ul></div></div>';
+     element.html(html);
+     element.addClass('navbar navbar-fixed-top');
+
+
+     $('#top-toolbar-div a').click(function(){
+        var d = $(this).data();
+        scrollWin('#' + d['id'],element.height()+50); 
+         return false;
+       })
+  }
+
+  function addTopToolbarMenu(element){  
+        //Azioni Edit Save Cancel Delete
+    var html = '<div class="btn-group pull-right" id="form_button">';
+    $.each($('#btn-group > input'),function(k,v){        
+        html += '<button class="btn btn-info" data-name="' + $(v).attr('name') + '">' + $(v).val() + '</button>';
+    });
+    html += '</div>';
+    $('#'+element + ' div.container').append(html);
+    $.each($('#form_button button'),function(k,v){
+        var d=$(v).data();
+        $(v).bind('click',function(event){
+          event.preventDefault();
+          var btn = $("input[name='" + d['name'] + "']");
+          btn.trigger('click');
+          btn.attr("disabled", "disabled");
+          window.setTimeout(function(){btn.removeAttr('disabled')},1000);
+        })
+    });
+  }
+
+  
+
 
     function addMandatory(){
         var label = $("label[for='"+$(this).attr('id')+"']");
@@ -147,6 +192,7 @@
         $("*[data-mandatory]").each(addMandatory);
 
 
+
         //SE C'E' LA PULSANTIERA AGGIUNGO LA BARRA IN ALTO
         if($('.iol-control-buttons').length > 0) addTopNavbar();
 
@@ -169,7 +215,17 @@
     // hide when dinamico prevede che siano inseriti nel campo html5 attribute gli attributi:
     // 'iol-hw=hw_no_...'  e  'hw_value=valore'
     // è comodo da usare quando è solo uno l'hide when da cui dipende il campo
-    $( document ).ready(function() {  
+    $( document ).ready(function() {
+
+       if($('#btn-group').length > 0) addTopToolbarMenu('top-toolbar-div');
+       
+  
+       
+
+      
+
+
+
 
         var hw = $("input[data-dhw]"); 
         $.each(hw,function(i,v){
@@ -197,11 +253,11 @@
             };     
         });    
           
-    });
+   
 
 
 
-$(document).ready(function() { 
+
     
     var elementi = $("div[class*='span']");
     $.each(elementi,function(){
@@ -237,7 +293,7 @@ $(document).ready(function() {
         }         
 
     });
-});
+
 
  
 
@@ -247,20 +303,20 @@ $(document).ready(function() {
 
 
 
-$(document).ready(function() {
-  if ($('form[name]').length > 0){
+
+  /*if ($('form[name]').length > 0){
     $("#portal-column-content").removeClass().addClass("span12")
     $(".portlet").remove();
     $(".managePortletsLink").remove();
     $("#portal-columns").removeClass().addClass('container-fluid');
     $("#portal-columns").attr("style",'margin-top:80px');
     $("div .remove-class-wf").removeClass()
-  } 
+  } */
 
-});   
+  
 
 
-$(document).ready(function() { 
+
 
       
       var html='<div id="top-toolbar-div" class="navbar navbar-fixed-top">';
@@ -296,16 +352,17 @@ $(document).ready(function() {
      });
 
 
-}); 
 
 
 
-$(document).ready(function() { 
+
+
     $("#edit-bar").addClass("row-fluid");
 
-});
 
-$(document).ready(function() { 
+
+
+
  $("select[name^=modello]").each(function(){
       var href = $('#btn_' + this.name).attr('href');
       $('#btn_' + this.name).attr('data-href',$('#btn_' + this.name).attr('href'));
@@ -330,9 +387,9 @@ $(document).ready(function() {
         }
     });
    });
-});
 
-$(document).ready(function() { 
+
+
 //VERIFICA INVIO SE NESSUN CAMPO MANDATORY VUOTO FACCIO COMPARIRE INVIO DOMANDA !!!
 
   if($("div.data-mandatory:visible").length == 0){
@@ -362,11 +419,11 @@ $(document).ready(function() {
           $('#btn_invia_domanda').attr('disabled','disabled');
       });
    }
-});
+
 
 
 // form dei pagamenti
-$(document).ready(function() {
+
 
 var formName=$('input[name="Form"]').val();
 if (formName=='iol_pagamenti_online'){

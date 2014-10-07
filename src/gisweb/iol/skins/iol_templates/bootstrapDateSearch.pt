@@ -1,0 +1,64 @@
+<tal:def tal:define="
+    title python:options['field'].title;
+    ttip_title title;  
+    fieldname options/fieldname;
+    v options/fieldvalue;
+    db python: options['field'].getParentDatabase();
+    defaultformat python:db.getDateTimeFormat();
+    fieldformat python:options['field'].getSettings('format');
+    format python:test(not(fieldformat),defaultformat,fieldformat);
+    value python: None if not(v) else v.strftime(format);
+    id options/fieldname;">
+     
+       
+        
+        <h4><span tal:content="title">Titolo</span></h4>
+        
+       
+        <div class="row-fluid">
+        <div class="span6">
+            <select class="span12  selectop" tal:attributes="id string:${id}_op;name string:${id}_op;">
+                <tal:loop tal:repeat="op python: [('eq', 'Uguale a'), ('lt', 'Prima del'), ('gt', 'Dopo il'), ('wi', 'Compreso tra')]">
+                    <option tal:attributes="value python:op[0]"
+                    tal:content="python:op[1]">value</option>
+                </tal:loop>
+            </select>
+        </div>   
+        <div class="span6" tal:attributes="id string:${id}_div1;">  
+        
+        <div class="input-append">
+
+        <tal:plugin tal:content='structure string:<input type="text" name="${fieldname}" id="${fieldname}" class="field span9" data-searchtype="date" />'></tal:plugin> 
+            
+         <span class="add-on" tal:attributes="id string:btn_${fieldname}"><i class="icon-calendar"></i></span>
+        </div>
+  
+        </div>
+        <div class="span6 hidden" tal:attributes="id string:${id}_div2;">    
+            
+         <div class="input-append">
+
+        <tal:plugin tal:content='structure string:<input type="text" name="${fieldname}" id="${fieldname}_el2" class="field span9" data-searchtype="date" />'></tal:plugin> 
+            
+            <span class="add-on" tal:attributes="id string:btn_${fieldname}_el2"><i class="icon-calendar"></i></span>
+        </div>
+        </div>
+        </div>
+            
+        
+                    
+    <script type="text/javascript" tal:content="structure string:
+
+                $('#${id}_op').change(function(){
+                    if($(this).val()=='wi'){
+                        $('#${id}_div2').removeClass('hidden');
+                    }else{
+                        $('#${id}_div2').addClass('hidden');
+                    }
+              
+                })
+        
+    ">
+    </script>           
+        
+</tal:def>

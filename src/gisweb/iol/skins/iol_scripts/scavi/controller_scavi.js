@@ -73,26 +73,28 @@
 
 
         var geom = "", points = [];
-        if(overlay.geometryType=='point')
+        if(overlay.geometryType=='point') {
           geom = "SRID=4326;POINT(" + overlay.getPosition().lng() + " " + overlay.getPosition().lat() + ")";
+          
+        }
         else{
           overlay.getPath().forEach(function(point,_){
             points.push(point.lng() + " " +point.lat());
           })
           geom = "SRID=4326;LINESTRING(" + points.join(",") + ")";
         }
-        $.ajax({
-        'url':"scavi/trovaCategoria",
-        'type':'POST',
-        'data':{"wkt_geometry":geom},
-        'dataType':'JSON',
-        'success':function(data, textStatus, jqXHR){
-          //elencoCivici = data.results;
-          //$('#civico').select2('data', elencoCivici);
-          //$('#civico').select2('val', null);
-          //$("#geometry").val('');
 
-          console.log(data);
+        $.ajax({
+        'url':"services/trovaCategoria",
+        'type':'POST',
+        'data':{"geom":geom},
+        'dataType':'JSON',         
+        'success':function(data, textStatus, jqXHR){            
+          elencoCat = data.results;
+          $('#categoria_cosap').select2('val', elencoCat[0]);
+          
+
+          
           return;
 
           //SE STO USANDO IL DATAGRID

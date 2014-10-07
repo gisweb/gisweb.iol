@@ -1,6 +1,6 @@
 
 <tal:block tal:define="fieldname options/fieldname;
-                       dburl python:context.aq_parent.absolute_url();
+                       dburl python:context.getParentDatabase().absolute_url();
                        sourceview python: options['field'].getSettings('sourceview');
                        params python:options['field'].getSettings('dynamictableparam');
                        cols python: options['field'].getSettings().getJQueryColumns();
@@ -9,7 +9,7 @@
         
 
         <input type="hidden" id="destinationForm" tal:attributes="value destForm"/>
-
+        <input type="hidden" id="Plomino_Database_URL" tal:attributes="value dburl"/>
         <script type="text/javascript" charset="utf-8"
         
         tal:content="structure string:
@@ -25,7 +25,7 @@
                                             var cell = oObj.aData[oObj.iDataColumn];           
                                             var dburl=$$('#Plomino_Database_URL').val();
                                             var destForm=$$('#destinationForm').val();
-                                            if (destForm ){
+                                            if (destForm ){                                                
                                                 return '<a href=\'' + dburl +'/' + destForm + '?parentDocument=' + oObj.aData[0] + '\' class=\'viewlink\'>' + cell + '</a>';
                                             }
                                             else
