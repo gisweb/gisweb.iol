@@ -20,7 +20,7 @@ if context.portal_type != 'PlominoDocument':
     return ''
 
 from Products.CMFPlomino.PlominoUtils import json_loads, json_dumps, DateToString, Now, open_url
-from gisweb.utils import report, Type, requests_post
+from gisweb.utils import report, Type, is_json,decode_b64,requests_post, get_headers
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import normalizeString
 
@@ -42,6 +42,8 @@ except:
 filename=model
 if """\\""" in filename:
     filename = filename.split("\\")[-1]
+if """/""" in filename:
+    filename = filename.split("/")[-1]    
 filename = '.'.join(
         [normalizeString(s, encoding='utf-8') 
             for s in filename.split('.')])
@@ -63,23 +65,49 @@ query = dict(
     download = 'false'
 )
 #Creazione del documento tramite webservice
+plone_tools = getToolByName(context.getParentDatabase().aq_inner, 'plone_utils')
 try:
-    result = requests_post(urlCreate,query, 'json', timeout=30)
+    r = requests_post(urlCreate,query, 'json', timeout=30)
 except Exception as error:
-    plone_tools = getToolByName(context.getParentDatabase().aq_inner, 'plone_utils')
+    
     msg = ('%s: %s' % (Type(error), error), 'error')
-    context.setItem('test',msg)
     plone_tools.addPortalMessage(*msg, request=context.REQUEST)
     doc.REQUEST.RESPONSE.redirect(context.absolute_url())
+else:
+    
+    result = r['text']
 
+    if is_json(result):
+        res = json_loads(result)
 
-#Lettura del documento da webservice
-res = open_url(docurl,asFile=False)
-(f,c) = doc.setfile(res,filename=filename,overwrite=True,contenttype='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-if f and c:
-    oItem = doc.getItem(field, {}) or {}
-    oItem[filename] = c
-    doc.setItem(field, oItem)
+        if res['success']==1:
+            text = decode_b64(res['file'])
+
+            context.removeItem(field)
+            (f,c) = context.setfile(text,filename=filename,overwrite=True,contenttype='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+            if f and c:
+                context.setItem(field, {f: c})
+        else:
+            msg = (res['message'], 'error')
+            plone_tools.addPortalMessage(*msg, request=context.REQUEST)
+            context.REQUEST.RESPONSE.redirect(context.absolute_url())
+    else:
+        if 'headers' in r.keys():
+            h = get_headers(r['headers'])
+            
+            if h['content-type']=='application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                context.removeItem(field)
+                (f,c) = context.setfile(result, filename=newfilename, overwrite=True, contenttype='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+                if f and c:
+                    context.setItem(file_type, {f: c})
+            else:
+                msg = ('Risposta non di tipo DOCX', 'error')
+                plone_tools.addPortalMessage(*msg, request=context.REQUEST)
+                context.REQUEST.RESPONSE.redirect(context.absolute_url())
+        else:
+            msg = ('Il sistema ha risposto senza Header', 'error')
+            plone_tools.addPortalMessage(*msg, request=context.REQUEST)
+            context.REQUEST.RESPONSE.redirect(context.absolute_url())
 
 if redirect_url:
     doc.REQUEST.RESPONSE.redirect(redirect_url)
