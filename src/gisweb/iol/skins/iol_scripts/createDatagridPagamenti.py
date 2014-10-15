@@ -111,5 +111,6 @@ elif doc.getItem('elenco_pagamenti'):
         	wf.doActionFor(doc, 'effettua_pagamento')
 
         return updateDatagrid(diz_pagamenti,diz_code_pagamenti={},stato_pagamento='in attesa di verifica',dg_exist=dg_esistente,allegato=True)
+                
     else:
         return updateDatagrid(diz_pagamenti,diz_code_pagamenti=codici_pagamenti_new,stato_pagamento='non pagato',dg_exist=dg_esistente,allegato=False)
