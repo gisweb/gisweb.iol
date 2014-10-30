@@ -49,6 +49,7 @@
                     },
                     'in': function() { /* less than value: value is max */
                         query[name] = ' *' + value +'*' ;
+                        //query[name] = (fieldType=='number')?(parseFloat(value)):(value);
                     },
                     'wi': function() {
                         /* In this case we have two fields with the same name
