@@ -10,6 +10,14 @@
 
 
 from Products.CMFPlomino.PlominoUtils import StringToDate,DateToString, Now
+from gisweb.utils import getChainFor
+
+if len(getChainFor(context))>1:
+    # recupera id del wf secondario
+    wf_id = getChainFor(context)[1]
+else:
+    # recupera id del wf primario
+    wf_id = getChainFor(context)[0]   
 
 
 
@@ -63,6 +71,18 @@ def settoAnnulloPagamentiTot(lista,cod_gruppo):
     context.setItem('elenco_pagamenti',p)
 
 
+
+def settoAnnulloPagamentiTot(lista,cod_gruppo):
+    p=[]
+    for c in lista:
+        if c[3]==cod_gruppo:            
+            c[4]='pagamento annullato'
+            c[5]=DateToString(Now(),'%d/%m/%Y')
+        p.append(c)
+    context.setItem('elenco_pagamenti',p)
+
+
+
 def settoAnnulloPagamentiCodice(lista,cod_single):
     p=[]
     for c in lista:
@@ -76,6 +96,11 @@ def settoAnnulloPagamentiCodice(lista,cod_single):
 
 
 # aggiorno lo stato dei pagamenti solo per i pagamenti non rateizzabili
+# nota totale è un parametro di REQUEST proveniente dal servizio di pagamento cartasi
+if context.getItem('elenco_pagamenti') and totale == '0':
+    settoAnnulloPagamentiGruppo(context.getItem('elenco_pagamenti'),cod_paga)
+
+# aggiorno lo stato dei pagamenti per tutti i pagamenti - totale     
 
 if context.getItem('elenco_pagamenti') and totale == '0':
     settoAnnulloPagamentiGruppo(context.getItem('elenco_pagamenti'),cod_paga)
@@ -88,9 +113,9 @@ elif context.getItem('elenco_pagamenti') and totale == '1':
 # aggiorna lo stato di pagamento delle rate
 rate = []
 elenco_rate = []
-if context.getItem('elenco_rate_pagamenti') and context.wf_getInfoFor('wf_pagamenti')==True:
+if context.getItem('elenco_rate_pagamenti') and context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id)==True:
     elenco_rate = context.getItem('elenco_rate_pagamenti')
-elif context.wf_getInfoFor('wf_pagamenti')=='True' and cod_paga[:-2] + '00' in context.getItem('permesso_rate_opt'):
+elif context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id)=='True' and cod_paga[:-2] + '00' in context.getItem('permesso_rate_opt'):
     elenco_rate = context.elencoRate(context.getId(),cod_paga[:-2] + '00')
 
 if elenco_rate:

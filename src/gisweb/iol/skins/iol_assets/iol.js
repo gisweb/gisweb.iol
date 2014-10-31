@@ -251,8 +251,20 @@
                     }       
                 });
             };     
-        });    
-          
+        }); 
+
+    // se presente in code_mirror: btn_hw_dg=['add','edit','delete'] 
+    // rimuove i pulsanti del datagrid
+    var dg_hw = $("input[btn_hw_dg]"); 
+        $.each(dg_hw,function(i,v){
+          console.log($(this).attr('btn_hw_dg'));
+          var name_dg = $(this).attr('name');          
+          var array_btn = eval($(this).attr('btn_hw_dg'));
+          $.each(array_btn,function(i,v){              
+              $("#" + name_dg + "_" + v + "row").attr("style","display:none")  
+          })
+
+        });      
    
 
 
@@ -446,6 +458,8 @@ if (formName=='iol_pagamenti_online'){
   var iconFile = '<div style="width: 32px; height: 32px; display: inline; position: absolute; overflow: hidden; background:url(' + urlImg + ') 100% 50% no-repeat;">';
   $("input[type=file]").before(classFile);
   $("input[class=file]").after(iconFile);*/
+
+});
 
 });
 

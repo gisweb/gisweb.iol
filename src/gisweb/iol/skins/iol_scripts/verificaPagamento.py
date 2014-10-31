@@ -10,6 +10,14 @@
 
 from Products.CMFPlomino.PlominoUtils import StringToDate,DateToString
 from Products.CMFCore.utils import getToolByName
+from gisweb.utils import getChainFor
+
+if len(getChainFor(context))>1:
+    # recupera id del wf secondario
+    wf_id = getChainFor(context)[1]
+else:
+    # recupera id del wf primario
+    wf_id = getChainFor(context)[0] 
 
 
 #doc=str(context.REQUEST.get('url'))
@@ -102,7 +110,8 @@ def settoVerificaRateConcluse(lista,cod_single):
 if context.getItem('elenco_pagamenti') and totale == '0':
     settoVerificaPagamentiGruppo(context.getItem('elenco_pagamenti'),cod_paga)
 
-# aggiorno lo stato dei pagamenti per tutti pagamento totale     
+
+# aggiorno lo stato dei pagamenti per tutti pagamenti - totale   
 elif context.getItem('elenco_pagamenti') and totale == '1':
     settoVerificaPagamentiTot(context.getItem('elenco_pagamenti'),cod_paga)
 
@@ -110,9 +119,9 @@ elif context.getItem('elenco_pagamenti') and totale == '1':
 # aggiorna lo stato di pagamento delle rate
 rate = []
 elenco_rate = []
-if context.getItem('elenco_rate_pagamenti') and context.wf_getInfoFor('wf_pagamenti')==True:
+if context.getItem('elenco_rate_pagamenti') and context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id)==True:
     elenco_rate = context.getItem('elenco_rate_pagamenti')
-elif context.wf_getInfoFor('wf_pagamenti')=='True' and cod_paga[:-2] + '00' in context.getItem('permesso_rate_opt'):
+elif context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id)=='True' and cod_paga[:-2] + '00' in context.getItem('permesso_rate_opt'):
     elenco_rate = context.elencoRate(context.getId(),cod_paga[:-2] + '00')
 
 if elenco_rate:
@@ -120,7 +129,7 @@ if elenco_rate:
     if not context.getItem('elenco_rate_pagamenti'):       
         for cod_rata in elenco_rate:
             if cod_rata[0] == cod_paga:
-                cod_rata[4] = 'pagamento annullato'
+                cod_rata[4] = 'pagamento effettuato'
                 cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
             rate.append(cod_rata)
         context.setItem('elenco_rate_pagamenti',rate)
@@ -130,7 +139,7 @@ if elenco_rate:
     elif context.getItem('elenco_rate_pagamenti'):
         for cod_rata in context.getItem('elenco_rate_pagamenti'):
             if cod_rata[0] == cod_paga:
-                cod_rata[4] = 'pagamento annullato'
+                cod_rata[4] = 'pagamento effettuato'
                 cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
             rate.append(cod_rata)
         context.setItem('elenco_rate_pagamenti',rate)
