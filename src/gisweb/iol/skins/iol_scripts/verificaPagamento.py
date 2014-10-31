@@ -110,7 +110,11 @@ def settoVerificaRateConcluse(lista,cod_single):
 if context.getItem('elenco_pagamenti') and totale == '0':
     settoVerificaPagamentiGruppo(context.getItem('elenco_pagamenti'),cod_paga)
 
+<<<<<<< HEAD
 # aggiorno lo stato dei pagamenti per tutti pagamenti - totale     
+=======
+# aggiorno lo stato dei pagamenti per tutti pagamento totale     
+>>>>>>> 44985ac7c826e755db9877a1a578df51234494e6
 elif context.getItem('elenco_pagamenti') and totale == '1':
     settoVerificaPagamentiTot(context.getItem('elenco_pagamenti'),cod_paga)
 
@@ -118,9 +122,15 @@ elif context.getItem('elenco_pagamenti') and totale == '1':
 # aggiorna lo stato di pagamento delle rate
 rate = []
 elenco_rate = []
+<<<<<<< HEAD
 if context.getItem('elenco_rate_pagamenti') and context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id)==True:
     elenco_rate = context.getItem('elenco_rate_pagamenti')
 elif context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id)=='True' and cod_paga[:-2] + '00' in context.getItem('permesso_rate_opt'):
+=======
+if context.getItem('elenco_rate_pagamenti') and context.wf_getInfoFor('wf_pagamenti')==True:
+    elenco_rate = context.getItem('elenco_rate_pagamenti')
+elif context.wf_getInfoFor('wf_pagamenti')=='True' and cod_paga[:-2] + '00' in context.getItem('permesso_rate_opt'):
+>>>>>>> 44985ac7c826e755db9877a1a578df51234494e6
     elenco_rate = context.elencoRate(context.getId(),cod_paga[:-2] + '00')
 
 if elenco_rate:
@@ -128,7 +138,11 @@ if elenco_rate:
     if not context.getItem('elenco_rate_pagamenti'):       
         for cod_rata in elenco_rate:
             if cod_rata[0] == cod_paga:
+<<<<<<< HEAD
                 cod_rata[4] = 'pagamento effettuato'
+=======
+                cod_rata[4] = 'pagamento annullato'
+>>>>>>> 44985ac7c826e755db9877a1a578df51234494e6
                 cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
             rate.append(cod_rata)
         context.setItem('elenco_rate_pagamenti',rate)
@@ -138,7 +152,11 @@ if elenco_rate:
     elif context.getItem('elenco_rate_pagamenti'):
         for cod_rata in context.getItem('elenco_rate_pagamenti'):
             if cod_rata[0] == cod_paga:
+<<<<<<< HEAD
                 cod_rata[4] = 'pagamento effettuato'
+=======
+                cod_rata[4] = 'pagamento annullato'
+>>>>>>> 44985ac7c826e755db9877a1a578df51234494e6
                 cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
             rate.append(cod_rata)
         context.setItem('elenco_rate_pagamenti',rate)

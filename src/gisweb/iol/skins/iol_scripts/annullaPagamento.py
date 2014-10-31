@@ -58,6 +58,7 @@ def settoAnnulloPagamentiGruppo(lista,cod_gruppo):
             if c[0] not in listRate(lista,c[0]):
                 c[4]='pagamento annullato'
                 c[5]=DateToString(Now(),'%d/%m/%Y')
+<<<<<<< HEAD
         p.append(c)
     context.setItem('elenco_pagamenti',p) 
 
@@ -71,6 +72,21 @@ def settoAnnulloPagamentiTot(lista,cod_gruppo):
     context.setItem('elenco_pagamenti',p)
 
 
+=======
+        p.append(c)
+    context.setItem('elenco_pagamenti',p) 
+
+def settoAnnulloPagamentiTot(lista,cod_gruppo):
+    p=[]
+    for c in lista:
+        if c[3]==cod_gruppo:            
+            c[4]='pagamento annullato'
+            c[5]=DateToString(Now(),'%d/%m/%Y')
+        p.append(c)
+    context.setItem('elenco_pagamenti',p)
+
+
+>>>>>>> 44985ac7c826e755db9877a1a578df51234494e6
 def settoAnnulloPagamentiCodice(lista,cod_single):
     p=[]
     for c in lista:
@@ -84,11 +100,19 @@ def settoAnnulloPagamentiCodice(lista,cod_single):
 
 
 # aggiorno lo stato dei pagamenti solo per i pagamenti non rateizzabili
+<<<<<<< HEAD
 # nota totale è un parametro di REQUEST proveniente dal servizio di pagamento cartasi
 if context.getItem('elenco_pagamenti') and totale == '0':
     settoAnnulloPagamentiGruppo(context.getItem('elenco_pagamenti'),cod_paga)
 
 # aggiorno lo stato dei pagamenti per tutti i pagamenti - totale     
+=======
+
+if context.getItem('elenco_pagamenti') and totale == '0':
+    settoAnnulloPagamentiGruppo(context.getItem('elenco_pagamenti'),cod_paga)
+
+# aggiorno lo stato dei pagamenti per tutti pagamenti - totale     
+>>>>>>> 44985ac7c826e755db9877a1a578df51234494e6
 elif context.getItem('elenco_pagamenti') and totale == '1':
     settoAnnulloPagamentiTot(context.getItem('elenco_pagamenti'),cod_paga)
 
@@ -96,9 +120,15 @@ elif context.getItem('elenco_pagamenti') and totale == '1':
 # aggiorna lo stato di pagamento delle rate
 rate = []
 elenco_rate = []
+<<<<<<< HEAD
 if context.getItem('elenco_rate_pagamenti') and context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id)==True:
     elenco_rate = context.getItem('elenco_rate_pagamenti')
 elif context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id)=='True' and cod_paga[:-2] + '00' in context.getItem('permesso_rate_opt'):
+=======
+if context.getItem('elenco_rate_pagamenti') and context.wf_getInfoFor('wf_pagamenti')==True:
+    elenco_rate = context.getItem('elenco_rate_pagamenti')
+elif context.wf_getInfoFor('wf_pagamenti')=='True' and cod_paga[:-2] + '00' in context.getItem('permesso_rate_opt'):
+>>>>>>> 44985ac7c826e755db9877a1a578df51234494e6
     elenco_rate = context.elencoRate(context.getId(),cod_paga[:-2] + '00')
 
 if elenco_rate:

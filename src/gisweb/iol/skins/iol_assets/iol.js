@@ -451,7 +451,15 @@ if (formName=='iol_pagamenti_online'){
     
 
 
+// skins per filed upload/multiupload
+  /*var urlImg = window.location.origin + '/images/upload.png'; 
+    
+  var classFile ='<input class="file" style="display: inline; width: 250px">';
+  var iconFile = '<div style="width: 32px; height: 32px; display: inline; position: absolute; overflow: hidden; background:url(' + urlImg + ') 100% 50% no-repeat;">';
+  $("input[type=file]").before(classFile);
+  $("input[class=file]").after(iconFile);*/
 
+});
 
 });
 
