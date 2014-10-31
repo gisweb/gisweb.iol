@@ -14,27 +14,30 @@
         
         tal:content="structure string:
                         $$(document).ready(function() {
+
                             var t=$$('#${fieldname}_datagrid').dataTable( {
                                 'aoColumns': ${cols},
                                 'sAjaxSource':'${dburl}/${sourceview}/search_json',
                                 'aoColumnDefs': [
                                     {
                                         'aTargets': ['_all'],
-                                        'bUseRendered': false,
+                                        'bUseRendered': true,
                                         'fnRender': function (oObj) {
-                                            var cell = oObj.aData[oObj.iDataColumn];           
+                                            var cell = oObj.aData[oObj.iDataColumn];     
                                             var dburl=$$('#Plomino_Database_URL').val();
                                             var destForm=$$('#destinationForm').val();
+                                            
                                             if (destForm ){                                                
                                                 return '<a href=\'' + dburl +'/' + destForm + '?parentDocument=' + oObj.aData[0] + '\' class=\'viewlink\'>' + cell + '</a>';
                                             }
-                                            else
+                                            else {                                               
                                                 return '<a href=\'' + dburl +'/' + oObj.aData[0] + '\' class=\'viewlink\'>' + cell + '</a>';
+                                            }
                                         }
                                             
                                     },
                                     { 'aTargets': [0], 'bSearchable': false, 'bSortable': false, 'sWidth': '0' }
-                                ],
+                                ],             
                                 ${params},
                                 
                                 'oLanguage': {

@@ -16,7 +16,7 @@ if not obj:
     return False
 if obj.portal_type=='PlominoDatabase':
     result=dict(
-        scavi=dict(
+        cantieri=dict(
             rinnovo=True,
             proroga=True,
             integrazione=True
@@ -47,7 +47,7 @@ elif obj.portal_type=='PlominoDocument':
         else:
             return False    
     elif cond=='rinnovo':
-        if ((today > start) and ((end + 30) > today)  and ((end - 30) < today))
+        if ((today > start) and ((end + 30) > today)  and ((end - 30) < today)):
         #nrinnovi=obj.getItem('numero_rinnovi')
         #if ((today > start) and ((end + 30) > today)  and ((end - 30) < today)) and obj.getItem('rinnovabile',0)==1 and nrinnovi<4:
             res = True

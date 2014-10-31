@@ -2,6 +2,7 @@
 $( document ).ready(function() {
 
 	$('#importo_cosap_temp').attr('readonly', true);
+	$('#categoria_cosap').attr('readonly', true);
   $('#marche_bollo').attr('readonly', true);
   
 
@@ -21,24 +22,43 @@ $( document ).ready(function() {
     }
   });  
 
-//resetta il campo importo cosap 
-   	$("[name='occupazioni_ridotta_cosap_opt'],#categoria_cosap,#superficie_occupata,[name='occupazioni_cosap_lavori_edili'],[name='occupazioni_no_cosap_opt']").bind('click',function(){
-       $("#importo_cosap_temp").val('');
+/*//resetta il campo importo cosap 
+   	$("[name='occupazioni_ridotta'],#categoria_cosap,#superficie_interna,#autorizzata_dal,#autorizzata_al").bind('change',function(){
+       //$("#importo_cosap_temp").val('');
        $("#importo_cosap").val('');
-  	})
+  	})  */
+
+
+
 
 
 //resetta il campo importo cosap 
-   	$("#occupazione_larghezza,#occupazione_lunghezza").bind('change',function(){
+   /*	$("#occupazione_larghezza,#occupazione_lunghezza").bind('change',function(){
    		var lung= $("#occupazione_lunghezza").val();
    		var larg= $("#occupazione_larghezza").val();
    		var superficie = lung*larg;
    		$("#occupazione_superficie").val(superficie.toFixed(2));
    	});
-   	
 
-// rimuove pulsante add al  datagrid dei pagamenti
-   $("#elenco_pagamenti_addrow").remove();
+    function checkLunghezza(){
+     if(this.fnGetData().length>0){
+        $("#importo_cosap").val(''); 
+     }
+    }; 
+
+ //resetta il campo importo cosap per datagrid
+$(document).on('datatable_complete',function(e){ 
+  if ($("#elementi_dehor_dg_datagrid").length>0){      
+     $("#elementi_dehor_dg_datagrid").dataTable().fnSettings().aoDrawCallback.push({fn: checkLunghezza});
+       
+  }
+}); */
+
+
+
+
+
+
 
 
     
