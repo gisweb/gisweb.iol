@@ -388,3 +388,10 @@ input[type='file'] {
   display:none;
 
 }
+
+.info-selected {
+
+  border: 1px solid #717B87;
+  background-color: #fff; 
+
+}

@@ -246,7 +246,7 @@
         }
 
         var zoomOnOverlay = function(overlay){
-            if(overlay.geometryType == "point"){
+            if(overlay.geometryType == "marker"){
                 map.setCenter(overlay.position);
                 map.setZoom(overlay.zoom || 16);
             }
@@ -469,7 +469,8 @@
                     currentOverlay.editMode = editMode;
                     currentOverlay.fieldId = $element.attr('id');
                     registerObject(currentOverlay);
-                    if(currentOverlay.geometryType == "point")  zoomOnStreetView(currentOverlay)
+                    zoomOnOverlay(currentOverlay);
+                    if(currentOverlay.geometryType == "marker")  zoomOnStreetView(currentOverlay)
                }
 
 

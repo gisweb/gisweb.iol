@@ -12,30 +12,37 @@ $(document).ready(function() {
   text2.id = "clicktarget2";
   inner2.appendChild(text2);
   outer2.appendChild(inner2);
-  var infoMenu = document.getElementById("infoButton");
+  var infoMenu = document.getElementById("info_button");
+  if(!infoMenu) return;
   inner2.appendChild(infoMenu );
   
+
+  var map = $("#geometry_map").iolGoogleMap.getMap();
+
+
+
+
   outer2.onclick = function(){
 
   if($(this).hasClass("info-selected")){
           google.maps.event.removeListener(clickControl);
-          $.plominoMaps.google.map.setOptions({draggableCursor:'hand'});
+          map.setOptions({draggableCursor:'hand'});
           $(this).removeClass("info-selected");
       }
       else{    
 
           $(this).addClass("info-selected");
-          $.plominoMaps.google.map.setOptions({draggableCursor:'default'});
-          clickControl = google.maps.event.addListener($.plominoMaps.google.map, 'click', function(e) {
-          var zoomLevel = $.plominoMaps.google.map.getZoom();
+          map.setOptions({draggableCursor:'default'});
+          clickControl = google.maps.event.addListener(map, 'click', function(e) {
+          var zoomLevel = map.getZoom();
 
-			var div=$.plominoMaps.google.map.getDiv();
+			var div=map.getDiv();
 			var w = $(div).width();
 			var h = $(div).height();
 			var x=parseInt(e.pixel.x);
 			var y=parseInt(e.pixel.y);
-			var sw = $.plominoMaps.google.map.getBounds().getSouthWest();
-			var ne = $.plominoMaps.google.map.getBounds().getNorthEast();
+			var sw = map.getBounds().getSouthWest();
+			var ne = map.getBounds().getNorthEast();
 			var lat = e.latLng.lat();
 			var lng = e.latLng.lng();
 			var box = sw.lng() + ',' + sw.lat() + ',' + ne.lng() + ',' + ne.lat();
@@ -45,9 +52,9 @@ $(document).ready(function() {
 				'success':function(html){
                                         console.log(html)
                                         if(!html) html='<b>NESSUNA INFORMAZIONE</b>';
-                                        $.plominoMaps.google.map.infowindow.setPosition(e.latLng);
-                                        $.plominoMaps.google.map.infowindow.setContent(html);
-                                        $.plominoMaps.google.map.infowindow.open($.plominoMaps.google.map);
+                                        map.infowindow.setPosition(e.latLng);
+                                        map.infowindow.setContent(html);
+                                        map.infowindow.open(map);
 
 				}
                                 
@@ -59,7 +66,7 @@ $(document).ready(function() {
 
  }
  
- $.plominoMaps.google.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(outer2); 
+ map.controls[google.maps.ControlPosition.TOP_RIGHT].push(outer2); 
 
 });
  
