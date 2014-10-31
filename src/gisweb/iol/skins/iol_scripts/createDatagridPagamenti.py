@@ -127,8 +127,7 @@ if not doc.getItem(field_dg):
         return createDatagrid(diz_pagamenti,stato_pagamento='in attesa di verifica')
     else:
         return createDatagrid(diz_pagamenti,stato_pagamento='non pagato')
-<<<<<<< HEAD
-    
+        
 elif doc.getItem(field_dg):
     if doc.wf_getInfoFor('wf_ricevuta_pagamento',wf_id='pagamenti_allegati') == True or doc.wf_getInfoFor('wf_ricevuta_pagamento',wf_id='pagamenti_allegati')=='true':
         
@@ -137,14 +136,6 @@ elif doc.getItem(field_dg):
                 wf.doActionFor(doc, 'effettua_pagamento')
         
         return updateDatagrid(diz_pagamenti,diz_code_pagamenti={},stato_pagamento='in attesa di verifica',dg_exist=dg_esistente,allegato=True,codice_allegato=codice_allegato)
-=======
-elif doc.getItem('elenco_pagamenti'):
-    if len(allegato_pagamento) > 0:
-    	if doc.wf_getInfoFor('review_state')=='pagamenti':
-        	wf.doActionFor(doc, 'effettua_pagamento')
-
-        return updateDatagrid(diz_pagamenti,diz_code_pagamenti={},stato_pagamento='in attesa di verifica',dg_exist=dg_esistente,allegato=True)
->>>>>>> 44985ac7c826e755db9877a1a578df51234494e6
                 
     else:
         
