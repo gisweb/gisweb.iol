@@ -369,8 +369,7 @@
 
 
 
-    $("#edit-bar").addClass("row-fluid");
-
+  $("#edit-bar").addClass("row-fluid");
 
 
 

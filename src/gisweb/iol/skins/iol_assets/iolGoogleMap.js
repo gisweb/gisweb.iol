@@ -318,15 +318,15 @@
             var stViewdiv = document.createElement( "div" );
             var infodiv = document.createElement( "div" );
             mapdiv.id = this.id + '_map';
-            stViewdiv.id = this.id + '_streetview';
+           // stViewdiv.id = this.id + '_streetview';
             infodiv.id = this.id + '_info';
 
             $(mapdiv).addClass("plominomap");
-            $(stViewdiv).addClass("plominomap-streetview");
+            //$(stViewdiv).addClass("plominomap-streetview");
             $(infodiv).addClass("plominomap-info");
 
             $element.before(mapdiv);
-            $element.before(stViewdiv);
+            //$element.before(stViewdiv);
             $element.before(infodiv);
 
             var mapLayers, mapTypeIds;
