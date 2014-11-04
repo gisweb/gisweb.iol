@@ -270,7 +270,7 @@
 
 
 
-    
+   /* 
     var elementi = $("div[class*='span']");
     $.each(elementi,function(){
         
@@ -306,7 +306,7 @@
 
     });
 
-
+*/
  
 
            

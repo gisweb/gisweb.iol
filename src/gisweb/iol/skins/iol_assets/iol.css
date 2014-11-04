@@ -43,26 +43,49 @@ span.TEXTFieldRead-TEXTAREA{
 }
 
 
-form span.label,span.legend{
+form span.label, span.legend {
  
     color: #000000;
-    font-size:12px;
+    font-size:15px;
     display:block;
-    
+    background-color: transparent;
     text-shadow:none;
     border-radius: 3px;
+    margin-bottom: 3px;
 
 }
 
-form span.TEXTFieldRead-TEXT{
+form span.TEXTFieldRead-TEXT, 
+     span.TEXTFieldRead-TEXTAREA, 
+     span.DATETIMEFieldRead,
+     span.SELECTIONFieldRead{
  
-    font-size:12px;
     background-color:#FFFFFF;
+    color: #000000;
+    font-size:15px;
+    display:block;
+    border: 1px solid #cccccc;
+    text-shadow:none;
+    border-radius: 3px;
+    padding: 5px;
+    height: 15px;
+    margin-bottom: 10px;
+
     /*width:100%;
     border:1 px solid gray;*/
 
 }
 
+form span.TEXTFieldRead-TEXT{
+    white-space:nowrap;
+    overflow: hidden;
+
+}
+
+form span.TEXTFieldRead-TEXTAREA{
+    height: auto;
+
+}
 /*div .span4 {
    border: 1px solid #cccccc; 
 }
@@ -117,7 +140,7 @@ input[data-plugin='iolCodicefiscale'],input[data-plugin='iolMarker'] {
 
 .plomino_form label.mandatory {
  
-    color: #FF00FF;
+    color: #0000FF;
 
 }
 
@@ -142,11 +165,18 @@ input[data-plugin='iolCodicefiscale'],input[data-plugin='iolMarker'] {
 
 }
 
-.plomino_form label,legend {
-    color:dark-grey;
-    font-weight:bold;
-    display:block;
+.plomino_form label, legend {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 15px;
+}
 
+legend {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 table.dataTable{
@@ -317,7 +347,11 @@ CSS for v3 buttons stolen from:
   display:none;
 }
 
+#portal-columns{
+  margin-top: 50px;
+  margin-left: 3px;
 
+}
 
 #iol-buttons .btn{
 
