@@ -432,8 +432,6 @@
       });
    }
 
-
-
 // form dei pagamenti
 
 
@@ -450,7 +448,6 @@ if (formName=='iol_pagamenti_online'){
 }
     
 
-
 // skins per filed upload/multiupload
   /*var urlImg = window.location.origin + '/images/upload.png'; 
     
@@ -460,9 +457,6 @@ if (formName=='iol_pagamenti_online'){
   $("input[class=file]").after(iconFile);*/
 
 });
-
-});
-
 
 
 })(jQuery);
