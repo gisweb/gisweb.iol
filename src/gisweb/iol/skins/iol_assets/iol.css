@@ -26,6 +26,7 @@ form span.label, form span.legend{
 
 form span.TEXTFieldRead-TEXT, 
      span.TEXTFieldRead-TEXTAREA, 
+     span.NUMBERFieldRead,
      span.DATETIMEFieldRead{
  
     background-color:#FFFFFF;
@@ -139,7 +140,6 @@ input[type="checkbox"], label {
 
 .plomino_form legend {
   text-align:left;
-  height:5px;
   top:-10px;
   font-size:15px;
   border-style: none;
@@ -147,7 +147,7 @@ input[type="checkbox"], label {
   display: block;
   font-weight: bold;
 
-  line-height: 4px;
+  line-height: 15px;
   margin-bottom: 2px;
   padding: 0;
   width: 100%;
@@ -346,7 +346,12 @@ CSS for v3 buttons stolen from:
   margin-left: 3px;
 
 }
-
+#portal-footer-wrapper{
+  margin-left: 3px
+}
+#viewlet-below-content{
+  margin-left: 30px
+}
 #iol-buttons .btn{
 
   margin-right:8px;

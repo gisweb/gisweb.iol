@@ -191,6 +191,51 @@
     }
 
 
+    $.fn.iolAutocompleteForm = function( options ) {
+
+        return this.each(function() {
+            //TODO SISTEMARE LA JSON ED EVITARE EVAL
+            eval("options = "  + options.pluginOptions +" || {}");
+            var fieldId = this.id;
+            var baseUrl = $(this).data('baseUrl') || '';
+            options.ajax = {
+                url: options.url,
+                dataType: 'json',
+                quietMillis: 100,
+                data: options.data,
+                results: function (data, page) {
+                    var more = (page * 10) < data.total; // whether or not there are more results available
+                    // notice we return the value of more so Select2 knows if more results can be loaded
+                    return {results: data.names, more: more};
+                }
+            };
+            options.escapeMarkup =  function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+            $(this).select2(options).on("change", function(e) { 
+                var childs=e.added;
+                if(e.removed){
+                    if(!confirm('Attenzione i dati già inseriti verranno rimossi, continuo?')) return;
+                    childs=e.removed; 
+                } 
+                $.each(childs, function(key,value) {
+                    var el;
+                    if($('[name='+key+']').length>0){
+                        el = $('[name='+key+']').eq(0);
+                        if(e.added) 
+                            setControlValue(el,value);                 
+                        else if(e.removed)
+                            setControlValue(el,'');
+                        el.trigger('change');
+                    }
+                 });
+                 //console.log("change "+JSON.stringify({val:e.val, added:e.added, removed:e.removed})); 
+
+
+            });
+
+ 
+        });
+    };
+
 
 
     $.fn.iolUploadFile = function( options ) {
@@ -254,13 +299,5 @@
 
         });
     }
-
-   
-
-
-
-
-
-
 	
 })(jQuery);
