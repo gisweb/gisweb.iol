@@ -63,10 +63,10 @@ def saveData(doc):
         db = sql.create_engine(conf['conn_string'])
         metadata = sql.schema.MetaData(bind=db,reflect=True,schema=conf['db_schema'])
         table = sql.Table(conf['db_table'], metadata, autoload=True)
-        
+        orm.clear_mappers() 
         rowmapper = orm.mapper(plominoData,table)
-    except:
-        api.portal.show_message(message=u'Si sono verificati errori nella connessione al database', request=doc.REQUEST )
+    except Exception as e:
+        api.portal.show_message(message=u'Si sono verificati errori nella connessione al database : %s' %str(e), request=doc.REQUEST )
         return -1
     #creating session
     Sess = orm.sessionmaker(bind = db)
@@ -102,7 +102,8 @@ def saveData(doc):
         session.commit()
         #adding row to database
         session.add(row)
-        session.commit()        
+        session.commit()
+        session.close()
     except Exception as e:
         api.portal.show_message(message=u'Si sono verificati errore nel salvataggio su database', request=doc.REQUEST )
         return -1
@@ -122,7 +123,7 @@ def delData(doc):
         db = sql.create_engine(conf['conn_string'])
         metadata = sql.schema.MetaData(bind=db,reflect=True,schema=conf['db_schema'])
         table = sql.Table(conf['db_table'], metadata, autoload=True)
-        
+        orm.clear_mappers() 
         rowmapper = orm.mapper(plominoData,table)
     except:
         api.portal.show_message(message=u'Si sono verificati errori nella connessione al database', request=doc.REQUEST )
