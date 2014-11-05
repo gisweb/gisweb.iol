@@ -9,6 +9,7 @@
 ##
 from Products.CMFPlone.utils import normalizeString
 from Products.CMFPlomino.PlominoUtils import Now,DateToString
+
 """
 Standardizzazione dele operazioni da svolgere al salvataggio di una istanza
 child_events: True o False (lancia gli script di gestione dell'uno a molti)
