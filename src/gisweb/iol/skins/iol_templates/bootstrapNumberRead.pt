@@ -1,7 +1,0 @@
-<tal:def tal:define="
-    v options/fieldvalue;
-    title python:options['field'].title;
-    formatted_value python:options['field'].getSettings().format_value(v)">   
-      
-        <div tal:attributes="class string:label1 number-field readonly;id options/fieldname" tal:content="formatted_value"></div>   
-</tal:def>
