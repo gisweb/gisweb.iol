@@ -14,13 +14,17 @@
 form span.label, form span.legend{
  
     color: #000000;
-    font-size:15px;
-    display:block;
+    font-size: 15px;
     font-weight: bold;
     background-color: transparent;
-    text-shadow:none;
+    text-shadow: none;
+    display: block;
     border-radius: 3px;
     margin-bottom: 3px;
+    white-space: normal;
+
+
+
 
 }
 
@@ -48,7 +52,7 @@ form span.TEXTFieldRead-TEXT,
 
 
 form span.TEXTFieldRead-TEXT{
-    white-space:nowrap;
+    white-space: nowrap;
     overflow: hidden;
 }
 
@@ -336,6 +340,7 @@ CSS for v3 buttons stolen from:
 }
 
 #portal-top,
+#portal-header-wrapper,
 #plone-document-byline
 {
   display:none;
