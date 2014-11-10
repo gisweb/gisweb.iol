@@ -112,7 +112,7 @@ def saveData(doc):
     
 def delData(doc):
     #getting database configuration
-
+    param_name = 'db_%s' %doc.getParentDatabase().id
     conf = doc.get_properties(params=(param_name, )).values()[0]
     if not 'value' in conf.keys():
         api.portal.show_message(message='Replication not configured')
@@ -131,7 +131,6 @@ def delData(doc):
     #creating session
     Sess = orm.sessionmaker(bind = db)
     session = Sess()
-    rowmapper = orm.mapper(plominoData,table)
     #deleting row from database
     docid = doc.getId()
     session.query(plominoData).filter_by(id=docid).delete()
