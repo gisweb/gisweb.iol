@@ -7,12 +7,12 @@
 	<tal:cond tal:condition="python: current"> 
 		<tal:loop tal:repeat="v labeled">
 			<i class="icon-ok"></i>
-			<span tal:attributes="class string:SELECTIONFieldRead" tal:content="python:v[0]">selected value</span>
+			<span tal:attributes="name options/fieldname;value python:v[1];class string:SELECTIONFieldRead" tal:content="python:v[0]">selected value</span>
 			<tal:sep tal:condition="not:repeat/v/end" tal:content="structure python:options['field'].getSettings('separator')">separator</tal:sep>
 		</tal:loop>
 	</tal:cond>
 	<tal:cond tal:condition="python: not current">
-	<span tal:attributes="class string:SELECTIONFieldRead" tal:content="python:'Nessun valore selezionato'">No value</span> 
+	<span tal:attributes="name options/fieldname;class string:SELECTIONFieldRead" tal:content="python:'Nessun valore selezionato'">No value</span> 
 	</tal:cond>
 
 

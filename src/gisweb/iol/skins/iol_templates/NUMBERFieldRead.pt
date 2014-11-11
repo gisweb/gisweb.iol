@@ -3,5 +3,5 @@
     title python:options['field'].title;
     formatted_value python:options['field'].getSettings().format_value(v)">   
       
-        <span tal:attributes="class string:NUMBERFieldRead" tal:content="formatted_value"></span>   
+        <span tal:attributes="name options/fieldname;value v;class string:NUMBERFieldRead" tal:content="formatted_value"></span>   
 </tal:def>

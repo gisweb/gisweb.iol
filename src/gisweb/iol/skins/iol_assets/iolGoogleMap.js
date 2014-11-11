@@ -77,7 +77,7 @@
             if(typeof(options)!='object') return;
             var overlay,pos;
             var patt = /\((.*?)\)/;
-            var sCoordinates = stringGeom.match(patt)[1]
+            var sCoordinates = stringGeom.match(patt) && stringGeom.match(patt)[1] || stringGeom
 
             if(stringGeom.indexOf('POINT')!=-1){
                 overlay = new google.maps.Marker(options.markerOptions||{});
@@ -85,7 +85,7 @@
                 overlay.setPosition(new google.maps.LatLng(pos[1],pos[0]))
                 overlay.geometryType = google.maps.drawing.OverlayType.MARKER;
             }
-            if((stringGeom.indexOf('LINESTRING')!=-1) || (stringGeom.indexOf('POLYGON')!=-1)){
+            else if((stringGeom.indexOf('LINESTRING')!=-1) || (stringGeom.indexOf('POLYGON')!=-1)){
 
                 if(stringGeom.indexOf('LINESTRING')!=-1){
                     overlay = new google.maps.Polyline(options.polylineOptions||{});
@@ -102,6 +102,14 @@
                     points.push(new google.maps.LatLng(v[1],v[0]));
                 }
                 overlay.setPath(points);
+            }
+            //SOLO COORDINATE DEL PUNTO 
+            else {
+                overlay = new google.maps.Marker(options.markerOptions||{});
+                pos = sCoordinates.split(' ');
+                overlay.setPosition(new google.maps.LatLng(pos[1],pos[0]))
+                overlay.geometryType = google.maps.drawing.OverlayType.MARKER;
+                console.log(overlay)
             }
 
             if(stringGeom.indexOf('POLYGON')!=-1){
@@ -460,6 +468,14 @@
                 });
 
 
+                if(options.mapGrid){
+
+
+
+
+                    console.log('sadsda')
+                }
+
                 //AGGIUNGO LE GEOMETRIE PRESENTI COME CAMPI SULLA FORM
                 var sGeom = $element.val();
                 if(sGeom){
@@ -519,6 +535,8 @@
 
                         sGeom = data[settings.geomIndex];  
                         elementType = data[settings.typeIndex]; 
+                        console.log(sGeom);
+                        console.log(elementType);
                         overlay = createOverlay(sGeom, drawingOptions[elementType]); 
                         overlay.dataTable = this;
                         overlay.setMap(map);
@@ -538,16 +556,22 @@
                     oTable.fnSettings().aoRowCreatedCallback.push( {
                         "fn": function( nRow, aData, iDataIndex ){ 
                             console.log("AGGIUNTA LA RIGA")
+                            if(currentOverlay){
+                                //SETTO PER DEFAULT ULTIMA E PENULTIMA COLONNA DEL GRID PER I VALORI DI GEOMETRIA E TIPO
+                                currentOverlay.dataTable = this;
+                                currentOverlay.geomIndex = settings.geomIndex;
+                                currentOverlay.typeIndex = settings.typeIndex;
+                                currentOverlay.lngIndex = settings.lngIndex;
+                                currentOverlay.latIndex = settings.latIndex;
+                                currentOverlay.saved = true;
+                                currentOverlay.rowIndex = iDataIndex;
+                                registerObject(currentOverlay)
+                            }
+                            else{
 
-                            //SETTO PER DEFAULT ULTIMA E PENULTIMA COLONNA DEL GRID PER I VALORI DI GEOMETRIA E TIPO
-                            currentOverlay.dataTable = this;
-                            currentOverlay.geomIndex = settings.geomIndex;
-                            currentOverlay.typeIndex = settings.typeIndex;
-                            currentOverlay.lngIndex = settings.lngIndex;
-                            currentOverlay.latIndex = settings.latIndex;
-                            currentOverlay.saved = true;
-                            currentOverlay.rowIndex = iDataIndex;
-                            registerObject(currentOverlay)
+
+
+                            }
 
                         }
                     });

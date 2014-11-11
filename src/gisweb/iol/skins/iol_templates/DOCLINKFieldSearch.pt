@@ -1,0 +1,51 @@
+
+<tal:block tal:define="fieldname options/fieldname;
+                       dburl python:context.getParentDatabase().absolute_url();
+                       sourceview python: options['field'].getSettings('sourceview');
+                       params python:options['field'].getSettings('dynamictableparam');
+                       cols python: options['field'].getSettings().getJQueryColumns();
+                       destForm python: context.REQUEST.get('destinationForm','');
+                       ">
+        
+
+        <input type="hidden" id="destinationForm" tal:attributes="value destForm"/>
+        <input type="hidden" id="Plomino_Database_URL" tal:attributes="value dburl"/>
+        <script type="text/javascript" charset="utf-8"
+        
+        tal:content="structure string:
+                        jQuery(document).ready(function() {
+
+                            jQuery('#${fieldname}_datagrid').dataTable( {
+                                'aoColumns': ${cols},
+                                'sAjaxSource':'${dburl}/${sourceview}/search_json',
+                                'aoColumnDefs': [
+                                    {
+                                        'aTargets': ['_all'],
+                                        'bUseRendered': true,
+                                        'fnRender': function (oObj) {
+                                            var cell = oObj.aData[oObj.iDataColumn];     
+                                            var dburl=jQuery('#Plomino_Database_URL').val();
+                                            var destForm=jQuery('#destinationForm').val();
+                                            
+                                            if (destForm ){                                                
+                                                return '<a href=\'' + dburl +'/' + destForm + '?parentDocument=' + oObj.aData[0] + '\' class=\'viewlink\'>' + cell + '</a>';
+                                            }
+                                            else {                                               
+                                                return '<a href=\'' + dburl +'/' + oObj.aData[0] + '\' class=\'viewlink\'>' + cell + '</a>';
+                                            }
+                                        }
+                                            
+                                    },
+                                    { 'aTargets': [0], 'bSearchable': false, 'bSortable': false, 'sWidth': '0' }
+                                ],             
+                                ${params},
+                                
+                                'oLanguage': {
+                                    'sUrl': '@@collective.js.datatables.translation'
+                                }
+                            } );
+                            plominoSearchTables.push('${fieldname}_datagrid');
+                        } );">
+        </script>
+        <table class="table table-bordered" data-plugin="datatables" tal:attributes="id string:${fieldname}_datagrid"></table>
+</tal:block>
