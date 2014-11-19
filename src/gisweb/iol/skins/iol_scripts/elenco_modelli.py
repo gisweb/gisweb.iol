@@ -26,7 +26,12 @@ def open_my_url(url, **args):
     uu = '%s?%s' %(url, urlencode(args))
     return json_loads(open_url(uu))
 
-if 'value' in url_info:
+modello=json_loads(context.printModelli(context.getParentDatabase().getId()))
+
+if modello['success']==1:   
+   outlist.append('%s|%s' %(modello['model'].split('/')[-1],modello['model'].split('/')[-1]))
+
+elif 'value' in url_info:
     outlist += open_my_url(url_info['value'], app=context.naming('iol_tipo_app'), group=sub_path, project=proj)
 
 if context.test_mode() and len(outlist)==1:
