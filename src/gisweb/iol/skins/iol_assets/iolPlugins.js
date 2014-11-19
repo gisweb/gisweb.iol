@@ -234,6 +234,15 @@
 
  
         });
+      
+        function setControlValue(el,value){
+             if(el.is(':checkbox')||el.is(':radio')) {
+                $("#"+el.attr("name")+'-'+value).attr('checked', true);      
+            }
+            else{
+                el.val(value)
+            }
+        }    
     };
 
 
