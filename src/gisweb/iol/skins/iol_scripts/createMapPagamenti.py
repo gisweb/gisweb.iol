@@ -23,29 +23,32 @@
 # l'elenco de	
 
 def updateDictPagamenti(codici_pagamenti):
-	cod_pagamenti = codici_pagamenti[0]
-	db=context.getParentDatabase()
-	lista_codici_pagamenti = cod_pagamenti.keys()
-	list_codici = map(lambda codice: 'pagamenti-' + str(codice) ,lista_codici_pagamenti) 	
-	diz_pagamenti = dict()
-	for codice in list_codici:
-		diz_pagamento = dict()
-		for v in db.get_property(codice)['value'].replace('\n','').split(','):
-			# cod_lista es.'007' 
-			cod_lista = codice.split('-')[1]
-			key = v.split(':')[0]
-			value = v.split(':')[1]			
+	if len(codici_pagamenti)>0:
+		cod_pagamenti = codici_pagamenti[0]
 
-			if key == 'importo' and cod_pagamenti[cod_lista] == '':
-			    diz_pagamento[key]=value
-			elif key == 'importo':
-				diz_pagamento[key]=cod_pagamenti[cod_lista]	   
-			else:    
-				diz_pagamento[key]=value
+		db=context.getParentDatabase()
+		lista_codici_pagamenti = cod_pagamenti.keys()
+		list_codici = map(lambda codice: 'pagamenti-' + str(codice) ,lista_codici_pagamenti) 	
+		diz_pagamenti = dict()
+		for codice in list_codici:
+			diz_pagamento = dict()
+			for v in db.get_property(codice)['value'].replace('\n','').split(','):
+				# cod_lista es.'007' 
+				cod_lista = codice.split('-')[1]
+				key = v.split(':')[0]
+				value = v.split(':')[1]			
 
-		diz_pagamenti[codice.split('-')[1]]=diz_pagamento	
-	return diz_pagamenti
-	
+				if key == 'importo' and cod_pagamenti[cod_lista] == '':
+				    diz_pagamento[key]=value
+				elif key == 'importo':
+					diz_pagamento[key]=cod_pagamenti[cod_lista]	   
+				else:    
+					diz_pagamento[key]=value
+
+			diz_pagamenti[codice.split('-')[1]]=diz_pagamento	
+		return diz_pagamenti
+	else:
+		return dict()
 
 
 
