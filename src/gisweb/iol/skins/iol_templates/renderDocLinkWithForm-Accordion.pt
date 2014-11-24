@@ -1,0 +1,35 @@
+<div tal:on-error="structure container/handleError">
+<tal:c tal:condition="python:True">
+<tal:block tal:define="fieldname options/fieldname;
+                       value options/fieldvalue;
+                       db python: context.getParentDatabase();">
+                           <h3>Fascicolo della Pratica</h3>
+                           <div tal:content="structure python: db"></div>
+
+    <tal:rep tal:repeat="link python: value">
+        <tal:block tal:define="relatedDoc python: db.getDocument(link);
+                           form_name python: options['field'].getSettings(key='labelcolumn') or relatedDoc.getItem('Form');
+                           relatedDocId python: relatedDoc.getId();
+                           renderForm python: db.getForm(form_name);
+                           r python:context.REQUEST.set('document_to_display',relatedDocId);
+                           html_content python: renderForm.displayDocument(relatedDoc,request=context.REQUEST)">
+                               <div class="accordion" tal:attributes="id string:iol-childs-${relatedDocId}">
+                                   <div class="accordion-group">
+                                       <div class="accordion-heading">
+                                           <a class="accordion-toggle" data-toggle="collapse" tal:attributes="data-parent string:iol-childs-${relatedDocId};href string:#iol-${relatedDocId}">
+                                              <strong><span tal:content="python: '''Numero pratica n°%s''' %(relatedDoc.getItem('numero_pratica'))"></span></strong>
+                                           </a>
+                                       </div>
+                                       <div tal:attributes="id string:iol-${relatedDocId}" class="accordion-body collapse" style="height: 0px; ">
+                                           <div class="accordion-inner">
+                                               <div tal:attributes="id string:PlominoDocument_${relatedDocId}" tal:content="structure string: ${html_content}"/>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+        </tal:block>
+        
+    </tal:rep>
+</tal:block>
+</tal:c>
+</div>
