@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=name, nest=1, render=1, follow=1, fieldsubset='', fieldnames='', format=''
+##parameters=name, nest=1, render=1, follow=1, fieldsubset='',fieldsremove='', fieldnames='', format=''
 ##title=A brand new serialItem
 ##
 assert context.portal_type == 'PlominoDocument', 'PlominoDocument expected, got %s instead' % context.portal_type
@@ -78,7 +78,7 @@ def renderSimpleItem(db, doc, itemvalue, render, field, fieldtype):
     return renderedValue
 
 
-def serialItem(doc, name, fieldtype=None, nest=True, render=True, follow=True, fieldsubset=[], fieldnames=[]):
+def serialItem(doc, name, fieldtype=None, nest=True, render=True, follow=True, fieldsubset=[],fieldsremove=[], fieldnames=[]):
     """
     Returns a list of 2-tuples with the data contained in the document item
 
@@ -139,7 +139,7 @@ def serialItem(doc, name, fieldtype=None, nest=True, render=True, follow=True, f
         for innervalue in itemvalue or []:
             if fieldtype == 'DOCLINK':
                 sub_doc = db.getDocument(innervalue)
-                sub_element = dict(sub_doc.serialDoc(fieldsubset=fieldsubset, nest=nested, render=render, follow=False))
+                sub_element = dict(sub_doc.serialDoc(fieldsubset=fieldsubset,fieldsremove=fieldsremove, nest=nested, render=render, follow=False))
             else:
                 sub_element = dict([(
                     k, renderSimpleItem(db, doc, v, render,
@@ -164,6 +164,8 @@ def serialItem(doc, name, fieldtype=None, nest=True, render=True, follow=True, f
 # trick
 if fieldsubset and isinstance(fieldsubset, basestring):
     fieldsubset = fieldsubset.split(',')
+if fieldsremove and isinstance(fieldsremove, basestring):
+    fieldsremove = fieldsremove.split(',')    
 if fieldnames and isinstance(fieldnames, basestring):
     fieldnames = fieldnames.split(',')
 

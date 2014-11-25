@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=fieldsubset='', get_id=0, nest=True, render=0, follow=0, format=''
+##parameters=fieldsubset='',fieldsremove='', get_id=0, nest=True, render=0, follow=0, format=''
 ##title=A brand new serialDoc
 ##
 assert context.portal_type == 'PlominoDocument', 'PlominoDocument expected, got %s instead' % context.portal_type
@@ -40,9 +40,14 @@ def serialDoc(doc, fieldsubset=[], nest=True, render=True, follow=False):
     form = doc.getForm()
     fieldnames = [i.getId() for i in form.getFormFields(includesubforms=True, doc=None, applyhidewhen=False)]
 
-    contentKeys = fieldnames + [i for i in doc.getItems() if i not in fieldnames]
+    contentKeys = fieldnames + [i for i in doc.getItems() if i not in fieldnames]    
+    
+    
     if fieldsubset:
-        contentKeys = [i for i in contentKeys if i in fieldsubset]
+        contentKeys = [i for i in contentKeys  if i in fieldsubset]
+        
+    if fieldsremove:         
+        contentKeys = [i for i in contentKeys if i not in fieldsremove]
 
     result = [] if not get_id else [('id', doc.getId(), )]
     for key in contentKeys:

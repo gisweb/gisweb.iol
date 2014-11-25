@@ -136,7 +136,7 @@ input[type="checkbox"], label {
 
 }
 
-.plomino_form label.mandatory {
+.plomino_form label.data-mandatory {
  
     color: #0000FF;
 

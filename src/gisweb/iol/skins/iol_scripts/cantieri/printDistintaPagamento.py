@@ -8,7 +8,8 @@
 ##title=stampoa distinta pagamento
 ##
 
-from Products.CMFPlomino.PlominoUtils import json_loads
+from Products.CMFPlomino.PlominoUtils import json_loads, Now
+doc.setItem('data_distinta_pagamento',Now())
 field = context.REQUEST.get('field')
 grp = context.REQUEST.get('grp')
 info = json_loads(context.printModelli(context.getParentDatabase().getId(),field=field,grp=grp))

@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=model='', grp='', field='',redirect_url=''
+##parameters=model='', grp='', field='',redirect_url='',fieldsubset='',fieldsremove=''
 ##title=Create docx file from PlominoDocument
 ##
 """
@@ -59,7 +59,7 @@ query = dict(
     project = proj,
     dataType = 'JSON',
     #mode = 'show',
-    data = context.serialDoc(format='json', render=True),
+    data = context.serialDoc(fieldsubset,fieldsremove,format='json', render=True),
     id = context.id,
     filename = filename,
     download = 'false'

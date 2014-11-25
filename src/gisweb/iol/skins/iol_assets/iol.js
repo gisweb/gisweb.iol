@@ -403,7 +403,7 @@
 
 //VERIFICA INVIO SE NESSUN CAMPO MANDATORY VUOTO FACCIO COMPARIRE INVIO DOMANDA !!!
 
-  if($("div.mandatory:visible").length == 0 || $("input.mandatory:visible").length == 0){
+  if($("div.data-mandatory:visible").length == 0 || $("input.data-mandatory:visible").length == 0){
 
       $('#section-message-compilazione').addClass('hidden');
       $('#section-invio-domanda').removeClass('hidden');
