@@ -8,7 +8,7 @@
 ##title= "script che verifica  il pagamento"
 ##
 
-from Products.CMFPlomino.PlominoUtils import StringToDate,DateToString
+from Products.CMFPlomino.PlominoUtils import StringToDate,DateToString, Now
 from Products.CMFCore.utils import getToolByName
 from gisweb.utils import getChainFor
 
@@ -28,7 +28,7 @@ esito=context.REQUEST.get('esito')
 divisa=context.REQUEST.get('divisa')
 trans=str(context.REQUEST.get('codTrans'))
 aut=context.REQUEST.get('codAut')
-totale=context.REQUEST.get('totale')
+totale=context.REQUEST.get('totale') or '0'
 session=context.REQUEST.get('session_id')
 
 wf = getToolByName(context, 'portal_workflow')
@@ -49,6 +49,8 @@ context.setItem('codAut_pagamento',aut)
 cod_paga=trans.split('-')[-1]
 
 
+
+
 # devo verificare che il codice non sia presente nell'elenco delle rate
 # 'permesso_rate_opt' è un cambo combo con l'elenco dei codici dei pagamenti rateizzabili
 #cod_pagam = c[0]
@@ -64,26 +66,39 @@ def listRate(lista,codice_pagam):
 
 
 def settoVerificaPagamentiGruppo(lista,cod_gruppo):
+    stati=['non pagato','pagamento annullato']
+    cod_non_pagati = [cod[0] for cod in lista if cod[4] in stati]
     p=[]
     for c in lista:
-        if c[3]==cod_gruppo:
-            if c[0] not in listRate(lista,c[0]):
+        if c[3]==cod_gruppo and c[0] in cod_non_pagati:
+            if c[0] not in listRate(lista,c[0]) and context.getItem('esito_pagamento')=='OK':
                 c[4]='pagamento effettuato'
+                c[5]=DateToString(Now(),'%d/%m/%Y')
+            elif c[0] not in listRate(lista,c[0]) and context.getItem('esito_pagamento')=='KO':
+                c[4]='pagamento annullato'
                 c[5]=DateToString(Now(),'%d/%m/%Y')
         p.append(c)
     context.setItem('elenco_pagamenti',p) 
 
 def settoVerificaPagamentiTot(lista,cod_gruppo):
+    stati=['non pagato','pagamento annullato']
+    cod_non_pagati = [cod[0] for cod in lista if cod[4] in stati]
     p=[]
     for c in lista:
-        if c[3]==cod_gruppo:            
-            c[4]='pagamento effettuato'
-            c[5]=DateToString(Now(),'%d/%m/%Y')
-        p.append(c)
+        if c[0] in cod_non_pagati:
+            if c[3]==cod_gruppo and context.getItem('esito_pagamento')=='OK':            
+                c[4]='pagamento effettuato'
+                c[5]=DateToString(Now(),'%d/%m/%Y')
+            elif c[3]==cod_gruppo and context.getItem('esito_pagamento')=='KO':
+                c[4]='pagamento annullato'
+                c[5]=DateToString(Now(),'%d/%m/%Y')
+            p.append(c)
     context.setItem('elenco_pagamenti',p)
 
 
 def settoVerificaPagamentiCodice(lista,cod_single):
+    stati=['non pagato','pagamento annullato']
+    cod_non_pagati = [cod[0] for cod in lista if cod[4] in stati]
     p=[]
     for c in lista:
         cod_single = cod_single[:-2] + '00'
@@ -94,13 +109,19 @@ def settoVerificaPagamentiCodice(lista,cod_single):
     context.setItem('elenco_pagamenti',p)
 
 def settoVerificaRateConcluse(lista,cod_single):
+    stati=['non pagato','pagamento annullato']
+    cod_non_pagati = [cod[0] for cod in lista if cod[4] in stati]
     p=[]
     for c in lista:
-        cod_single = cod_single[:-2] + '00'
-        if c[0]==cod_single:
-            c[4]='pagamento effettuato'
-            c[5]=DateToString(Now(),'%d/%m/%Y')
-        p.append(c)
+        if c[0] in cod_non_pagati:
+            cod_single = cod_single[:-2] + '00'
+            if c[0]==cod_single and context.getItem('esito_pagamento')=='OK':
+                c[4]='pagamento effettuato'
+                c[5]=DateToString(Now(),'%d/%m/%Y')
+            elif c[0]==cod_single and context.getItem('esito_pagamento')=='KO':
+                c[4]='pagamento annullato'
+                c[5]=DateToString(Now(),'%d/%m/%Y')
+            p.append(c)
     context.setItem('elenco_pagamenti',p)    
 
 
@@ -126,10 +147,13 @@ elif context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id)=='True' and cod_paga[:-2]
 
 if elenco_rate:
     # 1° caso dg rate non esistente
-    if not context.getItem('elenco_rate_pagamenti'):       
-        for cod_rata in elenco_rate:
-            if cod_rata[0] == cod_paga:
+    if not context.getItem('elenco_rate_pagamenti'):               
+        for cod_rata in elenco_rate:            
+            if cod_rata[0] == cod_paga and context.getItem('esito_pagamento')=='OK':
                 cod_rata[4] = 'pagamento effettuato'
+                cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
+            elif cod_rata[0] == cod_paga and context.getItem('esito_pagamento')=='KO':
+                cod_rata[4] = 'pagamento annullato'
                 cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
             rate.append(cod_rata)
         context.setItem('elenco_rate_pagamenti',rate)
@@ -138,8 +162,11 @@ if elenco_rate:
     # casi successivi il dg rate esiste
     elif context.getItem('elenco_rate_pagamenti'):
         for cod_rata in context.getItem('elenco_rate_pagamenti'):
-            if cod_rata[0] == cod_paga:
+            if cod_rata[0] == cod_paga and context.getItem('esito_pagamento')=='OK':
                 cod_rata[4] = 'pagamento effettuato'
+                cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
+            elif cod_rata[0] == cod_paga and context.getItem('esito_pagamento')=='KO':
+                cod_rata[4] = 'pagamento annullato'
                 cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
             rate.append(cod_rata)
         context.setItem('elenco_rate_pagamenti',rate)
@@ -149,8 +176,19 @@ if elenco_rate:
             settoVerificaRateConcluse(context.getItem('elenco_pagamenti'),cod_paga)
 
         
-                  
+db = context.getParentDatabase()
+applicazione = db.getId().split('_')[-1]
+app = getToolByName(context,applicazione)
+
+scriptName = 'verificaPagamento' 
+
+
+if scriptName in app.objectIds():
+     
+    return app.verificaPagamento(context)
+              
     
 
 rurl=context.absolute_url()
 context.redirectTo(rurl)
+

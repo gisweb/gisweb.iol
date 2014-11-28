@@ -66,7 +66,11 @@ def renderSimpleItem(db, doc, itemvalue, render, field, fieldtype):
                 custom_format = field.getSettings('format') or db.getDateTimeFormat()
             else:
                 custom_format = db.getDateTimeFormat()
-            renderedValue = itemvalue.strftime(custom_format)
+            try:
+        
+                renderedValue = itemvalue.strftime(custom_format)
+            except:
+                renderedValue = itemvalue
         else:
             # in order to prevent TypeError for unknown not JSON serializable objects
             try:
