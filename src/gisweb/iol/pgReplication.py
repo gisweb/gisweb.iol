@@ -10,7 +10,7 @@ from Products.CMFPlomino import PlominoDocument,PlominoForm
 from plone import api
 
 class plominoData(object):
-    def __init__(self, id, plominodb, form, owner, url, review_state, review_history, data):
+    def __init__(self, id, plominodb, form, owner, url, review_state, review_history,iol_owner,iol_reviewer,iol_manager, data):
         self.id = id
         self.plominoform = form
         self.plominodb = plominodb
@@ -18,6 +18,9 @@ class plominoData(object):
         self.review_state = review_state
         self.review_history = review_history
         self.url = url
+        self.iol_owner = iol_owner
+        self.iol_reviewer = iol_reviewer
+        self.iol_manager = iol_manager
         self.data = data
         
 
@@ -46,10 +49,7 @@ def getPlominoValues(doc):
         results[f['name']]=serialDatagridItem(doc,f)
     return results 
 
-def saveData(doc):
-    print '                     '
-    print 'Saving Document on DB'
-    print '                     '
+def saveData(doc):                   '
     #getting database configuration
     param_name = 'db_%s' %doc.getParentDatabase().id
     conf = doc.get_properties(params=(param_name, )).values()[0]
@@ -92,10 +92,13 @@ def saveData(doc):
         url = doc.absolute_url(),
         review_state = api.content.get_state(obj=doc),
         review_history = json.loads(json.dumps(wf.getInfoFor(doc,'review_history'), default=DateTime.DateTime.ISO,use_decimal=True )),
+        iol_owner = [doc.getOwner().getUserName()],
+        iol_reviewer = [],
+        iol_manager = [],
         data = d
     )
     try:    
-        row = plominoData(data['id'],data['plominodb'],data['plominoform'],data['owner'],data["url"], data["review_state"], data["review_history"],d)
+        row = plominoData(data['id'],data['plominodb'],data['plominoform'],data['owner'],data["url"], data["review_state"], data["review_history"],data['iol_owner'],data['iol_reviewer'],data['iol_manager'],d)
         session = Sess()
         #deleting row from database
         session.query(plominoData).filter_by(id=id).delete()
