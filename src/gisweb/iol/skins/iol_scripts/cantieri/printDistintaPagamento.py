@@ -25,7 +25,7 @@ if elenco:
             aa.append(array)
     if len(aa) > 0:        
         context.setItem('elenco_pagamenti_print',aa)
-    importo_list=[float(cod[1]) for cod in context.getItem('elenco_pagamenti') if cod in cod_non_pagati]   
+    importo_list=[float(cod[1]) for cod in context.getItem('elenco_pagamenti') if cod[0] in cod_non_pagati]   
     if len(importo_list)>0:
         importo=sum(filter(lambda v:v,importo_list))
         context.setItem('importo_totale_no_pagato',importo)
