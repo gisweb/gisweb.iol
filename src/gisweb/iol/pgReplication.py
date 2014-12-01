@@ -9,6 +9,22 @@ from Products.CMFPlomino import PlominoDocument,PlominoForm
 
 from plone import api
 
+
+def getIolRoles(doc):
+    result = dict(
+        iol_owner = [],
+        iol_reviewer = [],
+        iol_manager = [],
+    )
+    for usr,roles in doc.get_local_roles():
+        if 'Owner' in roles:
+            result['iol_owner'].append(usr)
+        if 'iol-reviewer' in roles:
+            result['iol_reviewer'].append(usr)
+        if 'iol-manager' in roles:
+            result['iol_manager'].append(usr)
+    return result
+
 class plominoData(object):
     def __init__(self, id, plominodb, form, owner, url, review_state, review_history,iol_owner,iol_reviewer,iol_manager, data):
         self.id = id
@@ -84,6 +100,7 @@ def saveData(doc):                   '
     #initialize object plominoData
     wf = api.portal.get_tool(name='portal_workflow')
     id = doc.getId()
+    roles = getIolRoles(doc)
     data = dict(
         id = id,
         plominoform = doc.getForm().getFormName(),
@@ -92,9 +109,9 @@ def saveData(doc):                   '
         url = doc.absolute_url(),
         review_state = api.content.get_state(obj=doc),
         review_history = json.loads(json.dumps(wf.getInfoFor(doc,'review_history'), default=DateTime.DateTime.ISO,use_decimal=True )),
-        iol_owner = [doc.getOwner().getUserName()],
-        iol_reviewer = [],
-        iol_manager = [],
+        iol_owner = roles['iol_owner'],
+        iol_reviewer = roles['iol_reviewer'],
+        iol_manager = roles['iol_manager'],
         data = d
     )
     try:    
