@@ -21,6 +21,7 @@ wf = getToolByName(doc, 'portal_workflow')
 
 
 
+
 # crea il datagrid con l'elenco dei primi pagamenti
 def createDatagrid(diz_pagamenti,stato_pagamento):
     lista_codici = diz_pagamenti.keys()
@@ -40,24 +41,20 @@ def createDatagrid(diz_pagamenti,stato_pagamento):
 
 # aggiorna il datagrid con i nuovi pagamenti
 def updateDatagrid(diz_pagamenti,diz_code_pagamenti, stato_pagamento, dg_exist, allegato,codice_allegato):
-       
+      
     lista_codici = diz_pagamenti.keys()    
-    old_codici = map(lambda codice: codice[0] ,dg_exist)    
-    new_codici = filter(lambda codice: codice not in old_codici ,lista_codici)
+    old_codici = map(lambda codice: codice[0] ,dg_exist)
+    new_codici = filter(lambda codice: codice not in old_codici ,lista_codici)   
     new_diz_value={}
-    if len(lista_codici) > len(old_codici):
+    if len(lista_codici) > len(old_codici):        
         
         new_diz_value = {k:codici_pagamenti[0][k] for k in diz_code_pagamenti.keys() if diz_code_pagamenti[k]!=codici_pagamenti[0][k] and codici_pagamenti[0][k]!=''}
-    else:
+    else:        
+        new_diz_value = {k:codici_pagamenti[0][k] for k in lista_codici}        
         
-        new_diz_value = {k:codici_pagamenti[0][k] for k in lista_codici}
-    
-        
-    if len(new_codici)==0 and new_diz_value =={}:
-        
+    if len(new_codici)==0 and new_diz_value =={}:        
              
-        aa = filter(lambda stato: stato[4]!=stato_pagamento,dg_exist)
-                               
+        aa = filter(lambda stato: stato[4]!=stato_pagamento,dg_exist)                               
         new_state = [code[0] for code in aa]
         
         for codice in new_state:
@@ -101,11 +98,17 @@ def updateDatagrid(diz_pagamenti,diz_code_pagamenti, stato_pagamento, dg_exist, 
         for k_code in new_diz_value.keys():            
             dg_exist_rmv_value = [dg_exist.pop(cod[0]) for cod in enumerate(dg_exist) if cod[1][0]==k_code][0]            
             cod = dg_exist_rmv_value[0]
+            
             label = dg_exist_rmv_value[2]
-            grp = dg_exist_rmv_value[3]
-            #importo = new_diz_value[k_code]
-            importo=diz_pagamenti[k_code]['importo']
-            stato = dg_exist_rmv_value[4]        
+            grp = dg_exist_rmv_value[3]            
+            importo=diz_pagamenti[k_code]['importo']            
+            if allegato == False and cod not in codice_allegato:    
+                stato = dg_exist_rmv_value[4]
+            elif cod in codice_allegato:                
+                stato = stato_pagamento
+            else:
+                stato = stato_pagamento          
+                
             data = dg_exist_rmv_value[5]
             dg = [cod,importo,label,grp,stato,data]            
             dg_exist_t.append(dg)
@@ -113,7 +116,9 @@ def updateDatagrid(diz_pagamenti,diz_code_pagamenti, stato_pagamento, dg_exist, 
 
 
 
-#allegato_pagamento = [x for x in [i for i in doc.getItems() if i.startswith('ricevuta_pagamento')] if doc.getItem(x)!={}]
+allegato_bolli = [x for x in [i for i in doc.getItems() if i.startswith('allegato_bolli_istruttore')] if doc.getItem(x)!={}]
+allegato_altri_pagamenti = [x for x in [i for i in doc.getItems() if i.startswith('istruttore_ricevuta_pagamento')] if doc.getItem(x)!={}]
+
 wf_trans_available = [act['id'] for act in context.wf_transitionsInfo(wf_id=wf_id, args=['description'])]
 trans_avb = [tran for tran in wf_trans_available if tran.startswith('effettua_pagamento')]
 dg_esistente = doc.getItem(field_dg)
@@ -121,13 +126,28 @@ dg_esistente = doc.getItem(field_dg)
 codici_pagamenti_new={}
 for v in dg_esistente:
     codici_pagamenti_new[v[0]]=v[1]
-
+    
 if not doc.getItem(field_dg):
    
     return createDatagrid(diz_pagamenti,stato_pagamento='non pagato')
         
-elif doc.getItem(field_dg):   
-                
+elif doc.getItem(field_dg):
     
+    if doc.wf_getInfoFor('review_state') == 'avvio': 
+        if len(allegato_bolli) > 0:
+            
+            return updateDatagrid(diz_pagamenti,diz_code_pagamenti={},stato_pagamento='pagamento effettuato',dg_exist=dg_esistente,allegato=True,codice_allegato=codice_allegato)
+        else:
+            
+            return updateDatagrid(diz_pagamenti,diz_code_pagamenti={},stato_pagamento='non pagato',dg_exist=dg_esistente,allegato=True,codice_allegato=codice_allegato)
         
-    return updateDatagrid(diz_pagamenti,diz_code_pagamenti=codici_pagamenti_new,stato_pagamento='non pagato',dg_exist=dg_esistente,allegato=False,codice_allegato=codice_allegato)
+    elif doc.wf_getInfoFor('review_state') == 'istruttoria_ok':     
+        if len(allegato_altri_pagamenti) > 0 or doc.getItem('codici_bancomat'):
+            
+            return updateDatagrid(diz_pagamenti,diz_code_pagamenti=codici_pagamenti_new,stato_pagamento='pagamento effettuato',dg_exist=dg_esistente,allegato=True,codice_allegato=codice_allegato)
+        
+        else:
+            
+            return updateDatagrid(diz_pagamenti,diz_code_pagamenti=codici_pagamenti_new,stato_pagamento='non pagato',dg_exist=dg_esistente,allegato=False,codice_allegato=['01600','01400','01300'])
+    else:    
+        return updateDatagrid(diz_pagamenti,diz_code_pagamenti=codici_pagamenti_new,stato_pagamento='non pagato',dg_exist=dg_esistente,allegato=False,codice_allegato=codice_allegato)

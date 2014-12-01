@@ -10,15 +10,18 @@
 
 from Products.CMFPlomino.PlominoUtils import  json_dumps
 
-  
-for obj in context.listFolderContents():
+
+db = db_name.split('_')[-1]
+
+
+
+for obj in context.getParentDatabase().aq_parent.listFolderContents():
     if obj.getId()==folder:
         folder= obj       
     
        
 
-db = db_name.split('_')[-1]
-diz={}
+
 try:
     for i in folder.getFolderContents():
         obj=i.getObject()
@@ -30,23 +33,30 @@ try:
                 sub_folders = obj.getFolderContents()
                 
                 pathFolder = [i.getObject().absolute_url() for i in sub_folders if grp in i.getObject().getId()][0]            
-                fileName = [i.getObject().keys() for i in sub_folders if grp in i.getObject().getId()][0]   
+                fileNames = [i.getObject().keys() for i in sub_folders if grp in i.getObject().getId()][0]   
                 
-                if len(fileName)>0:
-                    fileName =fileName[0]
-                    pathModel= '%s/%s' %(pathFolder,fileName)
-                    diz['model']= pathModel
-                    diz['field']=field
-                    diz['success']=1
-                else:
-                    diz['model']='test'
-                    diz['field']=field
+                if len(fileNames)>0:
                     
-                return json_dumps(diz)            
+                    dizFile={}
+                    for fileName in fileNames:
+                        diz={}
+                        pathModel= '%s/%s' %(pathFolder,fileName)
+                        
+                        diz['model']= pathModel
+                        diz['field']=field                        
+                        dizFile[fileName]=diz
+                        dizFile['success']=1
+                      
+                else:
+                   
+                    dizFile['model']='test'
+                    dizFile['field']=field
+                    
+                return json_dumps(dizFile)            
         except:        
             return context.addPortalMessage('Non sono presenti sotto cartelle nella folder %s' %db)
                
     
 except:
-    diz['success']=0
-    return json_dumps(diz)
+    dizFile['success']=0
+    return json_dumps(dizFile)
