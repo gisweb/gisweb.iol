@@ -65,7 +65,7 @@ def getPlominoValues(doc):
         results[f['name']]=serialDatagridItem(doc,f)
     return results 
 
-def saveData(doc):                   '
+def saveData(doc):
     #getting database configuration
     param_name = 'db_%s' %doc.getParentDatabase().id
     conf = doc.get_properties(params=(param_name, )).values()[0]
