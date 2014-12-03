@@ -57,12 +57,9 @@ def getPlominoValues(doc):
     try:
     frm = doc.getForm()
     fieldnames = []
-    try:
-        for i in frm.getFormFields(includesubforms=True, doc=None, applyhidewhen=False):
-            if i.getFieldType()=='DATAGRID':
-                fieldnames.append(dict(field=i,name=i.getId(),form=i.getSettings().associated_form,field_list=i.getSettings().field_mapping.split(',')))
-    except:
-        fieldnames=[]
+    for i in frm.getFormFields(includesubforms=True, doc=None, applyhidewhen=False):
+        if i.getFieldType()=='DATAGRID':
+            fieldnames.append(dict(field=i,name=i.getId(),form=i.getSettings().associated_form,field_list=i.getSettings().field_mapping.split(',')))
     try:
         for f in fieldnames:
             if f['name'] in results:
