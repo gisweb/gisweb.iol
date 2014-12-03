@@ -54,7 +54,6 @@ def serialDatagridItem(doc, obj ):
     
 def getPlominoValues(doc):
     results = dict(deepcopy(doc.items))
-    try:
     frm = doc.getForm()
     fieldnames = []
     for i in frm.getFormFields(includesubforms=True, doc=None, applyhidewhen=False):
