@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters= doc='', wf_id='iol_occupazione_wf'
+##parameters= doc='', wf_id='iol_dehor_wf'
 ##title=Script che renderizza i dati base della pratica
 ##
 #                                                                                              #
