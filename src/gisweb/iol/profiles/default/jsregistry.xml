@@ -74,4 +74,14 @@
              inline="False"
              insert-after="select2.js"
              />
+<javascript cacheable="True"
+             compression="safe"
+             cookable="True"
+             enabled="True"
+             expression=""
+             id="jquery.numeric.js"
+             inline="False"
+             insert-after="select2.js"
+             />            
 </object>
+

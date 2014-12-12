@@ -65,6 +65,12 @@ form span.SELECTIONFieldRead{
   font-size:15px;
 }
 
+form input.NUMBERField-FLOAT{
+
+  
+}
+
+
 form .fieldset{
 
   margin-bottom: 10px;
@@ -74,7 +80,6 @@ form .fieldset{
 
 .fieldset .TEXTFieldRead-TEXT {
   margin-top:-5px;
-  vertical-align:middle;
 }
 
 /*div .span4 {
