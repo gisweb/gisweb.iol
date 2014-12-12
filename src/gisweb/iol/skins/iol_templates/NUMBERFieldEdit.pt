@@ -1,0 +1,5 @@
+<span tal:define="
+	size python:options['field'].getSettings('size');
+	ftype python:options['field'].getSettings().type;">
+	<input type="text" tal:attributes="id options/fieldname; name options/fieldname; value options/fieldvalue; size size; class string:NUMBERField-${ftype}" />
+</span>
