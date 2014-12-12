@@ -8,7 +8,7 @@
 ##title=
 ##
 
-from gisweb.utils import json_dumps
+from Products.CMFPlomino.PlominoUtils import json_dumps
 columns = context.getColumns()
 
 context.REQUEST.RESPONSE.setHeader("Content-type", "application/json")

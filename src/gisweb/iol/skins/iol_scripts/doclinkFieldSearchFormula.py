@@ -13,7 +13,8 @@ Calcola i documenti figli.
 
 if context.isNewDocument(): return []
 
-from gisweb.utils import serialItem, json_dumps
+from Products.CMFPlomino.PlominoUtils import json_dumps
+from gisweb.utils import serialItem
 
 db = context.getParentDatabase()
 idx = db.getIndex()

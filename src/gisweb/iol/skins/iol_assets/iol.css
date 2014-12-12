@@ -72,6 +72,11 @@ form .fieldset{
 
 }
 
+.fieldset .TEXTFieldRead-TEXT {
+  margin-top:-5px;
+  vertical-align:middle;
+}
+
 /*div .span4 {
    border: 1px solid #cccccc; 
 }
