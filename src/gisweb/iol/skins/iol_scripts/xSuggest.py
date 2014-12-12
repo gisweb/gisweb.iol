@@ -7,7 +7,8 @@
 ##parameters=field='',term=''
 ##title=
 ##
-from gisweb.utils import json_dumps, suggestFromTable
+from Products.CMFPlomino.PlominoUtils import json_dumps
+from gisweb.utils import  suggestFromTable
 result=[]
 
 if field.count('comune')>0:

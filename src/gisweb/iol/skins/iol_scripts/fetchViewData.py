@@ -16,7 +16,9 @@ this method is a patched version of:
 https://github.com/silviot/Plomino/blob/2043b6e94503a1eda6831e11f7b3875c0890581b/Products/CMFPlomino/PlominoView.py#L660
 """
 
-from gisweb.utils import fetchViewDocuments, json_dumps
+from Products.CMFPlomino.PlominoUtils import json_dumps
+from gisweb.utils import fetchViewDocuments
+
 from Products.CMFPlomino.PlominoUtils import asUnicode, asList
 
 def main():
