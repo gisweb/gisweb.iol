@@ -10,7 +10,7 @@
 db = context.getParentDatabase()
 
 assert db.hasCurrentUserRight('PlominoAuthor'), "You don't have rights!"
-from gisweb.utils import json_dumps
+from Products.CMFPlomino.PlominoUtils import json_dumps
 from gisweb.utils import isRepoUpToDate
 
 idx = db.getIndex()

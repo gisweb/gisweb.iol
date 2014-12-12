@@ -15,11 +15,10 @@ if 'remove_on_fails' in context.REQUEST.form:
     remove_on_fails = int(remove_on_fails)
 if 'redirect' in context.REQUEST.form:
     redirect = int(redirect)
-
+from Products.CMFPlomino.PlominoUtils import json_dumps
 from gisweb.utils import rndgenerate, batch_saveDocument, namegenerate, dategenerate, boolgenerate
 from gisweb.utils import numbergenerate, urllib_quote_plus, da_du_ma, cf_build, rndselection, rndCodFisco
 from gisweb.utils import printToPdf, is_valid_piva, geocode, latlongenerate
-from gisweb.utils import json_dumps
 db = context.getParentDatabase()
 
 # if context is a PlominoDocument we use its form

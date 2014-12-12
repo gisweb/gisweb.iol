@@ -208,6 +208,11 @@
             });
         });
 
+        //CAMPI NUMERICI
+        $('input.NUMBERField-FLOAT').numeric();
+        $('input.NUMBERField-DECIMAL').numeric();
+        $('input.NUMBERField-INTEGER').numeric(false, function() { alert("Solo valori interi"); this.value = ""; this.focus(); });
+
 
 
     });
