@@ -5,7 +5,7 @@ from copy import deepcopy
 import simplejson as json
 import DateTime
 
-from Products.CMFPlomino import PlominoDocument,PlominoForm
+from Products.CMFPlomino.PlominoDocument import PlominoDocument
 
 from plone import api
 

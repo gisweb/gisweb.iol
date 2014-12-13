@@ -10,7 +10,9 @@
     <include package="Products.CMFCore" />
     <include package="Products.CMFPlacefulWorkflow" />
     <include package="Products.CMFPlomino" />
-
+	
+	<include package=".browser" />
+	
     <genericsetup:registerProfile
         name="default"
         title="IOL Base (gisweb.iol)"
@@ -24,14 +26,6 @@
     <cmf:registerDirectory name="iol_scripts" recursive="True" />
     <cmf:registerDirectory name="iol_assets" recursive="True" />
 
-   
 
-    <browser:page
-        name="iolbootstrapview"
-        for="*"
-        class=".browser.BootstrapView"
-        allowed_interface=".interfaces.IBootstrapView"
-        permission="zope.Public"
-    />
 
 </configure>
