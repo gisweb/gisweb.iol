@@ -10,7 +10,7 @@
 assert context.portal_type in ('PlominoForm', 'PlominoDocument', ), 'PlominoDocument expected, got %s instead' % context.portal_type
 assert context.getParentDatabase().hasCurrentUserRight('PlominoAuthor'), "You don't have rights!"
 
-from gisweb.utils import json_dumps
+from Products.CMFPlomino.PlominoUtils import json_dumps
 #from Products.CMFPlone.utils import safe_unicode
 from gisweb.utils import Type
 

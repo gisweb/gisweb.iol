@@ -29,7 +29,8 @@ def open_my_url(url, **args):
 modello=json_loads(context.printModelli(context.getParentDatabase().getId()))
 
 if modello['success']==1:   
-   outlist.append('%s|%s' %(modello['model'].split('/')[-1],modello['model'].split('/')[-1]))
+   outlist1=['%s|%s' %(models,models) for models in modello.keys() if models!='success']
+   outlist = outlist + outlist1
 
 elif 'value' in url_info:
     outlist += open_my_url(url_info['value'], app=context.naming('iol_tipo_app'), group=sub_path, project=proj)

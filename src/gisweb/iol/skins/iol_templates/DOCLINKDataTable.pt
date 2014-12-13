@@ -1,0 +1,159 @@
+<div tal:on-error="structure container/handleError">
+<span tal:define="widget python:options['field'].getSettings('widget');
+                    selection python:options['selection'];
+                    name python:options['fieldname'];
+                    fieldname name;
+                    title python:options['field'].title;                    
+                    current python:options['fieldvalue'];
+                    lcurrent python:test(hasattr(current,'split'),[current],current);
+                    lcurrent_ids python:[p.split('/')[-1] for p in lcurrent];
+                    ">
+                      
+	<tal:widget tal:condition="python:test(widget=='DYNAMICTABLE')"
+                tal:define="portal_state context/@@plone_portal_state;
+                    portal_url portal_state/portal_url;
+                    fieldid options/field/id;
+                    baseURL python: context.getParentDatabase().absolute_url();
+                    doc python: context.REQUEST.PARENTS[0];
+                    docId python:doc.isDocument() and doc.getId();
+                    editMode python: 1 if not doc.isDocument() or doc.isEditMode() else 0;			
+                    data selection;
+                    cols python:options['field'].getSettings().getJQueryColumns();
+                    params python:options['field'].getSettings('dynamictableparam');
+                    selected python:'|'.join(lcurrent_ids+lcurrent);">
+                        
+                                       
+                        
+        <script type='text/javascript' tal:content="structure string:
+            var ${fieldname}_datatable;
+    
+			$$(document).ready(function() {
+                var aData = ${data};
+                for(i=0;i<aData.length;i++) {
+                    aData[i] = eval(aData[i].substring(1));
+                };
+
+			    ${fieldname}_datatable = $$('#${fieldname}_datagrid').dataTable( {
+			        'aaData': aData,
+			        'bJQueryUI': false,
+                    'iconPath': '${baseURL}/resources/icons/',
+                    'editMode':false,
+                    ${params},
+                     'fnDrawCallback': function() {
+                            //jQuery.plominoMaps.google.updateMap(this);
+
+                            var v = 0
+                            for(i=0;i<${fieldname}_datatable.fnGetData().length;i++){
+                               v=v+parseFloat(${fieldname}_datatable.fnGetData()[i][2])
+
+                            }
+
+                            $$('#sumvalues').text(v);
+                            $$('#${fieldname}_editrow').addClass('disabled');
+                            $$('#${fieldname}_deleterow').addClass('disabled');   
+                            $$('#${fieldname}_datagrid > tbody > tr').click(function() {
+                                datagrid_deselect_rows(${fieldname}_datatable);
+                                $$(this).addClass('datagrid_row_selected');
+                                console.log(${fieldname}_datatable.fnGetPosition(this))
+
+                                //marker.map.infowindow.setContent(marker.title);
+                                //marker.map.infowindow.open(marker.map, marker);
+                                console.log(${fieldname}_datatable.fnGetPosition(this))
+                                if(${fieldname}_datatable.fnGetData().length>0){
+                                    var rowData = ${fieldname}_datatable.fnGetData(${fieldname}_datatable.fnGetPosition(this)) 
+                                    //console.log(rowData);
+                                    //var overlay = jQuery.plominoMaps.google.getOverlay(rowData[0]);
+
+		        				    $$(this).addClass('datagrid_row_selected');
+                                    $$('#${fieldname}_editrow').removeClass('disabled');
+                                    $$('#${fieldname}_deleterow').removeClass('disabled');
+                                }
+
+
+                            });
+                       },
+                        'aoColumnDefs': [
+         {
+            'aTargets': ['_all'],
+            'bUseRendered': false,
+            'fnRender': function (oObj) {
+                var cell = oObj.aData[oObj.iDataColumn];
+                var dburl='${baseURL}';
+                if(oObj.iDataColumn==0){
+                    var EditLink = '<a class=\'context add-row ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary\' href=\'' + dburl + '/' + oObj.aData[0] + '/EditDocument\'><span class=\'ui-button-icon-primary ui-icon ui-icon-pencil\'></span><span class=\'ui-button-text\'>Modifica</span></a>';
+                    var ViewLink = '<a class=\'context add-row ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary\' href=\'' + dburl + '/' + oObj.aData[0] + '\'' + '><span class=\'ui-button-icon-primary ui-icon ui-icon-info\'></span><span class=\'ui-button-text\'>Visualizza</span></a>';
+                    
+                   return EditLink+ViewLink;
+                }
+                else
+                    return cell
+            }
+                
+        },    
+        { 'aTargets': [0], 'bSearchable': false, 'bSortable': false, 'sWidth': '0' , 'bVisible':true }                      
+
+                        ],
+                                
+       				'oLanguage': {
+       					'sUrl': '@@collective.js.datatables.translation'
+					}
+			        
+			    });
+
+		
+
+        			$$('#${fieldname}_addrow').click(function() {
+                        if($.plominoFormChanged && !confirm('Attenzione: le modifiche sul form andranno perse, continuare?')) return false;
+                        var editUrl = '${baseURL}/' + ${fieldname}_datatable.fnSettings().oInit.editForm;
+                        window.location=editUrl+'/OpenForm?parentDocument=${docId}&parentField=${fieldname}';
+                        return false;
+        			});
+        			$$('#${fieldname}_editrow').click(function() {
+                        var row = datagrid_get_selected_row(${fieldname}_datatable);
+                        var rowIndex = ${fieldname}_datatable.fnGetPosition(row);
+                        var id = ${fieldname}_datatable.fnGetData(rowIndex,0);
+                        window.location='${baseURL}/'+id+'/EditDocument';   
+                        return false;
+
+        			});
+        			$$('#${fieldname}_deleterow').button({'label':'Elimina'}).click(function() {
+                        if(confirm('Sicuro di voler cancellare questo elemento ?')){
+                            var row = datagrid_get_selected_row(${fieldname}_datatable);
+                            var rowIndex = ${fieldname}_datatable.fnGetPosition(row);
+                            var id = ${fieldname}_datatable.fnGetData(rowIndex,0);
+                            window.location='${baseURL}/plomino_documents/'+id+'/delete?returnurl=${baseURL}/plomino_documents/${docId}';
+                        }
+                            return false;
+        			});
+
+        		});">
+         </script>
+                        
+        <label class="control-label"><span tal:content="python:'%s: ' % title">Titolo</span>
+            <i class="icon-info-sign" data-fade-speed="10" data-trigger="hover"></i>
+        </label>
+                           
+        <div tal:attributes="
+            id string:${fieldname}_gmap;
+            data-base-url baseURL;
+            data-edit-mode editMode;
+            class string: googlemap-plugin;"></div>              
+              
+        <table class="table table-bordered" tal:attributes="id string:${fieldname}_datagrid"></table>
+        <div class="btn-group" tal:condition="python:doc.isDocument() and not doc.isEditMode()">
+            <a class="context add-row ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary"
+                tal:attributes="id string:${fieldname}_addrow;">
+                <span class="ui-button-icon-primary ui-icon ui-icon-pencil"></span><span class="ui-button-text">Aggiungi</span>
+            </a>
+            <!-- <button class="btn" tal:attributes="id string:${fieldname}_addrow;">Aggiungi</button>
+            <button class="btn disabled" tal:attributes="id string:${fieldname}_editrow;">Modifica</button>
+            <button class="btn disabled" tal:attributes="id string:${fieldname}_deleterow;">Elimina</button> -->
+        </div>              
+               
+        <!--<div style="clear: both"></div>-->
+        <input type="hidden"
+            tal:attributes="name options/fieldname; id string:${name};
+            value python:test(current is not None,'|'.join(current),'')"/>
+    </tal:widget>
+</span>
+</div>

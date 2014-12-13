@@ -104,12 +104,15 @@ def updateDatagrid(diz_pagamenti,diz_code_pagamenti, stato_pagamento, dg_exist, 
             importo=diz_pagamenti[k_code]['importo']            
             if allegato == False and cod not in codice_allegato:    
                 stato = dg_exist_rmv_value[4]
+                data = dg_exist_rmv_value[5]
             elif cod in codice_allegato:                
                 stato = stato_pagamento
+                data = DateToString(Now(),'%d/%m/%Y')
             else:
-                stato = stato_pagamento          
+                stato = stato_pagamento
+                data = DateToString(Now(),'%d/%m/%Y')          
                 
-            data = dg_exist_rmv_value[5]
+            
             dg = [cod,importo,label,grp,stato,data]            
             dg_exist_t.append(dg)
         return dg_exist_t
