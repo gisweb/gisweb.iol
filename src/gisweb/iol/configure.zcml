@@ -10,9 +10,7 @@
     <include package="Products.CMFCore" />
     <include package="Products.CMFPlacefulWorkflow" />
     <include package="Products.CMFPlomino" />
-	
-	<include package=".browser" />
-	
+
     <genericsetup:registerProfile
         name="default"
         title="IOL Base (gisweb.iol)"
