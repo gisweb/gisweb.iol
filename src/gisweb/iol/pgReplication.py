@@ -5,7 +5,7 @@ from copy import deepcopy
 import simplejson as json
 import DateTime
 
-from Products.CMFPlomino import PlominoDocument,PlominoForm
+from Products.CMFPlomino.PlominoDocument import PlominoDocument
 
 from plone import api
 
@@ -105,14 +105,24 @@ def saveData(doc):
     wf = api.portal.get_tool(name='portal_workflow')
     id = doc.getId()
     roles = getIolRoles(doc)
+    try:
+        state = api.content.get_state(obj=doc)
+        rh = json.loads(json.dumps(wf.getInfoFor(doc,'review_history'), default=DateTime.DateTime.ISO,use_decimal=True ))
+    except:
+        if 'wf_iol' in d.keys():
+            state = d['wf_iol']
+        else:
+            state = ''
+        rh = []
+        
     data = dict(
         id = id,
         plominoform = doc.getForm().getFormName(),
         plominodb = doc.getParentDatabase().id,
         owner = doc.getOwner().getUserName(),
         url = doc.absolute_url(),
-        review_state = api.content.get_state(obj=doc),
-        review_history = json.loads(json.dumps(wf.getInfoFor(doc,'review_history'), default=DateTime.DateTime.ISO,use_decimal=True )),
+        review_state = state,
+        review_history = rh,
         iol_owner = roles['iol_owner'],
         iol_reviewer = roles['iol_reviewer'],
         iol_manager = roles['iol_manager'],
