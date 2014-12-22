@@ -19,8 +19,6 @@
 	</tal:cond>
 
 	<tal:cond tal:condition="python: not current">
-	<span tal:attributes="name options/fieldname;class string:SELECTIONFieldRead" tal:content="python:'Nessun valore selezionato'">No value</span> 
+	<span tal:attributes="name options/fieldname;class string:SELECTIONFieldRead" tal:content="python:'---'">No value</span> 
 	</tal:cond>
-
-
 </tal:block>
