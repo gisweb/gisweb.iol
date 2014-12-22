@@ -47,18 +47,12 @@ elif obj.portal_type=='PlominoDocument':
         else:
             return False    
     elif cond=='rinnovo':
-        if ((today > start) and ((end + 30) > today)  and ((end - 30) < today)):
+        #if ((today > start) and ((end + 30) > today)  and ((end - 30) < today)):
         #nrinnovi=obj.getItem('numero_rinnovi')
         #if ((today > start) and ((end + 30) > today)  and ((end - 30) < today)) and obj.getItem('rinnovabile',0)==1 and nrinnovi<4:
-            res = True
-        else:
-            return False
-    elif cond=='proroga':
-        nproroghe=len(obj.getItem('childrenList_proroga',[]))
-        if nproroghe < 3 and today > start and end > today and obj.getItem('prorogabile',0)==1:
-            return True
-        else:
-            res = False
+        res = True
+        
+    
     else:
         res = False
 else:

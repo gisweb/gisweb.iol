@@ -26,7 +26,7 @@ importo=context.REQUEST.get('importo')
 esito=context.REQUEST.get('esito')
 divisa=context.REQUEST.get('divisa')
 trans=str(context.REQUEST.get('codTrans'))
-totale = str(context.REQUEST.get('totale'))
+totale = str(context.REQUEST.get('totale')) or '0'
 
 context.setItem('importo_pagamento',importo)
 context.setItem('esito_pagamento',esito)
@@ -72,23 +72,12 @@ def settoAnnulloPagamentiTot(lista,cod_gruppo):
 
 
 
-def settoAnnulloPagamentiTot(lista,cod_gruppo):
-    p=[]
-    for c in lista:
-        if c[3]==cod_gruppo:            
-            c[4]='pagamento annullato'
-            c[5]=DateToString(Now(),'%d/%m/%Y')
-        p.append(c)
-    context.setItem('elenco_pagamenti',p)
-
-
-
 def settoAnnulloPagamentiCodice(lista,cod_single):
     p=[]
     for c in lista:
         cod_single = cod_single[:-2] + '00'
         if c[0]==cod_single:
-            c[4]='pagamento rate'
+            c[4]='pagamento annullato'
             c[5]=DateToString(Now(),'%d/%m/%Y')
         p.append(c)
     context.setItem('elenco_pagamenti',p)
@@ -100,10 +89,6 @@ def settoAnnulloPagamentiCodice(lista,cod_single):
 if context.getItem('elenco_pagamenti') and totale == '0':
     settoAnnulloPagamentiGruppo(context.getItem('elenco_pagamenti'),cod_paga)
 
-# aggiorno lo stato dei pagamenti per tutti i pagamenti - totale     
-
-if context.getItem('elenco_pagamenti') and totale == '0':
-    settoAnnulloPagamentiGruppo(context.getItem('elenco_pagamenti'),cod_paga)
 
 # aggiorno lo stato dei pagamenti per tutti pagamenti - totale     
 elif context.getItem('elenco_pagamenti') and totale == '1':
@@ -111,37 +96,51 @@ elif context.getItem('elenco_pagamenti') and totale == '1':
 
 
 # aggiorna lo stato di pagamento delle rate
-rate = []
-elenco_rate = []
-if context.getItem('elenco_rate_pagamenti') and context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id)==True:
+rata = []
+elenco_rate=[]
+if context.getItem('elenco_rate_pagamenti') and context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id) and len(context.getItem('permesso_rate_opt'))>0: 
     elenco_rate = context.getItem('elenco_rate_pagamenti')
-elif context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id)=='True' and cod_paga[:-2] + '00' in context.getItem('permesso_rate_opt'):
-    elenco_rate = context.elencoRate(context.getId(),cod_paga[:-2] + '00')
+    
+elif context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id) and len(context.getItem('permesso_rate_opt'))>0:
+    elenco_rate = context.elencoRate(context.getId(),context.getItem('permesso_rate_opt')[0])
 
-if elenco_rate:
+if len(elenco_rate)>0:    
+    s=['non pagato','pagamento annullato']
+    elenco_rate_no_pagate = filter(lambda cod: cod[4] in s ,elenco_rate)        
+    elenco_rate_no_pagate.sort()
+    rate_da_pagare = [v[0] for v in elenco_rate_no_pagate]
+    
     # 1° caso dg rate non esistente
     if not context.getItem('elenco_rate_pagamenti'):       
-        for cod_rata in elenco_rate:
-            if cod_rata[0] == cod_paga:
+        for idx,cod_rata in enumerate(elenco_rate):
+            if cod_rata[3] == cod_paga and cod_rata[0] == rate_da_pagare[0]:
                 cod_rata[4] = 'pagamento annullato'
                 cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
-            rate.append(cod_rata)
-        context.setItem('elenco_rate_pagamenti',rate)
-        # impostiamo sul dg principale lo stato dei pagamenti es. pagamento rate in corso
-        settoAnnulloPagamentiCodice(context.getItem('elenco_pagamenti'),cod_paga)
+                rata = elenco_rate
+                #rata.insert(idx,cod_rata)
+                # impostiamo sul dg principale lo stato dei pagamenti es. pagamento rate in corso
+                settoAnnulloPagamentiCodice(context.getItem('elenco_pagamenti'),cod_rata[0])
+        context.setItem('elenco_rate_pagamenti',rata)
+        
     # casi successivi il dg rate esiste
+    
     elif context.getItem('elenco_rate_pagamenti'):
-        for cod_rata in context.getItem('elenco_rate_pagamenti'):
-            if cod_rata[0] == cod_paga:
+                
+        for idx,cod_rata in enumerate(elenco_rate):
+            
+            if cod_rata[0] == rate_da_pagare[0]:
+                
                 cod_rata[4] = 'pagamento annullato'
-                cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
-            rate.append(cod_rata)
-        context.setItem('elenco_rate_pagamenti',rate)
+                cod_rata[5] = DateToString(Now(),'%d/%m/%Y')             
 
+                settoAnnulloPagamentiCodice(context.getItem('elenco_pagamenti'),cod_rata[0])
+                   
+        context.setItem('elenco_rate_pagamenti',elenco_rate)
+        
+        
         
 
     
 
 rurl=context.absolute_url()
 context.redirectTo(rurl)
-
