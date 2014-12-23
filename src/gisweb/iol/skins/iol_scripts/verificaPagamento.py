@@ -103,7 +103,7 @@ def settoVerificaPagamentiCodice(lista,cod_single):
     for c in lista:
         cod_single = cod_single[:-2] + '00'
         if c[0]==cod_single:
-            c[4]='pagamento rate'
+            c[4]='pagamento effettuato'
             c[5]=DateToString(Now(),'%d/%m/%Y')
         p.append(c)
     context.setItem('elenco_pagamenti',p)
@@ -138,43 +138,55 @@ elif context.getItem('elenco_pagamenti') and totale == '1':
 
 
 # aggiorna lo stato di pagamento delle rate
-rate = []
+rata = []
 elenco_rate = []
-if context.getItem('elenco_rate_pagamenti') and context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id)==True:
+if context.getItem('elenco_rate_pagamenti') and context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id) and len(context.getItem('permesso_rate_opt'))>0:    
     elenco_rate = context.getItem('elenco_rate_pagamenti')
-elif context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id)=='True' and cod_paga[:-2] + '00' in context.getItem('permesso_rate_opt'):
-    elenco_rate = context.elencoRate(context.getId(),cod_paga[:-2] + '00')
+    
+elif context.wf_getInfoFor('wf_pagamenti',wf_id=wf_id) and len(context.getItem('permesso_rate_opt'))>0:    
+    elenco_rate = context.elencoRate(context.getId(),context.getItem('permesso_rate_opt')[0])
 
-if elenco_rate:
+if len(elenco_rate) > 0:    
+    s=['non pagato','pagamento annullato']
+    elenco_rate_no_pagate = filter(lambda cod: cod[4] in s ,elenco_rate)        
+    elenco_rate_no_pagate.sort()
+    rata_da_pagare = [v[0] for v in elenco_rate_no_pagate]
+   
     # 1° caso dg rate non esistente
     if not context.getItem('elenco_rate_pagamenti'):               
         for cod_rata in elenco_rate:            
-            if cod_rata[0] == cod_paga and context.getItem('esito_pagamento')=='OK':
+            if cod_rata[3] == cod_paga and cod_rata[0] == rata_da_pagare[0] and context.getItem('esito_pagamento')=='OK':
+                
                 cod_rata[4] = 'pagamento effettuato'
                 cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
-            elif cod_rata[0] == cod_paga and context.getItem('esito_pagamento')=='KO':
+                rata = elenco_rate                
+                # impostiamo sul dg principale lo stato dei pagamenti es. pagamento rate in corso
+                settoVerificaPagamentiCodice(context.getItem('elenco_pagamenti'),cod_rata[0])
+        
+            elif cod_rata[0] == rata_da_pagare[0] and context.getItem('esito_pagamento')=='KO':
                 cod_rata[4] = 'pagamento annullato'
                 cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
-            rate.append(cod_rata)
-        context.setItem('elenco_rate_pagamenti',rate)
-        # impostiamo sul dg principale lo stato dei pagamenti es. pagamento rate in corso
-        settoVerificaPagamentiCodice(context.getItem('elenco_pagamenti'),cod_paga)
+                settoVerificaRateConcluse(context.getItem('elenco_pagamenti'),cod_rata[0])
+            
+        context.setItem('elenco_rate_pagamenti',rata)
+        
     # casi successivi il dg rate esiste
     elif context.getItem('elenco_rate_pagamenti'):
-        for cod_rata in context.getItem('elenco_rate_pagamenti'):
-            if cod_rata[0] == cod_paga and context.getItem('esito_pagamento')=='OK':
+        
+        for cod_rata in elenco_rate:
+            
+            if cod_rata[0] == rata_da_pagare[0] and context.getItem('esito_pagamento')=='OK':
                 cod_rata[4] = 'pagamento effettuato'
                 cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
-            elif cod_rata[0] == cod_paga and context.getItem('esito_pagamento')=='KO':
+                rata = elenco_rate
+                
+                settoVerificaPagamentiCodice(context.getItem('elenco_pagamenti'),cod_rata[0])
+            elif cod_rata[0] == rata_da_pagare[0] and context.getItem('esito_pagamento')=='KO':                
                 cod_rata[4] = 'pagamento annullato'
                 cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
-            rate.append(cod_rata)
-        context.setItem('elenco_rate_pagamenti',rate)
-        rate_da_pagare = filter(lambda cod_rata: cod_rata[4]=='non pagato' ,context.getItem('elenco_rate_pagamenti'))
-        if len(rate_da_pagare) == 0:
-            # rate terminate setto stato pagamento rate concluse
-            settoVerificaRateConcluse(context.getItem('elenco_pagamenti'),cod_paga)
-
+                rata = elenco_rate
+                
+        context.setItem('elenco_rate_pagamenti',rata)
         
 db = context.getParentDatabase()
 applicazione = db.getId().split('_')[-1]

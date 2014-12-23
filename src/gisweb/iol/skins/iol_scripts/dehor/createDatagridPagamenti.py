@@ -4,7 +4,7 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=codici_pagamenti, field_allegato='ricevuta_pagamento', field_dg='elenco_pagamenti', codice_allegato=''
+##parameters=doc,codici_pagamenti, field_allegato='ricevuta_pagamento', field_dg='elenco_pagamenti', codice_allegato=''
 ##title=pagamenti datagrid prove
 ##
 
@@ -18,20 +18,6 @@ db = context.getParentDatabase()
 doc = context
 
 wf = getToolByName(doc, 'portal_workflow')
-
-
-applicazione = db.getId().split('_')[-1]
-app = getToolByName(context,applicazione)
-
-scriptName = 'createDatagridPagamenti' 
-
-
-if scriptName in app.objectIds():
-     
-    return app.createDatagridPagamenti(context,codici_pagamenti)
-              
-    
-
 
 
 
@@ -54,7 +40,7 @@ def createDatagrid(diz_pagamenti,stato_pagamento):
 
 # aggiorna il datagrid con i nuovi pagamenti
 def updateDatagrid(diz_pagamenti,diz_code_pagamenti, stato_pagamento, dg_exist, allegato,codice_allegato):
-       
+      
     lista_codici = diz_pagamenti.keys()    
     old_codici = map(lambda codice: codice[0] ,dg_exist)    
     new_codici = filter(lambda codice: codice not in old_codici ,lista_codici)
@@ -75,6 +61,7 @@ def updateDatagrid(diz_pagamenti,diz_code_pagamenti, stato_pagamento, dg_exist, 
         new_state = [code[0] for code in aa]
         
         for codice in new_state:
+             
             dg_exist_new = [dg_exist.pop(cod[0]) for cod in enumerate(dg_exist) if cod[1][0] == codice]            
             sub_diz = diz_pagamenti[codice]            
             cod = sub_diz['codice']
@@ -95,7 +82,7 @@ def updateDatagrid(diz_pagamenti,diz_code_pagamenti, stato_pagamento, dg_exist, 
         return dg_exist
               
     elif len(new_codici) > 0:
-           
+          
         for codice in new_codici:
         
             sub_diz = diz_pagamenti[codice]
@@ -110,16 +97,20 @@ def updateDatagrid(diz_pagamenti,diz_code_pagamenti, stato_pagamento, dg_exist, 
         return dg_exist
 
     elif new_diz_value !={}:        
-        
+         
         dg_exist_t = []
         for k_code in new_diz_value.keys():            
             dg_exist_rmv_value = [dg_exist.pop(cod[0]) for cod in enumerate(dg_exist) if cod[1][0]==k_code][0]            
             cod = dg_exist_rmv_value[0]
             label = dg_exist_rmv_value[2]
-            grp = dg_exist_rmv_value[3]
-            #importo = new_diz_value[k_code]
+            grp = dg_exist_rmv_value[3]            
             importo=diz_pagamenti[k_code]['importo']
-            stato = dg_exist_rmv_value[4]        
+            if allegato == False and cod not in codice_allegato:                
+                stato = dg_exist_rmv_value[4]
+            elif cod in codice_allegato:                
+                stato = stato_pagamento                
+            else:
+                stato = stato_pagamento        
             data = dg_exist_rmv_value[5]
             dg = [cod,importo,label,grp,stato,data]            
             dg_exist_t.append(dg)
