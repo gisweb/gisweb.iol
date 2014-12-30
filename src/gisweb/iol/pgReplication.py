@@ -114,12 +114,15 @@ def saveData(doc):
         else:
             state = ''
         rh = []
-        
+    try:
+        owner = doc.getOwner().getUserName()
+    except:
+        owner = ''
     data = dict(
         id = id,
         plominoform = doc.getForm().getFormName(),
         plominodb = doc.getParentDatabase().id,
-        owner = doc.getOwner().getUserName(),
+        owner = owner,
         url = doc.absolute_url(),
         review_state = state,
         review_history = rh,
@@ -138,8 +141,10 @@ def saveData(doc):
         session.add(row)
         session.commit()
         session.close()
+        db.close()
     except Exception as e:
         api.portal.show_message(message=u'Si sono verificati errore nel salvataggio su database', request=doc.REQUEST )
+        db.close()
         return -1
     return 1
     
