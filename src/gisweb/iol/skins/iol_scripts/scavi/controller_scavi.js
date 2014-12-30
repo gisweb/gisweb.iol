@@ -22,7 +22,7 @@
             });
             query.callback(data);
         },
-/*        //PER INSERIRE U N VALORE NON IN ELENCO (COMBO EDITABILE)
+        //PER INSERIRE U N VALORE NON IN ELENCO (COMBO EDITABILE)
         createSearchChoice:function(term, data) {
           if ($(data).filter(function() {return this.text.localeCompare(term)===0;}).length===0) {
             return {id:term, text:term};
@@ -31,7 +31,7 @@
         initSelection : function (element, callback) {
           var data ={id: element.val(), text: element.val(), coords:'' } ;
           callback(data);
-        }*/
+        }
     }).on("change", function(e){
         //$("#geometry").val(e.added.coords);
         var coords = e.added.coords.split(" ");
