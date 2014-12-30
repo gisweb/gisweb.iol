@@ -141,10 +141,8 @@ def saveData(doc):
         session.add(row)
         session.commit()
         session.close()
-        db.close()
     except Exception as e:
         api.portal.show_message(message=u'Si sono verificati errore nel salvataggio su database', request=doc.REQUEST )
-        db.close()
         return -1
     return 1
     
