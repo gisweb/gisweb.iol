@@ -114,12 +114,15 @@ def saveData(doc):
         else:
             state = ''
         rh = []
-        
+    try:
+        owner = doc.getOwner().getUserName()
+    except:
+        owner = ''
     data = dict(
         id = id,
         plominoform = doc.getForm().getFormName(),
         plominodb = doc.getParentDatabase().id,
-        owner = doc.getOwner().getUserName(),
+        owner = owner,
         url = doc.absolute_url(),
         review_state = state,
         review_history = rh,
