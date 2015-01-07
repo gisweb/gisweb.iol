@@ -481,12 +481,14 @@
                 if(sGeom){
                     elementType = $("[name='"+ options.drawingTools +"']").val();
                     currentOverlay = createOverlay(sGeom, drawingOptions[elementType]); 
-                    currentOverlay.setMap(map);
-                    currentOverlay.editMode = editMode;
-                    currentOverlay.fieldId = $element.attr('id');
-                    registerObject(currentOverlay);
-                    zoomOnOverlay(currentOverlay);
-                    if(currentOverlay.geometryType == "marker")  zoomOnStreetView(currentOverlay)
+                    if(currentOverlay){
+                        currentOverlay.setMap(map);
+                        currentOverlay.editMode = editMode;
+                        currentOverlay.fieldId = $element.attr('id');
+                        registerObject(currentOverlay);
+                        zoomOnOverlay(currentOverlay);
+                        if(currentOverlay.geometryType == "marker")  zoomOnStreetView(currentOverlay)
+                    }
                }
 
 
