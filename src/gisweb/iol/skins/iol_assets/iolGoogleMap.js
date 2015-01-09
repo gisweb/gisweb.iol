@@ -48,6 +48,9 @@
             return ;
 
         };
+        $.fn.iolGoogleMap.createOverlay = function(stringGeom,options) {
+            return createOverlay (stringGeom,options);
+        };
         $.fn.iolGoogleMap.addMarker = function(mapName, markerOptions) {
 
             //createOverlay('sdfsdf','sdfsdf')

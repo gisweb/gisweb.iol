@@ -67,11 +67,21 @@
     console.log(this)
     console.log($.fn.iolGoogleMap.settings)
 
+    var gridSettings = $('#elenco_civici_datagrid').dataTable().fnSettings().oInit;
+
+
     //EVENTI SUL DATAGRID 
     $('#elenco_civici_datagrid').dataTable().fnSettings().aoRowCreatedCallback.push( {
         "fn": function( nRow, aData, iDataIndex ){ 
-            console.log("AGGIUNTA LA RIGA")
-
+            console.log(aData);
+            var geomIndex = gridSettings.geomIndex || (aData.length-1);
+            
+            var coord = aData[geomIndex];
+            var testRE = coord.match("<span>(.*)</span>");
+            if(testRE.length>0) coord = testRE[1];
+            var markerOptions = {};
+            var marker = $("#mappa").iolGoogleMap.createOverlay(coord,markerOptions);
+            marker.setMap(mappa);
             //SETTO PER DEFAULT ULTIMA E PENULTIMA COLONNA DEL GRID PER I VALORI DI GEOMETRIA E TIPO
 /*            currentOverlay.dataTable = this;
             currentOverlay.geomIndex = settings.geomIndex;
