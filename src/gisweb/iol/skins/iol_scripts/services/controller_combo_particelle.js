@@ -1,10 +1,10 @@
 
 (function ($) {
 
-  var initDialog = function(_, container){
+  var initDialogParticelle = function(_, container){
     var elencoFogli = [];
     var elencoParticelle = [];
-    $('#nct_foglio').select2({
+    $("[name='nct_foglio']").select2({
           placeholder: '---',
           allowClear: true,
           minimumInputLength: 0,
@@ -27,17 +27,18 @@
       $.ajax({
         'url':"services/elencoParticelle",
         'type':'GET',
-        'data':{"sezione":$('#nct_sezione').select2('val'), "foglio":$(this).val()},
+        'data':{"sezione":$("[name='nct_sezione']").select2('val'), "foglio":$(this).val()},
         'dataType':'JSON',
         'success':function(data, textStatus, jqXHR){
           elencoParticelle = data.results;
-          $('#nct_particella').select2('data', elencoParticelle);
-          $('#nct_particella').select2('val', null);
-          $("#nct_geometry").val('');
+          console.log(elencoParticelle)
+          $("[name='nct_particella']").select2('data', elencoParticelle);
+          $("[name='nct_particella']").select2('val', null);
+          $("[name='nct_geometry']").val('');
         }
       });
     });
-    $('#nct_particella').select2({
+    $("[name='nct_particella']").select2({
           placeholder: '---',
           allowClear: true,
           minimumInputLength: 0,
@@ -63,9 +64,10 @@
           callback(data);
         }
     }).on("change", function(e){
-        $("#nct_geometry").val(e.added.coords);
+        var val = e.added && e.added.coords || '';
+        $("input[name='nct_geometry']").val(val);
     });
-    $("#nct_sezione").select2().on("change", function(e) { 
+    $("[name='nct_sezione']").select2().on("change", function(e) { 
       $.ajax({
         'url':"services/elencoFogli",
         'type':'GET',
@@ -74,22 +76,67 @@
         'success':function(data, textStatus, jqXHR){
           elencoFogli = data.results;
           elencoParticelle = [];
-          $('#nct_foglio').select2('data', elencoFogli);
-          $('#nct_foglio').select2('val', null);
-          $('#nct_particella').select2('data', elencoParticelle);
-          $('#nct_particella').select2('val', null);
-          $("#nct_geometry").val('');
+          $("[name='nct_foglio']").select2('data', elencoFogli);
+          $("[name='nct_foglio']").select2('val', null);
+          $("[name='nct_particella']").select2('data', elencoParticelle);
+          $("[name='nct_particella']").select2('val', null);
+          $("[name='nct_geometry']").val('');
         }
       });
     });
-    $("#nct_sezione").select2().trigger("change");
+    $("[name='nct_sezione']").select2().trigger("change");
 
   }
   //codice da eseguire sull'apertura del dialog
-  $(document).on('opendialog', initDialog);
+  $(document).on('opendialog', initDialogParticelle);
 
   //per i test anche in creazione del doc
-  $(document).on('ready', initDialog);
+  $(document).on('ready', initDialogParticelle);
+
+  //MARKERS DALLA TABELLA ALLA MAPPA
+  $(document).on('maploaded', function () {
+
+
+    var mappa = $("#mappa").iolGoogleMap.getMap();
+
+    var gridSettings = $('#elenco_nct_datagrid').dataTable().fnSettings().oInit;
+
+
+    //EVENTI SUL DATAGRID 
+    $('#elenco_nct_datagrid').dataTable().fnSettings().aoRowCreatedCallback.push( {
+        "fn": function( nRow, aData, iDataIndex ){ 
+            var geomIndex = gridSettings.geomIndex || (aData.length-1);
+            
+            var coord = aData[geomIndex];
+            var testRE = coord.match("<span>(.*)</span>");
+            if(testRE.length>0) coord = testRE[1];
+            var polygonOptions = {"strokeColor":"#00FFFF","strokeOpacity": 1.0,"strokeWeight": 2};
+
+            var polygon = $("#mappa").iolGoogleMap.createOverlay(coord,polygonOptions);
+            polygon.setMap(mappa);
+
+        }
+    });
+    //EVENTI SUL DATAGRID 
+
+    var aData = $('#elenco_nct_datagrid').dataTable().fnGetData();
+    
+    var polygonOptions = {"strokeColor":"#00FFFF","fillColor":"#00FFFF","strokeWeight": 2};
+
+    for(i=0;i<aData.length;i++){
+      var geomIndex = gridSettings.geomIndex || (aData[0].length-1);
+      var coord = aData[i][geomIndex];
+
+      //var testRE = coord.match("<span>(.*)</span>");
+      //if(testRE.length>0) coord = testRE[1];
+      var polygon = $("#mappa").iolGoogleMap.createOverlay(coord,polygonOptions);
+      polygon.setMap(mappa);
+
+    }
+
+  });
+
+
 
 
 })(jQuery);
