@@ -1,9 +1,9 @@
 
 (function ($) {
 
-  var initDialog = function(_, container){
+  var initDialogCivici = function(_, container){
     var elencoCivici = [];
-    $('#civico_civico').select2({
+    $("input[name='civico_civico']").select2({
           placeholder: '---',
           allowClear: true,
           minimumInputLength: 0,
@@ -29,11 +29,12 @@
           callback(data);
         }
     }).on("change", function(e){
-        $("#civico_geometry").val(e.added.coords);
+        var val = e.added && e.added.coords || '';
+        $("input[name='civico_geometry']").val(val);
     });
 
-    $("#civico_via").select2().on("change", function(e) { 
-      $("#civico_nomevia").val(e.added.text);
+    $("select[name='civico_via']").select2().on("change", function(e) { 
+      //$("input[name='civico_nomevia']").val(e.added.text);
       $.ajax({
         'url':"services/elencoCivici",
         'type':'GET',
@@ -41,18 +42,18 @@
         'dataType':'JSON',
         'success':function(data, textStatus, jqXHR){
           elencoCivici = data.results;
-          $('#civico_civico').select2('data', elencoCivici);
-          $('#civico_civico').select2('val', null);
-          $("#civico_geometry").val('');
+          $("input[name='civico_civico']").select2('data', elencoCivici);
+          $("input[name='civico_civico']").select2('val', null);
+          $("input[name='civico_geometry']").val('');
         }
       });
     });
   }
   //codice da eseguire sull'apertura del dialog
-  $(document).on('opendialog', initDialog);
+  $(document).on('opendialog', initDialogCivici);
 
   //per i test anche in creazione del doc
-  $(document).on('ready', initDialog);
+  $(document).on('ready', initDialogCivici);
 
 
 
@@ -62,30 +63,36 @@
 
     var mappa = $("#mappa").iolGoogleMap.getMap();
 
-
-    console.log(mappa)
-    console.log(this)
-    console.log($.fn.iolGoogleMap.settings)
+    var gridSettings = $('#elenco_civici_datagrid').dataTable().fnSettings().oInit;
+    var markerOptions = {};
 
     //EVENTI SUL DATAGRID 
     $('#elenco_civici_datagrid').dataTable().fnSettings().aoRowCreatedCallback.push( {
         "fn": function( nRow, aData, iDataIndex ){ 
-            console.log("AGGIUNTA LA RIGA")
-
-            //SETTO PER DEFAULT ULTIMA E PENULTIMA COLONNA DEL GRID PER I VALORI DI GEOMETRIA E TIPO
-/*            currentOverlay.dataTable = this;
-            currentOverlay.geomIndex = settings.geomIndex;
-            currentOverlay.typeIndex = settings.typeIndex;
-            currentOverlay.lngIndex = settings.lngIndex;
-            currentOverlay.latIndex = settings.latIndex;
-            currentOverlay.saved = true;
-            currentOverlay.rowIndex = iDataIndex;
-            registerObject(currentOverlay)*/
+            var geomIndex = gridSettings.geomIndex || (aData.length-1);
+            var coord = aData[geomIndex];
+            var testRE = coord.match("<span>(.*)</span>");
+            if(testRE.length>0) coord = testRE[1];
+            var marker = $("#mappa").iolGoogleMap.createOverlay(coord,markerOptions);
+            marker.setMap(mappa);
 
         }
     });
 
+    var aData = $('#elenco_civici_datagrid').dataTable().fnGetData();
+    
+    for(i=0;i<aData.length;i++){
+      var geomIndex = gridSettings.geomIndex || (aData[0].length-1);
+      var coord = aData[i][geomIndex];
 
+      //var testRE = coord.match("<span>(.*)</span>");
+      //if(testRE.length>0) coord = testRE[1];
+      var marker = $("#mappa").iolGoogleMap.createOverlay(coord,markerOptions);
+      marker.setMap(mappa);
+      //polygon.setMap(mappa);
+      //console.log(polygon.getPath())
+
+    }
 
 
   });

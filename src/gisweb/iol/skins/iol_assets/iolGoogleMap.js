@@ -48,6 +48,9 @@
             return ;
 
         };
+        $.fn.iolGoogleMap.createOverlay = function(stringGeom,options) {
+            return createOverlay (stringGeom,options);
+        };
         $.fn.iolGoogleMap.addMarker = function(mapName, markerOptions) {
 
             //createOverlay('sdfsdf','sdfsdf')
@@ -76,7 +79,7 @@
         var createOverlay = function  (stringGeom,options){
             if(typeof(options)!='object') return;
             var overlay,pos;
-            var patt = /\((.*?)\)/;
+            var patt = /\(\((.*?)\)\)/;
             var sCoordinates = stringGeom.match(patt) && stringGeom.match(patt)[1] || stringGeom
 
             if(stringGeom.indexOf('POINT')!=-1){
@@ -87,6 +90,13 @@
             }
             else if((stringGeom.indexOf('LINESTRING')!=-1) || (stringGeom.indexOf('POLYGON')!=-1)){
 
+                var v, points = [];
+                var pos = sCoordinates.split(',');
+                for(var i=0;i<pos.length;i++){
+                    v = pos[i].split(" ");
+                    points.push(new google.maps.LatLng(v[1], v[0]));
+                }
+
                 if(stringGeom.indexOf('LINESTRING')!=-1){
                     overlay = new google.maps.Polyline(options.polylineOptions||{});
                     overlay.geometryType = google.maps.drawing.OverlayType.POLYLINE;
@@ -94,14 +104,13 @@
                 else{
                     overlay = new google.maps.Polygon(options.polygonOptions||{});
                     overlay.geometryType = google.maps.drawing.OverlayType.POLYGON;
+                    //RIBATTO IL PRIMO VERTICE
+                    //v = pos[0].split(" ");
+                    //points.push(new google.maps.LatLng(v[1], v[0]));
                 }
-                var v, points = [];
-                var pos = sCoordinates.split(',');
-                for(var i=0;i<pos.length;i++){
-                    v = pos[i].split(" ");
-                    points.push(new google.maps.LatLng(v[1],v[0]));
-                }
+
                 overlay.setPath(points);
+
             }
             //SOLO COORDINATE DEL PUNTO 
             else {
@@ -112,18 +121,6 @@
                 console.log(overlay)
             }
 
-            if(stringGeom.indexOf('POLYGON')!=-1){
-                points = [];
-                pos = sCoordinates.split(',');
-                for(var i=0;i<pos.length;i++){
-                    v = pos[i].split(" ");
-                    points.push(new google.maps.LatLng(v[1],v[0]));
-                }
-                console.log(options)
-
-                overlay.setPath(points);
-
-            }
  /* 
             //STRINGA DI COORDINATE
             else if(geometryType == "coords"){
