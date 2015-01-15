@@ -78,17 +78,19 @@
         //AGGIUNGE UN OGGETTO IN MAPPA CREANDO UN NUOVO OVERLAY (LE OPZIONI SONO MEMORIZZATE NEL FIELD DI PLOMINO)
         var createOverlay = function  (stringGeom,options){
             if(typeof(options)!='object') return;
-            var overlay,pos;
-            var patt = /\(\((.*?)\)\)/;
-            var sCoordinates = stringGeom.match(patt) && stringGeom.match(patt)[1] || stringGeom
+            var overlay,pos,patt,sCoordinates;
 
             if(stringGeom.indexOf('POINT')!=-1){
+                patt = /\((.*?)\)/;
+                sCoordinates = stringGeom.match(patt) && stringGeom.match(patt)[1] || stringGeom;
                 overlay = new google.maps.Marker(options.markerOptions||{});
                 pos = sCoordinates.split(' ');
                 overlay.setPosition(new google.maps.LatLng(pos[1],pos[0]))
                 overlay.geometryType = google.maps.drawing.OverlayType.MARKER;
             }
             else if((stringGeom.indexOf('LINESTRING')!=-1) || (stringGeom.indexOf('POLYGON')!=-1)){
+                patt = /\(\((.*?)\)\)/;
+                sCoordinates = stringGeom.match(patt) && stringGeom.match(patt)[1] || stringGeom;
 
                 var v, points = [];
                 var pos = sCoordinates.split(',');
