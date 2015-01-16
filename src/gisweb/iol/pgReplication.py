@@ -47,7 +47,7 @@ def serialDatagridItem(doc, obj ):
         i = 0
         res = dict()
         for fld in obj['field_list']:
-            res['fld']= el[i]
+            res[fld]= el[i]
             i+=1
         result.append(res)
     return result
