@@ -20,7 +20,21 @@ $( document ).ready(function() {
       $("#autorizzata_al").val("");
       $("#autorizzata_al").attr('readonly', false);
     }
+  });
+
+  $("[name='btn_invia_domanda']").bind('click',function(){
+    var serverUrl = document.URL;
+    var urlRedirect = serverUrl + '/inviaDomanda?rate_opt_utente=01200'
+    var urlProtocolla = serverUrl + '/protocollaInvia'
+    if ($('[name=rate_opt_utente]').is(":checked")){
+      window.location = urlRedirect 
+    }
+    else 
+      window.location = urlProtocolla  
   });  
+
+
+
 
 /*//resetta il campo importo cosap 
    	$("[name='occupazioni_ridotta'],#categoria_cosap,#superficie_interna,#autorizzata_dal,#autorizzata_al").bind('change',function(){

@@ -48,6 +48,9 @@
             return ;
 
         };
+        $.fn.iolGoogleMap.createOverlay = function(stringGeom,options) {
+            return createOverlay (stringGeom,options);
+        };
         $.fn.iolGoogleMap.addMarker = function(mapName, markerOptions) {
 
             //createOverlay('sdfsdf','sdfsdf')
@@ -75,17 +78,26 @@
         //AGGIUNGE UN OGGETTO IN MAPPA CREANDO UN NUOVO OVERLAY (LE OPZIONI SONO MEMORIZZATE NEL FIELD DI PLOMINO)
         var createOverlay = function  (stringGeom,options){
             if(typeof(options)!='object') return;
-            var overlay,pos;
-            var patt = /\((.*?)\)/;
-            var sCoordinates = stringGeom.match(patt) && stringGeom.match(patt)[1] || stringGeom
+            var overlay,pos,patt,sCoordinates;
 
             if(stringGeom.indexOf('POINT')!=-1){
+                patt = /\((.*?)\)/;
+                sCoordinates = stringGeom.match(patt) && stringGeom.match(patt)[1] || stringGeom;
                 overlay = new google.maps.Marker(options.markerOptions||{});
                 pos = sCoordinates.split(' ');
                 overlay.setPosition(new google.maps.LatLng(pos[1],pos[0]))
                 overlay.geometryType = google.maps.drawing.OverlayType.MARKER;
             }
             else if((stringGeom.indexOf('LINESTRING')!=-1) || (stringGeom.indexOf('POLYGON')!=-1)){
+                patt = /\(\((.*?)\)\)/;
+                sCoordinates = stringGeom.match(patt) && stringGeom.match(patt)[1] || stringGeom;
+
+                var v, points = [];
+                var pos = sCoordinates.split(',');
+                for(var i=0;i<pos.length;i++){
+                    v = pos[i].split(" ");
+                    points.push(new google.maps.LatLng(v[1], v[0]));
+                }
 
                 if(stringGeom.indexOf('LINESTRING')!=-1){
                     overlay = new google.maps.Polyline(options.polylineOptions||{});
@@ -94,14 +106,13 @@
                 else{
                     overlay = new google.maps.Polygon(options.polygonOptions||{});
                     overlay.geometryType = google.maps.drawing.OverlayType.POLYGON;
+                    //RIBATTO IL PRIMO VERTICE
+                    //v = pos[0].split(" ");
+                    //points.push(new google.maps.LatLng(v[1], v[0]));
                 }
-                var v, points = [];
-                var pos = sCoordinates.split(',');
-                for(var i=0;i<pos.length;i++){
-                    v = pos[i].split(" ");
-                    points.push(new google.maps.LatLng(v[1],v[0]));
-                }
+
                 overlay.setPath(points);
+
             }
             //SOLO COORDINATE DEL PUNTO 
             else {
@@ -112,18 +123,6 @@
                 console.log(overlay)
             }
 
-            if(stringGeom.indexOf('POLYGON')!=-1){
-                points = [];
-                pos = sCoordinates.split(',');
-                for(var i=0;i<pos.length;i++){
-                    v = pos[i].split(" ");
-                    points.push(new google.maps.LatLng(v[1],v[0]));
-                }
-                console.log(options)
-
-                overlay.setPath(points);
-
-            }
  /* 
             //STRINGA DI COORDINATE
             else if(geometryType == "coords"){
@@ -481,12 +480,14 @@
                 if(sGeom){
                     elementType = $("[name='"+ options.drawingTools +"']").val();
                     currentOverlay = createOverlay(sGeom, drawingOptions[elementType]); 
-                    currentOverlay.setMap(map);
-                    currentOverlay.editMode = editMode;
-                    currentOverlay.fieldId = $element.attr('id');
-                    registerObject(currentOverlay);
-                    zoomOnOverlay(currentOverlay);
-                    if(currentOverlay.geometryType == "marker")  zoomOnStreetView(currentOverlay)
+                    if(currentOverlay){
+                        currentOverlay.setMap(map);
+                        currentOverlay.editMode = editMode;
+                        currentOverlay.fieldId = $element.attr('id');
+                        registerObject(currentOverlay);
+                        zoomOnOverlay(currentOverlay);
+                        if(currentOverlay.geometryType == "marker")  zoomOnStreetView(currentOverlay)
+                    }
                }
 
 

@@ -1,4 +1,4 @@
-from gisweb.iol.replication import delData
+from gisweb.iol.pgReplication import delData
 
 if context.portal_type=="PlominoDocument":
     delData(context)    

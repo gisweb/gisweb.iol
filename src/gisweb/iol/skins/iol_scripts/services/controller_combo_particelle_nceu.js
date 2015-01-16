@@ -1,10 +1,10 @@
 
 (function ($) {
 
-  var initDialog = function(_, container){
-    var elencoFogli = [];
+  var initDialogParticelleCU = function(_, container){
+    var elencoFogliCU = [];
     var elencoParticelle = [];
-    $('#n_foglio').select2({
+    $("[name='nceu_foglio']").select2({
           placeholder: '---',
           allowClear: true,
           minimumInputLength: 0,
@@ -25,19 +25,19 @@
         }
     }).on("change", function(e){
       $.ajax({
-        'url':"services/elencoParticelle",
+        'url':"services/elencoParticelleCU",
         'type':'GET',
-        'data':{"sezione":$('#nct_sezione').select2('val'), "foglio":$(this).val()},
+        'data':{"sezione":$("[name='nceu_sezione']").select2('val'), "foglio":$(this).val()},
         'dataType':'JSON',
         'success':function(data, textStatus, jqXHR){
           elencoParticelle = data.results;
-          $('#nct_particella').select2('data', elencoParticelle);
-          $('#nct_particella').select2('val', null);
-          $("#nct_geometry").val('');
+          $("[name='nceu_particella']").select2('data', elencoParticelle);
+          $("[name='nceu_particella']").select2('val', null);
+          $("[name='nceu_geometry']").val('');
         }
       });
     });
-    $('#nct_particella').select2({
+    $("[name='nceu_particella']").select2({
           placeholder: '---',
           allowClear: true,
           minimumInputLength: 0,
@@ -63,9 +63,9 @@
           callback(data);
         }
     }).on("change", function(e){
-        $("#nct_geometry").val(e.added.coords);
+        $("[name='nceu_geometry']").val(e.added.coords);
     });
-    $("#nceu_sezione").select2().on("change", function(e) { 
+    $("[name='nceu_sezione']").select2().on("change", function(e) { 
       $.ajax({
         'url':"services/elencoFogli",
         'type':'GET',
@@ -74,22 +74,22 @@
         'success':function(data, textStatus, jqXHR){
           elencoFogli = data.results;
           elencoParticelle = [];
-          $('#nct_foglio').select2('data', elencoFogli);
-          $('#nct_foglio').select2('val', null);
-          $('#nct_particella').select2('data', elencoParticelle);
-          $('#nct_particella').select2('val', null);
-          $("#nct_geometry").val('');
+          $("[name='nceu_foglio']").select2('data', elencoFogli);
+          $("[name='nceu_foglio']").select2('val', null);
+          $("[name='nceu_particella']").select2('data', elencoParticelle);
+          $("[name='nceu_particella']").select2('val', null);
+          $("[name='nceu_geometry']").val('');
         }
       });
     });
-    $("#nceu_sezione").select2().trigger("change");
+    $("[name='nceu_sezione']").select2().trigger("change");
 
   }
   //codice da eseguire sull'apertura del dialog
-  $(document).on('opendialog', initDialog);
+  $(document).on('opendialog', initDialogParticelleCU);
 
   //per i test anche in creazione del doc
-  $(document).on('ready', initDialog);
+  $(document).on('ready', initDialogParticelleCU);
 
 
 })(jQuery);

@@ -43,7 +43,6 @@ form span.TEXTFieldRead-TEXT,
     padding: 5px;
     height: 15px;
     margin-bottom: 10px;
-
     /*width:100%;
     border:1 px solid gray;*/
 
@@ -58,6 +57,8 @@ form span.TEXTFieldRead-TEXT{
 
 form span.TEXTFieldRead-TEXTAREA{
     height: auto;
+    white-space: normal
+
 }
 
 form span.SELECTIONFieldRead{
