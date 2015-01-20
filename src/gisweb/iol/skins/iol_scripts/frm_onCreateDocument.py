@@ -14,6 +14,8 @@ kwargs: argomenti da passare al metodo oncreate_child
 """
 
 from gisweb.utils import updateAllRoleMappingsFor
+from iol.utils.interfaces import IolDocument
+
 db = context.getParentDatabase()
 
 # RUOLI
@@ -34,7 +36,7 @@ for uid,roles in rolesToAdd.items():
 # PERMESSI
 # Settaggio dei permessi in accordo agli stati iniziali dei workflow
 updateAllRoleMappingsFor(context)
-context.updateStatus()
+IolDocument(context).updateStatus()
 
 
 # EVENTI DI REALIZZAZIONE COLLEGAMENTO UNO A MOLTI
