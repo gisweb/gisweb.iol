@@ -34,7 +34,7 @@ def addElementsLista(lista,dg_fields):
         return lista
 
 
-# crea il datagrid con l'elenco dei primi pagamenti
+# crea il datagrid con l'elenco dei primi pagamentigit p
 def createDatagrid(diz_pagamenti,stato_pagamento):
     lista_codici = diz_pagamenti.keys()
     elenco_dg = []

@@ -43,10 +43,11 @@ elif obj.portal_type=='PlominoDocument':
     tipoRichiesta = obj.getItem('iol_tipo_richiesta')
  
     if cond=='rinnovo':
+        if obj.getItem('durata_occupazione') == 'permanente':
         #if ((today > start) and ((end + 30) > today)  and ((end - 30) < today)):
         #nrinnovi=obj.getItem('numero_rinnovi')
         #if ((today > start) and ((end + 30) > today)  and ((end - 30) < today)) and obj.getItem('rinnovabile',0)==1 and nrinnovi<4:
-        res = True
+            res = True
         
     
     else:

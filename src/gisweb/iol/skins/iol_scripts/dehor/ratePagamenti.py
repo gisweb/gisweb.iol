@@ -49,7 +49,7 @@ def scadenzaRate(diz,date_scadenza):
         if int(idx) + 1 == int(num_rata):            
             l_rata = diz[rata] 
             data_scad = '%s/%s' %(date_scadenza[idx],anno)
-            l_rata[-1] = data_scad
+            l_rata[5] = data_scad
             n_diz[rata] = l_rata
             for i in l_rata:
                 alist.append(i)
