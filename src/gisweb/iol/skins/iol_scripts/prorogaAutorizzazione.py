@@ -11,6 +11,8 @@
 from Products.CMFPlomino.PlominoUtils import json_loads, json_dumps, DateToString, Now
 from gisweb.utils import serialDoc, report, Type, requests_post, attachThis, os_path_join
 from Products.CMFCore.utils import getToolByName
+from iol.utils.interfaces import IolDocument
+
 
 if context.portal_type != 'PlominoDocument':
     return context.REQUEST.RESPONSE.redirect(context.absolute_url())
@@ -33,7 +35,7 @@ wf = getToolByName(proroga, 'portal_workflow') #state_change.workflow
 next_tr = 'istruttoria_completata'
 wf.doActionFor(proroga, next_tr)
 
-proroga.updateStatus()
+IolDocument(proroga).updateStatus()
 proroga.copiaPerProroga()
 
 doc.createDoc(field=field,grp=grp,model=model)
