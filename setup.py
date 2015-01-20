@@ -46,7 +46,8 @@ setup(name='gisweb.iol',
           'collective.wkpdfview', 
           'zope.app.component',
           # -*- Extra requirements: -*-
-          'dict2xml'
+          'dict2xml',
+          'iol.utils'
       ],
       extras_require={
         'test': [
