@@ -22,7 +22,7 @@ $( document ).ready(function() {
     }
   });
 
-  $("[name='btn_invia_domanda']").bind('click',function(){
+  $("#btn_invia_domanda").bind('click',function(){
     var serverUrl = document.URL;
     var urlRedirect = serverUrl + '/inviaDomanda?rate_opt_utente=01200'
     var urlProtocolla = serverUrl + '/protocollaInvia'
