@@ -1,11 +1,11 @@
-## Script (Python) "isConditionVerified"
+## Script (Python) "translateListToDiz"
 ##bind container=container
 ##bind context=context
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
 ##parameters=doc=None, form='', field=''
-##title=Script che renderizza i dati base della pratica
+##title=Script che trasforma una lista in dizionario
 
 
 
