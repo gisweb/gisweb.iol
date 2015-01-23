@@ -52,9 +52,11 @@ def listRate(lista,codice_pagam):
 
 
 def settoAnnulloPagamentiGruppo(lista,cod_gruppo):
+    stati=['pagamento effettuato','in attesa di verifica']
+    cod_pagati = [cod[0] for cod in lista if cod[4] in stati]
     p=[]
     for c in lista:
-        if c[3]==cod_gruppo:
+        if c[3]==cod_gruppo and c[0] not in cod_pagati:
             if c[0] not in listRate(lista,c[0]):
                 c[4]='pagamento annullato'
                 c[5]=DateToString(Now(),'%d/%m/%Y')
@@ -62,9 +64,11 @@ def settoAnnulloPagamentiGruppo(lista,cod_gruppo):
     context.setItem('elenco_pagamenti',p) 
 
 def settoAnnulloPagamentiTot(lista,cod_gruppo):
+    stati=['pagamento effettuato','in attesa di verifica']
+    cod_pagati = [cod[0] for cod in lista if cod[4] in stati]
     p=[]
     for c in lista:
-        if c[3]==cod_gruppo:            
+        if c[3]==cod_gruppo and c[0] not in cod_pagati:          
             c[4]='pagamento annullato'
             c[5]=DateToString(Now(),'%d/%m/%Y')
         p.append(c)
@@ -73,10 +77,12 @@ def settoAnnulloPagamentiTot(lista,cod_gruppo):
 
 
 def settoAnnulloPagamentiCodice(lista,cod_single):
+    stati=['pagamento effettuato','in attesa di verifica']
+    cod_pagati = [cod[0] for cod in lista if cod[4] in stati]
     p=[]
     for c in lista:
         cod_single = cod_single[:-2] + '00'
-        if c[0]==cod_single:
+        if c[0]==cod_single and c[0] not in cod_pagati:
             c[4]='pagamento annullato'
             c[5]=DateToString(Now(),'%d/%m/%Y')
         p.append(c)

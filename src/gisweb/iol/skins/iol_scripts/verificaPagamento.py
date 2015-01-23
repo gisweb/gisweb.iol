@@ -128,6 +128,9 @@ def settoVerificaRateConcluse(lista,cod_single):
 
 
 
+
+
+
 # aggiorno lo stato dei pagamenti solo per i pagamenti non rateizzabili
 
 if context.getItem('elenco_pagamenti') and totale == '0':
