@@ -121,6 +121,7 @@ def updateDatagrid(diz_pagamenti,diz_code_pagamenti, stato_pagamento, dg_exist, 
 
 
 allegato_bolli = [x for x in [i for i in doc.getItems() if i.startswith('allegato_bolli_istruttore')] if doc.getItem(x)!={}]
+allegato_bolli_utente = [x for x in [i for i in doc.getItems() if i.startswith('allegato_bolli_utente')] if doc.getItem(x)!={}]
 allegato_altri_pagamenti = [x for x in [i for i in doc.getItems() if i.startswith('istruttore_ricevuta_pagamento')] if doc.getItem(x)!={}]
 
 wf_trans_available = [act['id'] for act in context.wf_transitionsInfo(wf_id=wf_id, args=['description'])]
@@ -141,6 +142,8 @@ elif doc.getItem(field_dg):
         if len(allegato_bolli) > 0:
             
             return updateDatagrid(diz_pagamenti,diz_code_pagamenti={},stato_pagamento='pagamento effettuato',dg_exist=dg_esistente,allegato=True,codice_allegato=codice_allegato)
+        elif  len(allegato_bolli_utente) > 0:
+            return updateDatagrid(diz_pagamenti,diz_code_pagamenti={},stato_pagamento='in attesa di verifica',dg_exist=dg_esistente,allegato=True,codice_allegato=codice_allegato)       
         else:
             
             return updateDatagrid(diz_pagamenti,diz_code_pagamenti={},stato_pagamento='non pagato',dg_exist=dg_esistente,allegato=True,codice_allegato=codice_allegato)
