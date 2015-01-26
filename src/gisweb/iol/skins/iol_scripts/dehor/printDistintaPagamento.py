@@ -24,7 +24,7 @@ if elenco:
             importo = elem[1]
             causale = elem[2] 
             data = elem[-1]
-            array = [importo,causale,data]
+            array = [causale,importo,data]
             aa.append(array)
     if len(aa) > 0:        
         context.setItem('elenco_pagamenti_print',aa)
