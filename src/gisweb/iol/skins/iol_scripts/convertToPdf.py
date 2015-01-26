@@ -13,7 +13,7 @@ Converte il file docx in documenti_autorizzazione in pdf
 
 from gisweb.utils import Type,decode_b64,requests_post, get_headers,is_json
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlomino.PlominoUtils import open_url
+from Products.CMFPlomino.PlominoUtils import open_url, json_loads
 
 if context.portal_type != 'PlominoDocument':
     return ''
