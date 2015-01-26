@@ -1,3 +1,14 @@
+## Script (Python) "verificaPagamento_test"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=
+##title=setta flag per variabile wf wf_effettuato_pagamento
+##
+
+
 effettuato=False
 
 allegato_pagamento=[]
@@ -11,7 +22,7 @@ stati=['non pagato','pagamento annullato']
 if context.getItem('elenco_pagamenti'):
     cod_non_pagati = filter(lambda x: x[4] in stati ,context.getItem('elenco_pagamenti'))
     
-if context.getItem('esito_pagamento')=='OK':
+if context.getItem('esito_pagamento')=='OK' and context.wf_getInfoFor('review_state')!='autorizzata':
     effettuato=True
     
 # se in assegnata è presente almeno una ricevuta di pagamento per tipo allora non si può riproporre il pagamento
