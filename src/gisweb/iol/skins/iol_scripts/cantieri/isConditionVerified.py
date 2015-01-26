@@ -43,7 +43,7 @@ elif obj.portal_type=='PlominoDocument':
     tipoRichiesta = obj.getItem('iol_tipo_richiesta')
     if (obj.verificaRuolo('iol-reviewer') or obj.verificaRuolo('iol-manager') or obj.verificaRuolo('Owner')):
         if cond == 'integrazione': 
-            res = False 
+            res = True
         elif cond == 'rinnovo':
             #nrinnovi=obj.getItem('numero_rinnovi')
             #if ((today > start) and ((end + 30) > today)  and ((end - 30) < today)) and obj.getItem('rinnovabile',0)==1 and nrinnovi<4:
