@@ -23,7 +23,7 @@ if elenco:
         if elem[0] in cod_non_pagati:
             importo = elem[1]
             causale = elem[2] 
-            data = elem[-1]
+            data = elem[5]
             array = [causale,importo,data]
             aa.append(array)
     if len(aa) > 0:        
@@ -45,7 +45,7 @@ if len(rate) > 0:
         importo_rata = rata[1]
         causale_rata = rata[2]
         data_scadenza = rata[6]
-        array_rate = [codice_rata,importo_rata,causale_rata,data_scadenza]                
+        array_rate = [codice_rata,causale_rata,importo_rata,data_scadenza]                
         list_rate.append(array_rate)      
 
     context.setItem('elenco_pagamenti_rate_print',list_rate) 
@@ -53,7 +53,8 @@ if len(rate) > 0:
     if importo_list_rate:
         importo_tot += sum(filter(lambda v:v,importo_list_rate))
 
-context.setItem('importo_totale_no_pagato',importo_tot)   
+context.setItem('importo_totale_no_pagato',importo_tot)
+context.setItem('data_distinta_pagamento',Now())   
 
 field = context.REQUEST.get('field')
 grp = context.REQUEST.get('grp') or 'distinta'
