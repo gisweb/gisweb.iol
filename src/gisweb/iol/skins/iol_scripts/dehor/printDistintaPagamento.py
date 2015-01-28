@@ -56,9 +56,14 @@ if len(rate) > 0:
 context.setItem('importo_totale_no_pagato',importo_tot)
 context.setItem('data_distinta_pagamento',Now())   
 
-field = context.REQUEST.get('field')
+field = context.REQUEST.get('field') or 'documento_distinta_pagamento'
 grp = context.REQUEST.get('grp') or 'distinta'
 info = json_loads(context.printModelli(context.getParentDatabase().getId(),field=field,grp=grp))
 
-context.aq_parent.createDoc(model=info['distinta_pagamento.docx']['model'],field=field,grp=grp,redirect_url=context.getDocument(doc).absolute_url())
+if context.getItem('iol_tipo_richiesta')!='rinnovo':
+    context.aq_parent.createDoc(model=info['distinta_pagamento.docx']['model'],field=field,grp=grp,redirect_url=context.getDocument(doc).absolute_url())
+else:
+    context.aq_parent.createDoc(model=info['distinta_pagamento.docx']['model'].replace('127.0.0.1:38082/istanze','iol.comune.rr.nu'),field=field,grp=grp)
+
+
 
