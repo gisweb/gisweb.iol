@@ -61,7 +61,7 @@ grp = context.REQUEST.get('grp') or 'distinta'
 info = json_loads(context.printModelli(context.getParentDatabase().getId(),field=field,grp=grp))
 
 
-if context.wf_getInfoFor('review_state')=='assegnata'
+if context.wf_getInfoFor('review_state')=='assegnata':
     context.aq_parent.createDoc(model=info['distinta_pagamento.docx']['model'],field=field,grp=grp,redirect_url=context.getDocument(doc).absolute_url())
 else:
     context.aq_parent.createDoc(model=info['distinta_pagamento.docx']['model'],field=field,grp=grp)
