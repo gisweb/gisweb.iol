@@ -59,11 +59,11 @@ context.setItem('data_distinta_pagamento',Now())
 field = context.REQUEST.get('field') or 'documento_distinta_pagamento'
 grp = context.REQUEST.get('grp') or 'distinta'
 info = json_loads(context.printModelli(context.getParentDatabase().getId(),field=field,grp=grp))
-istruttori = context.verificaRuolo('iol-reviewer') or context.verificaRuolo('iol-manager')
 
-if istruttori:
+
+if context.wf_getInfoFor('review_state')=='assegnata'
     context.aq_parent.createDoc(model=info['distinta_pagamento.docx']['model'],field=field,grp=grp,redirect_url=context.getDocument(doc).absolute_url())
-elif context.getItem('iol_tipo_richiesta')=='rinnovo' and not istruttori:
+else:
     context.aq_parent.createDoc(model=info['distinta_pagamento.docx']['model'],field=field,grp=grp)
 
 
