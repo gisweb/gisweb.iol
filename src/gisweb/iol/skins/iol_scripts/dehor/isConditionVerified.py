@@ -41,8 +41,13 @@ elif obj.portal_type=='PlominoDocument':
     start = obj.getItem('autorizzata_dal')
     end = obj.getItem('autorizzata_al')
     tipoRichiesta = obj.getItem('iol_tipo_richiesta')
- 
-    if cond=='rinnovo':
+    dovuto = context.getItem('dovuto',0)
+    pagato = context.getItem('pagato',0)
+    debito = 0
+    if dovuto and pagato:
+        debito = dovuto - pagato
+
+    if cond=='rinnovo' and debito <= 0:
         if obj.getItem('durata_occupazione') == 'permanente':
         #if ((today > start) and ((end + 30) > today)  and ((end - 30) < today)):
         #nrinnovi=obj.getItem('numero_rinnovi')
