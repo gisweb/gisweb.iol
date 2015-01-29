@@ -27,7 +27,7 @@ scriptName = 'createDatagridPagamenti'
 
 
 if scriptName in app.objectIds():
-     
+    
     return app.createDatagridPagamenti(context,codici_pagamenti)
               
     

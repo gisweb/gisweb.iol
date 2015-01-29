@@ -32,5 +32,19 @@ if len(allegato_pagamento_rate) > 0:
         ricevuta = True
     else:
         ricevuta = False
+        
+if context.wf_getInfoFor('review_state') == 'autorizzata':
+    
+    s=['pagamento annullato','non pagato']
+    num_rate_non_pagate = len(filter(lambda c: c[4] in s,context.getItem('elenco_rate_pagamenti')))
+    
+    if num_rate_non_pagate > 0:
+        
+        ricevuta=True
+    else:
+        ricevuta = False
+        
+if context.wf_getInfoFor('review_state') == 'avvio' and context.getItem('iol_tipo_richiesta')=='rinnovo':
+    ricevuta = True        
 
 return ricevuta

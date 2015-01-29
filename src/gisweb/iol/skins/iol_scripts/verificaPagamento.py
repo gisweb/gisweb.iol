@@ -22,7 +22,7 @@ else:
 
 #doc=str(context.REQUEST.get('url'))
 importo=context.REQUEST.get('importo')
-data=StringToDate(context.REQUEST.get('data'),'%d/%m/%Y')
+#data=StringToDate(context.REQUEST.get('data'),'%d/%m/%Y')
 ora=str(context.REQUEST.get('orario'))
 esito=context.REQUEST.get('esito')
 divisa=context.REQUEST.get('divisa')
@@ -38,13 +38,15 @@ wf = getToolByName(context, 'portal_workflow')
 
 
 context.setItem('importo_pagamento',importo)
-context.setItem('data_pagamento',data)
+#context.setItem('data_pagamento',data)
 context.setItem('ora_pagamento',ora)
 context.setItem('esito_pagamento',esito)
 context.setItem('divisa',divisa)
 context.setItem('codTrans_pagamento',trans)
 context.setItem('codAut_pagamento',aut)
 
+if trans:
+    codice_trans_pagamento = 'PO-%s' %(trans.split('-')[1])
 
 cod_paga=trans.split('-')[-1]
 
@@ -126,6 +128,9 @@ def settoVerificaRateConcluse(lista,cod_single):
 
 
 
+
+
+
 # aggiorno lo stato dei pagamenti solo per i pagamenti non rateizzabili
 
 if context.getItem('elenco_pagamenti') and totale == '0':
@@ -159,6 +164,7 @@ if len(elenco_rate) > 0:
                 
                 cod_rata[4] = 'pagamento effettuato'
                 cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
+                cod_rata[7] = '%s-%s' %(codice_trans_pagamento,cod_rata[0])
                 rata = elenco_rate                
                 # impostiamo sul dg principale lo stato dei pagamenti es. pagamento rate in corso
                 settoVerificaPagamentiCodice(context.getItem('elenco_pagamenti'),cod_rata[0])
@@ -178,6 +184,7 @@ if len(elenco_rate) > 0:
             if cod_rata[0] == rata_da_pagare[0] and context.getItem('esito_pagamento')=='OK':
                 cod_rata[4] = 'pagamento effettuato'
                 cod_rata[5] = DateToString(Now(),'%d/%m/%Y')
+                cod_rata[7] = '%s-%s' %(codice_trans_pagamento,cod_rata[0])
                 rata = elenco_rate
                 
                 settoVerificaPagamentiCodice(context.getItem('elenco_pagamenti'),cod_rata[0])

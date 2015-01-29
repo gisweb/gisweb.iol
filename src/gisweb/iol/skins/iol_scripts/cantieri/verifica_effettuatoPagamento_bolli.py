@@ -9,10 +9,13 @@
 ##
 
 stati=['non pagato','pagamento annullato']
+effettuato = False
 
+if context.getItem('allegato_bolli_utente')!={}:
+	effettuato = True
 
-if context.getItem('elenco_pagamenti'):
-    cod_non_pagati = filter(lambda x: x[4] in stati ,context.getItem('elenco_pagamenti'))
+#if context.getItem('elenco_pagamenti'):
+#    cod_non_pagati = filter(lambda x: x[4] in stati ,context.getItem('elenco_pagamenti'))
 
-return len(cod_non_pagati)>0
-
+#return len(cod_non_pagati)>0
+return effettuato

@@ -10,7 +10,11 @@
 
 from Products.CMFPlomino.PlominoUtils import StringToDate,DateToString, Now
 from Products.CMFCore.utils import getToolByName
+from gisweb.utils import getChainFor
+trans=str(doc.REQUEST.get('codTrans'))
 
+if trans:
+    codice_trans_pagamento = 'PO-%s' %(trans.split('-')[1])
 rurl=doc.absolute_url()
 
 if len(getChainFor(doc))>1:
@@ -25,17 +29,30 @@ wf = getToolByName(doc, 'portal_workflow')
 transitions_avb =  [act['id'] for act in doc.wf_transitionsInfo(wf_id=wf_id, args=['description'])]
 transitions_wf_main =  [act['id'] for act in doc.wf_transitionsInfo(args=['description'])]
 
-if doc.getItem('iol_tipo_richiesta')=='rinnovo' and 'invia_domanda_autorizzazione' in transitions_wf_main:
-    wf.doActionFor(doc, 'invia_domanda_autorizzazione')
+if doc.getItem('elenco_pagamenti'):
+    
+    diz_dg_pagamenti = doc.translateListToDiz(doc.getId(),'sub_elenco_pagamenti','elenco_pagamenti')
+    for diz_pagamento in diz_dg_pagamenti:
+        if diz_pagamento['stato_pagamento']=='pagamento effettuato':
+
+            # il pagamento è stato effettuato
+            diz_pagamento['codice_pos'] = '%s-%s' %(codice_trans_pagamento,diz_pagamento['codice_sub_pagamento'])
+            
+    if not doc.getItem('elenco_rate_pagamenti'):
+
+        # aggiunge la transazione di pagamento al dg principale solo se non si sono le rate
+        dg = doc.translateDizToList(doc.getId(),'sub_elenco_pagamenti','elenco_pagamenti',diz_dg_pagamenti)
+        
+        doc.setItem('elenco_pagamenti',dg)
+
+
+
+
 
 if 'effettua_pagamento_online' in transitions_avb:    
     wf.doActionFor(doc, 'effettua_pagamento_online')
 
-if doc.getItem('iol_tipo_richiesta')=='base':    
-    if 'autorizza' in transitions_wf_main:
-        wf.doActionFor(doc, 'autorizza')
-else:
-	doc.redirectTo(rurl)
+
 
 
 
