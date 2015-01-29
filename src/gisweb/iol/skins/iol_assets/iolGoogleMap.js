@@ -62,6 +62,13 @@
 
             
         };
+
+        $.fn.iolGoogleMap.deleteOverlays = function() {
+
+            console.log(mapOverlays)
+            return map;
+        };
+
         $.fn.iolGoogleMap.registerObject = function(overlay){
             registerObject(overlay)
         }
@@ -440,7 +447,7 @@
                     //DISABILITO LA MODALITA' DISEGNO E AGGIUNGO GLI ATTRIBUTI ALL'OVERLAY
                     
 
-                    drawingManager.setDrawingMode(null);
+                    //drawingManager.setDrawingMode(null);
                     e.overlay.geometryType = (e.type=='marker')?'point':e.type;
                     e.overlay.editMode = editMode;
 

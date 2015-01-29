@@ -105,9 +105,9 @@ form div.row-fluid{
     height: 24px;
 
 }
-.date{
+.hasDatepicker{
 
-    width:100%;
+    width:80%;
     height: 1em;
     border-radius: 5px;
 
@@ -120,7 +120,7 @@ input[data-plugin='iolCodicefiscale'],input[data-plugin='iolMarker'] {
 }
 
 
-.plomino_form .row-fluid input.date{width:100%;text-align:left} 
+.plomino_form .row-fluid input.date{width:80%;text-align:left} 
 
 input[type="radio"],label {
     vertical-align:middle;
@@ -401,7 +401,8 @@ background: #FFFFFF;
   position: relative;
   overflow: hidden;
   margin-left: 5px;
-  margin-top:-10px;
+  margin-top:-15px;
+  height:25px;
 }
 
 .fileUpload ul{

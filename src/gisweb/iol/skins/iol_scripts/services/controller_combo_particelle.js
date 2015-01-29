@@ -20,6 +20,7 @@
             query.callback(data);
         },
         initSelection : function (element, callback) {
+          console.log(element)
           var data ={id: element.val(), text: element.val()} ;
           callback(data);
         }
@@ -31,13 +32,13 @@
         'dataType':'JSON',
         'success':function(data, textStatus, jqXHR){
           elencoParticelle = data.results;
-          console.log(elencoParticelle)
-          $("[name='nct_particella']").select2('data', elencoParticelle);
-          $("[name='nct_particella']").select2('val', null);
-          $("[name='nct_geometry']").val('');
+         // $("[name='nct_particella']").select2('data', elencoParticelle);
+          //$("[name='nct_particella']").select2('val', null);
+          //$("[name='nct_geometry']").val('');
         }
       });
     });
+
     $("[name='nct_particella']").select2({
           placeholder: '---',
           allowClear: true,
@@ -67,6 +68,7 @@
         var val = e.added && e.added.coords || '';
         $("input[name='nct_geometry']").val(val);
     });
+
     $("[name='nct_sezione']").select2().on("change", function(e) { 
       $.ajax({
         'url':"services/elencoFogli",
@@ -76,11 +78,12 @@
         'success':function(data, textStatus, jqXHR){
           elencoFogli = data.results;
           elencoParticelle = [];
-          $("[name='nct_foglio']").select2('data', elencoFogli);
-          $("[name='nct_foglio']").select2('val', null);
-          $("[name='nct_particella']").select2('data', elencoParticelle);
-          $("[name='nct_particella']").select2('val', null);
-          $("[name='nct_geometry']").val('');
+
+          //$("[name='nct_foglio']").select2('data', elencoFogli);
+          //$("[name='nct_foglio']").select2('val', null);
+          //$("[name='nct_particella']").select2('data', elencoParticelle);
+          //$("[name='nct_particella']").select2('val', null);
+          //$("[name='nct_geometry']").val('');
         }
       });
     });
@@ -97,15 +100,96 @@
   $(document).on('maploaded', function () {
 
 
+    var overlays = [];
+
     var mappa = $("#mappa").iolGoogleMap.getMap();
 
     var gridSettings = $('#elenco_nct_datagrid').dataTable().fnSettings().oInit;
+    var polygonOptions = {"strokeColor":"#00FFFF","fillColor":"#00FFFF","strokeWeight": 2};
 
 
+    function addOverlays(data){
+      for(var i=0;i<data.length;i++){
+        var geomIndex = gridSettings.geomIndex || (data[i].length-1);
+        var coord = data[i][geomIndex];
+        var polygon = $("#mappa").iolGoogleMap.createOverlay(coord,polygonOptions);
+        polygon.setMap(mappa);
+        overlays.push(polygon);
+      }
+
+    }
+
+    function removeOverlays(){
+      for(var i=0;i<overlays.length;i++){
+        overlays[i].setMap(null);
+        delete overlays[i];
+      }
+      overlays=[];
+      console.log("eliminati")
+    }
+
+    function aggiungiVincoli(data){
+      var foglio = data[1];
+      console.log(foglio)
+      var testRE = foglio.match("<span>(.*)</span>");
+      if(testRE && testRE.length>0) foglio = testRE[1];
+
+      var particella = data[2];
+      var testRE = particella.match("<span>(.*)</span>");
+      if(testRE && testRE.length>0) particella = testRE[1];
+
+      $.ajax({
+        'url':"services/elencoVincoli",
+        'type':'GET',
+        'data':{"sezione":'',"foglio":foglio,"particella":particella},
+        'dataType':'JSON',
+        'success':function(data, textStatus, jqXHR){
+          elencoVincoli = data.results;
+          console.log(elencoVincoli)
+          var sVincolo;
+          for(var i=0;i<elencoVincoli.length;i++){
+            sVincolo = elencoVincoli[i].descrizione_tavola + " - " + elencoVincoli[i].descrizione_zona;
+            for(var j=1;j<7;j++){
+              if($("#vincolo_nome_0" + j).val() == sVincolo)
+                break;
+              if($("#vincolo_nome_0" + j).val() == ""){
+                $("#vincolo_nome_0" + j).val(sVincolo);
+                break;
+              }
+            }
+          }
+
+        }
+
+      });
+    }
+
+
+    //RIAGGIUNGO TUTTI GLI OVERLAYS
+    $('#elenco_nct_datagrid').dataTable().fnSettings().aoDrawCallback.push( {
+      "fn": function( oSettings ){
+        removeOverlays();
+        var data = $('#elenco_nct_datagrid').dataTable().fnGetData();
+        addOverlays(data);
+        for(var i=0;i<overlays.length;i++){
+          aggiungiVincoli(data[i]);
+        }
+      }
+    });
+
+    addOverlays($('#elenco_nct_datagrid').dataTable().fnGetData());
+
+  });
+
+
+
+/*
     //EVENTI SUL DATAGRID 
-    $('#elenco_nct_datagrid').dataTable().fnSettings().aoRowCreatedCallback.push( {
+    $('#elenco_nct_datagrid').dataTable().fnSettings().aoRowCreatedCallbackpush( {
         "fn": function( nRow, aData, iDataIndex ){ 
             var geomIndex = gridSettings.geomIndex || (aData.length-1);
+
+
             
             var coord = aData[geomIndex];
             var testRE = coord.match("<span>(.*)</span>");
@@ -115,13 +199,48 @@
             var polygon = $("#mappa").iolGoogleMap.createOverlay(coord,polygonOptions);
             polygon.setMap(mappa);
 
+            var foglio = aData[1];
+            var testRE = foglio.match("<span>(.*)</span>");
+            if(testRE.length>0) foglio = testRE[1];
+
+            var particella = aData[2];
+            var testRE = particella.match("<span>(.*)</span>");
+            if(testRE.length>0) particella = testRE[1];
+            console.log(aData)
+
+        $.ajax({
+          'url':"services/elencoVincoli",
+          'type':'GET',
+          'data':{"sezione":'',"foglio":foglio,"particella":particella},
+          'dataType':'JSON',
+          'success':function(data, textStatus, jqXHR){
+            elencoVincoli = data.results;
+            console.log(elencoVincoli)
+            var sVincolo;
+            for(var i=0;i<elencoVincoli.length;i++){
+              sVincolo = elencoVincoli[i].descrizione_tavola + " - " + elencoVincoli[i].descrizione_zona;
+              for(var j=1;j<7;j++){
+                if($("#vincolo_nome_0" + j).val() == sVincolo)
+                  break;
+                if($("#vincolo_nome_0" + j).val() == ""){
+                  $("#vincolo_nome_0" + j).val(sVincolo);
+                  break;
+                }
+              }
+            }
+
+          }
+
+        });
+
+
+
         }
     });
     //EVENTI SUL DATAGRID 
-
+/*
     var aData = $('#elenco_nct_datagrid').dataTable().fnGetData();
     
-    var polygonOptions = {"strokeColor":"#00FFFF","fillColor":"#00FFFF","strokeWeight": 2};
 
     for(i=0;i<aData.length;i++){
       var geomIndex = gridSettings.geomIndex || (aData[0].length-1);
@@ -131,12 +250,11 @@
       //if(testRE.length>0) coord = testRE[1];
       var polygon = $("#mappa").iolGoogleMap.createOverlay(coord,polygonOptions);
       polygon.setMap(mappa);
+      overlays.push(polygon);
 
     }
 
-  });
-
-
+*/
 
 
 })(jQuery);
