@@ -80,7 +80,7 @@ if fine < addToDate(inizio, 8, units='months') and tipo_occupazione=='permanente
 
 # anno solare intero        
 else:
-    diz_scadenze = scadenzaRate(diz,['31/03','31/05','31/07','31/10'])
+    diz_scadenze = scadenzaRate(diz,['31/01','30/04','31/07','31/10'])
 
 # gestione dei fields associati al datagrid    
 form = db.getForm('sub_elenco_pagamenti')
