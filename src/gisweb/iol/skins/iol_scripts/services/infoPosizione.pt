@@ -1,0 +1,25 @@
+<tal:block tal:define="infoPosizione python:context.getParentDatabase().resources.zsqlInfoPosizione(lat = context.REQUEST.get('lat'), lng = context.REQUEST.get('lng')).dictionaries()">
+
+
+        <tal:info tal:condition="python:len(infoPosizione)>0" >
+            <div class="v-content well">
+            <dl tal:define="dataInfo python:infoPosizione[0]" class="dl-horizontal">
+              <dt>Comune:</dt>
+              <dd><span tal:content="python:dataInfo['comune']"></span></dd>
+              <dt>Foglio:</dt>
+              <dd><span tal:content="python:dataInfo['foglio']"></span></dd>    
+              <dt>Mappale:</dt>
+              <dd><span tal:content="python:dataInfo['mappale']"></span></dd>                            
+            </dl>
+            </div>
+        </tal:info>
+
+          <tal:info tal:condition="python:len(infoPosizione)==0">
+            
+            Nessun elemento
+            
+
+        </tal:info>
+
+
+      </tal:block>
