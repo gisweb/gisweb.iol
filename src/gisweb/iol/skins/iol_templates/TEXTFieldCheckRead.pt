@@ -1,0 +1,8 @@
+	<label tal:attributes="for options/fieldname;">
+    <input tal:define="v options/fieldvalue;"  type="checkbox" tal:attributes="id options/fieldname; name options/fieldname; value python: '' if v else ''; checked python: None if not v else 'checked';"/>
+    <span tal:content="options/fieldvalue"></span>
+    </label>
+
+
+
+

@@ -1,0 +1,12 @@
+<span tal:define="widget python:options['field'].getSettings('widget');
+                size python:options['field'].getSettings('size')">
+    <tal:widget tal:condition="python:test(widget=='HIDDEN')">
+        <input type="hidden" tal:attributes="id options/fieldname; name options/fieldname; value options/fieldvalue" />
+    </tal:widget>
+    <tal:widget tal:condition="python:test(widget=='TEXT')">
+        <input type="checkbox" tal:attributes="id options/fieldname; name options/fieldname; value options/fieldvalue; size size" />
+    </tal:widget>
+    <tal:widget tal:condition="python:test(widget=='TEXTAREA')">
+        <input type="checkbox" tal:attributes="id options/fieldname; name options/fieldname; value options/fieldvalue; size size" />
+    </tal:widget>
+</span>
