@@ -445,3 +445,8 @@ input[type='file'] {
   background-color: #fff; 
 
 }
+
+textarea {
+  font-size:20px;
+
+}

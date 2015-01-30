@@ -144,7 +144,7 @@
         'data':{"sezione":'',"foglio":foglio,"particella":particella},
         'dataType':'JSON',
         'success':function(data, textStatus, jqXHR){
-          elencoVincoli = data.results;
+          var elencoVincoli = data.results;
           console.log(elencoVincoli)
           var sVincolo;
           for(var i=0;i<elencoVincoli.length;i++){
@@ -164,6 +164,33 @@
       });
     }
 
+    function aggiungiAmbiti(data){
+      var foglio = data[1];
+      console.log(foglio)
+      var testRE = foglio.match("<span>(.*)</span>");
+      if(testRE && testRE.length>0) foglio = testRE[1];
+
+      var particella = data[2];
+      var testRE = particella.match("<span>(.*)</span>");
+      if(testRE && testRE.length>0) particella = testRE[1];
+
+      $.ajax({
+        'url':"services/elencoAmbiti",
+        'type':'GET',
+        'data':{"sezione":'',"foglio":foglio,"particella":particella},
+        'dataType':'JSON',
+        'success':function(data, textStatus, jqXHR){
+          var elencoAmbiti = data.results;
+          console.log(elencoAmbiti)
+          var sAmbito = '';
+          for(var i=0;i<elencoAmbiti.length;i++){
+            sAmbito += elencoAmbiti[i].descrizione_zona + '\n';
+          }
+          $("#immobile_ambito").val(sAmbito);
+        }
+
+      });
+    }
 
     //RIAGGIUNGO TUTTI GLI OVERLAYS
     $('#elenco_nct_datagrid').dataTable().fnSettings().aoDrawCallback.push( {
@@ -173,6 +200,7 @@
         addOverlays(data);
         for(var i=0;i<overlays.length;i++){
           aggiungiVincoli(data[i]);
+          aggiungiAmbiti(data[i]);
         }
       }
     });
