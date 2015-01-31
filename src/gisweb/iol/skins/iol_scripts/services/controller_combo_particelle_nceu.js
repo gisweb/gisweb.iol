@@ -31,9 +31,9 @@
         'dataType':'JSON',
         'success':function(data, textStatus, jqXHR){
           elencoParticelle = data.results;
-          $("[name='nceu_particella']").select2('data', elencoParticelle);
-          $("[name='nceu_particella']").select2('val', null);
-          $("[name='nceu_geometry']").val('');
+          //$("[name='nceu_particella']").select2('data', elencoParticelle);
+          //$("[name='nceu_particella']").select2('val', null);
+          //$("[name='nceu_geometry']").val('');
         }
       });
     });
@@ -74,11 +74,11 @@
         'success':function(data, textStatus, jqXHR){
           elencoFogli = data.results;
           elencoParticelle = [];
-          $("[name='nceu_foglio']").select2('data', elencoFogli);
-          $("[name='nceu_foglio']").select2('val', null);
-          $("[name='nceu_particella']").select2('data', elencoParticelle);
-          $("[name='nceu_particella']").select2('val', null);
-          $("[name='nceu_geometry']").val('');
+          //$("[name='nceu_foglio']").select2('data', elencoFogli);
+          //$("[name='nceu_foglio']").select2('val', null);
+          //$("[name='nceu_particella']").select2('data', elencoParticelle);
+          //$("[name='nceu_particella']").select2('val', null);
+          //$("[name='nceu_geometry']").val('');
         }
       });
     });

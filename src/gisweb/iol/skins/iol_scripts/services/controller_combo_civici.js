@@ -42,9 +42,9 @@
         'dataType':'JSON',
         'success':function(data, textStatus, jqXHR){
           elencoCivici = data.results;
-          $("input[name='civico_civico']").select2('data', elencoCivici);
-          $("input[name='civico_civico']").select2('val', null);
-          $("input[name='civico_geometry']").val('');
+          //$("input[name='civico_civico']").select2('data', elencoCivici);
+          //$("input[name='civico_civico']").select2('val', null);
+          //$("input[name='civico_geometry']").val('');
         }
       });
     });
@@ -60,40 +60,41 @@
   //MARKERS DALLA TABELLA ALLA MAPPA
   $(document).on('maploaded', function () {
 
-
-    var mappa = $("#mappa").iolGoogleMap.getMap();
-
     var gridSettings = $('#elenco_civici_datagrid').dataTable().fnSettings().oInit;
-    var markerOptions = {};
+    var options = {"markerOptions":{"icon":portal_url+'/images/iol-marker.png'}};
+    var mappa = $("#mappa").iolGoogleMap.getMap();
+    var overlays = [];
 
-    //EVENTI SUL DATAGRID 
-    $('#elenco_civici_datagrid').dataTable().fnSettings().aoRowCreatedCallback.push( {
-        "fn": function( nRow, aData, iDataIndex ){ 
-            var geomIndex = gridSettings.geomIndex || (aData.length-1);
-            var coord = aData[geomIndex];
-            var testRE = coord.match("<span>(.*)</span>");
-            if(testRE.length>0) coord = testRE[1];
-            var marker = $("#mappa").iolGoogleMap.createOverlay(coord,markerOptions);
-            marker.setMap(mappa);
-
-        }
-    });
-
-    var aData = $('#elenco_civici_datagrid').dataTable().fnGetData();
-    
-    for(i=0;i<aData.length;i++){
-      var geomIndex = gridSettings.geomIndex || (aData[0].length-1);
-      var coord = aData[i][geomIndex];
-
-      //var testRE = coord.match("<span>(.*)</span>");
-      //if(testRE.length>0) coord = testRE[1];
-      var marker = $("#mappa").iolGoogleMap.createOverlay(coord,markerOptions);
-      marker.setMap(mappa);
-      //polygon.setMap(mappa);
-      //console.log(polygon.getPath())
+    function addOverlays(data){
+      for(var i=0;i<data.length;i++){
+        var geomIndex = gridSettings.geomIndex || (data[i].length-1);
+        var coord = data[i][geomIndex];
+        var marker = $("#mappa").iolGoogleMap.createOverlay(coord,options);
+        marker.setMap(mappa);
+        overlays.push(marker);
+      }
 
     }
 
+    function removeOverlays(){
+      for(var i=0;i<overlays.length;i++){
+        overlays[i].setMap(null);
+        delete overlays[i];
+      }
+      overlays=[];
+      console.log("eliminati")
+    }
+
+    //RIAGGIUNGO TUTTI GLI OVERLAYS
+    $('#elenco_civici_datagrid').dataTable().fnSettings().aoDrawCallback.push( {
+      "fn": function( oSettings ){
+        removeOverlays();
+        var data = $('#elenco_civici_datagrid').dataTable().fnGetData();
+        addOverlays(data);
+      }
+    })
+
+    addOverlays($('#elenco_civici_datagrid').dataTable().fnGetData());
 
   });
 

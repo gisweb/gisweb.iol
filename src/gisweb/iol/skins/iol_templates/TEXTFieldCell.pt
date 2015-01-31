@@ -1,1 +1,1 @@
-<span tal:content="options/fieldvalue"></span>   
+<tal:cell tal:content="options/fieldvalue"></tal:cell>   

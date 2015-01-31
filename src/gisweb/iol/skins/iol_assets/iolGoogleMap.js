@@ -86,7 +86,6 @@
         var createOverlay = function  (stringGeom,options){
             if(typeof(options)!='object') return;
             var overlay,pos,patt,sCoordinates;
-
             if(stringGeom.indexOf('POINT')!=-1){
                 patt = /\((.*?)\)/;
                 sCoordinates = stringGeom.match(patt) && stringGeom.match(patt)[1] || stringGeom;
@@ -124,10 +123,9 @@
             //SOLO COORDINATE DEL PUNTO 
             else {
                 overlay = new google.maps.Marker(options.markerOptions||{});
-                pos = sCoordinates.split(' ');
+                pos = stringGeom.split(' ');
                 overlay.setPosition(new google.maps.LatLng(pos[1],pos[0]))
                 overlay.geometryType = google.maps.drawing.OverlayType.MARKER;
-                console.log(overlay)
             }
 
  /* 
