@@ -42,12 +42,14 @@ def scadenzaRate(diz,date_scadenza):
     anno = DateToString(fine,'%Y')
     diz_ord = diz.keys()
     diz_ord.sort()
+    
     res = dict()
+   
     for idx,rata in enumerate(diz_ord):        
         num_rata = rata[-1]
         alist = list()
         if int(idx) + 1 == int(num_rata):            
-            l_rata = diz[rata] 
+            l_rata = diz[rata]            
             data_scad = '%s/%s' %(date_scadenza[idx],anno)
             l_rata[5] = data_scad
             n_diz[rata] = l_rata
@@ -77,11 +79,11 @@ if fine < addToDate(inizio, 8, units='months') and tipo_occupazione=='permanente
     scadenza_rate_inf4[2] = calcolaPeriodoIntermedio(inizio,fine)[1]
     scadenza_rate_inf4[3] = DateToString(fine,'%d/%m')
     diz_scadenze = scadenzaRate(diz,scadenza_rate_inf4)
-
+    
 # anno solare intero        
 else:
     diz_scadenze = scadenzaRate(diz,['31/01','30/04','31/07','31/10'])
-
+    
 # gestione dei fields associati al datagrid    
 form = db.getForm('sub_elenco_pagamenti')
 fld = form.getFormField('elenco_rate_pagamenti')
