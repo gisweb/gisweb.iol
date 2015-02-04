@@ -201,7 +201,7 @@ table.dataTable{
     font-weight: bold;
     font-size: 12px;
 
-background-color: #FFFFFF;
+    background-color: #FFFFFF;
     padding: 3px 18px 3px 10px;
 }
 
@@ -398,14 +398,13 @@ background: #FFFFFF;
 
 
 .fileUpload {
-  position: relative;
-  overflow: hidden;
-  margin-left: 5px;
+
   margin-top:-15px;
-  height:25px;
+
 }
 
 .fileUpload ul{
+  padding:10px;
   margin-left: -5px;
   margin-top: 10px;
   font-size: 12px;
@@ -413,7 +412,7 @@ background: #FFFFFF;
 }
 .icon-folder-open{
 
-  margin:2px;
+  margin:5px;
 
 }
 input[type='file'] {
@@ -438,6 +437,14 @@ input[type='file'] {
   display:none;
 
 }
+
+.file-remove {
+  width:100px;
+  cursor: pointer;
+  position:relative;
+  top:-24px;
+}
+
 
 .info-selected {
 

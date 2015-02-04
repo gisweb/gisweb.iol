@@ -280,9 +280,21 @@
             options = options.pluginOptions;
             var $element = $(this);
             $element.wrap( "<div class='fileUpload'></div>" );
-            $("label[for='" + this.id + "'] ").append($("<span class='icon-folder-open'>"))
-            var message = options.emptyMessage || 'No files'
+            var $elementRemove = $("<span id='" + this.id + "-remove' class='icon-remove file-remove'>").hide();
+            $("label[for='" + this.id + "']").append("<span class='icon-folder-open'>");
+            $("label[for='" + this.id + "']").after($elementRemove);
+            var left = $("label[for='" + this.id + "'] .icon-folder-open").position().left;
+            $elementRemove.animate({left:left},'fast');
+            var message = options.emptyMessage || 'Nessun file'
             $element.before("<ul><li class='noFile'>" + message + "</li></ul>")
+            $elementRemove.bind("click",function(){
+                $element.prev().find(".noFile").show()
+                $element.val('');
+                $element.prev().find("li").each(function(index,element){
+                    if(index>0) $(element).remove();
+                })
+                $elementRemove.hide();
+            })
             $element.bind("change",function(e){
                 var ul = $element.prev();
                 $element.prev().find("li").each(function(index,element){
@@ -290,17 +302,19 @@
                 })
                 if(checkUploadFile($element,options)){
                     $element.prev().find(".noFile").hide()
-                    for(var i=0;i<$element.prop("files").length;i++){
-                        var li = $('<li> ' + $element.prop("files")[i].name + '</li>');
+                    var file_list = $element.prop("files");
+                    for(var i=0;i<file_list.length;i++){
+                        var li = $('<li>' + file_list[i].name + '</li>');
                         $element.prev().append(li);
                     }
+                    $elementRemove.show();
                 }
                 else{
                     $element.prev().find(".noFile").show()
                     $element.text('');
                     $element.val('');
+                    $elementRemove.hide();
                 }
-                console.log($element.prop("files"))
 
 
             })
