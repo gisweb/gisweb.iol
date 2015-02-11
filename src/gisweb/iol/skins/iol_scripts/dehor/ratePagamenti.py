@@ -32,6 +32,32 @@ for i in range(4):
     key = '%s0%s' %(k,i+1)
     diz[key]=list_rata
 
+
+
+# numera i gruppi assegnandone uno diverso per rata
+diz_ord_grp = diz.keys()
+diz_ord_grp.sort()
+g=[]
+for i,k in enumerate(diz_ord_grp):    
+    gruppo = diz[k][2]
+    n_gruppo = '%s0%s' %(gruppo[:-2],i+1)
+    g.append(n_gruppo)
+g.sort()
+n_diz={}
+res ={}
+for i,k in enumerate(diz_ord_grp):
+    alist = list()
+    if int(i)+1 == int(k[-1]):
+        l = diz[k]    
+        l[2]=g[i]
+        n_diz[k]=l
+        for idx in l:
+            alist.append(idx)
+        res[k]=alist   
+diz = res 
+
+
+
 fine = doc.getItem('autorizzata_al')
 inizio = doc.getItem('autorizzata_dal')
 tipo_occupazione = doc.getItem('durata_occupazione')
@@ -47,10 +73,11 @@ def scadenzaRate(diz,date_scadenza):
         num_rata = rata[-1]
         alist = list()
         if int(idx) + 1 == int(num_rata):            
-            l_rata = diz[rata] 
-            data_scad = '%s/%s' %(date_scadenza[idx],anno)
-            l_rata[5] = data_scad
-            n_diz[rata] = l_rata
+            l_rata = diz[rata]
+            if date_scadenza[idx]!='': 
+                data_scad = '%s/%s' %(date_scadenza[idx],anno)
+                l_rata[5] = data_scad
+                n_diz[rata] = l_rata
             for i in l_rata:
                 alist.append(i)
             res[rata]=alist
@@ -72,7 +99,7 @@ if fine < addToDate(inizio, 8, units='months') and tipo_occupazione=='permanente
     scadenza_rate_inf4 = [0,0,0,0] 
           
                
-    scadenza_rate_inf4[0] = DateToString(inizio,'%d/%m')
+    scadenza_rate_inf4[0] = ''
     scadenza_rate_inf4[1] = calcolaPeriodoIntermedio(inizio,fine)[0]
     scadenza_rate_inf4[2] = calcolaPeriodoIntermedio(inizio,fine)[1]
     scadenza_rate_inf4[3] = DateToString(fine,'%d/%m')
@@ -80,7 +107,7 @@ if fine < addToDate(inizio, 8, units='months') and tipo_occupazione=='permanente
 
 # anno solare intero        
 else:
-    diz_scadenze = scadenzaRate(diz,['31/03','31/05','31/07','31/10'])
+    diz_scadenze = scadenzaRate(diz,['','31/05','31/07','31/10'])
 
 # gestione dei fields associati al datagrid    
 form = db.getForm('sub_elenco_pagamenti')
