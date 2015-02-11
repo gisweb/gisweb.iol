@@ -49,10 +49,11 @@ def scadenzaRate(diz,date_scadenza):
         num_rata = rata[-1]
         alist = list()
         if int(idx) + 1 == int(num_rata):            
-            l_rata = diz[rata]            
-            data_scad = '%s/%s' %(date_scadenza[idx],anno)
-            l_rata[5] = data_scad
-            n_diz[rata] = l_rata
+            l_rata = diz[rata]
+            if date_scadenza[idx]!='':            
+                data_scad = '%s/%s' %(date_scadenza[idx],anno)
+	        l_rata[5] = data_scad
+                n_diz[rata] = l_rata
             for i in l_rata:
                 alist.append(i)
             res[rata]=alist
@@ -69,12 +70,12 @@ def calcolaPeriodoIntermedio(inizio,fine):
 
 
 
-if fine < addToDate(inizio, 8, units='months') and tipo_occupazione=='permanente':
+if fine < addToDate(inizio, 8, units='months'):
     # inferiore a 8 - 4 mesi
     scadenza_rate_inf4 = [0,0,0,0] 
           
                
-    scadenza_rate_inf4[0] = DateToString(inizio,'%d/%m')
+    scadenza_rate_inf4[0] = ''
     scadenza_rate_inf4[1] = calcolaPeriodoIntermedio(inizio,fine)[0]
     scadenza_rate_inf4[2] = calcolaPeriodoIntermedio(inizio,fine)[1]
     scadenza_rate_inf4[3] = DateToString(fine,'%d/%m')
@@ -82,7 +83,9 @@ if fine < addToDate(inizio, 8, units='months') and tipo_occupazione=='permanente
     
 # anno solare intero        
 else:
-    diz_scadenze = scadenzaRate(diz,['31/01','30/04','31/07','31/10'])
+    diz_scadenze = scadenzaRate(diz,['','30/04','31/07','31/10'])
+
+
     
 # gestione dei fields associati al datagrid    
 form = db.getForm('sub_elenco_pagamenti')

@@ -48,7 +48,8 @@ elif obj.portal_type=='PlominoDocument':
         #nrinnovi=obj.getItem('numero_rinnovi')
         #if ((today > start) and ((end + 30) > today)  and ((end - 30) < today)) and obj.getItem('rinnovabile',0)==1 and nrinnovi<4:
             res = False
-        
+        else:
+            res = False
     
     else:
         res = False
