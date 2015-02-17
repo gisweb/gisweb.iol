@@ -31,51 +31,61 @@ $( document ).ready(function() {
     }
     else 
       window.location = urlProtocolla  
-  });  
+  });
+
+
+  
 
 
 
-
-/*//resetta il campo importo cosap 
-   	$("[name='occupazioni_ridotta'],#categoria_cosap,#superficie_interna,#autorizzata_dal,#autorizzata_al").bind('change',function(){
-       //$("#importo_cosap_temp").val('');
-       $("#importo_cosap").val('');
-  	})  */
-
-
-
-
-
-//resetta il campo importo cosap 
-   /*	$("#occupazione_larghezza,#occupazione_lunghezza").bind('change',function(){
-   		var lung= $("#occupazione_lunghezza").val();
-   		var larg= $("#occupazione_larghezza").val();
-   		var superficie = lung*larg;
-   		$("#occupazione_superficie").val(superficie.toFixed(2));
-   	});
-
-    function checkLunghezza(){
-     if(this.fnGetData().length>0){
-        $("#importo_cosap").val(''); 
-     }
-    }; 
-
- //resetta il campo importo cosap per datagrid
-$(document).on('datatable_complete',function(e){ 
-  if ($("#elementi_dehor_dg_datagrid").length>0){      
-     $("#elementi_dehor_dg_datagrid").dataTable().fnSettings().aoDrawCallback.push({fn: checkLunghezza});
-       
-  }
-}); */
-
-
-
-
-
-
-
+   
+  $("[name=tipologia_parere]").bind('click',function(){
+    console.log($(this).val());
+    
+     
 
     
+    $("[name=tipologia_parere]").each(function(){
+      if ($("[name=tipologia_parere]").is(":checked")==true){
+        console.log(true)
+        $("#btn_tipologia_parere").removeAttr('disabled');              
+          
+      }
+      else {
+        console.log(false)
+        $("#btn_tipologia_parere").off('click');     
+        //$("#btn_tipologia_parere").removeAttr('href');
+        $("#btn_tipologia_parere").attr('disabled','disabled');
+      }        
+    });
+   
+    
+     
+  }); 
+
+  $("#btn_tipologia_parere").bind('click',function(){
+      
+      tipologie = [] 
+      $("[name=tipologia_parere]").each(function(){
+             
+        if ($(this).is(":checked")){
+          if ($.inArray($(this).val(),tipologie) == -1){
+              tipologie.push($(this).val())  
+          }        
+        }      
+      })
+      var baseHref = $('#btn_tipologia_parere').attr('href');
+      var url = baseHref + '&tipologia_parere=' + tipologie.toString(); 
+      console.log(url);
+      $("#btn_tipologia_parere").attr('href',url); 
+    }) 
+
+
+
+
+  
+
+  
   
     
 });
