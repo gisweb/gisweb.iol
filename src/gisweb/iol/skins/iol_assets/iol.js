@@ -2,8 +2,8 @@
 (function ($) {
 
 
-        var wfdata = {
-            "base_url":  "/istanze/iol_praticaweb_demo/00007-2015/content_status_modify?workflow_action=",
+        /*var wfdata = {
+            "base_url":  "/istanze/iol_praticaweb_demo/0007-2015/content_status_modify?workflow_action=",
             "forms": [
                 {'label':'Richiedenti','action':'vai_richiedenti','class':''},
                 {'label':'Ubicazione','action':'vai_ubicazione','class':''},
@@ -13,7 +13,7 @@
                 {'label':'Oneri','action':'vai_oneri','class':'disabled'},
                 {'label':'Riassunto Finale','action':'vai_completata','class':'disabled'}
             ]
-        }
+        }*/
 
 
 
@@ -116,24 +116,25 @@
   }
 
   function addWFToolbar(element, wfdata){
-     
+
 
      var frm;
      for(var i=0;i<wfdata.forms.length;i++){
-        frm = wfdata.forms[i]
-        $("#iol-menus").append('<li class="' + frm.class + '"><a href="' + wfdata.base_url + frm.action + '" >' + frm.label + '</a></li>')
+         frm = wfdata.forms[i];
+         $("#iol-menus").append('<li class="' + frm.class + '"><a href="' + wfdata.base_url + frm.action + '" >' + frm.label + '</a></li>');
      }
+      console.log($("#iol-menus"));
 
 
       // $('#iol-menus a').click(function(e){
       //   e.preventDefault();
-      //   var target =  wfdata . $(this).attr("anchor");  
+      //   var target =  wfdata . $(this).attr("anchor");
       //   console.log(target);
       // });
 
 
 
-  }  
+  }
 
 
     function addMandatory(){
@@ -155,7 +156,7 @@
     }
     
     // aggiunge l'attributo data-dhw=1 a tutti gli input radio con lo stesso name
-    $( document ).ready(function() {        
+    $( document ).ready(function() {
         var radio = $("input:radio").filter("[data-dhw=1]");        
         $.each(radio,function(i,v){
             var nome = v['name'];            
@@ -263,7 +264,7 @@
        if($('#btn-group').length > 0) addTopToolbarMenu('top-toolbar-div');
        
   
-       
+
         //SE È DEFINITO L'OGGETTO WORKFLOW DI MARCO AGGIUNGO LA NAVBAR
         if(typeof(wfdata)=='object') addWFToolbar('top-toolbar-div',wfdata);
       
