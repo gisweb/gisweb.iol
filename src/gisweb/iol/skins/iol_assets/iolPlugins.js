@@ -42,11 +42,13 @@
             //$.extend(options,baseOptions);
             $(this).select2(options).on("change", function(e) { 
                 var fieldName = this.name;
+                var self = this;
                 $.each(childs, function(_,child) {
                     var childName =fieldName.replace('_comune','_'+child.name);
                     var el;
-                    if($('[name='+childName+']').length>0){
-                        el = $('[name='+childName+']').eq(0);
+                    var frm_container = $(self).parents("form#plomino_form").first();
+                    if($(frm_container).find('[name='+childName+']')){
+                        el = $(frm_container).find('[name='+childName+']').first();
                         if(e.added) 
                             el.val(e.added[child.idx]);
                         else if(e.removed) 
@@ -63,7 +65,6 @@
             color: "#556b2f",
             backgroundColor: "white"
         }, options );
-        console.log(options)
 
     };
 
@@ -172,7 +173,9 @@
         });
     };
 
-    $.fn.iolDatePicker = function( ) {
+
+    $.fn.iolDatePicker = function( ) {}
+
         return this.each(function() {
             $(this).wrap( "<div class='input-append'></div>" );
             var button = document.createElement( "span" );
@@ -182,10 +185,9 @@
             $(button).after(icon);
             $(this).after(button);
             $(button).append(icon);
-            $(button).click(function(){
-
-                $(this).datepicker('show');
-
+            var el = this;
+            $(button).click(function(e){
+                $(el).datepicker('show');
             });
         });
     }
