@@ -174,7 +174,7 @@
     };
 
 
-    $.fn.iolDatePicker = function( ) {}
+    $.fn.iolDatePicker = function() {
 
         return this.each(function() {
             $(this).wrap( "<div class='input-append'></div>" );
@@ -190,7 +190,7 @@
                 $(el).datepicker('show');
             });
         });
-    }
+    };
 
 
     $.fn.iolAutocompleteForm = function( options ) {
