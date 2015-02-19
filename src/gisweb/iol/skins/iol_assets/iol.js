@@ -1,6 +1,23 @@
 
 (function ($) {
 
+
+        var wfdata = {
+            "base_url":  "/istanze/iol_praticaweb_demo/00007-2015/content_status_modify?workflow_action=",
+            "forms": [
+                {'label':'Richiedenti','action':'vai_richiedenti','class':''},
+                {'label':'Ubicazione','action':'vai_ubicazione','class':''},
+                {'label':'Dati Pratica','action':'vai_dati','class':''},
+                {'label':'Altri Soggetti','action':'vai_altri_soggetti','class':''},
+                {'label':'Allegati','action':'vai_allegati','class':''},
+                {'label':'Oneri','action':'vai_oneri','class':'disabled'},
+                {'label':'Riassunto Finale','action':'vai_completata','class':'disabled'}
+            ]
+        }
+
+
+
+
     "use strict";
     //I can pass a plugin name or set the plugin name in element's attributes
     function initializePlugin (){
@@ -98,7 +115,25 @@
     });
   }
 
-  
+  function addWFToolbar(element, wfdata){
+     
+
+     var frm;
+     for(var i=0;i<wfdata.forms.length;i++){
+        frm = wfdata.forms[i]
+        $("#iol-menus").append('<li class="' + frm.class + '"><a href="' + wfdata.base_url + frm.action + '" >' + frm.label + '</a></li>')
+     }
+
+
+      // $('#iol-menus a').click(function(e){
+      //   e.preventDefault();
+      //   var target =  wfdata . $(this).attr("anchor");  
+      //   console.log(target);
+      // });
+
+
+
+  }  
 
 
     function addMandatory(){
@@ -159,6 +194,7 @@
 
     $(function () {
 
+
         //AGGIUNGO LA CLASSE POI SAREBBE MEGLIO SOSTITUIRE NEL TEMPLATE ID CON CLASS
         $("#content").addClass("container-fluid");
         //$("#plomino_form").addClass("plomino_form");
@@ -191,10 +227,12 @@
         //mandatory for sending
         $("*[data-mandatory]").each(addMandatory);
 
-
-
         //SE C'E' LA PULSANTIERA AGGIUNGO LA BARRA IN ALTO
         if($('.iol-control-buttons').length > 0) addTopNavbar();
+
+
+
+
 
 
         //INIZIALIZZO TUTTO IL CONTENUTO DEL DIALOG DOPO AVER APERTO IL DIALOG DEL DATAGRID
@@ -226,7 +264,8 @@
        
   
        
-
+        //SE È DEFINITO L'OGGETTO WORKFLOW DI MARCO AGGIUNGO LA NAVBAR
+        if(typeof(wfdata)=='object') addWFToolbar('top-toolbar-div',wfdata);
       
 
 
@@ -345,24 +384,27 @@
 
       $("#renderedForm").append(html);
 
-      $('.v-content-title').each(function(k,v){
-        var title = $(v).attr('title');
-        if(title) 
-          $("#iol-menus").append('<li><a anchor="' + title + '" >' + title + '</a></li>')
-      });
 
+      if(typeof(wfdata)=='undefined'){
+        $('.v-content-title').each(function(k,v){
+          var title = $(v).attr('title');
+          if(title) 
+            $("#iol-menus").append('<li><a anchor="' + title + '" >' + title + '</a></li>')
+        });
+
+        $('#iol-menus a').click(function(e){
+          e.preventDefault();
+          var target = $("[title='" + $(this).attr("anchor") + "']");  
+          var offset = 50;
+          console.log(target)
+          if(target)
+            $('html, body').animate({scrollTop: target.offset().top - offset}, 500);  
+        });
+      }
       $('.iol-control-buttons > input').each(function(k,v){
         $(v).addClass("btn btn-inverse").appendTo("#iol-buttons")
       });
 
-      $('#iol-menus a').click(function(e){
-        e.preventDefault();
-        var target = $("[title='" + $(this).attr("anchor") + "']");  
-        var offset = 50;
-        console.log(target)
-        if(target)
-          $('html, body').animate({scrollTop: target.offset().top - offset}, 500);  
-      });
 
       $('input[uppercase=1]').keyup(function(){
          this.value = this.value.toUpperCase();
