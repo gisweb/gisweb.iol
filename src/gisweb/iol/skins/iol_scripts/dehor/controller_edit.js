@@ -38,16 +38,17 @@ $( document ).ready(function() {
 
 
 
-   
+  $("#btn_tipologia_parere").attr('disabled','disabled');
+  $("#btn_tipologia_parere").off('click');  
   $("[name=tipologia_parere]").bind('click',function(){
-    console.log($(this).val());
-    
+    console.log($(this).val());   
      
 
     
     $("[name=tipologia_parere]").each(function(){
       if ($("[name=tipologia_parere]").is(":checked")==true){
         console.log(true)
+        $("#btn_tipologia_parere").on('click');  
         $("#btn_tipologia_parere").removeAttr('disabled');              
           
       }
