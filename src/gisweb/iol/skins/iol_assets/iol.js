@@ -155,9 +155,11 @@
         label.on("mouseout",function(){icon.tooltipster('hide')})
     }
     
+/*
+
     // aggiunge l'attributo data-dhw=1 a tutti gli input radio con lo stesso name
     $( document ).ready(function() {
-        var radio = $("input:radio").filter("[data-dhw=1]");        
+        var radio = $("input:radio,checkbox").filter("[data-dhw=1]");        
         $.each(radio,function(i,v){
             var nome = v['name'];            
             $("[name="+ "'" + nome + "'" + "]").each(function(){$(this).attr('data-dhw',1)});          
@@ -190,7 +192,7 @@
     });
 
     
-
+*/
     
 
     $(function () {
@@ -253,8 +255,15 @@
         $('input.NUMBERField-INTEGER').numeric(false, function() { alert("Solo valori interi"); this.value = ""; this.focus(); });
 
 
+        //SE È DEFINITO L'OGGETTO WORKFLOW DI MARCO AGGIUNGO LA NAVBAR
+        if(typeof(wfdata)=='object') addWFToolbar('top-toolbar-div',wfdata);
+
+
 
     });
+
+
+
 
     // hide when dinamico prevede che siano inseriti nel campo html5 attribute gli attributi:
     // 'iol-hw=hw_no_...'  e  'hw_value=valore'
@@ -263,40 +272,9 @@
 
        if($('#btn-group').length > 0) addTopToolbarMenu('top-toolbar-div');
        
-  
+//?????????????????????????????????????????????????????????????????????
 
-        //SE È DEFINITO L'OGGETTO WORKFLOW DI MARCO AGGIUNGO LA NAVBAR
-        if(typeof(wfdata)=='object') addWFToolbar('top-toolbar-div',wfdata);
-      
-
-
-
-
-        var hw = $("input[data-dhw]"); 
-        $.each(hw,function(i,v){
-            if ($(this).attr('data-dhw') != "1"){
-                var hw_field = 'hidewhen-' + $(this).attr('data-dhw');
-                //$("." + hw_field).attr("style","display: none;");                
-                var name = v['name'];
-                $("[name="+ "'" + name + "'" + "]").bind('click',function(){                        
-                    var value = $(this).attr('hw_value');
-                    if (value) {
-                        
-                        if ($(this).val() == value) {
-                            $("." + hw_field).attr("style","display: block;");
-                        }
-                        else {
-                            $("." + hw_field).attr("style","display: none;");
-                        }
-                        
-                    }
-                    else {
-                        console.log(hw_field)
-                        $("." + hw_field).toggle();
-                    }       
-                });
-            };     
-        }); 
+ 
 
     // se presente in code_mirror: btn_hw_dg=['add','edit','delete'] 
     // rimuove i pulsanti del datagrid
