@@ -386,7 +386,8 @@
 
 
       $('input[uppercase=1]').keyup(function(){
-         this.value = this.value.toUpperCase();
+            var self = this;
+            this.value = this.value.toUpperCase();
      });
 
 

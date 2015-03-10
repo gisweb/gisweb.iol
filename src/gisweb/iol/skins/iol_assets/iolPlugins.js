@@ -73,6 +73,7 @@
         return this.each(function() {
             options = options.pluginOptions;
             var fieldId = this.id;
+            var self = this;
             var baseUrl = $(this).data('baseUrl') || '';
             $(this).wrap( "<div class='input-append'></div>" );
             var button = document.createElement( "span" );
@@ -86,7 +87,7 @@
             $(button).append(icon);
             $(button).click(function(e){
                 e.preventDefault();
-                var params = getValuesForFields (options.params)
+                var params = getValuesForFields (options.params);
                 if(!options.service) return;
                 $.ajax({
                     'url':baseUrl + "/" + options.service,
@@ -94,7 +95,9 @@
                     'data':params,
                     'dataType':'JSON',
                     'success':function(data, textStatus, jqXHR){
-                        $('#' + fieldId).val(data.value);
+                        var frm_container = $(self).parents("form#plomino_form").first();
+                        $(frm_container).find('#' + fieldId).first().val(data.value);
+                        //$('#' + fieldId).val(data.value);
                     }
                 });
             });
