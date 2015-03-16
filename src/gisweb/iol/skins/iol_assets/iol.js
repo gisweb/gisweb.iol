@@ -121,13 +121,16 @@
      var frm;
      for(var i=0;i<wfdata.forms.length;i++){
          frm = wfdata.forms[i];
-         $("#iol-menus").append('<li class="' + frm.class + '"><a href="' + wfdata.base_url + frm.action + '" >' + frm.label + '</a></li>');
+         $("#iol-menus").append('<li class="' + frm.class + '"><a href="' + (frm.action)?(wfdata.base_url + frm.action):("#") + '" >' + frm.label + '</a></li>');
      }
-      console.log($("#iol-menus"));
+
+      //console.log($("#iol-menus"));
 
 
-      // $('#iol-menus a').click(function(e){
-      //   e.preventDefault();
+       $('#iol-menus a').bind('click',function(event){
+           event.preventDefault();
+           console.log($(this).attr("href"));
+       });
       //   var target =  wfdata . $(this).attr("anchor");
       //   console.log(target);
       // });

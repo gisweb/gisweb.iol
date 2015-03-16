@@ -96,7 +96,8 @@
                     'dataType':'JSON',
                     'success':function(data, textStatus, jqXHR){
                         var frm_container = $(self).parents("form#plomino_form").first();
-                        $(frm_container).find('#' + fieldId).first().val(data.value);
+                        var el = $(frm_container).find('[name='+self.name+']').first();
+                        $(el).val(data.value);
                         //$('#' + fieldId).val(data.value);
                     }
                 });
@@ -119,7 +120,7 @@
             $(icon).addClass('icon-' + options.type);
             $(button).after(icon);
 
-            $(button).html(' '+options.title + ' ')
+            $(button).html(' '+options.title + ' ');
             $(this).after(button);
             $(button).append(icon);
 /*
@@ -141,15 +142,15 @@
                     'dataType':'JSON',
                     'success':function(data, textStatus, jqXHR){
                         if(data.success){
-                            sGeom = options.type + ";marker;" + data.lng.toFixed(6) + " " + data.lat.toFixed(6) 
+                            var sGeom = options.type + ";marker;" + data.lng.toFixed(6) + " " + data.lat.toFixed(6)
                             sGeom = data.lng.toFixed(6) + " " + data.lat.toFixed(6) 
                             $element.val(sGeom);
-                            marker = google.maps.iolMarkers[fieldId];
+                            var marker = google.maps.iolMarkers[fieldId];
                             if(marker){
                                 marker.setPosition(new google.maps.LatLng(data.lat,data.lng));
                             }
                             else{
-                                markerOptions = {
+                                var markerOptions = {
                                     position: new google.maps.LatLng(data.lat,data.lng),
                                     icon: iconPath,
                                     title: options.title,
