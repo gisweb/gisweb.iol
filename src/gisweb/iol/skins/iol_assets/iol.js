@@ -121,12 +121,16 @@
      var frm;
      for(var i=0;i<wfdata.forms.length;i++){
          frm = wfdata.forms[i];
-         $("#iol-menus").append('<li class="' + frm.class + '"><a href="' + wfdata.base_url + frm.action + '" >' + frm.label + '</a></li>');
+         $("#iol-menus").append('<li class="' + frm.class + '"><a class="wizard-link" href="' + wfdata.base_url + frm.action + '" >' + frm.label + '</a></li>');
      }
 
       //console.log($("#iol-menus"));
 
-
+        $.each($(".wizard-link"),function(k,v){
+            $(v).bind('click',function(event){
+                if ($(v).parent().hasClass('link-disabled')) event.preventDefault();
+            });
+        });
        /*$('#iol-menus a').bind('click',function(event){
            event.preventDefault();
            console.log($(this).attr("href"));
