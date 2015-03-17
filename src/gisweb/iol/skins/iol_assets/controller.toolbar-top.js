@@ -188,9 +188,6 @@ $(document).ready(function(){
           , targets = this.targets
           , activeTarget = this.activeTarget
           , i
-console.log(targets)
-console.log(activeTarget)
-
 
         if (scrollTop >= maxScroll) {
 

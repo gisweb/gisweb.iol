@@ -30,13 +30,7 @@
         $.fn.iolOLMap.addMarker = function(mapName, markerOptions) {
 
             //createOverlay('sdfsdf','sdfsdf')
-            console.log(markerOptions);
-            console.log(mapName);
 
-
-
-
-            
         };
         $.fn.iolOLMap.registerObject = function(overlay){
             registerObject(overlay)
@@ -94,13 +88,11 @@
                 mapOptions.center = mapOptions.center.getBounds().getCenterLonLat();
             }
 
-console.log(mapOptions);
             map = new OpenLayers.Map(mapOptions);
 
             map.addLayers([new OpenLayers.Layer.OSM(),boxes]);
 
             map.addControl(new OpenLayers.Control.MousePosition());
-            console.log(map)
 return;
 
             //ELENCO DEI LIVELLI
@@ -108,7 +100,6 @@ return;
             if(options.mapLayers) {
                 var layerSettings = $("[name='" + options.mapLayers + "']").data('mapLayers');
                 if(typeof(layerSettings)=='string')  layerSettings = JSON.parse(layerSettings.replace(/[\n\r]/g, ''));
-                console.log(layerSettings);                
             }
 
 
@@ -198,7 +189,6 @@ return;
                         if(typeof(pluginOptions)=='string')  pluginOptions = JSON.parse(pluginOptions.replace(/[\n\r]/g, ''));
                         var Options = pluginOptions.pluginOptions;
                         var coords = $(this).val().split(' ');
-                        console.log(Options)
                         iconPath = baseUrl + "/resources/icons/" + Options.type +".png";
                         markerOptions = {
                             position: new google.maps.LatLng(coords[1],coords[0]),
@@ -245,7 +235,6 @@ return;
                     var oTable = $('#'+ options.drawingTarget +'_datagrid').dataTable();
                     oTable.fnSettings().aoRowCreatedCallback.push( {
                         "fn": function( nRow, aData, iDataIndex ){ 
-                            console.log("AGGIUNTA LA RIGA")
 
                             //SETTO PER DEFAULT ULTIMA E PENULTIMA COLONNA DEL GRID PER I VALORI DI GEOMETRIA E TIPO
                             currentOverlay.dataTable = this;
@@ -264,7 +253,6 @@ return;
                     $('#'+ options.drawingTarget +'_datagrid > tbody > tr').click(function() {
                         var currentRow = oTable.fnGetPosition(this);
                         currentOverlay = mapOverlays[currentRow];
-                        console.log(currentOverlay);
                         zoomOnOverlay(currentOverlay);
                         //ZOOM SU OGGETTO????
                     });
@@ -272,7 +260,6 @@ return;
                      //SUL CHIUDI ELIMINO IL MARKER SE NON HO SALVATO
                     $("#" + options.drawingTarget + "_editform").dialog().bind("dialogclose", 
                         function(event, ui){ 
-                            console.log("CLOSE!!!!!!!!!!!!")
                             setTimeout(function(){
                                 if(!currentOverlay.saved) currentOverlay.setMap(null);
                             },500)} 

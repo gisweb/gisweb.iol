@@ -20,7 +20,6 @@
             query.callback(data);
         },
         initSelection : function (element, callback) {
-          console.log(element)
           var data ={id: element.val(), text: element.val()} ;
           callback(data);
         }
@@ -125,13 +124,11 @@
         delete overlays[i];
       }
       overlays=[];
-      console.log("eliminati")
     }
 
     function aggiungiVincoli(data){
       var foglio = data[1];
       foglio = foglio.trim();
-      console.log(foglio)
       //var testRE = foglio.match("<span>(.*)</span>");
       //if(testRE && testRE.length>0) foglio = testRE[1];
 
@@ -147,7 +144,6 @@
         'dataType':'JSON',
         'success':function(data, textStatus, jqXHR){
           var elencoVincoli = data.results;
-          console.log(elencoVincoli)
           var sVincolo;
           for(var i=0;i<elencoVincoli.length;i++){
             sVincolo = elencoVincoli[i].descrizione_tavola + " - " + elencoVincoli[i].descrizione_zona;
@@ -169,7 +165,6 @@
     function aggiungiAmbiti(data){
       var foglio = data[1];
       foglio = foglio.trim();
-      console.log(foglio)
       //var testRE = foglio.match("<span>(.*)</span>");
       //if(testRE && testRE.length>0) foglio = testRE[1];
 
@@ -186,7 +181,6 @@
         'success':function(data, textStatus, jqXHR){
           var str;
           var elencoAmbiti = data.results;
-          console.log(elencoAmbiti)
           var sAmbito = $("#immobile_puc_ambito").val();
           for(var i=0;i<elencoAmbiti.length;i++){
             str = elencoAmbiti[i].descrizione_zona;
@@ -202,7 +196,6 @@
     function aggiungiInondabilita(data){
       var foglio = data[1];
       foglio = foglio.trim();
-      console.log(foglio)
       //var testRE = foglio.match("<span>(.*)</span>");
       //if(testRE && testRE.length>0) foglio = testRE[1];
 
@@ -219,7 +212,6 @@
         'success':function(data, textStatus, jqXHR){
           var str;
           var elencoAmbiti = data.results;
-          console.log(elencoAmbiti)
           var sAmbito = $("#immobile_pdb_inondabilita").val();
           for(var i=0;i<elencoAmbiti.length;i++){
             str = elencoAmbiti[i].descrizione_zona;
@@ -235,7 +227,6 @@
     function aggiungiSuscettivita(data){
       var foglio = data[1];
       foglio = foglio.trim();
-      console.log(foglio)
       //var testRE = foglio.match("<span>(.*)</span>");
       //if(testRE && testRE.length>0) foglio = testRE[1];
 
@@ -252,7 +243,6 @@
         'success':function(data, textStatus, jqXHR){
           var str;
           var elencoAmbiti = data.results;
-          console.log(elencoAmbiti)
           var sAmbito = $("#immobile_pdb_suscettivita").val();
           for(var i=0;i<elencoAmbiti.length;i++){
             str = elencoAmbiti[i].descrizione_zona;

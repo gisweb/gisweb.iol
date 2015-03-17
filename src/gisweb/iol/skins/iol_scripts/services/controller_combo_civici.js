@@ -82,7 +82,6 @@
         delete overlays[i];
       }
       overlays=[];
-      console.log("eliminati")
     }
 
     //RIAGGIUNGO TUTTI GLI OVERLAYS

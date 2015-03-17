@@ -50,11 +50,10 @@ $(document).ready(function() {
                                 'type':'GET',
 				'url':'http://iol.comune.rr.nu/cgi-bin/mapserv?map=/apps/gisclient-3.2/map/servizicomunali/occupazione_suolo.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureinfo&QUERY_LAYERS=elementi_scavi.elementi_puntuali&LAYERS=elementi_scavi.elementi_puntuali&SRS=EPSG:4326&BBOX='+box+'&X='+x+'&Y='+y+'&WIDTH='+w+'&HEIGHT='+h+'&INFO_FORMAT=text/html',
 				'success':function(html){
-                                        console.log(html)
-                                        if(!html) html='<b>NESSUNA INFORMAZIONE</b>';
-                                        map.infowindow.setPosition(e.latLng);
-                                        map.infowindow.setContent(html);
-                                        map.infowindow.open(map);
+                    if(!html) html='<b>NESSUNA INFORMAZIONE</b>';
+                    map.infowindow.setPosition(e.latLng);
+                    map.infowindow.setContent(html);
+                    map.infowindow.open(map);
 
 				}
                                 

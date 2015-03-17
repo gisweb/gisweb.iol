@@ -54,18 +54,9 @@
         $.fn.iolGoogleMap.addMarker = function(mapName, markerOptions) {
 
             //createOverlay('sdfsdf','sdfsdf')
-            console.log(markerOptions);
-            console.log(mapName);
-
-
-
-
-            
         };
 
         $.fn.iolGoogleMap.deleteOverlays = function() {
-
-            console.log(mapOverlays)
             return map;
         };
 
@@ -474,10 +465,6 @@
 
                 if(options.mapGrid){
 
-
-
-
-                    console.log('sadsda')
                 }
 
                 //AGGIUNGO LE GEOMETRIE PRESENTI COME CAMPI SULLA FORM
@@ -512,7 +499,6 @@
                         if(typeof(pluginOptions)=='string')  pluginOptions = JSON.parse(pluginOptions.replace(/[\n\r]/g, ''));
                         var Options = pluginOptions.pluginOptions;
                         var coords = $(this).val().split(' ');
-                        console.log(Options)
                         iconPath = baseUrl + "/resources/icons/" + Options.type +".png";
                         markerOptions = {
                             position: new google.maps.LatLng(coords[1],coords[0]),
@@ -540,9 +526,7 @@
                     $.each($('#'+ options.drawingTarget +'_datagrid').dataTable().fnGetData(),function(index,data){
 
                         sGeom = data[settings.geomIndex];  
-                        elementType = data[settings.typeIndex]; 
-                        console.log(sGeom);
-                        console.log(elementType);
+                        elementType = data[settings.typeIndex];
                         overlay = createOverlay(sGeom, drawingOptions[elementType]); 
                         overlay.dataTable = this;
                         overlay.setMap(map);
@@ -561,7 +545,6 @@
                     var oTable = $('#'+ options.drawingTarget +'_datagrid').dataTable();
                     oTable.fnSettings().aoRowCreatedCallback.push( {
                         "fn": function( nRow, aData, iDataIndex ){ 
-                            console.log("AGGIUNTA LA RIGA")
                             if(currentOverlay){
                                 //SETTO PER DEFAULT ULTIMA E PENULTIMA COLONNA DEL GRID PER I VALORI DI GEOMETRIA E TIPO
                                 currentOverlay.dataTable = this;
@@ -586,7 +569,6 @@
                     $('#'+ options.drawingTarget +'_datagrid > tbody > tr').click(function() {
                         var currentRow = oTable.fnGetPosition(this);
                         currentOverlay = mapOverlays[currentRow];
-                        console.log(currentOverlay);
                         zoomOnOverlay(currentOverlay);
                         //ZOOM SU OGGETTO????
                     });
@@ -594,7 +576,6 @@
                      //SUL CHIUDI ELIMINO IL MARKER SE NON HO SALVATO
                     $("#" + options.drawingTarget + "_editform").dialog().bind("dialogclose", 
                         function(event, ui){ 
-                            console.log("CLOSE!!!!!!!!!!!!")
                             setTimeout(function(){
                                 if(!currentOverlay.saved) currentOverlay.setMap(null);
                             },500)} 

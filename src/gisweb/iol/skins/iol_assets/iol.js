@@ -288,8 +288,7 @@
     // rimuove i pulsanti del datagrid
     var dg_hw = $("input[btn_hw_dg]"); 
         $.each(dg_hw,function(i,v){
-          console.log($(this).attr('btn_hw_dg'));
-          var name_dg = $(this).attr('name');          
+          var name_dg = $(this).attr('name');
           var array_btn = eval($(this).attr('btn_hw_dg'));
           $.each(array_btn,function(i,v){              
               $("#" + name_dg + "_" + v + "row").attr("style","display:none")  
@@ -383,7 +382,6 @@
           e.preventDefault();
           var target = $("[title='" + $(this).attr("anchor") + "']");  
           var offset = 50;
-          console.log(target)
           if(target)
             $('html, body').animate({scrollTop: target.offset().top - offset}, 500);  
         });

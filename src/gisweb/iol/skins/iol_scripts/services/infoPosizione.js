@@ -52,12 +52,11 @@ $(document).ready(function() {
                                 'type':'GET',
         'url':'services/infoPosizione?lat='+lat+'&lng='+lng,
         'success':function(html){
-                                        console.log(html)
-                                        if(!html) html='<b>NESSUNA INFORMAZIONE</b>';
-                                        map.infowindow.setOptions({maxWidth:600});
-                                        map.infowindow.setPosition(e.latLng);
-                                        map.infowindow.setContent(html);
-                                        map.infowindow.open(map);
+            if(!html) html='<b>NESSUNA INFORMAZIONE</b>';
+            map.infowindow.setOptions({maxWidth:600});
+            map.infowindow.setPosition(e.latLng);
+            map.infowindow.setContent(html);
+            map.infowindow.open(map);
 
         }
                                 

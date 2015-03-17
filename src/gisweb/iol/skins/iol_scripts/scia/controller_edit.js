@@ -1,6 +1,4 @@
 $(document).ready(function() {
-console.log('pronto')
-
 if ($("form#plomino_form").length > 0) {
    $(".grp-alimenti").attr("style","display: none;");
    }
@@ -44,7 +42,6 @@ function checkAlimentari(){
         elem.push(this.fnGetData()[i][0])
         
         if ((this.fnGetData()[i][0]) == 'alimentare'){
-              console.log(elem)
               $(".grp-alimenti").attr("style","display: block;");
         }
         else if (((this.fnGetData()[i][0]) != 'alimentare') && (elem.indexOf('alimentare')==-1))  {
@@ -59,7 +56,7 @@ function checkAlimentari(){
 
 
 $("#btn_salva").bind('click',function() {
-console.log(jQuery('#elenco_superfici_datagrid').length);
+
 });
 
 
@@ -79,7 +76,6 @@ $("#morali_soggetti_datagrid").dataTable().fnSettings().aoDrawCallback.push({fn:
 
 // GESTIONE PULSANTE VOLTURA
 $("#btn_wf_voltura").bind('click',function(event) {
-       console.log($(this))
        event.preventDefault();
        var radio = $("input:checked").val();       
        var u =$(this).attr('href') + radio;              
@@ -149,13 +145,6 @@ function calcolaAccessi(prior,no_prior) {
           $("#btn_salva").attr('disabled','disabled');
           }
      
-   
-   
-    
-       console.log(tot.length)
-      console.log(b.length) 
-      console.log(a.length) 
-     
 };
 
 //ZONA RESTITUITA DI DEFAULT
@@ -199,7 +188,6 @@ function geometria_zona(data){
 
 $("[name='requisiti_accesso_opt']").bind('change',function(){
     var geom=$("[name='ubicazione_civico_geometry']").attr('value');
-    console.log(geom)
     portale_href=location.href.split('/')[2]
     //url=portale_href + '/' + 'iol_scia/resources/scrZonaCommercio'
 
@@ -210,8 +198,7 @@ $("[name='requisiti_accesso_opt']").bind('change',function(){
         dataType: 'json',
         cache:false,           
            success:function(data){
-               console.log(data.zona)
-              if (data.zona=="CENTRO STORICO"){                
+              if (data.zona=="CENTRO STORICO"){
                 $(".accesso_centro").attr("style","display: block;");
                  $(".accesso_levante")                    
                      .attr("style","display: none;");

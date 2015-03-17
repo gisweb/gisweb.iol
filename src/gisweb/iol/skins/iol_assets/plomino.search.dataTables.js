@@ -9,7 +9,6 @@ $.extend( true, $.fn.dataTable.defaults, {
     
     $(nRow).bind('click',function(){
         var dburl = $('#Plomino_Database_URL').val();
-        console.log(dburl);
         window.location= dburl + '/' + aData[0];
     });
 },
@@ -18,14 +17,12 @@ $.extend( true, $.fn.dataTable.defaults, {
         var form_query = {};
         jQuery.each(jQuery('.staticSearch'),function(){            
             var query = jQuery(this).serializeZopeQuery();
-            console.log(this);
             form_query = jQuery.extend(form_query,query);
         });
         aoData.push({name:'query', value: JSON.stringify(form_query)});
      },
     'fnServerData': function ( sSource, aoData, fnCallback, oSettings ) {
-        console.log(sSource)
-     oSettings.jqXHR = jQuery.ajax( {
+         oSettings.jqXHR = jQuery.ajax( {
         'dataType': 'json',
         'type': 'POST',
         'url': sSource,

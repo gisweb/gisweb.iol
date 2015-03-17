@@ -91,9 +91,7 @@
           //$('#civico').select2('data', elencoCivici);
           //$('#civico').select2('val', null);
           //$("#geometry").val('');
-
-          console.log(data);
-          return;
+          // return;
 
           //SE STO USANDO IL DATAGRID
           var datagridLink = $("#" + overlay.fieldId + "_addrow").get(0);
