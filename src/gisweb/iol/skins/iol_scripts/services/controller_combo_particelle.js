@@ -272,10 +272,10 @@
         addOverlays(data);
         $("#immobile_ambito").val("");
         for(var i=0;i<overlays.length;i++){
-          aggiungiVincoli(data[i]);
-          aggiungiAmbiti(data[i]);
-          aggiungiInondabilita(data[i]);
-          aggiungiSuscettivita(data[i]);
+          if ($("#vincolo_nome_0").length) aggiungiVincoli(data[i]);
+          if ($("#immobile_puc_ambito").length) aggiungiAmbiti(data[i]);
+          if ($("#immobile_pdb_inondabilita").length) aggiungiInondabilita(data[i]);
+          if ($("#immobile_pdb_suscettivita").length) aggiungiSuscettivita(data[i]);
         }
       }
     });

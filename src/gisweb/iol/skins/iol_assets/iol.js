@@ -51,24 +51,25 @@
       html+='</ul></div></div>'//</div>';
       $(".plomino_form").append(html);
 
-      $('.v-content-title').each(function(k,v){
+      /*$('.v-content-title').each(function(k,v){
         var title = $(v).attr('title');
         if(title) 
           $("#iol-menus").append('<li><a anchor="' + title + '" >' + title + '</a></li>')
       });
+      */
 
       $('.iol-control-buttons > input').each(function(k,v){
         $(v).addClass("btn btn-inverse").appendTo("#iol-buttons")
       });
 
-      $('#iol-menus a').click(function(e){
+      /*$('#iol-menus a').click(function(e){
         e.preventDefault();
         var target = $("[title='" + $(this).attr("anchor") + "']");  
         var offset = 50;
         console.log(target)
         if(target)
           $('html, body').animate({scrollTop: target.offset().top - offset}, 500);  
-      });
+      });*/
 
     }
 
