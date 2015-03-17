@@ -1,12 +1,18 @@
 (function ($) {
     "use strict";
 
-    function getValuesForFields(fieldList){
+    function getValuesForFields(fieldList,container){
          var params={};
          $.each(fieldList, function(key,fieldName) { 
-                params[key] = fieldName;
-                if($("input:radio[name='"+fieldName+"']:checked").length>0) params[key] = $("input:radio[name='"+fieldName+"']:checked").val();
-                else if($("[name='"+fieldName+"']").length>0) params[key] = $("[name='"+fieldName+"']").val();
+             params[key] = fieldName;
+             if ($(container).find("input:radio[name='"+fieldName+"']:checked").first().length>0)
+                 params[key] = $(container).find("input:radio[name='"+fieldName+"']:checked").first().val();
+             else if ($(container).find('[name='+fieldName+']').first().length>0)
+                 params[key] = $(container).find('[name='+fieldName+']').first().val();
+             /*
+             if($("input:radio[name='"+fieldName+"']:checked").length>0) params[key] = $("input:radio[name='"+fieldName+"']:checked").val();
+             else if($('[name='+fieldName+']').length>0) params[key] = $("[name='"+fieldName+"']").val();
+             */
          });
          return params
     }
@@ -87,7 +93,8 @@
             $(button).append(icon);
             $(button).click(function(e){
                 e.preventDefault();
-                var params = getValuesForFields (options.params);
+                var frm_container = $(self).parents("form#plomino_form").first();
+                var params = getValuesForFields (options.params,frm_container);
                 if(!options.service) return;
                 $.ajax({
                     'url':baseUrl + "/" + options.service,
@@ -133,7 +140,8 @@
 */
             $(button).click(function(e){
                 e.preventDefault();
-                var params = getValuesForFields (options.params)
+                var frm_container = $(self).parents("form#plomino_form").first();
+                var params = getValuesForFields (options.params,frm_container)
                 if(!options.service) return;
                 $.ajax({
                     'url':baseUrl + "/services/" + options.service,
