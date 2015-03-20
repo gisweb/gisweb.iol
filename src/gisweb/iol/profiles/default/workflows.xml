@@ -3,5 +3,4 @@
  <property
     name="title">Contains workflow definitions for your portal</property>
     <object name="iol_workflow" meta_type="Workflow"/>
-    <object name="compilazione_iol_wf" meta_type="Workflow"/>
 </object>
