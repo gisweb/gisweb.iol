@@ -49,7 +49,7 @@ $(document).ready(function() {
       var lng = e.latLng.lng();
       var box = sw.lng() + ',' + sw.lat() + ',' + ne.lng() + ',' + ne.lat();
       $.ajax({
-                                'type':'GET',
+        'type':'GET',
         'url':'services/infoPosizione?lat='+lat+'&lng='+lng,
         'success':function(html){
             if(!html) html='<b>NESSUNA INFORMAZIONE</b>';
