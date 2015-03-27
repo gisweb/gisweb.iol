@@ -90,11 +90,9 @@
         'data':{"geom":geom},
         'dataType':'JSON',         
         'success':function(data, textStatus, jqXHR){            
-          elencoCat = data.results;
-          $('#categoria_cosap').select2('val', elencoCat[0]);
-          
+          $('#categoria_cosap').select2('val', data.cosap);
+          $('#allerta2').val(data.allerta2);
 
-          
           return;
 
           //SE STO USANDO IL DATAGRID
