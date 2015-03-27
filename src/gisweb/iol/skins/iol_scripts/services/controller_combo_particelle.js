@@ -100,9 +100,7 @@
 
 
     var overlays = [];
-
     var mappa = $("#mappa").iolGoogleMap.getMap();
-
     var gridSettings = $('#elenco_nct_datagrid').dataTable().fnSettings().oInit;
     var polygonOptions = {"strokeColor":"#00FFFF","fillColor":"#00FFFF","strokeWeight": 2};
 
@@ -114,6 +112,7 @@
         var polygon = $("#mappa").iolGoogleMap.createOverlay(coord,polygonOptions);
         polygon.setMap(mappa);
         overlays.push(polygon);
+        mappa.fitBounds(polygon.getBounds());
       }
 
     }

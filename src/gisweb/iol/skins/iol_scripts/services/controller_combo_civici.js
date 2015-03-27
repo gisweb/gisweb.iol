@@ -72,6 +72,8 @@
         var marker = $("#mappa").iolGoogleMap.createOverlay(coord,options);
         marker.setMap(mappa);
         overlays.push(marker);
+        mappa.setCenter(marker.getPosition());
+        mappa.setZoom(16);      
       }
 
     }
@@ -92,6 +94,8 @@
         addOverlays(data);
       }
     })
+
+
 
     addOverlays($('#elenco_civici_datagrid').dataTable().fnGetData());
 
