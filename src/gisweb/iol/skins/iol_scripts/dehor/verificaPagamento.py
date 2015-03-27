@@ -14,7 +14,7 @@ from gisweb.utils import getChainFor
 trans=str(doc.REQUEST.get('codTrans'))
 
 if trans:
-    codice_trans_pagamento = 'PO-%s' %(trans.split('-')[1])
+    codice_trans_pagamento = 'PO-%s' %(trans)
 rurl=doc.absolute_url()
 
 if len(getChainFor(doc))>1:

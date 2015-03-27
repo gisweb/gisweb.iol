@@ -43,16 +43,39 @@ elif obj.portal_type=='PlominoDocument':
     tipoRichiesta = obj.getItem('iol_tipo_richiesta')
     dovuto = context.getItem('dovuto',0)
     pagato = context.getItem('pagato',0)
+
+    if context.getItem('elenco_pagamenti',''):
+        pagamenti= context.dehor.translateListToDiz(context.getId(),'sub_elenco_pagamenti','elenco_pagamenti')
+    else:
+        pagamenti = []
+    if context.getItem('elenco_rate_pagamenti',''):
+        rate= context.dehor.translateListToDiz(context.getId(),'sub_elenco_pagamenti','elenco_rate_pagamenti')
+    else:
+        rate = []
+    stati=['non pagato','pagamento annullato']
+    tot= rate+pagamenti
+    
     debito = 0
     if dovuto and pagato:
         debito = dovuto - pagato
 
-    if cond=='rinnovo' and debito <= 0:
+    if cond=='rinnovo':
         if obj.getItem('durata_occupazione') == 'permanente':
-        #if ((today > start) and ((end + 30) > today)  and ((end - 30) < today)):
-        #nrinnovi=obj.getItem('numero_rinnovi')
-        #if ((today > start) and ((end + 30) > today)  and ((end - 30) < today)) and obj.getItem('rinnovabile',0)==1 and nrinnovi<4:
-            res = True
+            
+            if len(tot)>0 and not (obj.verificaRuolo('iol-manager') or obj.verificaRuolo('iol-reviewer')):
+                a=[]
+                for i in tot:
+                    if i['stato_pagamento'] in stati:
+                        a.append(False)
+                    else:
+                        a.append(True)
+                        
+                if False not in a:
+                    res = True
+                else:
+                    res = False    
+            else:
+                res = True
         else:
             res = False   
     
