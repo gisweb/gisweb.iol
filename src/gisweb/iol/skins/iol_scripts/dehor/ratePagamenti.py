@@ -94,7 +94,7 @@ def calcolaPeriodoIntermedio(inizio,fine):
 
 
 
-if fine < addToDate(inizio, 8, units='months') and tipo_occupazione=='permanente':
+if fine < addToDate(inizio, 8, units='months'):
     # inferiore a 8 - 4 mesi
     scadenza_rate_inf4 = [0,0,0,0] 
           

@@ -22,9 +22,9 @@ lista_fields = elenco_fields.split(',')
 
 
 diz_tot=[]
-for idx,itm in enumerate(context.getItem(field)):
+for idx,itm in enumerate(doc.getItem(field)):
     diz = {}
     for k,v in enumerate(lista_fields):
-        diz[v] = context.getItem(field)[idx][k]
+        diz[v] = doc.getItem(field)[idx][k]
     diz_tot.append(diz)
 return diz_tot   

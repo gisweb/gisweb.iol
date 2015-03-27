@@ -20,7 +20,19 @@ doc = context
 wf_id = 'iol_cantieri_wf'
 wf = getToolByName(doc, 'portal_workflow')
 
+# gestione dei fields associati al datagrid    
+form = db.getForm('sub_elenco_pagamenti')
+fld = form.getFormField('elenco_pagamenti')
+elenco_fields = fld.getSettings().field_mapping    
+dg_fields = elenco_fields.split(',')
 
+def addElementsLista(lista,dg_fields):
+    if len(lista) < len(dg_fields):
+        diff_fields = len(dg_fields) -len(lista)
+        # add empty element to list
+        for i in range(diff_fields):            
+            lista.insert(len(lista),'')
+        return lista
 
 
 # crea il datagrid con l'elenco dei primi pagamenti
@@ -36,6 +48,7 @@ def createDatagrid(diz_pagamenti,stato_pagamento):
         stato = stato_pagamento
         data = DateToString(Now(),'%d/%m/%Y')
         dg = [cod,importo,label,grp,stato,data]
+        addElementsLista(dg,dg_fields)
         elenco_dg.append(dg)
     return elenco_dg
 
@@ -74,6 +87,7 @@ def updateDatagrid(diz_pagamenti,diz_code_pagamenti, stato_pagamento, dg_exist, 
                      stato = dg_exist_new[0][4]
             data = DateToString(Now(),'%d/%m/%Y')            
             dg = [cod,importo,label,grp,stato,data]
+            addElementsLista(dg,dg_fields)
             dg_exist.append(dg)
            
         return dg_exist
@@ -90,6 +104,7 @@ def updateDatagrid(diz_pagamenti,diz_code_pagamenti, stato_pagamento, dg_exist, 
             stato = stato_pagamento        
             data = DateToString(Now(),'%d/%m/%Y')
             dg = [cod,importo,label,grp,stato,data]
+            addElementsLista(dg,dg_fields)
             dg_exist.append(dg)
         return dg_exist
 
@@ -106,15 +121,22 @@ def updateDatagrid(diz_pagamenti,diz_code_pagamenti, stato_pagamento, dg_exist, 
             if allegato == False and cod not in codice_allegato:    
                 stato = dg_exist_rmv_value[4]
                 data = dg_exist_rmv_value[5]
+                modalita = dg_exist_rmv_value[6]                    
+                transazione = dg_exist_rmv_value[7]
             elif cod in codice_allegato:                
                 stato = stato_pagamento
                 data = DateToString(Now(),'%d/%m/%Y')
+                modalita = dg_exist_rmv_value[6]                    
+                transazione = dg_exist_rmv_value[7]
             else:
                 stato = stato_pagamento
-                data = DateToString(Now(),'%d/%m/%Y')          
+                data = DateToString(Now(),'%d/%m/%Y')
+                modalita = dg_exist_rmv_value[6]                    
+                transazione = dg_exist_rmv_value[7]          
                 
             
-            dg = [cod,importo,label,grp,stato,data]            
+            dg = [cod,importo,label,grp,stato,data,modalita,transazione]
+            addElementsLista(dg,dg_fields)            
             dg_exist_t.append(dg)
         return dg_exist_t
 

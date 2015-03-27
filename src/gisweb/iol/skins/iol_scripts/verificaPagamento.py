@@ -42,7 +42,7 @@ context.setItem('importo_pagamento',importo)
 context.setItem('ora_pagamento',ora)
 context.setItem('esito_pagamento',esito)
 context.setItem('divisa',divisa)
-context.setItem('codTrans_pagamento',trans)
+context.setItem('codTrans_pagamento',trans) 
 context.setItem('codAut_pagamento',aut)
 
 if trans:
