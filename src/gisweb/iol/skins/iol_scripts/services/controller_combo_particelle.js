@@ -125,6 +125,7 @@
       for(var i=0;i<data.length;i++){
         var geomIndex = gridSettings.geomIndex || (data[i].length-1);
         var coord = data[i][geomIndex];
+        if(!coord) return;
         var polygon = $("#mappa").iolGoogleMap.createOverlay(coord,polygonOptions);
         polygon.setMap(mappa);
         overlays.push(polygon);

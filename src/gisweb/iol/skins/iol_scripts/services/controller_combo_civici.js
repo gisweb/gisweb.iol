@@ -69,6 +69,7 @@
       for(var i=0;i<data.length;i++){
         var geomIndex = gridSettings.geomIndex || (data[i].length-1);
         var coord = data[i][geomIndex];
+        if(!coord) return;
         var marker = $("#mappa").iolGoogleMap.createOverlay(coord,options);
         marker.setMap(mappa);
         overlays.push(marker);
