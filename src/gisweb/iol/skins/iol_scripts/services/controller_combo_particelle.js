@@ -4,6 +4,40 @@
   var initDialogParticelle = function(_, container){
     var elencoFogli = [];
     var elencoParticelle = [];
+
+    if($("[name='nct_sezione']").length){
+      $("[name='nct_sezione']").select2().on("change", function(e) { 
+        $.ajax({
+          'url':"services/elencoFogli",
+          'type':'GET',
+          'data':{"sezione":$(this).val()},
+          'dataType':'JSON',
+          'success':function(data, textStatus, jqXHR){
+            elencoFogli = data.results;
+            elencoParticelle = [];
+            //$("[name='nceu_foglio']").select2('data', elencoFogli);
+            //$("[name='nceu_foglio']").select2('val', null);
+            //$("[name='nceu_particella']").select2('data', elencoParticelle);
+            //$("[name='nceu_particella']").select2('val', null);
+            //$("[name='nceu_geometry']").val('');
+          }
+        });
+      });
+      $("[name='nct_sezione']").select2().trigger("change");
+    }
+    else{
+      $.ajax({
+        'url':"services/elencoFogli",
+        'type':'GET',
+        'dataType':'JSON',
+        'success':function(data, textStatus, jqXHR){
+          elencoFogli = data.results;
+          elencoParticelle = [];
+        }
+      });
+    }
+
+
     $("[name='nct_foglio']").select2({
           placeholder: '---',
           allowClear: true,
@@ -24,10 +58,12 @@
           callback(data);
         }
     }).on("change", function(e){
+      var data = {"foglio":$(this).val()};
+      if($("[name='nct_sezione']").length) data["sezione"] = $("[name='nct_sezione']").select2('val');
       $.ajax({
         'url':"services/elencoParticelle",
         'type':'GET',
-        'data':{"sezione":$("[name='nct_sezione']").select2('val'), "foglio":$(this).val()},
+        'data': data,
         'dataType':'JSON',
         'success':function(data, textStatus, jqXHR){
           elencoParticelle = data.results;
@@ -67,26 +103,6 @@
         var val = e.added && e.added.coords || '';
         $("input[name='nct_geometry']").val(val);
     });
-
-    $("[name='nct_sezione']").select2().on("change", function(e) { 
-      $.ajax({
-        'url':"services/elencoFogli",
-        'type':'GET',
-        'data':{"sezione":$(this).val()},
-        'dataType':'JSON',
-        'success':function(data, textStatus, jqXHR){
-          elencoFogli = data.results;
-          elencoParticelle = [];
-
-          //$("[name='nct_foglio']").select2('data', elencoFogli);
-          //$("[name='nct_foglio']").select2('val', null);
-          //$("[name='nct_particella']").select2('data', elencoParticelle);
-          //$("[name='nct_particella']").select2('val', null);
-          //$("[name='nct_geometry']").val('');
-        }
-      });
-    });
-    $("[name='nct_sezione']").select2().trigger("change");
 
   }
   //codice da eseguire sull'apertura del dialog
