@@ -13,7 +13,7 @@
             var re = RegExp('^' + query.term, 'i');
             $.each(elencoCivici, function(){
               if (re.test(this.text)){
-                data.results.push({id: this.id, text: this.text, coords: this.lng + ' ' + this.lat});
+                data.results.push({id: this.id, text: this.text, coords: (this.lng)?(this.lng + ' ' + this.lat):''});
               }
             });
             query.callback(data);
@@ -68,8 +68,8 @@
     function addOverlays(data){
       for(var i=0;i<data.length;i++){
         var geomIndex = gridSettings.geomIndex || (data[i].length-1);
-        var coord = data[i][geomIndex];
-        if(!coord) return;
+        var coord = data[i][geomIndex];     
+        if(coord.length < 4) return;
         var marker = $("#mappa").iolGoogleMap.createOverlay(coord,options);
         marker.setMap(mappa);
         overlays.push(marker);

@@ -84,7 +84,7 @@
             var re = RegExp('^' + query.term, 'i');
             $.each(elencoParticelle, function(){
               if (re.test(this.text)){
-                data.results.push({id: this.id, text: this.text, coords: this.geom});
+                data.results.push({id: this.id, text: this.text, coords: this.geom?this.geom:''});
               }
             });
             query.callback(data);
@@ -125,7 +125,7 @@
       for(var i=0;i<data.length;i++){
         var geomIndex = gridSettings.geomIndex || (data[i].length-1);
         var coord = data[i][geomIndex];
-        if(!coord) return;
+        if(coord=="") return;
         var polygon = $("#mappa").iolGoogleMap.createOverlay(coord,polygonOptions);
         polygon.setMap(mappa);
         overlays.push(polygon);
