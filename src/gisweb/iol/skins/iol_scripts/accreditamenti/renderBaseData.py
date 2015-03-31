@@ -56,7 +56,7 @@ if doc or db.isNewDocument():
     frm = db.getForm('base_sub_etichette')
     html += frm.displayDocument(doc,editmode=editMode,parent_form_id=frmName)  
 
-if doc.isDocument() and not doc.isEditMode() and state == 'avvio':
+if doc.isDocument() and not doc.isEditMode() and state == 'avvio' and 'invia_domanda' in [act.get('id') for act in wf_acts]:
     frm = db.getForm('sub_avvertenze') 
     html += frm.displayDocument(doc,parent_form_id=frmName)
 
