@@ -266,7 +266,9 @@
         //SE È DEFINITO L'OGGETTO WORKFLOW DI MARCO AGGIUNGO LA NAVBAR
         if(typeof(wfdata)=='object') addWFToolbar('top-toolbar-div',wfdata);
 
-
+        $("#plomino_form").on("submit",function(e){
+          if($(".lock-div").length == 0) $("#plomino_form").after("<div class='lock-div'></div>");
+        })
 
     });
 

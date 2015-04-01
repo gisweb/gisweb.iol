@@ -474,3 +474,15 @@ legend.scheduler-border {
   padding:0 10px;
   border-bottom:none;
 }
+
+.lock-div {
+
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  top:0px;
+  left:0px;
+  background: url('loading.gif') no-repeat center;
+
+
+}
