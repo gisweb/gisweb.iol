@@ -1,0 +1,420 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="iol_compilazione_wf" title="WorkFlow di compilazione delle Istanze On Line" description="" state_variable="review_state" initial_state="richiedenti" manager_bypass="False">
+ <permission>gisweb.iol: Delete iol documents</permission>
+ <permission>gisweb.iol: Edit iol documents</permission>
+ <permission>gisweb.iol: Read iol documents</permission>
+ <state state_id="allegati" title="Documentazione Allegata">
+  <exit-transition transition_id="g1_completa"/>
+  <exit-transition transition_id="vai_altri_soggetti"/>
+  <exit-transition transition_id="vai_completata"/>
+  <exit-transition transition_id="vai_dati"/>
+  <exit-transition transition_id="vai_oneri"/>
+  <exit-transition transition_id="vai_richiedenti"/>
+  <exit-transition transition_id="vai_sicurezza"/>
+  <exit-transition transition_id="vai_ubicazione"/>
+  <assignment name="form_order" type="string">python: 7</assignment>
+  <assignment name="wf_formname" type="string">allegati</assignment>
+ </state>
+ <state state_id="altri_soggetti" title="Altri Soggetti">
+  <description>Progettista, Direttore Lavori etc.</description>
+  <exit-transition transition_id="d1_altri_soggetti_to_sicurezza"/>
+  <exit-transition transition_id="d2_altri_soggetti_to_oneri"/>
+  <exit-transition transition_id="vai_allegati"/>
+  <exit-transition transition_id="vai_completata"/>
+  <exit-transition transition_id="vai_dati"/>
+  <exit-transition transition_id="vai_oneri"/>
+  <exit-transition transition_id="vai_richiedenti"/>
+  <exit-transition transition_id="vai_sicurezza"/>
+  <exit-transition transition_id="vai_ubicazione"/>
+  <assignment name="form_order" type="string">python: 4</assignment>
+  <assignment name="wf_formname" type="string">altri_soggetti</assignment>
+ </state>
+ <state state_id="completata" title="Domanda Completata">
+  <exit-transition transition_id="h1_presenta"/>
+  <exit-transition transition_id="stampa_domanda"/>
+  <exit-transition transition_id="vai_allegati"/>
+  <exit-transition transition_id="vai_altri_soggetti"/>
+  <exit-transition transition_id="vai_dati"/>
+  <exit-transition transition_id="vai_oneri"/>
+  <exit-transition transition_id="vai_richiedenti"/>
+  <exit-transition transition_id="vai_sicurezza"/>
+  <exit-transition transition_id="vai_ubicazione"/>
+  <assignment name="form_order" type="string">python: 8</assignment>
+  <assignment name="wf_formname" type="string">completata</assignment>
+ </state>
+ <state state_id="dati" title="Dati della Pratica">
+  <exit-transition transition_id="c1_dati_to_altri_soggetti"/>
+  <exit-transition transition_id="g1_completa"/>
+  <exit-transition transition_id="vai_allegati"/>
+  <exit-transition transition_id="vai_altri_soggetti"/>
+  <exit-transition transition_id="vai_completata"/>
+  <exit-transition transition_id="vai_oneri"/>
+  <exit-transition transition_id="vai_richiedenti"/>
+  <exit-transition transition_id="vai_ubicazione"/>
+  <assignment name="form_order" type="string">python: 3</assignment>
+  <assignment name="wf_formname" type="string">dati</assignment>
+ </state>
+ <state state_id="oneri" title="Sezione Oneri e Diritti di Segreteria">
+  <exit-transition transition_id="f1_oneri_to_allegati"/>
+  <exit-transition transition_id="vai_allegati"/>
+  <exit-transition transition_id="vai_altri_soggetti"/>
+  <exit-transition transition_id="vai_completata"/>
+  <exit-transition transition_id="vai_dati"/>
+  <exit-transition transition_id="vai_richiedenti"/>
+  <exit-transition transition_id="vai_sicurezza"/>
+  <exit-transition transition_id="vai_ubicazione"/>
+  <assignment name="form_order" type="string">python: 6</assignment>
+  <assignment name="wf_formname" type="string">oneri</assignment>
+ </state>
+ <state state_id="presentata" title="Domanda Presentata">
+  <exit-transition transition_id="i1_protocolla"/>
+  <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <assignment name="wf_formname" type="string">completata</assignment>
+ </state>
+ <state state_id="protocollata" title="">
+  <assignment name="wf_formname" type="string">completata</assignment>
+ </state>
+ <state state_id="richiedenti" title="Richiedenti">
+  <exit-transition transition_id="a1_richiedenti_to_ubicazione"/>
+  <exit-transition transition_id="vai_allegati"/>
+  <exit-transition transition_id="vai_altri_soggetti"/>
+  <exit-transition transition_id="vai_completata"/>
+  <exit-transition transition_id="vai_dati"/>
+  <exit-transition transition_id="vai_oneri"/>
+  <exit-transition transition_id="vai_sicurezza"/>
+  <exit-transition transition_id="vai_ubicazione"/>
+  <assignment name="form_order" type="string">python: 1</assignment>
+  <assignment name="wf_formname" type="string">richiedenti</assignment>
+ </state>
+ <state state_id="sicurezza" title="Dati sicurezza">
+  <exit-transition transition_id="e1_sicurezza_to_oneri"/>
+  <exit-transition transition_id="vai_allegati"/>
+  <exit-transition transition_id="vai_altri_soggetti"/>
+  <exit-transition transition_id="vai_completata"/>
+  <exit-transition transition_id="vai_dati"/>
+  <exit-transition transition_id="vai_oneri"/>
+  <exit-transition transition_id="vai_richiedenti"/>
+  <exit-transition transition_id="vai_ubicazione"/>
+  <assignment name="form_order" type="string">python: 5</assignment>
+  <assignment name="wf_formname" type="string">sicurezza</assignment>
+ </state>
+ <state state_id="ubicazione" title="Ubicazione Intervento e Vincoli Relativi">
+  <exit-transition transition_id="b1_ubicazione_to_dati"/>
+  <exit-transition transition_id="vai_allegati"/>
+  <exit-transition transition_id="vai_altri_soggetti"/>
+  <exit-transition transition_id="vai_completata"/>
+  <exit-transition transition_id="vai_dati"/>
+  <exit-transition transition_id="vai_oneri"/>
+  <exit-transition transition_id="vai_richiedenti"/>
+  <exit-transition transition_id="vai_sicurezza"/>
+  <assignment name="form_order" type="string">python: 2</assignment>
+  <assignment name="wf_formname" type="string">ubicazione</assignment>
+ </state>
+ <transition transition_id="a1_richiedenti_to_ubicazione" title="Inserisci Dati Ubicazione" new_state="ubicazione" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Inserisci Dati Ubicazione</action>
+  <guard>
+   <guard-expression>python: scripts.guard_a1(state_change,workflow)</guard-expression>
+  </guard>
+  <assignment name="wf_richiedenti">python:True</assignment>
+ </transition>
+ <transition transition_id="b1_ubicazione_to_dati" title="Inserisci dati pratica" new_state="dati" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Inserisci dati pratica</action>
+  <guard>
+   <guard-expression>python: scripts.guard_b1(state_change,workflow)</guard-expression>
+  </guard>
+  <assignment name="wf_ubicazione">python:True</assignment>
+ </transition>
+ <transition transition_id="c1_dati_to_altri_soggetti" title="Inserisci Altri Soggetti" new_state="altri_soggetti" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Inserisci Altri Soggetti</action>
+  <guard>
+   <guard-expression>python: scripts.guard_c1(state_change,workflow)</guard-expression>
+  </guard>
+  <assignment name="wf_dati">python: True</assignment>
+ </transition>
+ <transition transition_id="d1_altri_soggetti_to_sicurezza" title="Inserisci Dati Sicurezza" new_state="sicurezza" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Inserisci Dati Sicurezza</action>
+  <guard>
+   <guard-expression>python: scripts.guard_d1(state_change,workflow)</guard-expression>
+  </guard>
+  <assignment name="wf_altri_soggetti">python: True</assignment>
+ </transition>
+ <transition transition_id="d2_altri_soggetti_to_oneri" title="Inserisci Dati Oneri " new_state="oneri" trigger="USER" before_script="" after_script="goto_newstate">
+  
+  <guard>
+   <guard-expression>python: scripts.guard_d2(state_change,workflow)</guard-expression>
+  </guard>
+  <assignment name="wf_altri_soggetti">python: True</assignment>
+ </transition>
+ <transition transition_id="e1_sicurezza_to_oneri" title="Inserisci Dati Oneri" new_state="oneri" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Inserisci Dati Oneri</action>
+  <guard>
+   <guard-expression>python: scripts.guard_e1(state_change,workflow)</guard-expression>
+  </guard>
+  <assignment name="wf_sicurezza">python: True</assignment>
+ </transition>
+ <transition transition_id="f1_oneri_to_allegati" title="Inserisci dati sulla sicurezza" new_state="allegati" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Inserisci dati sulla sicurezza</action>
+  <guard>
+   <guard-expression>python: scripts.guard_f1(state_change,workflow)</guard-expression>
+  </guard>
+  <assignment name="wf_oneri">python: True</assignment>
+ </transition>
+ <transition transition_id="g1_completa" title="Completa Domanda" new_state="completata" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Completa Domanda</action>
+  <guard>
+   <guard-expression>python: scripts.guard_g1(state_change,workflow)</guard-expression>
+  </guard>
+  <assignment name="wf_allegati">python: True</assignment>
+  <assignment name="wf_completata">python: True</assignment>
+ </transition>
+ <transition transition_id="h1_presenta" title="Presenta Domanda" new_state="presentata" trigger="USER" before_script="before_h1" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Presenta Domanda</action>
+  <guard>
+   <guard-expression>python: scripts.guard_h1(state_change,workflow)</guard-expression>
+  </guard>
+  <assignment name="wf_presentata">python: True</assignment>
+ </transition>
+ <transition transition_id="i1_protocolla" title="Protocolla" new_state="protocollata" trigger="USER" before_script="" after_script="after_stampa_domanda">
+  <action url="" category="workflow" icon="">Protocolla</action>
+  <guard>
+  </guard>
+  <assignment name="wf_protocollata">python: True</assignment>
+ </transition>
+ <transition transition_id="vai_allegati" title="Modifica Allegati" new_state="allegati" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Modifica Allegati</action>
+  <guard>
+   <guard-expression>python: scripts.guard_vai_allegati(state_change,workflow)</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="vai_altri_soggetti" title="Modifica Altri Soggetti" new_state="altri_soggetti" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Modifica Altri Soggetti</action>
+  <guard>
+   <guard-expression>python: scripts.guard_vai_altri_soggetti(state_change,workflow)</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="vai_completata" title="Riepilogo Finale" new_state="completata" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Riepilogo Finale</action>
+  <guard>
+   <guard-expression>python: scripts.guard_vai_completata(state_change,workflow)</guard-expression>
+  </guard>
+  <assignment name="wf_integra">python: True</assignment>
+ </transition>
+ <transition transition_id="vai_dati" title="Modifica Dati Domanda" new_state="dati" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Modifica Dati Domanda</action>
+  <guard>
+   <guard-expression>python: scripts.guard_vai_dati(state_change,workflow)</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="vai_oneri" title="Modifica Oneri Domanda" new_state="oneri" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Modifica Oneri Domanda</action>
+  <guard>
+   <guard-expression>python: scripts.guard_vai_oneri(state_change,workflow)</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="vai_richiedenti" title="Modifica Richiedenti" new_state="richiedenti" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Modifica Richiedenti</action>
+  <guard>
+   <guard-expression>python: scripts.guard_vai_richiedenti(state_change,workflow)</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="vai_sicurezza" title="Modifica sicurezza" new_state="sicurezza" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Modifica sicurezza</action>
+  <guard>
+   <guard-expression>python: scripts.guard_vai_sicurezza(state_change,workflow)</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="vai_ubicazione" title="Modifica Ubicazione" new_state="ubicazione" trigger="USER" before_script="" after_script="goto_newstate">
+  <action url="" category="workflow" icon="">Modifica Ubicazione</action>
+  <guard>
+   <guard-expression>python: scripts.guard_vai_ubicazione(state_change,workflow)</guard-expression>
+  </guard>
+  <assignment name="wf_formname">string:ubicazione</assignment>
+ </transition>
+ <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
+  <description>Previous Action</description>
+  <default>
+   
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
+  <description>The ID of the user who performed the previous transition</description>
+  <default>
+   
+   <expression>user/getUserName</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="form_order" for_catalog="True" for_status="True" update_always="True">
+  <default>
+   
+   
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="True">
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
+  <description>When the previous transition was performed</description>
+  <default>
+   
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_allegati" for_catalog="True" for_status="True" update_always="False">
+  <description>Compilato modulo Allegati</description>
+  <default>
+   
+   <expression>python:False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_altri_soggetti" for_catalog="True" for_status="True" update_always="False">
+  <default>
+   
+   <expression>python:False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_completata" for_catalog="True" for_status="True" update_always="False">
+  <default>
+   
+   <expression>python:False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_dati" for_catalog="True" for_status="True" update_always="False">
+  <description>Compilato il modulo dei dati della pratica</description>
+  <default>
+   
+   <expression>python:False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_formname" for_catalog="True" for_status="True" update_always="True">
+  <default>
+   <value type="string">dati</value>
+   
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_integra" for_catalog="True" for_status="True" update_always="True">
+  <default>
+   
+   
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_oneri" for_catalog="True" for_status="True" update_always="False">
+  <description>Compilato modulo Contributo di costruzione</description>
+  <default>
+   
+   <expression>python:False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_presentata" for_catalog="True" for_status="True" update_always="False">
+  <description>Pratica presentata</description>
+  <default>
+   
+   <expression>python:False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_protocollata" for_catalog="True" for_status="True" update_always="False">
+  <description>Pratica protocollata</description>
+  <default>
+   
+   <expression>python:False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_richiedenti" for_catalog="True" for_status="True" update_always="False">
+  <description>Compilato il modulo dei richiedenti</description>
+  <default>
+   
+   <expression>python:False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_sicurezza" for_catalog="True" for_status="True" update_always="False">
+  <description>Compilato il modulo della sicurezza</description>
+  <default>
+   
+   <expression>python:False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_ubicazione" for_catalog="True" for_status="True" update_always="False">
+  <description>Compilato il modulo dell'ubicazione</description>
+  <default>
+   
+   <expression>python:False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <script script_id="after_stampa_domanda" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/after_stampa_domanda.py" module="" function=""/>
+ <script script_id="before_completa" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/before_completa.py" module="" function=""/>
+ <script script_id="before_h1" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/before_h1.py" module="" function=""/>
+ <script script_id="completa_domanda" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/completa_domanda.py" module="" function=""/>
+ <script script_id="goto_newstate" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/goto_newstate.py" module="" function=""/>
+ <script script_id="guard_a1" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_a1.py" module="" function=""/>
+ <script script_id="guard_b1" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_b1.py" module="" function=""/>
+ <script script_id="guard_c1" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_c1.py" module="" function=""/>
+ <script script_id="guard_d1" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_d1.py" module="" function=""/>
+ <script script_id="guard_d2" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_d2.py" module="" function=""/>
+ <script script_id="guard_e1" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_e1.py" module="" function=""/>
+ <script script_id="guard_f1" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_f1.py" module="" function=""/>
+ <script script_id="guard_g1" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_g1.py" module="" function=""/>
+ <script script_id="guard_h1" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_h1.py" module="" function=""/>
+ <script script_id="guard_i1" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_i1.py" module="" function=""/>
+ <script script_id="guard_vai_allegati" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_vai_allegati.py" module="" function=""/>
+ <script script_id="guard_vai_altri_soggetti" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_vai_altri_soggetti.py" module="" function=""/>
+ <script script_id="guard_vai_completata" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_vai_completata.py" module="" function=""/>
+ <script script_id="guard_vai_dati" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_vai_dati.py" module="" function=""/>
+ <script script_id="guard_vai_oneri" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_vai_oneri.py" module="" function=""/>
+ <script script_id="guard_vai_presentata" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_vai_presentata.py" module="" function=""/>
+ <script script_id="guard_vai_richiedenti" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_vai_richiedenti.py" module="" function=""/>
+ <script script_id="guard_vai_sicurezza" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_vai_sicurezza.py" module="" function=""/>
+ <script script_id="guard_vai_ubicazione" type="Script (Python)" filename="workflows/iol_compilazione_wf/scripts/guard_vai_ubicazione.py" module="" function=""/>
+</dc-workflow>

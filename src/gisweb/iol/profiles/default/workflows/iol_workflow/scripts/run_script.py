@@ -7,7 +7,6 @@
 ##parameters=doc, name, suffix=''
 ##title=
 ##
-
 """
 Se lo script eseguito restituisce qualcosa di valutabile come True lo script di
 workflow chiamante viene by-passato.

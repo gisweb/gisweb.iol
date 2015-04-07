@@ -7,7 +7,6 @@
 ##parameters=state_change
 ##title=
 ##
-
 doc = state_change.object
 
 guard_response = script.run_script(doc, script.id)

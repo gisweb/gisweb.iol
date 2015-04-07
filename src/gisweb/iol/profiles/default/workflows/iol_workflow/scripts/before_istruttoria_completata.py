@@ -7,7 +7,6 @@
 ##parameters=state_change
 ##title=
 ##
-
 from Products.CMFPlomino.PlominoUtils import StringToDate
 
 doc = state_change.object

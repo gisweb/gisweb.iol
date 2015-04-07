@@ -7,7 +7,6 @@
 ##parameters=state_change
 ##title=
 ##
-
 doc = state_change.object
 
 #Aggiornamento dello stato su plominoDocument

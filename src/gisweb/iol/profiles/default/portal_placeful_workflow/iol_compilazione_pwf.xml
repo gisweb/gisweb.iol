@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name="iol_compilazione_pwf" meta_type="WorkflowPolicy">
+ <property name="title">Plomino compilazione iol wf</property>
+ <bindings>
+  <default/>
+  <type type_id="PlominoDocument">
+   <bound-workflow workflow_id="iol_compilazione_wf"/>
+  </type>
+ </bindings>
+</object>
