@@ -39,12 +39,11 @@ setup(name='gisweb.iol',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'gisweb.utils',
-          'Products.CMFPlomino',
           'collective.wtf',
-          'Products.CMFPlacefulWorkflow',
           'collective.wkpdfview', 
           'zope.app.component',
+          'gisweb.utils',
+          'iol.gisweb.utils',
           # -*- Extra requirements: -*-
           'dict2xml'
       ],
