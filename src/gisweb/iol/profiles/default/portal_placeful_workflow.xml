@@ -2,11 +2,8 @@
 <object name="portal_placeful_workflow" meta_type="Placeful Workflow Tool">
  <property name="title"></property>
  <property name="max_chain_length" type="int">1</property>
- <object name="intranet" meta_type="WorkflowPolicy"/>
- <object name="iol_accreditamenti_pwf" meta_type="WorkflowPolicy"/>
+ <object name="iol_accreditamento_pwf" meta_type="WorkflowPolicy"/>
+ <object name="iol_backoffice_pwf" meta_type="WorkflowPolicy"/>
+ <object name="iol_compilazione_backoffice_pwf" meta_type="WorkflowPolicy"/>
  <object name="iol_compilazione_pwf" meta_type="WorkflowPolicy"/>
- <object name="iol_workflow_pwf" meta_type="WorkflowPolicy"/>
- <object name="old-plone" meta_type="WorkflowPolicy"/>
- <object name="one-state" meta_type="WorkflowPolicy"/>
- <object name="simple-publication" meta_type="WorkflowPolicy"/>
 </object>

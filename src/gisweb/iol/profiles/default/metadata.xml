@@ -1,5 +1,13 @@
 <?xml version="1.0"?>
 <metadata>
   <version>0001</version>
-
+  <dependencies>
+  	<dependency>profile-Products.CMFPlacefulWorkflow:base</dependency>
+    <dependency>profile-Products.CMFPlomino:default</dependency>
+    <dependency>profile-plone.resource:default</dependency>
+    <dependency>profile-iol.gisweb.utils:default</dependency>
+    <dependency>profile-iol.desktop:default</dependency>
+    <dependency>profile-plomino.replication:default</dependency>
+    <dependency>profile-iol.gisweb.savona:default</dependency>
+  </dependencies>
 </metadata>

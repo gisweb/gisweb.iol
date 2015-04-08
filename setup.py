@@ -42,8 +42,8 @@ setup(name='gisweb.iol',
           'collective.wtf',
           'collective.wkpdfview', 
           'zope.app.component',
+          'plone.resource',
           'gisweb.utils',
-          'iol.gisweb.utils',
           # -*- Extra requirements: -*-
           'dict2xml'
       ],

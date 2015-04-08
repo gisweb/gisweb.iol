@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="iol_compilazione_wf" title="WorkFlow di compilazione delle Istanze On Line" description="" state_variable="review_state" initial_state="richiedenti" manager_bypass="False">
+<dc-workflow workflow_id="iol_compilazione_wf" title="WorkFlow di compilazione Istanze On Line" description="" state_variable="review_state" initial_state="richiedenti" manager_bypass="False">
  <permission>gisweb.iol: Delete iol documents</permission>
  <permission>gisweb.iol: Edit iol documents</permission>
  <permission>gisweb.iol: Read iol documents</permission>

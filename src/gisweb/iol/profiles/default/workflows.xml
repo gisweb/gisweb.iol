@@ -2,7 +2,7 @@
 <object name="portal_workflow" meta_type="Plone Workflow Tool">
  <property
     name="title">Contains workflow definitions for your portal</property>
-    <object name="iol_accreditamenti_wf" meta_type="Workflow"/>
- 	<object name="iol_compilazione_wf" meta_type="Workflow"/>
-    <object name="iol_workflow" meta_type="Workflow"/>
+	<object name="iol_accreditamento_wf" meta_type="Workflow"/>
+	<object name="iol_compilazione_wf" meta_type="Workflow"/>
+	<object name="iol_backoffice_wf" meta_type="Workflow"/>
 </object>

@@ -7,10 +7,6 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="gisweb.iol">
 
-    <include package="Products.CMFCore" />
-    <include package="Products.CMFPlacefulWorkflow" />
-    <include package="Products.CMFPlomino" />
-
     <genericsetup:registerProfile
         name="default"
         title="IOL Base (gisweb.iol)"
