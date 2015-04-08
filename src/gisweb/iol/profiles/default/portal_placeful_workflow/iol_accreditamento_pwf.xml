@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name="iol_accreditamento_pwf" meta_type="WorkflowPolicy">
+ <property name="title">Plomino accreditamento workflow</property>
+ <bindings>
+  <default/>
+  <type type_id="PlominoDocument">
+   <bound-workflow workflow_id="iol_accreditamento_wf"/>
+  </type>
+ </bindings>
+</object>

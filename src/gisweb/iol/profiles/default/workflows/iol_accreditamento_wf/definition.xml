@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="iol_accreditamento_wf" title="WorkFlow di accreditamento Istanze On Line" description="Workflow di accreditamento utenti alla compilazione di richieste di istanze online" state_variable="review_state" initial_state="avvio" manager_bypass="False">
+ <permission>gisweb.iol: Delete iol documents</permission>
+ <permission>gisweb.iol: Edit iol documents</permission>
+ <permission>gisweb.iol: Read iol documents</permission>
+ <state state_id="autorizzazione" title="Autorizzazione">
+  <description>L'utente è accreditato alla compilazione delle richieste di istanze online</description>
+  <exit-transition transition_id="revoca"/>
+  <permission-map name="gisweb.iol: Delete iol documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Edit iol documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <assignment name="message_class" type="string">info</assignment>
+  <assignment name="state_instructions" type="string"></assignment>
+  <assignment name="state_message" type="string">Accreditamento autorizzato. Ora è possibile inoltrare richieste.</assignment>
+ </state>
+ <state state_id="avvio" title="Accreditamento nuovo utente">
+  <description>Modulo di accreditamento in fase di compilazione.</description>
+  <exit-transition transition_id="invia_domanda"/>
+  <permission-map name="gisweb.iol: Delete iol documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Edit iol documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <assignment name="instruction_class" type="string">info</assignment>
+  <assignment name="message_class" type="string">error</assignment>
+  <assignment name="state_instructions" type="string">wf_invio_domanda</assignment>
+  <assignment name="state_message" type="string">Attenzione! Si ricorda che per poter inviare la richiesta di accreditemento occorre aver compilato anche tutti i campi indicati dal simbolo blu.</assignment>
+ </state>
+ <state state_id="revocato" title="Accreditamento revocato">
+  <description>L'accreditamento è stato revocato.</description>
+  <exit-transition transition_id="ripristina"/>
+  <permission-map name="CMFPlomino: Edit documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>istruttore</permission-role>
+   <permission-role>rup</permission-role>
+  </permission-map>
+  <permission-map name="CMFPlomino: Remove documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>rup</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="richiesta" title="Richiesta di accreditamento utente">
+  <description>L'utente ha fatto richiesta di accreditamento.</description>
+  <exit-transition transition_id="autorizza"/>
+  <permission-map name="gisweb.iol: Delete iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Edit iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <permission-map name="gisweb.iol: Read iol documents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>iol-manager</permission-role>
+   <permission-role>iol-reviewer</permission-role>
+  </permission-map>
+  <assignment name="instruction_class" type="string">info</assignment>
+  <assignment name="message_class" type="string">warning</assignment>
+  <assignment name="state_div_id" type="string"></assignment>
+  <assignment name="state_instructions" type="string">wf_richiesta</assignment>
+  <assignment name="state_message" type="string">Accreditamento in attesa di approvazione</assignment>
+  <assignment name="transition_div_id" type="string"></assignment>
+ </state>
+ <transition transition_id="autorizza" title="Accredita utente" new_state="autorizzazione" trigger="USER" before_script="" after_script="after_autorizza">
+  <description>Abilita l'utente alla sottoscrizione di richieste di istanze online</description>
+  <action url="" category="workflow" icon="">Accredita utente</action>
+  <guard>
+   <guard-expression>python: scripts.guard_autorizza(state_change)</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="invia_domanda" title="Richiedi accreditamento" new_state="richiesta" trigger="USER" before_script="before_invia_domanda" after_script="after_invia_domanda">
+  <description>Invia la richiesta di accreditamento dell'utente.</description>
+  <action url="" category="workflow" icon="">Richiedi accreditamento</action>
+  <guard>
+   <guard-expression>python: scripts.guard_invia_domanda(state_change)</guard-expression>
+  </guard>
+  <assignment name="wf_presentata">python: True</assignment>
+ </transition>
+ <transition transition_id="revoca" title="Revoca accreditamento" new_state="revocato" trigger="USER" before_script="" after_script="after_revoca">
+  <description>In caso di decadenza delle condizioni necessarie è possibile revocare l'accreditamento all'utente.</description>
+  <action url="" category="workflow" icon="">Revoca accreditamento</action>
+  <guard>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>iol-reviewer</guard-role>
+   <guard-role>Manager</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="ripristina" title="Ripristina accreditamento" new_state="autorizzazione" trigger="USER" before_script="" after_script="after_ripristina">
+  <description>Ripristina l'accreditamento dell'utente.</description>
+  <action url="" category="workflow" icon="">Ripristina accreditamento</action>
+  <guard>
+   <guard-role>iol-manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>iol-reviewer</guard-role>
+  </guard>
+ </transition>
+ <variable variable_id="instruction_class" for_catalog="True" for_status="True" update_always="False">
+  <default>
+   <value type="string">info</value>
+   
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="instruction_div_id" for_catalog="False" for_status="True" update_always="False">
+  <description>id da usare per il div contenente le istruzioni.</description>
+  <default>
+   <value type="string">section-invio-domanda</value>
+   
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="message_class" for_catalog="True" for_status="True" update_always="True">
+  <default>
+   <value type="string">info</value>
+   
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="True" for_status="True" update_always="True">
+  <description>Provides access to workflow history</description>
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="state_div_id" for_catalog="True" for_status="True" update_always="False">
+  <description>id da usare per il div contenente le informazioni di stato. Se nullo viene usato l'id</description>
+  <default>
+   <value type="string">section-message-compilazione</value>
+   
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="state_instructions" for_catalog="False" for_status="True" update_always="False">
+  <description>Istruzioni e avvertenze</description>
+  <default>
+   <value type="string">wf_invio_domanda</value>
+   
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="state_message" for_catalog="False" for_status="True" update_always="False">
+  <default>
+   <value type="string">Per poter inviare la richiesta di accreditemento occorre compilare anche tutti i campi indicati dal simbolo blu e salvare il modulo.</value>
+   
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="wf_presentata" for_catalog="True" for_status="True" update_always="True">
+  <default>
+   
+   <expression>python:False</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <script script_id="after_autorizza" type="Script (Python)" filename="workflows/iol_accreditamento_wf/scripts/after_autorizza.py" module="" function=""/>
+ <script script_id="after_invia_domanda" type="Script (Python)" filename="workflows/iol_accreditamento_wf/scripts/after_invia_domanda.py" module="" function=""/>
+ <script script_id="after_revoca" type="Script (Python)" filename="workflows/iol_accreditamento_wf/scripts/after_revoca.py" module="" function=""/>
+ <script script_id="after_ripristina" type="Script (Python)" filename="workflows/iol_accreditamento_wf/scripts/after_ripristina.py" module="" function=""/>
+ <script script_id="before_autorizza" type="Script (Python)" filename="workflows/iol_accreditamento_wf/scripts/before_autorizza.py" module="" function=""/>
+ <script script_id="before_invia_domanda" type="Script (Python)" filename="workflows/iol_accreditamento_wf/scripts/before_invia_domanda.py" module="" function=""/>
+ <script script_id="guard_autorizza" type="Script (Python)" filename="workflows/iol_accreditamento_wf/scripts/guard_autorizza.py" module="" function=""/>
+ <script script_id="guard_invia_domanda" type="Script (Python)" filename="workflows/iol_accreditamento_wf/scripts/guard_invia_domanda.py" module="" function=""/>
+ <script script_id="guard_revoca" type="Script (Python)" filename="workflows/iol_accreditamento_wf/scripts/guard_revoca.py" module="" function=""/>
+</dc-workflow>
