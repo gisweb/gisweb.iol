@@ -143,12 +143,12 @@
     }
 
     function aggiungiVincoli(data){
-      var foglio = data[1];
+      var foglio = data[0];
       foglio = foglio.trim();
       //var testRE = foglio.match("<span>(.*)</span>");
       //if(testRE && testRE.length>0) foglio = testRE[1];
 
-      var particella = data[2];
+      var particella = data[1];
       particella = particella.trim();
       //var testRE = particella.match("<span>(.*)</span>");
       //if(testRE && testRE.length>0) particella = testRE[1];
@@ -179,12 +179,12 @@
     }
 
     function aggiungiAmbiti(data){
-      var foglio = data[1];
+      var foglio = data[0];
       foglio = foglio.trim();
       //var testRE = foglio.match("<span>(.*)</span>");
       //if(testRE && testRE.length>0) foglio = testRE[1];
 
-      var particella = data[2];
+      var particella = data[1];
       particella = particella.trim();
       //var testRE = particella.match("<span>(.*)</span>");
       //if(testRE && testRE.length>0) particella = testRE[1];
@@ -210,12 +210,12 @@
     }
 
     function aggiungiInondabilita(data){
-      var foglio = data[1];
+      var foglio = data[0];
       foglio = foglio.trim();
       //var testRE = foglio.match("<span>(.*)</span>");
       //if(testRE && testRE.length>0) foglio = testRE[1];
 
-      var particella = data[2];
+      var particella = data[1];
       particella = particella.trim();
       //var testRE = particella.match("<span>(.*)</span>");
       //if(testRE && testRE.length>0) particella = testRE[1];
@@ -241,12 +241,12 @@
     }
 
     function aggiungiSuscettivita(data){
-      var foglio = data[1];
+      var foglio = data[0];
       foglio = foglio.trim();
       //var testRE = foglio.match("<span>(.*)</span>");
       //if(testRE && testRE.length>0) foglio = testRE[1];
 
-      var particella = data[2];
+      var particella = data[1];
       particella = particella.trim();
       //var testRE = particella.match("<span>(.*)</span>");
       //if(testRE && testRE.length>0) particella = testRE[1];
