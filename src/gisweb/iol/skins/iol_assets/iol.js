@@ -1,6 +1,6 @@
 
 (function ($) {
-
+  console.log('prova')
     "use strict";
     //I can pass a plugin name or set the plugin name in element's attributes
     function initializePlugin (){
@@ -403,6 +403,25 @@
         }
     });
    });
+ 
+
+ //CONFERMA PRIMA DI ELIMINARE DOCUMENTO
+    $('#btn_elimina').attr('onclick','').unbind('click');
+    $('#btn_elimina').bind('click',function(event){
+          
+          event.preventDefault();
+          
+          var conferma = confirm("Sei sicuro di voler eliminare il documento?");
+          //var url = window.location.href;
+          var url = $("base").attr("href")
+          var urlDelete = url + '/delete';
+          if (conferma == true){
+            window.location = urlDelete;
+          }
+          else{
+            window.location = url;
+          }
+    });
 
 
 
