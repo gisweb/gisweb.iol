@@ -11,7 +11,7 @@
 stati=['non pagato','pagamento annullato']
 effettuato = False
 
-if context.getItem('allegato_bolli_utente')!={}:
+if context.getItem('allegato_bolli_utente',{})!={}:
 	effettuato = True
 
 #if context.getItem('elenco_pagamenti'):
