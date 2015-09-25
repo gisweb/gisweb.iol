@@ -21,15 +21,15 @@ else:
 
 
 #doc=str(context.REQUEST.get('url'))
-importo=context.REQUEST.get('importo')
+importo=context.REQUEST.get('importo',0)
 #data=StringToDate(context.REQUEST.get('data'),'%d/%m/%Y')
-ora=str(context.REQUEST.get('orario'))
-esito=context.REQUEST.get('esito')
-divisa=context.REQUEST.get('divisa')
-trans=str(context.REQUEST.get('codTrans'))
-aut=context.REQUEST.get('codAut')
+ora=str(context.REQUEST.get('orario',''))
+esito=context.REQUEST.get('esito','')
+divisa=context.REQUEST.get('divisa','')
+trans=str(context.REQUEST.get('codTrans',''))
+aut=context.REQUEST.get('codAut','')
 totale=context.REQUEST.get('totale') or '0'
-session=context.REQUEST.get('session_id')
+session=context.REQUEST.get('session_id','')
 
 wf = getToolByName(context, 'portal_workflow')
 
@@ -44,6 +44,8 @@ context.setItem('esito_pagamento',esito)
 context.setItem('divisa',divisa)
 context.setItem('codTrans_pagamento',trans)
 context.setItem('codAut_pagamento',aut)
+
+
 
 if trans:
     codice_trans_pagamento = 'PO-%s' %(trans.split('-')[1])
