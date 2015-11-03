@@ -19,17 +19,17 @@ else:
     # recupera id del wf primario
     wf_id = getChainFor(context)[0] 
 
-
-#doc=str(context.REQUEST.get('url'))
-importo=context.REQUEST.get('importo',0)
-#data=StringToDate(context.REQUEST.get('data'),'%d/%m/%Y')
-ora=str(context.REQUEST.get('orario',''))
-esito=context.REQUEST.get('esito','')
-divisa=context.REQUEST.get('divisa','')
-trans=str(context.REQUEST.get('codTrans',''))
-aut=context.REQUEST.get('codAut','')
-totale=context.REQUEST.get('totale') or '0'
-session=context.REQUEST.get('session_id','')
+try:
+    importo=context.REQUEST.get('importo',0)
+    ora=str(context.REQUEST.get('orario',''))
+    esito=context.REQUEST.get('esito','')
+    divisa=context.REQUEST.get('divisa','')
+    trans=str(context.REQUEST.get('codTrans',''))
+    aut=context.REQUEST.get('codAut','')
+    totale=context.REQUEST.get('totale') or '0'
+    session=context.REQUEST.get('session_id','')
+except Exception as e:
+    context.setItem('esito_verificapagamento','Error %s' %(e))
 
 wf = getToolByName(context, 'portal_workflow')
 
