@@ -128,6 +128,15 @@ wf_trans_available = [act['id'] for act in context.wf_transitionsInfo(wf_id=wf_i
 trans_avb = [tran for tran in wf_trans_available if tran.startswith('effettua_pagamento')]
 dg_esistente = doc.getItem(field_dg)
 
+elenco_pagamenti = context.translateListToDiz(context.getId(),'sub_elenco_pagamenti','elenco_pagamenti') or []
+stati = ['non pagato','pagamento annullato']
+stati_pagamenti = [row['stato_pagamento'] for row in elenco_pagamenti if 'stato_pagamento' in row.keys()]
+
+non_pagato = '0'
+for stato in stati:
+    if stato in stati_pagamenti:
+        non_pagato = '1'
+
 codici_pagamenti_new={}
 for v in dg_esistente:
     codici_pagamenti_new[v[0]]=v[1]
@@ -137,18 +146,13 @@ if not doc.getItem(field_dg):
     return createDatagrid(diz_pagamenti,stato_pagamento='non pagato')
         
 elif doc.getItem(field_dg):
-    codici_gruppo = [i['gruppo_sub_pagamento'] for i in doc.translateListToDiz(doc.getId(),form='sub_elenco_pagamenti',field='elenco_pagamenti')]
-   
     
     if doc.wf_getInfoFor('review_state') == 'avvio': 
-        if len(allegato_bolli) > 0:
+        if len(allegato_bolli) > 0 or non_pagato == '0':
             
             return updateDatagrid(diz_pagamenti,diz_code_pagamenti={},stato_pagamento='pagamento effettuato',dg_exist=dg_esistente,allegato=True,codice_allegato=codice_allegato)
         elif  len(allegato_bolli_utente) > 0:
             return updateDatagrid(diz_pagamenti,diz_code_pagamenti={},stato_pagamento='in attesa di verifica',dg_exist=dg_esistente,allegato=True,codice_allegato=codice_allegato)       
-        elif doc.getItem('esito_pagamento','KO')=='OK' and doc.getItem('codTrans_pagamento','')!='':
-	    if doc.getItem('codTrans_pagamento').split('-')[-1] in codici_gruppo:                
-                return updateDatagrid(diz_pagamenti,diz_code_pagamenti={},stato_pagamento='pagamento effettuato',dg_exist=dg_esistente,allegato=True,codice_allegato=codice_allegato)         
         else:
             
             return updateDatagrid(diz_pagamenti,diz_code_pagamenti={},stato_pagamento='non pagato',dg_exist=dg_esistente,allegato=True,codice_allegato=codice_allegato)
