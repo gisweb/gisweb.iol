@@ -11,6 +11,8 @@ $(document).ready(function() {
   var outer = document.createElement("div");
   outer.style.width = "93px";
 
+ console.log('asfasd')
+
   var inner = document.createElement("div");
   inner.id = "more_inner";
   inner.className = "button";

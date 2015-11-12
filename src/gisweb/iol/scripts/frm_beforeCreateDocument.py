@@ -14,6 +14,10 @@ from gisweb.utils import urllib_urlencode
 def frm_beforeCreateDocument(context, child_events=False, msg='', redirect_to=''):
     db = context.getParentDatabase()
 
+    roleTestResult = not filter(
+        lambda r: r in ('Manager', 'iol-manager', 'iol-reviewer', ),
+        db.getCurrentUser().getRolesInContext(context)
+    )
 
     # SE UTENTE ACCREDITATO PRECARICO I VALORI DI DEFAULT
 
@@ -25,7 +29,7 @@ def frm_beforeCreateDocument(context, child_events=False, msg='', redirect_to=''
             if defaults:
                 for k,v in defaults.items():
                     context.REQUEST.set(k, v)
-            elif not 'Manager' in db.getCurrentUser().getRolesInContext(context):
+            elif roleTestResult:
                 plone_tools = getToolByName(context.getParentDatabase().aq_inner, 'plone_utils')
                 msg = """ATTENZIONE! L'accesso al servizio \"%s\" è consentito solo ad utenti accreditati.
     Per iniziare la pratica di accreditamento compilare il form sottostante.""" % db.Title()
@@ -57,3 +61,4 @@ def frm_beforeCreateDocument(context, child_events=False, msg='', redirect_to=''
     vs = db.resources.get(tipo_app, {}).get('beforeCreateDocument')
     if vs:
         return vs(context) or ''
+
